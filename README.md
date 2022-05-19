@@ -37,7 +37,7 @@ Use [Docker Compose Tiledesk installation guide](https://github.com/Tiledesk/til
 
 # Installation
 
-* Clone the repository from master (or use a tagged release) with command: ```git clone https://github.com/chat21/chat21-web-widget <YOUR_PATH>```
+* Clone the repository from master (or use a tagged release) with command: ```git clone https://github.com/Tiledesk/chat21-web-widget <YOUR_PATH>```
 * Move to the downloaded project path ```cd <YOUR_PATH>```
 * Build running: `npm install`
 
