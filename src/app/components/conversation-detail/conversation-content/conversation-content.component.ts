@@ -96,6 +96,7 @@ export class ConversationContentComponent implements OnInit {
     //decomment if element should have same color of themeColor and fregroundColor
     if(this.stylesMap && this.stylesMap.get('bubbleSentTextColor')) this.elementRef.nativeElement.querySelector('.c21-body').style.setProperty('--textColorSent', this.stylesMap.get('bubbleSentTextColor'));
     if(this.stylesMap && this.stylesMap.get('bubbleReceivedTextColor')) this.elementRef.nativeElement.querySelector('.c21-body').style.setProperty('--textColorReceive', this.stylesMap.get('bubbleReceivedTextColor'));
+
   }
 
 
@@ -259,7 +260,7 @@ export class ConversationContentComponent implements OnInit {
     }, showDelay);
   }
 
-  isLastMessage(idMessage: string) {
+  isLastMessage(idMessage: string):boolean {
     // console.log('idMessage: ' + idMessage + 'id LAST Message: ' + this.messages[this.messages.length - 1].uid);
     if (idMessage === this.messages[this.messages.length - 1].uid) {
       return true;
@@ -267,7 +268,7 @@ export class ConversationContentComponent implements OnInit {
     return false;
   }
 
-  isSameSender(senderId, index){
+  isSameSender(senderId, index):boolean{
     if(senderId && this.messages[index - 1] && (senderId === this.messages[index - 1].sender)){
       return true;
     }
@@ -275,12 +276,19 @@ export class ConversationContentComponent implements OnInit {
   }
 
 
-  isFirstMessage(senderId, index){
+  isFirstMessage(senderId, index):boolean{
     if(senderId && index == 0 && this.messages[index] && (this.messages[index] !== senderId)){
       return true;
     }
     return false;
   }
+
+  // isEmojii(message):boolean {
+  //   if(this.isEmojii(message.text)){
+  //     return true 
+  //   }
+  //   return false
+  // }
 
 
   hideMenuOption(){
