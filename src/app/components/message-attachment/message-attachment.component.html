@@ -1,6 +1,7 @@
 <div id="buttons-in-message">
-  
-  <span *ngFor="let button of buttons" class="div-button">
+  <div class="buttons-wrapper">
+
+    <span *ngFor="let button of buttons" class="div-button">
       
       <chat-text-button-attachment *ngIf="button.type === 'text' && isLastMessage === true" class="div-button"
         [button]="button"
@@ -59,7 +60,8 @@
 
       <!-- <button tabindex="1413" [disabled]="!preChatFormGroup.controls.name.valid || !preChatFormGroup.controls.email.valid" class="c21-button-primary" (click)="openNewConversation()" [ngStyle]="{'background-color': g.themeColor, 'border-color': g.themeColor, 'color': g.themeForegroundColor }">
         
-    </button> -->
+      </button> -->
 
-  </span>
+    </span>
+  </div>
 </div>
