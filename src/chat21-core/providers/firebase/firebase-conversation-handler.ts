@@ -27,7 +27,7 @@ import {
   isJustRecived
 } from '../../utils/utils';
 import { v4 as uuidv4 } from 'uuid';
-import { messageType, checkIfIsMemberJoinedGroup } from '../../utils/utils-message';
+import { messageType, checkIfIsMemberJoinedGroup, isEmojii } from '../../utils/utils-message';
 
 // @Injectable({ providedIn: 'root' })
 @Injectable()

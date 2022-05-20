@@ -496,7 +496,6 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
 
 
   setFocusOnId(id) {
-    console.log('IS MOBILEEE?', this.isMobile)
     if(!this.isMobile){
       setTimeout(function () {
         const textarea = document.getElementById(id);
