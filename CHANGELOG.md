@@ -1,6 +1,9 @@
 # chat21-web-widget ver 5.0
 
-### 5.0.24-rc.23
+### 5.0.24-rc.4
+- bug-fixed: emojii function doesn't work when iframe is in bubble-message
+
+### 5.0.24-rc.3
 - changed: left alignment of attachment-buttons
 - changed: emojii regex to catch message with only emojis
 
