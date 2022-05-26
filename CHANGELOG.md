@@ -1,5 +1,9 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.24-rc.5
+ - added: close chat button option in upper-right menu concersation-detail header to close a chat from widget
+ - added: amLocal pipe in tooltip message timestamp on mouse-hover event
+
 ### 5.0.24-rc.4
 - bug-fixed: emojii function doesn't work when iframe is in bubble-message
 
