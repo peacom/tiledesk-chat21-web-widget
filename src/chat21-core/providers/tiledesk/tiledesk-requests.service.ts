@@ -38,12 +38,11 @@ export class TiledeskRequestsService {
     });
     const requestOptions = { headers: headers };
     const that = this;
-    this.URL_TILEDESK_CLOSE_REQUEST = this.URL_TILEDESK_CLOSE_REQUEST + supportgroupid + '/close'
+    this.URL_TILEDESK_CLOSE_REQUEST = this.URL_TILEDESK_CLOSE_REQUEST + supportgroupid + '/closeg'
     return new Promise((resolve, reject) => {
       this.http.put(this.URL_TILEDESK_CLOSE_REQUEST, {}, requestOptions).subscribe((data) => {
-          console.log('dataaaa', data)
-          resolve('ok')
-        
+        this.logger.debug('[TILEDESK-REQUEST-SERV] - closeSupportGroup response', data);
+        resolve('closed')
       }, (error) => {
         reject(error)
       });
