@@ -1968,7 +1968,10 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
   returnCloseChat(event){
     this.logger.debug('[CONV-COMP] close chat with uid ', this.conversation.uid)
     this.tiledeskRequestService.closeSupportGroup(this.conversation.uid).then(data => {
-      console.log('chat closeddddd', data)
+      if(data === 'closed'){
+        this.isMenuShow = false
+        this.logger.debug('[CONV-COMP] chat closed successfully with uid ', this.conversation.uid)
+      }
     }).catch(error => {
       this.logger.error('[CONV-COMP] ERROR while closing chat with id: ', this.conversation.uid, error)
     })
