@@ -38,7 +38,7 @@
       <!-- <div *ngIf="message.type == 'text'"> -->     
       <div *ngIf="message?.text" [tooltip]="timeTooltipLeft" [options]="tooltipOptions" placement="left" content-type="template" (click)="handleTooltipEvents($event)"> 
           <ng-template #timeTooltipLeft>
-              <span>{{message.timestamp | amTimeAgo}} - ( {{message.timestamp | amLocal | amDateFormat: 'HH:mm'}} )</span>
+              <span>{{message.timestamp | amTimeAgo}} ({{message.timestamp | amLocal | amDateFormat: 'L HH:mm:ss'}})</span>
           </ng-template>
 
           <!-- [htmlEnabled]="(message?.type==='html')? true : false" -->
