@@ -1,3 +1,4 @@
+import { TiledeskRequestsService } from './../chat21-core/providers/tiledesk/tiledesk-requests.service';
 import { MessageModel } from './../chat21-core/models/message';
 import { EyeeyeCatcherCardComponent } from './components/eyeeye-catcher-card/eyeeye-catcher-card.component';
 import { LoggerInstance } from './../chat21-core/providers/logger/loggerInstance';
@@ -148,6 +149,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         private translateService: CustomTranslateService,
         public messagingAuthService: MessagingAuthService,
         public tiledeskAuthService: TiledeskAuthService,
+        private tiledeskRequestsService: TiledeskRequestsService,
         //public messagingService: MessagingService,
         public contactService: ContactService,
         //public chatPresenceHandlerService: ChatPresenceHandlerService,
@@ -317,7 +319,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         });
         // this.authService.initialize()
         this.appStorageService.initialize(environment.storage_prefix, this.g.persistence, this.g.projectid)
-        this.tiledeskAuthService.initialize(this.appConfigService.getConfig().apiUrl)
+        this.tiledeskAuthService.initialize(this.appConfigService.getConfig().apiUrl);
+        this.tiledeskRequestsService.initialize(this.appConfigService.getConfig().apiUrl, this.g.projectid)
         this.messagingAuthService.initialize();
         this.chatManager.initialize();
         this.uploadService.initialize();
@@ -492,6 +495,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                 that.typingService.initialize(this.g.tenant);
                 that.presenceService.initialize(this.g.tenant);
                 that.presenceService.setPresence(user.uid);
+                
                 this.initConversationsHandler(this.g.tenant, that.g.senderId);
                 if (autoStart) {
                     that.showWidget();

@@ -1,3 +1,4 @@
+import { TiledeskRequestsService } from './../../../../chat21-core/providers/tiledesk/tiledesk-requests.service';
 import { ChatManager } from './../../../../chat21-core/providers/chat-manager';
 
 import { ConversationFooterComponent } from './../conversation-footer/conversation-footer.component';
@@ -202,6 +203,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
     private customTranslateService: CustomTranslateService,
     private chatManager: ChatManager,
     public typingService: TypingService,
+    private tiledeskRequestService : TiledeskRequestsService,
     private changeDetectorRef: ChangeDetectorRef,
     private elementRef: ElementRef
   ) { }
@@ -249,7 +251,8 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
       'BACK',
       'CLOSE',
       'MAXIMIZE',
-      'MINIMIZE'
+      'MINIMIZE',
+      'CLOSE_CHAT'
     ];
 
     const keysFooter = [
@@ -1960,6 +1963,15 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
 
   returnSoundChange(soundEnabled){
     this.onSoundChange.emit(soundEnabled)
+  }
+
+  returnCloseChat(event){
+    this.logger.debug('[CONV-COMP] close chat with uid ', this.conversation.uid)
+    this.tiledeskRequestService.closeSupportGroup(this.conversation.uid).then(data => {
+      console.log('chat closeddddd', data)
+    }).catch(error => {
+      this.logger.error('[CONV-COMP] ERROR while closing chat with id: ', this.conversation.uid, error)
+    })
   }
 
   returnOnWidgetHeightChange(mode){

@@ -29,6 +29,7 @@ export class ConversationHeaderComponent implements OnInit, OnChanges {
   @Output() onBack = new EventEmitter();
   @Output() onCloseWidget = new EventEmitter();
   @Output() onSoundChange = new EventEmitter();
+  @Output() onCloseChat =  new EventEmitter();
   @Output() onWidgetHeightChange = new EventEmitter<string>();
   @Output() onMenuOptionShow = new EventEmitter();
   // ========= end:: Input/Output values
@@ -155,6 +156,10 @@ export class ConversationHeaderComponent implements OnInit, OnChanges {
     // this.appStorageService.removeItem('activeConversation');
     // this.g.setParameter('activeConversation', null, false);
     this.onBack.emit();
+  }
+
+  closeChat(){
+    this.onCloseChat.emit()
   }
 
   returnCloseWidget() {
