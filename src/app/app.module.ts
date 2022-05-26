@@ -1,3 +1,4 @@
+import { TiledeskRequestsService } from './../chat21-core/providers/tiledesk/tiledesk-requests.service';
 
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -453,6 +454,7 @@ export function uploadFactory(http: HttpClient, appConfig: AppConfigService, app
     Triggerhandler,
     Chat21Service,
     TiledeskAuthService,
+    TiledeskRequestsService
   ],
   bootstrap: [AppComponent]
 })
