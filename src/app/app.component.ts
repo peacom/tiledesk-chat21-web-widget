@@ -1715,20 +1715,20 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
      * 3 - reinit widget
     */
    private restart() {
-    // if (!firebase.auth().currentUser) {
-    
-    this.hideWidget();
-    // that.triggerOnAuthStateChanged(resp);
-    if (this.g.autoStart !== false) {
-        this.authenticate();
-        this.initAll();
+        // if (!firebase.auth().currentUser) {
+        
+        this.hideWidget();
+        // that.triggerOnAuthStateChanged(resp);
+        if (this.g.autoStart !== false) {
+            this.authenticate();
+            this.initAll();
+        }
+        const divWidgetRoot = this.g.windowContext.document.getElementsByTagName('chat-root')[0];
+        const divWidgetContainer = this.g.windowContext.document.getElementById('tiledesk-container');
+        divWidgetContainer.remove();
+        divWidgetRoot.remove();
+        this.g.windowContext.initWidget();
     }
-    const divWidgetRoot = this.g.windowContext.document.getElementsByTagName('chat-root')[0];
-    const divWidgetContainer = this.g.windowContext.document.getElementById('tiledesk-container');
-    divWidgetContainer.remove();
-    divWidgetRoot.remove();
-    this.g.windowContext.initWidget();
-}
 
 
     // private reInit_old() {

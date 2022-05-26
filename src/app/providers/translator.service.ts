@@ -32,7 +32,7 @@ export class TranslatorService {
     public appConfigService: AppConfigService
   ) {
 
-    let windowContext = window;
+    let windowContext: Window = window;
     if (window.frameElement && window.frameElement.getAttribute('tiledesk_context') === 'parent') {
       windowContext = window.parent;
     }
@@ -163,7 +163,7 @@ export class TranslatorService {
           });
         } else {
           // console.log(`»»»» translateWithBrowserLang '${browserLang}' language.'`);
-          this.language = JSON.parse(data._body).lang.toLowerCase();;
+          this.language = JSON.parse(data._body).lang.toLowerCase();
           this.translateWithBrowserLang(data._body, this.language);
         }
       }, (error) => {
