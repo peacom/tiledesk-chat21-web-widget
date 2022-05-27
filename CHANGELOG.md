@@ -3,7 +3,9 @@
 ### 5.0.24-rc.5
  - added: close chat button option in upper-right menu concersation-detail header to close a chat from widget
  - added: amLocal pipe in tooltip message timestamp on mouse-hover event
-
+ - added: hideCloseConversationOptionMenu tiledesk setting property to hide/show close conversation a chat from setting upper-right conversation heater menu option
+ - bug-fixed: image url different from firebase show image fullscreen instead of download it as a file
+ 
 ### 5.0.24-rc.4
 - bug-fixed: emojii function doesn't work when iframe is in bubble-message
 
