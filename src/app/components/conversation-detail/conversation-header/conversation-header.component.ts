@@ -20,6 +20,7 @@ export class ConversationHeaderComponent implements OnInit, OnChanges {
   @Input() soundEnabled: boolean;
   @Input() isMenuShow: boolean;
   @Input() isTrascriptDownloadEnabled: boolean;
+  @Input() hideCloseConversationOptionMenu: boolean;
   @Input() hideHeaderCloseButton: boolean;
   @Input() hideHeaderConversationOptionsMenu: boolean;
   @Input() windowContext;

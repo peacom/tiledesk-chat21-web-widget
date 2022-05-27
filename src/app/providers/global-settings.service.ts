@@ -820,15 +820,20 @@ export class GlobalSettingsService {
         if (TEMP !== undefined) {
             globals.openExternalLinkButton = TEMP;
         }
+        TEMP = tiledeskSettings['hideCloseConversationOptionMenu'];
+        // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > hideCloseConversationOptionMenu:: ', TEMP]);
+        if (TEMP !== undefined) {
+            globals.hideCloseConversationOptionMenu = (TEMP === true) ? true : false;;
+        }
         TEMP = tiledeskSettings['hideHeaderConversationOptionsMenu'];
         // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > hideHeaderConversationOptionsMenu:: ', TEMP]);
         if (TEMP !== undefined) {
-            globals.hideHeaderConversationOptionsMenu = TEMP;
+            globals.hideHeaderConversationOptionsMenu = (TEMP === true) ? true : false;;
         }
         TEMP = tiledeskSettings['hideSettings'];
         // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > hideSettings:: ', TEMP]);
         if (TEMP !== undefined) {
-            globals.hideSettings = TEMP;
+            globals.hideSettings = (TEMP === true) ? true : false;;
         }
         TEMP = tiledeskSettings['logLevel'];
         // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > logLevel:: ', TEMP]);
@@ -1099,6 +1104,10 @@ export class GlobalSettingsService {
         TEMP = el.nativeElement.getAttribute('hideHeaderConversationOptionsMenu');
         if (TEMP !== null) {
             this.globals.hideHeaderConversationOptionsMenu = TEMP;
+        }
+        TEMP = el.nativeElement.getAttribute('hideCloseConversationOptionMenu');
+        if (TEMP !== null) {
+            this.globals.hideCloseConversationOptionMenu = TEMP;
         }
         TEMP = el.nativeElement.getAttribute('hideSettings');
         if (TEMP !== null) {
@@ -1436,6 +1445,11 @@ export class GlobalSettingsService {
         TEMP = getParameterByName(windowContext, 'tiledesk_hideHeaderConversationOptionsMenu');
         if (TEMP) {
             globals.hideHeaderConversationOptionsMenu = stringToBoolean(TEMP); 
+        }
+
+        TEMP = getParameterByName(windowContext, 'tiledesk_hideCloseConversationOptionMenu');
+        if (TEMP) {
+            globals.hideCloseConversationOptionMenu = stringToBoolean(TEMP); 
         }
 
         TEMP = getParameterByName(windowContext, 'tiledesk_hideSettings');

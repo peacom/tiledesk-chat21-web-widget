@@ -203,7 +203,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
     private customTranslateService: CustomTranslateService,
     private chatManager: ChatManager,
     public typingService: TypingService,
-    private tiledeskRequestService : TiledeskRequestsService,
+    private tiledeskRequestService: TiledeskRequestsService,
     private changeDetectorRef: ChangeDetectorRef,
     private elementRef: ElementRef
   ) { }

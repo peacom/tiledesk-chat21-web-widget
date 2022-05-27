@@ -185,6 +185,7 @@ export class Globals {
    isLogEnabled: boolean;
    openExternalLinkButton: boolean;
    hideHeaderConversationOptionsMenu: boolean;
+   hideCloseConversationOptionMenu: boolean;
    hideSettings: boolean;
    filterByRequester: boolean;
    persistence;
@@ -343,10 +344,12 @@ export class Globals {
     this.baloonShape = '50%';
     /** set launcher balon widget shape: can set corner by corner   */
     this.isLogEnabled = false;
-    // this.parameters['isLogEnabled'] = false;
-    this.openExternalLinkButton = true;
     /** enable to open URL in  self action link button in external page from widget */
+    this.openExternalLinkButton = true;
+    /** enable to hide/show upper-right header conversation options menu */
     this.hideHeaderConversationOptionsMenu = false;
+    /** enable to close a conversation from upper-right header menu  */
+    this.hideCloseConversationOptionMenu = false;
     /** enable to hide/show options menu in conversation detail header */
     this.hideSettings = false;
     /** enable to hide/show options menu in home component */
