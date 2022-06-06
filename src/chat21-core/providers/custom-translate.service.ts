@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 // https://enappd.com/blog/how-to-translate-in-ionic-internationalization-and-localization/143/
 // https://phrase.com/blog/posts/localizing-ionic-applications-with-ngx-translate/
 import { TranslateService } from '@ngx-translate/core';
-
+import LabelENG from 'src/assets/i18n/en.json';
 // @Injectable({
 //   providedIn: 'root'
 // })
@@ -34,6 +34,9 @@ export class CustomTranslateService {
     const mapTranslate = new Map();
     keys.forEach((key: string) => {
       this.translateService.get(key).subscribe((res: string) => {
+        if(key === res && LabelENG[key]){
+          res= LabelENG[key]
+        }
         mapTranslate.set(key, res);
       });
     });

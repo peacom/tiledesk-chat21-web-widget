@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Google+Sans:200,400,800');
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons');
-@import '../sass/normalize.scss';
-@import '../sass/variables';
-@import '../sass/animations.scss';
-@import url("../sass/hover.css");
-
+@import 'src/app/sass/normalize.scss';
+@import 'src/app/sass/variables';
+@import 'src/app/sass/animations.scss';
+@import url("./sass/hover.css");
+@import '~@ctrl/ngx-emoji-mart/picker';
 /** custom scroll bar **/
 input, select:focus, textarea {
     font-size: 16px !important;
@@ -234,7 +234,7 @@ chat-root {
     textarea:hover,
     textarea:active{
         // all: unset;
-        line-height: 15px!important;
+        line-height: 20px!important;
         outline: none!important;
         box-shadow:none!important;;
         border: 0px solid $trasp-light-black!important;;
@@ -604,14 +604,14 @@ chat-root {
         z-index: 10;
 
         button:hover {
-            background: rgba(240,240,240,0.2)!important;
+            background: rgba(240,240,240,0.4)!important;
             opacity: 1!important;
-            transition: all .45s ease-in-out!important;
-            -moz-transition: all .45s ease-in-out!important;
-            -webkit-transition: all .45s ease-in-out!important;
+            transition: all .45s ease-in-out 0s!important;
+            -moz-transition: all .45s ease-in-out 0s!important;
+            -webkit-transition: all .45s ease-in-out 0s!important;
             padding: 0px;
             margin: 0px;
-            border-radius: 10%;
+            border-radius: 50%;
         }
 
         .c21-header-container{

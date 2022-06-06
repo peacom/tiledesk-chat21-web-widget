@@ -1,9 +1,9 @@
-import { Subscription } from 'rxjs/Subscription';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 // firebase
-import * as firebase from 'firebase/app';
+// import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import 'firebase/messaging';
 import 'firebase/database';
 import 'firebase/auth';
@@ -29,10 +29,10 @@ export class FirebaseArchivedConversationsHandler extends ArchivedConversationsH
     // BehaviorSubject
     BSConversationDetail: BehaviorSubject<ConversationModel>;
     // readAllMessages: BehaviorSubject<string>;
-    archivedConversationAdded: BehaviorSubject<ConversationModel>;
-    archivedConversationChanged: BehaviorSubject<ConversationModel>;
-    archivedConversationRemoved: BehaviorSubject<ConversationModel>;
-    loadedConversationsStorage: BehaviorSubject<ConversationModel[]>;
+    archivedConversationAdded: BehaviorSubject<ConversationModel> = new BehaviorSubject<ConversationModel>(null);
+    archivedConversationChanged: BehaviorSubject<ConversationModel> = new BehaviorSubject<ConversationModel>(null);
+    archivedConversationRemoved: BehaviorSubject<ConversationModel> = new BehaviorSubject<ConversationModel>(null);
+    loadedConversationsStorage: BehaviorSubject<ConversationModel[]> = new BehaviorSubject<ConversationModel[]>([]);
 
     // public params
     archivedConversations: Array<ConversationModel> = [];

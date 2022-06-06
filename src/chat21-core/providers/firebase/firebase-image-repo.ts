@@ -6,7 +6,7 @@ import { environment } from '../../../environments/environment';
 import { ImageRepoService } from '../abstract/image-repo.service';
 
 // firebase
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import 'firebase/storage';
 
 // @Injectable({ providedIn: 'root' })

@@ -7,21 +7,15 @@ import { BehaviorSubject } from 'rxjs';
 import { UserModel } from '../models/user';
 
 // handlers
-// import { ChatConversationHandler } from './chat-conversation-handler';
-// import { ChatConversationsHandler } from './chat-conversations-handler';
-
+import { ArchivedConversationsHandlerService } from './abstract/archivedconversations-handler.service';
 import { ConversationHandlerService } from './abstract/conversation-handler.service';
 import { ConversationsHandlerService } from './abstract/conversations-handler.service';
-// import { ChatArchivedConversationsHandler } from './chat-archived-conversations-handler';
-// import { ChatContactsSynchronizer } from './chat-contacts-synchronizer';
-import { environment } from '../../environments/environment';
-import { ArchivedConversationsHandlerService } from './abstract/archivedconversations-handler.service';
+
 import { LoggerService } from './abstract/logger.service';
 import { LoggerInstance } from './logger/loggerInstance';
 
 
-// @Injectable({ providedIn: 'root' })
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ChatManager {
 
   BSStart: BehaviorSubject<any> = new BehaviorSubject<any>(null);

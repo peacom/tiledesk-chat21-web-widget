@@ -1,18 +1,14 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-// import { Headers, Http } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-
-import { environment } from '../../environments/environment';
-// services
+import { Injectable } from '@angular/core';
+import { getParameterByName } from 'src/chat21-core/utils/utils';
+import { environment } from 'src/environments/environment';
 import { Globals } from '../utils/globals';
 
-import { getParameterByName } from '../utils/utils';
-import { LoggerService } from '../../chat21-core/providers/abstract/logger.service';
-import { LoggerInstance } from '../../chat21-core/providers/logger/loggerInstance';
-
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AppConfigService {
+
   private appConfig;
 
   constructor(private http: HttpClient, public g: Globals) {
@@ -20,7 +16,7 @@ export class AppConfigService {
     // console.debug('chat21-web-widget environment: ', environment);
   }
 
-  loadAppConfig() { // : Observable<any> {
+  loadAppConfig() {
     // START GET BASE URL and create absolute url of remoteConfigUrl //
     let urlConfigFile = this.appConfig.remoteConfigUrl;
     if (!this.appConfig.remoteConfigUrl.startsWith('http')) {
@@ -43,14 +39,7 @@ export class AppConfigService {
           }
       }
     }
-    // urlConfigFile = 'https://widget.inspired.edu.au/widget-config.json';
-    // console.log('baseURL: ', this.g.baseLocation , this.appConfig.remoteConfigUrl );
     // END GET BASE URL and create absolute url of remoteConfigUrl //
-    // const headers = new Headers();
-    // headers.append('Content-Type', 'application/json');
-    // return this.http
-    //   .get(urlConfigFile, { headers })
-    //   .map((response) => response.json());
     const that = this;
     return this.http.get(urlConfigFile).toPromise().then(data => {
       that.appConfig = data;

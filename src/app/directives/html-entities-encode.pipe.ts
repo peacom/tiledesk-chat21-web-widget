@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { htmlEntities, replaceEndOfLine } from '../../chat21-core/utils/utils';
+import { htmlEntities, replaceEndOfLine } from 'src/chat21-core/utils/utils';
 
 @Pipe({
   name: 'htmlEntitiesEncode'

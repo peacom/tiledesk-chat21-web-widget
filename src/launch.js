@@ -42,11 +42,11 @@ function loadIframe(tiledeskScriptBaseLocation) {
     srcTileDesk += '</head>';
     srcTileDesk += '<body>';
     srcTileDesk += '<chat-root></chat-root>';
-    srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/inline.bundle.js"></script>';
-    srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/polyfills.bundle.js"></script>';
-    srcTileDesk += '<script type="text/css" src="'+tiledeskScriptBaseLocation+'/styles.bundle.css"></script>';
-    srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/vendor.bundle.js"></script>';
-    srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/main.bundle.js"></script>';
+    srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/runtime.js"></script>';
+    srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/polyfills.js"></script>';
+    srcTileDesk += '<script type="text/css" src="'+tiledeskScriptBaseLocation+'/styles.css"></script>';
+    srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/vendor.js"></script>';
+    srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/main.js"></script>';
     srcTileDesk += '</body>';
     srcTileDesk += '</html>';
     
@@ -121,7 +121,7 @@ function loadIframe(tiledeskScriptBaseLocation) {
     /**** BEGIN EVENST ****/
     /** */
     window.tiledesk.on('onNewConversation', function(event_data) {
-        // console.log("test-custom-auth.html onNewConversation >>>",event_data);
+        console.log("test-custom-auth.html onNewConversation >>>",event_data);
         const tiledeskToken = window.tiledesk.angularcomponent.component.g.tiledeskToken;
         // console.log(">>>> tiledeskToken >>>> ",event_data.detail.appConfigs.apiUrl+event_data.detail.default_settings.projectid);
         if(tiledeskToken) {
@@ -147,7 +147,7 @@ function loadIframe(tiledeskScriptBaseLocation) {
 
     /** */
     window.tiledesk.on('onAuthStateChanged', function(event_data) {
-        // console.log("test-custom-auth.html onAuthStateChanged",event_data);
+        console.log("test-custom-auth.html onAuthStateChanged",event_data);
         const tiledeskToken = window.tiledesk.angularcomponent.component.g.tiledeskToken;
         // console.log("------------------->>>> tiledeskToken: ",window.tiledesk.angularcomponent.component.g);
         if(tiledeskToken) {
@@ -279,7 +279,6 @@ function initWidget() {
         window.tiledesk = new function() {
             //this.type = "macintosh";
             this.tiledeskroot = tiledeskroot;
-            // console.log(" this.tiledeskroot",  this.tiledeskroot);
             this.on = function (event_name, handler) {
                 //console.log("addEventListener for "+ event_name, handler);
                 tiledeskroot.addEventListener(event_name, handler);

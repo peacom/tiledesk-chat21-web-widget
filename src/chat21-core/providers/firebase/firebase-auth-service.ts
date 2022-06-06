@@ -3,10 +3,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 
 // firebase
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import 'firebase/messaging';
 import 'firebase/database';
 import 'firebase/auth';
+import 'firebase/storage';
 
 // services
 import { MessagingAuthService } from '../abstract/messagingAuth.service';
@@ -22,8 +23,8 @@ export class FirebaseAuthService extends MessagingAuthService {
 
 
   // BehaviorSubject
-  BSAuthStateChanged: BehaviorSubject<any>;
-  BSSignOut: BehaviorSubject<any>;
+  BSAuthStateChanged: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  BSSignOut: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   // firebaseSignInWithCustomToken: BehaviorSubject<any>;
 
   // public params

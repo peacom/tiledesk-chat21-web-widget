@@ -1,466 +1,340 @@
-import { TiledeskRequestsService } from './../chat21-core/providers/tiledesk/tiledesk-requests.service';
-import { MessageModel } from './../chat21-core/models/message';
-import { EyeeyeCatcherCardComponent } from './components/eyeeye-catcher-card/eyeeye-catcher-card.component';
-import { LoggerInstance } from './../chat21-core/providers/logger/loggerInstance';
-import { TiledeskAuthService } from './../chat21-core/providers/tiledesk/tiledesk-auth.service';
-import { AppStorageService } from '../chat21-core/providers/abstract/app-storage.service';
-import { StarRatingWidgetService } from './components/star-rating-widget/star-rating-widget.service';
-import { StarRatingWidgetComponent } from './components/star-rating-widget/star-rating-widget.component';
-import { UserModel } from '../../src/chat21-core/models/user';
-
-import { ElementRef, Component, OnInit, OnDestroy, AfterViewInit, NgZone, ViewEncapsulation, HostListener, ViewChild } from '@angular/core';
-// import * as moment from 'moment';
-import * as moment from 'moment/moment';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-
-// https://www.davebennett.tech/subscribe-to-variable-change-in-angular-4-service/
-import 'rxjs/add/operator/takeWhile';
-import { Subscription } from 'rxjs/Subscription';
-
-// services
-import { Globals } from './utils/globals';
-
-
-import { MessagingService } from './providers/messaging.service';
-import { ContactService } from './providers/contact.service';
-import { StorageService } from './providers/storage.service';
-import { TranslatorService } from './providers/translator.service';
-//import { ConversationsService } from './providers/conversations.service';
-import { ChatPresenceHandlerService } from './providers/chat-presence-handler.service';
-import { AgentAvailabilityService } from './providers/agent-availability.service';
-
-// firebase
-import * as firebase from 'firebase/app';
-import 'firebase/app';
-import { environment } from '../environments/environment';
-
-// utils
-// setLanguage,
-// getImageUrlThumb,
-import { strip_tags, isPopupUrl, popupUrl, detectIfIsMobile, supports_html5_storage, getImageUrlThumb, isJustRecived } from './utils/utils';
-import { ConversationModel } from '../chat21-core/models/conversation';
-import { AppConfigService } from './providers/app-config.service';
-
-
-import { GlobalSettingsService } from './providers/global-settings.service';
-import { SettingsSaverService } from './providers/settings-saver.service';
-import { User } from '../models/User';
-import { CustomTranslateService } from '../chat21-core/providers/custom-translate.service';
-import { ConversationsHandlerService } from '../chat21-core/providers/abstract/conversations-handler.service';
-import { ChatManager } from '../chat21-core/providers/chat-manager';
-import { TypingService } from '../chat21-core/providers/abstract/typing.service';
-import { MessagingAuthService } from '../chat21-core/providers/abstract/messagingAuth.service';
+/** ANGULAR MODULES */
+import { AfterViewInit, Component, ElementRef, HostListener, NgZone, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { Subscription } from 'rxjs/internal/Subscription';
+import * as moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
-import { FIREBASESTORAGE_BASE_URL_IMAGE, STORAGE_PREFIX, UID_SUPPORT_GROUP_MESSAGES } from './utils/constants';
-import { ConversationHandlerBuilderService } from '../chat21-core/providers/abstract/conversation-handler-builder.service';
-import { ConversationHandlerService } from '../chat21-core/providers/abstract/conversation-handler.service';
-import { Triggerhandler } from '../chat21-core/utils/triggerHandler';
-import { PresenceService } from '../chat21-core/providers/abstract/presence.service';
-import { ArchivedConversationsHandlerService } from '../chat21-core/providers/abstract/archivedconversations-handler.service';
-import { AUTH_STATE_OFFLINE, AUTH_STATE_ONLINE, TYPE_MSG_FILE, TYPE_MSG_IMAGE, URL_SOUND_LIST_CONVERSATION } from '../chat21-core/utils/constants';
-import { ImageRepoService } from '../chat21-core/providers/abstract/image-repo.service';
-import { UploadService } from '../chat21-core/providers/abstract/upload.service';
-import { LoggerService } from '../chat21-core/providers/abstract/logger.service';
-import { isInfo } from '../chat21-core/utils/utils-message';
+//COMPONENTS
+import { EyeeyeCatcherCardComponent } from './component/eyeeye-catcher-card/eyeeye-catcher-card.component';
+//MODELS
+import { UserModel } from 'src/chat21-core/models/user';
+import { ConversationModel } from 'src/chat21-core/models/conversation';
+// SERVICES
+/** LOGGER SERVICES */
+import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
+import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
+/** TILEDESK SERVICES */
+import { TiledeskAuthService } from 'src/chat21-core/providers/tiledesk/tiledesk-auth.service';
+import { TiledeskRequestsService } from 'src/chat21-core/providers/tiledesk/tiledesk-requests.service';
+/** CONVERSATIONS - MESSAGE SERVICES */
+import { MessagingAuthService } from 'src/chat21-core/providers/abstract/messagingAuth.service';
+import { ChatManager } from 'src/chat21-core/providers/chat-manager';
+import { UploadService } from 'src/chat21-core/providers/abstract/upload.service';
+import { Triggerhandler } from 'src/chat21-core/utils/triggerHandler';
+import { AppStorageService } from 'src/chat21-core/providers/abstract/app-storage.service';
+import { ConversationHandlerBuilderService } from 'src/chat21-core/providers/abstract/conversation-handler-builder.service';
+import { ArchivedConversationsHandlerService } from 'src/chat21-core/providers/abstract/archivedconversations-handler.service';
+import { ConversationsHandlerService } from 'src/chat21-core/providers/abstract/conversations-handler.service';
+import { ConversationHandlerService } from 'src/chat21-core/providers/abstract/conversation-handler.service';
+import { ImageRepoService } from 'src/chat21-core/providers/abstract/image-repo.service';
+import { TypingService } from 'src/chat21-core/providers/abstract/typing.service';
+import { PresenceService } from 'src/chat21-core/providers/abstract/presence.service';
+import { CustomTranslateService } from 'src/chat21-core/providers/custom-translate.service';
+/** OTHERS */
+import { AppConfigService } from './providers/app-config.service';
+import { GlobalSettingsService } from './providers/global-settings.service';
+import { TranslatorService } from './providers/translator.service';
+import { SettingsSaverService } from './providers/settings-saver.service';
+// UTILS
+import { Globals } from './utils/globals';
+import { UID_SUPPORT_GROUP_MESSAGES } from './utils/constants';
+import { supports_html5_storage } from 'src/chat21-core/utils/utils';
+import { AUTH_STATE_OFFLINE, AUTH_STATE_ONLINE, TYPE_MSG_FILE, TYPE_MSG_IMAGE, URL_SOUND_LIST_CONVERSATION } from 'src/chat21-core/utils/constants';
+import { isInfo } from 'src/chat21-core/utils/utils-message';
 
 interface MessageObj {
-    tenant?: string;
-    senderId?: string;
-    senderFullname?: string;
-    message: string;
-    type: string;
-    metadata: any;
-    recipientId: string;
-    recipientFullname: string;
-    attributes: {};
-    projectid?: string;
-    channelType?: string;
+  tenant?: string;
+  senderId?: string;
+  senderFullname?: string;
+  message: string;
+  type: string;
+  metadata: any;
+  recipientId: string;
+  recipientFullname: string;
+  attributes: {};
+  projectid?: string;
+  channelType?: string;
 }
 
 @Component({
-    selector: 'chat-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss'],
-    encapsulation: ViewEncapsulation.None /* it allows to customize 'Powered By' */
-    // providers: [AgentAvailabilityService, TranslatorService]
+  selector: 'chat-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  encapsulation: ViewEncapsulation.None /* it allows to customize 'Powered By' */
+  // providers: [AgentAvailabilityService, TranslatorService]
 })
-
 export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
-    obsEndRenderMessage: any;
-    stateLoggedUser;
-    // ========= begin:: parametri di stato widget ======= //
-    isInitialized = false;              /** if true show button */
-    isOpenHome = true;                  /** check open/close component home ( sempre visibile xchè il primo dello stack ) */
-    isOpenConversation = false;         /** check open/close component conversation if is true  */
-    isOpenAllConversation = false;
-    isOpenSelectionDepartment = false;  /** check open/close modal select department */
-    // isOpenPrechatForm = false;          /** check open/close modal prechatform if g.preChatForm is true  */
-    isOpenStartRating = false;          /** check open/close modal start rating chat if g.isStartRating is true  */
-    // isWidgetActive: boolean;            /** var bindata sullo stato conv aperta/chiusa !!!! da rivedere*/
-    // isModalLeaveChatActive = false;     /** ???? */
-    isConversationArchived: boolean = false;
-    departments = [];
-    marginBottom: number;
-    conversationSelected: ConversationModel;
-    lastConversation: ConversationModel;
-    // isBeingAuthenticated = false;           /** authentication is started */
-    // ========= end:: parametri di stato widget ======= //
+  
 
+  // ========= begin:: sottoscrizioni ======= //
+  subscriptions: Subscription[] = []; /** */
+  // ========= end:: sottoscrizioni ======= //
 
-    // ========= begin:: dichiarazione funzioni ======= //
-    detectIfIsMobile = detectIfIsMobile; /** utils: controllo se mi trovo su mobile */
-    isPopupUrl = isPopupUrl;
-    popupUrl = popupUrl;
-    strip_tags = strip_tags;
-    // ========= end:: dichiarazione funzioni ======= //
+  // ========= begin:: tabTitle and sounds ======= //
+  private tabTitle: string; 
+  private audio: any;
+  private setTimeoutSound: any;
+  private setIntervalTime: any;
+  private isTabVisible: boolean = true;
+  public stateLoggedUser;
+  // ========= end:: tabTitle and sounds ======= //
 
+  // ========= begin:: widget state parameter ======= //
+  isOpenHome = true;                  /** check open/close component home ( sempre visibile xchè il primo dello stack ) */
+  isOpenConversation = false;         /** check open/close component conversation if is true  */
+  isOpenAllConversation = false;
+  isOpenSelectionDepartment = false;  /** check open/close modal select department */
+  // isOpenPrechatForm = false;          /** check open/close modal prechatform if g.preChatForm is true  */
+  isOpenStartRating = false;          /** check open/close modal start rating chat if g.isStartRating is true  */
+  // isWidgetActive: boolean;            /** var bindata sullo stato conv aperta/chiusa !!!! da rivedere*/
+  isConversationArchived: boolean = false;
+  isInitialized = false;              /** if true show button */
+  // ========= end:: widget state parameter ======= //
 
-    // ========= begin:: sottoscrizioni ======= //
-    subscriptions: Subscription[] = []; /** */
-    // ========= end:: sottoscrizioni ======= //
+  listConversations: Array<ConversationModel>;
+  archivedConversations: Array<ConversationModel>;
+  lastConversation: ConversationModel;
+  
+  @ViewChild(EyeeyeCatcherCardComponent, { static: false }) eyeeyeCatcherCardComponent: EyeeyeCatcherCardComponent
+  styleMapConversation: Map<string, string> = new Map();
+  marginBottom: number;
+  
+  private logger: LoggerService = LoggerInstance.getInstance();
+  constructor(
+    private el: ElementRef,
+    private ngZone: NgZone,
+    public g: Globals,
+    public triggerHandler: Triggerhandler,
+    public globalSettingsService: GlobalSettingsService,
+    private settingsSaverService: SettingsSaverService,
+    public appConfigService: AppConfigService,
+    private appStorageService: AppStorageService,
+    private translatorService: TranslatorService,
+    private translateService: CustomTranslateService,
+    public chatManager: ChatManager,
+    private tiledeskRequestsService: TiledeskRequestsService,
+    public tiledeskAuthService: TiledeskAuthService,
+    public messagingAuthService: MessagingAuthService,
+    public conversationsHandlerService: ConversationsHandlerService,
+    public archivedConversationsService: ArchivedConversationsHandlerService,
+    public conversationHandlerBuilderService: ConversationHandlerBuilderService,
+    public imageRepoService: ImageRepoService,
+    public typingService: TypingService,
+    public presenceService: PresenceService,
+    public uploadService: UploadService
+  ){}
 
-    // ========= begin:: variabili del componente ======= //
-    listConversations: Array<ConversationModel>;
-    archivedConversations: Array<ConversationModel>;
-    private audio: any;
-    private setTimeoutSound: any;
-    private setIntervalTime: any;
-    private isTabVisible: boolean = true;
-    private tabTitle: string;
-    // ========= end:: variabili del componente ======== //
+  ngOnInit(): void {
+    this.logger.info('[APP-CONF]---------------- ngOnInit: APP.COMPONENT ---------------- ')
+    this.initWidgetParamiters();
+  }
 
-    // ========= begin:: DA SPOSTARE ======= //
-    IMG_PROFILE_SUPPORT = 'https://user-images.githubusercontent.com/32448495/39111365-214552a0-46d5-11e8-9878-e5c804adfe6a.png';
-    // private aliveSubLoggedUser = true; /** ????? */
-    // THERE ARE TWO 'CARD CLOSE BUTTONS' THAT ARE DISPLAYED ON THE BASIS OF PLATFORM
-    // isMobile: boolean;
-    // ========= end:: DA SPOSTARE ========= //
+  ngAfterViewInit(): void {
+    this.logger.info('[APP-CONF]---------------- ngAfterViewInit: APP.COMPONENT ---------------- ')
+    this.ngZone.run(() => {
+        const that = this;
+        const subChangedConversation = this.conversationsHandlerService.conversationChanged.subscribe((conversation) => {
+            // that.ngZone.run(() => {
+            if (conversation) {
+                this.onImageLoaded(conversation)
+                this.onConversationLoaded(conversation)
 
-    styleMapConversation: Map<string, string> = new Map();
-    @ViewChild(EyeeyeCatcherCardComponent) eyeeyeCatcherCardComponent: EyeeyeCatcherCardComponent
-    private logger: LoggerService = LoggerInstance.getInstance();
-
-    constructor(
-        private el: ElementRef,
-        private ngZone: NgZone,
-        public g: Globals,
-        public triggerHandler: Triggerhandler,
-        public translatorService: TranslatorService,
-        private translateService: CustomTranslateService,
-        public messagingAuthService: MessagingAuthService,
-        public tiledeskAuthService: TiledeskAuthService,
-        private tiledeskRequestsService: TiledeskRequestsService,
-        //public messagingService: MessagingService,
-        public contactService: ContactService,
-        //public chatPresenceHandlerService: ChatPresenceHandlerService,
-        public presenceService: PresenceService,
-        private agentAvailabilityService: AgentAvailabilityService,
-        // private storageService: StorageService,
-        private appStorageService: AppStorageService,
-        public appConfigService: AppConfigService,
-        public globalSettingsService: GlobalSettingsService,
-        public settingsSaverService: SettingsSaverService,
-        //public conversationsService: ConversationsService,
-        public conversationsHandlerService: ConversationsHandlerService,
-        public archivedConversationsService: ArchivedConversationsHandlerService,
-        public conversationHandlerBuilderService: ConversationHandlerBuilderService,
-        public chatManager: ChatManager,
-        public typingService: TypingService,
-        public imageRepoService: ImageRepoService,
-        public uploadService: UploadService
-    ) {
-        // if (!appConfigService.getConfig().firebaseConfig || appConfigService.getConfig().firebaseConfig.apiKey === 'CHANGEIT') {
-        //     throw new Error('firebase config is not defined. Please create your widget-config.json. See the Chat21-Web_widget Installation Page');
-        // }
-
-        // firebase.initializeApp(appConfigService.getConfig().firebaseConfig);  // here shows the error
-        this.obsEndRenderMessage = new BehaviorSubject(null);
-    }
-
-    /** */
-    ngOnInit() {
-        this.logger.info('[APP-CONF]---------------- ngOnInit: APP.COMPONENT ---------------- ')
-        this.initWidgetParamiters();
-    }
-
-    @HostListener('document:visibilitychange')
-    visibilitychange() {
-        // this.logger.printDebug("document TITLE", this.g.windowContext.window.document.title);
-        if (document.hidden) {
-            this.isTabVisible = false
-            // this.g.windowContext.window.document.title = this.tabTitle
-        } else {
-            // TAB IS ACTIVE --> restore title and DO NOT SOUND
-            clearInterval(this.setIntervalTime)
-            this.setIntervalTime = null;
-            this.isTabVisible = true;
-            this.g.windowContext.window.document.title = this.tabTitle;
-            // this.g.windowContext.parent.title = "SHOWING"
-            // this.g.windowContext.title = "SHOWING2"
-        }
-    }
-
-    private manageTabNotification() {
-        if (!this.isTabVisible) {
-            // TAB IS HIDDEN --> manage title and SOUND 
-            // this.g.windowContext.parent.title = "HIDDEN"
-            // this.g.windowContext.title = "HIDDEN2"
-
-            let badgeNewConverstionNumber = this.conversationsHandlerService.countIsNew()
-            this.logger.debug('[APP-COMP] badgeNewConverstionNumber::', badgeNewConverstionNumber)
-            badgeNewConverstionNumber > 0 ? badgeNewConverstionNumber : badgeNewConverstionNumber= 1
-            this.g.windowContext.window.document.title = "(" + badgeNewConverstionNumber + ") " + this.tabTitle
-            clearInterval(this.setIntervalTime)
-            const that = this
-            this.setIntervalTime = window.setInterval(function () {
-                if (that.g.windowContext.window.document.title.charAt(0) === '(') {
-                    that.g.windowContext.window.document.title = that.tabTitle
-                } else {
-                    that.g.windowContext.window.document.title = "(" + badgeNewConverstionNumber + ") " + that.tabTitle;
+                if(conversation.sender !== this.g.senderId && !isInfo(conversation)){
+                    that.manageTabNotification();
                 }
-            }, 1000);
-            this.soundMessage()
-        }
-    }
 
-
-    /** */
-    ngAfterViewInit() {
-        // this.triggerOnViewInit();
-        this.ngZone.run(() => {
-            const that = this;
-            const subChangedConversation = this.conversationsHandlerService.conversationChanged.subscribe((conversation) => {
-                // that.ngZone.run(() => {
-                if (conversation) {
-                    this.onImageLoaded(conversation)
-                    this.onConversationLoaded(conversation)
-
-                    if(conversation.sender !== this.g.senderId && !isInfo(conversation)){
-                        that.manageTabNotification();
-                    }
-
-                    if (that.g.isOpen === true) {
-                        that.g.setParameter('displayEyeCatcherCard', 'none');
-    
-                        this.logger.debug('[APP-COMP] obsChangeConversation ::: ', conversation);
-                        if (conversation.attributes && conversation.attributes['subtype'] === 'info') {
-                            return;
-                        }
-                        if (conversation.is_new && !this.isOpenConversation) {
-                            // this.soundMessage();
-                        }
-    
-                    } else {
-                        // if(conversation.is_new && isJustRecived(this.g.startedAt.getTime(), conversation.timestamp)){
-                        //widget closed
-                        that.lastConversation = conversation;
-                        that.g.isOpenNewMessage = true;
-                        that.logger.debug('[APP-COMP] lastconversationnn', that.lastConversation)
-    
-                        let badgeNewConverstionNumber = that.conversationsHandlerService.countIsNew()
-                        that.g.setParameter('conversationsBadge', badgeNewConverstionNumber);
-                        // }
-                    }
-
-                    that.triggerOnConversationUpdated(conversation);
-                } else {
-                    this.logger.debug('[APP-COMP] oBSconversationChanged null: errorrr')
-                    return;
-                }
-                
-                // });
-            });
-            this.subscriptions.push(subChangedConversation);
-
-            const subAddedConversation = this.conversationsHandlerService.conversationAdded.subscribe((conversation) => {
-                // that.ngZone.run(() => {
-                if (that.g.isOpen === true && conversation) {
+                if (that.g.isOpen === true) {
                     that.g.setParameter('displayEyeCatcherCard', 'none');
-                    that.triggerOnConversationUpdated(conversation);
-                    that.logger.debug('[APP-COMP] obsAddedConversation ::: ', conversation);
-                    if (conversation && conversation.attributes && conversation.attributes['subtype'] === 'info') {
+
+                    this.logger.debug('[APP-COMP] obsChangeConversation ::: ', conversation);
+                    if (conversation.attributes && conversation.attributes['subtype'] === 'info') {
                         return;
                     }
-                    if (conversation.is_new) {
-                        that.manageTabNotification()
-                        // this.soundMessage(); 
+                    if (conversation.is_new && !this.isOpenConversation) {
+                        // this.soundMessage();
                     }
-                    if(this.g.isOpen === false){
-                        that.lastConversation = conversation;
-                        that.g.isOpenNewMessage = true;
-                    }
+
                 } else {
+                    // if(conversation.is_new && isJustRecived(this.g.startedAt.getTime(), conversation.timestamp)){
                     //widget closed
+                    that.lastConversation = conversation;
+                    that.g.isOpenNewMessage = true;
+                    that.logger.debug('[APP-COMP] lastconversationnn', that.lastConversation)
 
                     let badgeNewConverstionNumber = that.conversationsHandlerService.countIsNew()
                     that.g.setParameter('conversationsBadge', badgeNewConverstionNumber);
+                    // }
                 }
-                // that.manageTabNotification()
-                // });
-                if(conversation){
-                    this.onImageLoaded(conversation)
-                    this.onConversationLoaded(conversation)
-                }
-                
-            });
-            this.subscriptions.push(subAddedConversation);
 
-            const subArchivedConversations = this.archivedConversationsService.archivedConversationAdded.subscribe((conversation) => {
-                // that.ngZone.run(() => {
-                if (conversation) {
-                    that.triggerOnConversationUpdated(conversation);
-                    this.onImageLoaded(conversation)
-                    this.onConversationLoaded(conversation)
-                }
-                // });
-            });
-            this.subscriptions.push(subArchivedConversations);
-
+                that.triggerOnConversationUpdated(conversation);
+            } else {
+                this.logger.debug('[APP-COMP] oBSconversationChanged null: errorrr')
+                return;
+            }
+            
+            // });
         });
-        // this.authService.initialize()
-        this.appStorageService.initialize(environment.storage_prefix, this.g.persistence, this.g.projectid)
-        this.tiledeskAuthService.initialize(this.appConfigService.getConfig().apiUrl);
-        this.tiledeskRequestsService.initialize(this.appConfigService.getConfig().apiUrl, this.g.projectid)
-        this.messagingAuthService.initialize();
-        this.chatManager.initialize();
-        this.uploadService.initialize();
+        this.subscriptions.push(subChangedConversation);
 
+        const subAddedConversation = this.conversationsHandlerService.conversationAdded.subscribe((conversation) => {
+            // that.ngZone.run(() => {
+            if (that.g.isOpen === true && conversation) {
+                that.g.setParameter('displayEyeCatcherCard', 'none');
+                that.triggerOnConversationUpdated(conversation);
+                that.logger.debug('[APP-COMP] obsAddedConversation ::: ', conversation);
+                if (conversation && conversation.attributes && conversation.attributes['subtype'] === 'info') {
+                    return;
+                }
+                if (conversation.is_new) {
+                    that.manageTabNotification()
+                    // this.soundMessage(); 
+                }
+                if(this.g.isOpen === false){
+                    that.lastConversation = conversation;
+                    that.g.isOpenNewMessage = true;
+                }
+            } else {
+                //widget closed
+
+                let badgeNewConverstionNumber = that.conversationsHandlerService.countIsNew()
+                that.g.setParameter('conversationsBadge', badgeNewConverstionNumber);
+            }
+            // that.manageTabNotification()
+            // });
+            if(conversation){
+                this.onImageLoaded(conversation)
+                this.onConversationLoaded(conversation)
+            }
+            
+        });
+        this.subscriptions.push(subAddedConversation);
+
+        const subArchivedConversations = this.archivedConversationsService.archivedConversationAdded.subscribe((conversation) => {
+            // that.ngZone.run(() => {
+            if (conversation) {
+                that.triggerOnConversationUpdated(conversation);
+                this.onImageLoaded(conversation)
+                this.onConversationLoaded(conversation)
+            }
+            // });
+        });
+        this.subscriptions.push(subArchivedConversations);
+
+    });
+    this.appStorageService.initialize(environment.storage_prefix, this.g.persistence, this.g.projectid)
+    this.tiledeskAuthService.initialize(this.appConfigService.getConfig().apiUrl)
+    this.tiledeskRequestsService.initialize(this.appConfigService.getConfig().apiUrl, this.g.projectid)
+    this.messagingAuthService.initialize();
+    this.chatManager.initialize();
+    this.uploadService.initialize();
+  }
+
+  private initWidgetParamiters(){
+    const that = this;
+    const obsSettingsService = this.globalSettingsService.obsSettingsService.subscribe((resp) => {
+        if(resp){
+
+            // /** INIT  */
+            this.logger.setLoggerConfig(this.g.isLogEnabled, this.g.logLevel)
+            this.tabTitle = this.g.windowContext.window.document.title
+            this.appStorageService.initialize(environment.storage_prefix, this.g.persistence, this.g.projectid)
+            this.logger.debug('[APP-COMP] controllo se è stato passato un token: ', this.g.jwt);
+            /**CHECK IF JWT IS IN URL PARAMETERS */
+            if (this.g.jwt) {
+                // logging in with custom token from url
+                // add JWY token to localstorage and authenticate with it           this.logger.debug('[APP-COMP] token from url. isShown:', this.g.isShown, 'autostart:', this.g.autoStart)
+                this.logger.debug('[APP-COMP]  ----------------  logging in with custom token from url ---------------- ');
+                //   this.g.autoStart = false;
+                const storedTiledeskToken = this.appStorageService.getItem('tiledeskToken')
+                storedTiledeskToken === this.g.jwt? null: 
+                this.appStorageService.setItem('tiledeskToken', this.g.jwt)
+                this.g.tiledeskToken = this.g.jwt;
+                // this.signInWithCustomToken(this.g.jwt) // moved to authenticate() in else(tiledeskToken)
+            }
+
+            /** INIT LABELS TRANSLATIONS */
+            this.translatorService.initI18n().then((result) => {
+                this.logger.debug('[APP-COMP] »»»» APP-COMPONENT.TS initI18n result', result);
+                const browserLang = this.translatorService.getLanguage();
+                moment.locale(browserLang)
+                this.translatorService.translate(this.g);
+            }).then(() => {
+                /** INIT  */
+                that.initAll();
+                /** TRIGGER ONBEFORE INIT */
+                that.triggerOnBeforeInit();
+                /** AUTH */
+                that.setAuthSubscription();
+            })
+      
+        }
+    });
+    this.subscriptions.push(obsSettingsService);
+    this.globalSettingsService.initWidgetParamiters(this.g, this.el);
+
+    // SET AUDIO
+    this.audio = new Audio();
+    this.audio.src = this.g.baseLocation + URL_SOUND_LIST_CONVERSATION;
+    this.audio.load();
+  }
+
+  private initAll() {
+    this.addComponentToWindow(this.ngZone);
+
+    //INIT TRIGGER-HANDLER
+    this.triggerHandler.setElement(this.el)
+    this.triggerHandler.setWindowContext(this.g.windowContext)
+
+    // /** TRANSLATION LOADER: */
+    // //  this.translatorService.translate(this.g);
+    // this.translatorService.initI18n().then((result) => {
+    //     this.g.wdLog(['»»»» APP-COMPONENT.TS initI18n result', result]);
+    //     this.translatorService.translate(this.g);
+    // });
+
+    /** SET ATTRIBUTES */
+    const attributes = this.setAttributesFromStorageService();
+    if (attributes) {
+        this.g.attributes = attributes;
     }
+    this.setStyleMap()
 
-    // setStoragePrefix(): string{
-    //     let prefix = STORAGE_PREFIX;
-    //     try {
-    //         prefix = environment.storage_prefix + '_';
-    //     } catch (e) {
-    //         this.g.wdLog(['> Error :' + e]);
-    //     }
-    //     return prefix + this.g.projectid + '_';
-    // }
+    /**
+     * SUBSCRIPTION :
+     * Subscription to runtime changes in globals
+     * and save changes in localstorage
+    */
+    this.settingsSaverService.initialize();
+    // ------------------------------- //
+
+    // ------------------------------- //
+    /**
+     * INIZIALIZE GLOBALS :
+     * create settings object used in trigger
+     * set isMobile
+     * set attributes
+    */
+    this.g.initialize();
+    // ------------------------------- //
+
+    this.removeFirebasewebsocketFromLocalStorage();
+    // this.triggerLoadParamsEvent();
+    // this.addComponentToWindow(this.ngZone); // forse dovrebbe stare prima di tutti i triggers
+
+    this.initLauncherButton();
+    this.triggerLoadParamsEvent(); // first trigger
+    //this.setAvailableAgentsStatus();
+
+  }
 
     // ========= begin:: SUBSCRIPTIONS ============//
-    /** login subscription
-    * GET CURRENT USER
-    * recupero il current user se esiste
-    * https://forum.ionicframework.com/t/firebase-auth-currentuser-shows-me-null-but-it-logged-in/68411/4
-    */
-    setAuthSubscription() {
+    private setAuthSubscription(){
         this.logger.debug('[APP-COMP] setLoginSubscription : ');
         const that = this;
-        /**
-         * SUBSCRIBE TO ASYNC LOGIN FUNCTION
-         * RESP
-         * -2: ho fatto il reinit
-         * -1: ho fatto il logout
-         * 0: non sono loggato
-         * 200: sono loggato
-         * 400: errore nel login
-         * 410: errore login (firebase)
-         */
-        // const obsLoggedUser = this.authService.obsLoggedUser.subscribe((resp) => {
-        //     this.g.wdLog(['obsLoggedUser ------------> ', resp]);
-        //     // if autostart == false don't autenticate!
-        //     // after called signInWithCustomToken need set autostart == true
-        //     // this.ngZone.run(() => {
-        //         // const tiledeskTokenTEMP = that.appStorageService.getItemWithoutProjectId('tiledeskToken');
-
-        //         const tiledeskTokenTEMP = that.appStorageService.getItem('tiledeskToken');
-        //         if (tiledeskTokenTEMP && tiledeskTokenTEMP !== undefined) {
-        //             that.g.tiledeskToken = tiledeskTokenTEMP;
-        //         }
-        //         const firebaseTokenTEMP = that.appStorageService.getItemWithoutProjectId('firebaseToken');
-        //         if (firebaseTokenTEMP && firebaseTokenTEMP !== undefined) {
-        //             that.g.firebaseToken = firebaseTokenTEMP;
-        //         }
-        //         const autoStart = this.g.autoStart;
-        //         that.g.wdLog(['tiledeskToken ------------> ', that.g.tiledeskToken]);
-        //         if (resp === -2) {
-        //             that.stateLoggedUser = resp;
-        //             /** ho fatto un reinit */
-        //             that.g.wdLog(['sono nel caso reinit -2']);
-        //             that.g.setParameter('isLogged', false);
-        //             that.hideAllWidget();
-        //             // that.g.setParameter('isShown', false, true);
-        //             that.appStorageService.removeItem('tiledeskToken');
-        //             that.g.isLogout = true;
-        //             // that.triggerOnAuthStateChanged(resp);
-        //             if (autoStart !== false) {
-        //                 that.setAuthentication();
-        //                 that.initAll();
-        //             }
-        //         } else if (resp === -1) {
-        //             that.stateLoggedUser = resp;
-        //             /** ho effettuato il logout: nascondo il widget */
-        //             that.g.wdLog(['sono nel caso logout -1']);
-        //             // that.g.wdLog(['obsLoggedUser', obsLoggedUser);
-        //             // that.g.wdLog(['this.subscriptions', that.subscriptions);
-        //             that.g.setParameter('isLogged', false);
-        //             that.hideAllWidget();
-        //             // that.g.setParameter('isShown', false, true);
-        //             that.appStorageService.removeItem('tiledeskToken');
-        //             that.g.isLogout = true;
-        //             that.triggerOnAuthStateChanged(that.stateLoggedUser);
-        //         } else if (resp === 0) {
-        //             that.stateLoggedUser = resp;
-        //             /** non sono loggato */
-        //             that.g.wdLog(['sono nel caso in cui non sono loggato 0']);
-        //             that.g.wdLog(['NO CURRENT USER AUTENTICATE: ']);
-        //             that.g.setParameter('isLogged', false);
-        //             that.hideAllWidget();
-        //             // that.g.setParameter('isShown', false, true);
-        //             that.triggerOnAuthStateChanged(that.stateLoggedUser);
-        //             if (autoStart !== false) {
-        //                 that.setAuthentication();
-        //             }
-        //         } else if (resp === 200) {
-        //             if (that.stateLoggedUser === 0) {
-        //                 that.stateLoggedUser = 201;
-        //             } else {
-        //                 that.stateLoggedUser = resp;
-        //             }
-        //             /** sono loggato */
-        //             const user = that.authService.getCurrentUser();
-        //             that.g.wdLog(['sono nel caso in cui sono loggato']);
-        //             that.g.wdLog([' anonymousAuthenticationInNewProject']);
-        //             // that.authService.resigninAnonymousAuthentication();
-        //             // confronto id utente tiledesk con id utente di firebase
-        //             // senderid deve essere == id di firebase
-        //             that.g.setParameter('senderId', user.uid);
-        //             that.g.setParameter('isLogged', true);
-        //             that.g.setParameter('attributes', that.setAttributesFromStorageService());
-        //             /* faccio scattare il trigger del login solo una volta */
-        //             // if (that.isBeingAuthenticated) {
-        //             //     that.triggerOnLoggedIn();
-        //             //     that.isBeingAuthenticated = false;
-        //             // }
-        //             that.triggerOnAuthStateChanged(that.stateLoggedUser);
-        //             that.startUI();
-        //             that.g.wdLog([' 1 - IMPOSTO STATO CONNESSO UTENTE ', autoStart]);
-        //             that.presenceService.setPresence(user.uid);
-        //             if (autoStart !== false) {
-        //                 that.showAllWidget();
-        //                 // that.g.setParameter('isShown', true, true);
-        //             }
-        //         } else if (resp >= 400) {
-        //             that.g.wdLog([' ERRORE LOGIN ']);
-        //             // that.appStorageService.removeItem('tiledeskToken');
-        //             return;
-        //         } else {
-        //             that.g.wdLog([' INIT obsLoggedUser']);
-        //             return;
-        //         }   
-        //         // that.triggerOnAuthStateChanged();
-        //     // });
-        //     this.initConversationsHandler(environment.tenant, that.g.senderId)
-        // });
-        // // that.g.wdLog(['onAuthStateChanged ------------> ']);
-        // this.subscriptions.push(obsLoggedUser);
-        // // this.authService.onAuthStateChanged();
-
+        
         const subAuthStateChanged = this.messagingAuthService.BSAuthStateChanged.subscribe(state => {
 
-            //const tiledeskTokenTEMP = that.appStorageService.getItem('tiledeskToken');
             const tiledeskTokenTEMP = this.appStorageService.getItem('tiledeskToken')
-            //const tiledeskTokenTEMP = this.authService2.getTiledeskToken();
             if (tiledeskTokenTEMP && tiledeskTokenTEMP !== undefined) {
                 that.g.tiledeskToken = tiledeskTokenTEMP;
             }
@@ -495,7 +369,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                 that.typingService.initialize(this.g.tenant);
                 that.presenceService.initialize(this.g.tenant);
                 that.presenceService.setPresence(user.uid);
-                
                 this.initConversationsHandler(this.g.tenant, that.g.senderId);
                 if (autoStart) {
                     that.showWidget();
@@ -546,373 +419,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.subscriptions.push(subUserLogOut);
     }
     // ========= end:: SUBSCRIPTIONS ============//
-
-
-    private initWidgetParamiters() {
-        // that.g.wdLog(['---------------- initWidgetParamiters ---------------- ');
-        const that = this;
-        // ------------------------------- //
-        /**
-         * SET WIDGET PARAMETERS
-         * when globals is setting (loaded paramiters from server):
-         * 1 - init widget
-         * 2 - setLoginSubscription
-        */
-        const obsSettingsService = this.globalSettingsService.obsSettingsService.subscribe((resp) => {
-            this.ngZone.run(() => {
-                if (resp) {
-
-                    // /** INIT  */
-                    // that.initAll();
-                    this.logger.setLoggerConfig(this.g.isLogEnabled, this.g.logLevel)
-                    // (this.g.logLevel === 0 || this.g.logLevel !== 0) && this.g.logLevel !== undefined? this.logger.setLoggerConfig(this.g.isLogEnabled, this.g.logLevel) : this.logger.setLoggerConfig(this.g.isLogEnabled, this.appConfigService.getConfig().logLevel)
-                    this.tabTitle = this.g.windowContext.window.document.title
-                    this.appStorageService.initialize(environment.storage_prefix, this.g.persistence, this.g.projectid)
-                    this.logger.debug('[APP-COMP] controllo se è stato passato un token: ', this.g.jwt);
-                    if (this.g.jwt) {
-                        // mi loggo con custom token passato nell'url
-                        //aggiungo nel local storage e mi autentico
-                        this.logger.debug('[APP-COMP] token passato da url. isShown:', this.g.isShown, 'autostart:', this.g.autoStart)
-                        this.logger.debug('[APP-COMP]  ----------------  mi loggo con custom token passato nell url  ---------------- ');
-                        //   this.g.autoStart = false;
-                        const storedTiledeskToken = this.appStorageService.getItem('tiledeskToken')
-                        storedTiledeskToken === this.g.jwt? null: 
-                        this.appStorageService.setItem('tiledeskToken', this.g.jwt)
-                        this.g.tiledeskToken = this.g.jwt;
-                        // this.signInWithCustomToken(this.g.jwt) // moved to authenticate() in else(tiledeskToken)
-                    }
-                    this.translatorService.initI18n().then((result) => {
-                        this.logger.debug('[APP-COMP] »»»» APP-COMPONENT.TS initI18n result', result);
-                        const browserLang = this.translatorService.getLanguage();
-                        moment.locale(browserLang)
-                        this.translatorService.translate(this.g);
-                    }).then(() => {
-                        /** INIT  */
-                        that.initAll();
-                        /**TRIGGER ONBEFORE INIT */
-                        that.triggerOnBeforeInit();
-                        /** AUTH */
-                        that.setAuthSubscription();
-                    })
-                    // /** AUTH */
-                    // that.setLoginSubscription();
-                }
-            });
-        });
-        this.subscriptions.push(obsSettingsService);
-        this.globalSettingsService.initWidgetParamiters(this.g, this.el);
-
-        // SET AUDIO
-        this.audio = new Audio();
-        this.audio.src = this.g.baseLocation + URL_SOUND_LIST_CONVERSATION;
-        this.audio.load();
-        // ------------------------------- //
-    }
-
-    /**
-     * INITIALIZE:
-     * 1 - set traslations
-     * 2 - set attributes
-     * 4 - triggerLoadParamsEvent
-     * 4 - subscription to runtime changes in globals
-     * add Component to Window
-     * 4 - trigget Load Params Event
-     * 5 - set Is Widget Open Or Active
-     * 6 - get MongDb Departments
-     * 7 - set isInitialized and enable principal button
-     */
-    private initAll() {
-        // that.g.wdLog(['---------------- initAll ---------------- ');
-        this.addComponentToWindow(this.ngZone);
-
-        //INIT TRIGGER-HANDLER
-        this.triggerHandler.setElement(this.el)
-        this.triggerHandler.setWindowContext(this.g.windowContext)
-
-        // /** TRANSLATION LOADER: */
-        // //  this.translatorService.translate(this.g);
-        // this.translatorService.initI18n().then((result) => {
-        //     this.g.wdLog(['»»»» APP-COMPONENT.TS initI18n result', result]);
-        //     this.translatorService.translate(this.g);
-        // });
-
-        /** SET ATTRIBUTES */
-        const attributes = this.setAttributesFromStorageService();
-        if (attributes) {
-            this.g.attributes = attributes;
-        }
-        this.setStyleMap()
-
-        /**
-         * SUBSCRIPTION :
-         * Subscription to runtime changes in globals
-         * and save changes in localstorage
-        */
-        this.settingsSaverService.initialize();
-        // ------------------------------- //
-
-        // ------------------------------- //
-        /**
-         * INIZIALIZE GLOBALS :
-         * create settings object used in trigger
-         * set isMobile
-         * set attributes
-        */
-        this.g.initialize();
-        // ------------------------------- //
-
-        this.removeFirebasewebsocketFromLocalStorage();
-        // this.triggerLoadParamsEvent();
-        // this.addComponentToWindow(this.ngZone); // forse dovrebbe stare prima di tutti i triggers
-
-        this.initLauncherButton();
-        this.triggerLoadParamsEvent(); // first trigger
-        //this.setAvailableAgentsStatus();
-
-
-    }
-
-    /** initLauncherButton
-     * posiziono e visualizzo il launcher button
-    */
-    initLauncherButton() {
-        this.isInitialized = true;
-        this.marginBottom = +this.g.marginY + 70;
-    }
-
-    initConversationsHandler(tenant: string, senderId: string) {
-        this.logger.debug('[APP-COMP] initialize: ListConversationsComponent');
-        const keys = ['YOU'];
-        const translationMap = this.translateService.translateLanguage(keys);
-        this.listConversations = [];
-        this.archivedConversations = [];
-        //this.availableAgents = this.g.availableAgents.slice(0, 5);
-
-        this.logger.debug('[APP-COMP] senderId: ', senderId);
-        this.logger.debug('[APP-COMP] tenant: ', tenant);
-
-        // 1 - init chatConversationsHandler and  archviedConversationsHandler
-        this.conversationsHandlerService.initialize(tenant, senderId, translationMap)
-        this.archivedConversationsService.initialize(tenant, senderId, translationMap)
-        // 2 - get conversations from storage
-        // this.chatConversationsHandler.getConversationsFromStorage();
-        // 5 - connect conversationHandler and archviedConversationsHandler to firebase event (add, change, remove)
-        this.conversationsHandlerService.subscribeToConversations(() => { })
-        this.archivedConversationsService.subscribeToConversations(() => { })
-        this.listConversations = this.conversationsHandlerService.conversations;
-        this.archivedConversations = this.archivedConversationsService.archivedConversations;
-        // 6 - save conversationHandler in chatManager
-        this.chatManager.setConversationsHandler(this.conversationsHandlerService);
-        this.chatManager.setArchivedConversationsHandler(this.archivedConversationsService);
-
-        this.logger.debug('[APP-COMP] this.listConversations.length', this.listConversations.length);
-        this.logger.debug('[APP-COMP] this.listConversations appcomponent', this.listConversations, this.archivedConversations);
-
-    }
-
-    /** initChatSupportMode
-     * se è una chat supportMode:
-     * carico i dipartimenti
-     * carico gli agenti disponibili
-     */
-    // initChatSupportMode() {
-    //     this.g.wdLog([' ---------------- B1: supportMode ---------------- ', this.g.supportMode]);
-    //     if (this.g.supportMode) {
-    //         // this.getMongDbDepartments();
-    //         // this.setAvailableAgentsStatus();
-    //     }
-    // }
-
-    /**
-     *
-     */
-    removeFirebasewebsocketFromLocalStorage() {
-        this.logger.debug('[APP-COMP]  ---------------- A1 ---------------- ');
-        // Related to https://github.com/firebase/angularfire/issues/970
-        if (supports_html5_storage()) {
-            this.appStorageService.removeItem('firebase:previous_websocket_failure');
-        }
-    }
-
-    /** setAttributesFromStorageService
-     *
-    */
-    private setAttributesFromStorageService(): any {
-        let attributes: any = {};
-        try {
-            attributes = JSON.parse(this.appStorageService.getItem('attributes'));
-            if (attributes.preChatForm) {
-                const preChatForm = attributes.preChatForm;
-                if(preChatForm.userEmail) this.g.userEmail = preChatForm.userEmail;
-                if(preChatForm.userFullname) this.g.userFullname = preChatForm.userFullname 
-            }
-            // this.g.wdLog(['> attributes: ', attributes]);
-        } catch (error) {
-            this.logger.debug('[APP-COMP] > Error :' + error);
-        }
-
-        const CLIENT_BROWSER = navigator.userAgent;
-        const projectid = this.g.projectid;
-        const userEmail = this.g.userEmail;
-        const userFullname = this.g.userFullname;
-        const senderId = this.g.senderId;
-        const widgetVersion = this.g.BUILD_VERSION
-
-        if (!attributes && attributes === null) {
-            if (this.g.attributes) {
-                attributes = this.g.attributes;
-            } else {
-                attributes = {};
-            }
-        }
-        // this.g.wdLog(['attributes: ', attributes, this.g.attributes]);
-        // that.g.wdLog(['CLIENT_BROWSER: ', CLIENT_BROWSER);
-        if (CLIENT_BROWSER) {
-            attributes['client'] = CLIENT_BROWSER;
-        }
-        if (location.href) {
-            attributes['sourcePage'] = location.href;
-        }
-        if (projectid) {
-            attributes['projectId'] = projectid;
-        }
-        if (userEmail) {
-            attributes['userEmail'] = userEmail;
-        }
-        if (userFullname) {
-            attributes['userFullname'] = userFullname;
-        }
-        if (senderId) {
-            attributes['requester_id'] = senderId;
-        }
-        if (widgetVersion) {
-            attributes['widgetVer'] = widgetVersion;
-        }
-        try {
-            // attributes['payload'] = this.g.customAttributes.payload;
-            attributes['payload'] = []
-            if (this.g.customAttributes) {
-                attributes['payload'] = this.g.customAttributes;
-            }
-        } catch (error) {
-            this.logger.debug('[APP-COMP] > Error is handled payload: ', error);
-        }
-
-        this.appStorageService.setItem('attributes', JSON.stringify(attributes));
-        return attributes;
-    }
-
-    /** setAvailableAgentsStatus
-     * mi sottoscrivo al nodo /projects/' + projectId + '/users/availables
-     * per verificare se c'è un agent disponibile
-     */
-    // private setAvailableAgentsStatus() {
-    //     const that = this;
-    //     const projectid = this.g.projectid;
-    //     this.g.wdLog(['projectId->', projectid]);
-    //     this.agentAvailabilityService.getAvailableAgents(projectid).subscribe( (availableAgents) => {
-    //         that.g.wdLog(['availableAgents->', availableAgents]);
-    //         if (availableAgents.length <= 0) {
-    //             that.g.setParameter('areAgentsAvailable', false);
-    //             that.g.setParameter('areAgentsAvailableText', that.g.AGENT_NOT_AVAILABLE);
-    //             that.g.setParameter('availableAgents', null);
-    //             that.appStorageService.removeItem('availableAgents');
-    //         } else {
-    //             that.g.setParameter('areAgentsAvailable', true);
-    //             that.g.setParameter('areAgentsAvailableText', that.g.AGENT_AVAILABLE);
-    //             that.g.setParameter('availableAgents', availableAgents);
-    //             availableAgents.forEach(element => {
-    //                 element.imageurl = getImageUrlThumb(element.id);
-    //             });
-    //             // that.addFirstMessage(that.g.LABEL_FIRST_MSG);
-    //         }
-    //         that.g.setParameter('availableAgentsStatus', true);
-    //     }, (error) => {
-    //         console.error('setOnlineStatus::setAvailableAgentsStatus', error);
-    //     }, () => {
-    //     });
-    // }
-
-    // ========= begin:: DEPARTEMENTS ============//
-    /** GET DEPARTEMENTS
-     * recupero elenco dipartimenti
-     * - mi sottoscrivo al servizio
-     * - se c'è un solo dipartimento la setto di default
-     * - altrimenti visualizzo la schermata di selezione del dipartimento
-    */
-    // getMongDbDepartments() {
-    //     const that = this;
-    //     const projectid = this.g.projectid;
-    //     this.g.wdLog(['getMongDbDepartments ::::', projectid]);
-    //     this.messagingService.getMongDbDepartments(projectid)
-    //     .subscribe(response => {
-    //         that.g.wdLog(['response DEP ::::', response]);
-    //         that.g.setParameter('departments', response);
-    //         that.initDepartments();
-    //     },
-    //     errMsg => {
-    //          this.g.wdLog(['http ERROR MESSAGE', errMsg]);
-    //     },
-    //     () => {
-    //          this.g.wdLog(['API ERROR NESSUNO']);
-    //     });
-    // }
-
-    /**
-     * INIT DEPARTMENT:
-     * get departments list
-     * set department default
-     * CALL AUTHENTICATION
-    */
-    // initDepartments() {
-    //     const departments = this.g.departments;
-    //     this.g.setParameter('departmentSelected', null);
-    //     this.g.setParameter('departmentDefault', null);
-    //     this.g.wdLog(['SET DEPARTMENT DEFAULT ::::', departments[0]]);
-    //     this.setDepartment(departments[0]);
-    //     let i = 0;
-    //     departments.forEach(department => {
-    //         if (department['default'] === true) {
-    //             this.g.setParameter('departmentDefault', department);
-    //             departments.splice(i, 1);
-    //             return;
-    //         }
-    //         i++;
-    //     });
-    //     if (departments.length === 1) {
-    //         // UN SOLO DEPARTMENT
-    //         this.g.wdLog(['DEPARTMENT FIRST ::::', departments[0]]);
-    //         this.setDepartment(departments[0]);
-    //         // return false;
-    //     } else if (departments.length > 1) {
-    //         // CI SONO + DI 2 DIPARTIMENTI
-    //         this.g.wdLog(['CI SONO + DI 2 DIPARTIMENTI ::::', departments[0]]);
-    //     } else {
-    //         // DEPARTMENT DEFAULT NON RESTITUISCE RISULTATI !!!!
-    //         this.g.wdLog(['DEPARTMENT DEFAULT NON RESTITUISCE RISULTATI ::::', departments[0]]);
-    //     }
-    // }
-
-    /**
-     * SET DEPARTMENT:
-     * set department selected
-     * save department selected in attributes
-     * save attributes in this.appStorageService
-    */
-    // setDepartment(department) {
-    //     this.g.setParameter('departmentSelected', department);
-    //     const attributes = this.g.attributes;
-    //     if (department && attributes) {
-    //         attributes.departmentId = department._id;
-    //         attributes.departmentName = department.name;
-    //         this.g.setParameter('attributes', attributes);
-    //         this.g.setParameter('departmentSelected', department);
-    //         this.g.wdLog(['setAttributes setDepartment: ', JSON.stringify(attributes)]);
-    //         this.appStorageService.setItem('attributes', JSON.stringify(attributes));
-    //     }
-    // }
-    // ========= end:: GET DEPARTEMENTS ============//
-
 
     // ========= begin:: AUTHENTICATION ============//
     /**
@@ -1003,13 +509,62 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             // this.authService.authenticateFirebaseAnonymously();
         }
     }
+
+    private signInWithCustomToken(token: string):Promise<UserModel> {
+        const that = this;
+        const storedTiledeskToken = this.appStorageService.getItem('tiledeskToken');
+        storedTiledeskToken === token? null: this.appStorageService.removeItem('recipientId')
+        return this.tiledeskAuthService.signInWithCustomToken(token).then((user: UserModel) => {
+            this.messagingAuthService.createCustomToken(token)
+            this.logger.debug('[APP-COMP] signInWithCustomToken user::', user, this.g.userFullname)
+            //check if tiledesk_userFullname exist (passed from URL or tiledeskSettings) before update userFullname parameter
+            //if tiledesk_userFullname not exist--> update parameter with tiledesk user returned from auth
+            if ((user.firstname || user.lastname) && !this.g.userFullname) {
+                const fullName = user.firstname + ' ' + user.lastname;
+                this.g.setParameter('userFullname', fullName);
+                this.g.setAttributeParameter('userFullname', fullName);
+            }
+            //check if tiledesk_userEmail exist (passed from URL or tiledeskSettings) before update userEmail parameter
+            //if tiledesk_userEmail not exist--> update parameter with tiledesk user returned from auth
+            if (user.email && !this.g.userEmail) {
+                this.g.setParameter('userEmail', user.email);
+                this.g.setAttributeParameter('userEmail', user.email);
+            }
+            return Promise.resolve(user)
+                // this.showWidget()
+        }).catch(error => {
+            this.logger.debug('[APP-COMP] signInWithCustomToken ERR ',error);
+            that.signOut();
+            return Promise.reject(error)
+        });
+
+    }
+
+    private signInAnonymous(): Promise<UserModel> {
+        this.logger.debug('[APP-COMP] signInAnonymous');
+        return this.tiledeskAuthService.signInAnonymously(this.g.projectid).then((tiledeskToken) => {
+            this.messagingAuthService.createCustomToken(tiledeskToken)
+            const user = this.tiledeskAuthService.getCurrentUser();
+            if (user.firstname || user.lastname) {
+                const fullName = user.firstname + ' ' + user.lastname;
+                this.g.setParameter('userFullname', fullName);
+                this.g.setAttributeParameter('userFullname', fullName);
+            }
+            if (user.email) {
+                this.g.setParameter('userEmail', user.email);
+                this.g.setAttributeParameter('userEmail', user.email);
+            }
+            return Promise.resolve(user)
+        }).catch((error)=> {
+            this.logger.error('[APP-COMP] signInAnonymous ERR', error);
+            return Promise.reject(error);
+        });
+        // this.authService.anonymousAuthentication();
+        // this.authService.authenticateFirebaseAnonymously();
+    }
     // ========= end:: AUTHENTICATION ============//
 
-
     // ========= begin:: START UI ============//
-    /**
-     * set opening priority widget
-     */
     private startUI() {
         this.logger.debug('[APP-COMP]  ============ startUI ===============');
         const departments = this.g.departments;
@@ -1072,7 +627,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                 }
             }
         }
-        
+      
         // visualizzo l'iframe!!!
         this.triggerOnViewInit();
         this.g.setParentBodyStyleMobile(this.g.isOpen, this.g.isMobile)
@@ -1086,7 +641,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         // }, 500);
     }
     // ========= end:: START UI ============//
-
 
     private openNewConversation() {
         this.logger.debug('[APP-COMP] openNewConversation in APP COMPONENT');
@@ -1125,6 +679,426 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         }
     }
 
+    /**
+     * genero un nuovo conversationWith
+     * al login o all'apertura di una nuova conversazione
+     */
+    private generateNewUidConversation() {
+        this.logger.debug('[APP-COMP] generateUidConversation **************: senderId= ', this.g.senderId);
+        return UID_SUPPORT_GROUP_MESSAGES + this.g.projectid + '-' + uuidv4().replace(/-/g, '');
+        // return UID_SUPPORT_GROUP_MESSAGES + uuidv4(); >>>>>OLD 
+    }
+
+    /**
+     * premendo sul pulsante 'APRI UNA NW CONVERSAZIONE'
+     * attivo una nuova conversazione
+     */
+    private startNewConversation() {
+        this.logger.debug('[APP-COMP] AppComponent::startNewConversation');
+        const newConvId = this.generateNewUidConversation();
+        this.g.setParameter('recipientId', newConvId);
+        this.appStorageService.setItem('recipientId', newConvId)
+        this.logger.debug('[APP-COMP]  recipientId: ', this.g.recipientId);
+        this.isConversationArchived = false;
+        this.triggerNewConversationEvent(newConvId);
+    }
+
+    private setAttributesFromStorageService(): any {
+        let attributes: any = {};
+        try {
+            attributes = JSON.parse(this.appStorageService.getItem('attributes'));
+            if (attributes.preChatForm) {
+                const preChatForm = attributes.preChatForm;
+                if(preChatForm.userEmail) this.g.userEmail = preChatForm.userEmail;
+                if(preChatForm.userFullname) this.g.userFullname = preChatForm.userFullname 
+            }
+            // this.g.wdLog(['> attributes: ', attributes]);
+        } catch (error) {
+            this.logger.debug('[APP-COMP] > Error :' + error);
+        }
+
+        const CLIENT_BROWSER = navigator.userAgent;
+        const projectid = this.g.projectid;
+        const userEmail = this.g.userEmail;
+        const userFullname = this.g.userFullname;
+        const senderId = this.g.senderId;
+        const widgetVersion = this.g.BUILD_VERSION
+
+        if (!attributes && attributes === null) {
+            if (this.g.attributes) {
+                attributes = this.g.attributes;
+            } else {
+                attributes = {};
+            }
+        }
+        // this.g.wdLog(['attributes: ', attributes, this.g.attributes]);
+        // that.g.wdLog(['CLIENT_BROWSER: ', CLIENT_BROWSER);
+        if (CLIENT_BROWSER) {
+            attributes['client'] = CLIENT_BROWSER;
+        }
+        if (location.href) {
+            attributes['sourcePage'] = location.href;
+        }
+        if (projectid) {
+            attributes['projectId'] = projectid;
+        }
+        if (userEmail) {
+            attributes['userEmail'] = userEmail;
+        }
+        if (userFullname) {
+            attributes['userFullname'] = userFullname;
+        }
+        if (senderId) {
+            attributes['requester_id'] = senderId;
+        }
+        if (widgetVersion) {
+            attributes['widgetVer'] = widgetVersion;
+        }
+        try {
+            // attributes['payload'] = this.g.customAttributes.payload;
+            attributes['payload'] = []
+            if (this.g.customAttributes) {
+                attributes['payload'] = this.g.customAttributes;
+            }
+        } catch (error) {
+            this.logger.debug('[APP-COMP] > Error is handled payload: ', error);
+        }
+
+        this.appStorageService.setItem('attributes', JSON.stringify(attributes));
+        return attributes;
+    }
+
+
+    private initConversationsHandler(tenant: string, senderId: string) {
+        this.logger.debug('[APP-COMP] initialize: ListConversationsComponent');
+        const keys = ['YOU'];
+        const translationMap = this.translateService.translateLanguage(keys);
+        this.listConversations = [];
+        this.archivedConversations = [];
+        //this.availableAgents = this.g.availableAgents.slice(0, 5);
+
+        this.logger.debug('[APP-COMP] senderId: ', senderId);
+        this.logger.debug('[APP-COMP] tenant: ', tenant);
+
+        // 1 - init chatConversationsHandler and  archviedConversationsHandler
+        this.conversationsHandlerService.initialize(tenant, senderId, translationMap)
+        this.archivedConversationsService.initialize(tenant, senderId, translationMap)
+        // 2 - get conversations from storage
+        // this.chatConversationsHandler.getConversationsFromStorage();
+        // 5 - connect conversationHandler and archviedConversationsHandler to firebase event (add, change, remove)
+        this.conversationsHandlerService.subscribeToConversations(() => { })
+        this.archivedConversationsService.subscribeToConversations(() => { })
+        this.listConversations = this.conversationsHandlerService.conversations;
+        this.archivedConversations = this.archivedConversationsService.archivedConversations;
+        // 6 - save conversationHandler in chatManager
+        this.chatManager.setConversationsHandler(this.conversationsHandlerService);
+        this.chatManager.setArchivedConversationsHandler(this.archivedConversationsService);
+
+        this.logger.debug('[APP-COMP] this.listConversations.length', this.listConversations.length);
+        this.logger.debug('[APP-COMP] this.listConversations appcomponent', this.listConversations, this.archivedConversations);
+
+    }
+
+    private initConversationHandler(conversationWith: string): ConversationHandlerService {
+        const tenant = this.g.tenant;
+        const keys = [
+            // 'LABEL_AVAILABLE',
+            // 'LABEL_NOT_AVAILABLE',
+            // 'LABEL_TODAY',
+            // 'LABEL_TOMORROW',
+            // 'LABEL_TO',
+            // 'LABEL_LAST_ACCESS',
+            // 'ARRAY_DAYS',
+            // 'LABEL_ACTIVE_NOW',
+            // 'LABEL_WRITING',
+            'INFO_SUPPORT_USER_ADDED_SUBJECT',
+            'INFO_SUPPORT_USER_ADDED_YOU_VERB',
+            'INFO_SUPPORT_USER_ADDED_COMPLEMENT',
+            'INFO_SUPPORT_USER_ADDED_VERB',
+            'INFO_SUPPORT_CHAT_REOPENED',
+            'INFO_SUPPORT_CHAT_CLOSED',
+            'LABEL_TODAY',
+            'LABEL_TOMORROW',
+            'LABEL_TO',
+            'ARRAY_DAYS',
+        ];
+
+        const translationMap = this.translateService.translateLanguage(keys);
+
+        //TODO-GAB: da sistemare loggedUser in firebase-conversation-handler.service
+        const loggedUser = { uid: this.g.senderId }
+        const conversationWithFullname = this.g.recipientFullname;
+        let handler: ConversationHandlerService = this.chatManager.getConversationHandlerByConversationId(conversationWith);
+        this.logger.debug('[APP-COMP] DETTAGLIO CONV - handler **************', handler, conversationWith);
+        if (!handler) {
+            const conversationHandlerService = this.conversationHandlerBuilderService.build();
+            conversationHandlerService.initialize(
+                conversationWith,
+                conversationWithFullname,
+                loggedUser,
+                tenant,
+                translationMap
+            );
+
+            this.logger.debug('[APP-COMP] DETTAGLIO CONV - NEW handler **************', conversationHandlerService);
+            this.chatManager.addConversationHandler(conversationHandlerService);
+            handler = conversationHandlerService
+
+        }
+
+        return handler
+    }
+
+    /** initLauncherButton
+     * posiziono e visualizzo il launcher button
+     */
+    private initLauncherButton() {
+        this.isInitialized = true;
+        this.marginBottom = +this.g.marginY + 70;
+    }
+
+    // ========= begin:: FUNCTIONS ============//
+    /**
+     * 1 - clear local storage
+     * 2 - remove user in firebase
+    */
+    signOut(): Promise<boolean> {
+        this.logger.debug('[APP-COMP] SIGNOUT');
+        if (this.g.isLogged === true) {
+            this.logger.debug('[APP-COMP] prima ero loggato allora mi sloggo!');
+            this.g.setIsOpen(false);
+            // this.g.setAttributeParameter('userFullname', null);
+            // this.g.setAttributeParameter('userEmail', null);
+            // this.g.setParameter('userFullname', null);
+            // this.g.setParameter('userEmail', null);
+            this.appStorageService.clear();
+            this.presenceService.removePresence();
+            this.tiledeskAuthService.logOut();
+            return this.messagingAuthService.logout();
+            // this.authService.signOut(-2);
+        }
+    }
+
+    /** show widget */
+    private showWidget() {
+        this.logger.debug('[APP-COMP] show widget--> autoStart:', this.g.autoStart, 'startHidden', this.g.startHidden, 'isShown', this.g.isShown)
+        const startHidden = this.g.startHidden;
+        const divWidgetContainer = this.g.windowContext.document.getElementById('tiledesk-container');
+        if (divWidgetContainer && startHidden === false) {
+            divWidgetContainer.style.display = 'block';
+            this.g.setParameter('isShown', true, true);
+        } else {
+            this.g.startHidden = false;
+            this.g.setParameter('isShown', false, true);
+        }
+    }
+
+    /** hide widget */
+    private hideWidget() {
+        const divWidgetContainer = this.g.windowContext.document.getElementById('tiledesk-container');
+        if (divWidgetContainer) {
+            divWidgetContainer.style.display = 'none';
+        }
+        this.g.setParameter('isShown', false, true);
+    }
+
+    /** */
+    private sendMessage(msgObect: MessageObj) {
+
+        const tenant = msgObect.tenant 
+        const senderId = msgObect.senderId
+        const senderFullname = msgObect.senderFullname
+        const message = msgObect.message
+        const type = msgObect.type
+        const metadata = msgObect.metadata
+        const recipientId = msgObect.recipientId
+        const recipientFullname  = msgObect.recipientFullname
+        const attributes = msgObect.attributes
+        const projectid = msgObect.projectid
+        const channelType = msgObect.channelType
+
+
+        this.logger.debug('[APP-COMP] sendMessage from window.tiledesk *********** ',tenant,senderId,senderFullname,
+                                message,type,metadata,recipientId,recipientFullname,
+                                attributes,projectid,channelType);
+        const messageSent = this.initConversationHandler(recipientId).sendMessage(
+            message,
+            type,
+            metadata,
+            recipientId,
+            recipientFullname,
+            senderId,
+            senderFullname,
+            channelType,
+            attributes)
+    }
+
+    /** */
+    private setPreChatForm(state: boolean) {
+        if (state != null) {
+            this.g.setParameter('preChatForm', state);
+            if (state === true) {
+                this.appStorageService.setItem('preChatForm', state);
+            } else {
+                this.appStorageService.removeItem('preChatForm');
+            }
+        }
+    }
+
+    private setPreChatFormJson(form: Array<any>) {
+        if(form){
+            this.g.setParameter('preChatFormJson', form);
+        }
+        this.logger.debug('[APP-COMP] setPreChatFormJson from external', form)
+    }
+
+    private getPreChatFormJson() {
+        let preChatForm = {}
+        if(this.g.preChatFormJson){
+            preChatForm = this.g.preChatFormJson
+        }
+        this.logger.debug('[APP-COMP] getPreChatFormJson from external', preChatForm)
+        return preChatForm
+    }
+
+    private setPrivacyPolicy() {
+        this.g.privacyApproved = true;
+        this.g.setAttributeParameter('privacyApproved', this.g.privacyApproved);
+        this.appStorageService.setItem('attributes', JSON.stringify(this.g.attributes));
+        this.g.setParameter('preChatForm', false);
+        this.appStorageService.removeItem('preChatForm');
+    }
+
+    /**
+     * 1 - cleare local storage
+     * 2 - remove div iframe widget
+     * 3 - reinit widget
+    */
+    private reInit() {
+        // if (!firebase.auth().currentUser) {
+        if (!this.tiledeskAuthService.getCurrentUser()) {
+            this.logger.debug('[APP-COMP] reInit ma NON SONO LOGGATO!');
+        } else {
+            this.tiledeskAuthService.logOut();
+            this.messagingAuthService.logout();
+            // this.authService.signOut(-2);
+            /** ho fatto un reinit */
+            this.logger.debug('[APP-COMP] sono nel caso reinit -2');
+            this.g.setParameter('isLogged', false);
+            this.hideWidget();
+            // that.g.setParameter('isShown', false, true);
+            this.appStorageService.removeItem('tiledeskToken');
+            this.g.isLogout = true;
+            if (this.g.autoStart !== false) {
+                this.authenticate();
+                this.initAll();
+            }
+            this.appStorageService.clear();
+        }
+        const divWidgetRoot = this.g.windowContext.document.getElementsByTagName('chat-root')[0];
+        const divWidgetContainer = this.g.windowContext.document.getElementById('tiledesk-container');
+        divWidgetContainer.remove();
+        divWidgetRoot.remove();
+        this.g.windowContext.initWidget();
+    }
+
+    /**
+     * 1 - cleare local storage
+     * 2 - remove div iframe widget
+     * 3 - reinit widget
+    */
+    private restart() {
+        // if (!firebase.auth().currentUser) {
+        
+        this.hideWidget();
+        // that.triggerOnAuthStateChanged(resp);
+        if (this.g.autoStart !== false) {
+            this.authenticate();
+            this.initAll();
+        }
+        const divWidgetRoot = this.g.windowContext.document.getElementsByTagName('chat-root')[0];
+        const divWidgetContainer = this.g.windowContext.document.getElementById('tiledesk-container');
+        divWidgetContainer.remove();
+        divWidgetRoot.remove();
+        this.g.windowContext.initWidget();
+    }
+
+    private logout(): Promise<boolean> {
+        return this.signOut();
+    }
+
+    /** show callout */
+    private showCallout() {
+        if (this.g.isOpen === false) {
+            // this.g.setParameter('calloutTimer', 1)
+            this.eyeeyeCatcherCardComponent.openEyeCatcher();
+            this.g.setParameter('displayEyeCatcherCard', 'block');
+            this.triggerOnOpenEyeCatcherEvent();
+        }
+    }
+
+    /** open popup conversation */
+    private f21_open() {
+        const senderId = this.g.senderId;
+        this.logger.debug('[APP-COMP] f21_open senderId: ', senderId);
+        if (senderId) {
+            // chiudo callout
+            this.g.setParameter('displayEyeCatcherCard', 'none');
+            // this.g.isOpen = true; // !this.isOpen;
+            this.g.setIsOpen(true);
+            this.isInitialized = true;
+            this.appStorageService.setItem('isOpen', 'true');
+            // this.g.displayEyeCatcherCard = 'none';
+            this.triggerOnOpenEvent();
+            // https://stackoverflow.com/questions/35232731/angular2-scroll-to-bottom-chat-style
+        }
+    }
+
+    /** close popup conversation */
+    private f21_close() {
+        this.g.setIsOpen(false);
+        this.g.isOpenNewMessage = false;
+        this.appStorageService.setItem('isOpen', 'false');
+        this.triggerOnCloseEvent();
+    }
+
+    /**open widget in conversation when is closed */
+    private _f21_open() {
+        // const senderId = this.g.senderId;
+        // this.logger.debug('[APP-COMP] f21_open senderId' , senderId) 
+        // this.logger.printDebug()
+        // this.g.wdLog(['f21_open senderId: ', senderId]);
+        // if (senderId) {
+        // chiudo callout
+        this.g.setParameter('displayEyeCatcherCard', 'none');
+        // this.g.isOpen = true; // !this.isOpen;
+        this.g.setIsOpen(true);
+        // this.isInitialized = true;
+        this.appStorageService.setItem('isOpen', 'true');
+        // this.g.displayEyeCatcherCard = 'none';
+        this.triggerOnOpenEvent();
+        // https://stackoverflow.com/questions/35232731/angular2-scroll-to-bottom-chat-style
+        // }
+    }
+
+    private setParameter(parameterObj: {key: string, value: any}){
+        this.g.setParameter(parameterObj.key, parameterObj.value)
+    }
+
+    private setAttributeParameter(parameterObj: {key: string, value: any}){
+        this.g.setAttributeParameter(parameterObj.key, parameterObj.value)
+    }
+
+    private removeFirebasewebsocketFromLocalStorage() {
+        this.logger.debug('[APP-COMP]  ---------------- A1 ---------------- ');
+        // Related to https://github.com/firebase/angularfire/issues/970
+        if (supports_html5_storage()) {
+            this.appStorageService.removeItem('firebase:previous_websocket_failure');
+        }
+    }
+    // ========= end:: FUNCTIONS ============//
+
+
     // ========= begin:: COMPONENT TO WINDOW ============//
     /**
      * http://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
@@ -1134,7 +1108,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         const windowContext = this.g.windowContext;
         if (windowContext && windowContext['tiledesk']) {
             windowContext['tiledesk']['angularcomponent'] = { component: this, ngZone: ngZone };
-    
+
             /** loggin with token */
             windowContext['tiledesk'].signInWithCustomToken = function (response):Promise<UserModel> {
                 return ngZone.run(() => {
@@ -1318,13 +1292,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                 });
             };
 
-            /** set state PreChatForm close/open */
-            // windowContext['tiledesk'].endMessageRender = function () {
-            //     ngZone.run(() => {
-            //         windowContext['tiledesk']['angularcomponent'].component.endMessageRender();
-            //     });
-            // };
-
             /** set state reinit */
             windowContext['tiledesk'].reInit = function () {
                 ngZone.run(() => {
@@ -1385,470 +1352,51 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
         }
     }
-
-
-    initConversationHandler(conversationWith: string): ConversationHandlerService {
-        const tenant = this.g.tenant;
-        const keys = [
-            // 'LABEL_AVAILABLE',
-            // 'LABEL_NOT_AVAILABLE',
-            // 'LABEL_TODAY',
-            // 'LABEL_TOMORROW',
-            // 'LABEL_TO',
-            // 'LABEL_LAST_ACCESS',
-            // 'ARRAY_DAYS',
-            // 'LABEL_ACTIVE_NOW',
-            // 'LABEL_WRITING',
-            'INFO_SUPPORT_USER_ADDED_SUBJECT',
-            'INFO_SUPPORT_USER_ADDED_YOU_VERB',
-            'INFO_SUPPORT_USER_ADDED_COMPLEMENT',
-            'INFO_SUPPORT_USER_ADDED_VERB',
-            'INFO_SUPPORT_CHAT_REOPENED',
-            'INFO_SUPPORT_CHAT_CLOSED',
-            'LABEL_TODAY',
-            'LABEL_TOMORROW',
-            'LABEL_TO',
-            'ARRAY_DAYS',
-        ];
-
-        const translationMap = this.translateService.translateLanguage(keys);
-
-        //TODO-GAB: da sistemare loggedUser in firebase-conversation-handler.service
-        const loggedUser = { uid: this.g.senderId }
-        const conversationWithFullname = this.g.recipientFullname;
-        let handler: ConversationHandlerService = this.chatManager.getConversationHandlerByConversationId(conversationWith);
-        this.logger.debug('[APP-COMP] DETTAGLIO CONV - handler **************', handler, conversationWith);
-        if (!handler) {
-            const conversationHandlerService = this.conversationHandlerBuilderService.build();
-            conversationHandlerService.initialize(
-                conversationWith,
-                conversationWithFullname,
-                loggedUser,
-                tenant,
-                translationMap
-            );
-
-            this.logger.debug('[APP-COMP] DETTAGLIO CONV - NEW handler **************', conversationHandlerService);
-            this.chatManager.addConversationHandler(conversationHandlerService);
-            handler = conversationHandlerService
-
-        }
-
-        return handler
-    }
-
-    /** */
-    // private endMessageRender() {
-    //     this.obsEndRenderMessage.next();
-    // }
-
-    /** */
-    private sendMessage(msgObect: MessageObj) {
-
-        const tenant = msgObect.tenant 
-        const senderId = msgObect.senderId
-        const senderFullname = msgObect.senderFullname
-        const message = msgObect.message
-        const type = msgObect.type
-        const metadata = msgObect.metadata
-        const recipientId = msgObect.recipientId
-        const recipientFullname  = msgObect.recipientFullname
-        const attributes = msgObect.attributes
-        const projectid = msgObect.projectid
-        const channelType = msgObect.channelType
-
-
-        this.logger.debug('[APP-COMP] sendMessage from window.tiledesk *********** ',tenant,senderId,senderFullname,
-                                message,type,metadata,recipientId,recipientFullname,
-                                attributes,projectid,channelType);
-        const messageSent = this.initConversationHandler(recipientId).sendMessage(
-            message,
-            type,
-            metadata,
-            recipientId,
-            recipientFullname,
-            senderId,
-            senderFullname,
-            channelType,
-            attributes)
-    }
-
-
-    /**
-     * Custom Auth called from the test-custom-auth.html
-     * note: https://tiledesk.atlassian.net/browse/TD-42?atlOrigin=eyJpIjoiMGMyZmVmNDgzNTFjNGZkZjhiMmM2Y2U1MmYyNzkwODMiLCJwIjoiaiJ9
-    */
-    private signInWithCustomToken(token: string):Promise<UserModel> {
-        const that = this;
-        const storedTiledeskToken = this.appStorageService.getItem('tiledeskToken');
-        storedTiledeskToken === token? null: this.appStorageService.removeItem('recipientId')
-        return this.tiledeskAuthService.signInWithCustomToken(token).then((user: UserModel) => {
-            this.messagingAuthService.createCustomToken(token)
-            this.logger.debug('[APP-COMP] signInWithCustomToken user::', user, this.g.userFullname)
-            //check if tiledesk_userFullname exist (passed from URL or tiledeskSettings) before update userFullname parameter
-            //if tiledesk_userFullname not exist--> update parameter with tiledesk user returned from auth
-            if ((user.firstname || user.lastname) && !this.g.userFullname) {
-                const fullName = user.firstname + ' ' + user.lastname;
-                this.g.setParameter('userFullname', fullName);
-                this.g.setAttributeParameter('userFullname', fullName);
-            }
-            //check if tiledesk_userEmail exist (passed from URL or tiledeskSettings) before update userEmail parameter
-            //if tiledesk_userEmail not exist--> update parameter with tiledesk user returned from auth
-            if (user.email && !this.g.userEmail) {
-                this.g.setParameter('userEmail', user.email);
-                this.g.setAttributeParameter('userEmail', user.email);
-            }
-            return Promise.resolve(user)
-                // this.showWidget()
-        }).catch(error => {
-            this.logger.debug('[APP-COMP] signInWithCustomToken ERR ',error);
-            that.signOut();
-            return Promise.reject(error)
-        });
-
-    }
-
-    // UNUSED
-    // private signInWithCustomTokenUniLe(token) {
-    //     this.g.wdLog(['signInWithCustomToken token ', token]);
-    //     const that = this;
-    //     const projectid = this.g.projectid;
-    //     this.authService.createFirebaseToken(token, projectid).subscribe(response => {
-    //             that.authService.decode(token, projectid).subscribe(resDec => {
-    //                     const attributes = that.g.attributes;
-    //                     const firebaseToken = response;
-    //                     this.g.wdLog(['firebaseToken', firebaseToken]);
-    //                     this.g.wdLog(['resDec', resDec.decoded]);
-    //                     that.g.setParameter('signInWithCustomToken', true);
-    //                     that.g.setParameter('userEmail', resDec.decoded.email);
-    //                     that.g.setParameter('userFullname', resDec.decoded.name);
-    //                     that.g.setParameter('userToken', firebaseToken);
-    //                     that.g.setParameter('signInWithCustomToken', true);
-    //                     that.g.setParameter('signInWithCustomToken', true);
-    //                     that.g.setParameter('signInWithCustomToken', true);
-    //                     that.authService.authenticateFirebaseCustomToken(firebaseToken);
-    //                     that.g.setAttributeParameter('userEmail', resDec.decoded.email);
-    //                     that.g.setAttributeParameter('userFullname', resDec.decoded.name);
-    //                     // attributes.userEmail = resDec.decoded.email;
-    //                     // attributes.userFullname = resDec.decoded.name;
-    //                     // that.g.setParameter('attributes', attributes);
-    //                     // attributes = that.setAttributesFromStorageService(); ?????????????+
-    //                     // ????????????????????
-    //                 }, error => {
-    //                     console.error('Error decoding token: ', error);
-    //                    // that.g.wdLog(['call signout');
-    //                    that.signOut();
-    //                 });
-    //                 // , () => {
-    //                 //     that.g.wdLog(['!!! NEW REQUESTS HISTORY - DOWNLOAD REQUESTS AS CSV * COMPLETE *');
-    //                 // });
-    //         }, error => {
-    //             console.error('Error creating firebase token: ', error);
-    //             // that.g.wdLog(['call signout');
-    //             that.signOut();
-    //         });
-    //         // , () => {
-    //             // that.g.wdLog(['!!! NEW REQUESTS HISTORY - DOWNLOAD REQUESTS AS CSV * COMPLETE *');
-    //         // });
-    // }
-
-    /** */
-    private signInAnonymous(): Promise<UserModel> {
-        this.logger.debug('[APP-COMP] signInAnonymous');
-        return this.tiledeskAuthService.signInAnonymously(this.g.projectid).then((tiledeskToken) => {
-            this.messagingAuthService.createCustomToken(tiledeskToken)
-            const user = this.tiledeskAuthService.getCurrentUser();
-            if (user.firstname || user.lastname) {
-                const fullName = user.firstname + ' ' + user.lastname;
-                this.g.setParameter('userFullname', fullName);
-                this.g.setAttributeParameter('userFullname', fullName);
-            }
-            if (user.email) {
-                this.g.setParameter('userEmail', user.email);
-                this.g.setAttributeParameter('userEmail', user.email);
-            }
-            return Promise.resolve(user)
-        }).catch((error)=> {
-            this.logger.error('[APP-COMP] signInAnonymous ERR', error);
-            return Promise.reject(error);
-        });
-        // this.authService.anonymousAuthentication();
-        // this.authService.authenticateFirebaseAnonymously();
-    }
-
-    /** */
-    private setPreChatForm(state: boolean) {
-        if (state != null) {
-            this.g.setParameter('preChatForm', state);
-            if (state === true) {
-                this.appStorageService.setItem('preChatForm', state);
-            } else {
-                this.appStorageService.removeItem('preChatForm');
-            }
-        }
-    }
-
-    private setPreChatFormJson(form: Array<any>) {
-        if(form){
-            this.g.setParameter('preChatFormJson', form);
-        }
-        this.logger.debug('[APP-COMP] setPreChatFormJson from external', form)
-    }
-
-    private getPreChatFormJson() {
-        let preChatForm = {}
-        if(this.g.preChatFormJson){
-            preChatForm = this.g.preChatFormJson
-        }
-        this.logger.debug('[APP-COMP] getPreChatFormJson from external', preChatForm)
-        return preChatForm
-    }
-
-    private setPrivacyPolicy() {
-        this.g.privacyApproved = true;
-        this.g.setAttributeParameter('privacyApproved', this.g.privacyApproved);
-        this.appStorageService.setItem('attributes', JSON.stringify(this.g.attributes));
-        this.g.setParameter('preChatForm', false);
-        this.appStorageService.removeItem('preChatForm');
-    }
-
-    /** show widget */
-    private showWidget() {
-        this.logger.debug('[APP-COMP] show widget--> autoStart:', this.g.autoStart, 'startHidden', this.g.startHidden, 'isShown', this.g.isShown)
-        const startHidden = this.g.startHidden;
-        const divWidgetContainer = this.g.windowContext.document.getElementById('tiledesk-container');
-        if (divWidgetContainer && startHidden === false) {
-            divWidgetContainer.style.display = 'block';
-            this.g.setParameter('isShown', true, true);
-        } else {
-            this.g.startHidden = false;
-            this.g.setParameter('isShown', false, true);
-        }
-    }
-
-    /** hide widget */
-    private hideWidget() {
-        const divWidgetContainer = this.g.windowContext.document.getElementById('tiledesk-container');
-        if (divWidgetContainer) {
-            divWidgetContainer.style.display = 'none';
-        }
-        this.g.setParameter('isShown', false, true);
-    }
-
-    /** open popup conversation */
-    private f21_open() {
-        const senderId = this.g.senderId;
-        this.logger.debug('[APP-COMP] f21_open senderId: ', senderId);
-        if (senderId) {
-            // chiudo callout
-            this.g.setParameter('displayEyeCatcherCard', 'none');
-            // this.g.isOpen = true; // !this.isOpen;
-            this.g.setIsOpen(true);
-            this.isInitialized = true;
-            this.appStorageService.setItem('isOpen', 'true');
-            // this.g.displayEyeCatcherCard = 'none';
-            this.triggerOnOpenEvent();
-            // https://stackoverflow.com/questions/35232731/angular2-scroll-to-bottom-chat-style
-        }
-    }
-
-    /** close popup conversation */
-    private f21_close() {
-        this.g.setIsOpen(false);
-        this.g.isOpenNewMessage = false;
-        this.appStorageService.setItem('isOpen', 'false');
-        this.triggerOnCloseEvent();
-    }
-
-    /**open widget in conversation when is closed */
-    private _f21_open() {
-        // const senderId = this.g.senderId;
-        // this.logger.debug('[APP-COMP] f21_open senderId' , senderId) 
-        // this.logger.printDebug()
-        // this.g.wdLog(['f21_open senderId: ', senderId]);
-        // if (senderId) {
-        // chiudo callout
-        this.g.setParameter('displayEyeCatcherCard', 'none');
-        // this.g.isOpen = true; // !this.isOpen;
-        this.g.setIsOpen(true);
-        // this.isInitialized = true;
-        this.appStorageService.setItem('isOpen', 'true');
-        // this.g.displayEyeCatcherCard = 'none';
-        this.triggerOnOpenEvent();
-        // https://stackoverflow.com/questions/35232731/angular2-scroll-to-bottom-chat-style
-        // }
-    }
-
-
-    /**
-     * 1 - cleare local storage
-     * 2 - remove div iframe widget
-     * 3 - reinit widget
-    */
-    private reInit() {
-        // if (!firebase.auth().currentUser) {
-        if (!this.tiledeskAuthService.getCurrentUser()) {
-            this.logger.debug('[APP-COMP] reInit ma NON SONO LOGGATO!');
-        } else {
-            this.tiledeskAuthService.logOut();
-            this.messagingAuthService.logout();
-            // this.authService.signOut(-2);
-            /** ho fatto un reinit */
-            this.logger.debug('[APP-COMP] sono nel caso reinit -2');
-            this.g.setParameter('isLogged', false);
-            this.hideWidget();
-            // that.g.setParameter('isShown', false, true);
-            this.appStorageService.removeItem('tiledeskToken');
-            this.g.isLogout = true;
-            if (this.g.autoStart !== false) {
-                this.authenticate();
-                this.initAll();
-            }
-            this.appStorageService.clear();
-        }
-        const divWidgetRoot = this.g.windowContext.document.getElementsByTagName('chat-root')[0];
-        const divWidgetContainer = this.g.windowContext.document.getElementById('tiledesk-container');
-        divWidgetContainer.remove();
-        divWidgetRoot.remove();
-        this.g.windowContext.initWidget();
-    }
-
-    /**
-     * 1 - cleare local storage
-     * 2 - remove div iframe widget
-     * 3 - reinit widget
-    */
-   private restart() {
-        // if (!firebase.auth().currentUser) {
-        
-        this.hideWidget();
-        // that.triggerOnAuthStateChanged(resp);
-        if (this.g.autoStart !== false) {
-            this.authenticate();
-            this.initAll();
-        }
-        const divWidgetRoot = this.g.windowContext.document.getElementsByTagName('chat-root')[0];
-        const divWidgetContainer = this.g.windowContext.document.getElementById('tiledesk-container');
-        divWidgetContainer.remove();
-        divWidgetRoot.remove();
-        this.g.windowContext.initWidget();
-    }
-
-
-    // private reInit_old() {
-    //     // this.isOpenHome = false;
-    //     this.appStorageService.clear();
-    //     let currentUser = this.authService.getCurrentUser();
-    //     this.authService.reloadCurrentUser().then(() => {
-    //         // location.reload();
-    //         currentUser = this.authService.getCurrentUser();
-    //         // alert(currentUser.uid);
-    //         this.initAll();
-    //         /** sono loggato */
-    //         this.g.wdLog(['reInit_old USER AUTENTICATE: ', currentUser.uid]);
-    //         this.g.setParameter('senderId', currentUser.uid);
-    //         this.g.setParameter('isLogged', true);
-    //         this.g.setParameter('attributes', this.setAttributesFromStorageService());
-    //         this.g.wdLog([' this.g.senderId', currentUser.uid]);
-    //         // this.startNwConversation();
-    //         this.startUI();
-    //         this.g.wdLog([' 1 - IMPOSTO STATO CONNESSO UTENTE ']);
-    //         this.presenceService.setPresence(currentUser.uid);
-    //     });
-
-    // }
-
-    private logout(): Promise<boolean> {
-        return this.signOut();
-    }
-
-    /** show callout */
-    private showCallout() {
-        if (this.g.isOpen === false) {
-            // this.g.setParameter('calloutTimer', 1)
-            this.eyeeyeCatcherCardComponent.openEyeCatcher();
-            this.g.setParameter('displayEyeCatcherCard', 'block');
-            this.triggerOnOpenEyeCatcherEvent();
-        }
-    }
-
-    private setParameter(parameterObj: {key: string, value: any}){
-        this.g.setParameter(parameterObj.key, parameterObj.value)
-    }
-
-    private setAttributeParameter(parameterObj: {key: string, value: any}){
-        this.g.setAttributeParameter(parameterObj.key, parameterObj.value)
-    }
     // ========= end:: COMPONENT TO WINDOW ============//
 
 
-
-    // ========= begin:: DESTROY ALL SUBSCRIPTIONS ============//
-    /** elimino tutte le sottoscrizioni */
-    ngOnDestroy() {
-        this.logger.debug('[APP-COMP] this.subscriptions', this.subscriptions);
-        const windowContext = this.g.windowContext;
-        if (windowContext && windowContext['tiledesk']) {
-            windowContext['tiledesk']['angularcomponent'] = null;
-            // this.g.setParameter('windowContext', windowContext);
-            this.g.windowContext = windowContext;
-        }
-        this.unsubscribe();
-    }
-
-    /** */
-    unsubscribe() {
-        this.subscriptions.forEach(function (subscription) {
-            subscription.unsubscribe();
-        });
-        this.subscriptions = [];
-        this.logger.debug('[APP-COMP] this.subscriptions', this.subscriptions);
-    }
-    // ========= end:: DESTROY ALL SUBSCRIPTIONS ============//
-
-
-
-    // ========= begin:: FUNCTIONS ============//
-    /**
-     * 1 - clear local storage
-     * 2 - remove user in firebase
-    */
-    signOut(): Promise<boolean> {
-        this.logger.debug('[APP-COMP] SIGNOUT');
-        if (this.g.isLogged === true) {
-            this.g.wdLog(['prima ero loggato allora mi sloggo!']);
-            this.g.setIsOpen(false);
-            // this.g.setAttributeParameter('userFullname', null);
-            // this.g.setAttributeParameter('userEmail', null);
-            // this.g.setParameter('userFullname', null);
-            // this.g.setParameter('userEmail', null);
-            this.appStorageService.clear();
-            this.presenceService.removePresence();
-            this.tiledeskAuthService.logOut();
-            return this.messagingAuthService.logout();
-            // this.authService.signOut(-2);
+    // ======== START: manage sound and title ========//
+    @HostListener('document:visibilitychange')
+    visibilitychange() {
+        // this.logger.printDebug("document TITLE", this.g.windowContext.window.document.title);
+        if (document.hidden) {
+            this.isTabVisible = false
+            // this.g.windowContext.window.document.title = this.tabTitle
+        } else {
+            // TAB IS ACTIVE --> restore title and DO NOT SOUND
+            clearInterval(this.setIntervalTime)
+            this.setIntervalTime = null;
+            this.isTabVisible = true;
+            this.g.windowContext.window.document.title = this.tabTitle;
+            // this.g.windowContext.parent.title = "SHOWING"
+            // this.g.windowContext.title = "SHOWING2"
         }
     }
 
-    /**
-     * get status window chat from this.appStorageService
-     * set status window chat open/close
-     */
-    // SET IN LOCAL SETTINGS setVariableFromStorage IMPOSTA IL VALORE DI TUTTE LE VARIABILI
-    // setIsWidgetOpenOrActive() {
-    //     if (this.appStorageService.getItem('isOpen') === 'true') {
-    //         // this.g.isOpen = true;
-    //         this.g.setIsOpen(true);
-    //     } else if (this.appStorageService.getItem('isOpen') === 'false') {
-    //         // this.g.isOpen = false;
-    //         this.g.setIsOpen(false);
-    //     }
-    //     // this.isWidgetActive = (this.appStorageService.getItem('isWidgetActive')) ? true : false;
-    // }
+    private manageTabNotification() {
+        if (!this.isTabVisible) {
+            // TAB IS HIDDEN --> manage title and SOUND 
+            // this.g.windowContext.parent.title = "HIDDEN"
+            // this.g.windowContext.title = "HIDDEN2"
 
-    /**
-     * attivo sound se è un msg nuovo
-     */
+            let badgeNewConverstionNumber = this.conversationsHandlerService.countIsNew()
+            this.logger.debug('[APP-COMP] badgeNewConverstionNumber::', badgeNewConverstionNumber)
+            badgeNewConverstionNumber > 0 ? badgeNewConverstionNumber : badgeNewConverstionNumber= 1
+            this.g.windowContext.window.document.title = "(" + badgeNewConverstionNumber + ") " + this.tabTitle
+            clearInterval(this.setIntervalTime)
+            const that = this
+            this.setIntervalTime = window.setInterval(function () {
+                if (that.g.windowContext.window.document.title.charAt(0) === '(') {
+                    that.g.windowContext.window.document.title = that.tabTitle
+                } else {
+                    that.g.windowContext.window.document.title = "(" + badgeNewConverstionNumber + ") " + that.tabTitle;
+                }
+            }, 1000);
+            this.soundMessage()
+        }
+    }
+
+
     private soundMessage() {
         this.logger.debug('[APP-COMP] ****** soundMessage *****', this.audio);
         const that = this;
@@ -1866,53 +1414,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             }, 1000);
         }
     }
-
-    // soundMessage() {
-    //     const soundEnabled = this.g.soundEnabled;
-    //     const baseLocation = this.g.baseLocation;
-    //     if (soundEnabled) {
-    //       const that = this;
-    //       this.audio = new Audio();
-    //       this.audio.src = baseLocation + '/assets/sounds/justsaying.mp3';
-    //       this.audio.load();
-    //       // this.logger.debug('[APP-COMP] conversation play');
-    //       clearTimeout(this.setTimeoutSound);
-    //       this.setTimeoutSound = setTimeout(function () {
-    //         that.audio.play();
-    //         that.g.wdLog(['****** soundMessage 1 *****', that.audio.src]);
-    //       }, 1000);
-    //     }
-    // }
-
-
-    /**
-     * genero un nuovo conversationWith
-     * al login o all'apertura di una nuova conversazione
-     */
-    generateNewUidConversation() {
-        this.logger.debug('[APP-COMP] generateUidConversation **************: senderId= ', this.g.senderId);
-        return UID_SUPPORT_GROUP_MESSAGES + this.g.projectid + '-' + uuidv4().replace(/-/g, '');
-        // return UID_SUPPORT_GROUP_MESSAGES + uuidv4(); >>>>>OLD 
-    }
-
-    /**
-     * premendo sul pulsante 'APRI UNA NW CONVERSAZIONE'
-     * attivo una nuova conversazione
-     */
-    startNewConversation() {
-        this.logger.debug('[APP-COMP] AppComponent::startNewConversation');
-        const newConvId = this.generateNewUidConversation();
-        this.g.setParameter('recipientId', newConvId);
-        this.appStorageService.setItem('recipientId', newConvId)
-        this.logger.debug('[APP-COMP]  recipientId: ', this.g.recipientId);
-        this.isConversationArchived = false;
-        this.triggerNewConversationEvent(newConvId);
-    }
-
-    // ========= end:: FUNCTIONS ============//
-
-
-
+    // ======== END: manage sound and title ========//
 
     // ========= begin:: CALLBACK FUNCTIONS ============//
     /**
@@ -2175,7 +1677,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
      * CONVERSATION DETAIL FOOTER:
      * floating button -> start new Conversation();
      */
-    onNewConversationButtonClicked(){
+    onNewConversationButtonClicked(event){
         this.logger.debug('[APP-COMP] onNewConversationButtonClicked');
         
         this.isOpenConversation = false;
@@ -2297,98 +1799,77 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     // ========= end:: CALLBACK FUNCTIONS ============//
 
 
-
     // ========= START:: TRIGGER FUNCTIONS ============//
+    /** onBeforeInit */
     private triggerOnBeforeInit() {
         const detailOBJ = { global: this.g, default_settings: this.g.default_settings, appConfigs: this.appConfigService.getConfig() }
         this.triggerHandler.triggerOnBeforeInit(detailOBJ)
     }
-
+    /** onInit */  
     private triggerOnViewInit() {
         const detailOBJ = { global: this.g, default_settings: this.g.default_settings, appConfigs: this.appConfigService.getConfig() }
         this.triggerHandler.triggerOnViewInit(detailOBJ)
     }
-
+    /** onOpen */  
     private triggerOnOpenEvent() {
         const detailOBJ = { default_settings: this.g.default_settings }
         this.triggerHandler.triggerOnOpenEvent(detailOBJ)
     }
+    /** onClose */  
     private triggerOnCloseEvent() {
         const detailOBJ = { default_settings: this.g.default_settings }
         this.triggerHandler.triggerOnCloseEvent(detailOBJ)
     }
-
+    /** onOpenEyeCatcher */  
     private triggerOnOpenEyeCatcherEvent() {
         const detailOBJ = { default_settings: this.g.default_settings }
         this.triggerHandler.triggerOnOpenEyeCatcherEvent(detailOBJ)
     }
-
+    /** onClosedEyeCatcher */
     private triggerOnClosedEyeCatcherEvent() {
         this.triggerHandler.triggerOnClosedEyeCatcherEvent()
     }
 
-    /** */
+    /** onLoggedIn */
     // private triggerOnLoggedIn() {
     //     const detailOBJ = { user_id: this.g.senderId, global: this.g, default_settings: this.g.default_settings, appConfigs: this.appConfigService.getConfig() }
     //     this.triggerHandler.triggerOnOpenEvent(detailOBJ)
     // }
 
-    /** */
+    /** onLoggedOut */
     // private triggerOnLoggedOut() {
     //     const detailOBJ = { isLogged: this.g.isLogged, global: this.g, default_settings: this.g.default_settings, appConfigs: this.appConfigService.getConfig() }
     //     this.triggerHandler.triggerOnLoggedOut(detailOBJ)
     // }
 
-    /** */
+    /** onAuthStateChanged */
     private triggerOnAuthStateChanged(event) {
         const detailOBJ = { event: event, isLogged: this.g.isLogged, user_id: this.g.senderId, global: this.g, default_settings: this.g.default_settings, appConfigs: this.appConfigService.getConfig() }
         this.triggerHandler.triggerOnAuthStateChanged(detailOBJ)
     }
 
+    /** onNewConversation */
     private triggerNewConversationEvent(newConvId) {
         const detailOBJ = { global: this.g, default_settings: this.g.default_settings, newConvId: newConvId, appConfigs: this.appConfigService.getConfig() }
         this.triggerHandler.triggerNewConversationEvent(detailOBJ)
     }
 
-    /** */
+    /** onLoadParams */
     private triggerLoadParamsEvent() {
         const detailOBJ = { default_settings: this.g.default_settings }
         this.triggerHandler.triggerLoadParamsEvent(detailOBJ)
     }
 
-    /** */
+    /** onConversationUpdated */
     private triggerOnConversationUpdated(conversation: ConversationModel) {
         this.triggerHandler.triggerOnConversationUpdated(conversation)
     }
 
-    /** */
+    /** onCloseMessagePreview */
     private triggerOnCloseMessagePreview() {
         this.triggerHandler.triggerOnCloseMessagePreview();
     }
-
     // ========= END:: TRIGGER FUNCTIONS ============//
-
-    // setSound() {
-    //     if (this.appStorageService.getItem('soundEnabled')) {
-    //         this.g.setParameter('soundEnabled', this.appStorageService.getItem('soundEnabled'));
-    //         // this.settingsSaverService.setVariable('soundEnabled', this.appStorageService.getItem('soundEnabled'));
-    //       }
-    // }
-
-    //   /**
-    //    * carico url immagine profilo passando id utente
-    //    */
-    //   setProfileImage(contact) {
-    //     const that = this;
-    //     // that.g.wdLog([' ********* displayImage::: ');
-    //     this.contactService.profileImage(contact.id, 'thumb')
-    //     .then((url) => {
-    //         contact.imageurl = url;
-    //     })
-    //     .catch((error) => {
-    //       // that.g.wdLog(["displayImage error::: ",error);
-    //     });
-    //   }
 
     private setStyleMap() {
         this.styleMapConversation.set('backgroundColor', this.g.colorBck)
@@ -2410,6 +1891,29 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.el.nativeElement.style.setProperty('--button-in-msg-background-color', this.g.bubbleSentBackground)
         this.el.nativeElement.style.setProperty('--button-in-msg-font-size', this.g.buttonFontSize)
     }
+
+    // ========= begin:: DESTROY ALL SUBSCRIPTIONS ============//
+    /** elimino tutte le sottoscrizioni */
+    ngOnDestroy() {
+        this.logger.debug('[APP-COMP] this.subscriptions', this.subscriptions);
+        const windowContext = this.g.windowContext;
+        if (windowContext && windowContext['tiledesk']) {
+            windowContext['tiledesk']['angularcomponent'] = null;
+            // this.g.setParameter('windowContext', windowContext);
+            this.g.windowContext = windowContext;
+        }
+        this.unsubscribe();
+    }
+
+    /** */
+    unsubscribe() {
+        this.subscriptions.forEach(function (subscription) {
+            subscription.unsubscribe();
+        });
+        this.subscriptions = [];
+        this.logger.debug('[APP-COMP] this.subscriptions', this.subscriptions);
+    }
+    // ========= end:: DESTROY ALL SUBSCRIPTIONS ============//
 
 
 }

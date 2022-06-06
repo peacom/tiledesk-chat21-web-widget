@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 // firebase
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import 'firebase/messaging';
 import 'firebase/database';
 
@@ -29,8 +29,8 @@ export class TypingModel {
 export class FirebaseTypingService extends TypingService {
 
   // BehaviorSubject
-  BSIsTyping: BehaviorSubject<any>;
-  BSSetTyping: BehaviorSubject<any>;
+  BSIsTyping: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  BSSetTyping: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
   // private params
   private urlNodeTypings: string;

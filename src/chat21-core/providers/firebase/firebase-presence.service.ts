@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 // firebase
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import 'firebase/messaging';
 import 'firebase/database';
 
@@ -23,8 +23,8 @@ export class FirebasePresenceService extends PresenceService {
 
   // BehaviorSubject
   // BSIsOnline: BehaviorSubject<any>;
-  BSIsOnline: BehaviorSubject<any>;
-  BSLastOnline: BehaviorSubject<any>;
+  BSIsOnline: BehaviorSubject<any> = new BehaviorSubject<any>(null);;
+  BSLastOnline: BehaviorSubject<any> = new BehaviorSubject<any>(null);;
 
   // private params
   private tenant: string;

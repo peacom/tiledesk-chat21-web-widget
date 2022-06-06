@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { UserTypingComponent } from './user-typing.component';
@@ -7,7 +7,7 @@ describe('UserTypingComponent', () => {
   let component: UserTypingComponent;
   let fixture: ComponentFixture<UserTypingComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ UserTypingComponent ],
       imports: []

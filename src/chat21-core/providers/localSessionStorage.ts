@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AppStorageService } from './abstract/app-storage.service';
 import { STORAGE_PREFIX } from '../utils/constants';
-import { supports_html5_storage, supports_html5_session } from '../utils/utils';
+import { supports_html5_session, supports_html5_storage } from '../utils/utils';
+import { AppStorageService } from './abstract/app-storage.service';
 import { LoggerService } from './abstract/logger.service';
 import { LoggerInstance } from './logger/loggerInstance';
+
 
 @Injectable()
 export class LocalSessionStorage extends AppStorageService{

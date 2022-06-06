@@ -45,7 +45,7 @@ export class SettingsSaverService {
   public setVariable(key: string, value: any) {
     const val =  JSON.stringify(value);
     // console.log('========================================');
-    // console.log('key: ', key);
+    //  console.log('key: ', key);
     // console.log('val: ', val);
     // console.log('========================================');
     this.appStorageService.setItem(key, stringToBoolean(value));

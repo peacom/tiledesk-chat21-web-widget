@@ -1,8 +1,8 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LogLevel } from './../../chat21-core/utils/constants';
 import { ElementRef, Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Http, Headers, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject, Observable } from 'rxjs';
+
 // services
 import { Globals } from '../utils/globals';
 import { getImageUrlThumb, stringToBoolean, convertColorToRGBA, getParameterByName, stringToNumber, detectIfIsMobile } from '../utils/utils';
@@ -25,7 +25,7 @@ export class GlobalSettingsService {
     private logger: LoggerService = LoggerInstance.getInstance()
 
     constructor(
-        public http: Http,
+        public http: HttpClient,
         private appStorageService: AppStorageService,
         // private settingsService: SettingsService,
         public appConfigService: AppConfigService
@@ -455,7 +455,7 @@ export class GlobalSettingsService {
                         globals['calloutTimer'] = variables['calloutTimer'];
                     }
                     if (variables.hasOwnProperty('dynamicWaitTimeReply')) {
-                        globals['dynamicWaitTimeReply'] = variables['dynamicWaitTimeReply'];
+                        globals['dynamicWaitTimeReply'] =  stringToBoolean(variables['dynamicWaitTimeReply']);
                     }
                     if (variables.hasOwnProperty('logoChat')) {
                         globals['logoChat'] = variables['logoChat'];
@@ -808,7 +808,7 @@ export class GlobalSettingsService {
         TEMP = tiledeskSettings['dynamicWaitTimeReply'];
         // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > dynamicWaitTimeReply:: ', TEMP]);
         if (TEMP !== undefined) {
-            globals.dynamicWaitTimeReply = TEMP;
+            globals.dynamicWaitTimeReply =  stringToBoolean(TEMP);
         }
         TEMP = tiledeskSettings['soundEnabled'];
         // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > soundEnabled:: ', TEMP]);
@@ -821,7 +821,7 @@ export class GlobalSettingsService {
             globals.openExternalLinkButton = TEMP;
         }
         TEMP = tiledeskSettings['hideCloseConversationOptionMenu'];
-        // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > hideCloseConversationOptionMenu:: ', TEMP]);
+        // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > hideHeaderConversationOptionsMenu:: ', TEMP]);
         if (TEMP !== undefined) {
             globals.hideCloseConversationOptionMenu = (TEMP === true) ? true : false;;
         }
@@ -1091,7 +1091,7 @@ export class GlobalSettingsService {
         // }
         TEMP = el.nativeElement.getAttribute('dynamicWaitTimeReply');
         if (TEMP !== null) {
-            this.globals.dynamicWaitTimeReply = TEMP;
+            this.globals.dynamicWaitTimeReply =  stringToBoolean(TEMP);
         }
         TEMP = el.nativeElement.getAttribute('soundEnabled');
         if (TEMP !== null) {
@@ -1748,10 +1748,9 @@ export class GlobalSettingsService {
             const API_URL = this.appConfigService.getConfig().apiUrl;
             const url = API_URL + id + '/widgets';
             // console.log('getProjectParametersById: ', url);
-            const headers = new Headers();
+            const headers = new HttpHeaders();
             headers.append('Content-Type', 'application/json');
-            return this.http.get(url, { headers })
-                            .map((response) => response.json());
+            return this.http.get<any[]>(url, { headers })
         }
     }
 

@@ -1,16 +1,16 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Globals } from '../utils/globals';
-import { Headers, Http } from '@angular/http';
 import { AppConfigService } from '../providers/app-config.service';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class WaitingService {
   API_URL: string;
 
   constructor(
-    public http: Http,
+    public http: HttpClient,
     public g: Globals,
     public appConfigService: AppConfigService
     ) {
@@ -20,12 +20,12 @@ export class WaitingService {
 
   public getCurrent(projectId): Observable<any> {
     const url = this.API_URL + projectId + '/publicanalytics/waiting/current';
-    const headers = new Headers();
+    const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     // headers.append('Authorization', TOKEN);
-    return this.http
-      .get(url, { headers })
-      .map((response) => response.json());
+    return this.http.get(url, { headers })
+                    .pipe(map((response: any) => { response}))
+
   }
 
 }

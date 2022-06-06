@@ -1,4 +1,4 @@
-import * as moment from 'moment/moment';
+import * as moment from 'moment';
 import 'moment/locale/it.js';
 
 // firebase

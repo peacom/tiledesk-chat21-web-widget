@@ -1,196 +1,132 @@
-import { TiledeskRequestsService } from './../chat21-core/providers/tiledesk/tiledesk-requests.service';
 
-
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, APP_INITIALIZER } from '@angular/core';
-import { HttpModule, Http } from '@angular/http';
-import { HttpClient } from '@angular/common/http';
+// ************** COMPONENTS ************** //
 import { AppComponent } from './app.component';
-import { Observable } from 'rxjs';
+/** HOME COMPONENTS */
+import { HomeComponent } from './component/home/home.component';
+import { HomeConversationsComponent } from './component/home-conversations/home-conversations.component';
+import { ListConversationsComponent } from './component/list-conversations/list-conversations.component';
+import { ListAllConversationsComponent } from './component/list-all-conversations/list-all-conversations.component';
+/** CONVERSATION COMPONENTS */
+import { ConversationComponent } from './component/conversation-detail/conversation/conversation.component';
+import { ConversationHeaderComponent } from './component/conversation-detail/conversation-header/conversation-header.component';
+import { ConversationContentComponent } from './component/conversation-detail/conversation-content/conversation-content.component';
+import { ConversationFooterComponent } from './component/conversation-detail/conversation-footer/conversation-footer.component';
+import { ConversationInternalFrameComponent } from './component/conversation-detail/conversation-internal-frame/conversation-internal-frame.component';
+import { ConversationPreviewComponent } from './component/conversation-detail/conversation-preview/conversation-preview.component';
+/** CONVERSATION-DETAIL COMPONENTS */
+import { BubbleMessageComponent } from './component/message/bubble-message/bubble-message.component';
+import { AvatarComponent } from './component/message/avatar/avatar.component';
+import { TextComponent } from './component/message/text/text.component';
+import { ImageComponent } from './component/message/image/image.component';
+import { InfoMessageComponent } from './component/message/info-message/info-message.component';
+import { HtmlComponent } from './component/message/html/html.component';
+import { FrameComponent } from './component/message/frame/frame.component';
+import { UserTypingComponent } from './../chat21-core/utils/user-typing/user-typing.component';
+/** MESSAGE ATTACHMENTS COMPONENTS */
+import { MessageAttachmentComponent } from './component/message-attachment/message-attachment.component';
+import { ActionButtonComponent } from './component/message/buttons/action-button/action-button.component';
+import { LinkButtonComponent } from './component/message/buttons/link-button/link-button.component';
+import { TextButtonComponent } from './component/message/buttons/text-button/text-button.component';
+import { ReturnReceiptComponent } from './component/message/return-receipt/return-receipt.component';
+/** FORM COMPONENTS */
+import { PrechatFormComponent } from './component/form/prechat-form/prechat-form.component';
+import { FormBuilderComponent } from './component/form/form-builder/form-builder.component';
+import { FormSelectComponent } from './component/form/inputs/form-select/form-select.component';
+import { FormRadioButtonComponent } from './component/form/inputs/form-radio-button/form-radio-button.component';
+import { FormTextComponent } from './component/form/inputs/form-text/form-text.component';
+import { FormLabelComponent } from './component/form/inputs/form-label/form-label.component';
+import { FormCheckboxComponent } from './component/form/inputs/form-checkbox/form-checkbox.component';
+import { FormTextareaComponent } from './component/form/inputs/form-textarea/form-textarea.component';
+/** OTHER COMPONENTS */
+import { LastMessageComponent } from './component/last-message/last-message.component';
+import { StarRatingWidgetComponent } from './component/star-rating-widget/star-rating-widget.component';
+import { LauncherButtonComponent } from './component/launcher-button/launcher-button.component';
+import { EyeeyeCatcherCardComponent } from './component/eyeeye-catcher-card/eyeeye-catcher-card.component';
+import { SelectionDepartmentComponent } from './component/selection-department/selection-department.component';
+import { MenuOptionsComponent } from './component/menu-options/menu-options.component';
 
-// Directives
-import { TooltipModule } from 'ng2-tooltip-directive';
-
-// Import the library module
-import { environment } from '../environments/environment';
-import { HttpClientModule} from '@angular/common/http';
+//ANGULAR MODULES
+import { AppRoutingModule } from './app-routing.module';
+import { AppConfigService } from './providers/app-config.service';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LocalStorageModule } from 'angular-2-local-storage';
-import { MomentModule } from 'angular2-moment';
-import { LinkyModule } from 'angular-linky';
-import { AngularResizedEventModule } from 'angular-resize-event';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader/src/http-loader';
+import { environment } from 'src/environments/environment';
 
-//pipe
-import { MarkedPipe } from './directives/marked.pipe';
+//THIRD-PART MODULES
+import { TranslateModule } from '@ngx-translate/core';
+import { MomentModule } from 'ngx-moment';
+import { TooltipModule } from 'ng2-tooltip-directive';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
+
+//DIRECTIVES
 import { HtmlEntitiesEncodePipe } from './directives/html-entities-encode.pipe';
+import { MarkedPipe } from './directives/marked.pipe';
 import { SafeHtmlPipe } from './directives/safe-html.pipe';
 
-// utils
-import { Globals } from './utils/globals';
+//LOGGER SERVICES
+import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
+import { CustomLogger } from 'src/chat21-core/providers/logger/customLogger';
 
-// users
-import { UserLoginComponent } from './users/user-login/user-login.component';
-import { UserProfileComponent } from './users/user-profile/user-profile.component';
-
-// providers
-import { GlobalSettingsService } from './providers/global-settings.service';
-import { SettingsSaverService } from './providers/settings-saver.service';
-import { StorageService } from './providers/storage.service';
-import { ChatPresenceHandlerService } from './providers/chat-presence-handler.service';
-import { AuthService_old } from './providers/auth.service';
-import { MessagingService } from './providers/messaging.service';
-import { ConversationsService } from './providers/conversations.service';
-import { ContactService } from './providers/contact.service';
-import { AgentAvailabilityService } from './providers/agent-availability.service';
+// TRANSLATOR SERVICE
 import { TranslatorService } from './providers/translator.service';
-import { WaitingService } from './providers/waiting.service';
-import { AppConfigService } from './providers/app-config.service';
-
-
-//------------------------>>>>> COMPONENTS <<<<<------------------------//
-//  ______________ HOME ________________ //
-import { HomeComponent } from './components/home/home.component';
-import { HomeConversationsComponent } from './components/home-conversations/home-conversations.component';
-
-// ___________DEPARTMENT______________//
-import { SelectionDepartmentComponent } from './components/selection-department/selection-department.component';
-
-import { LauncherButtonComponent } from './components/launcher-button/launcher-button.component';
-import { MessageAttachmentComponent } from './components/message-attachment/message-attachment.component';
-import { PrechatFormComponent } from './components/prechat-form/prechat-form.component';
-import { EyeeyeCatcherCardComponent } from './components/eyeeye-catcher-card/eyeeye-catcher-card.component';
-import { PreviewLoadingFilesComponent } from './components/preview-loading-files/preview-loading-files.component';
-import { MenuOptionsComponent } from './components/menu-options/menu-options.component';
-import { StarRatingWidgetComponent } from './components/star-rating-widget/star-rating-widget.component';
-import { StarRatingWidgetService } from './components/star-rating-widget/star-rating-widget.service';
-import { LastMessageComponent } from './components/last-message/last-message.component';
-import { SendButtonComponent } from './components/send-button/send-button.component';
-
-
-// ___________ CONVERSATIONS LIST ______________//
-import { ListAllConversationsComponent } from './components/list-all-conversations/list-all-conversations.component';
-import { ListConversationsComponent } from './components/list-conversations/list-conversations.component';
-
-// ___________ CONVERSATIONS ELEMENT ______________//
-import { ConversationComponent } from './components/conversation-detail/conversation/conversation.component';
-import { ConversationHeaderComponent } from './components/conversation-detail/conversation-header/conversation-header.component';
-import { ConversationContentComponent } from './components/conversation-detail/conversation-content/conversation-content.component';
-import { ConversationFooterComponent } from './components/conversation-detail/conversation-footer/conversation-footer.component';
-import { ConversationPreviewComponent } from './components/conversation-detail/conversation-preview/conversation-preview.component';
-import { BubbleMessageComponent } from './components/message/bubble-message/bubble-message.component';
-import { TextComponent } from './components/message/text/text.component';
-import { HtmlComponent } from './components/message/html/html.component';
-import { ImageComponent } from './components/message/image/image.component';
-import { TextButtonComponent } from './components/message/buttons/text-button/text-button.component';
-import { FrameComponent } from './components/message/frame/frame.component';
-import { LinkButtonComponent } from './components/message/buttons/link-button/link-button.component';
-import { ActionButtonComponent } from './components/message/buttons/action-button/action-button.component';
-import { AvatarComponent } from './components/message/avatar/avatar.component';
-import { ReturnReceiptComponent } from './components/message/return-receipt/return-receipt.component';
-import { InfoMessageComponent } from './components/message/info-message/info-message.component';
-import { InterlalFrameComponent } from './components/conversation-detail/interlal-frame/interlal-frame.component';
-
-
-
-// **************** CHAT21-CORE ************************ //
-//COMPONENTS
-import { UserTypingComponent } from '../../src/chat21-core/utils/user-typing/user-typing.component';
-
-//CONSTANTS
-import { CHAT_ENGINE_MQTT, UPLOAD_ENGINE_NATIVE } from '../../src/chat21-core/utils/constants';
-
-//TRIGGER-HANDLER
-import { Triggerhandler } from '../chat21-core/utils/triggerHandler';
-
-//SERVICES
-// import { DatabaseProvider } from '../chat21-core/providers/database';
-import { ChatManager } from './../chat21-core/providers/chat-manager';
-import { CustomTranslateService } from './../chat21-core/providers/custom-translate.service';
+import { CustomTranslateService } from 'src/chat21-core/providers/custom-translate.service';
 
 //ABSTRACT SERVICES
-import { MessagingAuthService } from '../chat21-core/providers/abstract/messagingAuth.service';
-import { ConversationHandlerBuilderService } from '../chat21-core/providers/abstract/conversation-handler-builder.service';
-import { ConversationsHandlerService } from '../chat21-core/providers/abstract/conversations-handler.service';
-import { ArchivedConversationsHandlerService } from '../chat21-core/providers/abstract/archivedconversations-handler.service';
-import { ConversationHandlerService } from '../chat21-core/providers/abstract/conversation-handler.service';
-import { ImageRepoService } from '../chat21-core/providers/abstract/image-repo.service';
-import { TypingService } from '../chat21-core/providers/abstract/typing.service';
-import { PresenceService } from '../chat21-core/providers/abstract/presence.service';
-import { UploadService } from '../chat21-core/providers/abstract/upload.service';
-import { AppStorageService } from '../chat21-core/providers/abstract/app-storage.service';
+import { AppStorageService } from 'src/chat21-core/providers/abstract/app-storage.service';
+import { MessagingAuthService } from 'src/chat21-core/providers/abstract/messagingAuth.service';
+import { ConversationsHandlerService } from 'src/chat21-core/providers/abstract/conversations-handler.service';
+import { ArchivedConversationsHandlerService } from 'src/chat21-core/providers/abstract/archivedconversations-handler.service';
+import { ConversationHandlerBuilderService } from 'src/chat21-core/providers/abstract/conversation-handler-builder.service';
+import { ConversationHandlerService } from 'src/chat21-core/providers/abstract/conversation-handler.service';
+import { ImageRepoService } from 'src/chat21-core/providers/abstract/image-repo.service';
+import { PresenceService } from 'src/chat21-core/providers/abstract/presence.service';
+import { TypingService } from 'src/chat21-core/providers/abstract/typing.service';
+import { UploadService } from 'src/chat21-core/providers/abstract/upload.service';
 
 //FIREBASE SERVICES
-import { FirebaseInitService } from '../chat21-core/providers/firebase/firebase-init-service';
-import { FirebaseAuthService } from '../chat21-core/providers/firebase/firebase-auth-service';
-import { FirebaseConversationHandlerBuilderService } from '../chat21-core/providers/firebase/firebase-conversation-handler-builder.service';
-import { FirebaseConversationsHandler } from '../chat21-core/providers/firebase/firebase-conversations-handler';
-import { FirebaseArchivedConversationsHandler } from '../chat21-core/providers/firebase/firebase-archivedconversations-handler';
-import { FirebaseConversationHandler } from '../chat21-core/providers/firebase/firebase-conversation-handler';
-import { FirebaseTypingService } from '../chat21-core/providers/firebase/firebase-typing.service';
-import { FirebasePresenceService } from '../chat21-core/providers/firebase/firebase-presence.service';
-import { FirebaseImageRepoService } from '../chat21-core/providers/firebase/firebase-image-repo';
-import { FirebaseUploadService } from '../chat21-core/providers/firebase/firebase-upload.service';
+import { FirebaseInitService } from 'src/chat21-core/providers/firebase/firebase-init-service';
+import { FirebaseAuthService } from 'src/chat21-core/providers/firebase/firebase-auth-service';
+import { FirebaseConversationsHandler } from 'src/chat21-core/providers/firebase/firebase-conversations-handler';
+import { FirebaseArchivedConversationsHandler } from 'src/chat21-core/providers/firebase/firebase-archivedconversations-handler';
+import { FirebaseConversationHandlerBuilderService } from 'src/chat21-core/providers/firebase/firebase-conversation-handler-builder.service';
+import { FirebaseConversationHandler } from 'src/chat21-core/providers/firebase/firebase-conversation-handler';
+import { FirebaseTypingService } from 'src/chat21-core/providers/firebase/firebase-typing.service';
+import { FirebasePresenceService } from 'src/chat21-core/providers/firebase/firebase-presence.service';
+import { FirebaseImageRepoService } from 'src/chat21-core/providers/firebase/firebase-image-repo';
+import { FirebaseUploadService } from 'src/chat21-core/providers/firebase/firebase-upload.service';
 
-// MQTT
-import { Chat21Service } from '../chat21-core/providers/mqtt/chat-service';
-import { MQTTAuthService } from '../chat21-core/providers/mqtt/mqtt-auth-service';
-import { MQTTConversationHandlerBuilderService } from '../chat21-core/providers/mqtt/mqtt-conversation-handler-builder.service';
-import { MQTTConversationsHandler } from '../chat21-core/providers/mqtt/mqtt-conversations-handler';
-import { MQTTArchivedConversationsHandler } from '../chat21-core/providers/mqtt/mqtt-archivedconversations-handler';
-import { MQTTConversationHandler } from '../chat21-core/providers/mqtt/mqtt-conversation-handler';
-import { MQTTTypingService } from '../chat21-core/providers/mqtt/mqtt-typing.service';
-import { MQTTPresenceService } from '../chat21-core/providers/mqtt/mqtt-presence.service';
+//MQTT SERVICES
+import { Chat21Service } from 'src/chat21-core/providers/mqtt/chat-service';
+import { MQTTAuthService } from 'src/chat21-core/providers/mqtt/mqtt-auth-service';
+import { MQTTConversationsHandler } from 'src/chat21-core/providers/mqtt/mqtt-conversations-handler';
+import { MQTTArchivedConversationsHandler } from 'src/chat21-core/providers/mqtt/mqtt-archivedconversations-handler';
+import { MQTTConversationHandlerBuilderService } from 'src/chat21-core/providers/mqtt/mqtt-conversation-handler-builder.service';
+import { MQTTConversationHandler } from 'src/chat21-core/providers/mqtt/mqtt-conversation-handler';
+import { MQTTTypingService } from 'src/chat21-core/providers/mqtt/mqtt-typing.service';
+import { MQTTPresenceService } from 'src/chat21-core/providers/mqtt/mqtt-presence.service';
 
-//NATIVE
-import { NativeUploadService } from '../chat21-core/providers/native/native-upload-service';
-import { NativeImageRepoService } from '../chat21-core/providers/native/native-image-repo';
-
-//TILEDESK
+// NATIVE TILEDESK SERVICES
 import { TiledeskAuthService } from './../chat21-core/providers/tiledesk/tiledesk-auth.service';
+import { TiledeskRequestsService } from 'src/chat21-core/providers/tiledesk/tiledesk-requests.service';
+import { NativeImageRepoService } from 'src/chat21-core/providers/native/native-image-repo';
+import { NativeUploadService } from 'src/chat21-core/providers/native/native-upload-service';
 
-//LOGGER SERVICES
-import { CustomLogger } from '../chat21-core/providers/logger/customLogger';
-import { LocalSessionStorage } from '../chat21-core/providers/localSessionStorage';
-import { LoggerInstance } from '../chat21-core/providers/logger/loggerInstance';
+//CONSTANTS
+import { CHAT_ENGINE_MQTT, UPLOAD_ENGINE_NATIVE } from 'src/chat21-core/utils/constants';
 
-//FORM COMPONENT
-import { FormBuilderComponent } from './components/form/form-builder/form-builder.component';
-import { RadioButtonComponent } from './components/form/inputs/radio-button/radio-button.component';
-import { SelectComponent } from './components/form/inputs/select/select.component';
-import { FormTextComponent } from './components/form/inputs/form-text/form-text.component';
-import { FormLabelComponent } from './components/form/inputs/form-label/form-label.component';
-import { FormCheckboxComponent } from './components/form/inputs/form-checkbox/form-checkbox.component';
-import { FormTextareaComponent } from './components/form/inputs/form-textarea/form-textarea.component';
+//STORAGE
+import { LocalSessionStorage } from 'src/chat21-core/providers/localSessionStorage';
+import { SettingsSaverService } from './providers/settings-saver.service';
 
+import { Globals } from './utils/globals';
+import { GlobalSettingsService } from './providers/global-settings.service';
+import { Triggerhandler } from 'src/chat21-core/utils/triggerHandler';
+import { WaitingService } from './providers/waiting.service';
+import { StarRatingWidgetService } from './providers/star-rating-widget.service';
 
-export class TranslateHttpLoaderCustom implements TranslateLoader {
-  constructor(private http: HttpClient, 
-              public prefix: string = "/assets/i18n/", 
-              public suffix: string = ".json") {}
-
-  public getTranslation(lang: string): Observable<Object> {
-    console.log('getTranslation', lang)
-      return this.http.get(`${this.prefix}${lang}${this.suffix}`).catch(err => {
-        console.log('err', err)
-        lang = 'en'
-        return this.http.get(`${this.prefix}${lang}${this.suffix}`);
-      }); 
-  }
-}
-
-
-// FACTORIES
-export function createTranslateLoader(http: HttpClient) {
-  let localUrl = './assets/i18n/';
-  if (location.pathname.includes('/assets/')) {
-    localUrl = '../i18n/';
-  }
-  console.log('translate factoryyyyyyyy APP MODULE')
-  return new TranslateHttpLoaderCustom(http, localUrl, '.json');
-}
 
 const appInitializerFn = (appConfig: AppConfigService) => {
   return () => {
@@ -201,6 +137,7 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     }
   };
 };
+
 
 export function authenticationFactory(http: HttpClient, appConfig: AppConfigService, chat21Service: Chat21Service, appSorage: AppStorageService) {
   const config = appConfig.getConfig()
@@ -297,75 +234,64 @@ export function uploadFactory(http: HttpClient, appConfig: AppConfigService, app
   }
 }
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    UserLoginComponent,
-    UserProfileComponent,
-    StarRatingWidgetComponent,
-    SelectionDepartmentComponent,
+    LauncherButtonComponent,
+    EyeeyeCatcherCardComponent,
     HomeConversationsComponent,
     HomeComponent,
-    LauncherButtonComponent,
-    ConversationComponent,
-    PrechatFormComponent,
-    EyeeyeCatcherCardComponent,
-    PreviewLoadingFilesComponent,
-    MenuOptionsComponent,
+    ListConversationsComponent,
     ListAllConversationsComponent,
+    MenuOptionsComponent,
+    SelectionDepartmentComponent,
+    StarRatingWidgetComponent,
     MessageAttachmentComponent,
     LastMessageComponent,
-    MarkedPipe,
-    HtmlEntitiesEncodePipe,
-    ListConversationsComponent,
-    ConversationHeaderComponent,
-    UserTypingComponent,
-    ConversationFooterComponent,
-    ConversationContentComponent,
-    BubbleMessageComponent,
-    TextComponent,
-    ImageComponent,
-    TextButtonComponent,
-    FrameComponent,
-    LinkButtonComponent,
-    ActionButtonComponent,
-    AvatarComponent,
-    ReturnReceiptComponent,
-    InfoMessageComponent,
-    InterlalFrameComponent,
+    /**FORM COMPONENTS */
+    PrechatFormComponent,
     FormBuilderComponent,
-    RadioButtonComponent,
-    SelectComponent,
     FormTextComponent,
     FormLabelComponent,
     FormCheckboxComponent,
     FormTextareaComponent,
+    FormRadioButtonComponent,
+    FormSelectComponent,
+    /**CONVERSATION-DETAILL COMPONENTS */
+    ConversationComponent,
+    ConversationHeaderComponent,
+    ConversationContentComponent,
+    ConversationFooterComponent,
     ConversationPreviewComponent,
-    SendButtonComponent,
+    ConversationInternalFrameComponent,
+    BubbleMessageComponent,
+    AvatarComponent,
+    FrameComponent,
     HtmlComponent,
+    ImageComponent,
+    InfoMessageComponent,
+    ReturnReceiptComponent,
+    TextComponent,
+    ActionButtonComponent,
+    LinkButtonComponent,
+    TextButtonComponent,
+    UserTypingComponent,
+    /**DIRECTIVES */
+    HtmlEntitiesEncodePipe,
+    MarkedPipe,
     SafeHtmlPipe
   ],
   imports: [
     BrowserModule,
-    // firebase.initializeApp(environment.firebase),
-    // AngularFireModule.initializeApp(environment.firebase),
-    // AngularFireAuthModule, // imports firebase/auth, only needed for auth features
-    // AngularFireDatabaseModule, // imports firebase/database, only needed for database features
-    // AngularFirestoreModule,
     BrowserAnimationsModule,
-    HttpModule,
+    // AppRoutingModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    LinkyModule,
-    // https://medium.com/codingthesmartway-com-blog/using-bootstrap-with-angular-c83c3cee3f4a
-    // NgbModule.forRoot(),
-    LocalStorageModule.withConfig({
-      prefix: 'chat21-web-widget',
-      storageType: 'localStorage'
-     }),
     MomentModule,
-    AngularResizedEventModule,
+    TooltipModule,
+    PickerModule,
     TranslateModule.forRoot(//),
     {
       // loader: {
@@ -373,17 +299,24 @@ export function uploadFactory(http: HttpClient, appConfig: AppConfigService, app
       //   useFactory: (createTranslateLoader),
       //   deps: [HttpClient]
       // }
-    }), 
-    TooltipModule,
-    //RouterModule.forRoot([])
+    })
   ],
   providers: [
-    AppConfigService, // https://juristr.com/blog/2018/01/ng-app-runtime-config/
+    AppConfigService,
+    Chat21Service,
+    Globals,
+    GlobalSettingsService,
+    SettingsSaverService,
+    StarRatingWidgetService,
     {
       provide: APP_INITIALIZER,
       useFactory: appInitializerFn,
       multi: true,
       deps: [AppConfigService]
+    },
+    {
+      provide: AppStorageService,
+      useClass: LocalSessionStorage
     },
     {
       provide: MessagingAuthService,
@@ -411,9 +344,9 @@ export function uploadFactory(http: HttpClient, appConfig: AppConfigService, app
       deps: [Chat21Service, AppConfigService]
     },
     {
-      provide: TypingService,
-      useFactory: typingFactory,
-      deps: [AppConfigService]
+      provide: ImageRepoService,
+      useFactory: imageRepoFactory,
+      deps: [AppConfigService, HttpClient]
     },
     {
       provide: PresenceService,
@@ -421,40 +354,21 @@ export function uploadFactory(http: HttpClient, appConfig: AppConfigService, app
       deps: [AppConfigService]
     },
     {
-      provide: ImageRepoService,
-      useFactory: imageRepoFactory,
-      deps: [AppConfigService, HttpClient]
+      provide: TypingService,
+      useFactory: typingFactory,
+      deps: [AppConfigService]
     },
     {
       provide: UploadService,
       useFactory: uploadFactory,
       deps: [HttpClient, AppConfigService, AppStorageService ]
     },
-    {
-      provide: AppStorageService,
-      useClass: LocalSessionStorage
-    },
-    //AuthService,
-    //MessagingService,
-    Globals,
-    GlobalSettingsService,
-    SettingsSaverService,
-    ConversationsService,
-    //UploadService,
-    ContactService,
-    StarRatingWidgetService,
-    AgentAvailabilityService,
-    TranslatorService,
-    //ChatPresenceHandlerService,
-    StorageService,
-    WaitingService,
-    //********chat21-core***********//
-    CustomTranslateService,
-    ChatManager,
-    Triggerhandler,
-    Chat21Service,
     TiledeskAuthService,
-    TiledeskRequestsService
+    TiledeskRequestsService,
+    TranslatorService,
+    CustomTranslateService,
+    Triggerhandler,
+    WaitingService
   ],
   bootstrap: [AppComponent]
 })

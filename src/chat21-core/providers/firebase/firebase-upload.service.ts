@@ -3,11 +3,11 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 // firebase
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import 'firebase/messaging';
 import 'firebase/database';
-import 'firebase/storage';
 import 'firebase/firestore';
+import 'firebase/storage';
 
 // services
 import { UploadService } from '../abstract/upload.service';
@@ -24,7 +24,7 @@ import { LoggerInstance } from '../logger/loggerInstance';
 export class FirebaseUploadService extends UploadService {
   
   // BehaviorSubject
-  BSStateUpload: BehaviorSubject<any>;
+  BSStateUpload: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
   //private
   private logger:LoggerService = LoggerInstance.getInstance()

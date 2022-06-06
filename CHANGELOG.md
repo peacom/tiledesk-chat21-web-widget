@@ -1,7 +1,7 @@
 # chat21-web-widget ver 5.0
 
 ### 5.0.24-rc.7
-- bug-fixed: default translation for CLOSE_CHAT translation key in conversation-header menu option
+- added: emoji-mart picker 
 
 ### 5.0.24-rc.6
 - added: angular version updated from v5 to v12

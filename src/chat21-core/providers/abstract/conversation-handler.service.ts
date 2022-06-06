@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 
 // models
 import { MessageModel } from '../../models/message';
-import { UserModel } from '../../models/user';
+import { UserModel } from 'src/chat21-core/models/user';
 
 // @Injectable({
 //   providedIn: 'root'

@@ -1,17 +1,17 @@
 [![npm version](https://badge.fury.io/js/%40chat21%2Fchat21-web-widget.svg)](https://badge.fury.io/js/%40chat21%2Fchat21-web-widget)
 
-# chat21-web-widget
+# Tiledesk web-widget
 
 > ***🚀 Do you want to install Tiledesk on your server with just one click?***
 > 
 > ***Use [Docker Compose Tiledesk installation](https://github.com/Tiledesk/tiledesk-deployment/blob/master/docker-compose/README.md) guide***
 
-Chat21-web-widget is a Free Live Chat Widget built on Firebase with Angular5 that lets you support and chat with visitors and customers on your website. 
+Tiledesk web-widget is a Free Live Chat Widget built on Firebase with Angular5 that lets you support and chat with visitors and customers on your website. 
 More information about web widget here : http://www.tiledesk.com
 
-<img width="488" alt="dialogo_widgetchat_2" src="https://user-images.githubusercontent.com/32448495/37662363-35110862-2c57-11e8-8720-263d1ff96f29.jpg">
+<img width="600" alt="dialogo_widgetchat_2" src="https://user-images.githubusercontent.com/47848430/151355859-f94be6a7-3098-43a2-924c-d411e10d5815.png">
 
-With Chat21-web-widget you can:
+With Tiledesk web-widget you can:
 * Invite your website visitors to share feedback and suggestions to better understand their needs.
 * Answer questions from website visitors instantly to increase trust
 * Add a code snippet to your website easly 
@@ -22,7 +22,7 @@ With Chat21-web-widget you can:
 * Receive realtime support from your team
 * Form to enter the chat sentiment
 * Configure the widget with company logo and colors
-* Chat21 Web Widget is free and open source.
+* Tiledesk Web Widget is free and open source.
 
 # Prerequisites #
 * Install Git
@@ -83,10 +83,10 @@ export const environment = {
 };
 ```
 
-* `logLevel`: The Chat21-ionic supports 4 log levels. The order is as follows:
+* `logLevel`: The Tiledesk web-widget supports 4 log levels. The order is as follows:
   `Error < Warn < Info < Debug`
 
-* `fileUploadAccept`: The Chat21-ionic allows you to manage the type of files that can be uploaded. By default, all file types are accepted.
+* `fileUploadAccept`: The Tiledesk web-widget allows you to manage the type of files that can be uploaded. By default, all file types are accepted.
 
 ### RUN in dev
 
@@ -143,7 +143,7 @@ If you use AWS Cloud Front enable gzip compression.
 # Run with docker
 
   
-To run Chat21-ionic on port 8080 run:
+To run Tiledesk web-widget on port 4200 run:
 
 ```
 

@@ -4,9 +4,10 @@ import { Injectable } from '@angular/core';
 import { NotificationsService } from '../abstract/notifications.service';
 
 // firebase
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import 'firebase/messaging';
 import 'firebase/auth';
+
 import { LoggerService } from '../abstract/logger.service';
 
 // @Injectable({ providedIn: 'root' })

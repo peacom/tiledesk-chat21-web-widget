@@ -4,10 +4,11 @@ import { Inject, Injectable, Optional } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 // firebase
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import 'firebase/messaging';
 import 'firebase/database';
 import 'firebase/firestore';
+
 
 // models
 import { UserModel } from '../../models/user';
@@ -27,18 +28,17 @@ import {
   isJustRecived
 } from '../../utils/utils';
 import { v4 as uuidv4 } from 'uuid';
-import { messageType, checkIfIsMemberJoinedGroup, isEmojii } from '../../utils/utils-message';
+import { messageType, checkIfIsMemberJoinedGroup } from '../../utils/utils-message';
 
 // @Injectable({ providedIn: 'root' })
 @Injectable()
 export class FirebaseConversationHandler extends ConversationHandlerService {
 
     // BehaviorSubject
-    messageAdded: BehaviorSubject<MessageModel>;
-    messageChanged: BehaviorSubject<MessageModel>;
-    messageRemoved: BehaviorSubject<string>;
-    messageWait: BehaviorSubject<any>;
-    isTyping: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+    messageAdded: BehaviorSubject<MessageModel> = new BehaviorSubject<MessageModel>(null);;
+    messageChanged: BehaviorSubject<MessageModel> = new BehaviorSubject<MessageModel>(null);;
+    messageRemoved: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+    messageWait: BehaviorSubject<any> = new BehaviorSubject<string>(null);
 
     // public variables
     public attributes: any;
@@ -300,8 +300,6 @@ export class FirebaseConversationHandler extends ConversationHandlerService {
             this.logger.error('[FIREBASEConversationHandlerSERVICE] CHANGED::message with uid: ', msg.uid, 'is not valid')
         }
 
-        
-        
     }
 
     /** */

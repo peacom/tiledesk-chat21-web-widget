@@ -1,49 +1,37 @@
-import { LogLevel } from './../../chat21-core/utils/constants';
 import { Injectable } from '@angular/core';
-// import { Subscription } from 'rxjs/Subscription';
 import { environment } from '../../environments/environment';
-// import { TranslatorService } from '../providers/translator.service';
-import { DepartmentModel } from '../../models/department';
-import { User } from '../../models/User';
-import { ProjectModel } from '../../models/project';
+import { BehaviorSubject } from 'rxjs';
 
-import { detectIfIsMobile, convertColorToRGBA, getParameterByName, setColorFromString, avatarPlaceholder } from '../utils/utils';
+/** CONSTANTS */
+import { CHANNEL_TYPE_GROUP } from 'src/chat21-core/utils/constants';
 
-import { CHANNEL_TYPE_GROUP } from '../utils/constants';
-// import { TemplateBindingParseResult } from '@angular/compiler';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { ConversationModel } from '../../models/conversation';
-import { ConversationComponent } from '../components/conversation-detail/conversation/conversation.component';
-import { invertColor } from '../../chat21-core/utils/utils';
-// import { variable } from '@angular/compiler/src/output/output_ast';
-// import { storage } from 'firebase';
+/** MODELS */
+import { ProjectModel } from 'src/models/project';
+import { UserAgent } from 'src/models/userAgent';
+import { DepartmentModel } from 'src/models/department';
 
-@Injectable()
+/** UTILS FUNCTIONS */
+import { avatarPlaceholder, convertColorToRGBA, detectIfIsMobile, getParameterByName, setColorFromString } from 'src/app/utils/utils';
+import { ConversationModel } from 'src/chat21-core/models/conversation';
+
+@Injectable({
+    providedIn: 'root'
+  })
 export class Globals {
 
   obsObjChanged = new BehaviorSubject<any>(null);
   obsIsOpen = new BehaviorSubject<boolean>(null);
-  // obsGlobalsParameters =  new BehaviorSubject<any>(null);
+
   BASE_LOCATION = 'https://widget.tiledesk.com/v2';
-  // POWERED_BY = '<a tabindex="-1" target="_blank" href="http://www.tiledesk.com/">Powered by <b>TileDesk</b></a>';
-  
   POWERED_BY ='<a tabindex="-1" target="_blank" href="http://www.tiledesk.com/"><span>POWERED BY</span> <img src="https://support-pre.tiledesk.com/dashboard/assets/img/logos/tiledesk-logo.svg"/></a>'
   DEFAULT_LOGO_CHAT = '/assets/images/tiledesk_logo_white_small.png';
   WIDGET_TITLE = 'Tiledesk';
 
-  // private parameters = {};
-  // private default_settings;
-
-
-
-  // ========= begin:: sottoscrizioni ======= //
-  // subscriptions: Subscription[] = []; /** */
-  // ========= end:: sottoscrizioni ======= //
-
   // ============ BEGIN: SET FUNCTION BY UTILS ==============//
-  getParameterByName = getParameterByName;
+  // getParameterByName = getParameterByName;
   convertColorToRGBA = convertColorToRGBA;
   // ============ BEGIN: SET INTERNAL PARAMETERS ==============//
+
   project = new ProjectModel();
   senderId: string;
   tenant: string;
@@ -55,7 +43,7 @@ export class Globals {
   BUILD_VERSION: String;
   filterSystemMsg: boolean; /** se è true i messaggi inviati da system non vengono visualizzati */
   baseLocation: string;
-  availableAgents: Array<User> = [];
+  availableAgents: Array<UserAgent> = [];
   isLogout = false; /** indica se ho appena fotto il logout */
 
   attributes: any;
@@ -65,9 +53,9 @@ export class Globals {
   firebaseToken: string;
   lang: string;
   conversationsBadge: number;
+  /**@deprecated */
   activeConversation: ConversationModel;
-  public currentConversationComponent: ConversationComponent;
-
+  
   isOpenStartRating: boolean;
   departments: DepartmentModel[];
   departmentSelected: DepartmentModel;
@@ -344,7 +332,7 @@ export class Globals {
     this.baloonShape = '50%';
     /** set launcher balon widget shape: can set corner by corner   */
     this.isLogEnabled = false;
-    /** enable to open URL in  self action link button in external page from widget */
+    // this.parameters['isLogEnabled'] = false;
     this.openExternalLinkButton = true;
     /** enable to hide/show upper-right header conversation options menu */
     this.hideHeaderConversationOptionsMenu = false;
@@ -444,10 +432,6 @@ export class Globals {
     this.conversationsBadge = 0;
     // this.parameters['conversationsBadge'] = 0;
     // this.parameters.push({'conversationsBadge': 0});
-
-    this.activeConversation = null;
-    // this.parameters['activeConversation'] = '';
-    // this.parameters.push({'activeConversation': ''});
 
     this.isOpenMenuOptions = false;
     // this.parameters['isOpenMenuOptions'] = false;
@@ -592,17 +576,5 @@ export class Globals {
     this.attributes[key] = val;
     this.setParameter('attributes', this.attributes, true);
   }
-
-  /**
-   *
-   * @param message
-   */
-  public wdLog(message: any) {
-    if ( this.isLogEnabled && message.length > 0 ) {
-      message.forEach(element => console.log(element));
-      // console.log(message.toString());
-    }
-  }
-
 
 }

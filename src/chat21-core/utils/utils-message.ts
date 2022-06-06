@@ -117,7 +117,7 @@ export function isChannelTypeGroup(channelType: string) {
 }
 
 
-export function isEmojii(message: string): boolean{
+export function isEmojii(message: any){
   
   // let emoji = '';
   // try {
@@ -137,14 +137,12 @@ export function isEmojii(message: string): boolean{
   // }
   // https://localcoder.org/javascript-detect-if-a-string-contains-only-unicode-emojis
   try {
-    if(message){
-      const onlyEmojis = message.replace(new RegExp('[\u0000-\u1eeff]', 'g'), '')
-      const visibleChars = message.replace(new RegExp('[\n\r\s]+|( )+', 'g'), '')
-      return onlyEmojis.length === visibleChars.length
-    }
-    return false
-    // console.log('messageee', message.length, message)
-  } catch {
+    if(!message) return false;
+    const onlyEmojis = message.replace(new RegExp('[\u0000-\u1eeff]', 'g'), '')
+    const visibleChars = message.replace(new RegExp('[\n\r\s]+|( )+', 'g'), '')
+    if(onlyEmojis === '' || visibleChars == '') return false
+    return onlyEmojis.length === visibleChars.length
+  } catch(e) {
     return false
   }
 }
