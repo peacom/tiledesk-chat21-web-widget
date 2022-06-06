@@ -73,6 +73,10 @@ export class ConversationHeaderComponent implements OnInit, OnChanges {
       this.logger.debug('[CONV-HEADER] onChanges -- Conversation-header.component-> start initializeTyping()', this.idConversation)
       this.initializeTyping();
     }
+    //Custom translate for chat closed: TEMPORARY BUG FIX
+    if(this.translationMap && this.translationMap.get('CLOSE_CHAT')=== 'CLOSE_CHAT'){
+      this.translationMap.set('CLOSE_CHAT', 'Close chat')
+    }
   }
 
   ngAfterViewInit() {

@@ -51,6 +51,7 @@
     "WAITING_TIME_FOUND": "The team typically replies in $reply_time",
     "WAITING_TIME_NOT_FOUND": "The team will reply as soon as possible",
     "CLOSED": "CLOSED",
+    "CLOSE_CHAT": "Close chat",
     
     "INFO_SUPPORT_USER_ADDED_SUBJECT":"you",
     "INFO_SUPPORT_USER_ADDED_YOU_VERB":"have been added to ",
@@ -69,5 +70,6 @@
     "SENT_AN_IMAGE":"sent an image",
 
     "LABEL_PREVIEW": "Preview"
+    
 
 }
