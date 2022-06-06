@@ -1,5 +1,15 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.24-rc.7
+- bug-fixed: default translation for CLOSE_CHAT translation key in conversation-header menu option
+
+### 5.0.24-rc.6
+- added: angular version updated from v5 to v12
+- changed: content-type directive to contentTipe
+- changed: moment import to "import * as moment from 'moment'"
+- changed: http to httpClient
+- removed: angular2-moment and installed ngx-moment
+
 ### 5.0.24-rc.5
  - added: close chat button option in upper-right menu concersation-detail header to close a chat from widget
  - added: amLocal pipe in tooltip message timestamp on mouse-hover event
