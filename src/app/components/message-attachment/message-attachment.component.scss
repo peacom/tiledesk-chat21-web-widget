@@ -1,19 +1,27 @@
 #buttons-in-message {
     text-align: right;
-    display: block;
-    margin-right: 16px; //align attachment-buttons to bubble sent message
+    display: block; 
+    // margin-top: -6px;
+    // margin-bottom: 5px;
+    // margin-right: 16px; //align attachment-buttons to bubble sent message
+    margin: 4px 16px;
     height: auto;
-    width: 85%;
-    float: right;
 
     .buttons-wrapper {
-        margin-top: 0px;
-        display: flex;
-        flex-wrap: wrap;
-        -webkit-box-pack: end;
-        justify-content: flex-end;
-        width: 100%;
-        border: none;
+        // margin-top: 0px;
+        // display: flex;
+        // flex-wrap: wrap;
+        // -webkit-box-pack: end;
+        // justify-content: flex-end;
+        // width: 100%;
+        // border: none;
+
+        // width: 85%;
+        // float: right;
+        // display: flex;
+        // flex-wrap: wrap;
+        // -webkit-box-pack: end;
+        // justify-content: flex-end;
     }
 
     .div-button {
