@@ -1,6 +1,7 @@
 import { LogLevel } from './../../utils/constants';
 import { Inject, Injectable } from '@angular/core';
 import { LoggerService } from './../abstract/logger.service';
+import { NGXLogger } from 'ngx-logger';
 @Injectable()
 export class CustomLogger extends LoggerService{
     
@@ -8,7 +9,8 @@ export class CustomLogger extends LoggerService{
     //private variables
     private logLevel: number = LogLevel.DEBUG
     private isLogEnabled: boolean = true;
-    constructor() {
+    
+    constructor(private logger: NGXLogger) {
         super();
     }
 
@@ -21,30 +23,38 @@ export class CustomLogger extends LoggerService{
         }
     }
 
-    info(...message) {
-        if (this.isLogEnabled && this.logLevel >= LogLevel.INFO) {
-            console.info(message)
-        }
-    }
-    debug(...message: any[]) {
-        if (this.isLogEnabled && this.logLevel >= LogLevel.DEBUG) {
-            console.debug(message)
-        }
-    }
-    warn(...message: any[]) {
-        if (this.isLogEnabled && this.logLevel >= LogLevel.WARN) {
-            console.warn(message)
-        }
-    }
-    error(...message: any[]) {
-        if(this.isLogEnabled && this.logLevel >= LogLevel.ERROR){
-            console.error(message)
+    error(message: any, ...optionalParams: any[]) {
+        if (this.isLogEnabled && this.logLevel >= LogLevel.ERROR) {
+            this.logger.error(message, ...optionalParams)
+            // console.log(message, ...optionalParams)
         }
     }
 
-    log(...message: any[]) {
+    warn(message: any, ...optionalParams: any[]) {
+        if (this.isLogEnabled && this.logLevel >= LogLevel.WARN) {
+            this.logger.warn(message, ...optionalParams)
+            // console.log(message, ...optionalParams)
+        }
+    }
+
+    info(message: any, ...optionalParams: any[]) {
+        if (this.isLogEnabled && this.logLevel >= LogLevel.INFO) {
+            this.logger.info(message, ...optionalParams)
+            // console.log(message, ...optionalParams)
+        }
+    }
+
+    debug(message: any, ...optionalParams: any[]) {
         if (this.isLogEnabled && this.logLevel >= LogLevel.DEBUG) {
-            console.log(message)
+            // this.logger.debug(message, ...optionalParams)
+            console.debug(message, ...optionalParams)
+        }
+    }
+
+    log(message: any, ...optionalParams: any[]) {
+        if (this.isLogEnabled && this.logLevel >= LogLevel.DEBUG) {
+            this.logger.log(message, ...optionalParams)
+            // console.log(message, ...optionalParams);
         }
     }
 

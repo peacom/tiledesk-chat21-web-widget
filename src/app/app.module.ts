@@ -46,7 +46,6 @@ import { SelectionDepartmentComponent } from './component/selection-department/s
 import { MenuOptionsComponent } from './component/menu-options/menu-options.component';
 
 //ANGULAR MODULES
-import { AppRoutingModule } from './app-routing.module';
 import { AppConfigService } from './providers/app-config.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -60,6 +59,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MomentModule } from 'ngx-moment';
 import { TooltipModule } from 'ng2-tooltip-directive';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { INGXLoggerMetadata, LoggerModule, NGXLogger, NgxLoggerLevel, NGXLoggerServerService, TOKEN_LOGGER_SERVER_SERVICE } from "ngx-logger";
 
 //DIRECTIVES
 import { HtmlEntitiesEncodePipe } from './directives/html-entities-encode.pipe';
@@ -128,9 +128,9 @@ import { WaitingService } from './providers/waiting.service';
 import { StarRatingWidgetService } from './providers/star-rating-widget.service';
 
 
-const appInitializerFn = (appConfig: AppConfigService) => {
+const appInitializerFn = (appConfig: AppConfigService, logger: NGXLogger) => {
   return () => {
-    let customLogger = new CustomLogger()
+    let customLogger = new CustomLogger(logger)
     LoggerInstance.setInstance(customLogger)
     if (environment.remoteConfig) {
       return appConfig.loadAppConfig();
@@ -299,7 +299,15 @@ export function uploadFactory(http: HttpClient, appConfig: AppConfigService, app
       //   useFactory: (createTranslateLoader),
       //   deps: [HttpClient]
       // }
-    })
+    }),
+    LoggerModule.forRoot({
+      level: NgxLoggerLevel.DEBUG,
+      // timestampFormat: 'HH:mm:ss.SSS',
+      enableSourceMaps: false,
+      disableFileDetails: true,
+      colorScheme: ['purple', 'yellow', 'gray', 'gray', 'red', 'red', 'red'],
+      //serverLoggingUrl: 'https://tiledesk-server-pre.herokuapp.com/logs'
+    }),
   ],
   providers: [
     AppConfigService,
@@ -312,7 +320,7 @@ export function uploadFactory(http: HttpClient, appConfig: AppConfigService, app
       provide: APP_INITIALIZER,
       useFactory: appInitializerFn,
       multi: true,
-      deps: [AppConfigService]
+      deps: [AppConfigService, NGXLogger]
     },
     {
       provide: AppStorageService,
