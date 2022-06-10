@@ -174,7 +174,7 @@ export class ConversationHeaderComponent implements OnInit, OnChanges {
   // =========== END: event emitter function ====== //
 
   dowloadTranscript() {
-    const url = this.API_URL + 'public/requests/' + this.idConversation + '/messages.html';
+    const url = this.API_URL + 'public/requests/' + this.idConversation + '/messages-users.html';
     const windowContext = this.windowContext;
     windowContext.open(url, '_blank');
     // this.isMenuShow  = false;
