@@ -100,7 +100,7 @@ export class EyeeyeCatcherCardComponent implements OnInit {
     const emojiRegex = require('emoji-regex');
     const regex = emojiRegex();
     let match: any;
-    this.logger.debug('[EYEEYE-CATCHER-CARD]-->regex, emojiRegex', regex, emojiRegex)
+    // this.logger.debug('[EYEEYE-CATCHER-CARD]-->regex, emojiRegex', regex, emojiRegex)
     while (match = regex.exec(title)) {
       const emoji = match[0];
       this.logger.debug('[EYEEYE-CATCHER-CARD]--> match', match)
