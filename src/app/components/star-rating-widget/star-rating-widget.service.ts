@@ -94,7 +94,7 @@ export class StarRatingWidgetService {
   }
 
   _dowloadTranscript(recipientId) {
-    const url = this.API_URL + 'public/requests/' + recipientId + '/messages.html';
+    const url = this.API_URL + 'public/requests/' + recipientId + '/messages-user.html';
     const windowContext = this.g.windowContext;
     windowContext.open(url, '_blank');
     // windowContext.location.reload(true);
