@@ -216,7 +216,7 @@ export class HomeConversationsComponent implements OnInit, OnDestroy {
         // console.log('that.waitingTime', that.waitingTime);
 
         const lang = that.translatorService.getLanguage();
-        that.humanWaitingTime = this.humanizer.humanize(wt, {language: 'id'});
+        that.humanWaitingTime = this.humanizer.humanize(wt, {language: lang});
         // console.log('LIST CONVERSATION humanWaitingTime ', that.humanWaitingTime);
         // console.log('LIST CONVERSATION g.WAITING_TIME_FOUND ',  this.g.WAITING_TIME_FOUND)
         // console.log('LIST CONVERSATION g.WAITING_TIME_FOUND contains $reply_time',  this.g.WAITING_TIME_FOUND.includes("$reply_time") )
