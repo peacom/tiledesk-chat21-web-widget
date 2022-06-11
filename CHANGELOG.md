@@ -1,5 +1,8 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.24.1 IN PROD
+- bug-fixed: humanize duration show wrong language format time
+
 ### 5.0.24 IN PROD
 
 ### 5.0.24-rc.7
