@@ -566,12 +566,12 @@ export class GlobalSettingsService {
             globals.widgetTitle = TEMP;
             // globals.setParameter('widgetTitle', TEMP);
         }
-        // TEMP = tiledeskSettings['poweredBy'];
-        // // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > poweredBy:: ', TEMP);
-        // if (TEMP !== undefined) {
-        //     globals.poweredBy = TEMP;
-        //     // globals.setParameter('poweredBy', TEMP);
-        // }
+        TEMP = tiledeskSettings['poweredBy'];
+        // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > poweredBy:: ', TEMP);
+        if (TEMP !== undefined) {
+            globals.poweredBy = TEMP;
+            // globals.setParameter('poweredBy', TEMP);
+        }
         TEMP = tiledeskSettings['userEmail'];
         // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > userEmail:: ', TEMP);
         if (TEMP !== undefined) {
@@ -957,10 +957,10 @@ export class GlobalSettingsService {
         if (TEMP !== null) {
             this.globals.widgetTitle = TEMP;
         }
-        // TEMP = el.nativeElement.getAttribute('poweredBy');
-        // if (TEMP !== null) {
-        //     this.globals.poweredBy = TEMP;
-        // }
+        TEMP = el.nativeElement.getAttribute('poweredBy');
+        if (TEMP !== null) {
+            this.globals.poweredBy = TEMP;
+        }
         // TEMP = el.nativeElement.getAttribute('userId');
         // if (TEMP !== null) {
         //     this.globals.userId = TEMP;
@@ -1192,10 +1192,10 @@ export class GlobalSettingsService {
             globals.widgetTitle = stringToBoolean(TEMP);
         }
 
-        // TEMP = getParameterByName(windowContext, 'tiledesk_poweredBy');
-        // if (TEMP) {
-        //     globals.poweredBy = stringToBoolean(TEMP);
-        // }
+        TEMP = getParameterByName(windowContext, 'tiledesk_poweredBy');
+        if (TEMP) {
+            globals.poweredBy = stringToBoolean(TEMP);
+        }
 
         // TEMP = getParameterByName(windowContext, 'tiledesk_userid');
         // if (TEMP) {
