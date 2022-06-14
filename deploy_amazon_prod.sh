@@ -6,6 +6,7 @@ echo "version $version"
 ng build --prod --env=prod --base-href --output-hashing none --build-optimizer=false
 
 cd dist
+aws s3 sync . s3://tiledesk-widget/v5/latest/
 aws s3 sync . s3://tiledesk-widget/v5/$version/
 aws s3 sync . s3://tiledesk-widget/v5/
 # --cache-control max-age=604800

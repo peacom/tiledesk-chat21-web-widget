@@ -43,12 +43,15 @@
               "src/environments/real_data/widget-config-native-mqtt.json"
             ],
             "styles": [
-              "src/styles.scss",
               "src/app/sass/styles.scss",
-              "node_modules/@ctrl/ngx-emoji-mart/picker.css"
+              "node_modules/@ctrl/ngx-emoji-mart/picker.css",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/popper.js/dist/umd/popper.min.js"
             ],
             "scripts": [
-              "src/assets/js/mqtt/4.2.6/mqtt.min.js"
+              "src/assets/js/mqtt/4.2.6/mqtt.min.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ],
             "vendorChunk": true,
             "extractLicenses": false,

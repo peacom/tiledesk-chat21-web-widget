@@ -1,5 +1,8 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.25-rc.1
+- bug-fixed: humanize duration show wrong language format time
+
 ### 5.0.24-rc.8
 - added: emoji-mart picker 
 
