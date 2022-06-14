@@ -65,7 +65,7 @@
             "namedChunks": true
           },
           "configurations": {
-            "production": {
+            "prod": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -117,15 +117,15 @@
             },
             "development": {}
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "prod"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
           },
           "configurations": {
-            "production": {
-              "browserTarget": "widget:build:production"
+            "prod": {
+              "browserTarget": "widget:build:prod"
             },
             "pre": {
               "browserTarget": "widget:build:pre"
@@ -179,8 +179,8 @@
             "protractorConfig": "e2e/protractor.conf.js"
           },
           "configurations": {
-            "production": {
-              "devServerTarget": "widget:serve:production"
+            "prod": {
+              "devServerTarget": "widget:serve:prod"
             },
             "pre": {
               "devServerTarget": "widget:serve:pre"
