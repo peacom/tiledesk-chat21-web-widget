@@ -488,6 +488,9 @@ export class GlobalSettingsService {
                     if (variables.hasOwnProperty('poweredBy')) {
                         globals['poweredBy'] = variables['poweredBy'];
                     }
+                    if (variables.hasOwnProperty('baloonImage')) {
+                        globals['baloonImage'] = variables['baloonImage'];
+                    }
                     
                 }
             }

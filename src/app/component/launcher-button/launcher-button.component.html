@@ -3,7 +3,7 @@
 <button aflauncherbutton #aflauncherbutton id="c21-launcher-button" class="c21-button-clean scale-in-center" 
     *ngIf="g.isLogged == true && g.isOpen == false" 
     [ngClass]="{'c21-align-left' : g.align === 'left', 'c21-align-right' : g.align !== 'left'}"
-    [ngStyle]="{ 'background-color': g.themeColor, 'bottom': g.marginY+'px!important', 'left':(g.align==='left')?g.marginX+'px!important':'', 'right':(g.align==='right')?g.marginX+'px!important':'', 'width': g.launcherWidth, 'height': g.launcherHeight, 'border-radius': g.baloonShape}"
+    [ngStyle]="{ 'background-color': g.baloonImage? null: g.themeColor, 'bottom': g.marginY+'px!important', 'left':(g.align==='left')?g.marginX+'px!important':'', 'right':(g.align==='right')?g.marginX+'px!important':'', 'width': g.launcherWidth, 'height': g.launcherHeight, 'border-radius': g.baloonShape}"
     (click)="openCloseWidget()"
     tabindex="1000" 
     aria-label="    apri chat"
@@ -13,7 +13,7 @@
 
     <!-- OPEN ICON -->
     <div *ngIf="!g.isOpen" class="launcher-button rotate-center" [@enterBubbleAnimation]>
-        <img *ngIf="g.baloonImage !== '' " [src]="g.baloonImage" [ngStyle]="{'width': '100%', 'height': '100%', 'margin': 'auto'}">
+        <img *ngIf="g.baloonImage !== '' " [src]="g.baloonImage" [ngStyle]="{'width': '100%', 'height': '100%', 'margin': 'auto', 'border-radius': g.baloonShape}">
         <svg role="img" [ngStyle]="{'fill': g.themeForegroundColor, 'display': (g.baloonImage==='')?'':'none' }" xmlns="http://www.w3.org/2000/svg" width="100%"
             height="100%" viewBox="0 0 90 90">
             <path fill="none" d="M0 0h24v24H0V0z" />
