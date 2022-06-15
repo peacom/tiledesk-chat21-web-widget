@@ -1,5 +1,8 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.25-rc.3
+- added: get baloonImage property value from remote request	
+
 ### 5.0.25-rc.2
 - added: unbranding in home footer 
 
