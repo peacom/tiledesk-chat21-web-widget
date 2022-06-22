@@ -50,13 +50,15 @@ export class StarRatingWidgetService {
   }
 
   httpSendRate(rate, message): Observable<string> {
-    const headers = new HttpHeaders();
     const token = this.g.tiledeskToken;
     const projectId = this.g.projectid;
     const recipientId = this.g.recipientId;
     if (rate && token && projectId && recipientId) {
-      headers.append('Authorization', token);
-      headers.append('Content-Type', 'application/json');
+      const headers = new HttpHeaders({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: token,
+      });
       // const url = this.API_URL + this.projectid + '/requests/' + this.requestid;
       // const url = this.API_URL + 'chat/support/tilechat/requests/' + recipientId + '/rate?token=chat21-secret-orgAa,&rating=' 
       // tslint:disable-next-line:max-line-length
@@ -70,7 +72,7 @@ export class StarRatingWidgetService {
       };
       this.logger.debug('[STAR-RATING-SERVICE] ------------------> options: ', headers);
       this.logger.debug('[STAR-RATING-SERVICE] ------------------> body: ', JSON.stringify(body));
-      return this.http.patch(url, JSON.stringify(body), {headers})
+      return this.http.patch(url, JSON.stringify(body), { headers: headers })
                       .pipe(map((res: any) => (res.json())));
     }
   }
