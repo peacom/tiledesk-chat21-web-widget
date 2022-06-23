@@ -1,5 +1,7 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.25 in PROD
+
 ### 5.0.25-rc.3
 - added: get baloonImage property value from remote request	
 
@@ -8,6 +10,13 @@
 
 ### 5.0.25-rc.1
 - bug-fixed: humanize duration show wrong language format time
+
+### 5.0.24.2 IN PROD
+
+### 5.0.24.1 IN PROD
+- bug-fixed: humanize duration show wrong language format time
+
+### 5.0.24 IN PROD
 
 ### 5.0.24-rc.8
 - added: emoji-mart picker 
