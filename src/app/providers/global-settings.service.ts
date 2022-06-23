@@ -485,7 +485,12 @@ export class GlobalSettingsService {
                     if (variables.hasOwnProperty('nativeRating')) {
                         globals['nativeRating'] = variables['nativeRating'];
                     }
-                    
+                    if (variables.hasOwnProperty('poweredBy')) {
+                        globals['poweredBy'] = variables['poweredBy'];
+                    }
+                    if (variables.hasOwnProperty('baloonImage')) {
+                        globals['baloonImage'] = variables['baloonImage'];
+                    }
                 }
             }
         } catch (error) {
