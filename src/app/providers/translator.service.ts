@@ -198,12 +198,13 @@ export class TranslatorService {
   private translateWithBrowserLang(data: any, lang: string) {
     this._translate.use(lang);
     this.logger.debug(`[TRANSLATOR-SERV] »»»» initI18n - »»» loadRemoteTranslations ?`, environment.loadRemoteTranslations);
-    if (environment.loadRemoteTranslations) {
-      // console.log(`»»»» initI18n - »»» remote translation `, data);
-      this._translate.setTranslation(lang, data, true);
-    } else {
-      this._translate.setTranslation(lang, data, true);
-    }
+    this._translate.setTranslation(lang, data, true);
+    // if (environment.loadRemoteTranslations) {
+    //   // console.log(`»»»» initI18n - »»» remote translation `, data);
+    //   this._translate.setTranslation(lang, data, true);
+    // } else {
+    //   this._translate.setTranslation(lang, data, true);
+    // }
   }
 
   /** */

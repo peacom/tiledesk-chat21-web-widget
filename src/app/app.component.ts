@@ -182,7 +182,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                 that.g.setParameter('displayEyeCatcherCard', 'none');
                 that.triggerOnConversationUpdated(conversation);
                 that.logger.debug('[APP-COMP] obsAddedConversation ::: ', conversation);
-                if (conversation && conversation.attributes && conversation.attributes['subtype'] === 'info') {
+                if (conversation.attributes && conversation.attributes['subtype'] === 'info') {
                     return;
                 }
                 if (conversation.is_new) {
@@ -487,8 +487,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             //  AUTENTICAZIONE ANONIMA
             this.logger.debug('[APP-COMP]  ---------------- 14 ---------------- ');
             this.logger.debug('[APP-COMP]  authenticateFirebaseAnonymously');
-            this.tiledeskAuthService.signInAnonymously(this.g.projectid).then(tiledeskToken => {
-                this.messagingAuthService.createCustomToken(tiledeskToken)
+            this.tiledeskAuthService.signInAnonymously(this.g.projectid).then(token => {
+                this.messagingAuthService.createCustomToken(token)
                 const user = this.tiledeskAuthService.getCurrentUser();
                 //check if tiledesk_userFullname exist (passed from URL or tiledeskSettings) before update userFullname parameter
                 //if tiledesk_userFullname not exist--> update parameter with tiledesk user returned from auth

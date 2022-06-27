@@ -24,7 +24,7 @@ export class WaitingService {
     headers.append('Content-Type', 'application/json');
     // headers.append('Authorization', TOKEN);
     return this.http.get(url, { headers })
-                    .pipe(map((response: any) => { response}))
+                    .pipe(map((response: any) => { return response}))
 
   }
 
