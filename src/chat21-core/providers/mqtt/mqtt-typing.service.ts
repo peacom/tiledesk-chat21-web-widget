@@ -15,6 +15,7 @@ import { environment } from '../../../environments/environment';
 import { TypingService } from '../abstract/typing.service';
 import { LoggerService } from '../abstract/logger.service';
 import { LoggerInstance } from '../logger/loggerInstance';
+import { BehaviorSubject } from 'rxjs';
 
 export class TypingModel {
   constructor(
@@ -28,6 +29,10 @@ export class TypingModel {
 @Injectable()
 export class MQTTTypingService extends TypingService {
 
+  // BehaviorSubject
+  BSIsTyping: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  BSSetTyping: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  
   // private params
   private tenant: string;
   private urlNodeTypings: string;

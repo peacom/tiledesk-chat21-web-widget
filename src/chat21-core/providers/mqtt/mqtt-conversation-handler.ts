@@ -31,11 +31,10 @@ import { checkIfIsMemberJoinedGroup, messageType } from '../../utils/utils-messa
 export class MQTTConversationHandler extends ConversationHandlerService {
 
     // BehaviorSubject
-    messageAdded: BehaviorSubject<MessageModel>;
-    messageChanged: BehaviorSubject<MessageModel>;
-    messageRemoved: BehaviorSubject<string>;
-    messageWait: BehaviorSubject<any>;
-    isTypings: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+    messageAdded: BehaviorSubject<MessageModel> = new BehaviorSubject<MessageModel>(null);;
+    messageChanged: BehaviorSubject<MessageModel> = new BehaviorSubject<MessageModel>(null);;
+    messageRemoved: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+    messageWait: BehaviorSubject<any> = new BehaviorSubject<string>(null);
 
     // public variables
     public attributes: any;

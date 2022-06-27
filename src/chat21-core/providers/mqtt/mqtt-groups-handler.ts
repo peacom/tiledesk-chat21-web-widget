@@ -13,11 +13,11 @@ import { Chat21Service } from './chat-service';
 export class MQTTGroupsHandler extends GroupsHandlerService {
     
     // BehaviorSubject
-    BSgroupDetail: BehaviorSubject<GroupModel>;
-    SgroupDetail: Subject<GroupModel>;
-    groupAdded: BehaviorSubject<GroupModel>;
-    groupChanged: BehaviorSubject<GroupModel>;
-    groupRemoved: BehaviorSubject<GroupModel>;
+    BSgroupDetail: BehaviorSubject<GroupModel> = new BehaviorSubject<GroupModel>(null); 
+    SgroupDetail: Subject<GroupModel> = new BehaviorSubject<GroupModel>(null);
+    groupAdded: BehaviorSubject<GroupModel> = new BehaviorSubject<GroupModel>(null);
+    groupChanged: BehaviorSubject<GroupModel> = new BehaviorSubject<GroupModel>(null);
+    groupRemoved: BehaviorSubject<GroupModel> = new BehaviorSubject<GroupModel>(null);
 
     // private params
     private tenant: string;

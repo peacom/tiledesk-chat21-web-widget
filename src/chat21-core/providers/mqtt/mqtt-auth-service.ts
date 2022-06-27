@@ -28,8 +28,8 @@ export class MQTTAuthService extends MessagingAuthService {
   // authStateChanged: BehaviorSubject<any>; // = new BehaviorSubject<any>([]);
 
   // BehaviorSubject
-  BSAuthStateChanged: BehaviorSubject<any>;
-  BSSignOut: BehaviorSubject<any>;
+  BSAuthStateChanged: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  BSSignOut: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
   // private persistence: string;
   SERVER_BASE_URL: string;

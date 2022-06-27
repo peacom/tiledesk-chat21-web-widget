@@ -24,11 +24,10 @@ export class MQTTConversationsHandler extends ConversationsHandlerService {
     
 
     // BehaviorSubject
-    BSConversationDetail: BehaviorSubject<ConversationModel>;
-    conversationAdded: BehaviorSubject<ConversationModel>;
-    conversationChanged: BehaviorSubject<ConversationModel>;
-    conversationRemoved: BehaviorSubject<ConversationModel>;
-    loadedConversationsStorage: BehaviorSubject<ConversationModel[]>;
+    BSConversationDetail: BehaviorSubject<ConversationModel> = new BehaviorSubject<ConversationModel>(null);;
+    conversationAdded: BehaviorSubject<ConversationModel> = new BehaviorSubject<ConversationModel>(null);;
+    conversationChanged: BehaviorSubject<ConversationModel> = new BehaviorSubject<ConversationModel>(null);; 
+    conversationRemoved: BehaviorSubject<ConversationModel> = new BehaviorSubject<ConversationModel>(null);;
     BSConversations: BehaviorSubject<ConversationModel[]>
     // readAllMessages: BehaviorSubject<string>;
     // imageRepo: ImageRepoService;
