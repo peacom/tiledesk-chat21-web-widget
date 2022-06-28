@@ -575,7 +575,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.g.setParameter('isOpenPrechatForm', false);
         this.isOpenSelectionDepartment = false;
         this.isOpenAllConversation = false;
-        // const conversationActive: ConversationModel = JSON.parse(this.appStorageService.getItem('activeConversation'));
         const recipientId : string = this.appStorageService.getItem('recipientId')
         this.logger.debug('[APP-COMP]  ============ idConversation ===============', recipientId, this.g.recipientId);
         // this.g.recipientId = null;
