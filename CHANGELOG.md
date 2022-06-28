@@ -1,6 +1,6 @@
 # chat21-web-widget ver 5.0
 
-### 5.0.26 in PROD
+### 5.0.26 in PROD 
 - bug-fixed: BSStateUpload is undefined while subscribe to native-upload service
 
 ### 5.0.25 in PROD
