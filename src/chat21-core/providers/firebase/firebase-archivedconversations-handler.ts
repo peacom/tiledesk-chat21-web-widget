@@ -28,11 +28,10 @@ export class FirebaseArchivedConversationsHandler extends ArchivedConversationsH
 
     // BehaviorSubject
     BSConversationDetail: BehaviorSubject<ConversationModel>;
-    // readAllMessages: BehaviorSubject<string>;
     archivedConversationAdded: BehaviorSubject<ConversationModel> = new BehaviorSubject<ConversationModel>(null);
     archivedConversationChanged: BehaviorSubject<ConversationModel> = new BehaviorSubject<ConversationModel>(null);
     archivedConversationRemoved: BehaviorSubject<ConversationModel> = new BehaviorSubject<ConversationModel>(null);
-    loadedConversationsStorage: BehaviorSubject<ConversationModel[]> = new BehaviorSubject<ConversationModel[]>([]);
+    // readAllMessages: BehaviorSubject<string>;
 
     // public params
     archivedConversations: Array<ConversationModel> = [];

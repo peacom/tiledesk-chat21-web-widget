@@ -20,8 +20,9 @@ import { LoggerInstance } from '../logger/loggerInstance';
 @Injectable()
 export class MQTTPresenceService extends PresenceService {
 
-  BSIsOnline: BehaviorSubject<any> = new BehaviorSubject<any>(null);;
-  BSLastOnline: BehaviorSubject<any> = new BehaviorSubject<any>(null);;
+  // BehaviorSubject
+  BSIsOnline: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  BSLastOnline: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
   // private params
   private tenant: string;

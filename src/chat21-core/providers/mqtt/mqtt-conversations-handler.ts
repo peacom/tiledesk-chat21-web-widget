@@ -30,14 +30,11 @@ export class MQTTConversationsHandler extends ConversationsHandlerService {
     conversationRemoved: BehaviorSubject<ConversationModel> = new BehaviorSubject<ConversationModel>(null);;
     BSConversations: BehaviorSubject<ConversationModel[]>
     // readAllMessages: BehaviorSubject<string>;
-    // imageRepo: ImageRepoService;
 
     // public variables
     conversations: Array<ConversationModel> = [];
     uidConvSelected: string;
     tenant: string;
-    // FIREBASESTORAGE_BASE_URL_IMAGE: string;
-    // urlStorageBucket: string;
 
     // private variables
     private loggedUserId: string;

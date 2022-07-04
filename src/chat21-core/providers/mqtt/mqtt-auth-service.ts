@@ -17,21 +17,19 @@ import { Chat21Service } from './chat-service';
 import { UserModel } from '../../models/user';
 import { avatarPlaceholder, getColorBck } from '../../utils/utils-user';
 import { AppStorageService } from '../abstract/app-storage.service';
+import { LoggerService } from '../abstract/logger.service';
+import { LoggerInstance } from '../logger/loggerInstance';
 
 
 
 // @Injectable({ providedIn: 'root' })
 @Injectable()
 export class MQTTAuthService extends MessagingAuthService {
-  // authStateChanged: BehaviorSubject<any>; // = new BehaviorSubject<any>([]);
-
-  // authStateChanged: BehaviorSubject<any>; // = new BehaviorSubject<any>([]);
 
   // BehaviorSubject
   BSAuthStateChanged: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   BSSignOut: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
-  // private persistence: string;
   SERVER_BASE_URL: string;
 
   public token: any;
@@ -39,11 +37,13 @@ export class MQTTAuthService extends MessagingAuthService {
   public user: any;
   private currentUser: any;
 
-  private URL_TILEDESK_SIGNIN: string;
+  // private URL_TILEDESK_SIGNIN: string;
   private URL_TILEDESK_CREATE_CUSTOM_TOKEN: string;
-  private URL_TILEDESK_SIGNIN_ANONYMOUSLY: string;
-  private URL_TILEDESK_SIGNIN_WITH_CUSTOM_TOKEN: string;
+  // private URL_TILEDESK_SIGNIN_ANONYMOUSLY: string;
+  // private URL_TILEDESK_SIGNIN_WITH_CUSTOM_TOKEN: string;
 
+  private logger: LoggerService = LoggerInstance.getInstance()
+  
   constructor(
     public http: HttpClient,
     public chat21Service: Chat21Service,

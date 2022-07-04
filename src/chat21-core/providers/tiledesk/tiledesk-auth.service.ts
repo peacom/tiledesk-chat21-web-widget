@@ -22,8 +22,10 @@ export class TiledeskAuthService {
   private currentUser: UserModel;
   private logger: LoggerService = LoggerInstance.getInstance()
   
-  constructor(public http: HttpClient,
-              public appStorage: AppStorageService) { }
+  constructor(
+    public http: HttpClient,
+    public appStorage: AppStorageService
+  ) { }
 
 
   initialize(serverBaseUrl: string) {

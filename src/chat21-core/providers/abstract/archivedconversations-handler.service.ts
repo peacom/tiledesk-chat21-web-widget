@@ -11,7 +11,6 @@ export abstract class ArchivedConversationsHandlerService {
   abstract archivedConversationAdded: BehaviorSubject<ConversationModel> = new BehaviorSubject<ConversationModel>(null);
   abstract archivedConversationChanged: BehaviorSubject<ConversationModel> = new BehaviorSubject<ConversationModel>(null);
   abstract archivedConversationRemoved: BehaviorSubject<ConversationModel> = new BehaviorSubject<ConversationModel>(null);
-  abstract loadedConversationsStorage: BehaviorSubject<ConversationModel[]> = new BehaviorSubject<ConversationModel[]>([]);
   // abstract readAllMessages: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
   // params
