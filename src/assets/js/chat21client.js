@@ -1,7 +1,7 @@
 /*
     Chat21Client
 
-    v0.1.10
+    v0.1.11
 
     @Author Andrea Sponziello
     (c) Tiledesk 2020
@@ -125,7 +125,7 @@ class Chat21Client {
     }
 
     sendMessageRaw(outgoing_message, recipient_id, callback) {
-        // callback - function (err) 
+        // callback - function (err)
         // console.log("recipient_id:", recipient_id)
         let dest_topic = `apps/${this.appid}/outgoing/users/${this.user_id}/messages/${recipient_id}/outgoing`
         // console.log("dest_topic:", dest_topic)
@@ -142,7 +142,7 @@ class Chat21Client {
         const payload = JSON.stringify(outgoing_message)
         this.client.publish(dest_topic, payload, null, (err) => {
             callback(err, outgoing_message)
-        })
+        });
     }
 
     updateMessageStatus(messageId, conversWith, status, callback) {
@@ -237,10 +237,6 @@ class Chat21Client {
                 group_members: members
             },
             method: 'POST'
-            // url: options.url,
-        // headers: options.headers,
-        // json: options.json,
-        // method: options.method
         }
         Chat21Client.myrequest(options, (err, response, json) => {
             if (err) {
@@ -250,23 +246,6 @@ class Chat21Client {
                 callback(null, json);
             }
         }, this.log);
-        // var xmlhttp = new XMLHttpRequest();
-        // xmlhttp.open("POST", URL, true);
-        // xmlhttp.setRequestHeader("authorization", this.jwt);
-        // xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        // xmlhttp.onreadystatechange = function() {
-        //     if (callback && xmlhttp.readyState == 4 && xmlhttp.status == 200 && xmlhttp.responseText) {
-        //         try {
-        //             const json = JSON.parse(xmlhttp.responseText)
-        //             callback(null, json.result)
-        //         }
-        //         catch (err) {
-        //             console.log("parsing json ERROR", err)
-        //             callback(err, null)
-        //         }
-        //     }
-        // };
-        // xmlhttp.send(JSON.stringify(data));
     }
 
     groupData(group_id, callback) {
@@ -591,7 +570,7 @@ class Chat21Client {
                         }
                         // map.forEach((value, key, map) =>)
                         this.onConversationUpdatedCallbacks.forEach((callback, handler, map) => {
-                            callback(JSON.parse(message.toString()), topic)
+                            callback(JSON.parse(message.toString()), _topic)
                         });
                     }
                 }
@@ -603,7 +582,7 @@ class Chat21Client {
                             console.log("conversation deleted! /conversations/, topic:", topic, message.toString() );
                         }
                         this.onConversationDeletedCallbacks.forEach((callback, handler, map) => {
-                            callback(JSON.parse(message.toString()), topic)
+                            callback(JSON.parse(message.toString()), _topic)
                         });
                     }
                 }
@@ -612,7 +591,7 @@ class Chat21Client {
                     if (topic.includes("/archived_conversations/") && topic.endsWith(_CLIENTADDED)) {
                         // map.forEach((value, key, map) =>)
                         this.onArchivedConversationAddedCallbacks.forEach((callback, handler, map) => {
-                            callback(JSON.parse(message.toString()), topic)
+                            callback(JSON.parse(message.toString()), _topic)
                         });
                     }
                 }
@@ -621,7 +600,7 @@ class Chat21Client {
                     if (topic.includes("/archived_conversations/") && topic.endsWith(_CLIENTDELETED)) {
                         // map.forEach((value, key, map) =>)
                         this.onArchivedConversationDeletedCallbacks.forEach((callback, handler, map) => {
-                            callback(JSON.parse(message.toString()), topic)
+                            callback(JSON.parse(message.toString()), _topic)
                         });
                     }
                 }
@@ -721,20 +700,20 @@ class Chat21Client {
     }
 
     parseTopic(topic) {
-        var topic_parts = topic.split("/")
+        var topic_parts = topic.split("/");
         // /apps/tilechat/users/(ME)/messages/RECIPIENT_ID/ACTION
         if (topic_parts.length >= 7) {
-            const app_id = topic_parts[1]
-            const sender_id = topic_parts[3]
-            const recipient_id = topic_parts[5]
-            const convers_with = recipient_id
-            const me = sender_id
+            const app_id = topic_parts[1];
+            const sender_id = topic_parts[3];
+            const recipient_id = topic_parts[5];
+            const convers_with = recipient_id;
+            const me = sender_id;
             const parsed = {
                 "conversWith": convers_with
             }
-            return parsed
+            return parsed;
         }
-        return null
+        return null;
     }
 
     lastArchivedConversations(callback) {
@@ -794,39 +773,54 @@ class Chat21Client {
 
     crossConversationDetail(conversWith, archived, callback) {
         let path = "conversations";
-        console.log('conversationdetail', conversWith, archived)
         if (archived) {
             path = "archived_conversations"
-            console.log('conversationdetail', conversWith, archived), path
         }
         // ex.: http://localhost:8004/tilechat/04-ANDREASPONZIELLO/conversations/CONVERS_WITH
         //const URL = `${this.APIendpoint}/${this.appid}/${this.user_id}/conversations/${conversWith}`
         const URL = `${this.APIendpoint}/${this.appid}/${this.user_id}/${path}/${conversWith}`
         console.log("getting conversation detail:", URL)
         console.log("conversWith:", conversWith)
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", URL, true);
-        xmlhttp.setRequestHeader("authorization", this.jwt);
-        xmlhttp.onreadystatechange = function() {
-            console.log('responseeeee 111', xmlhttp)
-            if (callback && xmlhttp.readyState == 4 && xmlhttp.status == 200 && xmlhttp.responseText) {
-                try {
-                    const json = JSON.parse(xmlhttp.responseText);
-                    console.log('responseeeee', json)
-                    if (json && json.result && Array.isArray(json.result) && json.result.length ==1) {
-                        callback(null, json.result[0]);
-                    }
-                    else {
-                        callback({"message": "Incorrect conversation result."}, null);
-                    }
-                }
-                catch (err) {
-                    console.error("parsing json ERROR", err);
-                    callback(err, null);
-                }
+        
+        let options = {
+            url: URL,
+            headers: {
+                "Authorization": this.jwt
+                // "Content-Type": "application/json;charset=UTF-8"
+            },
+            method: 'GET'
+        }
+        Chat21Client.myrequest(options, (err, response, json) => {
+            console.log("JSON...", json)
+            if (json && json.result && Array.isArray(json.result) && json.result.length ==1) {
+                callback(null, json.result[0]);
             }
-        };
-        xmlhttp.send(null);
+            else {
+                callback(null, null);
+            }
+        }, this.log);
+        
+        // var xmlhttp = new XMLHttpRequest();
+        // xmlhttp.open("GET", URL, true);
+        // xmlhttp.setRequestHeader("authorization", this.jwt);
+        // xmlhttp.onreadystatechange = function() {
+        //     if (callback && xmlhttp.readyState == 4 && xmlhttp.status == 200 && xmlhttp.responseText) {
+        //         try {
+        //             const json = JSON.parse(xmlhttp.responseText);
+        //             if (json && json.result && Array.isArray(json.result) && json.result.length ==1) {
+        //                 callback(null, json.result[0]);
+        //             }
+        //             else {
+        //                 callback({"message": "Incorrect conversation result."}, null);
+        //             }
+        //         }
+        //         catch (err) {
+        //             console.error("parsing json ERROR", err);
+        //             callback(err, null);
+        //         }
+        //     }
+        // };
+        // xmlhttp.send(null);
     }
 
     lastMessages(convers_with, callback) {
@@ -837,9 +831,10 @@ class Chat21Client {
         // console.log("END")
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.open("GET", URL, true);
+        console.log('ulrrrrrrr', URL)
         xmlhttp.setRequestHeader("authorization", this.jwt);
         xmlhttp.onreadystatechange = function() {
-            // console.log("onreadystatechange messages!")
+            console.log("onreadystatechange messages!")
             if (callback && xmlhttp.readyState == 4 && xmlhttp.status == 200 && xmlhttp.responseText) {
                 // console.log("xmlhttp...", xmlhttp.responseText)
                 try {
@@ -1038,7 +1033,7 @@ class Chat21Client {
 
 function isBrowser() {
     return true;
-    // return false;
+    //return false;
 }
 
 export { Chat21Client }; // Browser
