@@ -20,6 +20,7 @@ export class ConversationHeaderComponent implements OnInit, OnChanges {
   @Input() isTrascriptDownloadEnabled: boolean;
   @Input() hideCloseConversationOptionMenu: boolean;
   @Input() hideHeaderCloseButton: boolean;
+  @Input() hideHeaderBackButton: boolean;
   @Input() hideHeaderConversationOptionsMenu: boolean;
   @Input() windowContext;
   @Input() stylesMap: Map<string, string>
