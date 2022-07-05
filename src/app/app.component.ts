@@ -363,14 +363,18 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                 // this.g.setAttributeParameter('userEmail', user.email);
                 that.g.setParameter('isLogged', true);
                 that.g.setParameter('attributes', that.setAttributesFromStorageService());
-                that.startUI();
+                this.initConversationsHandler(this.g.tenant, that.g.senderId);
+                
+                /* If singleConversation mode is active wait to startUI: do it later in initConversationsHandler */
+                that.g.singleConversation? null: that.startUI();
                 that.triggerOnAuthStateChanged(that.stateLoggedUser);
                 that.logger.debug('[APP-COMP]  1 - IMPOSTO STATO CONNESSO UTENTE ', autoStart);
                 that.typingService.initialize(this.g.tenant);
                 that.presenceService.initialize(this.g.tenant);
                 that.presenceService.setPresence(user.uid);
-                this.initConversationsHandler(this.g.tenant, that.g.senderId);
-                if (autoStart) {
+                // this.initConversationsHandler(this.g.tenant, that.g.senderId);
+                /* If singleConversation mode is active wait to showWidget: do it later in initConversationsHandler */
+                if (autoStart && !that.g.singleConversation) { 
                     that.showWidget();
                 }
 
@@ -578,7 +582,32 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         const recipientId : string = this.appStorageService.getItem('recipientId')
         this.logger.debug('[APP-COMP]  ============ idConversation ===============', recipientId, this.g.recipientId);
         // this.g.recipientId = null;
-        if(this.g.recipientId){
+        this.logger.debug('[APP-COMP] singleConversation conv da ...', this.g.recipientId)
+        if(this.g.recipientId && this.g.singleConversation){
+            //start widget from current recipientId conversation
+            this.logger.debug('[APP-COMP] singleConversation conv da API', this.g.recipientId)
+            this.isOpenHome = false;
+            this.isOpenConversation = true;
+            this.isOpenSelectionDepartment = false;
+        }else if (!this.g.recipientId && this.g.singleConversation){
+            //start newConversation
+            this.logger.debug('[APP-COMP] singleConversation start new conv ', this.g.recipientId)
+            this.isOpenHome = false;
+            this.isOpenConversation = false;
+            this.isOpenSelectionDepartment = false;
+            // if (departments.length > 1 && !this.g.departmentID == null) {
+            //     // this.logger.debug('[APP-COMP] 22222');
+            //     this.isOpenSelectionDepartment = true;
+            // } else {
+            //     // this.logger.debug('[APP-COMP] 11111', this.g.isOpen, this.g.recipientId);
+            //     this.isOpenConversation = false;
+            //     if (!this.g.recipientId && this.g.isOpen) {
+            //         // this.startNwConversation();
+            //         this.openNewConversation();
+            //     }
+            // }
+            this.openNewConversation();
+        }else if(this.g.recipientId){
             this.logger.debug('[APP-COMP]  conv da urll', this.g.recipientId)
             if (this.g.isOpen) {
                 this.isOpenConversation = true;
@@ -784,6 +813,10 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.archivedConversationsService.initialize(tenant, senderId, translationMap)
         // 2 - get conversations from storage
         // this.chatConversationsHandler.getConversationsFromStorage();
+        // 3 - get conversation from database with REST Api call if singleConversation mode is active
+        if(this.g.singleConversation){
+            this.manageWidgetSingleConversation();
+        }
         // 5 - connect conversationHandler and archviedConversationsHandler to firebase event (add, change, remove)
         this.conversationsHandlerService.subscribeToConversations(() => { })
         this.archivedConversationsService.subscribeToConversations(() => { })
@@ -854,6 +887,61 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     private initLauncherButton() {
         this.isInitialized = true;
         this.marginBottom = +this.g.marginY + 70;
+    }
+
+    /**
+     * @description 
+     * -if recipientId from tiledesk settings IS SET, not get last active conversation
+     * and call startUI() and showWidget() from current recipientId
+     * - if recipientId from tiledesk settings IS NOT SET, get last active
+     * conversation from REST API call and then startUI() and showWidget()
+     */
+    manageWidgetSingleConversation(){
+        if(this.g.recipientId){
+            this.appStorageService.setItem('recipientId', this.g.recipientId)
+            new Promise((resolve, reject)=>{
+                this.startUI();
+                resolve('ok')
+            }).then((res)=> { this.showWidget() });
+            return;
+        }
+
+        this.conversationsHandlerService.getLastConversation((conv, error)=> {
+            this.logger.debug('[APP-COMP] getConverationRESTApi: conversation from rest API --> ', conv)
+            if(error){
+                this.logger.error("[APP-COMP] getConverationRESTApi: ERORR while retriving data", error)
+            }
+            if(conv){
+                //start widget from this conversation
+                const recipientId : string = conv.uid
+                this.g.setParameter('recipientId', recipientId);
+                this.appStorageService.setItem('recipientId', recipientId)
+                // this.startUI();
+                // if (this.g.isOpen === true) {
+                //     console.log('conversation from rest API go to conversationdetail -->', recipientId)
+                //     this.isOpenHome = false;
+                //     this.isOpenConversation = true;
+                //     this.isOpenSelectionDepartment = false;
+                //     this.isConversationArchived = false;
+                //     this.triggerOnOpenEvent();
+                // } else {
+                //     this.triggerOnCloseEvent();
+                // }
+            }else {
+                //start widget with NEW CONVERSATION
+                this.logger.error("[APP-COMP] getConverationRESTApi: NO active conversations")
+                // this.isOpenHome = false;
+                // this.isOpenConversation = true;
+                // this.onNewConversation()
+            }
+
+            new Promise((resolve, reject)=>{
+                this.startUI();
+                resolve('ok')
+            }).then((res)=> { this.showWidget() });
+            
+        });
+        
     }
 
     // ========= begin:: FUNCTIONS ============//
@@ -1445,7 +1533,9 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.logger.debug('[APP-COMP] openCloseWidget', recipientId, this.g.isOpen, this.g.startFromHome);
         if (this.g.isOpen === true) {
             if (!recipientId) {
-                if (this.g.startFromHome) {
+                if(this.g.singleConversation){
+                    this.onNewConversation()
+                } else if (this.g.startFromHome) {
                     this.isOpenHome = true;
                     this.isOpenConversation = false;
                 } else {
@@ -1769,15 +1859,17 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
      * close modal page
      */
     onCloseModalRateChat() {
-        this.isOpenHome = true;
-        this.g.setParameter('isOpenPrechatForm', false);
-        // this.settingsSaverService.setVariable('isOpenPrechatForm', false);
-        this.isOpenConversation = false;
-        this.isOpenSelectionDepartment = false;
-        this.g.setParameter('isOpenStartRating', false);
-        // this.settingsSaverService.setVariable('isOpenStartRating', false);
-        // this.startNwConversation();
-        this.onBackConversation();
+        if(!this.g.singleConversation && this.g.nativeRating){
+            this.isOpenHome = true;
+            this.g.setParameter('isOpenPrechatForm', false);
+            // this.settingsSaverService.setVariable('isOpenPrechatForm', false);
+            this.isOpenConversation = false;
+            this.isOpenSelectionDepartment = false;
+            this.g.setParameter('isOpenStartRating', false);
+            // this.settingsSaverService.setVariable('isOpenStartRating', false);
+            // this.startNwConversation();
+            this.onBackConversation();
+        }
     }
 
     /**
@@ -1785,15 +1877,17 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
      * complete rate chat
      */
     onRateChatComplete() {
-        this.isOpenHome = true;
-        this.g.setParameter('isOpenPrechatForm', false);
-        // this.settingsSaverService.setVariable('isOpenPrechatForm', false);
-        this.isOpenConversation = false;
-        this.isOpenSelectionDepartment = false;
-        this.g.setParameter('isOpenStartRating', false);
-        // this.settingsSaverService.setVariable('isOpenStartRating', false);
-        // this.startNwConversation();
-        this.onBackConversation();
+        if(!this.g.singleConversation && this.g.nativeRating){
+            this.isOpenHome = true;
+            this.g.setParameter('isOpenPrechatForm', false);
+            // this.settingsSaverService.setVariable('isOpenPrechatForm', false);
+            this.isOpenConversation = false;
+            this.isOpenSelectionDepartment = false;
+            this.g.setParameter('isOpenStartRating', false);
+            // this.settingsSaverService.setVariable('isOpenStartRating', false);
+            // this.startNwConversation();
+            this.onBackConversation();
+        }
     }
     // ========= end:: CALLBACK FUNCTIONS ============//
 
