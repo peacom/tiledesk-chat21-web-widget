@@ -1,5 +1,9 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.27-rc.1
+- changed: if message contains only one emoji remove bubble message background and increase the font-size
+- added: singleConversation implementation
+
 ### 5.0.26 in PROD 
 - bug-fixed: BSStateUpload is undefined while subscribe to native-upload service
 
