@@ -508,10 +508,13 @@ export class GlobalSettingsService {
             this.globals.attributes['ipAddress'] = IP;
             this.globals.setAttributeParameter('ipAddress', IP);
             this.logger.debug('[GLOBAL-SET] setVariablesFromService > ipAddress :', IP);
+            
             // console.log('this.globals.attributes.IP ----------------->', this.globals.attributes);
         } catch (error) {
             this.logger.error('[GLOBAL-SET] setVariablesFromService > ipAddress > Error :', error);
         }
+
+        this.appStorageService.setItem('attributes', JSON.stringify(this.globals.attributes))
 
         // if (response && response.project && response.project.widget !== null) {
         //     this.logger.debug('[GLOBAL-SET] setVariablesFromService response.widget: ', response.project.widget);
@@ -1704,7 +1707,7 @@ export class GlobalSettingsService {
         this.logger.debug('[GLOBAL-SET] setDepartment > setAttributes: ', JSON.stringify(attributes));
         this.globals.setParameter('departmentSelected', department);
         this.globals.setParameter('attributes', attributes);
-        this.appStorageService.setItem('attributes', JSON.stringify(attributes));
+        // this.appStorageService.setItem('attributes', JSON.stringify(attributes));
 
     }
     // ========= end:: GET DEPARTEMENTS ============//
