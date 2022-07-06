@@ -55,11 +55,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     // get global variables
     this.logger.debug('[HOME-COMP] ngOnInit');
-
-    if (this.g.firstOpen === true) {
-      this.addAnimation();
-      this.g.firstOpen = false;
-    }
     // https://stackoverflow.com/questions/7015302/css-hexadecimal-rgba
     // this.themeColor50 = convertColorToRGBA(this.themeColor, 30); // this.g.themeColor + 'CC';
     // this.colorGradient = 'linear-gradient(' + this.themeColor + ', ' + this.themeColor50 + ')';
@@ -69,6 +64,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(){
     this.logger.debug('[HOME-COMP]---ngAfterViewInit--- ');
+
+    if (this.g.firstOpen === true) {
+      this.addAnimation();
+      this.g.firstOpen = false;
+    }
+
     setTimeout(() => {
       if (this.aflistconv) {
         this.aflistconv.nativeElement.focus();
@@ -137,6 +138,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   addAnimation() {
     try {
+      console.log('animationnnnn', this.element)
       const mainDiv = this.element.nativeElement;
       if (mainDiv) {
         mainDiv.classList.add('start-animation');
