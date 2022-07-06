@@ -49,18 +49,19 @@
     }
     
     .c21-header{
-        height: calc(2px + var(--header-height));
+        height: calc( var(--header-height));
+        width: var(--modal-width);
         position: fixed;
         top: var(--margin-top);
-        // right: var(--margin-right);
-        // left: var(--margin-left);
+
+        -webkit-box-shadow: 0 3px 5px -3px rgba(0, 0, 0, 0.4);
+        -moz-box-shadow: 0 3px 5px -3pxrgba(0, 0, 0, 0.4);
+        box-shadow: 0 3px 5px -3px rgba(0, 0, 0, 0.4);
         .c21-header-container{
-            height: var(--header-height);
-            width: var(--modal-width);
-            margin: inherit;
-            -webkit-box-shadow: 0 3px 5px -3px rgba(0, 0, 0, 0.4);
-            -moz-box-shadow: 0 3px 5px -3pxrgba(0, 0, 0, 0.4);
-            box-shadow: 0 3px 5px -3px rgba(0, 0, 0, 0.4);
+            // height: var(--header-height);
+            
+            // margin: inherit;
+            
             .c21-header-content {
                 .c21-title {
                     position: absolute;
