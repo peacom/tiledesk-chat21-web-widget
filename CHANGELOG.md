@@ -1,5 +1,10 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.27-rc.2
+- bug-fixed: typing is active if leave and open the same conversations
+- bug-fixed: reading null of undefined in home conversation while add animation
+- bug-fixed: ipAddress not shown in attributes for Firefox and Safari
+
 ### 5.0.27-rc.1
 - changed: if message contains only one emoji remove bubble message background and increase the font-size
 - added: singleConversation implementation
