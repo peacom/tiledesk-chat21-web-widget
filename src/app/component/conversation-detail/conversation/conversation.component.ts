@@ -343,7 +343,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
     if(changes && changes['conversationId'] && changes['conversationId'].previousValue !== undefined && (changes['conversationId'].previousValue !== changes['conversationId'].currentValue)){
       this.logger.debug("[CONV-COMP] UID CHANGESSSS", changes['conversationId'])
       this.isConversationArchived = false;
-      this.conversationFooter.textInputTextArea=null;
+      this.conversationFooter.textInputTextArea='';
       this.ngOnInit();
       this.ngAfterViewInit();
     }
@@ -1101,7 +1101,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
     this.unsubscribe$.complete();
     this.chatManager.conversationsHandlerService.conversationRemoved.next(null)
     this.conversationHandlerService.messageWait.next(null)
-    // this.typingService.BSIsTyping.next(null)
+    this.typingService.BSIsTyping.next(null)
 
     // TODO-GAB: da verificare se eliminarlo
     this.subscriptions.forEach(function (subscription) {

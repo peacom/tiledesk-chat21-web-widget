@@ -138,7 +138,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   addAnimation() {
     try {
-      console.log('animationnnnn', this.element)
       const mainDiv = this.element.nativeElement;
       if (mainDiv) {
         mainDiv.classList.add('start-animation');
