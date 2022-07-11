@@ -213,7 +213,6 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
         that.logger.debug('[CONV-FOOTER] AppComponent::uploadSingle::', metadata, file);
         // const file = this.selectedFiles.item(0);
         const currentUpload = new UploadModel(file);
-        // console.log(currentUpload.file);
 
         // const uploadTask = this.upSvc.pushUpload(currentUpload);
         // uploadTask.then(snapshot => {
@@ -281,6 +280,7 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
    */
   sendMessage(msg: string, type: string, metadata?: any, additional_attributes?: any) { // sponziello
     (metadata) ? metadata = metadata : metadata = '';
+    this.showEmojiPicker = false;
     this.logger.debug('[CONV-FOOTER] SEND MESSAGE: ', msg, type, metadata, additional_attributes);
     if (msg && msg.trim() !== '' || type === TYPE_MSG_IMAGE || type === TYPE_MSG_FILE ) {
 
@@ -304,7 +304,6 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
           }
         }
           // fine-sponziello
-        // console.log('this.conversationswith', this.conversationWith)
         // this.conversationHandlerService = this.chatManager.getConversationHandlerByConversationId(this.conversationWith)
         const senderId = this.senderId;
         const projectid = this.projectid;
@@ -496,13 +495,14 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
   }
 
   onEmojiiPickerClicked(){
-    this.showEmojiPicker= !this.showEmojiPicker
-    
+    //OPEN EMOJII PICKER
+    this.showEmojiPicker= true
   }
 
   addEmoji(event){
-    this.onEmojiiPickerClicked()
-    this.textInputTextArea = this.textInputTextArea + event.emoji.native + " "
+    this.showEmojiPicker = false; //de-activate emojii picker on select
+    this.textInputTextArea = this.textInputTextArea.trimStart() + event.emoji.native + " "
+    this.setFocusOnId('chat21-main-message-context')
   }
 
 
@@ -564,8 +564,8 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
     const keyCode = event.which || event.keyCode;
     // console.log('keycode', keyCode)
     this.textInputTextArea = ((document.getElementById('chat21-main-message-context') as HTMLInputElement).value);
-    // this.logger.debug('[CONV-FOOTER] onkeypress **************', this.textInputTextArea, keyCode]);
-    if (keyCode === 13) {
+    this.logger.debug('[CONV-FOOTER] onkeypress **************', this.textInputTextArea, keyCode);
+    if (keyCode === 13) { // ENTER pressed
       if (this.textInputTextArea && this.textInputTextArea.trim() !== '') {
         //   that.logger.debug('[CONV-FOOTER] sendMessage -> ', this.textInputTextArea);
         // this.resizeInputField();
@@ -575,8 +575,7 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
         this.sendMessage(this.textInputTextArea, TYPE_MSG_TEXT);
         // this.restoreTextArea();
       }
-    } else if (keyCode === 9) {
-      // console.log('TAB pressedddd')
+    } else if (keyCode === 9) { // TAB pressed
       event.preventDefault();
     }
   }
@@ -589,7 +588,7 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
   onkeydown(event){
     const keyCode = event.which || event.keyCode;
     // metaKey -> COMMAND ,  shiftKey -> SHIFT, altKey -> ALT, ctrlKey -> CONTROL
-    if( (event.metaKey || event.shiftKey || event.altKey || event.ctrlKey) && keyCode===13){   
+    if( (event.metaKey || event.shiftKey || event.altKey || event.ctrlKey) && keyCode===13){  
       event.preventDefault();
       this.textInputTextArea += '\r\n';
       this.resizeInputField();
