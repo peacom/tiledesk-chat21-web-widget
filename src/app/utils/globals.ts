@@ -339,7 +339,7 @@ export class Globals {
     /** enable to close a conversation from upper-right header menu  */
     this.hideCloseConversationOptionMenu = false;
     /** enable to hide/show options menu in conversation detail header */
-    this.hideSettings = false;
+    this.hideSettings = true;
     /** enable to hide/show options menu in home component */
     this.filterByRequester = false;
     /** show conversations with conversation.attributes.requester_id == user.uid */
