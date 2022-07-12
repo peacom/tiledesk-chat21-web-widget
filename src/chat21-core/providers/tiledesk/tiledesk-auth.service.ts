@@ -29,6 +29,7 @@ export class TiledeskAuthService {
 
 
   initialize(serverBaseUrl: string) {
+    this.logger.log('[TILEDESK-AUTH-SERV] - initialize serverBaseUrl', serverBaseUrl);
     this.SERVER_BASE_URL = serverBaseUrl;
     this.URL_TILEDESK_SIGNIN = this.SERVER_BASE_URL + 'auth/signin';
     this.URL_TILEDESK_SIGNIN_ANONYMOUSLY = this.SERVER_BASE_URL + 'auth/signinAnonymously'
@@ -111,7 +112,8 @@ export class TiledeskAuthService {
         if (data['success'] && data['token']) {
           that.tiledeskToken = data['token'];
           that.createCompleteUser(data['user']);
-          that.appStorage.setItem('tiledeskToken', that.tiledeskToken); // salvarlo esternamente nell'app.component
+          // that.appStorage.setItem('tiledeskToken', that.tiledeskToken); // salvarlo esternamente nell'app.component
+          this.checkAndSetInStorageTiledeskToken(that.tiledeskToken)
           resolve(this.currentUser)
         }
       }, (error) => {
@@ -157,6 +159,21 @@ export class TiledeskAuthService {
       this.logger.error('[TILEDESK-AUTH]- createCompleteUser ERR ', err) 
     }
     
+  }
+
+  private checkAndSetInStorageTiledeskToken(tiledeskToken) {
+    this.logger.log('[TILEDESK-AUTH] - checkAndSetInStorageTiledeskToken tiledeskToken from request', tiledeskToken)
+    const storedTiledeskToken = this.appStorage.getItem('tiledeskToken');
+    this.logger.log('[TILEDESK-AUTH] - checkAndSetInStorageTiledeskToken storedTiledeskToken ', storedTiledeskToken)
+    if (!storedTiledeskToken) {
+      this.logger.log('[TILEDESK-AUTH] - checkAndSetInStorageTiledeskToken TOKEN DOES NOT EXIST - RUN SET ')
+      this.appStorage.setItem('tiledeskToken', tiledeskToken);
+    } else if (storedTiledeskToken && storedTiledeskToken !== tiledeskToken) {
+      this.logger.log('[TILEDESK-AUTH] - checkAndSetInStorageTiledeskToken STORED-TOKEN EXIST BUT IS != FROM TOKEN - RUN SET ')
+      this.appStorage.setItem('tiledeskToken', tiledeskToken);
+    } else if (storedTiledeskToken && storedTiledeskToken === tiledeskToken) {
+      this.logger.log('[TILEDESK-AUTH] - checkAndSetInStorageTiledeskToken STORED-TOKEN EXIST AND IS = TO TOKEN ')
+    }
   }
 
 

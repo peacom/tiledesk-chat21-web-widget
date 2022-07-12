@@ -33,6 +33,7 @@ export class FirebaseConversationsHandler extends ConversationsHandlerService {
     BSConversationDetail: BehaviorSubject<ConversationModel> = new BehaviorSubject<ConversationModel>(null);
     conversationAdded: BehaviorSubject<ConversationModel> = new BehaviorSubject<ConversationModel>(null);
     conversationChanged: BehaviorSubject<ConversationModel> = new BehaviorSubject<ConversationModel>(null);
+    conversationChangedDetailed: BehaviorSubject<{value: ConversationModel, previousValue: ConversationModel}> = new BehaviorSubject<{value: ConversationModel, previousValue: ConversationModel}>(null);
     conversationRemoved: BehaviorSubject<ConversationModel> = new BehaviorSubject<ConversationModel>(null);
     // readAllMessages: BehaviorSubject<string>;
 
@@ -450,6 +451,7 @@ export class FirebaseConversationsHandler extends ConversationsHandlerService {
      */
     //TODO-GAB: ora emit singola conversation e non dell'intero array di conversations
     private added(childSnapshot: any) {
+        
         if (this.conversationGenerate(childSnapshot)) {
             const index = searchIndexInArrayForUid(this.conversations, childSnapshot.key);
             if (index > -1) {
@@ -473,11 +475,13 @@ export class FirebaseConversationsHandler extends ConversationsHandlerService {
 
     //TODO-GAB: ora emit singola conversation e non dell'intero array di conversations
     private changed(childSnapshot: any) {
+        const oldConversation = this.conversations[searchIndexInArrayForUid(this.conversations, childSnapshot.key)]
         if (this.conversationGenerate(childSnapshot)) {
             const index = searchIndexInArrayForUid(this.conversations, childSnapshot.key);
             if (index > -1) {
                 const conversationChanged = this.conversations[index]
                 this.conversationChanged.next(conversationChanged);
+                this.conversationChangedDetailed.next({value: conversationChanged, previousValue: oldConversation});
             }
         } else {
             this.logger.error('[FIREBASEConversationsHandlerSERVICE]CHANGED::conversations with conversationId: ', childSnapshot.key, 'is not valid')

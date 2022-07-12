@@ -37,10 +37,8 @@ export class MQTTAuthService extends MessagingAuthService {
   public user: any;
   private currentUser: any;
 
-  // private URL_TILEDESK_SIGNIN: string;
+  // private
   private URL_TILEDESK_CREATE_CUSTOM_TOKEN: string;
-  // private URL_TILEDESK_SIGNIN_ANONYMOUSLY: string;
-  // private URL_TILEDESK_SIGNIN_WITH_CUSTOM_TOKEN: string;
 
   private logger: LoggerService = LoggerInstance.getInstance()
   
@@ -50,7 +48,6 @@ export class MQTTAuthService extends MessagingAuthService {
     public appStorage: AppStorageService
   ) {
     super();
-    console.log("chat21Service:", chat21Service)
   }
 
   /**
@@ -58,26 +55,23 @@ export class MQTTAuthService extends MessagingAuthService {
    */
   initialize() {
     this.SERVER_BASE_URL = this.getBaseUrl();
-    // this.URL_TILEDESK_SIGNIN = this.SERVER_BASE_URL + 'auth/signin';
-    // this.URL_TILEDESK_SIGNIN_ANONYMOUSLY = this.SERVER_BASE_URL + 'auth/signinAnonymously';
     this.URL_TILEDESK_CREATE_CUSTOM_TOKEN = this.SERVER_BASE_URL + 'chat21/native/auth/createCustomToken';
-    // this.URL_TILEDESK_SIGNIN_WITH_CUSTOM_TOKEN = this.SERVER_BASE_URL + 'auth/signinWithCustomToken';
-    console.log(' ---------------- login con token url ---------------- ');
+    this.logger.log('[MQTTAuthService] initialize ');
     // this.checkIsAuth();
-    this.onAuthStateChanged();
+    // this.onAuthStateChanged();
   }
 
   // logout(callback) {
   logout(): Promise<boolean> {
-    console.log("closing mqtt connection...");
+    this.logger.log("[MQTTAuthService] logout: closing mqtt connection...");
     return new Promise((resolve, reject) => {
       this.chat21Service.chatClient.close(() => {
-        console.log("mqtt connection closed. OK");
+        console.log("[MQTTAuthService] logout: mqtt connection closed. OK");
         // remove
         // this.appStorage.removeItem('tiledeskToken');
         // this.appStorage.removeItem('currentUser');
         this.currentUser = null;
-        console.log("user removed.");
+        console.log("[MQTTAuthService] logout: user removed");
         this.BSSignOut.next(true);
         this.BSAuthStateChanged.next('offline');
         resolve(true)
@@ -99,39 +93,39 @@ z
 
   /** */
   getToken(): string {
-    console.log('UserService::getToken');
+    console.log('[MQTTAuthService]::getToken');
     return this.token;
   }
 
   /**
    */
-  onAuthStateChanged() {
-    console.log('UserService::onAuthStateChanged');
-    // if (this.appStorage.getItem('tiledeskToken') == null) {
-    //   this.currentUser = null;
-      this.BSAuthStateChanged.next('offline');
-    // }
-    // const that = this;
-    console.log("STORAGE CHANGED: added listner")
-    // window.addEventListener('storage', (e) => {
-    //   console.log('STORAGE CHANGED:', e.key);
-    //   if (this.appStorage.getItem('tiledeskToken') == null && this.appStorage.getItem('currentUser') == null) {
-    //     console.log('STORAGE CHANGED: CASO TOKEN NULL');
-    //     this.currentUser = null;
-    //     // that.logout(() => {
-    //     //   that.BSAuthStateChanged.next('offline');
-    //     // });
-    //     this.logout();
-    //   }
-    //   else if (this.currentUser == null && this.appStorage.getItem('tiledeskToken') != null && this.appStorage.getItem('currentUser') != null) {
-    //     console.log('STORAGE CHANGED: CASO LOGGED OUTSIDE');
-    //     this.currentUser = JSON.parse(this.appStorage.getItem('currentUser'));
-    //     const tiledeskToken = this.appStorage.getItem('tiledeskToken');
-    //     this.connectWithCustomToken(tiledeskToken);
-    //   }
-    // }, false);
+  // onAuthStateChanged() {
+  //   console.log('UserService::onAuthStateChanged');
+  //   // if (this.appStorage.getItem('tiledeskToken') == null) {
+  //   //   this.currentUser = null;
+  //     this.BSAuthStateChanged.next('offline');
+  //   // }
+  //   // const that = this;
+  //   console.log("STORAGE CHANGED: added listner")
+  //   // window.addEventListener('storage', (e) => {
+  //   //   console.log('STORAGE CHANGED:', e.key);
+  //   //   if (this.appStorage.getItem('tiledeskToken') == null && this.appStorage.getItem('currentUser') == null) {
+  //   //     console.log('STORAGE CHANGED: CASO TOKEN NULL');
+  //   //     this.currentUser = null;
+  //   //     // that.logout(() => {
+  //   //     //   that.BSAuthStateChanged.next('offline');
+  //   //     // });
+  //   //     this.logout();
+  //   //   }
+  //   //   else if (this.currentUser == null && this.appStorage.getItem('tiledeskToken') != null && this.appStorage.getItem('currentUser') != null) {
+  //   //     console.log('STORAGE CHANGED: CASO LOGGED OUTSIDE');
+  //   //     this.currentUser = JSON.parse(this.appStorage.getItem('currentUser'));
+  //   //     const tiledeskToken = this.appStorage.getItem('tiledeskToken');
+  //   //     this.connectWithCustomToken(tiledeskToken);
+  //   //   }
+  //   // }, false);
 
-  }
+  // }
 
   createCustomToken(tiledeskToken: any): void {
     this.connectWithCustomToken(tiledeskToken)
@@ -258,10 +252,9 @@ z
     const responseType = 'text';
     const postData = {};
     // const that = this;
-    console.log('tokeeeennnnn', tiledeskToken)
     this.http.post(this.URL_TILEDESK_CREATE_CUSTOM_TOKEN, postData, { headers, responseType})
     .subscribe(data =>  {
-      console.log("**** data", data)
+      console.log("[MQTTAuthService] connectWithCustomToken: **** data", data)
       const result = JSON.parse(data);
       this.connectMQTT(result);
     }, error => {
@@ -270,10 +263,10 @@ z
   }
 
   connectMQTT(credentials: any): any {
-    console.log('**** credentials:', credentials);
+    console.log('[MQTTAuthService] connectMQTT: **** credentials:', credentials);
     const userid = credentials.userid;
     this.chat21Service.chatClient.connect(userid, credentials.token, () => {
-      console.log('Chat connected.');
+      console.log('[MQTTAuthService] connectMQTT: Chat connected.');
       this.BSAuthStateChanged.next('online');
     });
   }

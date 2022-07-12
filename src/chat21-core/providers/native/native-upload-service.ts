@@ -25,9 +25,8 @@ export class NativeUploadService extends UploadService {
         super();
     }
 
-
     initialize(): void {
-        this.logger.debug(' [NATIVE UPLOAD] initialize')
+        this.logger.debug('[NATIVE UPLOAD] initialize')
         this.URL_TILEDESK_FILE = this.getBaseUrl() + 'files'
         this.URL_TILEDESK_IMAGES = this.getBaseUrl() + 'images'
         this.tiledeskToken = this.appStorage.getItem('tiledeskToken')

@@ -15,18 +15,19 @@ import { ConversationsHandlerService } from '../abstract/conversations-handler.s
 import { TYPE_GROUP } from '../../utils/constants';
 import { getImageUrlThumbFromFirebasestorage, avatarPlaceholder, getColorBck } from '../../utils/utils-user';
 import { compareValues, getFromNow, conversationsPathForUserId, searchIndexInArrayForUid } from '../../utils/utils';
+import { LoggerService } from '../abstract/logger.service';
+import { LoggerInstance } from '../logger/loggerInstance';
 // import { ImageRepoService } from '../abstract/image-repo.service';
 // import { ConsoleReporter } from 'jasmine';
 
 // @Injectable({ providedIn: 'root' })
 @Injectable()
 export class MQTTConversationsHandler extends ConversationsHandlerService {
-    
-
     // BehaviorSubject
     BSConversationDetail: BehaviorSubject<ConversationModel> = new BehaviorSubject<ConversationModel>(null);;
     conversationAdded: BehaviorSubject<ConversationModel> = new BehaviorSubject<ConversationModel>(null);;
     conversationChanged: BehaviorSubject<ConversationModel> = new BehaviorSubject<ConversationModel>(null);; 
+    conversationChangedDetailed: BehaviorSubject<{value: ConversationModel, previousValue: ConversationModel}> = new BehaviorSubject<{value: ConversationModel, previousValue: ConversationModel}>(null);
     conversationRemoved: BehaviorSubject<ConversationModel> = new BehaviorSubject<ConversationModel>(null);;
     BSConversations: BehaviorSubject<ConversationModel[]>
     // readAllMessages: BehaviorSubject<string>;
@@ -40,13 +41,9 @@ export class MQTTConversationsHandler extends ConversationsHandlerService {
     private loggedUserId: string;
     private translationMap: Map<string, string>;
     private isConversationClosingMap: Map<string, boolean>;
-
-    private audio: any;
-    private setTimeoutSound: any;
+    private logger: LoggerService = LoggerInstance.getInstance()
 
     constructor(
-        // private tiledeskConversationsProvider: TiledeskConversationProvider,
-        // public databaseProvider: DatabaseProvider,
         public chat21Service: Chat21Service
     ) {
         super();
@@ -55,18 +52,12 @@ export class MQTTConversationsHandler extends ConversationsHandlerService {
     /**
      * inizializzo conversations handler
      */
-    initialize(
-        tenant: string, 
-        userId: string,
-        translationMap: Map<string, string>
-        ) {
-        console.log('initialize MQTTConversationsHandler');
+    initialize(tenant: string, userId: string,translationMap: Map<string, string>) {
+        this.logger.debug('[MQTTConversationsHandler] initialize');
         this.loggedUserId = userId;
         this.translationMap = translationMap;
         this.conversations = [];
-        // this.databaseProvider.initialize(userId, this.tenant);
         this.isConversationClosingMap = new Map();
-        // this.getConversationsFromStorage();
     }
 
     public getConversationDetail(conversationWith: string, callback) {
@@ -75,16 +66,13 @@ export class MQTTConversationsHandler extends ConversationsHandlerService {
         // callback
 
         const conversation = this.conversations.find(conv => conv.conversation_with === conversationWith);
-        console.log('found locally? getConversationDetail *****: ', conversation);
+        this.logger.log('[MQTTConversationsHandler] getConversationDetail found locally? *****: ', conversation);
         if (conversation) {
-            console.log('found!');
             callback(conversation);
         } else {
-            console.log('Not found locally, remote.getConversationDetail *****: ', conversation);
+            this.logger.log('[MQTTConversationsHandler] getConversationDetail Not found locally, remote.getConversationDetail *****: ', conversation);
             this.chat21Service.chatClient.conversationDetail(conversationWith, (err, conversation) => {
-                console.log("--REMOTE CONV IS:" + JSON.stringify(conversation));
-                console.log("--REMOTE CONV IS OBJ:", conversation);
-                console.log("--REMOTE ERR IS:" + JSON.stringify(err));
+                this.logger.log('[MQTTConversationsHandler] getConversationDetail --REMOTE CONV IS OBJ:', conversation);
                 if (conversation) {
                     if (callback) {
                         callback(this.completeConversation(conversation));
@@ -100,13 +88,13 @@ export class MQTTConversationsHandler extends ConversationsHandlerService {
     }
 
     setConversationRead(conversationrecipient): void {
-        console.log("setConversationRead...")
+        this.logger.debug('[MQTTConversationsHandler] setConversationRead...')
         this.chat21Service.chatClient.updateConversationIsNew(conversationrecipient, false, (err) => {
             if (err) {
-                console.error("setConversationRead: false. An error occurred", err);
+                this.logger.error('[MQTTConversationsHandler]setConversationRead: false. An error occurred', err);
             }
             else {
-                console.log("setConversationRead: false. Ok");
+                this.logger.debug('[MQTTConversationsHandler]setConversationRead: false. Ok');
             }
         });
     }
@@ -161,50 +149,63 @@ export class MQTTConversationsHandler extends ConversationsHandlerService {
      // New connect - renamed subscribeToConversation
      //----------------------------------------------------------------------------------
      subscribeToConversations(loaded) {
-            console.log('connecting MQTT conversations handler');
-            const handlerConversationAdded = this.chat21Service.chatClient.onConversationAdded( (conv) => {
-                let conversation = this.completeConversation(conv); // needed to get the "conversation_with", and find the conv in the conv-history
-                const index = this.searchIndexInArrayForConversationWith(this.conversations, conversation.conversation_with);
-                if (index > -1) {
-                    console.log("Added conv -> Changed!")
-                    this.changed(conversation);
-                }
-                else {
-                    console.log("Added conv -> Added!")
-                    this.added(conversation);
-                }
+        this.logger.debug('[MQTTConversationsHandler] connecting MQTT conversations handler');
+        const handlerConversationAdded = this.chat21Service.chatClient.onConversationAdded( (conv) => {
+            let conversation = this.completeConversation(conv); // needed to get the "conversation_with", and find the conv in the conv-history
+            this.logger.log("onConversationAdded completed:",conversation);
+            const index = this.searchIndexInArrayForConversationWith(this.conversations, conversation.conversation_with);
+            if (index > -1) {
+                this.logger.log('[MQTTConversationsHandler] Added conv -> Changed!')
+                this.changed(conversation);
+            }
+            else {
+                this.logger.log('[MQTTConversationsHandler]Added conv -> Added!')
+                this.added(conversation);
+            }
+        });
+        const handlerConversationUpdated = this.chat21Service.chatClient.onConversationUpdated( (conv, topic) => {
+            this.logger.debug('[MQTTConversationsHandler] conversation updated:', JSON.stringify(conv));
+            this.changed(conv);
+        });
+        const handlerConversationDeleted = this.chat21Service.chatClient.onConversationDeleted( (conv, topic) => {
+            this.logger.debug('[MQTTConversationsHandler] conversation deleted:', conv, topic);
+            // example topic: apps.tilechat.users.ME.conversations.CONVERS-WITH.clientdeleted
+            const topic_parts = topic.split("/")
+            this.logger.debug('[MQTTConversationsHandler] topic and parts', topic_parts)
+            if (topic_parts.length < 7) {
+                this.logger.error('[MQTTConversationsHandler] Error. Not a conversation-deleted topic:', topic);
+                return
+            }
+            const convers_with = topic_parts[5];
+            this.removed({
+                uid: convers_with
             });
-            const handlerConversationUpdated = this.chat21Service.chatClient.onConversationUpdated( (conv, topic) => {
-                console.log('conversation updated:', JSON.stringify(conv));
-                this.changed(conv);
-            });
-            const handlerConversationDeleted = this.chat21Service.chatClient.onConversationDeleted( (conv, topic) => {
-                console.log('conversation deleted:', conv, topic);
-                // example topic: apps.tilechat.users.ME.conversations.CONVERS-WITH.clientdeleted
-                const topic_parts = topic.split("/")
-                console.debug("topic and parts", topic_parts)
-                if (topic_parts.length < 7) {
-                    console.error("Error. Not a conversation-deleted topic:", topic);
-                    return
-                }
-                const convers_with = topic_parts[5];
-                this.removed({
-                    uid: convers_with
+        });
+        this.chat21Service.chatClient.lastConversations( false, (err, conversations) => {
+            this.logger.debug('[MQTTConversationsHandler] Last conversations', conversations, 'err', err);
+            if (!err) {
+                conversations.forEach(conv => {
+                    this.added(conv);
                 });
-            });
-            this.chat21Service.chatClient.lastConversations( false, (err, conversations) => {
-                console.log('Last conversations', conversations, 'err', err);
-                if (!err) {
-                    conversations.forEach(conv => {
-                        this.added(conv);
-                    });
-                    loaded();
-                }
-            });
+                loaded();
+            }
+        });
     }
 
     getLastConversation(callback: (conv: ConversationModel, error: string) => void): void {
-        throw new Error('Method not implemented.');
+        this.chat21Service.chatClient.lastConversations( false, (err, conversations) => {
+            console.log('Last conversations', conversations, 'err', err);
+            if (!err) {
+                if(conversations && conversations.length > 0){
+                    callback(conversations[0], null)
+                }else {
+                    callback(null, null)
+
+                }
+            }else{
+                callback(null, err)
+            }
+        });
     }
 
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
@@ -219,34 +220,27 @@ export class MQTTConversationsHandler extends ConversationsHandlerService {
      * 7 -  pubblico conversations:update
      */
     private added(conv: any) {
-        console.log("NEW CONV childSnapshot", conv)
+        this.logger.debug('[MQTTConversationsHandler] NEW CONV childSnapshot', conv)
         let conversation = this.completeConversation(conv);
         if (this.isValidConversation(conversation)) {
             this.setClosingConversation(conversation.conversation_with, false);
-            console.log("new conv.uid" + conversation.uid);
-            console.log("conversations:", this.conversations);
+            this.logger.debug('[MQTTConversationsHandler] conversations:', conversation.uid, this.conversations);
             const index = this.searchIndexInArrayForConversationWith(this.conversations, conversation.conversation_with);
-            console.log("found index:", index)
             console.log("NUOVA CONVER;.uid2" + conversation.uid)
             if (index > -1) {
-                console.log("TROVATO")
+                this.logger.debug('[MQTTConversationsHandler] TROVATO')
                 this.conversations.splice(index, 1, conversation);
             } else {
-                console.log("NON TROVATO")
+                this.logger.debug('[MQTTConversationsHandler] NON TROVATO')
                 this.conversations.splice(0, 0, conversation);
                 // this.databaseProvider.setConversation(conversation);
             }
-            console.log("NUOVA CONVER;.uid3" + conversation.uid)
+            this.logger.debug('[MQTTConversationsHandler] NUOVA CONVER;.uid3' + conversation.uid)
             this.conversations.sort(compareValues('timestamp', 'desc'));
-            console.log("NUOVA CONVER;.uid4" + conversation.uid)
-            console.log("TUTTE:", this.conversations)
-            // this.conversationChanged.next(conversation);
-            console.log("NUOVA CONVER;.uid5" + conversation.uid)
+            this.logger.debug('[MQTTConversationsHandler] TUTTE:', this.conversations)
             this.conversationAdded.next(conversation);
-            console.log("NUOVA CONVER;.uid6" + conversation.uid)
-            // this.events.publish('conversationsChanged', this.conversations);
         } else {
-            console.error('ChatConversationsHandler::added::conversations with conversationId: ', conversation.conversation_with, 'is not valid');
+            this.logger.error('[MQTTConversationsHandler] ChatConversationsHandler::added::conversations with conversationId: ', conversation.conversation_with, 'is not valid');
         }
     }
 
@@ -268,7 +262,7 @@ export class MQTTConversationsHandler extends ConversationsHandlerService {
         // childData.uid = childSnapshot.key;
         // console.log('changed conversation: ', childData);
         // const conversation = this.completeConversation(childData);
-        console.log("Conversation changed:", conversation)
+        this.logger.debug('[MQTTConversationsHandler] Conversation changed:', conversation)
         // let conversation = this.completeConversation(childSnapshot);
         // childSnapshot.uid = childSnapshot.conversation_with;
         // let conversation = this.completeConversation(childSnapshot);
@@ -286,7 +280,7 @@ export class MQTTConversationsHandler extends ConversationsHandlerService {
             // const conv = this.conversations[index];
             // console.log("Conversation to update found", conv);
             this.updateConversationWithSnapshot(this.conversations[index], conversation);
-            console.log("conversationchanged.isnew", index, JSON.stringify(conversation))
+            this.logger.debug('[MQTTConversationsHandler] conversationchanged.isnew', JSON.stringify(conversation))
             this.conversations.sort(compareValues('timestamp', 'desc'));
             this.conversations.splice(index, 1, this.conversations[index])
             this.conversationChanged.next(this.conversations[index]);
@@ -294,74 +288,51 @@ export class MQTTConversationsHandler extends ConversationsHandlerService {
     }
 
     private updateConversationWithSnapshot(conv: ConversationModel, snap: any) {
-        console.log("updating conv", conv, "with snap", snap)
-        console.log("print snap keys/values")
+        this.logger.debug('[MQTTConversationsHandler] updating conv', conv, 'with snap', snap)
         Object.keys(snap).forEach(k => {
-            console.log("key:" + k);
             if (k === 'is_new') {
-                console.log("aggiorno key:" + k);
+                this.logger.debug('[MQTTConversationsHandler] aggiorno key:' + k);
                 conv.is_new = snap[k];
             }
             if (k === 'text') {
-                console.log("aggiorno key:" + k);
+                this.logger.debug('[MQTTConversationsHandler] aggiorno key:' + k);
                 conv.last_message_text = snap[k];
                 conv.text = snap[k];
             }
             if (k === 'recipient') {
-                console.log("aggiorno key:" + k);
+                this.logger.debug('[MQTTConversationsHandler] aggiorno key:' + k);
                 conv.recipient = snap[k];
             }
             if (k === 'recipient_fullname') {
-                console.log("aggiorno key:" + k);
+                this.logger.debug('[MQTTConversationsHandler] aggiorno key:' + k);
                 conv.recipient_fullname = snap[k];
             }
             if (k === 'sender') {
-                console.log("aggiorno key:" + k);
+                this.logger.debug('[MQTTConversationsHandler] aggiorno key:' + k);
                 conv.sender = snap[k];
             }
             if (k === 'sender_fullname') {
-                console.log("aggiorno key:" + k);
+                this.logger.debug('[MQTTConversationsHandler] aggiorno key:' + k);
                 conv.sender_fullname = snap[k];
             }
             if (k === 'attributes') {
-                console.log("aggiorno key:" + k);
+                this.logger.debug('[MQTTConversationsHandler] aggiorno key:' + k);
                 conv.attributes = snap[k];
             }
             if (k === 'timestamp') {
-                console.log("aggiorno key:" + k);
+                this.logger.debug('[MQTTConversationsHandler] aggiorno key:' + k);
                 conv.timestamp = snap[k]; //this.getTimeLastMessage(snap[k]);
             }
             if (k === 'status') {
-                console.log("aggiorno key:" + k);
+                this.logger.debug('[MQTTConversationsHandler] aggiorno key:' + k);
                 conv.status = this.setStatusConversation(conv.sender, conv.uid);
             }
             if (k === 'type') {
-                console.log("aggiorno key:" + k);
+                this.logger.debug('[MQTTConversationsHandler] aggiorno key:' + k);
                 conv.type = snap[k];
             }
 
         });
-        console.log('listtttttt', this.conversations, conv, snap)
-        // SCHEMA ConversationModel
-        // public uid: string,
-        // public attributes: any,
-        // public channel_type: string,
-        // public conversation_with_fullname: string,
-        // public conversation_with: string,
-        // public recipient: string,
-        // public recipient_fullname: string,
-        // public image: string,
-        // public is_new: boolean,
-        // public last_message_text: string,
-        // public sender: string,
-        // public senderAuthInfo: any,
-        // public sender_fullname: string,
-        // public status: string,
-        // public timestamp: string,
-        // public selected: boolean,
-        // public color: string,
-        // public avatar: string,
-        // public archived: boolean
     }
 
     
@@ -379,7 +350,7 @@ export class MQTTConversationsHandler extends ConversationsHandlerService {
             this.conversations.splice(index, 1);
             // this.conversations.sort(compareValues('timestamp', 'desc'));
             // this.databaseProvider.removeConversation(childSnapshot.key);
-            console.debug("conversationRemoved::", conversationRemoved)
+            this.logger.debug('[MQTTConversationsHandler] conversationRemoved::', conversationRemoved)
             this.conversationRemoved.next(conversationRemoved);
         }
         // remove the conversation from the isConversationClosingMap
@@ -412,8 +383,7 @@ export class MQTTConversationsHandler extends ConversationsHandlerService {
     }
 
     private completeConversation(conv): ConversationModel {
-        console.log('completeConversation', conv);
-        conv.selected = false;
+        // conv.selected = false;
         if (!conv.sender_fullname || conv.sender_fullname === 'undefined' || conv.sender_fullname.trim() === '') {
             conv.sender_fullname = conv.sender;
         }
@@ -440,6 +410,12 @@ export class MQTTConversationsHandler extends ConversationsHandlerService {
             conv.last_message_text = conv.text; // building conv with a message
         }
         conv.uid = conv.conversation_with;
+        if (conv.uid === this.uidConvSelected) {
+            conv.is_new = false;
+        }
+        if (conv.sender === this.loggedUserId) {
+            conv.is_new = false;
+        }
         return conv;
     }
 
@@ -491,26 +467,26 @@ export class MQTTConversationsHandler extends ConversationsHandlerService {
     /**
      * attivo sound se è un msg nuovo
      */
-    private soundMessage() {
-        console.log('****** soundMessage *****', this.audio);
-        const that = this;
-        // this.audio = new Audio();
-        // this.audio.src = 'assets/pling.mp3';
-        // this.audio.load();
-        this.audio.pause();
-        this.audio.currentTime = 0;
-        clearTimeout(this.setTimeoutSound);
-        this.setTimeoutSound = setTimeout(function () {
-        //setTimeout(function() {
-            that.audio.play()
-            .then(function() {
-                // console.log('****** then *****');
-            })
-            .catch(function() {
-                // console.log('***//tiledesk-dashboard/chat*');
-            });
-        }, 1000);       
-    }
+    // private soundMessage() {
+    //     console.log('****** soundMessage *****', this.audio);
+    //     const that = this;
+    //     // this.audio = new Audio();
+    //     // this.audio.src = 'assets/pling.mp3';
+    //     // this.audio.load();
+    //     this.audio.pause();
+    //     this.audio.currentTime = 0;
+    //     clearTimeout(this.setTimeoutSound);
+    //     this.setTimeoutSound = setTimeout(function () {
+    //     //setTimeout(function() {
+    //         that.audio.play()
+    //         .then(function() {
+    //             // console.log('****** then *****');
+    //         })
+    //         .catch(function() {
+    //             // console.log('***//tiledesk-dashboard/chat*');
+    //         });
+    //     }, 1000);       
+    // }
 
     // /**
     //  *  check if the conversations is valid or not
@@ -567,48 +543,48 @@ export class MQTTConversationsHandler extends ConversationsHandlerService {
     */
     private isValidConversation(convToCheck: ConversationModel) : boolean {
         //console.log("[BEGIN] ChatConversationsHandler:: convToCheck with uid: ", convToCheckId);
-        console.log("checking uid of", convToCheck)
-        console.log("conversation.uid", convToCheck.uid)
-        console.log("channel_type is:", convToCheck.channel_type)
+        this.logger.debug('[MQTTConversationsHandler] checking uid of', convToCheck)
+        this.logger.debug('[MQTTConversationsHandler] conversation.uid', convToCheck.uid)
+        this.logger.debug('[MQTTConversationsHandler] channel_type is:', convToCheck.channel_type)
         
         if (!this.isValidField(convToCheck.uid)) {
-            console.error("ChatConversationsHandler::isValidConversation:: 'uid is not valid' ");
+            this.logger.error('[MQTTConversationsHandler] ChatConversationsHandler::isValidConversation:: "uid is not valid" ');
             return false;
         }
         // if (!this.isValidField(convToCheck.is_new)) {
-        //     console.error("ChatConversationsHandler::isValidConversation:: 'is_new is not valid' ");
+        //     this.logger.error("ChatConversationsHandler::isValidConversation:: 'is_new is not valid' ");
         //     return false;
         // }
         if (!this.isValidField(convToCheck.last_message_text)) {
-            console.error("ChatConversationsHandler::isValidConversation:: 'last_message_text is not valid' ");
+            this.logger.error('[MQTTConversationsHandler] ChatConversationsHandler::isValidConversation:: "last_message_text is not valid" ');
             return false;
         }
         if (!this.isValidField(convToCheck.recipient)) {
-            console.error("ChatConversationsHandler::isValidConversation:: 'recipient is not valid' ");
+            this.logger.error('[MQTTConversationsHandler] ChatConversationsHandler::isValidConversation:: "recipient is not valid" ');
             return false;
         }
         if (!this.isValidField(convToCheck.recipient_fullname)) {
-            console.error("ChatConversationsHandler::isValidConversation:: 'recipient_fullname is not valid' ");
+            this.logger.error('[MQTTConversationsHandler] ChatConversationsHandler::isValidConversation:: "recipient_fullname is not valid" ');
             return false;
         }
         if (!this.isValidField(convToCheck.sender)) {
-            console.error("ChatConversationsHandler::isValidConversation:: 'sender is not valid' ");
+            this.logger.error('[MQTTConversationsHandler] ChatConversationsHandler::isValidConversation:: "sender is not valid" ');
             return false;
         }
         if (!this.isValidField(convToCheck.sender_fullname)) {
-            console.error("ChatConversationsHandler::isValidConversation:: 'sender_fullname is not valid' ");
+            this.logger.error('[MQTTConversationsHandler] ChatConversationsHandler::isValidConversation:: "sender_fullname is not valid" ');
             return false;
         }
         if (!this.isValidField(convToCheck.status)) {
-            console.error("ChatConversationsHandler::isValidConversation:: 'status is not valid' ");
+            this.logger.error('[MQTTConversationsHandler] ChatConversationsHandler::isValidConversation:: "status is not valid" ');
             return false;
         }
         if (!this.isValidField(convToCheck.timestamp)) {
-            console.error("ChatConversationsHandler::isValidConversation:: 'timestamp is not valid' ");
+            this.logger.error('[MQTTConversationsHandler] ChatConversationsHandler::isValidConversation:: "timestamp is not valid" ');
             return false;
         }
         if (!this.isValidField(convToCheck.channel_type)) {
-            console.error("ChatConversationsHandler::isValidConversation:: 'channel_type is not valid' ");
+            this.logger.error('[MQTTConversationsHandler] ChatConversationsHandler::isValidConversation:: "channel_type is not valid" ');
             return false;
         }
         //console.log("[END] ChatConversationsHandler:: convToCheck with uid: ", convToCheckId);

@@ -63,12 +63,13 @@ export class MQTTGroupsHandler extends GroupsHandlerService {
 
     onGroupChange(groupId: string): Observable<GroupModel> {
         if (this.isGroup(groupId)) {
-            this.chat21Service.chatClient.getGroup(groupId, (err, group) => {
-                console.log('subscribing to group updates...', group);
+            this.chat21Service.chatClient.groupData(groupId, (err, group) => {
+                this.logger.log('[MQTT-GROUPS-HANDLER] onGroupChange: got result by REST call:', group);
+                this.groupValue(group.result);
+                this.logger.log('[MQTT-GROUPS-HANDLER] onGroupChange: subscribing to group updates...', groupId);
                 const handler_group_updated = this.chat21Service.chatClient.onGroupUpdated( (group, topic) => {
                     if (topic.conversWith === groupId) {
-                        this.logger.debug('[MQTT-GROUPS-SERV] group updated:', group);
-                        //this.groupValue(group);
+                        this.groupValue(group);
                     }
                 });
             });
@@ -84,7 +85,6 @@ export class MQTTGroupsHandler extends GroupsHandlerService {
     }
 
     private groupValue(childSnapshot: any){
-        const that = this;
         this.logger.debug('[MQTT-GROUPS-SERV] group detail::', childSnapshot.val(), childSnapshot)
         const group: GroupModel = childSnapshot.val();
         this.logger.debug('[MQTT-GROUPS-SERV] groupValue ', group)
