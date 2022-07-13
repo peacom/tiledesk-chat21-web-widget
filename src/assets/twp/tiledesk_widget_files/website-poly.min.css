@@ -5344,9 +5344,9 @@ section {
 
 .navbar-brand {
     background: url(logo.png) no-repeat;
-    background-size: 171px 34px;
+    background-size: 200px 34px;
     margin: 20px 30px 0 0;
-    width: 171px;
+    width: 200px;
     height: 45px
 }
 
