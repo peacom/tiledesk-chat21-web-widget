@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons');
 @import 'src/app/sass/normalize.scss';
 @import 'src/app/sass/variables';
-@import 'src/app/sass/animations.scss';
+@import url('./sass/animations.scss');
 @import url("./sass/hover.css");
 @import '~@ctrl/ngx-emoji-mart/picker';
 // @import "~bootstrap/dist/css/bootstrap.css";
@@ -761,3 +761,27 @@ chat-root {
     }
 
 }
+
+
+@-webkit-keyframes modal-active-in {
+    0% {
+      left: 100%;
+      opacity: 0;
+    }
+    100% {
+      background-color: red;
+      opacity: 1;
+      left: 0px;
+    }
+  }
+  @keyframes modal-active-in {
+    0% {
+      left: 100%;
+      opacity: 0;
+    }
+    100% {
+      background-color: red;
+      opacity: 1;
+      left: 0px;
+    }
+  }
