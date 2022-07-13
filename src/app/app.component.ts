@@ -349,7 +349,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             if (state && state === AUTH_STATE_ONLINE) {
                 /** sono loggato */
                 const user = that.tiledeskAuthService.getCurrentUser()
-                that.logger.info('[APP-COMP] ONLINE - LOGGED SUCCESSFULLY', user, this.g.logoChat);
+                that.logger.info('[APP-COMP] ONLINE - LOGGED SUCCESSFULLY', user);
                 // that.g.wdLog([' anonymousAuthenticationInNewProject']);
                 // that.authService.resigninAnonymousAuthentication();
                 // confronto id utente tiledesk con id utente di firebase
