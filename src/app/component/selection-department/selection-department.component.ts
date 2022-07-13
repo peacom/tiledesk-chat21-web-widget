@@ -103,7 +103,7 @@ export class SelectionDepartmentComponent implements OnInit, AfterViewInit {
             this.appStorageService.setItem('attributes', JSON.stringify(attributes));
             this.logger.debug('[SELECT-DEP] setDepartment: attributes', JSON.stringify(attributes));
         }
-        this.closePage();
+        // this.closePage();
     }
 
 
