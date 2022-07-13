@@ -1,5 +1,20 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.28-rc.2
+- bug-fixed: convesation component delayed to start when singleConversation mode is active
+- changed: lancher icon with new tiledesk logo
+- changed: tiledesk logos with new one 
+
+### 5.0.28-rc.1
+ - bug-fixed: if text is sent by keyboad return key and then emojii is selected, text area present a '\r' at the end
+ - bug-fixed: improve the loading of emoji-mart picker 
+ - added: getLastConversation method for mqtt useful for singleConversation mode
+
+### 5.0.27 in PROD
+- bug-fixed: typing is active if leave and open the same conversations
+- bug-fixed: reading null of undefined in home conversation while add animation
+- bug-fixed: ipAddress not shown in attributes for Firefox and Safari
+
 ### 5.0.27-rc.2
 - bug-fixed: typing is active if leave and open the same conversations
 - bug-fixed: reading null of undefined in home conversation while add animation
