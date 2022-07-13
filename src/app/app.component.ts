@@ -349,7 +349,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             if (state && state === AUTH_STATE_ONLINE) {
                 /** sono loggato */
                 const user = that.tiledeskAuthService.getCurrentUser()
-                that.logger.info('[APP-COMP] ONLINE - LOGGED SUCCESSFULLY', user);
+                that.logger.info('[APP-COMP] ONLINE - LOGGED SUCCESSFULLY', user, this.g.logoChat);
                 // that.g.wdLog([' anonymousAuthenticationInNewProject']);
                 // that.authService.resigninAnonymousAuthentication();
                 // confronto id utente tiledesk con id utente di firebase
@@ -363,6 +363,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                 // this.g.setAttributeParameter('userEmail', user.email);
                 that.g.setParameter('isLogged', true);
                 that.g.setParameter('attributes', that.setAttributesFromStorageService());
+                // that.startUI();
                 this.initConversationsHandler(this.g.tenant, that.g.senderId);
                 
                 /* If singleConversation mode is active wait to startUI: do it later in initConversationsHandler */
@@ -606,7 +607,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             //         this.openNewConversation();
             //     }
             // }
-            this.openNewConversation();
+            this.onNewConversation();
         }else if(this.g.recipientId){
             this.logger.debug('[APP-COMP]  conv da urll', this.g.recipientId)
             if (this.g.isOpen) {
@@ -651,7 +652,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                 this.isOpenConversation = false;
                 if (!this.g.recipientId && this.g.isOpen) {
                     // this.startNwConversation();
-                    this.openNewConversation();
+                    this.onNewConversation();
                 }
             }
         }
@@ -670,42 +671,42 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     // ========= end:: START UI ============//
 
-    private openNewConversation() {
-        this.logger.debug('[APP-COMP] openNewConversation in APP COMPONENT');
-        this.g.newConversationStart = true;
-        // controllo i dipartimenti se sono 1 o 2 seleziono dipartimento e nascondo modale dipartimento
-        // altrimenti mostro modale dipartimenti
-        const preChatForm = this.g.preChatForm;
-        const attributes = this.g.attributes;
-        const departments = this.g.departments;
-        // that.g.wdLog(['departments: ', departments, departments.length);
-        if (preChatForm && (!attributes || !attributes.userFullname || !attributes.userEmail)) {
-            // if (preChatForm && (!attributes.userFullname || !attributes.userEmail)) {
-            this.isOpenConversation = false;
-            this.g.setParameter('isOpenPrechatForm', true);
-            // this.settingsSaverService.setVariable('isOpenPrechatForm', true);
-            this.isOpenSelectionDepartment = false;
-            if (departments && departments.length > 1 && this.g.departmentID == null) {
-                this.isOpenSelectionDepartment = true;
-            }
-        } else {
-            // this.g.isOpenPrechatForm = false;
-            this.g.setParameter('isOpenPrechatForm', false);
-            // this.settingsSaverService.setVariable('isOpenPrechatForm', false);
-            this.isOpenConversation = false;
-            this.isOpenSelectionDepartment = false;
-            if (departments && departments.length > 1 && this.g.departmentID == null) {
-                this.isOpenSelectionDepartment = true;
-            } else {
-                this.isOpenConversation = true;
-            }
-        }
+    // private openNewConversation() {
+    //     this.logger.debug('[APP-COMP] openNewConversation in APP COMPONENT');
+    //     this.g.newConversationStart = true;
+    //     // controllo i dipartimenti se sono 1 o 2 seleziono dipartimento e nascondo modale dipartimento
+    //     // altrimenti mostro modale dipartimenti
+    //     const preChatForm = this.g.preChatForm;
+    //     const attributes = this.g.attributes;
+    //     const departments = this.g.departments;
+    //     // that.g.wdLog(['departments: ', departments, departments.length);
+    //     if (preChatForm && (!attributes || !attributes.userFullname || !attributes.userEmail)) {
+    //         // if (preChatForm && (!attributes.userFullname || !attributes.userEmail)) {
+    //         this.isOpenConversation = false;
+    //         this.g.setParameter('isOpenPrechatForm', true);
+    //         // this.settingsSaverService.setVariable('isOpenPrechatForm', true);
+    //         this.isOpenSelectionDepartment = false;
+    //         if (departments && departments.length > 1 && this.g.departmentID == null) {
+    //             this.isOpenSelectionDepartment = true;
+    //         }
+    //     } else {
+    //         // this.g.isOpenPrechatForm = false;
+    //         this.g.setParameter('isOpenPrechatForm', false);
+    //         // this.settingsSaverService.setVariable('isOpenPrechatForm', false);
+    //         this.isOpenConversation = false;
+    //         this.isOpenSelectionDepartment = false;
+    //         if (departments && departments.length > 1 && this.g.departmentID == null) {
+    //             this.isOpenSelectionDepartment = true;
+    //         } else {
+    //             this.isOpenConversation = true;
+    //         }
+    //     }
 
-        this.logger.debug('[APP-COMP] isOpenPrechatForm', this.g.isOpenPrechatForm, ' isOpenSelectionDepartment:', this.isOpenSelectionDepartment);
-        if (this.g.isOpenPrechatForm === false && this.isOpenSelectionDepartment === false) {
-            this.startNewConversation();
-        }
-    }
+    //     this.logger.debug('[APP-COMP] isOpenPrechatForm', this.g.isOpenPrechatForm, ' isOpenSelectionDepartment:', this.isOpenSelectionDepartment);
+    //     if (this.g.isOpenPrechatForm === false && this.isOpenSelectionDepartment === false) {
+    //         this.startNewConversation();
+    //     }
+    // }
 
     /**
      * genero un nuovo conversationWith
@@ -1771,7 +1772,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         
         this.isOpenConversation = false;
         this.g.singleConversation? this.isOpenHome = false: null;
-        this.openNewConversation();
+        this.onNewConversation();
         // const departments = this.g.departments;
         // if (departments && departments.length > 1 && this.g.departmentID == null) {
         //     this.isOpenSelectionDepartment = true;
