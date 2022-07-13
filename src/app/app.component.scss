@@ -761,27 +761,3 @@ chat-root {
     }
 
 }
-
-
-@-webkit-keyframes modal-active-in {
-    0% {
-      left: 100%;
-      opacity: 0;
-    }
-    100% {
-      background-color: red;
-      opacity: 1;
-      left: 0px;
-    }
-  }
-  @keyframes modal-active-in {
-    0% {
-      left: 100%;
-      opacity: 0;
-    }
-    100% {
-      background-color: red;
-      opacity: 1;
-      left: 0px;
-    }
-  }
