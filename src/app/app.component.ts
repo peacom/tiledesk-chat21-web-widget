@@ -1602,10 +1602,15 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
      * close modal
      */
     onCloseModalDepartment() {
-        this.logger.debug('[APP-COMP] returnCloseModalDepartment');
-        this.isOpenHome = true;
-        this.isOpenSelectionDepartment = false;
-        this.isOpenConversation = false;
+        if(!this.g.singleConversation){
+            this.logger.debug('[APP-COMP] returnCloseModalDepartment');
+            this.isOpenHome = true;
+            this.isOpenSelectionDepartment = false;
+            this.isOpenConversation = false;
+        }else{
+            this.onCloseWidget()
+        }
+        
     }
 
 
