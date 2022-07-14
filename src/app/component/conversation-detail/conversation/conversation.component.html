@@ -16,6 +16,7 @@
         [hideHeaderBackButton]="g?.singleConversation"
         [hideCloseConversationOptionMenu]="(isConversationArchived || g?.hideCloseConversationOptionMenu)"
         [hideHeaderConversationOptionsMenu]="g?.hideHeaderConversationOptionsMenu"
+        [hideSignOutOptionMenu]="(!g?.singleConversation || !g?.showLogoutOption)"
         [stylesMap]="stylesMap"
         [translationMap]="translationMapHeader"
         [widgetTitle]="g?.project?.widgetTitle"
@@ -26,6 +27,7 @@
         (onSoundChange)="onSoundChangeFN($event)"
         (onCloseChat)="onCloseChat($event)"
         (onWidgetHeightChange)="onWidgetHeightChange($event)"
+        (onSignOut)="onSignOutFN($event)"
         (onMenuOptionShow)="onMenuOption($event)">
     </chat-conversation-header>
 

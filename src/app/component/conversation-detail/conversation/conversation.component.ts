@@ -65,8 +65,9 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() isConversationArchived: boolean;
   @Output() onBackHome = new EventEmitter();
   @Output() onCloseWidget = new EventEmitter();
-  @Output() onConversationClosed = new EventEmitter<string>()
   @Output() onSoundChange = new EventEmitter();
+  @Output() onConversationClosed = new EventEmitter<string>()
+  @Output() onSignOut = new EventEmitter();
   @Output() onBeforeMessageSent = new EventEmitter();
   @Output() onAfterSendMessage = new EventEmitter();
   @Output() onNewConversationInit = new EventEmitter();
@@ -250,7 +251,8 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
       'CLOSE',
       'MAXIMIZE',
       'MINIMIZE',
-      'CLOSE_CHAT'
+      'CLOSE_CHAT',
+      'LOGOUT'
     ];
 
     const keysFooter = [
@@ -953,6 +955,10 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
       tiledeskDiv.style.maxHeight = '620px'
     }
     this.isMenuShow = false;
+  }
+  /** CALLED BY: conv-header component */
+  onSignOutFN(event){
+    this.onSignOut.emit(true)
   }
   /** CALLED BY: conv-header conv-content component */
   onMenuOption(event:boolean){

@@ -1523,6 +1523,13 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.g.setParameter('soundEnabled', soundEnabled);
     }
 
+    onMenuOptionSignOut(){
+        this.logger.debug('[APP-COMP] onMenuOptionSignOut');
+        this.signOut()
+        this.isOpenConversation = false;
+        this.onNewConversation();
+    }
+
     /**
      * LAUNCHER BUTTON:
      * onClick button open/close widget

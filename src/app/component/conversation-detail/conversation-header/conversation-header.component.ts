@@ -22,6 +22,7 @@ export class ConversationHeaderComponent implements OnInit, OnChanges {
   @Input() hideHeaderCloseButton: boolean;
   @Input() hideHeaderBackButton: boolean;
   @Input() hideHeaderConversationOptionsMenu: boolean;
+  @Input() hideSignOutOptionMenu: boolean;
   @Input() windowContext;
   @Input() stylesMap: Map<string, string>
   @Input() translationMap: Map< string, string>;
@@ -31,6 +32,7 @@ export class ConversationHeaderComponent implements OnInit, OnChanges {
   @Output() onSoundChange = new EventEmitter();
   @Output() onCloseChat =  new EventEmitter();
   @Output() onWidgetHeightChange = new EventEmitter<string>();
+  @Output() onSignOut = new EventEmitter();
   @Output() onMenuOptionShow = new EventEmitter();
   // ========= end:: Input/Output values
 
@@ -160,7 +162,7 @@ export class ConversationHeaderComponent implements OnInit, OnChanges {
     this.onCloseChat.emit()
   }
 
-  returnCloseWidget() {
+  closeWidget() {
     //this.g.setParameter('activeConversation', null, false);
     this.onCloseWidget.emit();
   }
@@ -178,6 +180,10 @@ export class ConversationHeaderComponent implements OnInit, OnChanges {
     //this.isMenuShow  = false;
     this.onMenuOptionShow.emit(false)
     this.onSoundChange.emit(!this.soundEnabled)
+  }
+
+  signOut(){
+    this.onSignOut.emit(true)
   }
 
   toggleMenu() {
