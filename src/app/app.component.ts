@@ -1480,8 +1480,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                     that.g.windowContext.window.document.title = "(" + badgeNewConverstionNumber + ") " + that.tabTitle;
                 }
             }, 1000);
-            this.soundMessage()
         }
+        this.soundMessage()
     }
 
 
