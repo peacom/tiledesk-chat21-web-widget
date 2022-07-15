@@ -39,7 +39,7 @@
       </chat-list-all-conversations>
     </div>
 
-    <div *ngIf="isOpenConversation && g.senderId" class="modal-page active">
+    <div *ngIf="isOpenConversation && g.senderId" class="modal-page active" [class.modal-slide-in-right]="isOpenConversation && !g?.singleConversation">
       <!-- [class.active]="true" isOpenConversation &&  [class.modal-slide-out-right]="!isOpenConversation"-->
       <!-- [conversation]="conversationSelected" -->
       <chat-conversation 
