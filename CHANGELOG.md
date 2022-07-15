@@ -1,7 +1,14 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.28-rc.2
+- changed: changed: hideSettings tiledesk property default value from false to true	
+- changed: changed powered by on home footer default value
+- changed: sound behaviour. before sounds when widget tab is hidden; now sounds when new conv added and conv changed (on every incoming message)
+- changed: option menu home icon visible on mouse hover
+- added: logout menu option in conversation-detail header if singleConversation mode is active
+
 ### 5.0.28-rc.1
- - bug-fixed: if text is sent by keyboad return key and then emojii is selected, text area present a '\r' at the end
+- bug-fixed: if text is sent by keyboad return key and then emojii is selected, text area present a '\r' at the end
 - bug-fixed: improve the loading of emoji-mart picker 
 - bug-fixed: convesation component delayed to start when singleConversation mode is active
 - changed: lancher icon with new tiledesk logo
