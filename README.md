@@ -17,6 +17,9 @@ With Tiledesk web-widget you can:
 * Add a code snippet to your website easly 
 * It's a HTML5 widget built with Google Firebase, Angular5 and Bootstrap
 
+## Community? Questions? Support?
+If you need help or just want to hang out, come, say hi on our <img width="15" alt="dialogo_widgetchat_2" src="https://seeklogo.com/images/D/discord-color-logo-E5E6DFEF80-seeklogo.com.png"> [Discord](https://discord.gg/WQPfqShJ) server.
+
 # Features
 * Send a direct message to a preset user
 * Receive realtime support from your team
@@ -154,4 +157,5 @@ nano .env #configure .env file properly
 docker run -p 4200:80 --env-file .env chat21/chat21-web-widget
 
 ```
+
 
