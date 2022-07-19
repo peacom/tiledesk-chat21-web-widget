@@ -18,7 +18,7 @@ With Tiledesk web-widget you can:
 * It's a HTML5 widget built with Google Firebase, Angular5 and Bootstrap
 
 ## Community? Questions? Support?
-If you need help or just want to hang out, come, say hi on our <img width="15" alt="dialogo_widgetchat_2" src="https://seeklogo.com/images/D/discord-color-logo-E5E6DFEF80-seeklogo.com.png"> [Discord](https://discord.gg/WQPfqShJ) server.
+If you need help or just want to hang out, come, say hi on our [<img width="15" alt="Tiledesk discord" src="https://seeklogo.com/images/D/discord-color-logo-E5E6DFEF80-seeklogo.com.png"> Discord](https://discord.gg/WQPfqShJ) server.
 
 # Features
 * Send a direct message to a preset user
