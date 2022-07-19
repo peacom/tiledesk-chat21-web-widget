@@ -55,7 +55,7 @@
         }
 
         body {
-            background-color: #f4f5f5 !important;
+            background-color: #ffffff !important; /*#f4f5f5 !important;*/
             font-family: Roboto, "Helvetica Neue", sans-serif;
             font-weight: 300;
             overflow: hidden;
@@ -726,6 +726,13 @@
             window.Tiledesk('restart')
         }
 
+        function onClickSingleConversation(){
+            let status = document.querySelector('input[name="singleConversation"]:checked').value
+            window.tiledeskSettings['singleConversation'] = stringToBoolean(status)
+            console.log('onClickSingleConversation: status-->',window.tiledeskSettings);
+            window.Tiledesk('restart')
+        }
+
         function onClickHideHeaderCloseButton(){
             let status = document.querySelector('input[name="hideHeaderCloseButton"]:checked').value
             window.tiledeskSettings['hideHeaderCloseButton'] = stringToBoolean(status)
@@ -744,6 +751,20 @@
             let status = document.querySelector('input[name="hideHeaderConversationOptionsMenu"]:checked').value
             window.tiledeskSettings['hideHeaderConversationOptionsMenu'] = stringToBoolean(status)
             console.log('onClickHideHeaderConversationOptionsMenu:', window.tiledeskSettings)
+            window.Tiledesk('restart')
+        }
+
+        function onClickHideCloseConversationOptionMenu(){
+            let status = document.querySelector('input[name="hideCloseConversationOptionMenu"]:checked').value
+            window.tiledeskSettings['hideCloseConversationOptionMenu'] = stringToBoolean(status)
+            console.log('onClickHideCloseConversationOptionMenu:', window.tiledeskSettings)
+            window.Tiledesk('restart')
+        }
+
+        function onClickAllowTranscriptDownload(){
+            let status = document.querySelector('input[name="allowTranscriptDownload"]:checked').value
+            window.tiledeskSettings['allowTranscriptDownload'] = stringToBoolean(status)
+            console.log('onClickAllowTranscriptDownload:',window.tiledeskSettings);
             window.Tiledesk('restart')
         }
 
@@ -842,13 +863,6 @@
             let text = document.getElementById('recipientId').value
             window.tiledeskSettings['recipientId'] = text
             console.log('onClickRecipientId:',window.tiledeskSettings);
-            window.Tiledesk('restart')
-        }
-
-        function onClickAllowTranscriptDownload(){
-            let status = document.querySelector('input[name="allowTranscriptDownload"]:checked').value
-            window.tiledeskSettings['allowTranscriptDownload'] = stringToBoolean(status)
-            console.log('onClickAllowTranscriptDownload:',window.tiledeskSettings);
             window.Tiledesk('restart')
         }
 
@@ -1544,6 +1558,16 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-md-5 formElement"><span><i><b>singleConversation</b></i></span></div>
+                            <div class="col-md-4">
+                                <input class="form-check-input" type="radio" name="singleConversation" value="true"><label>True</label>
+                                <input class="form-check-input" type="radio" name="singleConversation" value="false" checked><label>False</label>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-light" onclick="onClickSingleConversation()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-5 formElement"><span><i><b>hideHeaderCloseButton</b></i></span></div>
                             <div class="col-md-4">
                                 <input class="form-check-input" type="radio" name="hideHeaderCloseButton" value="true"><label>True</label>
@@ -1571,6 +1595,26 @@
                             </div>
                             <div class="col-md-3">
                                 <button class="btn btn-light" onclick="onClickHideHeaderConversationOptionsMenu()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 formElement"><span><i><b>hideCloseConversationOptionMenu</b></i></span></div>
+                            <div class="col-md-4">
+                                <input class="form-check-input" type="radio" name="hideCloseConversationOptionMenu" value="true"><label>True</label>
+                                <input class="form-check-input" type="radio" name="hideCloseConversationOptionMenu" value="false" checked><label >False</label>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-light" onclick="onClickHideCloseConversationOptionMenu()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 formElement"><span><i><b>allowTranscriptDownload</b></i></span></div>
+                            <div class="col-md-4">
+                                <input class="form-check-input" type="radio" name="allowTranscriptDownload" value="true"><label>True</label>
+                                <input class="form-check-input" type="radio" name="allowTranscriptDownload" value="false" checked><label >False</label>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-light" onclick="onClickAllowTranscriptDownload()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
@@ -1619,16 +1663,6 @@
                             </div>
                             <div class="col-md-3">
                                 <button class="btn btn-light" onclick="onClickRecipientId()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-5 formElement"><span><i><b>allowTranscriptDownload</b></i></span></div>
-                            <div class="col-md-4">
-                                <input class="form-check-input" type="radio" name="allowTranscriptDownload" value="true"><label>True</label>
-                                <input class="form-check-input" type="radio" name="allowTranscriptDownload" value="false" checked><label >False</label>
-                            </div>
-                            <div class="col-md-3">
-                                <button class="btn btn-light" onclick="onClickAllowTranscriptDownload()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">

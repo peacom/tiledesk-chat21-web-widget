@@ -5485,6 +5485,7 @@ only screen and (min-resolution:2dppx) {
     }
     .navbar-brand {
         background-image: url(logo-short.png);
+        background-size: 30px 30px;
         width: auto;
         max-height: 34px;
         margin-top: 6px
