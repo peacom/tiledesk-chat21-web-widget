@@ -1,5 +1,7 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.28 in PROD
+
 ### 5.0.28-rc.2
 - changed: changed: hideSettings tiledesk property default value from false to true	
 - changed: changed powered by on home footer default value
