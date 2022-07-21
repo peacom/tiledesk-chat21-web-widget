@@ -58,7 +58,7 @@ export class MQTTAuthService extends MessagingAuthService {
     this.URL_TILEDESK_CREATE_CUSTOM_TOKEN = this.SERVER_BASE_URL + 'chat21/native/auth/createCustomToken';
     this.logger.log('[MQTTAuthService] initialize ');
     // this.checkIsAuth();
-    // this.onAuthStateChanged();
+    this.onAuthStateChanged();
   }
 
   // logout(callback) {
@@ -99,33 +99,33 @@ z
 
   /**
    */
-  // onAuthStateChanged() {
-  //   console.log('UserService::onAuthStateChanged');
-  //   // if (this.appStorage.getItem('tiledeskToken') == null) {
-  //   //   this.currentUser = null;
-  //     this.BSAuthStateChanged.next('offline');
-  //   // }
-  //   // const that = this;
-  //   console.log("STORAGE CHANGED: added listner")
-  //   // window.addEventListener('storage', (e) => {
-  //   //   console.log('STORAGE CHANGED:', e.key);
-  //   //   if (this.appStorage.getItem('tiledeskToken') == null && this.appStorage.getItem('currentUser') == null) {
-  //   //     console.log('STORAGE CHANGED: CASO TOKEN NULL');
-  //   //     this.currentUser = null;
-  //   //     // that.logout(() => {
-  //   //     //   that.BSAuthStateChanged.next('offline');
-  //   //     // });
-  //   //     this.logout();
-  //   //   }
-  //   //   else if (this.currentUser == null && this.appStorage.getItem('tiledeskToken') != null && this.appStorage.getItem('currentUser') != null) {
-  //   //     console.log('STORAGE CHANGED: CASO LOGGED OUTSIDE');
-  //   //     this.currentUser = JSON.parse(this.appStorage.getItem('currentUser'));
-  //   //     const tiledeskToken = this.appStorage.getItem('tiledeskToken');
-  //   //     this.connectWithCustomToken(tiledeskToken);
-  //   //   }
-  //   // }, false);
+  onAuthStateChanged() {
+    console.log('UserService::onAuthStateChanged');
+    // if (this.appStorage.getItem('tiledeskToken') == null) {
+    //   this.currentUser = null;
+      this.BSAuthStateChanged.next('offline');
+    // }
+    // const that = this;
+    console.log("STORAGE CHANGED: added listner")
+    // window.addEventListener('storage', (e) => {
+    //   console.log('STORAGE CHANGED:', e.key);
+    //   if (this.appStorage.getItem('tiledeskToken') == null && this.appStorage.getItem('currentUser') == null) {
+    //     console.log('STORAGE CHANGED: CASO TOKEN NULL');
+    //     this.currentUser = null;
+    //     // that.logout(() => {
+    //     //   that.BSAuthStateChanged.next('offline');
+    //     // });
+    //     this.logout();
+    //   }
+    //   else if (this.currentUser == null && this.appStorage.getItem('tiledeskToken') != null && this.appStorage.getItem('currentUser') != null) {
+    //     console.log('STORAGE CHANGED: CASO LOGGED OUTSIDE');
+    //     this.currentUser = JSON.parse(this.appStorage.getItem('currentUser'));
+    //     const tiledeskToken = this.appStorage.getItem('tiledeskToken');
+    //     this.connectWithCustomToken(tiledeskToken);
+    //   }
+    // }, false);
 
-  // }
+  }
 
   createCustomToken(tiledeskToken: any): void {
     this.connectWithCustomToken(tiledeskToken)
