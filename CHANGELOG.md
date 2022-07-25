@@ -1,5 +1,10 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.29 in PROD
+
+### 5.0.29-rc.1
+- changed: reduced cache-control max-age from 7 days to 1 day
+
 ### 5.0.29-rc.1
 - changed: restore default launcher icon
 - changed: removed 'Powered by' string from home footer
