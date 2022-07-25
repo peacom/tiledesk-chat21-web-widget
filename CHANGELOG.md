@@ -1,9 +1,13 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.29-rc.1
+- changed: restore default launcher icon
+- changed: removed 'Powered by' string from home footer
+
 ### 5.0.28 in PROD
 
 ### 5.0.28-rc.2
-- changed: changed: hideSettings tiledesk property default value from false to true	
+- changed: hideSettings tiledesk property default value from false to true	
 - changed: changed powered by on home footer default value
 - changed: sound behaviour. before sounds when widget tab is hidden; now sounds when new conv added and conv changed (on every incoming message)
 - changed: option menu home icon visible on mouse hover
