@@ -1,5 +1,17 @@
 [![npm version](https://badge.fury.io/js/%40chat21%2Fchat21-web-widget.svg)](https://badge.fury.io/js/%40chat21%2Fchat21-web-widget)
 
+# Tiledesk Introduction
+
+Tiledesk-server is the server engine of Tiledesk. Tiledesk is an Open Source Live Chat platform with integrated Chatbots written in NodeJs and Express. Build your own customer support with a multi-channel platform for Web, Android and iOS.
+
+Designed to be open source since the beginning, we actively worked on it to create a totally new, first class customer service platform based on instant messaging.
+
+What is Tiledesk today? It became the open source “conversational app development” platform that everyone needs 😌
+
+You can use Tiledesk to increase sales for your website or for post-sales customer service. Every conversation can be automated using our first class native chatbot technology. You can also connect your own applications using our APIs or Webhooks. Moreover you can deploy entire visual applications inside a conversation. And your applications can converse with your chatbots or your end-users! We know this is cool 😎
+
+Tiledesk is multichannel in a totally new way. You can write your chatbot scripts with images, buttons and other cool elements that your channels support. But you will configureyour chatbot replies only once. They will run on every channel, auto-adapting the responses to the target channel whatever it is, Whatsapp, Facebook Messenger, Telegram etc.
+
 # Tiledesk web-widget
 
 > ***🚀 Do you want to install Tiledesk on your server with just one click?***
@@ -17,7 +29,7 @@ With Tiledesk web-widget you can:
 * Add a code snippet to your website easly 
 * It's a HTML5 widget built with Google Firebase, Angular5 and Bootstrap
 
-## Community? Questions? Support ?
+# Community? Questions? Support ?
 If you need help or just want to hang out, come, say hi on our [<img width="15" alt="Tiledesk discord" src="https://seeklogo.com/images/D/discord-color-logo-E5E6DFEF80-seeklogo.com.png"> Discord](https://discord.gg/nERZEZ7SmG) server or make a post on our [Forum](https://tiledesk.discourse.group)
 
 # Features
