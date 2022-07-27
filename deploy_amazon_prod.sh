@@ -7,8 +7,8 @@ ng build --configuration="prod" --aot=true --base-href --output-hashing none --b
 
 cd dist
 # aws s3 sync . s3://tiledesk-widget/v5/latest/
-aws s3 sync . s3://tiledesk-widget/v5/$version/ --cache-control max-age=172800
-aws s3 sync . s3://tiledesk-widget/v5/ --cache-control max-age=172800
+aws s3 sync . s3://tiledesk-widget/v5/$version/ --cache-control max-age=300
+aws s3 sync . s3://tiledesk-widget/v5/ --cache-control max-age=300
 cd ..
 
 aws  cloudfront create-invalidation --distribution-id E3EJDWEHY08CZZ --paths "/*"
