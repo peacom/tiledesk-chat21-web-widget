@@ -1,9 +1,9 @@
 <div id='c21-menu-options'>
-  <div class="button-menu-options" (click)="f21_toggle_options()"  (mouseover)="hover=true" (mouseleave)="hover=false">
-    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Livello_1" x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
-      <circle class="st1" cx="6" cy="12" r="2" [ngStyle]="{'fill': g.themeColor, 'opacity': 1}"/>
-      <circle class="st2" cx="18" cy="12" r="2"[ngStyle]="{'fill': g.themeColor, 'opacity': 0.6}"/>
-      <circle class="st3" cx="12" cy="12" r="2"[ngStyle]="{'fill': g.themeColor, 'opacity': 0.4}"/>
+  <div class="button-menu-options" (click)="f21_toggle_options()"  (mouseover)="isHover=true" (mouseleave)="isHover=false">
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Livello_1" x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve" [ngStyle]="{'display': (isHover || g.isOpenMenuOptions)? 'block': 'none'}">
+      <circle class="st1" cx="6" cy="12" r="2" [ngStyle]="{'fill': '#a8a8a8', 'opacity': 1}"/>
+      <circle class="st3" cx="12" cy="12" r="2"[ngStyle]="{'fill': '#a8a8a8', 'opacity': 0.6}"/>
+      <circle class="st2" cx="18" cy="12" r="2"[ngStyle]="{'fill': '#a8a8a8', 'opacity': 0.4}"/>
       </svg>
   </div>
   <div *ngIf="g.isOpenMenuOptions" class="modal-menu-options" [ngStyle]="{ 'border-top': '2.4px solid', 'border-top-color': themeColor50 }">

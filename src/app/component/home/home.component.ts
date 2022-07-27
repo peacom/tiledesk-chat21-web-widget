@@ -38,6 +38,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   welcomeMsg;
   welcomeTitle;
   colorBck;
+  hover: boolean = false;
   translationMapHeader: Map<string, string>;
   translationMapFooter: Map<string, string>;
   // ========= end:: component variables ======= //

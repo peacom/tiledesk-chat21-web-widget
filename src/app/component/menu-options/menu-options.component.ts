@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Globals } from 'src/app/utils/globals';
 import { convertColorToRGBA } from 'src/app/utils/utils';
 
@@ -11,6 +11,7 @@ import { convertColorToRGBA } from 'src/app/utils/utils';
 })
 export class MenuOptionsComponent implements OnInit {
 
+  @Input() isHover: boolean = false;
   @Output() onSignOut = new EventEmitter();
   
   themeColor50: string;
