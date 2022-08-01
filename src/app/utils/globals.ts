@@ -211,6 +211,7 @@ export class Globals {
    singleConversation: boolean; // *******  new ********
    nativeRating: boolean; // *******  new ********
    hideBubbleInfoMessage: boolean; // *******  new ********
+   typingLocation: string; // *******  new ********
   constructor(
   ) {
     // console.log(' ---------------- 1: initDefafultParameters ---------------- ');
@@ -375,7 +376,8 @@ export class Globals {
     /** set if native rating componet has to be shown */
     this.hideBubbleInfoMessage = false;
     /** disable or show bubble info message 'MEMBER_JOINED_CHAT' */
-
+    this.typingLocation = 'content'
+    /** set the location of typing indicator (header or content) */
     this.showWaitTime = true;
 
     this.showAvailableAgents = true;
@@ -451,6 +453,7 @@ export class Globals {
     // this.parameters.push({'supportMode': true});
 
     this.newConversationStart = true;
+
 
   }
 

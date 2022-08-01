@@ -1056,6 +1056,13 @@
             window.Tiledesk('restart')
         }
 
+        function onClickTypingLocation(){
+            let status = document.querySelector('input[name="typingLocation"]:checked').value
+            window.tiledeskSettings['typingLocation'] = status
+            console.log('onClickTypingLocation:', window.tiledeskSettings)
+            window.Tiledesk('restart')
+        }
+
         function onClickCustomAttributes(){
             let text = document.getElementById('customAttributes').value
             window.tiledeskSettings['customAttributes'] = JSON.parse(text)
@@ -1890,6 +1897,16 @@
                             </div>
                             <div class="col-md-3">
                                 <button class="btn btn-light" onclick="onClickNativeRating()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 formElement"><span><i><b>typingLocation</b></i></span></div>
+                            <div class="col-md-4">
+                                <input class="form-check-input" type="radio" name="typingLocation" value="content" checked><label>content</label>
+                                <input class="form-check-input" type="radio" name="typingLocation" value="header"><label>header</label>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-light" onclick="onClickTypingLocation()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">

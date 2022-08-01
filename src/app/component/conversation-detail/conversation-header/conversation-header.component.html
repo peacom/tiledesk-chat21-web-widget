@@ -46,11 +46,12 @@
             <div class="titleText">{{widgetTitle}}</div>
         </div>
         
-        <!-- <user-typing *ngIf="isTypings"
+        <user-typing *ngIf="isTypings && typingLocation==='header'"
             [themeColor]="stylesMap?.get('foregroundColor')"
             [translationMap]="translationMap"
-            [nameUserTypingNow]="nameUserTypingNow">
-        </user-typing> -->
+            [nameUserTypingNow]="nameUserTypingNow"
+            [typingLocation]="typingLocation">
+        </user-typing>
         <!-- <p *ngIf="isTypings" class="c21-header-writing" [ngStyle]="{'color': g.themeForegroundColor}">{{writingMessage}}</p> -->
       </div>
 

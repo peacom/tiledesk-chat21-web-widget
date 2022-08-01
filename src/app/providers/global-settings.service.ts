@@ -926,17 +926,22 @@ export class GlobalSettingsService {
         TEMP = tiledeskSettings['singleConversation'];
         // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > singleConversation:: ', TEMP]);
         if (TEMP !== undefined) {
-            globals.singleConversation = (TEMP === true) ? true : false;;
+            globals.singleConversation = (TEMP === true) ? true : false;
         }
         TEMP = tiledeskSettings['nativeRating'];
         // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > nativeRating:: ', TEMP]);
         if (TEMP !== undefined) {
-            globals.nativeRating = (TEMP === true) ? true : false;;
+            globals.nativeRating = (TEMP === true) ? true : false;
         }
         TEMP = tiledeskSettings['hideBubbleInfoMessage'];
         // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > hideBubbleInfoMessage:: ', TEMP]);
         if (TEMP !== undefined) {
-            globals.hideBubbleInfoMessage = (TEMP === true) ? true : false;;
+            globals.hideBubbleInfoMessage = (TEMP === true) ? true : false;
+        }
+        TEMP = tiledeskSettings['typingLocation'];
+        // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > hideBubbleInfoMessage:: ', TEMP]);
+        if (TEMP !== undefined) {
+            globals.hideBubbleInfoMessage = TEMP;
         }
         
 
@@ -1169,6 +1174,10 @@ export class GlobalSettingsService {
         TEMP = el.nativeElement.getAttribute('hideBubbleInfoMessage');
         if (TEMP !== null) {
             this.globals.hideBubbleInfoMessage = (TEMP === true) ? true : false;
+        }
+        TEMP = el.nativeElement.getAttribute('typingLocation');
+        if (TEMP !== null) {
+            this.globals.typingLocation = TEMP;
         }
         
     }
@@ -1562,6 +1571,10 @@ export class GlobalSettingsService {
         TEMP = getParameterByName(windowContext, 'tiledesk_hideBubbleInfoMessage');
         if (TEMP) {
             globals.hideBubbleInfoMessage = stringToBoolean(TEMP);
+        }
+        TEMP = getParameterByName(windowContext, 'tiledesk_typingLocation');
+        if (TEMP) {
+            globals.hideBubbleInfoMessage = TEMP;
         }
         
     }

@@ -213,7 +213,7 @@
                       </div>
 
 
-                      <div *ngIf="isTypings" class="msg_container base_receive">
+                      <div *ngIf="isTypings && typingLocation==='content' " class="msg_container base_receive">
                         <!-- !isSameSender(idUserTypingNow, i) -->
                         <chat-avatar-image *ngIf="idUserTypingNow " class="slide-in-left"  
                           [senderID]="idUserTypingNow"

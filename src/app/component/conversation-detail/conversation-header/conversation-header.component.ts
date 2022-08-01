@@ -17,6 +17,9 @@ export class ConversationHeaderComponent implements OnInit, OnChanges {
   @Input() senderId: string;
   @Input() soundEnabled: boolean;
   @Input() isMenuShow: boolean;
+  @Input() isTypings: boolean;
+  @Input() nameUserTypingNow: string;
+  @Input() typingLocation: string;
   @Input() isTrascriptDownloadEnabled: boolean;
   @Input() hideCloseConversationOptionMenu: boolean;
   @Input() hideHeaderCloseButton: boolean;
@@ -42,10 +45,10 @@ export class ConversationHeaderComponent implements OnInit, OnChanges {
   
   isButtonsDisabled = true;
   
-  public isTypings = false;
+  // public isTypings = false;
   public isDirect = false;
   public writingMessage: string;
-  public nameUserTypingNow: string;
+  // public nameUserTypingNow: string;
   private setTimeoutWritingMessages;
 
   subscriptions = [];
