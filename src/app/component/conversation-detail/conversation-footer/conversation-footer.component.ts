@@ -421,6 +421,9 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
     if (textArea) {
       textArea.value = '';  // clear the textarea
       textArea.placeholder = this.translationMap.get('LABEL_PLACEHOLDER');  // restore the placholder
+      if(textArea.style.height > this.HEIGHT_DEFAULT){
+        document.getElementById('chat21-button-send').style.removeProperty('right')
+      }
       this.logger.debug('[CONV-FOOTER] AppComponent:restoreTextArea::restoreTextArea::textArea:', 'restored');
     } else {
       this.logger.error('[CONV-FOOTER] restoreTextArea::textArea:', 'not restored');
