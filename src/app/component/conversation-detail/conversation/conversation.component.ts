@@ -804,6 +804,20 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
       this.subscriptions.push(subscribe);
     }
 
+    subscribtionKey = 'messageInfo';
+    subscribtion = this.subscriptions.find(item => item.key === subscribtionKey);
+    if (!subscribtion) {
+      this.logger.debug('[CONV-COMP] ***** add messageInfo *****',  this.conversationHandlerService);
+      subscribtion = this.conversationHandlerService.messageInfo.pipe(takeUntil(this.unsubscribe$)).subscribe((data: any) => {
+        this.logger.debug('[CONV-COMP] ***** DETAIL messageInfo *****', data);
+        if(data){
+          this.updateLeadInfo(data)
+        }
+      });
+      const subscribe = {key: subscribtionKey, value: subscribtion };
+      this.subscriptions.push(subscribe);
+    }
+
     subscribtionKey = 'conversationTyping';
     subscribtion = this.subscriptions.find(item => item.key === subscribtionKey);
     if (!subscribtion) {
@@ -871,23 +885,26 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
         this.footerMessagePlaceholder = '';
       }
 
-      //check if user has changed userFullName and userEmail
-      if (msg.attributes && msg.attributes['updateUserFullname']) {
-        const userFullname = msg.attributes['updateUserFullname'];
-        that.logger.debug('[CONV-COMP] newMessageAdded --> updateUserFullname', userFullname)
-        that.g.setAttributeParameter('userFullname', userFullname);
-        that.g.setParameter('userFullname', userFullname);
-        that.appStorageService.setItem('attributes', JSON.stringify(that.g.attributes));
-      }
-      if (msg.attributes && msg.attributes['updateUserEmail']) {
-        const userEmail = msg.attributes['updateUserEmail'];
-        that.logger.debug('[CONV-COMP] newMessageAdded --> userEmail', userEmail)
-        that.g.setAttributeParameter('userEmail', userEmail);
-        that.g.setParameter('userEmail', userEmail);
-        that.appStorageService.setItem('attributes', JSON.stringify(that.g.attributes));
-      }
     }
 
+  }
+
+  updateLeadInfo(msg){
+    //check if user has changed userFullName and userEmail
+    if (msg.attributes && msg.attributes['updateUserFullname']) {
+      const userFullname = msg.attributes['updateUserFullname'];
+      this.logger.debug('[CONV-COMP] newMessageAdded --> updateUserFullname', userFullname)
+      this.g.setAttributeParameter('userFullname', userFullname);
+      this.g.setParameter('userFullname', userFullname);
+      this.appStorageService.setItem('attributes', JSON.stringify(this.g.attributes));
+    }
+    if (msg.attributes && msg.attributes['updateUserEmail']) {
+      const userEmail = msg.attributes['updateUserEmail'];
+      this.logger.debug('[CONV-COMP] newMessageAdded --> userEmail', userEmail)
+      this.g.setAttributeParameter('userEmail', userEmail);
+      this.g.setParameter('userEmail', userEmail);
+      this.appStorageService.setItem('attributes', JSON.stringify(this.g.attributes));
+    }
   }
 
  scrollToBottom() {

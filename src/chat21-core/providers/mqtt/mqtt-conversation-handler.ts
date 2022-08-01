@@ -35,6 +35,7 @@ export class MQTTConversationHandler extends ConversationHandlerService {
     messageChanged: BehaviorSubject<MessageModel> = new BehaviorSubject<MessageModel>(null);;
     messageRemoved: BehaviorSubject<string> = new BehaviorSubject<string>(null);
     messageWait: BehaviorSubject<any> = new BehaviorSubject<string>(null);
+    messageInfo: BehaviorSubject<MessageModel> = new BehaviorSubject<MessageModel>(null);
 
     // public variables
     public attributes: any;
@@ -232,6 +233,7 @@ export class MQTTConversationHandler extends ConversationHandlerService {
         const msg = this.messageGenerate(messageSnapshot);
         msg.uid = msg.message_id;
         if(this.skipInfoMessage && messageType(MESSAGE_TYPE_INFO, msg) ){
+            this.messageInfo.next(msg)
             if(!checkIfIsMemberJoinedGroup(msg, this.loggedUser)){
                 return;
             } 

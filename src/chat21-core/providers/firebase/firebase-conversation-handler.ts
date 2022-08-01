@@ -35,10 +35,11 @@ import { messageType, checkIfIsMemberJoinedGroup } from '../../utils/utils-messa
 export class FirebaseConversationHandler extends ConversationHandlerService {
 
     // BehaviorSubject
-    messageAdded: BehaviorSubject<MessageModel> = new BehaviorSubject<MessageModel>(null);;
-    messageChanged: BehaviorSubject<MessageModel> = new BehaviorSubject<MessageModel>(null);;
+    messageAdded: BehaviorSubject<MessageModel> = new BehaviorSubject<MessageModel>(null);
+    messageChanged: BehaviorSubject<MessageModel> = new BehaviorSubject<MessageModel>(null);
     messageRemoved: BehaviorSubject<string> = new BehaviorSubject<string>(null);
     messageWait: BehaviorSubject<any> = new BehaviorSubject<string>(null);
+    messageInfo: BehaviorSubject<MessageModel> = new BehaviorSubject<MessageModel>(null);
 
     // public variables
     public attributes: any;
@@ -266,6 +267,7 @@ export class FirebaseConversationHandler extends ConversationHandlerService {
         if(this.isValidMessage(msg)){
             // msg.attributes && msg.attributes['subtype'] === 'info'
             if(this.skipMessage && messageType(MESSAGE_TYPE_INFO, msg)){
+                this.messageInfo.next(msg)
                 if(!checkIfIsMemberJoinedGroup(msg, this.loggedUser)){
                     return;
                 }
