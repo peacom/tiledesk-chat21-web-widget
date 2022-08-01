@@ -383,7 +383,7 @@ export class Globals {
     this.showAvailableAgents = true;
     // this.parameters['availableAgents'] = [];
 
-    this.showLogoutOption = true;
+    this.showLogoutOption = false;
 
     this.offline_msg = this.LABEL_FIRST_MSG_NO_AGENTS;
     this.online_msg = this.LABEL_FIRST_MSG;
