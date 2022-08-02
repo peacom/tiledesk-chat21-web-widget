@@ -941,7 +941,7 @@ export class GlobalSettingsService {
         TEMP = tiledeskSettings['typingLocation'];
         // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > hideBubbleInfoMessage:: ', TEMP]);
         if (TEMP !== undefined) {
-            globals.hideBubbleInfoMessage = TEMP;
+            globals.typingLocation = TEMP;
         }
         
 
@@ -1574,7 +1574,7 @@ export class GlobalSettingsService {
         }
         TEMP = getParameterByName(windowContext, 'tiledesk_typingLocation');
         if (TEMP) {
-            globals.hideBubbleInfoMessage = TEMP;
+            globals.typingLocation = TEMP;
         }
         
     }
