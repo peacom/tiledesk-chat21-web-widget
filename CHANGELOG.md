@@ -1,5 +1,17 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.31-rc.1
+- added: typingLocation settings property to locate the typing indicator
+- added: tooltip added to info-message
+- added: update user info on new message info received
+- added: close conversation-preview component on 'Esc' keyboard button
+- changed: new downloadUrl for native upload service
+- changed: showLogoutOption default value changed from true to false
+- bug-fixed: if textarea is greater then default heigth -> restore send button icon to its default position 
+
+### 5.0.30 in PROD
+- changed: max-age value for cache control reduced from 7 days to 5 minutes
+
 ### 5.0.29 in PROD
 
 ### 5.0.29-rc.1
