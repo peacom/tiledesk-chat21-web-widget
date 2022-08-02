@@ -1,5 +1,7 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.31 in PROD
+
 ### 5.0.31-rc.1
 - added: typingLocation settings property to locate the typing indicator
 - added: tooltip added to info-message
