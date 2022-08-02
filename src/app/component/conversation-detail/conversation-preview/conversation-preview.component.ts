@@ -278,6 +278,13 @@ export class ConversationPreviewComponent implements OnInit {
     }
   }
 
+  onkeydown(event){
+    const keyCode = event.which || event.keyCode;
+    if (keyCode === 27) { // Esc keyboard code
+      this.onClickClose()
+    }
+  }
+
   onPaste(event){
     this.resizeInputField();
     this.logger.debug('[LOADER-PREVIEW] onPaste', event)
