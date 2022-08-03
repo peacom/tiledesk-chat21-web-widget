@@ -590,7 +590,7 @@
             if(preChatForm !== '' && isJsonString(preChatForm)=== true){
                 document.getElementById('preChatForm').style.color= '#555'
                 window.tiledeskSettings['preChatForm'] = true
-                window.Tiledesk('setAttributeParameter',({key: 'userFullName', value: null}))
+                window.Tiledesk('setAttributeParameter',({key: 'userFullname', value: null}))
                 window.Tiledesk('setAttributeParameter',({key: 'userEmail', value: null}))
                 window.Tiledesk('setPreChatFormJson', JSON.parse(preChatForm))
                 // window.Tiledesk('restart')
