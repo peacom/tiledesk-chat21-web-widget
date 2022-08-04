@@ -837,12 +837,6 @@
             window.Tiledesk('restart')
         }
 
-        function onClickHideBubbleInfoMessage(){
-            let status = document.querySelector('input[name="hideBubbleInfoMessage"]:checked').value
-            window.tiledeskSettings['hideBubbleInfoMessage'] = stringToBoolean(status)
-            console.log('onClickHideBubbleInfoMessage:', window.tiledeskSettings)
-            window.Tiledesk('restart')
-        }
 
         function onClickButtonFontSize(){
             let text = document.getElementById('buttonFontSize').value
@@ -1067,6 +1061,13 @@
             let text = document.getElementById('customAttributes').value
             window.tiledeskSettings['customAttributes'] = JSON.parse(text)
             console.log('onClickCustomAttributes:',window.tiledeskSettings);
+            window.Tiledesk('restart')
+        }
+
+        function onClickShowInfoMessage(){
+            let text = document.getElementById('showInfoMessage').value
+            window.tiledeskSettings['showInfoMessage'] = text
+            console.log('onClickShowInfoMessage:', window.tiledeskSettings)
             window.Tiledesk('restart')
         }
 
@@ -1916,6 +1917,15 @@
                             </div>
                             <div class="col-md-3">
                                 <button class="btn btn-light" onclick="onClickCustomAttributes()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 formElement"><span><i><b>showInfoMessage</b></i></span></div>
+                            <div class="col-md-4">
+                                <textarea class="form-control" id="showInfoMessage" placeholder="Set a comma separated string..." rows="6" cols="30"></textarea>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-light" onclick="onClickShowInfoMessage()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">

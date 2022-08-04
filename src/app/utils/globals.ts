@@ -374,7 +374,7 @@ export class Globals {
     /** set the single conversation mode for the widget */
     this.nativeRating = true;
     /** set if native rating componet has to be shown */
-    this.showInfoMessage = ['MEMBER_JOINED_GROUP', 'CHAT_CLOSED']
+    this.showInfoMessage = 'MEMBER_JOINED_GROUP'.split(',')
     /** disable or show bubble info message 'MEMBER_JOINED_CHAT' */
     this.typingLocation = 'content'
     /** set the location of typing indicator (header or content) */
