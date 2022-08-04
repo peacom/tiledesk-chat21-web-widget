@@ -1,5 +1,9 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.32-rc.1
+- removed: hideBubbleInfoMessage settings property 
+- added: showInfoMessage string array settings property to hide/show info message in conversation-detail component
+
 ### 5.0.31 in PROD
 
 ### 5.0.31-rc.1
