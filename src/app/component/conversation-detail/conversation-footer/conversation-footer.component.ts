@@ -425,8 +425,6 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
         document.getElementById('chat21-button-send').style.removeProperty('right')
       }
       this.logger.debug('[CONV-FOOTER] AppComponent:restoreTextArea::restoreTextArea::textArea:', 'restored');
-    } else {
-      this.logger.error('[CONV-FOOTER] restoreTextArea::textArea:', 'not restored');
     }
     this.setFocusOnId('chat21-main-message-context');
   }
