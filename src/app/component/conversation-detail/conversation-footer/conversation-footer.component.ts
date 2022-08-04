@@ -541,13 +541,13 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
    */
   setWritingMessages(str) {
     //this.messagingService.setWritingMessages(str, this.g.channelType);
-    this.typingService.setTyping(this.conversationWith, str, this.senderId, this.getUserFUllName() )
+    this.typingService.setTyping(this.conversationWith, str, this.senderId, this.getUserFullname() )
   }
 
-  getUserFUllName(): string {
-    const userFullName = this.userFullname
-    if(userFullName){
-      return userFullName
+  getUserFullname(): string {
+    const userFullname = this.userFullname
+    if(userFullname){
+      return userFullname
     }else{
       return this.translationMap.get('GUEST_LABEL')
     }
