@@ -19,7 +19,6 @@ export class ConversationContentComponent implements OnInit {
   @Input() messages: MessageModel[]
   @Input() senderId: string;
   @Input() baseLocation: string;
-  @Input() hideBubbleInfoMessage: boolean;
   @Input() isConversationArchived: boolean;
   @Input() isTypings: boolean;
   @Input() idUserTypingNow: string;

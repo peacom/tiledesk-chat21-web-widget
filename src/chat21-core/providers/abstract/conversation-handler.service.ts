@@ -31,8 +31,8 @@ export abstract class ConversationHandlerService {
     recipientFullName: string, 
     loggedUser: UserModel, 
     tenant: string, 
-    translationMap: Map<string, string>
-  ): void;
+    translationMap: Map<string, string>,
+    showBubbleInfoMessage: Array<string>): void;
   abstract connect(): void;
   abstract sendMessage(
     msg: string,

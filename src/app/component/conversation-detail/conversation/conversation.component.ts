@@ -592,7 +592,8 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
         conversationWithFullname,
         loggedUser,
         tenant,
-        this.translationMapContent
+        this.translationMapContent,
+        this.g.showInfoMessage
       );
       this.conversationHandlerService.connect();
       this.logger.debug('[CONV-COMP] DETTAGLIO CONV - NEW handler **************', this.conversationHandlerService);
@@ -890,7 +891,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   updateLeadInfo(msg){
-    //check if user has changed userFullName and userEmail
+    //check if user has changed userFullname and userEmail
     if (msg.attributes && msg.attributes['updateUserFullname']) {
       const userFullname = msg.attributes['updateUserFullname'];
       this.logger.debug('[CONV-COMP] newMessageAdded --> updateUserFullname', userFullname)

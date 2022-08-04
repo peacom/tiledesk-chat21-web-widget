@@ -147,7 +147,6 @@ export function isEmojii(message: any){
   }
 }
 
-
 export function checkIfIsMemberJoinedGroup(msg, loggedUser): boolean{
   if(msg && msg.attributes && msg.attributes.messagelabel
       && msg.attributes.messagelabel['key']=== "MEMBER_JOINED_GROUP" 
@@ -155,7 +154,18 @@ export function checkIfIsMemberJoinedGroup(msg, loggedUser): boolean{
       && !msg.attributes.messagelabel.parameters['member_id'].includes('bot') 
       && !msg.attributes.messagelabel.parameters['member_id'].includes('system')){
           return true
+  } else if (msg && msg.attributes && msg.attributes.messagelabel
+    && msg.attributes.messagelabel['key'] !== "MEMBER_JOINED_GROUP" ){
+      return true
   }
   return false
   
+}
+
+export function hideInfoMessage(msg, infoMessageKeyEnabled): boolean{
+  if(msg && msg.attributes && msg.attributes.messagelabel
+    && infoMessageKeyEnabled.includes(msg.attributes.messagelabel['key'])){
+      return false
+  }
+  return true
 }

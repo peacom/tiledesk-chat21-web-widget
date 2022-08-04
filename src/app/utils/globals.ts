@@ -210,7 +210,7 @@ export class Globals {
    buttonHoverTextColor: string // *******  new ********
    singleConversation: boolean; // *******  new ********
    nativeRating: boolean; // *******  new ********
-   hideBubbleInfoMessage: boolean; // *******  new ********
+   showInfoMessage: Array<string>; // *******  new ********
    typingLocation: string; // *******  new ********
   constructor(
   ) {
@@ -374,7 +374,7 @@ export class Globals {
     /** set the single conversation mode for the widget */
     this.nativeRating = true;
     /** set if native rating componet has to be shown */
-    this.hideBubbleInfoMessage = false;
+    this.showInfoMessage = ['MEMBER_JOINED_GROUP', 'CHAT_CLOSED']
     /** disable or show bubble info message 'MEMBER_JOINED_CHAT' */
     this.typingLocation = 'content'
     /** set the location of typing indicator (header or content) */

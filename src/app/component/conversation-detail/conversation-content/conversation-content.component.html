@@ -121,8 +121,9 @@
 
                           </div>
                           
-                          <!-- message INFO/SUPPORT::   message.attributes['subtype'] === 'info/support' -->
-                          <div *ngIf="!hideBubbleInfoMessage && messageType(MESSAGE_TYPE_INFO, message) && message.text.indexOf('INFO_SUPPORT_USER_ADDED_VERB') === -1" class="msg_info_container">
+                          <!-- message INFO/SUPPORT:: message.attributes['subtype'] === 'info/support' -->
+                          <!-- !hideBubbleInfoMessage && && message.text.indexOf('INFO_SUPPORT_USER_ADDED_VERB') === -1 -->
+                          <div *ngIf="messageType(MESSAGE_TYPE_INFO, message)" class="msg_info_container">
                             <chat-info-message class="messages"
                                 [message]="message">
                             </chat-info-message>
