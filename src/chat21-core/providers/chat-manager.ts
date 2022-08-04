@@ -42,7 +42,7 @@ export class ChatManager {
     this.handlers = [];
     this.openInfoConversation = true;
     this.currentUser = null;
-    this.logger.debug('[CHAT MANAGER]**** init ****', this.handlers);
+    this.logger.info('[CHAT MANAGER]**** init ****', this.handlers);
   }
 
   /**

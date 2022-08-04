@@ -1609,10 +1609,9 @@ export class GlobalSettingsService {
     initDepartments(departments: any) {
         this.globals.setParameter('departmentSelected', null);
         this.globals.setParameter('departmentDefault', null);
-        this.logger.debug('[GLOBAL-SET] initDepartments departments ::::', departments);
+        this.logger.info('[GLOBAL-SET] initDepartments departments ::::', departments);
         if (departments === null ) { return; }
         this.globals.departments = departments;
-        // console.log('departments.length', departments.length);
         if (departments.length === 1) {
             // UN SOLO DEPARTMENT
             const department = departments[0];

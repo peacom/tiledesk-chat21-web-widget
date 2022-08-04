@@ -68,7 +68,6 @@ function loadIframe(tiledeskScriptBaseLocation) {
     });
     /** */
     window.tiledesk.on('onOpen', function(event_data) {
-        // console.log("tiledesk onOpen");
         containerDiv.classList.add("open");
         containerDiv.classList.remove("closed");
         iDiv.classList.remove("callout");
@@ -76,25 +75,21 @@ function loadIframe(tiledeskScriptBaseLocation) {
     });
     /** */
     window.tiledesk.on('onClose', function(event_data) {
-        // console.log("tiledesk onClose");
         containerDiv.classList.add("closed");
         containerDiv.classList.remove("open");
     });
 
     /** */
     window.tiledesk.on('onOpenEyeCatcher', function(event_data) {
-        // console.log("tiledesk onOpenEyeCatcher", event_data);
         iDiv.classList.add("callout");
     });
     /** */
     window.tiledesk.on('onClosedEyeCatcher', function(event_data) {
-        // console.log("tiledesk onClosedEyeCatcher", event_data);
         iDiv.classList.remove("callout");
     });
 
     /** */
     window.tiledesk.on('onConversationUpdated', function(event_data) {
-        // console.log("tiledesk onChangedConversation", event_data);
         const messagePreview = window.tiledesk.angularcomponent.component.g.isOpenNewMessage
         const isOpen = window.tiledesk.angularcomponent.component.g.isOpen
         try {
@@ -104,16 +99,15 @@ function loadIframe(tiledeskScriptBaseLocation) {
                 // ----------------------------//
             }  
         } catch(er) {
-            console.log("> error: " + er);
+            console.error("onConversationUpdated > error: " + er);
         }
     });
 
     window.tiledesk.on('onCloseMessagePreview', function(event_data) {
-        // console.log("tiledesk onCloseMessagePreview", event_data);
         try {
             iDiv.classList.remove("messagePreview");
         } catch(er) {
-            console.log("> error: " + er);
+            console.error("onCloseMessagePreview > error: " + er);
         }
     });
 
@@ -121,7 +115,7 @@ function loadIframe(tiledeskScriptBaseLocation) {
     /**** BEGIN EVENST ****/
     /** */
     window.tiledesk.on('onNewConversation', function(event_data) {
-        console.log("test-custom-auth.html onNewConversation >>>",event_data);
+        // console.log("test-custom-auth.html onNewConversation >>>",event_data);
         const tiledeskToken = window.tiledesk.angularcomponent.component.g.tiledeskToken;
         // console.log(">>>> tiledeskToken >>>> ",event_data.detail.appConfigs.apiUrl+event_data.detail.default_settings.projectid);
         if(tiledeskToken) {
@@ -147,7 +141,7 @@ function loadIframe(tiledeskScriptBaseLocation) {
 
     /** */
     window.tiledesk.on('onAuthStateChanged', function(event_data) {
-        console.log("test-custom-auth.html onAuthStateChanged",event_data);
+        // console.log("test-custom-auth.html onAuthStateChanged",event_data);
         const tiledeskToken = window.tiledesk.angularcomponent.component.g.tiledeskToken;
         // console.log("------------------->>>> tiledeskToken: ",window.tiledesk.angularcomponent.component.g);
         if(tiledeskToken) {
@@ -242,18 +236,15 @@ function initAysncEvents() {
 
       // RICHIAMATO DOPO L'INIT DEL WIDGET
       window.Tiledesk = function() {
-        // console.log("wwwwwwww onInit window.Tiledesk ", window.Tiledesk);
         if (arguments.length>=1) {
           var functionName = arguments[0];
           if (arguments.length==2) {
               var functionCallback = arguments[1];
           }
           var methodOrProperty = window.tiledesk[functionName];
-          if(typeof methodOrProperty==="function"){     
-            // console.log("method:", functionName, functionCallback);            
+          if(typeof methodOrProperty==="function"){            
             return window.tiledesk[functionName](functionCallback);            
           }else { //property
-            // console.log("property:", functionName, functionCallback);
             return window.tiledesk[functionName];
           }
         }
@@ -274,24 +265,20 @@ function initWidget() {
     //var tiledeskScriptLocation = '';
     //setInterval(function(){
         //tiledeskScriptLocation = currentScript.src;
-        // console.log(tiledeskScriptLocation)
         var tiledeskScriptBaseLocation = tiledeskScriptLocation.replace("/launch.js","");
         window.tiledesk = new function() {
             //this.type = "macintosh";
             this.tiledeskroot = tiledeskroot;
             this.on = function (event_name, handler) {
-                //console.log("addEventListener for "+ event_name, handler);
                 tiledeskroot.addEventListener(event_name, handler);
             };
             this.getBaseLocation = function() {
                 return tiledeskScriptBaseLocation;
             }
         }
-        // console.log('tiledeskScriptBaseLocation:: ', tiledeskScriptBaseLocation);
 
         try {
             window.tileDeskAsyncInit();
-            //console.log("tileDeskAsyncInit() called");
         }catch(er) {
             if (typeof window.tileDeskAsyncInit == "undefined") { 
                 console.log("tileDeskAsyncInit() doesn't exists");
@@ -360,7 +347,6 @@ function signInWithCustomToken() {
 
 
 function createCORSRequest(method, url, async) {
-    // console.log("createCORSRequest");
 	var xhr = new XMLHttpRequest();
 	if ("withCredentials" in xhr) {
 		xhr.open(method, url, async);

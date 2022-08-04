@@ -238,7 +238,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             this.logger.setLoggerConfig(this.g.isLogEnabled, this.g.logLevel)
             this.tabTitle = this.g.windowContext.window.document.title
             this.appStorageService.initialize(environment.storage_prefix, this.g.persistence, this.g.projectid)
-            this.logger.debug('[APP-COMP] controllo se è stato passato un token: ', this.g.jwt);
+            this.logger.debug('[APP-COMP] check if token is passed throw url: ', this.g.jwt);
             /**CHECK IF JWT IS IN URL PARAMETERS */
             if (this.g.jwt) {
                 // logging in with custom token from url
