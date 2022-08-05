@@ -261,7 +261,6 @@ export class ConversationPreviewComponent implements OnInit {
   onkeypress(event) {
     const keyCode = event.which || event.keyCode;
     this.textInputTextArea = ((document.getElementById('chat21-main-message-context-preview') as HTMLInputElement).value);
-    // this.logger.debug('[CONV-FOOTER] onkeypress **************', this.textInputTextArea, keyCode]);
     if (keyCode === 13) {
       if (this.textInputTextArea && this.textInputTextArea.trim() !== '') {
         //   that.logger.debug('[CONV-FOOTER] sendMessage -> ', this.textInputTextArea);

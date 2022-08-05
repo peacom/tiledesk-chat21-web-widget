@@ -506,6 +506,7 @@ export class Globals {
       'marginY': this.marginY, 'lancherWidth': this.launcherWidth, 'lancherHeight': this.launcherHeight,
       'baloonImage': this.baloonImage, 'baloonShape': this.baloonShape, 'isLogEnabled': this.isLogEnabled,
       'openExternalLinkButton': this.openExternalLinkButton, 'hideHeaderConversationOptionsMenu': this.hideHeaderConversationOptionsMenu,
+      'hideCloseConversationOptionMenu': this.hideCloseConversationOptionMenu, 'showInfoMessage': this.showInfoMessage,
       'hideSettings': this.hideSettings,'filterByRequester': this.filterByRequester, 
       'persistence': this.persistence,'showWaitTime': this.showWaitTime, 'showAvailableAgents': this.showAvailableAgents,
       'showLogoutOption': this.showLogoutOption, 'showAttachmentButton': this.showAttachmentButton,

@@ -565,7 +565,6 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
     const keyCode = event.which || event.keyCode;
     // console.log('keycode', keyCode)
     this.textInputTextArea = ((document.getElementById('chat21-main-message-context') as HTMLInputElement).value);
-    this.logger.debug('[CONV-FOOTER] onkeypress **************', this.textInputTextArea, keyCode);
     if (keyCode === 13) { // ENTER pressed
       if (this.textInputTextArea && this.textInputTextArea.trim() !== '') {
         //   that.logger.debug('[CONV-FOOTER] sendMessage -> ', this.textInputTextArea);
