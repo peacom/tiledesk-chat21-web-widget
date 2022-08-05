@@ -1,5 +1,11 @@
 # chat21-web-widget ver 5.0
 
+
+### 5.0.32-rc.2
+- bug-fixed: error while closing chat from upper rigth menu option in conversation-detail header
+- bug-fixed: topic.split is not a function while a conversataion is closed by an agent in MQTT-conversations-handler.service
+- changed: default value of logger from DEBUG to ERROR
+
 ### 5.0.32-rc.1
 - removed: hideBubbleInfoMessage settings property 
 - added: showInfoMessage string array settings property to hide/show info message in conversation-detail component
