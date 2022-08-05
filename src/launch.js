@@ -153,7 +153,7 @@ function loadIframe(tiledeskScriptBaseLocation) {
     });
     /**** END EVENST ****/
 
-    iDiv.appendChild(ifrm);  
+    iDiv.appendChild(ifrm);
     ifrm.contentWindow.document.open();
     ifrm.contentWindow.document.write(srcTileDesk);
     ifrm.contentWindow.document.close();
