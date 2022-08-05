@@ -1,5 +1,6 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.32 in PROD
 
 ### 5.0.32-rc.2
 - bug-fixed: error while closing chat from upper rigth menu option in conversation-detail header
