@@ -1,5 +1,7 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.33 in PROD
+
 ### 5.0.33-rc.1
 - added: possibility continue to chat in an archived conversation if an agent reopen it
 - bug-fixed: not show typing if info message arrive

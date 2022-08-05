@@ -12,7 +12,7 @@
     </button>
 </div>
 
-<div class="visible-text-area"  *ngIf="!isConversationArchived" [class.disabled] = "( isConversationArchived || hideTextReply)? true : null">
+<div class="visible-text-area fade-in-bottom"  *ngIf="!isConversationArchived" [class.disabled] = "( isConversationArchived || hideTextReply)? true : null">
     <!-- isFilePendingToUpload || -->
   <textarea 
     [attr.disabled] = "(isConversationArchived || hideTextReply)? true : null"
