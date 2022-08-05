@@ -676,7 +676,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
       }
       this.logger.debug('[CONV-COMP] subscribeTypings data:', data);
       const userTyping = this.membersConversation.includes(key);
-      if ( !userTyping) {
+      if ( !userTyping && key) {
         this.isTypings = true;
         setTimeout(function () {
           that.conversationContent.scrollToBottom();
@@ -703,7 +703,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
   resetTimeout(){
     this.isTypings = false
     this.setTimeoutWritingMessages = null;
-    // clearTimeout(this.setTimeoutWritingMessages)
+    clearTimeout(this.setTimeoutWritingMessages)
   }
 
   /**
