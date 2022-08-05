@@ -209,7 +209,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         });
         this.subscriptions.push(subAddedConversation);
 
-        const subArchivedConversations = this.archivedConversationsService.archivedConversationAdded.subscribe((conversation) => {
+        const subAddedArchivedConversations = this.archivedConversationsService.archivedConversationAdded.subscribe((conversation) => {
             // that.ngZone.run(() => {
             if (conversation) {
                 that.triggerOnConversationUpdated(conversation);
@@ -218,7 +218,17 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             }
             // });
         });
-        this.subscriptions.push(subArchivedConversations);
+        this.subscriptions.push(subAddedArchivedConversations);
+
+        const subRemovedArchivedConversations = this.archivedConversationsService.archivedConversationRemoved.subscribe((conversation) => {
+            // that.ngZone.run(() => {
+            if (conversation) {
+                this.isConversationArchived = false;
+                that.triggerOnConversationUpdated(conversation);
+            }
+            // });
+        });
+        this.subscriptions.push(subRemovedArchivedConversations);
 
     });
     this.appStorageService.initialize(environment.storage_prefix, this.g.persistence, this.g.projectid)
