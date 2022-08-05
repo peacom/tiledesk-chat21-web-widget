@@ -7,7 +7,7 @@ export class CustomLogger extends LoggerService{
     
     
     //private variables
-    private logLevel: number = LogLevel.INFO
+    private logLevel: number = LogLevel.ERROR
     private isLogEnabled: boolean = true;
     
     constructor(private logger: NGXLogger) {
