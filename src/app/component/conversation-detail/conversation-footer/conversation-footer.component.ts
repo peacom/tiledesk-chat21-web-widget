@@ -31,10 +31,12 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
   @Input() isConversationArchived: boolean;
   @Input() hideTextReply: boolean;
   @Input() isMobile: boolean;
+  @Input() isEmojiiPickerShow: boolean;
   @Input() footerMessagePlaceholder: string;
   @Input() fileUploadAccept: string;
   @Input() stylesMap: Map<string, string>
   @Input() translationMap: Map< string, string>;
+  @Output() onEmojiiPickerShow = new EventEmitter<boolean>();
   @Output() onBeforeMessageSent = new EventEmitter();
   @Output() onAfterSendMessage = new EventEmitter();
   @Output() onChangeTextArea = new EventEmitter<any>();
@@ -55,7 +57,6 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
   textInputTextArea: string;
   conversationHandlerService: ConversationHandlerService
 
-  showEmojiPicker: boolean = false; //To show/hide emoji picker
   emojiiOptions = {
     emojiPerLine : 9,
     totalFrequentLines: 1,
@@ -280,7 +281,7 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
    */
   sendMessage(msg: string, type: string, metadata?: any, additional_attributes?: any) { // sponziello
     (metadata) ? metadata = metadata : metadata = '';
-    this.showEmojiPicker = false;
+    this.onEmojiiPickerShow.emit(false)
     this.logger.debug('[CONV-FOOTER] SEND MESSAGE: ', msg, type, metadata, additional_attributes);
     if (msg && msg.trim() !== '' || type === TYPE_MSG_IMAGE || type === TYPE_MSG_FILE ) {
 
@@ -497,11 +498,11 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
 
   onEmojiiPickerClicked(){
     //OPEN EMOJII PICKER
-    this.showEmojiPicker= true
+    this.onEmojiiPickerShow.emit(!this.isEmojiiPickerShow)
   }
 
   addEmoji(event){
-    this.showEmojiPicker = false; //de-activate emojii picker on select
+    this.onEmojiiPickerShow.emit(false); //de-activate emojii picker on select
     this.textInputTextArea = this.textInputTextArea.trimStart() + event.emoji.native + " "
     this.setFocusOnId('chat21-main-message-context')
   }

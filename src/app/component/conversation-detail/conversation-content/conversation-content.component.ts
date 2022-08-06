@@ -28,7 +28,8 @@ export class ConversationContentComponent implements OnInit {
   @Input() stylesMap: Map<string, string>;
   @Output() onBeforeMessageRender = new EventEmitter();
   @Output() onAfterMessageRender = new EventEmitter();
-  @Output() onMenuOptionShow = new EventEmitter();
+  @Output() onMenuOptionShow = new EventEmitter<boolean>();
+  @Output() onEmojiiPickerShow = new EventEmitter<boolean>()
   @Output() onAttachmentButtonClicked = new EventEmitter();
   @Output() onScrollContent = new EventEmitter();
 
@@ -290,8 +291,9 @@ export class ConversationContentComponent implements OnInit {
   // }
 
 
-  hideMenuOption(){
+  hideOutsideElements(){
     this.onMenuOptionShow.emit(false)
+    this.onEmojiiPickerShow.emit(false)
   }
 
 

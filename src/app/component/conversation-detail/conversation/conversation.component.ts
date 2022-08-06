@@ -84,6 +84,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
   conversation: ConversationModel
   conversationWith: string;
   isMenuShow = false;
+  isEmojiiPickerShow = false;
   
   isButtonsDisabled = true;
   // isConversationArchived = false;
@@ -1060,6 +1061,10 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
     this.logger.debug('[CONV-COMP] onCloseModalPreview::::', this.isOpenAttachmentPreview, this.conversationFooter)
   }
   
+  /** CALLED BY: conv-footer conv-content component */
+  onEmojiiPickerShow(event:boolean){
+    this.isEmojiiPickerShow = event
+  }
   /** CALLED BY: conv-footer component */
   onBeforeMessangeSentFN(messageModel){
     this.onBeforeMessageSent.emit(messageModel)
