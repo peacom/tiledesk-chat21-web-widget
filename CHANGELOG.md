@@ -1,5 +1,10 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.34-rc.1
+- removed: widgetTitle input property from conversation-footer --> unused
+- added: ability to close emojii picker if click on emoji icon again or click outside emojii picker component
+- bug-fixed: after refresh, if conversation-detail component is loaded first, animation not fired (emoji-mart plugin was responsible)
+
 ### 5.0.33 in PROD
 
 ### 5.0.33-rc.1
