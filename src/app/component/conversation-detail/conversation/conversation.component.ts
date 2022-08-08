@@ -84,7 +84,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
   conversation: ConversationModel
   conversationWith: string;
   isMenuShow = false;
-  isEmojiiPickerShow = false;
+  isEmojiiPickerShow: boolean = false;
   
   isButtonsDisabled = true;
   // isConversationArchived = false;

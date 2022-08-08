@@ -56,6 +56,7 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
   textInputTextArea: string;
   conversationHandlerService: ConversationHandlerService
 
+  showEmojiPicker: boolean = false; //To show/hide emoji picker
   emojiiOptions = {
     emojiPerLine : 9,
     totalFrequentLines: 1,
@@ -87,6 +88,10 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
   
   ngAfterViewInit() {
     this.logger.debug('[CONV-FOOTER] --------ngAfterViewInit: conversation-footer-------- '); 
+    // this.showEmojiPicker = true
+    setTimeout(() => {
+      this.showEmojiPicker = true
+    }, 500);
   }
 
   // ========= begin:: functions send image ======= //
