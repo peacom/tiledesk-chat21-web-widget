@@ -491,6 +491,12 @@ export class GlobalSettingsService {
                     if (variables.hasOwnProperty('baloonImage')) {
                         globals['baloonImage'] = variables['baloonImage'];
                     }
+                    if (variables.hasOwnProperty('allowReopen')) {
+                        globals['allowReopen'] = variables['allowReopen'];
+                        if(globals.allowReopen && !globals.showInfoMessage.includes('CHAT_CLOSED')){
+                            globals.showInfoMessage.push('CHAT_CLOSED')
+                        }
+                    }
                     
                 }
             }
@@ -943,6 +949,15 @@ export class GlobalSettingsService {
         if (TEMP !== undefined) {
             globals.typingLocation = TEMP;
         }
+        TEMP = tiledeskSettings['allowReopen'];
+        // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > allowReopen:: ', TEMP]);
+        if (TEMP !== undefined) {
+            globals.allowReopen = (TEMP === true) ? true : false;
+            if(globals.allowReopen && !globals.showInfoMessage.includes('CHAT_CLOSED')){
+                globals.showInfoMessage.push('CHAT_CLOSED')
+            }
+        }
+            
         
 
     }
@@ -1178,6 +1193,13 @@ export class GlobalSettingsService {
         TEMP = el.nativeElement.getAttribute('typingLocation');
         if (TEMP !== null) {
             this.globals.typingLocation = TEMP;
+        }
+        TEMP = el.nativeElement.getAttribute('allowReopen');
+        if (TEMP !== null) {
+            this.globals.allowReopen = TEMP;
+            if(this.globals.allowReopen && !this.globals.showInfoMessage.includes('CHAT_CLOSED')){
+                this.globals.showInfoMessage.push('CHAT_CLOSED')
+            }
         }
         
     }
@@ -1576,6 +1598,14 @@ export class GlobalSettingsService {
         TEMP = getParameterByName(windowContext, 'tiledesk_showInfoMessage');
         if (TEMP) {
             globals.showInfoMessage = TEMP.split(',');
+        }
+
+        TEMP = getParameterByName(windowContext, 'tiledesk_allowReopen');
+        if (TEMP) {
+            globals.allowReopen = stringToBoolean(TEMP);
+            if(globals.allowReopen && !globals.showInfoMessage.includes('CHAT_CLOSED')){
+                globals.showInfoMessage.push('CHAT_CLOSED')
+            }
         }
     }
 

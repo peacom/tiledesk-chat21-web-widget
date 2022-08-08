@@ -212,6 +212,7 @@ export class Globals {
    nativeRating: boolean; // *******  new ********
    showInfoMessage: Array<string>; // *******  new ********
    typingLocation: string; // *******  new ********
+   allowReopen: boolean; // *******  new ********
   constructor(
   ) {
     // console.log(' ---------------- 1: initDefafultParameters ---------------- ');
@@ -378,6 +379,8 @@ export class Globals {
     /** disable or show bubble info message 'MEMBER_JOINED_CHAT' */
     this.typingLocation = 'content'
     /** set the location of typing indicator (header or content) */
+    this.allowReopen = false;
+    /** enable the user to reopen a closed conversation */
     this.showWaitTime = true;
 
     this.showAvailableAgents = true;
@@ -507,6 +510,7 @@ export class Globals {
       'baloonImage': this.baloonImage, 'baloonShape': this.baloonShape, 'isLogEnabled': this.isLogEnabled,
       'openExternalLinkButton': this.openExternalLinkButton, 'hideHeaderConversationOptionsMenu': this.hideHeaderConversationOptionsMenu,
       'hideCloseConversationOptionMenu': this.hideCloseConversationOptionMenu, 'showInfoMessage': this.showInfoMessage,
+      'typingLocation': this.typingLocation, 'allowReopen': this.allowReopen,
       'hideSettings': this.hideSettings,'filterByRequester': this.filterByRequester, 
       'persistence': this.persistence,'showWaitTime': this.showWaitTime, 'showAvailableAgents': this.showAvailableAgents,
       'showLogoutOption': this.showLogoutOption, 'showAttachmentButton': this.showAttachmentButton,
