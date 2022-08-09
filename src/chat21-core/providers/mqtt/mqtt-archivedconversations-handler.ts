@@ -7,13 +7,10 @@ import {Chat21Service} from './chat-service';
 // models
 import { ConversationModel } from '../../models/conversation';
 
-// services
-import { ConversationsHandlerService } from '../abstract/conversations-handler.service';
-
 // utils
 import { TYPE_GROUP } from '../../utils/constants';
-import { getImageUrlThumbFromFirebasestorage, avatarPlaceholder, getColorBck } from '../../utils/utils-user';
-import { compareValues, getFromNow, conversationsPathForUserId, searchIndexInArrayForUid } from '../../utils/utils';
+import { avatarPlaceholder, getColorBck } from '../../utils/utils-user';
+import { compareValues, getFromNow, searchIndexInArrayForUid } from '../../utils/utils';
 import { ArchivedConversationsHandlerService } from '../abstract/archivedconversations-handler.service';
 import { LoggerService } from '../abstract/logger.service';
 import { LoggerInstance } from '../logger/loggerInstance';
@@ -51,6 +48,7 @@ export class MQTTArchivedConversationsHandler extends ArchivedConversationsHandl
      */
     initialize(tenant: string, userId: string,translationMap: Map<string, string>) {
         this.logger.debug('[MQTTArchivedConversationsHandler] initialize');
+        this.tenant = tenant;
         this.loggedUserId = userId;
         this.translationMap = translationMap;
         this.archivedConversations = [];
@@ -142,17 +140,17 @@ export class MQTTArchivedConversationsHandler extends ArchivedConversationsHandl
     // ---------------------------------------------------------------------------------
      // New connect - renamed subscribeToConversation
      //----------------------------------------------------------------------------------
-     subscribeToConversations(loaded) {
+    subscribeToConversations(loaded) {
         this.logger.debug('[MQTTArchivedConversationsHandler] connecting MQTT conversations handler');
-            const handlerConversationAdded = this.chat21Service.chatClient.onArchivedConversationAdded( (conv) => {
+            this.chat21Service.chatClient.onArchivedConversationAdded( (conv) => {
                 this.logger.log('[MQTTArchivedConversationsHandler] Added conv ->', conv.text)
                 this.added(conv);
             });
-            // const handlerConversationUpdated = this.chat21Service.chatClient.onConversationUpdated( (conv) => {
+            // this.chat21Service.chatClient.onConversationUpdated( (conv) => {
             //     console.log('conversation updated:', conv.text);
             //     this.changed(conv);
             // });
-            const handlerConversationDeleted = this.chat21Service.chatClient.onArchivedConversationDeleted( (conv) => {
+            this.chat21Service.chatClient.onArchivedConversationDeleted( (conv) => {
                 this.logger.debug('[MQTTArchivedConversationsHandler] conversation deleted:', conv);
                 this.removed(conv);
             });
@@ -195,14 +193,12 @@ export class MQTTArchivedConversationsHandler extends ArchivedConversationsHandl
             } else {
                 this.logger.debug('[MQTTArchivedConversationsHandler] NON TROVATO')
                 this.archivedConversations.splice(0, 0, conversation);
-                // this.databaseProvider.setConversation(conversation);
             }
             this.logger.debug('[MQTTArchivedConversationsHandler] NUOVA CONVER;.uid3' + conversation.uid)
             this.archivedConversations.sort(compareValues('timestamp', 'desc'));
             this.logger.debug('[MQTTArchivedConversationsHandler] TUTTE:', this.archivedConversations)
             this.archivedConversationChanged.next(conversation);
             this.archivedConversationAdded.next(conversation);
-            // this.events.publish('conversationsChanged', this.conversations);
         } else {
             this.logger.error('[MQTTArchivedConversationsHandler] ChatConversationsHandler::added::conversations with conversationId: ', conversation.conversation_with, 'is not valid');
         }
@@ -257,8 +253,6 @@ export class MQTTArchivedConversationsHandler extends ArchivedConversationsHandl
         if (index > -1) {
             const conversationRemoved = this.archivedConversations[index]
             this.archivedConversations.splice(index, 1);
-            // this.conversations.sort(compareValues('timestamp', 'desc'));
-            // this.databaseProvider.removeConversation(childSnapshot.key);
             this.archivedConversationRemoved.next(conversationRemoved);
         }
         // remove the conversation from the isConversationClosingMap

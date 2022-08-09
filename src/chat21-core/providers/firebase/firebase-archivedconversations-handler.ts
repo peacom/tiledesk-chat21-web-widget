@@ -57,18 +57,12 @@ export class FirebaseArchivedConversationsHandler extends ArchivedConversationsH
     /**
      * inizializzo conversations handler
      */
-    initialize(
-        tenant: string,
-        userId: string,
-        translationMap: Map<string, string>
-        ) {
+    initialize(tenant: string,userId: string,translationMap: Map<string, string>) {
         this.tenant = tenant;
         this.loggedUserId = userId;
         this.translationMap = translationMap;
         this.archivedConversations = [];
         this.isConversationClosingMap = new Map();
-        //this.databaseProvider.initialize(userId, this.tenant);
-        //this.getConversationsFromStorage();
     }
 
     /**
@@ -176,9 +170,7 @@ export class FirebaseArchivedConversationsHandler extends ArchivedConversationsH
         this.logger.debug('[FIREBASEArchivedConversationsHandlerSERVICE] SubscribeToConversations getConversationDetail::ARCHIVED *****: ', conversation)
         if (conversation) {
             callback(conversation)
-            // this.BSConversationDetail.next(conversationSelected);
         } else {
-            // const urlNodeFirebase = '/apps/' + this.tenant + '/users/' + this.loggedUserId + '/archived_conversations/' + conversationId;
             const urlNodeFirebase = archivedConversationsPathForUserId(this.tenant, this.loggedUserId) // + '/' + conversationId;
             this.logger.debug('[FIREBASEArchivedConversationsHandlerSERVICE] urlNodeFirebase conversationDetail *****', urlNodeFirebase, conversationId)
             const firebaseMessages = firebase.database().ref(urlNodeFirebase);
@@ -204,7 +196,6 @@ export class FirebaseArchivedConversationsHandler extends ArchivedConversationsH
                             callback(null)
                         }
                     }
-                    // this.BSConversationDetail.next(conversation);
                 }
             });
         }
@@ -216,10 +207,6 @@ export class FirebaseArchivedConversationsHandler extends ArchivedConversationsH
     dispose() {
         this.archivedConversations = [];
         this.uidConvSelected = '';
-        //this.ref.off();
-        // this.ref.off("child_changed");
-        // this.ref.off("child_removed");
-        // this.ref.off("child_added");
         this.logger.debug('[FIREBASEArchivedConversationsHandlerSERVICE] DISPOSE::: ', this.ref)
     }
 
@@ -258,7 +245,6 @@ export class FirebaseArchivedConversationsHandler extends ArchivedConversationsH
             } else {
                 this.archivedConversations.splice(0, 0, conversation);
             }
-            //this.databaseProvider.setConversation(conversation);
             this.archivedConversations.sort(compareValues('timestamp', 'desc'));
             return true;
         } else {

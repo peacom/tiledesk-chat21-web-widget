@@ -256,8 +256,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                 this.logger.debug('[APP-COMP]  ----------------  logging in with custom token from url ---------------- ');
                 //   this.g.autoStart = false;
                 const storedTiledeskToken = this.appStorageService.getItem('tiledeskToken')
-                storedTiledeskToken === this.g.jwt? null: 
-                this.appStorageService.setItem('tiledeskToken', this.g.jwt)
+                storedTiledeskToken === this.g.jwt? null: this.appStorageService.setItem('tiledeskToken', this.g.jwt);
                 this.g.tiledeskToken = this.g.jwt;
                 // this.signInWithCustomToken(this.g.jwt) // moved to authenticate() in else(tiledeskToken)
             }

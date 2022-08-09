@@ -65,11 +65,7 @@ export class FirebaseConversationsHandler extends ConversationsHandlerService {
     /**
      * inizializzo conversations handler
      */
-    initialize(
-        tenant: string,
-        userId: string,
-        translationMap: Map<string, string>
-    ) {
+    initialize(tenant: string,userId: string,translationMap: Map<string, string>) {
         this.tenant = tenant;
         this.loggedUserId = userId;
         this.translationMap = translationMap;
