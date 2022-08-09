@@ -122,7 +122,7 @@ export class ConversationContentComponent implements OnInit {
         sizeImage.width = MAX_WIDTH_IMAGES;
         sizeImage.height = MAX_WIDTH_IMAGES / rapporto;
     }
-    return sizeImage; // h.toString();
+    return sizeImage;
   }
 
 
@@ -238,13 +238,11 @@ export class ConversationContentComponent implements OnInit {
   handleTooltipEvents() {
     const that = this;
     const showDelay = this.tooltipOptions['showDelay'];
-    // console.log(this.tooltipOptions);
     setTimeout(function () {
       try {
         const domRepresentation = document.getElementsByClassName('chat-tooltip');
         if (domRepresentation) {
           const item = domRepresentation[0] as HTMLInputElement;
-          // console.log(item);
           if (!item.classList.contains('tooltip-show')) {
             item.classList.add('tooltip-show');
           }
@@ -261,7 +259,6 @@ export class ConversationContentComponent implements OnInit {
   }
 
   isLastMessage(idMessage: string):boolean {
-    // console.log('idMessage: ' + idMessage + 'id LAST Message: ' + this.messages[this.messages.length - 1].uid);
     if (idMessage === this.messages[this.messages.length - 1].uid) {
       return true;
     }

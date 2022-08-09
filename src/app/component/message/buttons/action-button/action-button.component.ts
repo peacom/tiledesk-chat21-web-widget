@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'chat-action-button-attachment',
@@ -42,9 +42,7 @@ export class ActionButtonComponent implements OnInit {
 
   actionButtonAction(){
     if ( this.button && this.button.action && this.button.action !== '') {
-      // const spanCheck = window.document.getElementById('actionButton');
       const spanCheck = this.elementRef.nativeElement.querySelector('.action');
-      // const spanCheck = document.getElementsByClassName('action');
       if (spanCheck) {
         // const item = domRepresentation[0] as HTMLInputElement;
         if (!spanCheck.classList.contains('active')) {

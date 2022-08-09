@@ -2,7 +2,6 @@ import * as moment from 'moment';
 import 'moment/locale/it.js';
 
 // firebase
-import * as firebase from 'firebase/app';
 import 'firebase/storage';
 
 
@@ -13,9 +12,7 @@ import {
   FIREBASESTORAGE_BASE_URL_IMAGE,
   ARRAY_DAYS,
   LABEL_TODAY,
-  LABEL_TOMORROW,
-  LABEL_LAST_ACCESS,
-  LABEL_TO
+  LABEL_TOMORROW
 } from './constants';
 import { environment } from '../../environments/environment';
 
@@ -191,8 +188,8 @@ export function strip_tags(html) {
 }
 
 export function replaceBr(text) {
-  if (text) { const newText = text.replace(/[\n\r]/g, '<br>');
-    return newText;
+  if (text) { 
+    return text.replace(/[\n\r]/g, '<br>');
   }
   return text;
 }
@@ -236,9 +233,7 @@ export function getFromNow(windowContext, timestamp) {
     browserLang = this.g.lang;
   }
   moment.locale(browserLang);
-  // console.log('getFromNow - browserLang: ', browserLang);
-  const date_as_string = moment.unix(timestamp).fromNow();
-  return date_as_string;
+  return moment.unix(timestamp).fromNow();
 }
 
 export function detectIfIsMobile(windowContext) {
@@ -288,12 +283,11 @@ export function convertColorToRGBA(color, opacity) {
 //   return translatorService.getDefaultLanguage(windowContext);
 // }
 
-export function getParameterByName(windowContext: any, name: String) {
+export function getParameterByName(windowContext: any, name: string) {
   const url = windowContext.location.href;
   name = name.replace(/[\[\]]/g, '\\$&');
   // const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'), results = regex.exec(url); //BUG-FIXED: when HEX color was passed throw url
   const regex = new RegExp('[?&]' + name + '(=([^&]*)|&|$)'), results = regex.exec(url);
-  // console.log('results----> ', results);
   if (!results) { return null; }
   if (!results[2]) {
     return 'true';
@@ -344,8 +338,7 @@ export function getUrlImgProfile(uid: string) {
  */
 export function getImageUrlThumb(uid: string) {
   // tslint:disable-next-line:max-line-length
-  const imageurl = FIREBASESTORAGE_BASE_URL_IMAGE + environment.firebaseConfig.storageBucket + '/o/' + 'profiles%2F' + uid + '%2Fthumb_photo.jpg?alt=media';
-  return imageurl;
+  return FIREBASESTORAGE_BASE_URL_IMAGE + environment.firebaseConfig.storageBucket + '/o/' + 'profiles%2F' + uid + '%2Fthumb_photo.jpg?alt=media';
 }
 
 
@@ -377,13 +370,11 @@ export function stringToNumber(string: any): number {
 }
 
 export function getUnique(arr, comp) {
-  const unique = arr
-    .map(e => e[comp])
+  return arr.map(e => e[comp])
      // store the keys of the unique objects
     .map((e, i, final) => final.indexOf(e) === i && i)
     // eliminate the dead keys & store unique objects
     .filter(e => arr[e]).map(e => arr[e]);
-   return unique;
 }
 
 export function isJustRecived(startedAt, time) {

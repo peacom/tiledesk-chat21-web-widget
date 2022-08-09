@@ -121,7 +121,6 @@ export class BubbleMessageComponent implements OnInit {
       const domRepresentation = document.getElementsByClassName('chat-tooltip');
       if (domRepresentation) {
         const item = domRepresentation[0] as HTMLInputElement;
-        // console.log(item);
         if (!item.classList.contains('tooltip-show')) {
           item.classList.add('tooltip-show');
         }
@@ -148,12 +147,12 @@ export class BubbleMessageComponent implements OnInit {
   //   this.onClickAttachmentButton.emit(event)
   // }
 
-  returnOnBeforeMessageRender(event){
+  onBeforeMessageRenderFN(event){
     const messageOBJ = { message: this.message, sanitizer: this.sanitizer, messageEl: event.messageEl, component: event.component}
     this.onBeforeMessageRender.emit(messageOBJ)
   }
 
-  returnOnAfterMessageRender(event){
+  onAfterMessageRenderFN(event){
     const messageOBJ = { message: this.message, sanitizer: this.sanitizer, messageEl: event.messageEl, component: event.component}
     this.onAfterMessageRender.emit(messageOBJ)
   }

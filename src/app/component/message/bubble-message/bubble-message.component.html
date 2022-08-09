@@ -49,8 +49,8 @@
             [color]="fontColor"
             [fontSize]="fontSize"
             [fontFamily]="fontFamily"
-            (onBeforeMessageRender)="returnOnBeforeMessageRender($event)"
-            (onAfterMessageRender)="returnOnAfterMessageRender($event)">
+            (onBeforeMessageRender)="onBeforeMessageRenderFN($event)"
+            (onAfterMessageRender)="onAfterMessageRenderFN($event)">
           </chat-text>
 
           <chat-html *ngIf="message?.type==='html'"
