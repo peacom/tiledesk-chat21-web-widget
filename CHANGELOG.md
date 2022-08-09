@@ -1,5 +1,7 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.34 in PROD
+
 ### 5.0.34-rc.1
 - removed: widgetTitle input property from conversation-footer --> unused
 - added: ability to close emojii picker if click on emoji icon again or click outside emojii picker component
