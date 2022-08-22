@@ -1,5 +1,9 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.35-rc.1
+- bug-fixed: bottom border on image component not rendered with blank text value (" ")
+- changed: animation on open widget	ec648fa	Gabriele Panico <gabriele.panico95@gmail.com>	22 ago 2022, 10:15
+
 ### 5.0.34 in PROD
 
 ### 5.0.34-rc.1
