@@ -328,6 +328,60 @@
   }
 }
 
+
+/**
+ * ----------------------------------------
+ * animation fade --> when widget is opened
+ * ----------------------------------------
+ */
+@keyframes fade {
+  0% {
+      -webkit-transform: rotateX(0);
+              transform: rotateX(0);
+      -webkit-transform-origin: bottom;
+              transform-origin: bottom;
+      opacity: 0;
+    }
+    50% {
+      -webkit-transform: rotateX(0);
+              transform: rotateX(0);
+      -webkit-transform-origin: bottom;
+              transform-origin: bottom;
+      opacity: 0.5;
+    }
+    100% {
+      -webkit-transform: rotateX(0);
+              transform: rotateX(0);
+      -webkit-transform-origin: bottom;
+              transform-origin: bottom;
+      opacity: 1;
+    }
+}
+
+@-webkit-keyframes fade {
+  0% {
+      -webkit-transform: rotateX(0);
+              transform: rotateX(0);
+      -webkit-transform-origin: bottom;
+              transform-origin: bottom;
+      opacity: 0;
+    }
+    50% {
+      -webkit-transform: rotateX(0);
+              transform: rotateX(0);
+      -webkit-transform-origin: bottom;
+              transform-origin: bottom;
+      opacity: 0.5;
+    }
+    100% {
+      -webkit-transform: rotateX(0);
+              transform: rotateX(0);
+      -webkit-transform-origin: bottom;
+              transform-origin: bottom;
+      opacity: 1;
+    }
+}
+
 /**
  * ----------------------------------------
  * animation heartbeat

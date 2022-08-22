@@ -111,9 +111,13 @@ body {
 	        animation: rotate-center 0.6s ease-in-out both;
 }
 
+/* START ANIMATION*/
 .swing-in-bottom-fwd {
-	-webkit-animation: swing-in-bottom-fwd 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
-	        animation: swing-in-bottom-fwd 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+	// -webkit-animation: swing-in-bottom-fwd 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+	        // animation: swing-in-bottom-fwd 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+            // animation: fadeInFromNone 0.8s ease-out;
+    -webkit-animation: fade 0.5s both;
+            animation: fade 0.5s both;
 }
 
 .heartbeat:hover {
@@ -516,7 +520,7 @@ chat-root {
             // border: 1px solid #cccccc; //NEW GAB
             margin: 0px;
             padding: 0px;
-            box-shadow:rgba(0, 18, 46, 0.16) 0px 8px 36px 0px; //NEW GAB
+            box-shadow:rgba(0, 0, 0, 0.16) 0px 8px 36px 0px; //NEW GAB
 
             &.full-screen-mode {
                 width: 100%;

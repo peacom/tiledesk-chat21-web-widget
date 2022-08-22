@@ -22,7 +22,7 @@
     bottom: 0px;
     display: block;
     position: fixed;
-    box-shadow: rgba(0, 18, 46, 0.16) 0px 8px 36px 0px; /* NEW GAB */
+    
 }
 
 
@@ -68,8 +68,12 @@
     /* border-radius: 16px; */
     /* box-shadow: rgba(0, 18, 46, 0.16) 0px 8px 36px 0px; */
     /* margin: 10px; */
-} 
 
+} 
+#tiledesk-container.open #tiledeskdiv {
+    transition: box-shadow .8s ease-in;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 8px 36px 0px; /*NEW GAB*/
+}
 /* @-webkit-keyframes fade-in-shadow {
     0% { box-shadow: rgba(0, 0, 0, 0.0) 0 0 0px; }
     100% { box-shadow: rgba(0, 0, 0, 0.1) 0 0 6px; }
