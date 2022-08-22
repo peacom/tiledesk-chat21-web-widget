@@ -11,10 +11,11 @@ import { MessageModel } from '../../../models/message';
 export class MessageAttachmentComponent implements OnInit {
 
   // ========= begin:: Input/Output values ============//
-  @Output() onAttachmentButtonClicked = new EventEmitter<any>();
   @Input() message: MessageModel;
+  @Input() isConversationArchived: boolean;
   @Input() isLastMessage: boolean;
   @Input() stylesMap: Map<string, string>;
+  @Output() onAttachmentButtonClicked = new EventEmitter<any>();
   // ========= end:: Input/Output values ============//
 
   public type: string;

@@ -184,6 +184,7 @@
                               <chat-message-attachment 
                                   style="height: 100%; display: block;"
                                   [message]="message"
+                                  [isConversationArchived]="isConversationArchived"
                                   [isLastMessage] = "isLastMessage(message?.uid)"
                                   [stylesMap]="stylesMap"
                                   (onAttachmentButtonClicked)="returnOnAttachmentButtonClicked($event)">

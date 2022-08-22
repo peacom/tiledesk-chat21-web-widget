@@ -5,6 +5,7 @@
       
       <chat-text-button-attachment *ngIf="button.type === 'text' && isLastMessage === true" class="div-button"
         [button]="button"
+        [isConversationArchived]="isConversationArchived"
         [fontSize]="stylesMap.get('buttonFontSize')"
         [backgroundColor]="stylesMap.get('buttonBackgroundColor')"
         [textColor]="stylesMap.get('buttonTextColor')"
@@ -25,6 +26,7 @@
 
       <chat-action-button-attachment *ngIf="button.type === 'action' && isLastMessage === true" class="div-button"
         [button]="button"
+        [isConversationArchived]="isConversationArchived"
         [fontSize]="stylesMap.get('buttonFontSize')"
         [backgroundColor]="stylesMap.get('buttonBackgroundColor')"
         [textColor]="stylesMap.get('buttonTextColor')"

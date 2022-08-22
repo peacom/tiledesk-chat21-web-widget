@@ -9,6 +9,7 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChang
 export class TextButtonComponent implements OnInit {
 
   @Input() button: any;
+  @Input() isConversationArchived: boolean;
   @Input() fontSize: string;
   @Input() backgroundColor: string;
   @Input() textColor: string;
