@@ -1,8 +1,12 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.35-rc.2
+- added: block click event if conversation is archived in text and action attachment buttons
+- bug-fixed: if conversation is archived and do a close->open action, then conversation is considered as active and not as archived
+
 ### 5.0.35-rc.1
 - bug-fixed: bottom border on image component not rendered with blank text value (" ")
-- changed: animation on open widget	ec648fa	Gabriele Panico <gabriele.panico95@gmail.com>	22 ago 2022, 10:15
+- changed: animation on open widget
 
 ### 5.0.34 in PROD
 
