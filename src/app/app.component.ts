@@ -939,7 +939,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                 // }
             }else {
                 //start widget with NEW CONVERSATION
-                this.logger.error("[APP-COMP] getConverationRESTApi: NO active conversations")
+                this.logger.debug("[APP-COMP] getConverationRESTApi: NO active conversations")
                 // this.isOpenHome = false;
                 // this.isOpenConversation = true;
                 // this.onNewConversation()
@@ -951,7 +951,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             }).then((res)=> { this.showWidget() });
             
         });
-        
     }
 
     // ========= begin:: FUNCTIONS ============//
