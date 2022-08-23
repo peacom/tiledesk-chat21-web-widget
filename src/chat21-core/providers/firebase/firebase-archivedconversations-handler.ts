@@ -174,10 +174,10 @@ export class FirebaseArchivedConversationsHandler extends ArchivedConversationsH
             const urlNodeFirebase = archivedConversationsPathForUserId(this.tenant, this.loggedUserId) // + '/' + conversationId;
             this.logger.debug('[FIREBASEArchivedConversationsHandlerSERVICE] urlNodeFirebase conversationDetail *****', urlNodeFirebase, conversationId)
             const firebaseMessages = firebase.database().ref(urlNodeFirebase);
-            if(this.subscribe){
-                this.logger.log('[FIREBASEArchivedConversationsHandlerSERVICE] getConversationDetail ALREADY SUBSCRIBED')
-                return;
-            }
+            // if(this.subscribe){
+            //     this.logger.log('[FIREBASEArchivedConversationsHandlerSERVICE] getConversationDetail ALREADY SUBSCRIBED')
+            //     return;
+            // }
             
             this.subscribe = firebaseMessages.on('value', (snap) => {
                 const childSnapshot = snap.child('/'+conversationId)

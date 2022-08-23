@@ -311,10 +311,10 @@ export class FirebaseConversationsHandler extends ConversationsHandlerService {
             const urlNodeFirebase = conversationsPathForUserId(this.tenant, this.loggedUserId) // + '/' + conversationId;
             this.logger.debug('[FIREBASEConversationsHandlerSERVICE] conversationDetail urlNodeFirebase *****', urlNodeFirebase)
             const firebaseMessages = firebase.database().ref(urlNodeFirebase);
-            if(this.subscribe){
-                this.logger.log('[FIREBASEConversationsHandlerSERVICE] getConversationDetail ALREADY SUBSCRIBED')
-                return;
-            }
+            // if(this.subscribe){
+            //     this.logger.log('[FIREBASEConversationsHandlerSERVICE] getConversationDetail ALREADY SUBSCRIBED')
+            //     return;
+            // }
             
             this.subscribe = firebaseMessages.on('value', (snap) => {
                 const childSnapshot = snap.child('/'+conversationId)
