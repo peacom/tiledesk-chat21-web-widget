@@ -565,7 +565,7 @@ private addCommandMessage(msg: MessageModel){
 private generateMessageObject(message, command_message, callback) {
     let parentUid = message.uid
     command_message.uid = uuidv4();
-    command_message.text = message.text.trim() //remove black msg with only spaces
+    command_message.text = command_message.text.trim() //remove black msg with only spaces
     command_message.language = message.language;
     command_message.recipient = message.recipient;
     command_message.recipient_fullname = message.recipient_fullname;
