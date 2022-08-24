@@ -25,11 +25,11 @@ export class TiledeskRequestsService {
     this.logger.debug('[TILEDESK-REQUEST-SERV] - initialize', projectId);
     this.SERVER_BASE_URL = serverBaseUrl;
     this.URL_TILEDESK_CLOSE_REQUEST = this.SERVER_BASE_URL + projectId +'/requests/';
-    this.tiledeskToken = this.appStorage.getItem('tiledeskToken')
   }
 
 
   closeSupportGroup(supportgroupid: string): Promise<string> {
+    this.tiledeskToken = this.appStorage.getItem('tiledeskToken')
     this.logger.debug('[TILEDESK-REQUEST-SERV] - closeSupportGroup', supportgroupid);
     const headers = new HttpHeaders({
       'Accept': 'application/json',
