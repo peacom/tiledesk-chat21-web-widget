@@ -769,6 +769,13 @@
             window.Tiledesk('restart')
         }
 
+        function onClickAllowReopen(){
+            let status = document.querySelector('input[name="allowReopen"]:checked').value
+            window.tiledeskSettings['allowReopen'] = stringToBoolean(status)
+            console.log('onClickAllowReopen:',window.tiledeskSettings);
+            window.Tiledesk('restart')
+        }
+
         function onClickFullScreenMode(){
             let status = document.querySelector('input[name="fullscreenMode"]:checked').value
             window.tiledeskSettings['fullscreenMode'] = stringToBoolean(status)
@@ -923,13 +930,6 @@
             let status = document.querySelector('input[name="showAllConversations"]:checked').value
             window.tiledeskSettings['showAllConversations'] = stringToBoolean(status)
             console.log('onClickShowAllConversations:', window.tiledeskSettings)
-            window.Tiledesk('restart')
-        }
-
-        function onClickShowLogoutOption(){
-            let status = document.querySelector('input[name="showLogoutOption"]:checked').value
-            window.tiledeskSettings['showLogoutOption'] = stringToBoolean(status)
-            console.log('onClickShowLogoutOption:', window.tiledeskSettings)
             window.Tiledesk('restart')
         }
 
@@ -1627,6 +1627,16 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-md-5 formElement"><span><em><strong>allowReopen</strong></em></span></div>
+                            <div class="col-md-4">
+                                <input class="form-check-input" type="radio" name="allowReopen" value="true"><label>True</label>
+                                <input class="form-check-input" type="radio" name="allowReopen" value="false" checked><label >False</label>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-light" onclick="onClickAllowReopen()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>fullscreenMode</strong></em></span></div>
                             <div class="col-md-4">
                                 <input class="form-check-input" type="radio" name="fullscreenMode" value="true"><label>True</label>
@@ -1760,16 +1770,6 @@
                             </div>
                             <div class="col-md-3">
                                 <button class="btn btn-light" onclick="onClickShowAllConversations()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-5 formElement"><span><em><strong>showLogoutOption</strong></em></span></div>
-                            <div class="col-md-4">
-                                <input class="form-check-input" type="radio" name="showLogoutOption" value="true" checked><label>True</label>
-                                <input class="form-check-input" type="radio" name="showLogoutOption" value="false"><label>False</label>
-                            </div>
-                            <div class="col-md-3">
-                                <button class="btn btn-light" onclick="onClickShowLogoutOption()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
