@@ -2,11 +2,7 @@ import { TranslatorService } from './../../providers/translator.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Component, EventEmitter, Input, IterableChangeRecord, IterableChanges, IterableDiffers, KeyValueDiffers, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ConversationModel } from '../../../chat21-core/models/conversation';
-import {
-  getUrlImgProfile,
-  setColorFromString,
-  avatarPlaceholder,
-  convertMessage} from '../../utils/utils';
+import { setColorFromString, avatarPlaceholder, convertMessage} from '../../utils/utils';
 import { ImageRepoService } from '../../../chat21-core/providers/abstract/image-repo.service';
 import { LoggerService } from '../../../chat21-core/providers/abstract/logger.service';
 import { LoggerInstance } from '../../../chat21-core/providers/logger/loggerInstance';
@@ -32,7 +28,6 @@ export class ListConversationsComponent implements OnInit {
   convertMessage = convertMessage;
   setColorFromString = setColorFromString;
   avatarPlaceholder = avatarPlaceholder;
-  getUrlImgProfile = getUrlImgProfile;
   // ========= end:: dichiarazione funzioni ========= //
 
   iterableDifferListConv: any;

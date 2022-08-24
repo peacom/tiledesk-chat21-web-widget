@@ -17,7 +17,7 @@ import {
 import { MessageModel } from 'src/chat21-core/models/message';
 
 // utils
-import { isJustRecived, getUrlImgProfile, isPopupUrl, searchIndexInArrayForUid} from 'src/app/utils/utils';
+import { isJustRecived, isPopupUrl} from 'src/app/utils/utils';
 import { v4 as uuidv4 } from 'uuid';
 
 
@@ -156,7 +156,6 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
 
   public showSpinner = true;
 
-  getUrlImgProfile = getUrlImgProfile;
   tooltipOptions = {
     'show-delay': 1500,
     'tooltip-class': 'chat-tooltip',

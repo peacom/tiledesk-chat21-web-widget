@@ -5,13 +5,7 @@ import { Subscription } from 'rxjs'
 
 
 import { Globals } from '../../utils/globals';
-import {
-  getUrlImgProfile,
-  setColorFromString,
-  avatarPlaceholder,
-  convertMessage,
-  compareValues
-} from '../../utils/utils';
+import { setColorFromString, avatarPlaceholder, convertMessage } from '../../utils/utils';
 
 
 // models
@@ -60,7 +54,6 @@ export class HomeConversationsComponent implements OnInit, OnDestroy {
   convertMessage = convertMessage;
   setColorFromString = setColorFromString;
   avatarPlaceholder = avatarPlaceholder;
-  getUrlImgProfile = getUrlImgProfile;
   // ========= end:: dichiarazione funzioni ========= //
 
 
@@ -305,19 +298,6 @@ checkShowAllConversation() {
   onConversationLoadedFN(conversation: ConversationModel){
     this.onConversationLoaded.emit(conversation)
   }
-
-  /** */
-  // getUrlImgProfile(uid?: string): string {
-  //   const baseLocation = this.g.baseLocation;
-  //   if (!uid || uid === 'system' ) {
-  //       return baseLocation + IMG_PROFILE_BOT;
-  //     } else if (uid === 'error') {
-  //       return baseLocation + IMG_PROFILE_DEFAULT;
-  //   } else {
-  //       return baseLocation + IMG_PROFILE_DEFAULT;
-  //   }
-  // }
-
 
   private openConversationByID(conversation) {
     this.logger.debug('[HOMECONVERSATIONS] openConversationByID: ', conversation);

@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 
 // services
 import { Globals } from 'src/app/utils/globals';
-import { getUrlImgProfile, convertMessage, compareValues } from 'src/app/utils/utils';
+import { convertMessage, compareValues } from 'src/app/utils/utils';
 import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
 import { LoggerInstance } from 'src//chat21-core/providers/logger/loggerInstance';
 import { CustomTranslateService } from 'src/chat21-core/providers/custom-translate.service';
@@ -31,7 +31,6 @@ export class ListAllConversationsComponent implements OnInit, OnDestroy, AfterVi
 
   // ========= begin:: dichiarazione funzioni ======= //
   convertMessage = convertMessage;
-  getUrlImgProfile = getUrlImgProfile;
   // ========= end:: dichiarazione funzioni ========= //
 
   // ========= begin:: sottoscrizioni ======= //
