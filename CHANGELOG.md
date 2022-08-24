@@ -1,5 +1,8 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.35-rc.3
+- bug-fixed: cannot find property of undefined while close a conversation from upper-right menu in conversation-detail header component
+
 ### 5.0.35-rc.2
 - added: block click event if conversation is archived in text and action attachment buttons
 - bug-fixed: if conversation is archived and do a close->open action, then conversation is considered as active and not as archived
