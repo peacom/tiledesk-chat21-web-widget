@@ -95,6 +95,7 @@ export class ConversationPreviewComponent implements OnInit {
       sizeImage.width = MAX_HEIGHT_IMAGES_PREIEW / ratio;
       sizeImage.height = MAX_HEIGHT_IMAGES_PREIEW ;
     }
+    console.log('sizeeeeee', sizeImage)
     return sizeImage; // h.toString();
   }
   
@@ -108,12 +109,8 @@ export class ConversationPreviewComponent implements OnInit {
       // ---------------------------------------------------------------------
       this.logger.log('[LOADER-PREVIEW-PAGE] - readAsDataURL - USE CASE IMAGE - IMAGE ', attachment);
       if(!this.fileSelected){
-        this.fileSelected = this.attachments[0]
-        // const sizeImage = this.getMetadataSize(this.fileSelected.metadata)
-        // console.log('attachmenttttt', attachment, this.attachments[0])
-        // this.fileSelected.metadata.width = sizeImage.width
-        // this.fileSelected.metadata.height = sizeImage.height
-
+        this.fileSelected = Object.assign({}, this.attachments[0].metadata)
+        this.fileSelected = Object.assign(this.fileSelected, this.getMetadataSize(this.fileSelected))
 
       }
     } else if ((attachment.file.type.startsWith("image")) && (attachment.file.type.includes("svg"))){
@@ -123,10 +120,8 @@ export class ConversationPreviewComponent implements OnInit {
       this.logger.log('[LOADER-PREVIEW-PAGE] - readAsDataURL - USE CASE SVG - SVG ', attachment);
       attachment.metadata.src = this.sanitizer.bypassSecurityTrustUrl(attachment.metadata.src)
       if(!this.fileSelected){
-        this.fileSelected = this.attachments[0]
-        // const sizeImage = this.getMetadataSize(this.fileSelected.metadata)
-        // this.fileSelected.metadata.width = sizeImage.width
-        // this.fileSelected.metadata.height = sizeImage.height
+        this.fileSelected = Object.assign({}, this.attachments[0].metadata)
+        this.fileSelected = Object.assign(this.fileSelected, this.getMetadataSize(this.fileSelected))
       }
     }else if(!attachment.file.type.startsWith("image")){
       // ---------------------------------------------------------------------
