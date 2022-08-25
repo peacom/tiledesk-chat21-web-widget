@@ -605,11 +605,18 @@ export class GlobalSettingsService {
             globals.preChatForm = (TEMP === true) ? true : false;
             // globals.setParameter('preChatForm', (TEMP === false) ? false : true);
         }
+        /** @deprecated */
         TEMP = tiledeskSettings['isOpen'];
         // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > isOpen:: ', TEMP);
         if (TEMP !== undefined) {
             globals.isOpen = (TEMP === true) ? true : false;
             // globals.setParameter('isOpen', (TEMP === false) ? false : true);
+        }
+        TEMP = tiledeskSettings['open'];
+        // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > open:: ', TEMP);
+        if (TEMP !== undefined) {
+            globals.isOpen = (TEMP === true) ? true : false;
+            // globals.setParameter('open', (TEMP === false) ? false : true);
         }
         TEMP = tiledeskSettings['channelType'];
         // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > channelType:: ', TEMP);
@@ -957,9 +964,6 @@ export class GlobalSettingsService {
                 globals.showInfoMessage.push('CHAT_CLOSED')
             }
         }
-            
-        
-
     }
 
     /**
@@ -1006,7 +1010,12 @@ export class GlobalSettingsService {
         if (TEMP !== null) {
             this.globals.preChatForm = (TEMP === true) ? true : false;
         }
+        /** @deprecated */
         TEMP = el.nativeElement.getAttribute('isOpen');
+        if (TEMP !== null) {
+            this.globals.isOpen = (TEMP === true) ? true : false;
+        }
+        TEMP = el.nativeElement.getAttribute('open');
         if (TEMP !== null) {
             this.globals.isOpen = (TEMP === true) ? true : false;
         }
@@ -1412,7 +1421,13 @@ export class GlobalSettingsService {
             globals.preChatForm = stringToBoolean(TEMP);
         }
 
+        /** @deprecated */
         TEMP = getParameterByName(windowContext, 'tiledesk_isOpen');
+        if (TEMP) {
+            globals.isOpen = stringToBoolean(TEMP);
+        }
+
+        TEMP = getParameterByName(windowContext, 'tiledesk_open');
         if (TEMP) {
             globals.isOpen = stringToBoolean(TEMP);
         }
