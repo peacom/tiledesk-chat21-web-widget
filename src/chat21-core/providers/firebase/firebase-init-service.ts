@@ -21,10 +21,10 @@ export class FirebaseInitService {
 
   public static initFirebase(firebaseConfig: any) {
     if(!FirebaseInitService.firebaseInit){
-        if (!firebaseConfig || firebaseConfig.apiKey === 'CHANGEIT') {
-            throw new Error('Firebase config is not defined. Please create your widget-config.json. See the Chat21-Web_widget Installation Page');
-          } 
-          FirebaseInitService.firebaseInit = firebase.initializeApp(firebaseConfig); 
+      if (!firebaseConfig || firebaseConfig.apiKey === 'CHANGEIT') {
+        throw new Error('Firebase config is not defined. Please create your widget-config.json. See the Chat21-Web_widget Installation Page');
+      } 
+      FirebaseInitService.firebaseInit = firebase.initializeApp(firebaseConfig); 
     }
     return FirebaseInitService.firebaseInit
   }
