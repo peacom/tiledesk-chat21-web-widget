@@ -1,6 +1,9 @@
 # chat21-web-widget ver 5.0
 
 ### 5.0.35 in PROD
+- bug-fixed: widget/chat must not modify original dimension of the attached file (image or video or gif ) before sending message
+- removed: deprecated isOpen tiledesk settings
+- added: open tiledesk property to enable widget to open/close itself after initialization
 
 ### 5.0.35-rc.3
 - bug-fixed: cannot find property of undefined while close a conversation from upper-right menu in conversation-detail header component
