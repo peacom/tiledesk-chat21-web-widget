@@ -213,6 +213,7 @@ export class Globals {
    showInfoMessage: Array<string>; // *******  new ********
    typingLocation: string; // *******  new ********
    allowReopen: boolean; // *******  new ********
+   continueConversationBeforeTime: number; // *******  new ********
   constructor(
   ) {
     // console.log(' ---------------- 1: initDefafultParameters ---------------- ');
@@ -381,6 +382,9 @@ export class Globals {
     /** set the location of typing indicator (header or content) */
     this.allowReopen = false;
     /** enable the user to reopen a closed conversation */
+    this.continueConversationBeforeTime = 48;
+    /** enable user to continue archived confersation before the value time from last timeout message */
+
     this.showWaitTime = true;
 
     this.showAvailableAgents = true;

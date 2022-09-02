@@ -964,6 +964,11 @@ export class GlobalSettingsService {
                 globals.showInfoMessage.push('CHAT_CLOSED')
             }
         }
+        TEMP = tiledeskSettings['continueConversationBeforeTime'];
+        // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > continueConversationBeforeTime:: ', TEMP]);
+        if (TEMP !== undefined) {
+            globals.continueConversationBeforeTime = +TEMP;
+        }      
     }
 
     /**
@@ -1209,6 +1214,10 @@ export class GlobalSettingsService {
             if(this.globals.allowReopen && !this.globals.showInfoMessage.includes('CHAT_CLOSED')){
                 this.globals.showInfoMessage.push('CHAT_CLOSED')
             }
+        }
+        TEMP = el.nativeElement.getAttribute('continueConversationBeforeTime');
+        if (TEMP !== null) {
+            this.globals.continueConversationBeforeTime = +TEMP;
         }
         
     }
@@ -1621,6 +1630,11 @@ export class GlobalSettingsService {
             if(globals.allowReopen && !globals.showInfoMessage.includes('CHAT_CLOSED')){
                 globals.showInfoMessage.push('CHAT_CLOSED')
             }
+        }
+
+        TEMP = getParameterByName(windowContext, 'tiledesk_continueConversationBeforeTime');
+        if (TEMP) {
+            globals.continueConversationBeforeTime = +TEMP;
         }
     }
 
