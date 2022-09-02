@@ -24,11 +24,10 @@ import { MSG_STATUS_RECEIVED, CHAT_REOPENED, CHAT_CLOSED, MEMBER_JOINED_GROUP, T
 import {
   compareValues,
   searchIndexInArrayForUid,
-  conversationMessagesRef,
-  isJustRecived
+  conversationMessagesRef  
 } from '../../utils/utils';
 import { v4 as uuidv4 } from 'uuid';
-import { messageType, checkIfIsMemberJoinedGroup, hideInfoMessage } from '../../utils/utils-message';
+import { messageType, checkIfIsMemberJoinedGroup, hideInfoMessage, isJustRecived } from '../../utils/utils-message';
 
 // @Injectable({ providedIn: 'root' })
 @Injectable()
@@ -503,7 +502,6 @@ export class FirebaseConversationHandler extends ConversationHandlerService {
         }
     });
   }
-
 
 
 private addCommandMessage(msg: MessageModel){

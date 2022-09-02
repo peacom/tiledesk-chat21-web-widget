@@ -116,7 +116,6 @@ export function isChannelTypeGroup(channelType: string) {
     return false;
 }
 
-
 export function isEmojii(message: any){
   
   // let emoji = '';
@@ -145,6 +144,13 @@ export function isEmojii(message: any){
   } catch(e) {
     return false
   }
+}
+
+export function isJustRecived(startedAt, time) {
+  if (time > startedAt) {
+    return true;
+  }
+  return false;
 }
 
 export function checkIfIsMemberJoinedGroup(msg, loggedUser): boolean{
