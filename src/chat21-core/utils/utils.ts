@@ -551,6 +551,21 @@ export function getFromNow(timestamp): string {
 }
 
 
+export function getDateDifference(startTimestampDate, endTimestampDate){
+  // var startTime = moment.unix(startTimestampDate);
+  // var endTime = moment.unix(endTimestampDate);
+
+  const startTime = moment(startTimestampDate);
+  const endTime = moment(endTimestampDate);
+  const duration = moment.duration(endTime.diff(startTime));
+  const days = duration.asDays()
+  const hours = duration.asHours();
+  const minutes = duration.asMinutes();
+
+  return {days, hours, minutes}
+}
+
+
 // export function getUrlImgProfile(uid: string) {
 //   const baseLocation = this.g.baseLocation;
 //   if (!uid || uid === 'system' ) {
@@ -596,13 +611,6 @@ export function getUnique(arr, comp) {
     // eliminate the dead keys & store unique objects
     .filter(e => arr[e]).map(e => arr[e]);
    return unique;
-}
-
-export function isJustRecived(startedAt, time) {
-  if (time > startedAt) {
-    return true;
-  }
-  return false;
 }
 
 export function isGroup(conv: ConversationModel) {

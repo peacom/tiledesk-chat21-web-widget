@@ -182,31 +182,6 @@ export class ConversationContentComponent implements OnInit {
    * chiamato in maniera ricorsiva sino a quando non risponde correttamente
   */
 
-//  scrollToBottomStart() {
-//   const that = this;
-//   if ( this.isScrolling === false ) {
-//     setTimeout(function () {
-//       try {
-//         that.isScrolling = true;
-//         const objDiv = document.getElementById(that.idDivScroll);
-//         setTimeout(function () {
-//           that.g.wdLog(['objDiv::', objDiv.scrollHeight]);
-//           //objDiv.scrollIntoView(false);
-//           objDiv.style.opacity = '1';
-//         }, 200);
-//         that.isScrolling = false;
-//       } catch (err) {
-//         that.g.wdLog(['> Error :' + err]);
-//       }
-//     }, 0);
-//   }
-// }
-
-  /**
-   * scrollo la lista messaggi all'ultimo
-   * chiamato in maniera ricorsiva sino a quando non risponde correttamente
-  */
-
  scrollToBottom(withoutAnimation?: boolean) {
   const that = this;
   try {

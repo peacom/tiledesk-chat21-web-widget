@@ -26,8 +26,10 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
   @Input() userFullname: string;
   @Input() userEmail: string;
   @Input() showAttachmentButton: boolean;
+  @Input() showContinueConversationButton: boolean;
   // @Input() showWidgetNameInConversation: boolean
   @Input() isConversationArchived: boolean;
+  @Input() singleConversation: boolean;
   @Input() hideTextReply: boolean;
   @Input() isMobile: boolean;
   @Input() isEmojiiPickerShow: boolean;
@@ -84,6 +86,7 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
     if(changes['hideTextReply'] && changes['hideTextReply'].currentValue !== undefined){
       this.restoreTextArea();
     }
+    console.log('showcontinuebutton-->', this.showContinueConversationButton)
   }
   
   ngAfterViewInit() {
@@ -514,6 +517,11 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
 
   openNewConversation(){
     this.onNewConversationButtonClicked.emit();
+  }
+
+  onContinueConversation(){
+    this.isConversationArchived = false;
+    this.restoreTextArea()
   }
 
 

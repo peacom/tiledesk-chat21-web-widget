@@ -29,7 +29,7 @@ import { AppComponent } from '../../../app.component';
 import { CustomTranslateService } from 'src/chat21-core/providers/custom-translate.service';
 import { ConversationHandlerService } from 'src/chat21-core/providers/abstract/conversation-handler.service';
 import { ConversationHandlerBuilderService } from 'src/chat21-core/providers/abstract/conversation-handler-builder.service';
-import { popupUrl } from 'src/chat21-core/utils/utils';
+import { getDateDifference, getFromNow, popupUrl } from 'src/chat21-core/utils/utils';
 import { ConversationContentComponent } from '../conversation-content/conversation-content.component';
 import { ConversationsHandlerService } from 'src/chat21-core/providers/abstract/conversations-handler.service';
 import { ArchivedConversationsHandlerService } from 'src/chat21-core/providers/abstract/archivedconversations-handler.service';
@@ -44,6 +44,7 @@ import { Globals } from 'src/app/utils/globals';
 import { AppConfigService } from 'src/app/providers/app-config.service';
 import { StarRatingWidgetService } from 'src/app/providers/star-rating-widget.service';
 import { TiledeskRequestsService } from 'src/chat21-core/providers/tiledesk/tiledesk-requests.service';
+import moment from 'moment';
 // import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -92,6 +93,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
   footerMessagePlaceholder: string = '';
   isTrascriptDownloadEnabled = false;
   audio: any;
+  showContinueConversationButton: boolean = false
   // ========= begin:: gestione scroll view messaggi ======= //
   //startScroll = true; // indica lo stato dello scroll: true/false -> è in movimento/ è fermo
   isScrolling = false;
@@ -258,7 +260,8 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
     const keysFooter = [
       'LABEL_PLACEHOLDER',
       'GUEST_LABEL',
-      'LABEL_START_NW_CONV'
+      'LABEL_START_NW_CONV',
+      'CONTINUE'
     ];
 
     const keysContent = [
@@ -311,24 +314,6 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
       }
       this.isButtonsDisabled = false;
     }, 300);
-    // this.g.currentConversationComponent = this;
-    // if (this.g.newConversationStart === true) {
-    //   this.onNewConversationComponentInit();
-    //   // this.g.setParameter('newConversationStart', null)
-    //   this.g.newConversationStart = false;
-    //   // console.log('reset newconv ' + this.g.newConversationStart);
-    //   // do  not send message hello
-    // }
-    // // ------------------------------------------------ //
-    // this.g.wdLog([' --------ngAfterViewInit-------- ']);
-    // // console.log('attributes: ', this.g.attributes);
-    // //this.scrollToBottom(true);
-    // this.setSubscriptions();
-    // setTimeout(() => {
-    //   if (this.afConversationComponent) {
-    //     this.afConversationComponent.nativeElement.focus();
-    //   }
-    // }, 1000);
   }
 
   ngAfterViewChecked(){
@@ -415,6 +400,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
       this.logger.debug('[CONV-COMP] getConversationDetail: conversationsHandlerService ', this.conversationWith, conv, this.isConversationArchived)
       if(conv){
         this.conversation = conv;
+        // let duration = getDateDifference(new Date(+this.conversation.timestamp * 1000) , new Date(1661439632 * 1000))
         this.isConversationArchived = false;
         callback(this.isConversationArchived)
       }
@@ -426,6 +412,9 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
           if(conv){
             this.conversation = conv;
             this.isConversationArchived = true;
+            /**calc time difference between now and last conversation timestamp to allow "Continue" button */
+            let duration = getDateDifference(this.conversation.timestamp, Date.now())
+            duration.hours < this.g.continueConversationBeforeTime? this.showContinueConversationButton = true: this.showContinueConversationButton = false
             callback(this.isConversationArchived)
           }else if(!conv) {
             callback(null);
