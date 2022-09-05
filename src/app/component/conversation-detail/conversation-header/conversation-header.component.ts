@@ -84,7 +84,7 @@ export class ConversationHeaderComponent implements OnInit, OnChanges {
     // this.appStorageService.setItem('activeConversation', this.conversation.uid);
     // --------------------------- //
     // after animation intro
-    setTimeout(() => {
+    // setTimeout(() => {
       // this.initAll();
       // this.setFocusOnId('chat21-main-message-context');
 
@@ -98,7 +98,7 @@ export class ConversationHeaderComponent implements OnInit, OnChanges {
       //   this.afConversationComponent.nativeElement.focus();
       // }
       this.isButtonsDisabled = false;
-    }, 300);
+    // }, 300);
     this.setSubscriptions();
 
   }
@@ -130,28 +130,28 @@ export class ConversationHeaderComponent implements OnInit, OnChanges {
   }
 
   /** */
-  subscribeTypings(data: any) {
-    const that = this;
-    try {
-      const key = data.uidUserTypingNow; 
-      this.nameUserTypingNow = null;
-      if (data.nameUserTypingNow) {
-        this.nameUserTypingNow = data.nameUserTypingNow;
-      }
-      this.logger.debug('[CONV-HEADER] subscribeTypings data:', data);
-      const userTyping = this.membersConversation.includes(key);
-      if ( !userTyping) {
-        this.isTypings = true;
-        clearTimeout(this.setTimeoutWritingMessages);
-        this.setTimeoutWritingMessages = setTimeout(() => {
-            that.isTypings = false;
-        }, 2000);
-      }
-    } catch (error) {
-      this.logger.error('[CONV-HEADER] error: ', error);
-    }
+  // subscribeTypings(data: any) {
+  //   const that = this;
+  //   try {
+  //     const key = data.uidUserTypingNow; 
+  //     this.nameUserTypingNow = null;
+  //     if (data.nameUserTypingNow) {
+  //       this.nameUserTypingNow = data.nameUserTypingNow;
+  //     }
+  //     this.logger.debug('[CONV-HEADER] subscribeTypings data:', data);
+  //     const userTyping = this.membersConversation.includes(key);
+  //     if ( !userTyping) {
+  //       this.isTypings = true;
+  //       clearTimeout(this.setTimeoutWritingMessages);
+  //       this.setTimeoutWritingMessages = setTimeout(() => {
+  //           that.isTypings = false;
+  //       }, 2000);
+  //     }
+  //   } catch (error) {
+  //     this.logger.error('[CONV-HEADER] error: ', error);
+  //   }
 
-  }
+  // }
 
 
   // =========== BEGIN: event emitter function ====== //
