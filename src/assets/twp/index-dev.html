@@ -648,6 +648,13 @@
             window.Tiledesk('restart')
         }
 
+        function onClickOpen(){
+            let status = document.querySelector('input[name="open"]:checked').value
+            window.tiledeskSettings['open'] = stringToBoolean(status)
+            console.log('onClickOpen: status-->',window.tiledeskSettings)
+            window.Tiledesk('restart')
+        }
+
         function onClickPreChatForm(){
             let status = document.querySelector('input[name="preChatForm"]:checked').value
             window.tiledeskSettings['preChatForm'] = stringToBoolean(status)
@@ -1142,16 +1149,6 @@
         //     document.getElementById("project_name").innerHTML = project_name;
         // }
 
-        
-        var isOpen = getQueryVariable("isOpen");
-        //var tiledesk_projectid = url.searchParams.get("tiledesk_projectid");
-
-        // console.log('isOpen >: ', isOpen);
-        if(isOpen == 'true') {
-            // console.log('QUI ENTRO isOpen >: ', isOpen);
-            localStorage.setItem("widget_sv5_"+ tiledesk_projectid +"_isOpen", true);
-        }
-
 
         function getQueryVariable(variable)     {
             var query = window.location.search.substring(1);
@@ -1467,6 +1464,16 @@
                             </div>
                             <div class="col-md-3">
                                 <button class="btn btn-light" onclick="onClickStartFromHome()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 formElement"><span><em><strong>open</strong></em></span></div>
+                            <div class="col-md-4">
+                                <input class="form-check-input" type="radio" name="open" value="true"><label class="form-check-label" for="open">True</label>
+                                <input class="form-check-input" type="radio" name="open" value="false"checked><label class="form-check-label" for="open">False</label>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-light" onclick="onClickOpen()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
