@@ -70,7 +70,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
   @Output() onConversationClosed = new EventEmitter<string>()
   @Output() onSignOut = new EventEmitter();
   @Output() onBeforeMessageSent = new EventEmitter();
-  @Output() onAfterSendMessage = new EventEmitter();
+  @Output() onAfterSendMessage = new EventEmitter<MessageModel>();
   @Output() onNewConversationInit = new EventEmitter();
   @Output() onBeforeMessageRender = new EventEmitter();
   @Output() onAfterMessageRender = new EventEmitter();
@@ -153,8 +153,6 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
 
   isIE = /msie\s|trident\//i.test(window.navigator.userAgent);
   firstScroll = true;
-
-  setTimeoutSound: NodeJS.Timer;
 
   public showSpinner = true;
 
@@ -1140,25 +1138,25 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
    * se sono nella conversazione in fondo alla pagina -> NO SOUND
    * altrimenti -> SOUND
    */
-  soundMessage(timestamp?) {
-    if (!isJustRecived(this.g.startedAt.getTime(), timestamp)) {
-      return;
-    }
-    const soundEnabled = this.g.soundEnabled;
-    const baseLocation = this.g.baseLocation;
-    if ( soundEnabled ) {
-      const that = this;
-      this.audio = new Audio();
-      this.audio.src = baseLocation + '/assets/sounds/justsaying.mp3';
-      this.audio.load();
-      // console.log('conversation play');
-      clearTimeout(this.setTimeoutSound);
-      this.setTimeoutSound = setTimeout(function () {
-        that.audio.play();
-        that.logger.debug('[CONV-COMP] ****** soundMessage 1 *****', that.audio.src);
-      }, 1000);
-    }
-  }
+  // soundMessage(timestamp?) {
+  //   if (!isJustRecived(this.g.startedAt.getTime(), timestamp)) {
+  //     return;
+  //   }
+  //   const soundEnabled = this.g.soundEnabled;
+  //   const baseLocation = this.g.baseLocation;
+  //   if ( soundEnabled ) {
+  //     const that = this;
+  //     this.audio = new Audio();
+  //     this.audio.src = baseLocation + '/assets/sounds/justsaying.mp3';
+  //     this.audio.load();
+  //     // console.log('conversation play');
+  //     clearTimeout(this.setTimeoutSound);
+  //     this.setTimeoutSound = setTimeout(function () {
+  //       that.audio.play();
+  //       that.logger.debug('[CONV-COMP] ****** soundMessage 1 *****', that.audio.src);
+  //     }, 1000);
+  //   }
+  // }
   
 
   /** */
