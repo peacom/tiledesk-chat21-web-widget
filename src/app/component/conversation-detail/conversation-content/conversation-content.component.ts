@@ -187,7 +187,6 @@ export class ConversationContentComponent implements OnInit {
   try {
     that.isScrolling = true;
     const objDiv = document.getElementById(that.idDivScroll) as HTMLElement;
-    // const element = objDiv[0] as HTMLElement;
     setTimeout(function () {
 
       if (that.isIE === true || withoutAnimation === true || that.firstScroll === true) {
@@ -206,33 +205,6 @@ export class ConversationContentComponent implements OnInit {
  }
 
   // ========= END:: functions scroll position ======= //
-
-  /**
-  * function customize tooltip
-  */
-  handleTooltipEvents() {
-    const that = this;
-    const showDelay = this.tooltipOptions['showDelay'];
-    setTimeout(function () {
-      try {
-        const domRepresentation = document.getElementsByClassName('chat-tooltip');
-        if (domRepresentation) {
-          const item = domRepresentation[0] as HTMLInputElement;
-          if (!item.classList.contains('tooltip-show')) {
-            item.classList.add('tooltip-show');
-          }
-          setTimeout(function () {
-            if (item.classList.contains('tooltip-show')) {
-              item.classList.remove('tooltip-show');
-            }
-          }, that.tooltipOptions['hideDelayAfterClick']);
-        }
-      } catch (err) {
-        this.logger.error('[CONV-CONTENT] handleTooltipEvents > Error :' + err);
-      }
-    }, showDelay);
-  }
-
   isLastMessage(idMessage: string):boolean {
     if (idMessage === this.messages[this.messages.length - 1].uid) {
       return true;
@@ -254,14 +226,6 @@ export class ConversationContentComponent implements OnInit {
     }
     return false;
   }
-
-  // isEmojii(message):boolean {
-  //   if(this.isEmojii(message.text)){
-  //     return true 
-  //   }
-  //   return false
-  // }
-
 
   hideOutsideElements(){
     this.onMenuOptionShow.emit(false)
