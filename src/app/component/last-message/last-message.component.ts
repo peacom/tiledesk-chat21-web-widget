@@ -41,23 +41,7 @@ export class LastMessageComponent implements OnInit, AfterViewInit, OnDestroy {
     private imageRepoService: ImageRepoService,
     public g: Globals,
     // public conversationsService: ConversationsService
-  ) {
-    // this.g.wdLog([' ---------------- ngOnInit LastMessageComponent ---------------- ']);
-    // const that = this;
-    // const subChangedConversation = this.conversationsService.obsChangeConversation.subscribe((conversation) => {
-    //     that.ngZone.run(() => {
-    //       if (that.g.isOpen === false) {
-    //         that.g.wdLog([' 2 - > obsChangeConversation ::: ', conversation]);
-    //         if (conversation && conversation.attributes && conversation.attributes['subtype'] === 'info') {
-    //           return;
-    //         }
-    //         that.conversation = conversation;
-    //         // this.logger.debug('conv: ' + conversation);
-    //       }
-    //     });
-    // });
-    // this.subscriptions.push(subChangedConversation);
-  }
+  ) { }
 
   ngOnInit() {
   }

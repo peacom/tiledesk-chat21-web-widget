@@ -106,33 +106,6 @@ export class ListAllConversationsComponent implements OnInit, OnDestroy, AfterVi
     this.concatAndOrderArray();
   }
 
-  // initSubscriptions(){
-  //   const that = this;
-  //   const subListConversations = this.conversationsHandlerService.conversationsAdded.subscribe((conversation) => {
-  //     that.ngZone.run(() => {
-  //       if(conversation){
-  //         that.listConversations.push(conversation);
-  //         that.concatAndOrderArray();
-  //         that.logger.debug(' ListAllConversationsComponent conversations:::: ', that.listConversations]);
-  //       }
-        
-  //     });
-  //   });
-  //   this.subscriptions.push(subListConversations);
-    
-
-  //   const subArchivedConversations = this.archivedConversationsService.archivedConversationAdded.subscribe((conversation) => {
-  //     that.ngZone.run(() => {
-  //       if(conversation){
-  //         that.archivedConversations.push(conversation);
-  //         that.concatAndOrderArray();
-  //       }
-  //       that.logger.debug(' ListAllConversationsComponent archivedConversations:::: ', that.allConversations]);
-  //     });
-  //   });
-  //   this.subscriptions.push(subArchivedConversations);
-  // }
-
   /**
    * 1 - concat array conversations
    * 2 - order array
