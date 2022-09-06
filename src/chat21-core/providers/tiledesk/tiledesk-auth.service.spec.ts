@@ -3,7 +3,6 @@ import { TestBed } from '@angular/core/testing';
 import { AppStorageService } from '../abstract/app-storage.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TiledeskAuthService } from './tiledesk-auth.service';
-import { timeout } from 'rxjs/operator/timeout';
 
 describe('TiledeskAuthService', () => {
   // let httpClientMock;
