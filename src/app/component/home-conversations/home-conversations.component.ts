@@ -1,5 +1,5 @@
 
-import { Component, NgZone, OnInit, AfterViewInit, Input, Output, EventEmitter, OnDestroy, ViewChild, ElementRef, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy} from '@angular/core';
 
 import { Subscription } from 'rxjs'
 
@@ -35,6 +35,7 @@ export class HomeConversationsComponent implements OnInit, OnDestroy {
   // ========= begin:: Input/Output values ============//
   @Input() listConversations: Array<ConversationModel>; // uid utente ex: JHFFkYk2RBUn87LCWP2WZ546M7d2
   @Input() archivedConversations: Array<ConversationModel>;
+  @Input() hideNewConversationButton: boolean;
   @Input() stylesMap: Map<string, string>
   @Output() onNewConversation = new EventEmitter<string>();
   @Output() onConversationSelected = new EventEmitter<ConversationModel>();
@@ -79,7 +80,6 @@ export class HomeConversationsComponent implements OnInit, OnDestroy {
   
   constructor(
     public g: Globals,
-    private ngZone: NgZone,
     public imageRepoService: ImageRepoService,
     public chatManager: ChatManager,
     public waitingService: WaitingService,
@@ -118,37 +118,6 @@ export class HomeConversationsComponent implements OnInit, OnDestroy {
   }
 
   // ========= end:: ACTIONS ============//
-
-  // showConversations() {
-  //   this.logger.debug(' showConversations:::: ', this.listConversations.length]);
-  //   const that = this;
-  //   let subListConversations;
-  //   if (!subListConversations) {
-  //     subListConversations = this.conversationsService.obsListConversations.subscribe((conversations) => {
-  //         that.ngZone.run(() => {
-  //           if (conversations && conversations.length > 3) {
-  //             that.listConversations = conversations.slice(0, 3);
-  //             that.logger.debug(' >3 :::: ', that.listConversations.length]);
-  //           } else if (conversations && conversations.length > 0) {
-  //             that.listConversations = conversations;
-  //           }
-  //           that.logger.debug(' conversations = 0 :::: ', that.listConversations]);
-  //         });
-  //     });
-  //     this.subscriptions.push(subListConversations);
-  //   }
-
-  //   if (!this.subArchivedConversations) {
-  //     this.subArchivedConversations = this.conversationsService.obsArchivedConversations.subscribe((conversations) => {
-  //       that.ngZone.run(() => {
-  //         that.archivedConversations = conversations;
-  //         that.logger.debug(' archivedConversations:::: ', that.archivedConversations]);
-  //       });
-  //     });
-  //     this.subscriptions.push(this.subArchivedConversations);
-  //   }
-
-  // }
 
   initialize() {
     this.logger.debug('initialize: ListConversationsComponent');

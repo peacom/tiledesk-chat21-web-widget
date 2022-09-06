@@ -9,6 +9,7 @@ import { UploadService } from 'src/chat21-core/providers/abstract/upload.service
 import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
 import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
 import { ChatManager } from 'src/chat21-core/providers/chat-manager';
+import { MessageModel } from 'src/chat21-core/models/message';
 
 @Component({
   selector: 'chat-conversation-footer',
@@ -39,7 +40,7 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
   @Input() translationMap: Map< string, string>;
   @Output() onEmojiiPickerShow = new EventEmitter<boolean>();
   @Output() onBeforeMessageSent = new EventEmitter();
-  @Output() onAfterSendMessage = new EventEmitter();
+  @Output() onAfterSendMessage = new EventEmitter<MessageModel>();
   @Output() onChangeTextArea = new EventEmitter<any>();
   @Output() onAttachmentFileButtonClicked = new EventEmitter<any>();
   @Output() onNewConversationButtonClicked = new EventEmitter();
@@ -86,7 +87,6 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
     if(changes['hideTextReply'] && changes['hideTextReply'].currentValue !== undefined){
       this.restoreTextArea();
     }
-    console.log('showcontinuebutton-->', this.showContinueConversationButton)
   }
   
   ngAfterViewInit() {

@@ -41,6 +41,7 @@ import { UID_SUPPORT_GROUP_MESSAGES } from './utils/constants';
 import { supports_html5_storage } from 'src/chat21-core/utils/utils';
 import { AUTH_STATE_OFFLINE, AUTH_STATE_ONLINE, TYPE_MSG_FILE, TYPE_MSG_IMAGE, URL_SOUND_LIST_CONVERSATION } from 'src/chat21-core/utils/constants';
 import { isInfo } from 'src/chat21-core/utils/utils-message';
+import { MessageModel } from 'src/chat21-core/models/message';
 
 interface MessageObj {
   tenant?: string;
@@ -89,6 +90,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   // isWidgetActive: boolean;            /** var bindata sullo stato conv aperta/chiusa !!!! da rivedere*/
   isConversationArchived: boolean = false;
   isInitialized = false;              /** if true show button */
+  isSentMessage = false;
   // ========= end:: widget state parameter ======= //
 
   listConversations: Array<ConversationModel>;
@@ -1217,10 +1219,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                     return windowContext['tiledesk']['angularcomponent'].component.signInAnonymous();
                 });
             };
-            // window['tiledesk'].on = function (event_name, handler) {
-            //      this.g.wdLog(["addEventListener for "+ event_name);
-            //     this.el.nativeElement.addEventListener(event_name, e =>  handler());
-            // };
             /** show all widget */
             windowContext['tiledesk'].show = function () {
                 ngZone.run(() => {
@@ -1494,10 +1492,10 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
     private soundMessage() {
-        this.logger.debug('[APP-COMP] ****** soundMessage *****', this.audio);
         const that = this;
         const soundEnabled = this.g.soundEnabled;
         if (soundEnabled) {
+            this.logger.debug('[APP-COMP] ****** soundMessage *****', this.audio);
             this.audio.pause();
             this.audio.currentTime = 0;
             clearTimeout(this.setTimeoutSound);
@@ -1525,17 +1523,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         // this.g.isOpen = false;
         // this.g.setIsOpen(false);
         this.f21_close();
-    }
-
-    onSoundChange(soundEnabled) {
-        this.g.setParameter('soundEnabled', soundEnabled);
-    }
-
-    onMenuOptionSignOut(){
-        this.logger.debug('[APP-COMP] onMenuOptionSignOut');
-        this.signOut()
-        this.isOpenConversation = false;
-        this.onNewConversation();
     }
 
     /**
@@ -1651,6 +1638,17 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         // this.settingsSaverService.setVariable('isOpenPrechatForm', false);
     }
 
+    onSoundChange(soundEnabled) {
+        this.g.setParameter('soundEnabled', soundEnabled);
+    }
+
+    onMenuOptionSignOut(){
+        this.logger.debug('[APP-COMP] onMenuOptionSignOut');
+        this.signOut()
+        this.isOpenConversation = false;
+        this.onNewConversation();
+    }
+
     /**
      * MODAL HOME:
      * @param $event
@@ -1760,11 +1758,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.isOpenHome = true;
         this.isOpenAllConversation = false;
         this.isOpenConversation = false;
-        setTimeout(() => {
-            // this.isOpenAllConversation = isOpenAllConversationTEMP;
-            // this.isOpenHome = isOpenHomeTEMP;
-            // this.isOpenConversation = false;
-        }, 200);
         // this.startNwConversation();
     }
         
@@ -1827,6 +1820,11 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             this.isOpenConversation = isOpenConversationTEMP;
             this.isOpenAllConversation = false;
         }, 200);
+    }
+
+    onAfterMessageSent(event: MessageModel){
+        this.triggerHandler.triggerAfterSendMessageEvent(event)
+        this.isSentMessage = true;
     }
 
     onImageLoaded(conversation: ConversationModel) {

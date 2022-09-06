@@ -66,7 +66,7 @@
   </div>
 
   
-  <div class="c21-footer"> 
+  <div class="c21-footer" *ngIf="!hideNewConversationButton"> 
     <!--  *ngIf="this.g.supportMode" -->
     <button tabindex="1040" aflistconv #aflistconv class="c21-button-primary" (click)="openNewConversation()" [ngStyle]="{'background-color': g.themeColor, 'border-color': g.themeColor, 'color': g.themeForegroundColor }">
         <span class="v-align-center">

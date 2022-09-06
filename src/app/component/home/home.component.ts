@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   @Input() listConversations: Array<ConversationModel>;
   @Input() archivedConversations: Array<ConversationModel>;
   @Input() hideSettings: boolean;
+  @Input() hideNewConversationButton: boolean;
   @Input() stylesMap: Map<string, string>
   @Output() onNewConversation = new EventEmitter<string>();
   @Output() onConversationSelected = new EventEmitter<ConversationModel>();
