@@ -1,5 +1,10 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.36-rc.1
+- added: dispose external method to tiledesk widget
+- added: manage behaviour for a banned user
+- added: enabled possibility to continue old conversation (when singleConversation is active) if last timeout is less then continueConversationBeforeTime property value
+
 ### 5.0.35 in PROD
 - bug-fixed: widget/chat must not modify original dimension of the attached file (image or video or gif ) before sending message
 - removed: deprecated isOpen tiledesk settings
