@@ -45,6 +45,7 @@ import { AppConfigService } from 'src/app/providers/app-config.service';
 import { StarRatingWidgetService } from 'src/app/providers/star-rating-widget.service';
 import { TiledeskRequestsService } from 'src/chat21-core/providers/tiledesk/tiledesk-requests.service';
 import moment from 'moment';
+import { isUserBanned } from 'src/chat21-core/utils/utils-message';
 // import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -763,6 +764,9 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
 
       subscribtion = this.chatManager.conversationsHandlerService.conversationChanged.pipe(takeUntil(this.unsubscribe$)).subscribe((conversation) => {
         this.logger.debug('[CONV-COMP] ***** DATAIL conversationsChanged *****', conversation, this.conversationWith, this.isConversationArchived);
+        if(conversation && conversation.recipient === this.g.senderId && isUserBanned(conversation)){
+          return;
+        }
         if(conversation && conversation.sender !== this.senderId){
           const checkContentScrollPosition = that.conversationContent.checkContentScrollPosition();
           if(checkContentScrollPosition && conversation.is_new){ //update conversation if scroolToBottom is to the end

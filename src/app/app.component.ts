@@ -1,3 +1,4 @@
+import { TYPE_DIRECT } from './../chat21-core/utils/constants';
 /** ANGULAR MODULES */
 import { AfterViewInit, Component, ElementRef, HostListener, NgZone, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -40,7 +41,7 @@ import { Globals } from './utils/globals';
 import { UID_SUPPORT_GROUP_MESSAGES } from './utils/constants';
 import { supports_html5_storage } from 'src/chat21-core/utils/utils';
 import { AUTH_STATE_OFFLINE, AUTH_STATE_ONLINE, TYPE_MSG_FILE, TYPE_MSG_IMAGE, URL_SOUND_LIST_CONVERSATION } from 'src/chat21-core/utils/constants';
-import { isInfo } from 'src/chat21-core/utils/utils-message';
+import { isInfo, isUserBanned } from 'src/chat21-core/utils/utils-message';
 import { MessageModel } from 'src/chat21-core/models/message';
 
 interface MessageObj {
@@ -140,6 +141,11 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             if (conversation) {
                 this.onImageLoaded(conversation)
                 this.onConversationLoaded(conversation)
+
+                if(conversation.recipient === this.g.senderId && isUserBanned(conversation)){
+                    that.disposeWidget();
+                    return;
+                }
 
                 if(conversation.sender !== this.g.senderId && !isInfo(conversation)){
                     that.manageTabNotification();
@@ -1000,6 +1006,13 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.g.setParameter('isShown', false, true);
     }
 
+    private disposeWidget(){
+        const divWidgetContainer = this.g.windowContext.document.getElementById('tiledesk-container');
+        if(divWidgetContainer){
+            divWidgetContainer.remove()
+        }
+    }
+
     /** */
     private sendMessage(msgObect: MessageObj) {
 
@@ -1225,10 +1238,16 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                     windowContext['tiledesk']['angularcomponent'].component.showWidget();
                 });
             };
-            /** hidden all widget */
+            /** hidden  widget */
             windowContext['tiledesk'].hide = function () {
                 ngZone.run(() => {
                     windowContext['tiledesk']['angularcomponent'].component.hideWidget();
+                });
+            };
+            /** dispose widget */
+            windowContext['tiledesk'].dispose = function () {
+                ngZone.run(() => {
+                    windowContext['tiledesk']['angularcomponent'].component.disposeWidget();
                 });
             };
             /** close window chat */
@@ -1661,8 +1680,13 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                 this._f21_open()
             }
             // this.conversationSelected = $event;
-            this.g.setParameter('recipientId', $event.recipient);
-            this.appStorageService.setItem('recipientId', $event.recipient)
+            if($event.channel_type === TYPE_DIRECT){
+                this.g.setParameter('recipientId', $event.sender);
+                this.appStorageService.setItem('recipientId', $event.sender)
+            }else {
+                this.g.setParameter('recipientId', $event.recipient);
+                this.appStorageService.setItem('recipientId', $event.recipient)
+            }
             this.isOpenConversation = true;
             $event.archived? this.isConversationArchived = $event.archived : this.isConversationArchived = false;
             this.logger.debug('[APP-COMP] onSelectConversation in APP COMPONENT: ', $event);

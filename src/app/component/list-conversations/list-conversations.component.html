@@ -4,16 +4,16 @@
       <div class="c21-body-conv">
         <div class="c21-left-conv">
           <div class="c21-ball" [ngStyle]="{'background': 'linear-gradient(rgb(255,255,255) -125%, ' + conversation.color + ')'}">
-            <span class="c21-ball-label" [innerHTML]="conversation.avatar"></span>
-            <div *ngIf="conversation.image" #avatarImage class="c21-avatar-image" [style.background-image]="'url(' + conversation.image + ')'"></div>
+            <span class="c21-ball-label">{{conversation?.avatar}}</span>
+            <div *ngIf="conversation?.image" #avatarImage class="c21-avatar-image" [style.background-image]="'url(' + conversation.image + ')'"></div>
           </div>
         </div>
         <div class="c21-right-conv">
-          <div class="c21-last-time">{{conversation.timestamp | amTimeAgo}}</div>
-          <div class="truncate c21-name">{{conversation.sender_fullname }}</div>
+          <div class="c21-last-time">{{conversation?.timestamp | amTimeAgo}}</div>
+          <div class="truncate c21-name">{{conversation?.sender_fullname }}</div>
           
           <!-- --- IMAGE PREVIEW ICON ---- -->
-          <div *ngIf="conversation.type ==='image'" [class.not-read]="conversation.is_new" class="c21-msg" style="float: left; margin-right: 5px;">
+          <div *ngIf="conversation?.type ==='image'" [class.not-read]="conversation?.is_new" class="c21-msg" style="float: left; margin-right: 5px;">
             <svg role="img" aria-labelledby="altIconTitle" xmlns="http://www.w3.org/2000/svg" fill="#000000"
               width="20px" height="20px" viewBox="0 0 24 24">
               <path d="M0 0h24v24H0V0z" fill="none"/>

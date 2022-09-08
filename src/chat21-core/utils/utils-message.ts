@@ -55,6 +55,13 @@ export function isInfo(message: any) {
     return false;
 }
 
+export function isUserBanned(message: any){
+  if (message && message.attributes && message.attributes.subtype === 'info' &&  message.attributes.messagelabel && message.attributes.messagelabel.key === 'USER_BANNED') {
+    return true;
+  }
+  return false;
+}
+
 /** */
 export function isMine(message: any) {
     if (message.isSender) {

@@ -151,10 +151,8 @@ function loadIframe(tiledeskScriptBaseLocation) {
             httpRequest.send(JSON.stringify({"name":"auth_state_changed","attributes": {"user_id":event_data.detail.global.senderId, "isLogged":event_data.detail.global.isLogged, "event":event_data.detail.event, "subtype":"info", "fullname":event_data.detail.global.attributes.userFullname, "email":event_data.detail.global.attributes.userEmail, "language":event_data.detail.global.lang, "attributes":event_data.detail.global.attributes}}));  
             httpRequest.onload = function(event) {
               if(event.target && event.target.status === 401){
-                console.log('user not authorizedddd')
                 window.tiledesk.hide()
-                window.tiledesk.angularcomponent.component.g.autoStart = false
-                window.tiledesk.logout()
+                window.tiledesk.dispose()
               }
             } 
           }
