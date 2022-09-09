@@ -1,5 +1,7 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.36 in PROD
+
 ### 5.0.36-rc.1
 - added: dispose external method to tiledesk widget
 - added: manage behaviour for a banned user
