@@ -1,5 +1,10 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.37-rc.2
+- added: onElementRendered event to scroll after image/frame is loaded
+- bug-fixed: animation while opening widget due to 'load' zone-flag.ts varible
+- added: onElementRendered event to scroll after a message-attachment is rendered in DOM
+
 ### 5.0.37-rc.1
 - bug-fixed: error while trim an inexisting string in messageCommandGenerate
 - bug-fixed: error while trin an inexisting string in generateMessageObject
