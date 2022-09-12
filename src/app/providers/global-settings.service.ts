@@ -949,7 +949,7 @@ export class GlobalSettingsService {
         TEMP = tiledeskSettings['showInfoMessage'];
         // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > showBubbleInfoMessage:: ', TEMP]);
         if (TEMP !== undefined) {
-            globals.showInfoMessage = TEMP.split(',');
+            globals.showInfoMessage = TEMP.split(',').map(key => { return key.trim()});
         }
         TEMP = tiledeskSettings['typingLocation'];
         // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > typingLocation:: ', TEMP]);
@@ -1202,7 +1202,7 @@ export class GlobalSettingsService {
         }
         TEMP = el.nativeElement.getAttribute('showInfoMessage');
         if (TEMP !== null) {
-            this.globals.showInfoMessage = TEMP.split(',')
+            this.globals.showInfoMessage = TEMP.split(',').map(key => { return key.trim()})
         }
         TEMP = el.nativeElement.getAttribute('typingLocation');
         if (TEMP !== null) {
@@ -1621,7 +1621,7 @@ export class GlobalSettingsService {
         
         TEMP = getParameterByName(windowContext, 'tiledesk_showInfoMessage');
         if (TEMP) {
-            globals.showInfoMessage = TEMP.split(',');
+            globals.showInfoMessage = TEMP.split(',').map(key => { return key.trim()});
         }
 
         TEMP = getParameterByName(windowContext, 'tiledesk_allowReopen');
