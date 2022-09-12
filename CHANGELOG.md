@@ -1,5 +1,11 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.37-rc.1
+- bug-fixed: error while trim an inexisting string in messageCommandGenerate
+- bug-fixed: error while trin an inexisting string in generateMessageObject
+- bug-fixed: showInfoMessage array options can't have a black space after ','
+- changed: font color and size of sender_fullname in conversation-detail and home-conversations header titles components
+
 ### 5.0.36 in PROD
 
 ### 5.0.36-rc.1
