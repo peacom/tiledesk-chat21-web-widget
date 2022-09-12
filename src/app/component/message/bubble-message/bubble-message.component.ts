@@ -20,7 +20,7 @@ export class BubbleMessageComponent implements OnInit {
   @Input() stylesMap: Map<string, string>;
   @Output() onBeforeMessageRender = new EventEmitter();
   @Output() onAfterMessageRender = new EventEmitter();
-  @Output() onImageRendered = new EventEmitter<boolean>()
+  @Output() onElementRendered = new EventEmitter<{element: string, status: boolean}>();
   isImage = isImage;
   isFile = isFile;
   isFrame = isFrame;
@@ -157,9 +157,10 @@ export class BubbleMessageComponent implements OnInit {
     this.onAfterMessageRender.emit(messageOBJ)
   }
 
-  onImageRenderedFN(event){
-    this.onImageRendered.emit(event)
+  onElementRenderedFN(event){
+    this.onElementRendered.emit({element: event.element, status: event.status})
   }
+
 
   // printMessage(message, messageEl, component) {
   //   const messageOBJ = { message: message, sanitizer: this.sanitizer, messageEl: messageEl, component: component}

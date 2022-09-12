@@ -249,9 +249,10 @@ export class ConversationContentComponent implements OnInit {
     this.onAfterMessageRender.emit(event)
   }
 
-  onImageRenderedFN(event){
-    const imageRendered = event;
-    if (imageRendered && this.scrollMe) {
+  onElementRenderedFN(event){
+    const elementRendered = event;
+    console.log('elementtttt', event)
+    if (elementRendered.status && this.scrollMe) {
       const divScrollMe = this.scrollMe.nativeElement;
       const checkContentScrollPosition = this.checkContentScrollPosition(divScrollMe);
       this.scrollToBottom() // SCROLLO SEMPRE

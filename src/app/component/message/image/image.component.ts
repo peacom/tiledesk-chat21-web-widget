@@ -12,7 +12,7 @@ export class ImageComponent implements OnInit {
   @Input() metadata: any;
   @Input() width: string;
   @Input() height: number;
-  @Output() onImageRendered = new EventEmitter<boolean>();
+  @Output() onElementRendered = new EventEmitter<{element: string, status: boolean}>();
 
   loading: boolean = true
   tooltipMessage: string;
@@ -35,7 +35,7 @@ export class ImageComponent implements OnInit {
 
   onLoaded(event){
     this.loading = false
-    this.onImageRendered.emit(true)
+    this.onElementRendered.emit({element: "image", status:true})
   }
 
   downloadImage(url: string, fileName: string) {
