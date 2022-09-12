@@ -251,7 +251,6 @@ export class ConversationContentComponent implements OnInit {
 
   onElementRenderedFN(event){
     const elementRendered = event;
-    console.log('elementtttt', event)
     if (elementRendered.status && this.scrollMe) {
       const divScrollMe = this.scrollMe.nativeElement;
       const checkContentScrollPosition = this.checkContentScrollPosition(divScrollMe);

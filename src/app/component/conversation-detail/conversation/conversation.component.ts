@@ -855,7 +855,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
         // https://developer.mozilla.org/it/docs/Web/API/Element/scrollHeight
         setTimeout(function () {
           that.conversationContent.scrollToBottom();
-        }, 0);
+        }, 200);
       } else {
         that.logger.debug('[CONV-COMP] *A3-------');
         that.messagesBadgeCount++;

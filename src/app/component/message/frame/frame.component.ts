@@ -31,7 +31,7 @@ export class FrameComponent implements OnInit {
 
   onLoaded(event){
     this.loading = false
-    this.onElementRendered.emit({element: "image", status:true})
+    this.onElementRendered.emit({element: "frame", status:true})
   }
 
 

@@ -16,6 +16,7 @@ export class MessageAttachmentComponent implements OnInit {
   @Input() isLastMessage: boolean;
   @Input() stylesMap: Map<string, string>;
   @Output() onAttachmentButtonClicked = new EventEmitter<any>();
+  @Output() onElementRendered = new EventEmitter<{element: string, status: boolean}>()
   // ========= end:: Input/Output values ============//
 
   public type: string;
@@ -44,6 +45,10 @@ export class MessageAttachmentComponent implements OnInit {
         return;
       }
     }
+  }
+
+  ngAfterViewInit(){
+    this.onElementRendered.emit({element: 'attachment', status: true})
   }
 
   returnOnAttachmentButtonClicked(event: any){

@@ -187,6 +187,7 @@
                                   [isConversationArchived]="isConversationArchived"
                                   [isLastMessage] = "isLastMessage(message?.uid)"
                                   [stylesMap]="stylesMap"
+                                  (onElementRendered)="onElementRenderedFN($event)"
                                   (onAttachmentButtonClicked)="returnOnAttachmentButtonClicked($event)">
                               </chat-message-attachment>
                           </div>
