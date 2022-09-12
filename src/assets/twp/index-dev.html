@@ -298,6 +298,23 @@
             width: 200px;
         }
 
+        div.method_container .btn {
+            background: #ffffff;
+            border-radius: 15px;
+            /* padding: 15px; */
+            margin: 5px;
+            font-size: 18px;
+            box-shadow: 0 10px 10px rgb(0 0 0 / 10%);
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        div.method_container .btn:hover{
+            background: rgb(240,135,118);
+            color: #ffffff;
+            border: none;
+        }
+
         
 
     </style>
@@ -1406,11 +1423,12 @@
                 <div class="col-md-7">
                     <h1 style="min-height: 39px;">TEST ACTIONS</h1>
                     <h3 id="project_name" style="min-height: 39px;"></h3>
-                    <div class="row">
+                    <div class="row method_container">
                         <button class="btn btn-light" onclick="onClickTestButton('open')">Open <em class="fa-arrow-up fa"></em></button>
                         <button class="btn btn-light" onclick="onClickTestButton('close')">Close <em class="fa fa-arrow-down"></em></button>
                         <button class="btn btn-light" onclick="onClickTestButton('hide')">Hide</button>
                         <button class="btn btn-light" onclick="onClickTestButton('show')">Show</button>
+                        <button class="btn btn-light" onclick="onClickTestButton('dispose')">Dispose</button>
                         <button class="btn btn-light" onclick="onClickTestButton('showCallout')">Show callout</button>
                         <button class="btn btn-light" onclick="onClickTestButton('reInit')">ReInit</button>
                         <button class="btn btn-light" onclick="onClickTestButton('restart')">ReStart</button>
