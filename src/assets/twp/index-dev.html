@@ -115,13 +115,10 @@
         }
 
         .row {
-            margin-left: 0;
-            margin-right: 0;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
         }
 
-        .btn:hover{
-            border: 1px solid darkgrey
-        }
 
         .b_frame {
             -webkit-box-shadow: 0px 19px 147px -41px rgba(0,0,0,0.75);
@@ -254,15 +251,32 @@
         }
 
         div.row.section {
-            border: 1px solid grey;
+            box-shadow: 0.05rem 0.1rem 0.3rem -0.03rem rgb(0 0 0 / 45%);
+            background: rgb(237, 237, 237);
             border-radius: 10px;
             padding: 15px;
-            margin: 5px 0px;
+            margin: 10px 0px;
             overflow-x: hidden;
             overflow-y: auto;
         }
         div.row.section > div.row {
-            margin-bottom: 5px
+            margin-bottom: 8px
+        }
+
+        div.section .btn {
+            background: #efefef;
+            border-radius: 15px;
+            /* padding: 15px; */
+            /* margin: 5px; */
+            font-size: 11px;
+            box-shadow: 0 5px 5px rgb(0 0 0 / 10%);
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        div.section .btn:hover{
+            background: rgb(240,135,118);
+            color: #ffffff;
         }
 
         div.row label{
@@ -298,13 +312,17 @@
             width: 200px;
         }
 
+        div.method_container {
+            margin-bottom: 20px;
+        }
+
         div.method_container .btn {
             background: #ffffff;
             border-radius: 15px;
             /* padding: 15px; */
             margin: 5px;
-            font-size: 18px;
-            box-shadow: 0 10px 10px rgb(0 0 0 / 10%);
+            font-size: 12px;
+            box-shadow: 0 5px 5px rgb(0 0 0 / 10%);
             cursor: pointer;
             transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
@@ -758,45 +776,10 @@
             window.Tiledesk('restart')
         }
 
-        function onClickHideHeaderCloseButton(){
-            let status = document.querySelector('input[name="hideHeaderCloseButton"]:checked').value
-            window.tiledeskSettings['hideHeaderCloseButton'] = stringToBoolean(status)
-            console.log('onClickHideHeaderCloseButton: status-->',window.tiledeskSettings);
-            window.Tiledesk('restart')
-        }
-
         function onClickHideSettings(){
             let status = document.querySelector('input[name="hideSettings"]:checked').value
             window.tiledeskSettings['hideSettings'] = stringToBoolean(status)
             console.log('onClickHideSettings: status-->',window.tiledeskSettings);
-            window.Tiledesk('restart')
-        }
-
-        function onClickHideHeaderConversationOptionsMenu(){
-            let status = document.querySelector('input[name="hideHeaderConversationOptionsMenu"]:checked').value
-            window.tiledeskSettings['hideHeaderConversationOptionsMenu'] = stringToBoolean(status)
-            console.log('onClickHideHeaderConversationOptionsMenu:', window.tiledeskSettings)
-            window.Tiledesk('restart')
-        }
-
-        function onClickHideCloseConversationOptionMenu(){
-            let status = document.querySelector('input[name="hideCloseConversationOptionMenu"]:checked').value
-            window.tiledeskSettings['hideCloseConversationOptionMenu'] = stringToBoolean(status)
-            console.log('onClickHideCloseConversationOptionMenu:', window.tiledeskSettings)
-            window.Tiledesk('restart')
-        }
-
-        function onClickAllowTranscriptDownload(){
-            let status = document.querySelector('input[name="allowTranscriptDownload"]:checked').value
-            window.tiledeskSettings['allowTranscriptDownload'] = stringToBoolean(status)
-            console.log('onClickAllowTranscriptDownload:',window.tiledeskSettings);
-            window.Tiledesk('restart')
-        }
-
-        function onClickAllowReopen(){
-            let status = document.querySelector('input[name="allowReopen"]:checked').value
-            window.tiledeskSettings['allowReopen'] = stringToBoolean(status)
-            console.log('onClickAllowReopen:',window.tiledeskSettings);
             window.Tiledesk('restart')
         }
 
@@ -861,34 +844,10 @@
             window.Tiledesk('restart')
         }
 
-        function onClickFontSize(){
-            let text = document.getElementById('fontSize').value
-            text === ""? text= '1.4em': text
-            window.tiledeskSettings['fontSize'] = text
-            console.log('onClickFontSize:',window.tiledeskSettings);
-            window.Tiledesk('restart')
-        }
-
-
-        function onClickButtonFontSize(){
-            let text = document.getElementById('buttonFontSize').value
-            text === ""? text= '15px': text
-            window.tiledeskSettings['buttonFontSize'] = text
-            console.log('onClickButtonFontSize:',window.tiledeskSettings);
-            window.Tiledesk('restart')
-        }
-
         function onClickDepartmentId(){
             let text = document.getElementById('departmentID').value
             window.tiledeskSettings['departmentID'] = text
             console.log('onClickDepartmentId:',window.tiledeskSettings);
-            window.Tiledesk('restart')
-        }
-
-        function onClickRecipientId(){
-            let text = document.getElementById('recipientId').value
-            window.tiledeskSettings['recipientId'] = text
-            console.log('onClickRecipientId:',window.tiledeskSettings);
             window.Tiledesk('restart')
         }
 
@@ -940,13 +899,6 @@
             let status = document.querySelector('input[name="showAvailableAgents"]:checked').value
             window.tiledeskSettings['showAvailableAgents'] = stringToBoolean(status)
             console.log('onClickShowAvailableAgents', window.tiledeskSettings)
-            window.Tiledesk('restart')
-        }
-
-        function onClickShowAttachmentButton(){
-            let status = document.querySelector('input[name="showAttachmentButton"]:checked').value
-            window.tiledeskSettings['showAttachmentButton'] = stringToBoolean(status)
-            console.log('onClickShowAttachmentButton:', window.tiledeskSettings)
             window.Tiledesk('restart')
         }
 
@@ -1040,13 +992,6 @@
             window.Tiledesk('restart')
         }
 
-        function onClickSoundEnabled(){
-            let status = document.querySelector('input[name="soundEnabled"]:checked').value
-            window.tiledeskSettings['soundEnabled'] = stringToBoolean(status)
-            console.log('onClickSoundEnabled:', window.tiledeskSettings)
-            window.Tiledesk('restart')
-        }
-
         function onClickOpenExternalLinkButton(){
             let status = document.querySelector('input[name="openExternalLinkButton"]:checked').value
             window.tiledeskSettings['openExternalLinkButton'] = stringToBoolean(status)
@@ -1074,6 +1019,62 @@
             console.log('onClickNativeRating:', window.tiledeskSettings)
             window.Tiledesk('restart')
         }
+        
+        function onClickHideHeaderCloseButton(){
+            let status = document.querySelector('input[name="hideHeaderCloseButton"]:checked').value
+            window.tiledeskSettings['hideHeaderCloseButton'] = stringToBoolean(status)
+            console.log('onClickHideHeaderCloseButton: status-->',window.tiledeskSettings);
+            window.Tiledesk('restart')
+        }
+
+        function onClickHideHeaderConversationOptionsMenu(){
+            let status = document.querySelector('input[name="hideHeaderConversationOptionsMenu"]:checked').value
+            window.tiledeskSettings['hideHeaderConversationOptionsMenu'] = stringToBoolean(status)
+            console.log('onClickHideHeaderConversationOptionsMenu:', window.tiledeskSettings)
+            window.Tiledesk('restart')
+        }
+
+        function onClickHideCloseConversationOptionMenu(){
+            let status = document.querySelector('input[name="hideCloseConversationOptionMenu"]:checked').value
+            window.tiledeskSettings['hideCloseConversationOptionMenu'] = stringToBoolean(status)
+            console.log('onClickHideCloseConversationOptionMenu:', window.tiledeskSettings)
+            window.Tiledesk('restart')
+        }
+
+        function onClickAllowTranscriptDownload(){
+            let status = document.querySelector('input[name="allowTranscriptDownload"]:checked').value
+            window.tiledeskSettings['allowTranscriptDownload'] = stringToBoolean(status)
+            console.log('onClickAllowTranscriptDownload:',window.tiledeskSettings);
+            window.Tiledesk('restart')
+        }
+
+        function onClickAllowReopen(){
+            let status = document.querySelector('input[name="allowReopen"]:checked').value
+            window.tiledeskSettings['allowReopen'] = stringToBoolean(status)
+            console.log('onClickAllowReopen:',window.tiledeskSettings);
+            window.Tiledesk('restart')
+        }
+
+        function onClickContinueConversationBeforeTime(){
+            let text = document.getElementById('continueConversationBeforeTime').value
+            window.tiledeskSettings['continueConversationBeforeTime'] = text
+            console.log('onClickContinueConversationBeforeTime:',window.tiledeskSettings);
+            window.Tiledesk('restart')
+        }
+
+        function onClickRecipientId(){
+            let text = document.getElementById('recipientId').value
+            window.tiledeskSettings['recipientId'] = text
+            console.log('onClickRecipientId:',window.tiledeskSettings);
+            window.Tiledesk('restart')
+        }
+
+        function onClickSoundEnabled(){
+            let status = document.querySelector('input[name="soundEnabled"]:checked').value
+            window.tiledeskSettings['soundEnabled'] = stringToBoolean(status)
+            console.log('onClickSoundEnabled:', window.tiledeskSettings)
+            window.Tiledesk('restart')
+        }
 
         function onClickTypingLocation(){
             let status = document.querySelector('input[name="typingLocation"]:checked').value
@@ -1095,6 +1096,46 @@
             console.log('onClickShowInfoMessage:', window.tiledeskSettings)
             window.Tiledesk('restart')
         }
+
+        function onClickShowAttachmentButton(){
+            let status = document.querySelector('input[name="showAttachmentButton"]:checked').value
+            window.tiledeskSettings['showAttachmentButton'] = stringToBoolean(status)
+            console.log('onClickShowAttachmentButton:', window.tiledeskSettings)
+            window.Tiledesk('restart')
+        }
+
+
+
+
+
+        function onClickFontSize(){
+            let text = document.getElementById('fontSize').value
+            text === ""? text= '1.4em': text
+            window.tiledeskSettings['fontSize'] = text
+            console.log('onClickFontSize:',window.tiledeskSettings);
+            window.Tiledesk('restart')
+        }
+
+
+        function onClickButtonFontSize(){
+            let text = document.getElementById('buttonFontSize').value
+            text === ""? text= '15px': text
+            window.tiledeskSettings['buttonFontSize'] = text
+            console.log('onClickButtonFontSize:',window.tiledeskSettings);
+            window.Tiledesk('restart')
+        }
+
+       
+
+        
+
+       
+
+        
+
+        
+
+        
 
 
         function onClickTestAll(){
@@ -1601,16 +1642,7 @@
                                 <button class="btn btn-light" onclick="onClickSingleConversation()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-5 formElement"><span><em><strong>hideHeaderCloseButton</strong></em></span></div>
-                            <div class="col-md-4">
-                                <input class="form-check-input" type="radio" name="hideHeaderCloseButton" value="true"><label>True</label>
-                                <input class="form-check-input" type="radio" name="hideHeaderCloseButton" value="false" checked><label>False</label>
-                            </div>
-                            <div class="col-md-3">
-                                <button class="btn btn-light" onclick="onClickHideHeaderCloseButton()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
-                            </div>
-                        </div>
+                       
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>hideSettings</strong></em></span></div>
                             <div class="col-md-4">
@@ -1621,46 +1653,7 @@
                                 <button class="btn btn-light" onclick="onClickHideSettings()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-5 formElement"><span><em><strong>hideHeaderConversationOptionsMenu</strong></em></span></div>
-                            <div class="col-md-4">
-                                <input class="form-check-input" type="radio" name="hideHeaderConversationOptionsMenu" value="true"><label>True</label>
-                                <input class="form-check-input" type="radio" name="hideHeaderConversationOptionsMenu" value="false" checked><label>False</label>
-                            </div>
-                            <div class="col-md-3">
-                                <button class="btn btn-light" onclick="onClickHideHeaderConversationOptionsMenu()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-5 formElement"><span><em><strong>hideCloseConversationOptionMenu</strong></em></span></div>
-                            <div class="col-md-4">
-                                <input class="form-check-input" type="radio" name="hideCloseConversationOptionMenu" value="true"><label>True</label>
-                                <input class="form-check-input" type="radio" name="hideCloseConversationOptionMenu" value="false" checked><label >False</label>
-                            </div>
-                            <div class="col-md-3">
-                                <button class="btn btn-light" onclick="onClickHideCloseConversationOptionMenu()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-5 formElement"><span><em><strong>allowTranscriptDownload</strong></em></span></div>
-                            <div class="col-md-4">
-                                <input class="form-check-input" type="radio" name="allowTranscriptDownload" value="true"><label>True</label>
-                                <input class="form-check-input" type="radio" name="allowTranscriptDownload" value="false" checked><label >False</label>
-                            </div>
-                            <div class="col-md-3">
-                                <button class="btn btn-light" onclick="onClickAllowTranscriptDownload()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-5 formElement"><span><em><strong>allowReopen</strong></em></span></div>
-                            <div class="col-md-4">
-                                <input class="form-check-input" type="radio" name="allowReopen" value="true"><label>True</label>
-                                <input class="form-check-input" type="radio" name="allowReopen" value="false" checked><label >False</label>
-                            </div>
-                            <div class="col-md-3">
-                                <button class="btn btn-light" onclick="onClickAllowReopen()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
-                            </div>
-                        </div>
+                        
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>fullscreenMode</strong></em></span></div>
                             <div class="col-md-4">
@@ -1698,15 +1691,6 @@
                             </div>
                             <div class="col-md-3">
                                 <button class="btn btn-light" onclick="onClickDepartmentId()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-5 formElement"><span><em><strong>recipientId</strong></em></span></div>
-                            <div class="col-md-4">
-                                <input class="form-control" type="text" id="recipientId" name="departmentID">
-                            </div>
-                            <div class="col-md-3">
-                                <button class="btn btn-light" onclick="onClickRecipientId()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
@@ -1775,16 +1759,6 @@
                             </div>
                             <div class="col-md-3">
                                 <button class="btn btn-light" onclick="onClickShowAvailableAgents()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-5 formElement"><span><em><strong>showAttachmentButton</strong></em></span></div>
-                            <div class="col-md-4">
-                                <input class="form-check-input" type="radio" name="showAttachmentButton" value="true" checked><label>True</label>
-                                <input class="form-check-input" type="radio" name="showAttachmentButton" value="false"><label>False</label>
-                            </div>
-                            <div class="col-md-3">
-                                <button class="btn btn-light" onclick="onClickShowAttachmentButton()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
@@ -1873,16 +1847,6 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-5 formElement"><span><em><strong>soundEnabled</strong></em></span></div>
-                            <div class="col-md-4">
-                                <input class="form-check-input" type="radio" name="soundEnabled" value="true" checked><label>True</label>
-                                <input class="form-check-input" type="radio" name="soundEnabled" value="false"><label>False</label>
-                            </div>
-                            <div class="col-md-3">
-                                <button class="btn btn-light" onclick="onClickSoundEnabled()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
-                            </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>openExternalLinkButton</strong></em></span></div>
                             <div class="col-md-4">
                                 <input class="form-check-input" type="radio" name="openExternalLinkButton" value="true" checked><label>True</label>
@@ -1926,6 +1890,90 @@
                                 <button class="btn btn-light" onclick="onClickNativeRating()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
+                        
+
+
+                        <div class="row">
+                            <h4 class="col-md-10 formElement" >Manage CONVERSATION DETAIL</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 formElement"><span><em><strong>hideHeaderCloseButton</strong></em></span></div>
+                            <div class="col-md-4">
+                                <input class="form-check-input" type="radio" name="hideHeaderCloseButton" value="true"><label>True</label>
+                                <input class="form-check-input" type="radio" name="hideHeaderCloseButton" value="false" checked><label>False</label>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-light" onclick="onClickHideHeaderCloseButton()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 formElement"><span><em><strong>hideHeaderConversationOptionsMenu</strong></em></span></div>
+                            <div class="col-md-4">
+                                <input class="form-check-input" type="radio" name="hideHeaderConversationOptionsMenu" value="true"><label>True</label>
+                                <input class="form-check-input" type="radio" name="hideHeaderConversationOptionsMenu" value="false" checked><label>False</label>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-light" onclick="onClickHideHeaderConversationOptionsMenu()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 formElement"><span><em><strong>hideCloseConversationOptionMenu</strong></em></span></div>
+                            <div class="col-md-4">
+                                <input class="form-check-input" type="radio" name="hideCloseConversationOptionMenu" value="true"><label>True</label>
+                                <input class="form-check-input" type="radio" name="hideCloseConversationOptionMenu" value="false" checked><label >False</label>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-light" onclick="onClickHideCloseConversationOptionMenu()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 formElement"><span><em><strong>allowTranscriptDownload</strong></em></span></div>
+                            <div class="col-md-4">
+                                <input class="form-check-input" type="radio" name="allowTranscriptDownload" value="true"><label>True</label>
+                                <input class="form-check-input" type="radio" name="allowTranscriptDownload" value="false" checked><label >False</label>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-light" onclick="onClickAllowTranscriptDownload()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 formElement"><span><em><strong>allowReopen</strong></em></span></div>
+                            <div class="col-md-4">
+                                <input class="form-check-input" type="radio" name="allowReopen" value="true"><label>True</label>
+                                <input class="form-check-input" type="radio" name="allowReopen" value="false" checked><label >False</label>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-light" onclick="onClickAllowReopen()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 formElement"><span><em><strong>continueConversationBeforeTime</strong></em></span></div>
+                            <div class="col-md-4">
+                                <input class="form-control" type="number" id="continueConversationBeforeTime" name="continueConversationBeforeTime" placeholder="(in hours)">
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-light" onclick="onClickContinueConversationBeforeTime()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 formElement"><span><em><strong>recipientId</strong></em></span></div>
+                            <div class="col-md-4">
+                                <input class="form-control" type="text" id="recipientId" name="departmentID">
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-light" onclick="onClickRecipientId()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 formElement"><span><em><strong>soundEnabled</strong></em></span></div>
+                            <div class="col-md-4">
+                                <input class="form-check-input" type="radio" name="soundEnabled" value="true" checked><label>True</label>
+                                <input class="form-check-input" type="radio" name="soundEnabled" value="false"><label>False</label>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-light" onclick="onClickSoundEnabled()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>typingLocation</strong></em></span></div>
                             <div class="col-md-4">
@@ -1954,6 +2002,18 @@
                                 <button class="btn btn-light" onclick="onClickShowInfoMessage()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-5 formElement"><span><em><strong>showAttachmentButton</strong></em></span></div>
+                            <div class="col-md-4">
+                                <input class="form-check-input" type="radio" name="showAttachmentButton" value="true" checked><label>True</label>
+                                <input class="form-check-input" type="radio" name="showAttachmentButton" value="false"><label>False</label>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-light" onclick="onClickShowAttachmentButton()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+
+
                         <div class="row">
                             <h4 class="col-md-10 formElement" >Manage BUBBLE MESSAGE STYLES</h4>
                         </div>
@@ -2006,16 +2066,9 @@
                                 <button class="btn btn-light" onclick="onClickFontSize()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-5 formElement"><span><em><strong>hideBubbleInfoMessage</strong></em></span></div>
-                            <div class="col-md-4">
-                                <input class="form-check-input" type="radio" name="hideBubbleInfoMessage" value="true" ><label>True</label>
-                                <input class="form-check-input" type="radio" name="hideBubbleInfoMessage" value="false" checked><label>False</label>
-                            </div>
-                            <div class="col-md-3">
-                                <button class="btn btn-light" onclick="onClickHideBubbleInfoMessage()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
-                            </div>
-                        </div>
+        
+
+
                         <div class="row">
                             <h4 class="col-md-10 formElement" >Manage BUTTON STYLES</h4>
                         </div>
