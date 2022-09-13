@@ -60,7 +60,10 @@
     "INFO_SUPPORT_USER_ADDED_VERB":"the chat",
     "INFO_SUPPORT_CHAT_REOPENED":"Chat reopened",
     "INFO_SUPPORT_CHAT_CLOSED":"Chat closed",
-
+    "INFO_SUPPORT_LEAD_UPDATED":"Lead updated",
+    "INFO_SUPPORT_MEMBER_LEFT_GROUP":"removed from group",
+    "INFO_A_NEW_SUPPORT_REQUEST_HAS_BEEN_ASSIGNED_TO_YOU": "A new support request has been assigned to you",
+    
     "LABEL_TODAY": "today",
     "LABEL_TOMORROW": "yesterday",
     "LABEL_LAST_ACCESS": "last access",

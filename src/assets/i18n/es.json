@@ -59,6 +59,9 @@
     "INFO_SUPPORT_USER_ADDED_VERB":"el chat",
     "INFO_SUPPORT_CHAT_REOPENED":"Chat reabierto",
     "INFO_SUPPORT_CHAT_CLOSED":"Chat cerrada",
+    "INFO_SUPPORT_LEAD_UPDATED":"Cliente potencial actualizado",
+    "INFO_SUPPORT_MEMBER_LEFT_GROUP":"eliminado del grupo",
+    "INFO_A_NEW_SUPPORT_REQUEST_HAS_BEEN_ASSIGNED_TO_YOU": "Se le ha asignado una nueva solicitud de soporte",
 
     "LABEL_TODAY": "hoy",
     "LABEL_TOMORROW": "ayer",
