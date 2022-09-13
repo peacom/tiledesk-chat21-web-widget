@@ -306,10 +306,15 @@
             text-align: right;
         }
 
-        .testAllBtn > button {
-            background-color: grey;
-            color: rgb(0, 0, 0);
+        div.row.testAllBtn > .btn {
+            background-color: rgb(61, 61, 61);
+            color: rgb(255, 255, 255);
             width: 200px;
+        }
+
+        div.row.testAllBtn > .btn:hover {
+            background: rgb(240,135,118);
+            color: #ffffff;
         }
 
         div.method_container {
@@ -330,7 +335,6 @@
         div.method_container .btn:hover{
             background: rgb(240,135,118);
             color: #ffffff;
-            border: none;
         }
 
         
@@ -1517,47 +1521,47 @@
                         <div>Select an option for Tiledesk settings parameter</div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>startFromHome</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-check-input" type="radio" name="startFromHome" value="true" checked><label class="form-check-label" for="startFromHome">True</label>
                                 <input class="form-check-input" type="radio" name="startFromHome" value="false"><label class="form-check-label" for="startFromHome">False</label>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickStartFromHome()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>open</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-check-input" type="radio" name="open" value="true"><label class="form-check-label" for="open">True</label>
                                 <input class="form-check-input" type="radio" name="open" value="false"checked><label class="form-check-label" for="open">False</label>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickOpen()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>prechatForm</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-check-input" type="radio" name="preChatForm" value="true"><label class="form-check-label" for="preChatForm">True</label>
                                 <input class="form-check-input" type="radio" name="preChatForm" value="false"checked><label class="form-check-label" for="preChatForm">False</label>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickPreChatForm()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>align</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-check-input" type="radio" name="align" value="left"><label class="form-check-label" for="preChatForm">Left</label>
                                 <input class="form-check-input" type="radio" name="align" value="right" checked><label class="form-check-label" for="preChatForm">Right</label>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickAlign()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>calloutTimer</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-check-input" type="radio" name="calloutTimer" value="-1"><label class="form-check-label" for="preChatForm">-1(disabled)</label>
                                 <input class="form-check-input" type="radio" name="calloutTimer" value="0"><label class="form-check-label" for="preChatForm">0(Immediatly)</label>
                                 <div class="formElement" >
@@ -1565,242 +1569,242 @@
                                     <input class="form-control col-sm-2" type="text" id="calloutTimerText" name="calloutTimer" placeholder="Ex. 10">
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickCalloutTimer()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>calloutTitle</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-control" type="text" id="calloutTitle" name="calloutTitle">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickCalloutTitle()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>calloutMsg</strong></em></span></div>
-                            <div class="col-md-4 ">
+                            <div class="col-md-5 ">
                                 <input class="form-control" type="text" id="calloutMsg" name="calloutMsg">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickCalloutMsg()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>welcomeTitle</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-control" type="text" id="welcomeTitle" name="welcomeTitle">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickWelcomeTitle()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>welcomeMsg</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-control" type="text" id="welcomeMsg" name="welcomeMsg">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickWelcomeMsg()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>widgetTitle</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-control" type="text" id="widgetTitle" name="widgetTitle">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickWidgetTitle()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>logoChat</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-control" type="text" id="logoChat" name="logoChat">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickLogoChat()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>lang</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <select class="form-control select" id="lang" name="lang"></select>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickLang()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>singleConversation</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-check-input" type="radio" name="singleConversation" value="true"><label>True</label>
                                 <input class="form-check-input" type="radio" name="singleConversation" value="false" checked><label>False</label>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickSingleConversation()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                        
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>hideSettings</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-check-input" type="radio" name="hideSettings" value="true"><label>True</label>
                                 <input class="form-check-input" type="radio" name="hideSettings" value="false" checked><label>False</label>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickHideSettings()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>fullscreenMode</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-check-input" type="radio" name="fullscreenMode" value="true"><label>True</label>
                                 <input class="form-check-input" type="radio" name="fullscreenMode" value="false" checked ><label>False</label>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickFullScreenMode()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>themeColor</strong></em></span></div>
-                            <div class="col-md-4 formElement">
+                            <div class="col-md-5 formElement">
                                 <input class="form-control" type="color" id="themeColor" name="themeColor" value="#2a6ac1" oninput="onChangeThemeColor()">
                                 <input class="form-control" type="text" id="themeColorText" name="themeColor" value="#2a6ac1" oninput="onChangeThemeColorText()">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickThemeColor()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>themeForegroundColor</strong></em></span></div>
-                            <div class="col-md-4 formElement">
+                            <div class="col-md-5 formElement">
                                 <input class="form-control" type="color" id="themeForegroundColor" name="themeForegroundColor" value="#000000" oninput="onChangeThemeForegroundColor()">
                                 <input class="form-control" type="text" id="themeForegroundColorText" name="themeForegroundColor" value="#000000" oninput="onChangeThemeForegroundColorText()">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickThemeForegroundColor()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>departmentID</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-control" type="text" id="departmentID" name="departmentID">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickDepartmentId()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>marginX</strong></em></span></div>
-                            <div class="col-md-4 formElement">
+                            <div class="col-md-5 formElement">
                                 <input class="form-control col-sm-2" type="text" id="marginX" name="marginX" placeholder="Ex. 100px, 1em">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickMarginX()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>marginY</strong></em></span></div>
-                            <div class="col-md-4 formElement">
+                            <div class="col-md-5 formElement">
                                 <input class="form-control col-sm-2" type="text" id="marginY" name="marginY" placeholder="Ex. 100px, 1em">
                             </div>
-                            <div class="col-md-3 ">
+                            <div class="col-md-2 ">
                                 <button class="btn btn-light" onclick="onClickMarginY()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>autoStart</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-check-input" type="radio" name="autoStart" value="true" checked><label>True</label>
                                 <input class="form-check-input" type="radio" name="autoStart" value="false"><label>False</label>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickAutoStart()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>startHidden</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-check-input" type="radio" name="startHidden" value="true"><label>True</label>
                                 <input class="form-check-input" type="radio" name="startHidden" value="false" checked><label >False</label>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickStartHidden()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>persistence</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-check-input" type="radio" name="persistence" value="local" checked><label>Local</label>
                                 <input class="form-check-input" type="radio" name="persistence" value="session"><label>Session</label>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickPersistence()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>showWaitTime</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-check-input" type="radio"  name="showWaitTime" value="true" checked><label>True</label>
                                 <input class="form-check-input" type="radio"  name="showWaitTime" value="false"><label>False</label>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickShowWaitTime()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>showAvailableAgents</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-check-input" type="radio" name="showAvailableAgents" value="true" checked><label>True</label>
                                 <input class="form-check-input" type="radio" name="showAvailableAgents" value="false"><label>False</label>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickShowAvailableAgents()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>showAllConversations</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-check-input" type="radio" name="showAllConversations" value="true" checked><label>True</label>
                                 <input class="form-check-input" type="radio" name="showAllConversations" value="false"><label>False</label>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickShowAllConversations()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>launcherWidth</strong></em></span></div>
-                            <div class="col-md-4 formElement">
+                            <div class="col-md-5 formElement">
                                 <input class="form-range" type="range" id="launcherWidth" name="launcherWidth" min="0" max="80" value="60" style="width: 80%;" oninput="onChangeLauncherWidth()"><label class="col-form-label" id=launcherWidthText>60 px</label>
                             </div>
-                            <div class="col-md-3 ">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickLauncherWidth()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>launcherHeight</strong></em></span></div>
-                            <div class="col-md-4 formElement">
+                            <div class="col-md-5 formElement">
                                 <input class="form-range" type="range" type="text" id="launcherHeight" name="launcherHeight" min="0" max="80" value="60" style="width: 80%;" oninput="onChangeLauncherHeight()"><label class="col-form-label" id=launcherHeightText>60 px</label>
                             </div>
-                            <div class="col-md-3 ">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickLauncherHeight()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>baloonImage</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-control" type="text" id="baloonImage" name="baloonImage">
                             </div>
-                            <div class="col-md-3 ">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickBaloonImage()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-md-5 formElement"><span><em><strong>baloonShape</strong></em></span></div>
-                            <div class="col-md-4" >
+                            <div class="col-md-5" >
                                 <div class="row ">
                                     <div class="col-md shapeElement">
                                         <div class="col-form-label">Top:</div>
@@ -1832,43 +1836,43 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickBaloonShape()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>dynamicWaitTimeReply</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-check-input" type="radio" name="dynamicWaitTimeReply" value="true" checked><label>True</label>
                                 <input class="form-check-input" type="radio" name="dynamicWaitTimeReply" value="false"><label>False</label>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickDynamicWaitTimeReply()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>openExternalLinkButton</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-check-input" type="radio" name="openExternalLinkButton" value="true" checked><label>True</label>
                                 <input class="form-check-input" type="radio" name="openExternalLinkButton" value="false"><label>False</label>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickOpenExternalLinkButton()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>isLogEnabled</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-check-input" type="radio" name="isLogEnabled" value="true"><label>True</label>
                                 <input class="form-check-input" type="radio" name="isLogEnabled" value="false" checked><label>False</label>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickIsLogEnabled()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>logLevel</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <select class="form-control select" id="logLevel" name="logLevel">
                                     <option value="ERROR">Error</option>
                                     <option value="WARN">Warn</option>
@@ -1876,17 +1880,17 @@
                                     <option value="DEBUG">Debug</option>
                                 </select>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickLogLevel()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>nativeRating</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-check-input" type="radio" name="nativeRating" value="true" checked><label>True</label>
                                 <input class="form-check-input" type="radio" name="nativeRating" value="false"><label>False</label>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickNativeRating()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
@@ -1898,117 +1902,118 @@
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>hideHeaderCloseButton</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-check-input" type="radio" name="hideHeaderCloseButton" value="true"><label>True</label>
                                 <input class="form-check-input" type="radio" name="hideHeaderCloseButton" value="false" checked><label>False</label>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickHideHeaderCloseButton()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>hideHeaderConversationOptionsMenu</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-check-input" type="radio" name="hideHeaderConversationOptionsMenu" value="true"><label>True</label>
                                 <input class="form-check-input" type="radio" name="hideHeaderConversationOptionsMenu" value="false" checked><label>False</label>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickHideHeaderConversationOptionsMenu()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>hideCloseConversationOptionMenu</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-check-input" type="radio" name="hideCloseConversationOptionMenu" value="true"><label>True</label>
                                 <input class="form-check-input" type="radio" name="hideCloseConversationOptionMenu" value="false" checked><label >False</label>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickHideCloseConversationOptionMenu()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>allowTranscriptDownload</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-check-input" type="radio" name="allowTranscriptDownload" value="true"><label>True</label>
                                 <input class="form-check-input" type="radio" name="allowTranscriptDownload" value="false" checked><label >False</label>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickAllowTranscriptDownload()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>allowReopen</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-check-input" type="radio" name="allowReopen" value="true"><label>True</label>
                                 <input class="form-check-input" type="radio" name="allowReopen" value="false" checked><label >False</label>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickAllowReopen()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>continueConversationBeforeTime</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5 formElement">
+                                <div class="col-form-label" style="width: 90px">Time (h):</div>
                                 <input class="form-control" type="number" id="continueConversationBeforeTime" name="continueConversationBeforeTime" placeholder="(in hours)">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickContinueConversationBeforeTime()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>recipientId</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-control" type="text" id="recipientId" name="departmentID">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickRecipientId()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>soundEnabled</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-check-input" type="radio" name="soundEnabled" value="true" checked><label>True</label>
                                 <input class="form-check-input" type="radio" name="soundEnabled" value="false"><label>False</label>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickSoundEnabled()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>typingLocation</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-check-input" type="radio" name="typingLocation" value="content" checked><label>content</label>
                                 <input class="form-check-input" type="radio" name="typingLocation" value="header"><label>header</label>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickTypingLocation()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>customAttributes</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <textarea class="form-control" id="customAttributes" placeholder="Set a key-value object.." rows="6" cols="30"></textarea>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickCustomAttributes()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>showInfoMessage</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <textarea class="form-control" id="showInfoMessage" placeholder="Set a comma separated string..." rows="6" cols="30"></textarea>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickShowInfoMessage()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>showAttachmentButton</strong></em></span></div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <input class="form-check-input" type="radio" name="showAttachmentButton" value="true" checked><label>True</label>
                                 <input class="form-check-input" type="radio" name="showAttachmentButton" value="false"><label>False</label>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickShowAttachmentButton()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
@@ -2019,50 +2024,50 @@
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>bubbleSentBackground</strong></em></span></div>
-                            <div class="col-md-4 formElement">
+                            <div class="col-md-5 formElement">
                                 <input class="form-control" type="color" id="bubbleSentBackground" name="bubbleSentBackground" value="#2a6ac1" oninput="onChangeColor('bubbleSentBackground')">
                                 <input class="form-control" type="text" id="bubbleSentBackgroundText" name="bubbleSentBackground" value="#2a6ac1" oninput="onChangeColorText('bubbleSentBackground')">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickColor('bubbleSentBackground')">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>bubbleSentTextColor</strong></em></span></div>
-                            <div class="col-md-4 formElement">
+                            <div class="col-md-5 formElement">
                                 <input class="form-control" type="color" id="bubbleSentTextColor" name="bubbleSentTextColor" value="ffffff" oninput="onChangeColor('bubbleSentTextColor')">
                                 <input class="form-control" type="text" id="bubbleSentTextColorText" name="bubbleSentTextColor" value="ffffff" oninput="onChangeColorText('bubbleSentTextColor')">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickColor('bubbleSentTextColor')">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>bubbleReceivedBackground</strong></em></span></div>
-                            <div class="col-md-4 formElement">
+                            <div class="col-md-5 formElement">
                                 <input class="form-control" type="color" id="bubbleReceivedBackground" name="bubbleReceivedBackground" value="#f7f7f7" oninput="onChangeColor('bubbleReceivedBackground')">
                                 <input class="form-control" type="text" id="bubbleReceivedBackgroundText" name="bubbleReceivedBackground" value="#f7f7f7" oninput="onChangeText('bubbleReceivedBackground')">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickColor('bubbleReceivedBackground')">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>bubbleReceivedTextColor</strong></em></span></div>
-                            <div class="col-md-4 formElement">
+                            <div class="col-md-5 formElement">
                                 <input class="form-control" type="color" id="bubbleReceivedTextColor" name="bubbleReceivedTextColor" value="#1a1a1a" oninput="onChangeColor('bubbleReceivedTextColor')">
                                 <input class="form-control" type="text" id="bubbleReceivedTextColorText" name="bubbleReceivedTextColor" value="#1a1a1a" oninput="onChangeColorText('bubbleReceivedTextColor')">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickColor('bubbleReceivedTextColor')">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>fontSize</strong></em></span></div>
-                            <div class="col-md-4 formElement">
+                            <div class="col-md-5 formElement">
                                 <input class="form-control col-sm-2" type="text" id="fontSize" name="fontSize" placeholder="Ex. 22px, 1.4em">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickFontSize()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
@@ -2074,50 +2079,50 @@
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>buttonBackgroundColor</strong></em></span></div>
-                            <div class="col-md-4 formElement">
+                            <div class="col-md-5 formElement">
                                 <input class="form-control" type="color" id="buttonBackgroundColor" name="buttonBackgroundColor" value="#ffffff" oninput="onChangeColor('buttonBackgroundColor')">
                                 <input class="form-control" type="text" id="buttonBackgroundColorText" name="buttonBackgroundColor" value="#ffffff" oninput="onChangeColorText('buttonBackgroundColor')">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickColor('buttonBackgroundColor')">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>buttonTextColor</strong></em></span></div>
-                            <div class="col-md-4 formElement">
+                            <div class="col-md-5 formElement">
                                 <input class="form-control" type="color" id="buttonTextColor" name="buttonTextColor" value="#2a6ac1" oninput="onChangeColor('buttonTextColor')">
                                 <input class="form-control" type="text" id="buttonTextColorText" name="buttonTextColor" value="#2a6ac1" oninput="onChangeColorText('buttonTextColor')">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickColor('buttonTextColor')">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>buttonHoverBackgroundColor</strong></em></span></div>
-                            <div class="col-md-4 formElement">
+                            <div class="col-md-5 formElement">
                                 <input class="form-control" type="color" id="buttonHoverBackgroundColor" name="buttonHoverBackgroundColor" value="#2a6ac1" oninput="onChangeColor('buttonHoverBackgroundColor')">
                                 <input class="form-control" type="text" id="buttonHoverBackgroundColorText" name="buttonHoverBackgroundColor" value="#2a6ac1" oninput="onChangeText('buttonHoverBackgroundColor')">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickColor('buttonHoverBackgroundColor')">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>buttonHoverTextColor</strong></em></span></div>
-                            <div class="col-md-4 formElement">
+                            <div class="col-md-5 formElement">
                                 <input class="form-control" type="color" id="buttonHoverTextColor" name="buttonHoverTextColor" value="#ffffff" oninput="onChangeColor('buttonHoverTextColor')">
                                 <input class="form-control" type="text" id="buttonHoverTextColorText" name="buttonHoverTextColor" value="#ffffff" oninput="onChangeColorText('buttonHoverTextColor')">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickColor('buttonHoverTextColor')">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>buttonFontSize</strong></em></span></div>
-                            <div class="col-md-4 formElement">
+                            <div class="col-md-5 formElement">
                                 <input class="form-control col-sm-2" type="text" id="buttonFontSize" name="buttonFontSize" placeholder="Ex. 15px, 1em">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickButtonFontSize()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
