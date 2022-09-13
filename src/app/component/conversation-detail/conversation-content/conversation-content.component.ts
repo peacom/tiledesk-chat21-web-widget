@@ -235,17 +235,17 @@ export class ConversationContentComponent implements OnInit {
 
   // ========= begin:: event emitter function ============//
 
-  returnOnAttachmentButtonClicked(event: any){
+  onAttachmentButtonClickedFN(event: any){
     this.onAttachmentButtonClicked.emit(event)
   }
 
-  returnOnBeforeMessageRender(event){
+  onBeforeMessageRenderFN(event){
     //decommentare se in html c'è solamente component tiledesk-text
     //const messageOBJ = { message: this.message, sanitizer: this.sanitizer, messageEl: event.messageEl, component: event.component}
     this.onBeforeMessageRender.emit(event)
   }
 
-  returnOnAfterMessageRender(event){
+  onAfterMessageRenderFN(event){
     this.onAfterMessageRender.emit(event)
   }
 

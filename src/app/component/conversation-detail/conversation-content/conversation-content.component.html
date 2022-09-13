@@ -79,8 +79,8 @@
                               [fontSize]="stylesMap.get('fontSize')"
                               [fontFamily]="stylesMap.get('fontFamily')"
                               [stylesMap]="stylesMap"
-                              (onBeforeMessageRender)="returnOnBeforeMessageRender($event)"
-                              (onAfterMessageRender)="returnOnAfterMessageRender($event)"
+                              (onBeforeMessageRender)="onBeforeMessageRenderFN($event)"
+                              (onAfterMessageRender)="onAfterMessageRenderFN($event)"
                               (onElementRendered)="onElementRenderedFN($event)">
                             </chat-bubble-message>
 
@@ -114,8 +114,8 @@
                               [fontSize]="stylesMap.get('fontSize')"
                               [fontFamily]="stylesMap.get('fontFamily')"
                               [stylesMap]="stylesMap"
-                              (onBeforeMessageRender)="returnOnBeforeMessageRender($event)"
-                              (onAfterMessageRender)="returnOnAfterMessageRender($event)"
+                              (onBeforeMessageRender)="onBeforeMessageRenderFN($event)"
+                              (onAfterMessageRender)="onAfterMessageRenderFN($event)"
                               (onElementRendered)="onElementRenderedFN($event)">
                             </chat-bubble-message>
 
@@ -188,7 +188,7 @@
                                   [isLastMessage] = "isLastMessage(message?.uid)"
                                   [stylesMap]="stylesMap"
                                   (onElementRendered)="onElementRenderedFN($event)"
-                                  (onAttachmentButtonClicked)="returnOnAttachmentButtonClicked($event)">
+                                  (onAttachmentButtonClicked)="onAttachmentButtonClickedFN($event)">
                               </chat-message-attachment>
                           </div>
     
