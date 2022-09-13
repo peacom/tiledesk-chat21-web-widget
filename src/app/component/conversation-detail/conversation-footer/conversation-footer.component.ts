@@ -28,7 +28,6 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
   @Input() userEmail: string;
   @Input() showAttachmentButton: boolean;
   @Input() showContinueConversationButton: boolean;
-  // @Input() showWidgetNameInConversation: boolean
   @Input() isConversationArchived: boolean;
   @Input() singleConversation: boolean;
   @Input() hideTextReply: boolean;
@@ -72,7 +71,6 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
   convertColorToRGBA = convertColorToRGBA;
   private logger: LoggerService = LoggerInstance.getInstance()
   constructor(public g: Globals,
-              //public upSvc: UploadService,
               private chatManager: ChatManager,
               private typingService: TypingService,
               private uploadService: UploadService) { }
@@ -91,17 +89,14 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
   
   ngAfterViewInit() {
     this.logger.debug('[CONV-FOOTER] --------ngAfterViewInit: conversation-footer-------- '); 
-    // this.showEmojiPicker = true
-    setTimeout(() => {
+    // setTimeout(() => {
       this.showEmojiPicker = true
-    }, 500);
+    // }, 500);
   }
 
   // ========= begin:: functions send image ======= //
   // START LOAD IMAGE //
-  /**
-   * carico in locale l'immagine selezionata e apro pop up anteprima
-   */
+  /** load the selected image locally and open the pop up preview */
   detectFiles(event) {
     this.logger.debug('[CONV-FOOTER] detectFiles: ', event);
 
@@ -138,12 +133,12 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
                   imageXLoad.src = reader.result.toString();
                   imageXLoad.title = nameFile;
                   imageXLoad.onload = function () {
-                    that.logger.debug('[CONV-FOOTER] onload immagine');
+                    that.logger.debug('[CONV-FOOTER] onload image');
                     // that.arrayFilesLoad.push(imageXLoad);
                     const uid = (new Date().getTime()).toString(36); // imageXLoad.src.substring(imageXLoad.src.length - 16);
                     that.arrayFilesLoad[0] = { uid: uid, file: imageXLoad, type: typeFile };
                     that.logger.debug('[CONV-FOOTER] OK: ', that.arrayFilesLoad[0]);
-                    // INVIO MESSAGGIO
+                    // SEND MESSAGE
                     that.loadFile();
                   };
                 } else {
@@ -156,7 +151,7 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
                   const uid = (new Date().getTime()).toString(36); // imageXLoad.src.substring(imageXLoad.src.length - 16);
                   that.arrayFilesLoad[0] = { uid: uid, file: fileXLoad, type: typeFile };
                   that.logger.debug('[CONV-FOOTER] OK: ', that.arrayFilesLoad[0]);
-                  // INVIO MESSAGGIO
+                  // SEND MESSAGE
                   that.loadFile();
                 }
               }, false);
@@ -172,7 +167,7 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
 
   loadFile() {
     this.logger.debug('[CONV-FOOTER] that.fileXLoad: ', this.arrayFilesLoad);
-        // al momento gestisco solo il caricamento di un'immagine alla volta
+        // at the moment I only manage the upload of one image at a time
         if (this.arrayFilesLoad[0] && this.arrayFilesLoad[0].file) {
             const fileXLoad = this.arrayFilesLoad[0].file;
             const uid = this.arrayFilesLoad[0].uid;
@@ -211,76 +206,72 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
     }
 
 
-  /**
-   *
-   */
     uploadSingle(metadata, file, messageText?: string) {
-        const that = this;
-        const send_order_btn = <HTMLInputElement>document.getElementById('chat21-start-upload-doc');
-        send_order_btn.disabled = true;
-        that.logger.debug('[CONV-FOOTER] AppComponent::uploadSingle::', metadata, file);
-        // const file = this.selectedFiles.item(0);
-        const currentUpload = new UploadModel(file);
+      const that = this;
+      const send_order_btn = <HTMLInputElement>document.getElementById('chat21-start-upload-doc');
+      send_order_btn.disabled = true;
+      that.logger.debug('[CONV-FOOTER] AppComponent::uploadSingle::', metadata, file);
+      // const file = this.selectedFiles.item(0);
+      const currentUpload = new UploadModel(file);
 
-        // const uploadTask = this.upSvc.pushUpload(currentUpload);
-        // uploadTask.then(snapshot => {
-        //     return snapshot.ref.getDownloadURL();   // Will return a promise with the download link
-        // }).then(downloadURL => {
-        //     that.logger.debug('[CONV-FOOTER] AppComponent::uploadSingle:: downloadURL', downloadURL]);
-        //     that.g.wdLog([`Successfully uploaded file and got download link - ${downloadURL}`]);
+      // const uploadTask = this.upSvc.pushUpload(currentUpload);
+      // uploadTask.then(snapshot => {
+      //     return snapshot.ref.getDownloadURL();   // Will return a promise with the download link
+      // }).then(downloadURL => {
+      //     that.logger.debug('[CONV-FOOTER] AppComponent::uploadSingle:: downloadURL', downloadURL]);
+      //     that.g.wdLog([`Successfully uploaded file and got download link - ${downloadURL}`]);
 
-        //     metadata.src = downloadURL;
-        //     let type_message = TYPE_MSG_TEXT;
-        //     let message = 'File: ' + metadata.src;
-        //     if (metadata.type.startsWith('image')) {
-        //         type_message = TYPE_MSG_IMAGE;
-        //         message = ''; // 'Image: ' + metadata.src;
-        //     }
-        //     that.sendMessage(message, type_message, metadata);
-        //     that.isFilePendingToUpload = false;
-        //     // return downloadURL;
-        // }).catch(error => {
-        //   // Use to signal error if something goes wrong.
-        //   console.error(`AppComponent::uploadSingle:: Failed to upload file and get link - ${error}`);
-        // });
+      //     metadata.src = downloadURL;
+      //     let type_message = TYPE_MSG_TEXT;
+      //     let message = 'File: ' + metadata.src;
+      //     if (metadata.type.startsWith('image')) {
+      //         type_message = TYPE_MSG_IMAGE;
+      //         message = ''; // 'Image: ' + metadata.src;
+      //     }
+      //     that.sendMessage(message, type_message, metadata);
+      //     that.isFilePendingToUpload = false;
+      //     // return downloadURL;
+      // }).catch(error => {
+      //   // Use to signal error if something goes wrong.
+      //   console.error(`AppComponent::uploadSingle:: Failed to upload file and get link - ${error}`);
+      // });
       // this.resetLoadImage();
       
+      this.uploadService.upload(this.senderId, currentUpload).then(downloadURL => {
+        that.logger.debug('[CONV-FOOTER] AppComponent::uploadSingle:: downloadURL', downloadURL);
+        that.logger.debug(`[CONV-FOOTER] Successfully uploaded file and got download link - ${downloadURL}`);
 
-        this.uploadService.upload(this.senderId, currentUpload).then(downloadURL => {
-          that.logger.debug('[CONV-FOOTER] AppComponent::uploadSingle:: downloadURL', downloadURL);
-          that.logger.debug(`[CONV-FOOTER] Successfully uploaded file and got download link - ${downloadURL}`);
-
-          metadata.src = downloadURL;
-          let type_message = TYPE_MSG_TEXT;
-          // let message = 'File: ' + metadata.src;
-          let message = `[${metadata.name}](${metadata.src})`
-          if (metadata.type.startsWith('image') && !metadata.type.includes('svg')) {
-              type_message = TYPE_MSG_IMAGE;
-              // message = '';
-              message = messageText 
-          } else if ((metadata.type.startsWith('image') && metadata.type.includes('svg')) || !metadata.type.startsWith('image')){
-              type_message = TYPE_MSG_FILE
-              // type_message = metadata.type
-              message = message + '\n' + messageText
-          } else if (!metadata.type.startsWith('image')){
+        metadata.src = downloadURL;
+        let type_message = TYPE_MSG_TEXT;
+        // let message = 'File: ' + metadata.src;
+        let message = `[${metadata.name}](${metadata.src})`
+        if (metadata.type.startsWith('image') && !metadata.type.includes('svg')) {
+            type_message = TYPE_MSG_IMAGE;
+            // message = '';
+            message = messageText 
+        } else if ((metadata.type.startsWith('image') && metadata.type.includes('svg')) || !metadata.type.startsWith('image')){
             type_message = TYPE_MSG_FILE
             // type_message = metadata.type
             message = message + '\n' + messageText
-          }
-          that.sendMessage(message, type_message, metadata);
-          that.chat21_file.nativeElement.value = ''; //BUG-FIXED: allow you to re-load the same previous file
-          that.isFilePendingToUpload = false;
-          // return downloadURL;
-        }).catch(error => {
-          // Use to signal error if something goes wrong.
-          that.logger.error(`[CONV-FOOTER] uploadSingle:: Failed to upload file and get link - ${error}`);
-          that.isFilePendingToUpload = false;
-        });
-        that.logger.debug('[CONV-FOOTER] reader-result: ', file);
+        } else if (!metadata.type.startsWith('image')){
+          type_message = TYPE_MSG_FILE
+          // type_message = metadata.type
+          message = message + '\n' + messageText
+        }
+        that.sendMessage(message, type_message, metadata);
+        that.chat21_file.nativeElement.value = ''; //BUG-FIXED: allow you to re-load the same previous file
+        that.isFilePendingToUpload = false;
+        // return downloadURL;
+      }).catch(error => {
+        // Use to signal error if something goes wrong.
+        that.logger.error(`[CONV-FOOTER] uploadSingle:: Failed to upload file and get link - ${error}`);
+        that.isFilePendingToUpload = false;
+      });
+      that.logger.debug('[CONV-FOOTER] reader-result: ', file);
     }
 
   /**
-   * invio del messaggio
+   * sending message
    * @param msg
    * @param type
    * @param metadata
@@ -318,20 +309,9 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
         const channelType = this.channelType;
         const userFullname = this.userFullname;
         const userEmail = this.userEmail;
-        // const showWidgetNameInConversation = this.showWidgetNameInConversation;
         const conversationWith = this.conversationWith;
         
-        // this.triggerBeforeSendMessageEvent(
-        //   recipientFullname,
-        //   msg,
-        //   type,
-        //   metadata,
-        //   conversationWith,
-        //   recipientFullname,
-        //   attributes,
-        //   projectid,
-        //   channelType
-        // );
+
         if (userFullname) {
           recipientFullname = userFullname;
         } else if (userEmail) {
@@ -341,9 +321,6 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
         } else {
           recipientFullname = this.translationMap.get('GUEST_LABEL');
         }
-        // if (showWidgetNameInConversation && showWidgetNameInConversation === true) {
-        //   recipientFullname += ' - ' + widgetTitle;
-        // }
 
         this.onBeforeMessageSent.emit({
           senderFullname: recipientFullname,
@@ -369,7 +346,6 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
           attributes
         );
 
-        // this.triggerAfterSendMessageEvent(messageSent);
         this.onAfterSendMessage.emit(messageSent)
         // this.isNewConversation = false;
 
@@ -385,41 +361,6 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
         this.restoreTextArea();
     }
   }
-
-  //MOVED TO TRIGGERHANDLER
-  // private triggerBeforeSendMessageEvent(senderFullname, text, type, metadata, conversationWith, recipientFullname, attributes, projectid, channel_type) {
-  //   try {
-  //       // tslint:disable-next-line:max-line-length
-  //       const onBeforeMessageSend = new CustomEvent('onBeforeMessageSend', { detail: { senderFullname: senderFullname, text: text, type: type, metadata, conversationWith: conversationWith, recipientFullname: recipientFullname, attributes: attributes, projectid: projectid, channelType: channel_type } });
-  //       const windowContext = this.g.windowContext;
-  //       if (windowContext.tiledesk && windowContext.tiledesk.tiledeskroot) {
-  //           windowContext.tiledesk.tiledeskroot.dispatchEvent(onBeforeMessageSend);
-  //           this.g.windowContext = windowContext;
-  //       } else {
-  //         this.el.nativeElement.dispatchEvent(onBeforeMessageSend);
-  //       }
-  //   } catch (e) {
-  //     this.logger.debug('[CONV-FOOTER] > Error :' + e]);
-  //   }
-  // }
-
-  //MOVED TO TRIGGERHANDLER
-  // private triggerAfterSendMessageEvent(message) {
-  //   try {
-  //       // tslint:disable-next-line:max-line-length
-  //       const onAfterMessageSend = new CustomEvent('onAfterMessageSend', { detail: { message: message } });
-  //       const windowContext = this.g.windowContext;
-  //       if (windowContext.tiledesk && windowContext.tiledesk.tiledeskroot) {
-  //           windowContext.tiledesk.tiledeskroot.dispatchEvent(onAfterMessageSend);
-  //           this.g.windowContext = windowContext;
-  //       } else {
-  //         this.el.nativeElement.dispatchEvent(onAfterMessageSend);
-  //       }
-  //   } catch (e) {
-  //     this.logger.debug('[CONV-FOOTER] > Error :' + e]);
-  //   }
-  // }
-
 
   private restoreTextArea() {
     //   that.logger.debug('[CONV-FOOTER] AppComponent:restoreTextArea::restoreTextArea');
@@ -438,9 +379,9 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
   }
 
   /**
-   * ridimensiona la textarea
-   * chiamato ogni volta che cambia il contenuto della textarea
-   * imposto stato 'typing'
+   * resize the textarea
+   * called whenever the content of the textarea changes
+   * set 'typing' state
    */
   resizeInputField() {
     try {
@@ -455,7 +396,6 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
           target.style.height = target.scrollHeight + 2 + 'px';
           target.style.minHeight = this.HEIGHT_DEFAULT;
         } else if (target) {
-          //   that.logger.debug('[CONV-FOOTER] PASSO 3');
           target.style.height = this.HEIGHT_DEFAULT;
           // segno sto scrivendo
           // target.offsetHeight - 15 + 'px';
@@ -465,8 +405,6 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
     } catch (e) {
       this.logger.error('[CONV-FOOTER] > Error :' + e);
     }
-    // tslint:disable-next-line:max-line-length
-    //   that.logger.debug('[CONV-FOOTER] H:: this.textInputTextArea', this.textInputTextArea, target.style.height, target.scrollHeight, target.offsetHeight, target.clientHeight);
   }
 
   onTextAreaChange(){
@@ -552,26 +490,17 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
    */
   setWritingMessages(str) {
     //this.messagingService.setWritingMessages(str, this.g.channelType);
-    this.typingService.setTyping(this.conversationWith, str, this.senderId, this.getUserFullname() )
-  }
-
-  getUserFullname(): string {
-    const userFullname = this.userFullname
-    if(userFullname){
-      return userFullname
-    }else{
-      return this.translationMap.get('GUEST_LABEL')
-    }
+    this.typingService.setTyping(this.conversationWith, str, this.senderId, this.userFullname )
   }
 
   /**
-   * quando premo un tasto richiamo questo metodo che:
-   * verifica se è stato premuto 'invio'
-   * se si azzera testo
-   * imposta altezza campo come min di default
-   * leva il focus e lo reimposta dopo pochi attimi
-   * (questa è una toppa per mantenere il focus e eliminare il br dell'invio!!!)
-   * invio messaggio
+   * when I press a key I call this method which:
+   * check if 'enter' has been pressed
+   * if you clear text
+   * set field height as min by default
+   * takes out the focus and resets it after a few moments
+   * (this is a patch to keep the focus and eliminate the br of the send !!!)
+   * send message
    * @param event
    */
   onkeypress(event) {
