@@ -186,6 +186,7 @@
                                   [message]="message"
                                   [isConversationArchived]="isConversationArchived"
                                   [isLastMessage] = "isLastMessage(message?.uid)"
+                                  [fullscreenMode]="fullscreenMode"
                                   [stylesMap]="stylesMap"
                                   (onElementRendered)="onElementRenderedFN($event)"
                                   (onAttachmentButtonClicked)="onAttachmentButtonClickedFN($event)">
