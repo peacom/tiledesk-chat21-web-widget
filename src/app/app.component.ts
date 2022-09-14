@@ -1603,9 +1603,12 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             //     this.startNewConversation();
             // }
             if (this.g.isOpenPrechatForm === false) {
-                this.isOpenConversation = true;
-                this.isOpenHome = false
                 this.isOpenSelectionDepartment = false;
+                this.isOpenConversation = true;
+                setTimeout(() => {
+                    this.isOpenHome = false 
+                }, 0);
+                // this.isOpenSelectionDepartment = false;
                 this.startNewConversation();
             }
         }
