@@ -331,8 +331,8 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
     // CHECK if conversationId is changed and re-build component
     if(changes && changes['conversationId'] && changes['conversationId'].previousValue !== undefined && (changes['conversationId'].previousValue !== changes['conversationId'].currentValue)){
       this.logger.debug("[CONV-COMP] UID CHANGESSSS", changes['conversationId'])
-      this.isConversationArchived = false;
-      this.conversationFooter.textInputTextArea='';
+      
+      this.ngOnDestroy();
       this.ngOnInit();
       this.ngAfterViewInit();
     }
@@ -730,6 +730,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
 
     subscribtionKey = 'messageAdded';
     subscribtion = this.subscriptions.find(item => item.key === subscribtionKey);
+    console.log('subscriptionnn', subscribtion, this.subscriptions.find(item => item.key === subscribtionKey))
     if (!subscribtion) {
       this.logger.debug('[CONV-COMP] ***** add messageAdded *****',  this.conversationHandlerService);
       subscribtion = this.conversationHandlerService.messageAdded.pipe(takeUntil(this.unsubscribe$)).subscribe((msg: MessageModel) => {
@@ -1113,6 +1114,10 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
   ngOnDestroy() {
     this.logger.debug('[CONV-COMP] ngOnDestroy ------------------> this.subscriptions', this.subscriptions);
     //this.storageService.removeItem('activeConversation');
+    this.isConversationArchived = false;
+    this.conversationFooter.textInputTextArea='';
+    this.hideFooterTextReply = false;
+    this.footerMessagePlaceholder = '';
     this.unsubscribe();
   }
 
