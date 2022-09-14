@@ -1,9 +1,11 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.37 in PROD
+
 ### 5.0.37-rc.3
 - added: if fullscreenMode is active, attachments button should be aligned left and not right
 - added: multi-language to MEMBER_LEFT_GROUP and LEAD_UPDATED info messages
-- removed: removed zone-flag import due to bad ui animation when close widget
+- removed: zone-flag import due to bad ui animation when close widget
 
 ### 5.0.37-rc.2
 - added: onElementRendered event to scroll after image/frame is loaded
