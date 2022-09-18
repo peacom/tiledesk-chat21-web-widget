@@ -1,5 +1,5 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ConversationInternalFrameComponent } from './conversation-internal-frame.component';
 
@@ -7,7 +7,7 @@ describe('InterlalFrameComponent', () => {
   let component: ConversationInternalFrameComponent;
   let fixture: ComponentFixture<ConversationInternalFrameComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ConversationInternalFrameComponent ],
       imports: [

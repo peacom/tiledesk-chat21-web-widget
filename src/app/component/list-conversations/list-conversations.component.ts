@@ -38,9 +38,7 @@ export class ListConversationsComponent implements OnInit {
   arrayDiffer: any;
 
   uidConvSelected: string;
-  constructor(private iterableDiffers: IterableDiffers,
-              private translatorService: TranslatorService,
-              private kvDiffers: KeyValueDiffers) {
+  constructor(private iterableDiffers: IterableDiffers) {
       this.iterableDifferListConv = this.iterableDiffers.find([]).create(null);
       
     }

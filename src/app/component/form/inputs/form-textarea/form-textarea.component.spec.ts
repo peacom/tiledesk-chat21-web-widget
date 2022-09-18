@@ -1,4 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormGroupDirective } from '@angular/forms';
 
 import { FormTextareaComponent } from './form-textarea.component';
 
@@ -6,9 +7,10 @@ describe('FormTextareaComponent', () => {
   let component: FormTextareaComponent;
   let fixture: ComponentFixture<FormTextareaComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ FormTextareaComponent ]
+      declarations: [ FormTextareaComponent ],
+      providers: [ FormGroupDirective ]
     })
     .compileComponents();
   }));

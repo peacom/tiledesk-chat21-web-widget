@@ -1,5 +1,6 @@
+import { MomentModule } from 'ngx-moment';
 import { TooltipModule } from 'ng2-tooltip-directive';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ConversationContentComponent } from './conversation-content.component';
 import { MarkedPipe } from '../../../directives/marked.pipe';
@@ -15,7 +16,7 @@ describe('ConversationContentComponent', () => {
   let component: ConversationContentComponent;
   let fixture: ComponentFixture<ConversationContentComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ 
         ConversationContentComponent,
@@ -35,7 +36,8 @@ describe('ConversationContentComponent', () => {
         HtmlEntitiesEncodePipe,
       ],
       imports: [
-        TooltipModule
+        TooltipModule,
+        MomentModule
       ],
       providers: [ 
         UploadService,

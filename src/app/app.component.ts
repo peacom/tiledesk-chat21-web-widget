@@ -541,6 +541,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             this.logger.debug('[APP-COMP] signInWithCustomToken user::', user, this.g.userFullname)
             //check if tiledesk_userFullname exist (passed from URL or tiledeskSettings) before update userFullname parameter
             //if tiledesk_userFullname not exist--> update parameter with tiledesk user returned from auth
+            
             if ((user.firstname || user.lastname) && !this.g.userFullname) {
                 const fullName = user.firstname + ' ' + user.lastname;
                 this.g.setParameter('userFullname', fullName);

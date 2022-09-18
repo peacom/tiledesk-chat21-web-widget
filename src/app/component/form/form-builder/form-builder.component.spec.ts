@@ -1,4 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TranslateService } from '@ngx-translate/core';
+import { CustomTranslateService } from './../../../../chat21-core/providers/custom-translate.service';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { FormBuilderComponent } from './form-builder.component';
 
@@ -6,9 +9,14 @@ describe('FormBuilderComponent', () => {
   let component: FormBuilderComponent;
   let fixture: ComponentFixture<FormBuilderComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ FormBuilderComponent ]
+      declarations: [ FormBuilderComponent ],
+      imports: [ReactiveFormsModule],
+      providers: [
+        CustomTranslateService,
+        TranslateService
+      ]
     })
     .compileComponents();
   }));

@@ -1,4 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormGroupDirective } from '@angular/forms';
 
 import { FormLabelComponent } from './form-label.component';
 
@@ -6,9 +7,10 @@ describe('FormLabelComponent', () => {
   let component: FormLabelComponent;
   let fixture: ComponentFixture<FormLabelComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ FormLabelComponent ]
+      declarations: [ FormLabelComponent ],
+      providers: [ FormGroupDirective ]
     })
     .compileComponents();
   }));

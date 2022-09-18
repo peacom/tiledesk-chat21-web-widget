@@ -1,4 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormGroupDirective } from '@angular/forms';
 
 import { FormTextComponent } from './form-text.component';
 
@@ -6,9 +7,10 @@ describe('FormTextComponent', () => {
   let component: FormTextComponent;
   let fixture: ComponentFixture<FormTextComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ FormTextComponent ]
+      declarations: [ FormTextComponent ],
+      providers: [ FormGroupDirective ]
     })
     .compileComponents();
   }));

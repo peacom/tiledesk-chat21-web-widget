@@ -1,3 +1,6 @@
+import { TiledeskRequestsService } from './../../../../chat21-core/providers/tiledesk/tiledesk-requests.service';
+import { StarRatingWidgetService } from './../../../providers/star-rating-widget.service';
+import { StarRatingWidgetComponent } from './../../star-rating-widget/star-rating-widget.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { Triggerhandler } from './../../../../chat21-core/utils/triggerHandler';
@@ -6,7 +9,7 @@ import { AppConfigService } from './../../../providers/app-config.service';
 
 import { Globals } from './../../../utils/globals';
 import { NO_ERRORS_SCHEMA, ElementRef } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ConversationComponent } from './conversation.component';
 import { GlobalSettingsService } from '../../../providers/global-settings.service';
@@ -33,7 +36,7 @@ describe('ConversationComponent', () => {
   let fixture: ComponentFixture<ConversationComponent>;
   class MockElementRef {}
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ConversationComponent ],
       imports: [
@@ -61,7 +64,9 @@ describe('ConversationComponent', () => {
         ChatManager,
         TypingService,
         ImageRepoService,
-        UploadService
+        UploadService,
+        StarRatingWidgetService,
+        TiledeskRequestsService
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })
