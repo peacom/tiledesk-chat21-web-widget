@@ -1,9 +1,8 @@
 import { AppConfigService } from './../../providers/app-config.service';
-import { StarRatingWidgetService } from './star-rating-widget.service';
+import { StarRatingWidgetService } from './../../providers/star-rating-widget.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { StarRatingWidgetComponent } from './star-rating-widget.component';
-import { HttpModule } from '@angular/http';
 import { Globals } from '../../utils/globals';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -15,7 +14,6 @@ describe('StarRatingWidgetComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ StarRatingWidgetComponent ],
       imports: [
-        HttpModule,
         HttpClientModule
       ],
       providers: [

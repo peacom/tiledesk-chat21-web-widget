@@ -1,6 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
-
 import { UserTypingComponent } from './user-typing.component';
 
 describe('UserTypingComponent', () => {

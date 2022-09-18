@@ -2,9 +2,7 @@ import { CustomTranslateService } from './../../../chat21-core/providers/custom-
 import { TranslatorService } from './../../providers/translator.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AppConfigService } from './../../providers/app-config.service';
-import { HttpModule } from '@angular/http';
 import { WaitingService } from './../../providers/waiting.service';
-import { ContactService } from './../../providers/contact.service';
 import { ChatManager } from './../../../chat21-core/providers/chat-manager';
 import { Globals } from './../../utils/globals';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -24,7 +22,6 @@ describe('HomeConversationsComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ HomeConversationsComponent ],
       imports: [
-        HttpModule,
         HttpClientModule,
         TranslateModule.forRoot()
       ],

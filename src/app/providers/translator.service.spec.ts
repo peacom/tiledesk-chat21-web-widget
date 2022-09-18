@@ -1,7 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { AppConfigService } from './app-config.service';
 import { Globals } from './../utils/globals';
-import { HttpModule } from '@angular/http';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TestBed, inject } from '@angular/core/testing';
 
@@ -11,7 +10,6 @@ describe('TranslatorService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpModule,
         HttpClientModule,
         TranslateModule.forRoot(),
       ],

@@ -1,9 +1,9 @@
-import { Globals } from './../../utils/globals';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { PrechatFormComponent } from './prechat-form.component';
-import { AppStorageService } from '../../../chat21-core/providers/abstract/app-storage.service';
+import { AppStorageService } from 'src/chat21-core/providers/abstract/app-storage.service';
+import { Globals } from 'src/app/utils/globals';
 
 describe('PrechatFormComponent', () => {
   let component: PrechatFormComponent;

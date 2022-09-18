@@ -15,9 +15,6 @@ describe('ConversationContentComponent', () => {
   let component: ConversationContentComponent;
   let fixture: ComponentFixture<ConversationContentComponent>;
 
-  let customLogger = new CustomLogger()
-  LoggerInstance.setInstance(customLogger)
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ 
