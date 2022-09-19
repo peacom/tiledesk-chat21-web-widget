@@ -70,8 +70,8 @@
     /* margin: 10px; */
 
 } 
-#tiledesk-container.open #tiledeskdiv {
-    transition: box-shadow 2.8s ease-in;
+#tiledesk-container.open #tiledeskdiv.shadow {
+    transition: box-shadow 0.8s ease-in;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 8px 36px 0px; /*NEW GAB*/
 }
 /* @-webkit-keyframes fade-in-shadow {

@@ -554,6 +554,17 @@ export class Globals {
     }
   }
 
+  setShadow(isOpen: boolean){
+    const divTiledeskWidget = this.windowContext.document.getElementById('tiledeskdiv');
+    if(isOpen && divTiledeskWidget){
+      setTimeout(() => {
+        divTiledeskWidget.classList.add('shadow')
+      }, 1000);
+    } else if(!isOpen && divTiledeskWidget){
+      divTiledeskWidget.classList.remove('shadow')
+    }
+  }
+
   /**
    *
    * @param val
