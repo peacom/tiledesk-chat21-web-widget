@@ -678,7 +678,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         // visualizzo l'iframe!!!
         this.triggerOnViewInit();
         this.g.setParentBodyStyleMobile(this.g.isOpen, this.g.isMobile);
-        this.g.setShadow(this.g.isOpen)
+        this.g.setElementStyle(this.g.isOpen)
         // this.triggerOnAuthStateChanged(true)
         // mostro il widget
         // setTimeout(() => {
@@ -1172,7 +1172,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.g.setIsOpen(false);
         this.g.isOpenNewMessage = false;
         this.appStorageService.setItem('isOpen', 'false');
-        this.g.setShadow(this.g.isOpen)
+        // this.g.setShadow(this.g.isOpen)
         this.triggerOnCloseEvent();
     }
 
@@ -1586,8 +1586,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         } else {
             this.triggerOnCloseEvent();
         }
-        this.g.setParentBodyStyleMobile(this.g.isOpen, this.g.isMobile)
-        this.g.setShadow(this.g.isOpen)
+        // this.g.setParentBodyStyleMobile(this.g.isOpen, this.g.isMobile)
+        // this.g.setShadow(this.g.isOpen)
     }
 
     /**

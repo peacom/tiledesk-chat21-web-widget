@@ -513,7 +513,7 @@ chat-root {
             right: 1px;
             top: 1px;
             bottom: 1px;
-            border-radius: 0px;
+            border-radius: 16px;
             overflow: hidden;
             background-color: transparent;
             // border: 1px solid #cccccc; //NEW GAB
@@ -530,6 +530,9 @@ chat-root {
                 bottom: 0px;
                 border-radius: 0px;
                 max-height: none;
+            }
+            &.isMobile{
+                border-radius: 0px;
             }
         }
 
@@ -748,12 +751,12 @@ chat-root {
     // nk: .chat21-sheet CUSTOM DIMENSIONS WHEN THE WINDOW WIDTH IS < 451PX 
     ***************/
 
-    @media (width: 376px){
-        #chat21-conversations {
-            // border-radius: 10px!important;
-            border-radius: 16px!important;
-        }
-    }
+    // @media (width: 376px){
+    //     #chat21-conversations {
+    //         // border-radius: 10px!important;
+    //         border-radius: 16px!important;
+    //     }
+    // }
 
     @media (max-width: 451px) {
         #tiledesk-container {

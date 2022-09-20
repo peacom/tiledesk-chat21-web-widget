@@ -538,6 +538,7 @@ export class Globals {
 
 
   setParentBodyStyleMobile(isOpen: boolean, isMobile: boolean){
+    console.log('setParentBodyStyleMobile-->', isMobile, isOpen)
     if(isOpen && isMobile){
       //block body scroll
       // window.parent.document.body.style.height = '100vh';
@@ -554,8 +555,11 @@ export class Globals {
     }
   }
 
-  setShadow(isOpen: boolean){
+  setElementStyle(isOpen: boolean){
     const divTiledeskWidget = this.windowContext.document.getElementById('tiledeskdiv');
+    const chat21conversationsEL = document.getElementById('chat21-conversations')
+
+    //customize shadow for 'tiledeskdiv'
     if(isOpen && divTiledeskWidget){
       setTimeout(() => {
         divTiledeskWidget.classList.add('shadow')
@@ -563,7 +567,15 @@ export class Globals {
     } else if(!isOpen && divTiledeskWidget){
       divTiledeskWidget.classList.remove('shadow')
     }
+
+    //customize border-radius for 'chat21-conversations'
+    if(isOpen && this.isMobile && chat21conversationsEL){
+      chat21conversationsEL.classList.add('isMobile')
+    } else if(!isOpen && chat21conversationsEL){
+      chat21conversationsEL.classList.remove('isMobile')
+    }
   }
+
 
   /**
    *
@@ -573,6 +585,7 @@ export class Globals {
     // console.log('setIsOpen', val);
     this.isOpen = val;
     this.setParentBodyStyleMobile(val, this.isMobile)
+    this.setElementStyle(val)
     this.obsIsOpen.next(val);
   }
 
