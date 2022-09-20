@@ -1,5 +1,9 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.38-rc.2
+- bug-fixed: add programmatically shadow after widget is loaded
+- bug-fixed: widget corners change if browser zoom is greater then 100%
+ 
 ### 5.0.38-rc.1
 - bug-fixed: if only one department is active, singleConversation is active footer is not disabled if close a conversation and start a new one with hideFooterTextReply: true
 - bug-fixed: if more than two department is active and new conversation is starting, component flashes before loaded (removed slid-in-right animation)
