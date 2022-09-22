@@ -23,7 +23,6 @@ describe('InfoMessageComponent', () => {
   });
 
   it('should create', () => {
-    console.log('componenttt', fixture)
     expect(component).toBeTruthy();
   });
 });

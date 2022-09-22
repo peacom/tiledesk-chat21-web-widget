@@ -46,8 +46,8 @@ export class CustomLogger extends LoggerService{
 
     debug(message: any, ...optionalParams: any[]) {
         if (this.isLogEnabled && this.logLevel >= LogLevel.DEBUG) {
-            // this.logger.debug(message, ...optionalParams)
-            console.debug(message, ...optionalParams)
+            this.logger.debug(message, ...optionalParams)
+            // console.debug(message, ...optionalParams)
         }
     }
 

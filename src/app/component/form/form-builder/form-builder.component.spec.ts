@@ -1,4 +1,4 @@
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CustomTranslateService } from './../../../../chat21-core/providers/custom-translate.service';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -12,10 +12,12 @@ describe('FormBuilderComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ FormBuilderComponent ],
-      imports: [ReactiveFormsModule],
+      imports: [
+        ReactiveFormsModule,
+        TranslateModule.forRoot(),
+      ],
       providers: [
         CustomTranslateService,
-        TranslateService
       ]
     })
     .compileComponents();

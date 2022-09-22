@@ -1,6 +1,6 @@
 import { CustomTranslateService } from './../../../chat21-core/providers/custom-translate.service';
 import { NO_ERRORS_SCHEMA, IterableDiffers, IterableDifferFactory } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Globals } from '../../utils/globals';
 
 import { ListAllConversationsComponent } from './list-all-conversations.component';
@@ -20,7 +20,7 @@ describe('ListAllConversationsComponent', () => {
     }
 }
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ListAllConversationsComponent ],
       imports: [

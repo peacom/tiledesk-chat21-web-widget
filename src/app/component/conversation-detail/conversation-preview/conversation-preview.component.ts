@@ -41,7 +41,7 @@ export class ConversationPreviewComponent implements OnInit {
   // ========= end:: gestione scroll view messaggi ======= //
 
 
-  private logger: LoggerService = LoggerInstance.getInstance()
+  public logger: LoggerService = LoggerInstance.getInstance()
   constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit() {

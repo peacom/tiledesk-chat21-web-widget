@@ -6,7 +6,7 @@ import { WaitingService } from './../../providers/waiting.service';
 import { ChatManager } from './../../../chat21-core/providers/chat-manager';
 import { Globals } from './../../utils/globals';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeConversationsComponent } from './home-conversations.component';
 import { ImageRepoService } from '../../../chat21-core/providers/abstract/image-repo.service';
@@ -18,7 +18,7 @@ describe('HomeConversationsComponent', () => {
   let component: HomeConversationsComponent;
   let fixture: ComponentFixture<HomeConversationsComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ HomeConversationsComponent ],
       imports: [
