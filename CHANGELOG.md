@@ -1,5 +1,7 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.38 in PROD
+
 ### 5.0.38-rc.2
 - bug-fixed: add programmatically shadow after widget is loaded
 - bug-fixed: widget corners change if browser zoom is greater then 100%
