@@ -2,15 +2,26 @@ import { Triggerhandler } from './../chat21-core/utils/triggerHandler';
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { GlobalSettingsService } from './providers/global-settings.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { AppStorageService } from 'src/chat21-core/providers/abstract/app-storage.service';
+import { SettingsSaverService } from './providers/settings-saver.service';
+import { TranslatorService } from './providers/translator.service';
 
 describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        
+        HttpClientTestingModule
       ],
-      providers:[Triggerhandler],
+      providers:[
+        Triggerhandler,
+        GlobalSettingsService,
+        AppStorageService,
+        SettingsSaverService,
+        TranslatorService
+      ],
       declarations: [
         AppComponent
       ],
