@@ -353,6 +353,10 @@ chat-root {
             color: $bck-msg-sent;
         }
 
+        img {
+            max-width: $max-width-images;
+        }
+
         // === CSS BUTTON === //
         button.c21-button-primary{
             width: auto;
