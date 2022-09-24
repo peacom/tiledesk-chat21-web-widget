@@ -1,5 +1,8 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.39-rc.1
+- added: new UI
+
 ### 5.0.38 in PROD
 
 ### 5.0.38-rc.2
