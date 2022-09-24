@@ -13,23 +13,25 @@
         color: $dark-gray;
         height: auto;
         position: relative;
-        min-height: 50px;
+        min-height: 40px; //50px;
         display: block;
         font-weight: 300;
+        border-bottom: 1px solid rgb(241,241,241);
+        border-radius: 0px;
 
         .c21-title{
             font-size: 1.4em;
             max-width: 230px;
             line-height: normal;
-            padding: 16px 0px 10px 24px;
+            padding: 14px 0px 10px 24px;
             float:left;
         }
         .c21-button{
-            font-size: 1.2em;
+            font-size: 1.4em;
             margin: 0px;
             line-height: normal;
             // padding: 17px 24px 11px 5px;
-            padding: 5px;
+            padding: 0px 5px;
             float: right;
             fill: $blue;
             button {
@@ -44,7 +46,7 @@
     .c21-waiting-time {
         font-size: 1.3em;
         font-weight: 200;
-        padding: 0px 24px 5px 24px;
+        padding: 0px 24px 15px 24px;
     }
     .c21-body {
         position: relative;
@@ -130,7 +132,7 @@
                 }
 
                 .c21-right-conv {
-                    width: calc( 100% - 70px);
+                    width: calc( 100% - 65px);
                     margin-left: 15px;
                     height: auto;
                     float: left;
@@ -219,8 +221,9 @@
         position: relative;
         padding: 0 0 10px 0;
         border-top: 0px solid $light-gray;
-        display: inline-block;
+        display: flex; //inline-block;
         align-items: center;
+        justify-content: center;
         -webkit-box-shadow: none;
         box-shadow: none;
         vertical-align: top;
@@ -230,7 +233,7 @@
         position: absolute;
         top: 40px;
         left: inherit;
-        right: 0px;
+        right: 10px; //0px;
         width: 10px;
         height: 10px;
         min-width: 10px;

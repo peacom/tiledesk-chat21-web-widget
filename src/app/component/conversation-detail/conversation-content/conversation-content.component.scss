@@ -109,8 +109,17 @@
                     position: absolute;
                     top: 0;
                     right: 0;
+
+                    &::-webkit-scrollbar {
+                        width: 6px;
+                        background-color: #00000000!important;
+                    } 
                 }
                 #scroll-me:hover {
+                    &::-webkit-scrollbar-track {
+                        background-color: #f9f9f9 !important;
+                    }
+
                     &::-webkit-scrollbar-thumb {
                         background: #777777; 
                     }
@@ -247,7 +256,7 @@
     
                 /** recive message **/
                 .base_receive {
-                    // padding: 0px 0px 6px 0px; //activate 
+                    padding: 2px 0px 4px 0px; //activate 
                     /* avatar */ 
                     .content-avatar {
                         position: relative;
@@ -281,7 +290,7 @@
                         // max-width: 260px;
                         max-width: calc(100% - 70px);
                         min-width: 14px;
-                        margin: 0 20px 4px 10px;
+                        margin: auto 20px auto 10px; //0 20px 4px 10px;
                         height: fit-content;
                         width: auto;
 

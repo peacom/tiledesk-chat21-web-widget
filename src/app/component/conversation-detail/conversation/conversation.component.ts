@@ -730,7 +730,6 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
 
     subscribtionKey = 'messageAdded';
     subscribtion = this.subscriptions.find(item => item.key === subscribtionKey);
-    console.log('subscriptionnn', subscribtion, this.subscriptions.find(item => item.key === subscribtionKey))
     if (!subscribtion) {
       this.logger.debug('[CONV-COMP] ***** add messageAdded *****',  this.conversationHandlerService);
       subscribtion = this.conversationHandlerService.messageAdded.pipe(takeUntil(this.unsubscribe$)).subscribe((msg: MessageModel) => {
@@ -880,7 +879,6 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
       }else {
         this.footerMessagePlaceholder = '';
       }
-
     }
 
   }
@@ -1040,6 +1038,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
   onCloseInternalFrame(event){
     this.isButtonUrl = false
     this.buttonClicked = null;
+    this.restoreDefaultWidgetSize();
   }
 
   /** CALLED BY: conv-preview component */
@@ -1169,16 +1168,42 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
   //     }, 1000);
   //   }
   // }
+  private onIncreaseWith(){
+    try{
+      const tiledeskDiv = this.g.windowContext.window.document.getElementById('tiledeskdiv') 
+      tiledeskDiv.classList.add('increaseSize')
+      const chat21conversations = document.getElementById('chat21-conversations')
+      chat21conversations.style.borderRadius = '16px'
+      // tiledeskDiv.style.width = '696px'
+      // tiledeskDiv.style.maxHeight = '712px'
+    }catch(e){
+      this.logger.error('[CONV-COMP] onIncreaseWith > Error :' + e);
+    }
+  }
+
+  private restoreDefaultWidgetSize(){
+    try{
+      const tiledeskDiv = this.g.windowContext.window.document.getElementById('tiledeskdiv') 
+      tiledeskDiv.classList.remove('increaseSize')
+      tiledeskDiv.classList.add('decreaseSize')
+      // tiledeskDiv.style.width = '376px'
+      // tiledeskDiv.style.maxHeight = '620px'
+    }catch(e){
+      this.logger.error('[CONV-COMP] restoreDefaultWidgetSize > Error :' + e);
+    }
+  }
   
 
   /** */
   private openLink(event: any) {
     const link = event.link ? event.link : '';
     const target = event.target ? event.target : '';
+    this.onIncreaseWith()
     if (target === 'self') {
       // window.open(link, '_self');
       this.isButtonUrl= true;
       this.buttonClicked = event
+      
     } else if (target === 'parent') {
       window.open(link, '_parent');
     } else {

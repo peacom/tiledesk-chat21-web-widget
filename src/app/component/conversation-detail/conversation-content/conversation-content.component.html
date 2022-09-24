@@ -1,43 +1,6 @@
 <div class="c21-body" (click)="hideOutsideElements()">
 
   <div class="c21-body-container">
-    <div class="c21-body-header">
-      <!-- 
-                      // nk new: simulates a higher header content -- USED ONLY FIRST MSG
-                      ??? a cosa serve ??? 
-                      -->
-                  <!-- <div *ngIf="isNewConversation == true && g.projectid != null" 
-                          class="chat21-sheet-content-themable-section" 
-                          [ngClass]="{'themable-section-agent_not_available':!areAgentsAvailable}" 
-                          [ngStyle]="{'background-color': g.themeColor}">
-                      </div> -->
-                  <!-- // AVATAR -->
-  
-                  <!-- DISPLAYS THE MSG 'ALL AGENT ARE OFFLINE' IN THE VIEW WHEN THERE IS NOT DISPLAYS WHEN THE USER DIGIT THE FIRST MSG -->
-                  <!-- <div *ngIf="!areAgentsAvailable && isNewConversation && availableAgentsStatus && messages.length == 0" 
-                          class="chat21-agents-available chat21-agents-available-is-new-conversation" 
-                          [ngStyle]="{ 'border-top': '2.4px solid', 'border-top-color': themeColor50 }"
-                          >
-                          <span style="font-size:18px">🤔</span>  
-                          <span>{{ g.ALL_AGENTS_OFFLINE_LABEL }}</span>
-                      </div> -->
-  
-                  <!-- // nk - to edit: display the msg of welcome msg if exist && g.availableAgentsStatus -->
-                  <!-- <div *ngIf="isNewConversation && messages.length == 0" class="chat21-header-modal-select chat21-header-modal-select-first-msg"
-                      [ngStyle]="{ 'border-top': '2.4px solid', 'border-top-color': themeColor50 }">
-                      <div *ngIf="g.areAgentsAvailable">
-                          <span> {{g.LABEL_FIRST_MSG}} </span>
-                      </div>
-                      <div *ngIf="!g.areAgentsAvailable">
-                          <span>{{g.LABEL_FIRST_MSG_NO_AGENTS}}</span>
-                      </div>
-                  </div> -->
-  
-                  <!-- // nk - to edit: display the msg of welcome msg if exist -->
-                  <!-- <div *ngIf="isNewConversation && g.areAgentsAvailable && messages.length == 0" class="chat21-header-modal-select chat21-header-modal-select-more-of-one-dept">
-                      {{g.departmentSelected.name}}
-                  </div> -->
-    </div>
   
     <div class="c21-body-content" tabindex="1520" aria-label=" messaggi della conversazione: ">
   

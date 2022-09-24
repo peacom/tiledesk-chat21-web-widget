@@ -135,6 +135,22 @@ textarea:active{
     padding: 0px 40px 0px 70px; //NEW FOR EMOJII BUTTON
     margin: 10px 0px 10px;
     border: none;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+        background-color: #00000000!important;
+    } 
+
+    &:hover {
+        &::-webkit-scrollbar-track {
+            background-color: #f9f9f9 !important;
+        }
+        
+        &::-webkit-scrollbar-thumb {
+            background: #777777; 
+        }
+
+    }
 }
 
 .chat21-textarea-button {
@@ -203,7 +219,7 @@ textarea:active{
 
     .c21-button-primary {
         height: 36px;
-        margin: 5px 5px;
+        margin: 5px 0px;
     }
 
     .c21-waiting-time {

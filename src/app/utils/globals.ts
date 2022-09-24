@@ -23,7 +23,7 @@ export class Globals {
   obsIsOpen = new BehaviorSubject<boolean>(null);
 
   BASE_LOCATION = 'https://widget.tiledesk.com/v2';
-  POWERED_BY ='<a tabindex="-1" target="_blank" href="http://www.tiledesk.com/"><img src="https://support-pre.tiledesk.com/dashboard/assets/img/logos/tiledesk-logo.svg"/></a>'
+  POWERED_BY ='<a tabindex="-1" target="_blank" href="http://www.tiledesk.com/"><img src="https://support-pre.tiledesk.com/dashboard/assets/img/logos/tiledesk-logo_new_gray.svg"/></a>'
   DEFAULT_LOGO_CHAT = '/assets/images/tiledesk_logo_white_small.png';
   WIDGET_TITLE = 'Tiledesk';
 
@@ -538,7 +538,6 @@ export class Globals {
 
 
   setParentBodyStyleMobile(isOpen: boolean, isMobile: boolean){
-    console.log('setParentBodyStyleMobile-->', isMobile, isOpen)
     if(isOpen && isMobile){
       //block body scroll
       // window.parent.document.body.style.height = '100vh';

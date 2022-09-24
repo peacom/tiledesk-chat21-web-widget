@@ -251,7 +251,7 @@
                 }
 
                 .c21-right-conv {
-                    width: calc( 100% - 70px);
+                    width: calc( 100% - 65px);
                     margin-left: 15px;
                     height: auto;
                     float: left;
@@ -315,7 +315,7 @@
         position: absolute;
         top: 40px;
         left: inherit;
-        right: 0px;
+        right: 10px ;//0px;
         width: 10px;
         height: 10px;
         min-width: 10px;
