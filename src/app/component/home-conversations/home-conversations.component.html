@@ -34,7 +34,7 @@
 
   <div class="c21-body">
     
-    <chat-list-conversations *ngIf="(listConversations || listConversations.length > 0)"
+    <chat-list-conversations *ngIf="(listConversations && listConversations.length > 0)"
       [listConversations]="listConversations"
       [limit]="3"
       [stylesMap]="stylesMap"
@@ -73,7 +73,7 @@
       </button>
     </div>
 
-    <div class="c21-new-conversation" *ngIf="availableAgents && availableAgents.length > 1"> 
+    <div class="c21-new-conversation" *ngIf="(availableAgents && availableAgents.length > 1 ) || (listConversations && listConversations.length > 0 )"> 
       <!--  *ngIf="this.g.supportMode" -->
       <button tabindex="1040" aflistconv #aflistconv class="c21-button-primary" (click)="openNewConversation()" [ngStyle]="{'background-color': g.themeColor, 'border-color': g.themeColor, 'color': g.themeForegroundColor }">
         <span class="v-align-center">

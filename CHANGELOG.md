@@ -1,5 +1,14 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.39-rc.2
+- bug-fixed: alignment of attachment buttons
+- bug-fixed: footer images not contained into parent div
+- added: new UI in home if only 1 agent is available and no conversations exists
+- changed: bubbleReceivedBackground color and bubbleReceivedTextColor default value	
+- changed: box-shadow in footer component
+- changed: scroll bar thumb color
+- removed: border from avatar
+
 ### 5.0.39-rc.1
 - added: new UI
 
