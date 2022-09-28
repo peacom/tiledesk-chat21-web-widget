@@ -101,8 +101,8 @@
                     height: auto;
                 }
                 .c21-name {
-                    font-weight: 200; //700;
-                    color: #3a3c4c;
+                    font-weight: 300; //700;
+                    color: #8b8ea6; // #3a3c4c;
                     font-size: 1.3em;
                     line-height: 1.7;
                     min-height: 20px;
@@ -135,7 +135,7 @@
     
     .c21-ball {
         position: relative;
-        border: 2px solid #ffffff;
+        // border: 2px solid #ffffff;
         width: 40px; //52px;
         height: 40px; //52px;
         border-radius: 50%;
