@@ -354,9 +354,9 @@ export class Globals {
     /** set the background of bubble sent message */
     this.bubbleSentTextColor = convertColorToRGBA('#ffffff', 100); //'#ffffff'
     /** set the text color of bubble sent message */
-    this.bubbleReceivedBackground= convertColorToRGBA('#f7f7f7', 100);
+    this.bubbleReceivedBackground= convertColorToRGBA('#f0f2f7', 100);
     /** set the background of bubble received message */
-    this.bubbleReceivedTextColor = convertColorToRGBA('#1a1a1a', 100); //#1a1a1a
+    this.bubbleReceivedTextColor = convertColorToRGBA('#06132b', 100); //#1a1a1a
     /** set the text color of bubble received message */
     this.fontSize = '1.4em'
     /** set the text size of bubble messages */
