@@ -60,6 +60,14 @@
         overflow: hidden;
         margin: 0px 0px 0 0px;
 
+        .flex-container{
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            margin: 20px;
+
+        }
+
         .c21-item-conversation {
             width: 100%;
             min-width: 344px;
@@ -178,12 +186,16 @@
 
         .c21-pallozzo{
             display: inline;
+
+            &.flex-inline-agent{
+                margin: auto 15px;
+            }
         }
 
         
         .c21-ball {
             position: relative;
-            border: 2px solid #ffffff;
+            // border: 2px solid #ffffff;
             width: 52px;
             height: 52px;
             border-radius: 50%;
@@ -214,7 +226,7 @@
         }
         
     }
-    .c21-footer {
+    .c21-new-conversation {
         width: auto;
         margin: 0 20px;
         height: auto;
@@ -227,6 +239,21 @@
         -webkit-box-shadow: none;
         box-shadow: none;
         vertical-align: top;
+    }
+
+    .c21-footer{
+        width: auto;
+        // margin: 0 20px;
+        height: auto;
+        position: relative;
+        // padding: 0 0 10px 0;
+        // border-top: 0px solid $light-gray;
+        display: flex; //inline-block;
+        align-items: center;
+        // justify-content: center;
+        // -webkit-box-shadow: none;
+        // box-shadow: none;
+        // vertical-align: top;
     }
 
     .c21-divBudge {
