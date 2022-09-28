@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Google+Sans:200,400,800');
-// @import url('https://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;0,700;1,300;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;0,700;1,300;1,400');
 @import 'src/app/sass/normalize.scss';
 @import 'src/app/sass/variables';
 @import url('./sass/animations.scss');
@@ -143,7 +143,7 @@ body {
     padding: 0;
     margin: 0;
     height: 70px;//52px;
-    width: 70px; //100%;
+    width: 80px; //100%;
     line-height: 52px;
 
     .avatar-placeholder {
