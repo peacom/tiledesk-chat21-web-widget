@@ -1,5 +1,8 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.39-rc.3
+- removed: animation of incoming messages
+
 ### 5.0.39-rc.2
 - bug-fixed: alignment of attachment buttons
 - bug-fixed: footer images not contained into parent div
