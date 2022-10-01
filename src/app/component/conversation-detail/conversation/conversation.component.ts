@@ -1198,7 +1198,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
   private openLink(event: any) {
     const link = event.link ? event.link : '';
     const target = event.target ? event.target : '';
-    this.onIncreaseWith()
+    // this.onIncreaseWith()
     if (target === 'self') {
       // window.open(link, '_self');
       this.isButtonUrl= true;
