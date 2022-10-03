@@ -67,6 +67,7 @@
                             </chat-avatar-image>
 
                             <!--backgroundColor non viene ancora usato -->
+                            <!-- [ngClass]="{'slide-in-left': !isFirstMessage(message?.sender, i)}"  -->
                             <chat-bubble-message class="messages msg_receive"
                               [ngClass]="{'slide-in-left': false}"  
                               [class.emoticon]="isEmojii(message?.text)"

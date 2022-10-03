@@ -73,7 +73,7 @@
       </button>
     </div>
 
-    <div class="c21-new-conversation" *ngIf="(availableAgents && availableAgents.length > 1 ) || (listConversations && listConversations.length > 0 )"> 
+    <div class="c21-new-conversation" *ngIf="(availableAgents && availableAgents.length > 1 ) || (listConversations && listConversations.length > 0  || (availableAgents && availableAgents.length === 0 ) )"> 
       <!--  *ngIf="this.g.supportMode" -->
       <button tabindex="1040" aflistconv #aflistconv class="c21-button-primary" (click)="openNewConversation()" [ngStyle]="{'background-color': g.themeColor, 'border-color': g.themeColor, 'color': g.themeForegroundColor }">
         <span class="v-align-center">
