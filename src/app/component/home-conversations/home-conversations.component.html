@@ -44,7 +44,7 @@
       (onConversationLoaded)="onConversationLoadedFN($event)">
     </chat-list-conversations>
 
-    <div *ngIf="(!listConversations || listConversations.length == 0) && g.showAvailableAgents === true && availableAgents && availableAgents.length > 1" style="margin: 30px;"> 
+    <div *ngIf="(!listConversations || listConversations.length == 0) && g.showAvailableAgents === true && availableAgents && availableAgents.length > 1" style="margin: 20px 30px;"> 
       <div *ngFor="let agent of availableAgents" class="c21-pallozzo">
           <div class="c21-ball" [ngStyle] = "{ 'background-color':setColorFromString(agent.firstname) }" >
             <span class="c21-ball-label">{{avatarPlaceholder(agent.firstname)}}</span>
