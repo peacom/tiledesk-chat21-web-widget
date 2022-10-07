@@ -1,5 +1,10 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.39-rc.5
+- bug-fixed: vendor.js file not found in prod env
+- bug-fixed: home logo extension changed from png to svg
+- changed: UI margin in home-conversations
+
 ### 5.0.39-rc.4
 - bug-fixed: if no conversations and no agents available, 'new conversation' button not showed
 
