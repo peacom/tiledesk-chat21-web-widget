@@ -43,11 +43,7 @@
             }
         }
     }
-    .c21-waiting-time {
-        font-size: 1.3em;
-        font-weight: 200;
-        padding: 0px 24px 15px 24px;
-    }
+    
     .c21-body {
         position: relative;
         display: inline-block;
@@ -231,7 +227,7 @@
         margin: 0 20px;
         height: auto;
         position: relative;
-        padding: 0 0 10px 0;
+        // padding: 10px 0 10px 0;
         border-top: 0px solid $light-gray;
         display: flex; //inline-block;
         align-items: center;
@@ -240,9 +236,9 @@
         box-shadow: none;
         vertical-align: top;
 
-        button.c21-button-primary{
-            margin: 5px 0px;
-        }
+        // button.c21-button-primary{
+        //     margin: 5px 0px;
+        // }
     }
 
     .c21-footer{
@@ -258,6 +254,12 @@
         // -webkit-box-shadow: none;
         // box-shadow: none;
         // vertical-align: top;
+
+        .c21-waiting-time {
+            font-size: 1.3em;
+            font-weight: 200;
+            padding: 0px 24px 10px 24px;
+        }
     }
 
     .c21-divBudge {
