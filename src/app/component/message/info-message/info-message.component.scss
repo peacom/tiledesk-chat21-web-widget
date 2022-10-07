@@ -12,7 +12,7 @@
     padding-right: 4px;
     padding: 6px 10px;
     display: inline-block;
-    background: rgba(24, 119, 242, 0.1);
+    background: $bkg-color-info-message;
     font-size: 10px;
     color: $base-gray;
     margin-left: 5px; //32px;
@@ -43,15 +43,15 @@
 }
 
 .spinner .bounce1 {
-    background-color: #C9E4F6;
+    background-color: $bkg-color-info-message;
 }
 
 .spinner .bounce2 {
-    background-color: #C9E4F6;
+    background-color:$bkg-color-info-message;
     opacity: 0.6
 }
 
 .spinner .bounce3 {
-    background-color: #C9E4F6;
+    background-color:$bkg-color-info-message;
     opacity: 0.4
 }
