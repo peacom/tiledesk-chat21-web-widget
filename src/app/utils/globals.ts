@@ -24,7 +24,7 @@ export class Globals {
 
   BASE_LOCATION = 'https://widget.tiledesk.com/v2';
   POWERED_BY ='<a tabindex="-1" target="_blank" href="http://www.tiledesk.com/"><img src="https://support-pre.tiledesk.com/dashboard/assets/img/logos/tiledesk-logo_new_gray.svg"/></a>'
-  DEFAULT_LOGO_CHAT = '/assets/images/tiledesk_logo_white_small.png';
+  DEFAULT_LOGO_CHAT = '/assets/images/tiledesk_logo_white_small.svg';
   WIDGET_TITLE = 'Tiledesk';
 
   // ============ BEGIN: SET FUNCTION BY UTILS ==============//
