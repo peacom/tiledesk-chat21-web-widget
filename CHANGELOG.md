@@ -1,5 +1,10 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.39-rc.6
+- added: ivy paraemter to angular build
+- added: implemetation to es5 and es2017 files during prod-pre-dev envs
+- bug-fixed: src url in *Enbed* option in index.html and index-dev.html files -> added dynamic url manadgement
+
 ### 5.0.39-rc.5
 - bug-fixed: vendor.js file not found in prod env
 - bug-fixed: home logo extension changed from png to svg
