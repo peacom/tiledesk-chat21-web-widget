@@ -833,9 +833,11 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.archivedConversationsService.initialize(tenant, senderId, translationMap)
         // 2 - get conversations from storage
         // this.chatConversationsHandler.getConversationsFromStorage();
-        // 3 - get conversation from database with REST Api call if singleConversation mode is active
-        if(this.g.singleConversation){
+        // 3 - get conversation from database with REST Api call if singleConversation mode is active and widget is Opened; otherwize show only widget and start conversation when launcher icon is clicked
+        if(this.g.singleConversation && this.g.isOpen){
             this.manageWidgetSingleConversation();
+        }else if(this.g.singleConversation && !this.g.isOpen){
+            this.showWidget()
         }
         // 5 - connect conversationHandler and archviedConversationsHandler to firebase event (add, change, remove)
         this.conversationsHandlerService.subscribeToConversations(() => { })
@@ -917,6 +919,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
      * conversation from REST API call and then startUI() and showWidget()
      */
     manageWidgetSingleConversation(){
+        console.log('recipientttt', this.g.recipientId)
         if(this.g.recipientId){
             this.appStorageService.setItem('recipientId', this.g.recipientId)
             new Promise((resolve, reject)=>{
@@ -1671,7 +1674,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.logger.debug('[APP-COMP] onMenuOptionSignOut');
         this.signOut()
         this.isOpenConversation = false;
-        this.onNewConversation();
+        // this.onNewConversation();
     }
 
     /**
