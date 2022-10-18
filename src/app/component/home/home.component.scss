@@ -162,7 +162,7 @@
                 padding: 180px 25px 20px 25px; //210px 10px 20px 10px;
                 margin: 0;
                 &.nologo{
-                    padding: 160px 10px 20px 10px;
+                    padding: 180px 10px 20px 10px;
                 }
                 .c21-cards {
                     .c21-card-blank{
@@ -211,7 +211,9 @@
         // box-shadow: 0 0px 10px 0px $trasp-light-gray;
         z-index: 20;
         // border-top: 1px solid $trasp-light-gray;
-
+        &#c21-powered-by{
+            display: block !important;
+        }
         .c21-powered-by {
             height: 40px;
             text-align: center;
