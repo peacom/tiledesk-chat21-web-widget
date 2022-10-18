@@ -321,6 +321,7 @@ chat-root {
         }
         .v-align-center{
             display: inline-flex;
+            -webkit-box-align: center;
             align-items: center;
             height: 100%;
             float: left;
@@ -641,6 +642,7 @@ chat-root {
                 .c21-header-button{
                     display: block;
                     align-items: center;
+                    justify-content: center;
                     text-align: center;
                     // margin: 0 10px 0 10px;
                     width: 40px;
@@ -662,7 +664,7 @@ chat-root {
                     svg {
                         height: 20px;
                         width: 20px;
-                        margin: 10px;
+                        // margin: 10px;
                     }
 
                     

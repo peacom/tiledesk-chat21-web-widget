@@ -2,14 +2,13 @@
 
 .visible-text-area {
     pointer-events: auto;
+    border-radius: 10px;
+    background-color: #f6f7fb;
     &.disabled {
         background-color: rgb(232, 233, 237);
     }
 }
 
-.chat21-textarea-button {
-    pointer-events: auto;
-}
 .chat21-textarea-button {
     fill: $blue;
     pointer-events: auto;
@@ -132,7 +131,7 @@ textarea:active{
     max-height: 110px;
     min-height: auto;
     height: 20px;
-    padding: 0px 40px 0px 70px; //NEW FOR EMOJII BUTTON
+    padding: 0px 12px; //0px 40px 0px 70px; //NEW FOR EMOJII BUTTON
     margin: 10px 0px 10px;
     border: none;
 
@@ -156,9 +155,8 @@ textarea:active{
 .chat21-textarea-button {
     position: absolute;
     display: block;
+    height: $chat-footer-height;
     bottom: 22px;
-    width: 20px;
-    height: 20px;
     opacity: 0.3;
     cursor: initial;
     &.active {
@@ -167,7 +165,7 @@ textarea:active{
     }
 }
 
-.chat21-textarea-button:hover {
+.chat21-textarea-button span svg:hover {
     background: rgba(240,240,240,0.4)!important;
     opacity: 1!important;
     transition: all .45s ease-in-out 0s!important;
@@ -180,21 +178,20 @@ textarea:active{
 
 #chat21-button-send {
     right: 8px;
-    bottom: 10px;
+    bottom: 0;
 }
 #chat21-file{
     left: 8px;
-    bottom: 10px;
+    bottom: 0;
 }
-
 #chat21-emoticon-picker{
     left: 36px;
-    top: 10px;
+    bottom: 0;
 }
 #chat21-start-upload-doc,
 #chat21-start-mic {
     left: 8px;
-    top: 10px;
+    bottom: 0;
 }
 
 #floating-container{
