@@ -39,7 +39,8 @@
   </form>
 
   <!-- [disabled]="!preChatFormGroupCustom?.valid" -->
-  <button [tabindex]="lastTabIndex"  class="c21-button-primary" 
+  <div class="c21-new-conversation">
+    <button [tabindex]="lastTabIndex"  class="c21-button-primary" 
     (click)="onSubmitPreChatForm()"
     (keydown.enter)="onEnterButtonPressed($event)"
     [ngStyle]="{'background-color': stylesMap?.get('themeColor'), 'border-color': stylesMap?.get('themeColor'), 'color': stylesMap?.get('foregroundColor') }">
@@ -54,4 +55,5 @@
     </span>  
     <div class="clear"></div>
   </button>
+  </div>
 </div>
