@@ -1,42 +1,10 @@
 # chat21-web-widget ver 5.0
 
-### 5.0.39-rc.7
+### 5.0.38.2
 - bug-fixed: if singleConversation mode is active and widget is closed, do not start new conversation flows
-- changed: conversation-footer UI
-- changed: conversation-preview component UI
-- changed: selection-department UI
-- changed: border-radius text-area
-- changed: moved sender-fullname info from conversation-content to bubble-message
-- changed: dynamically decide if show enbedJs element
-- added: enbedJs and enbedJsBaseUrl property in envs file
 
-### 5.0.39-rc.6
-- added: ivy paraemter to angular build
-- added: implemetation to es5 and es2017 files during prod-pre-dev envs
-- bug-fixed: src url in *Enbed* option in index.html and index-dev.html files -> added dynamic url manadgement
-
-### 5.0.39-rc.5
-- bug-fixed: vendor.js file not found in prod env
-- bug-fixed: home logo extension changed from png to svg
-- changed: UI margin in home-conversations
-
-### 5.0.39-rc.4
-- bug-fixed: if no conversations and no agents available, 'new conversation' button not showed
-
-### 5.0.39-rc.3
+### 5.0.38.1
 - removed: animation of incoming messages
-
-### 5.0.39-rc.2
-- bug-fixed: alignment of attachment buttons
-- bug-fixed: footer images not contained into parent div
-- added: new UI in home if only 1 agent is available and no conversations exists
-- changed: bubbleReceivedBackground color and bubbleReceivedTextColor default value	
-- changed: box-shadow in footer component
-- changed: scroll bar thumb color
-- removed: border from avatar
-
-### 5.0.39-rc.1
-- added: new UI
 
 ### 5.0.38 in PROD
 
