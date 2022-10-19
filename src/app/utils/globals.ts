@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { environment } from 'src/environments/environment';
 import { BehaviorSubject } from 'rxjs';
 
 /** CONSTANTS */
@@ -538,7 +538,6 @@ export class Globals {
 
 
   setParentBodyStyleMobile(isOpen: boolean, isMobile: boolean){
-    console.log('setParentBodyStyleMobile-->', isMobile, isOpen)
     if(isOpen && isMobile){
       //block body scroll
       // window.parent.document.body.style.height = '100vh';
