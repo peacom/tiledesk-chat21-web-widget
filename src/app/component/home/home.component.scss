@@ -17,18 +17,17 @@
         -webkit-animation: fade-in-bottom 0.5s cubic-bezier(0.600, -0.280, 0.735, 0.045) 0.0s;
         animation: fade-in-bottom 0.5s cubic-bezier(0.600, -0.280, 0.735, 0.045) 0.0s;
     }
-    // &.start-animation .fade-in-bottom-footer {
-    //     -webkit-animation: fade-in-dw-up 1.0s ease-in 0.0s;
-    //     animation: fade-in-dw-up 1.0s ease-in 0.0s;
-    // }
+    &.start-animation .fade-in-bottom-footer {
+        -webkit-animation: fade-in-dw-up 1.0s ease-in 0.0s;
+        animation: fade-in-dw-up 1.0s ease-in 0.0s;
+    }
 
 
     /*********  c21-header **********/
     .c21-header {
         position: absolute;
         width: 100%;
-        height: 500px; //252px;
-        border-radius: 0px 0px 16px 16px;
+        height: 252px;
         overflow: hidden;
         margin: 0;
         padding: 0;
@@ -46,18 +45,24 @@
                 position: absolute;
                 margin: 0;
             }
-
-            .flex-container {
-                display: flex;
-                align-items: stretch;
+            .c21-header-content {
+                position: relative;
                 margin: 30px 40px 0px 40px;
                 width: auto;
                 height: auto;
                 
-                .avatar-project {
-                    width: 22%;
+                .c21-logo {
+                    position: relative;
+                    width: auto;
+                    height: 32px;
+                    margin-bottom: 20px;
+                    img {
+                        max-width: 100%;
+                        max-height: 100%;
+                        margin: auto 0;
+                        display: block;
+                    }
                 }
-
                 .c21-text {
                     font-family: 'Google Sans';
                     .c21-text-welcome {
@@ -72,49 +77,6 @@
                         display: inline-block;
                         font-size: 1.4em;
                         font-weight: 300;
-                        line-height: 1.2em;
-                        max-height: 2.4em;
-                    }
-                }
-            }
-
-            .c21-header-content {
-                // position: relative;
-                margin: 55px 40px 0px 40px; //30px 40px 0px 40px;
-                width: auto;
-                height: auto;
-
-                display: flex;
-                align-items: stretch;
-                
-                .c21-logo {
-                    position: relative;
-                    width: auto;
-                    height: 70px;
-                    margin-bottom: 20px;
-                    img {
-                        max-width: 100%;
-                        max-height: 100%;
-                        margin: auto 0;
-                        display: block;
-                    }
-                }
-                .c21-text {
-                    font-family: 'Roboto';
-                    margin: 0 0 0 15px;
-
-                    .c21-text-welcome {
-                        overflow: hidden;
-                        line-height: 1.4em; //1.2em;
-                        max-height: 3em; //2.4em;
-                        font-weight: 200;
-                        font-size: 2.5em; //3.0em; 
-                        margin-bottom: 15px; //10px;
-                    }
-                    .c21-text-intro {
-                        display: inline-block;
-                        font-size: 1.7em; //1.4em;
-                        font-weight: 600; //400;
                         line-height: 1.2em;
                         max-height: 2.4em;
                     }
@@ -159,29 +121,17 @@
 
             .c21-body-content {
                 position: relative;
-                padding: 180px 25px 20px 25px; //210px 10px 20px 10px;
+                padding: 210px 10px 20px 10px;
                 margin: 0;
                 &.nologo{
-                    padding: 180px 10px 20px 10px;
+                    padding: 160px 10px 20px 10px;
                 }
                 .c21-cards {
-                    .c21-card-blank{
-                        width: 0;
-                        height: 0;
-                        position: absolute;
-                        margin: -8px 16px;
-                        border-radius: 0;
-                        z-index: 40;
-                        border-style: solid;
-                        border-width: 0px 15px 15px 15px;
-                        border-color: transparent transparent #ffffff transparent;
-                    }
-
                     .c21-card {
                         position: relative;
                         margin-bottom: 20px;
                         background-color: #ffffff;
-                        border-radius: 16px; //3px;
+                        border-radius: 3px;
                         font-size: 1.4em;
                         line-height: 1.4;
                         color: $black;
@@ -190,8 +140,6 @@
                         box-shadow: 0 4px 15px 0 $trasp-light-black, 0 1px 2px 0 $trasp-light-black;
                         z-index: 20;
                         text-align: left;
-
-                        // width: 325px; //comment to make responsive
                     }
                 } 
             } 
@@ -202,30 +150,25 @@
     .c21-footer {
         position: absolute;
         width: 100%;
-        height: 40px; //30px;
+        height: 30px;
         bottom: 0px;
-        // left: 0px;
-        // right: 0px;
-        display: flex;
+        left: 0px;
+        right: 0px;
         background-color: white;
-        // box-shadow: 0 0px 10px 0px $trasp-light-gray;
+        box-shadow: 0 0px 10px 0px $trasp-light-gray;
         z-index: 20;
-        // border-top: 1px solid $trasp-light-gray;
-        &#c21-powered-by{
-            display: block !important;
-        }
+        border-top: 1px solid $trasp-light-gray;
+
         .c21-powered-by {
-            height: 40px;
+            height: 25px;
             text-align: center;
             padding: 0;
-            // margin: 5px 0;
+            margin: 5px 0;
             position: absolute;
             color: $gray;
             top: 0;
-            left: 20px; //60px;
-            // right: 60px;
-            display: flex;
-            align-items: center;
+            left: 60px;
+            right: 60px;
             
             a {
                 text-decoration: none;
@@ -247,12 +190,10 @@
                 }
 
                 img {
-                    width: 80px; //60px;
+                    width: 60px;
                     height: auto;
-                    max-height: 40px;
                     position: relative;
                     vertical-align: middle;
-                    object-fit: contain;
                 }
             }
             b{
@@ -265,16 +206,13 @@
             color: $gray;
             position: absolute;
             bottom: 0px;
-            right: 40px; //10px;
+            right: 10px;
             line-height: 30px;
         }
 
-        #c21-powered-by {
-            width: calc(100% - 40px);
-            &:hover {
-                div.build_version {
-                    display: block;
-                }
+        #c21-powered-by:hover {
+            div.build_version {
+                display: block;
             }
         }
 
@@ -283,6 +221,9 @@
     
 
 }
+  
+
+
 /*********************************/
 /******* CSS MOBILE VER **********/
 /*********************************/

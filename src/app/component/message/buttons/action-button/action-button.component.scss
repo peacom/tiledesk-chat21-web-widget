@@ -6,13 +6,12 @@
     --hoverBackgroundColor: #{$bck-msg-sent};
     --hoverTextColor: #{$blue};
     --buttonFontSize: #{$button-in-msg-font-size};
-    --max-width: #{$button-in-msg-max-width};
 }
 
 .button-in-msg {
     padding: 8px 16px!important;
     position: relative;
-    max-width: var(--max-width);
+    max-width: 280px;
     min-width: inherit;
     cursor: pointer;
     border: 1px solid var(--textColor);

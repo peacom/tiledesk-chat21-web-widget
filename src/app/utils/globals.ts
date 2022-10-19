@@ -23,8 +23,8 @@ export class Globals {
   obsIsOpen = new BehaviorSubject<boolean>(null);
 
   BASE_LOCATION = 'https://widget.tiledesk.com/v2';
-  POWERED_BY ='<a tabindex="-1" target="_blank" href="http://www.tiledesk.com/"><img src="https://support-pre.tiledesk.com/dashboard/assets/img/logos/tiledesk-logo_new_gray.svg"/></a>'
-  DEFAULT_LOGO_CHAT = '/assets/images/tiledesk_logo_white_small.svg';
+  POWERED_BY ='<a tabindex="-1" target="_blank" href="http://www.tiledesk.com/"><img src="https://support-pre.tiledesk.com/dashboard/assets/img/logos/tiledesk-logo.svg"/></a>'
+  DEFAULT_LOGO_CHAT = '/assets/images/tiledesk_logo_white_small.png';
   WIDGET_TITLE = 'Tiledesk';
 
   // ============ BEGIN: SET FUNCTION BY UTILS ==============//
@@ -354,9 +354,9 @@ export class Globals {
     /** set the background of bubble sent message */
     this.bubbleSentTextColor = convertColorToRGBA('#ffffff', 100); //'#ffffff'
     /** set the text color of bubble sent message */
-    this.bubbleReceivedBackground= convertColorToRGBA('#f0f2f7', 100); //#f7f7f7;
+    this.bubbleReceivedBackground= convertColorToRGBA('#f7f7f7', 100);
     /** set the background of bubble received message */
-    this.bubbleReceivedTextColor = convertColorToRGBA('#06132b', 100); //#1a1a1a
+    this.bubbleReceivedTextColor = convertColorToRGBA('#1a1a1a', 100); //#1a1a1a
     /** set the text color of bubble received message */
     this.fontSize = '1.4em'
     /** set the text size of bubble messages */
@@ -538,6 +538,7 @@ export class Globals {
 
 
   setParentBodyStyleMobile(isOpen: boolean, isMobile: boolean){
+    console.log('setParentBodyStyleMobile-->', isMobile, isOpen)
     if(isOpen && isMobile){
       //block body scroll
       // window.parent.document.body.style.height = '100vh';

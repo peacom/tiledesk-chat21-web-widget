@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Google+Sans:200,400,800');
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;0,700;1,300;1,400');
 @import 'src/app/sass/normalize.scss';
 @import 'src/app/sass/variables';
 @import url('./sass/animations.scss');
@@ -142,8 +141,8 @@ body {
     position: relative;
     padding: 0;
     margin: 0;
-    height: 70px;//52px;
-    width: 80px; //100%;
+    height: 52px;
+    width: 100%;
     line-height: 52px;
 
     .avatar-placeholder {
@@ -165,8 +164,8 @@ body {
         bottom: 0;
         margin: 0px;
         left: 0;
-        width: 100%; //90%;
-        height: 100%; //80%;
+        width: 90%;
+        height: 80%; //100%;
         // max-width: 42px;
         max-height: 100%; //32px;
         text-align: left;
@@ -321,7 +320,6 @@ chat-root {
         }
         .v-align-center{
             display: inline-flex;
-            -webkit-box-align: center;
             align-items: center;
             height: 100%;
             float: left;
@@ -364,7 +362,7 @@ chat-root {
             width: auto;
             height: 40px;
             line-height: 40px;
-            margin: 25px 0px; //8px 0;
+            margin: 8px 0;
             padding: 0 24px;
             opacity: 1;
             text-align: center;
@@ -430,16 +428,16 @@ chat-root {
         /** header-buttons **/
         .c21-close-button {
             position: absolute;
-            width: 35px; //50px
-            height: 35px; //50px
+            width: 50px;
+            height: 50px;
             top: 0;
             right: 0;
             margin: 10px;
             z-index: 10;
             .c21-close-button-body {
                 cursor: pointer;
-                width: 35px; //51px
-                height: 35px; //51px
+                width: 51px;
+                height: 51px;
                 border-radius: 8px;
                 padding: 0px;
                 margin: 0px;
@@ -642,7 +640,6 @@ chat-root {
                 .c21-header-button{
                     display: block;
                     align-items: center;
-                    justify-content: center;
                     text-align: center;
                     // margin: 0 10px 0 10px;
                     width: 40px;
@@ -664,7 +661,7 @@ chat-root {
                     svg {
                         height: 20px;
                         width: 20px;
-                        // margin: 10px;
+                        margin: 10px;
                     }
 
                     

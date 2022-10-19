@@ -95,6 +95,7 @@ export class ConversationPreviewComponent implements OnInit {
       sizeImage.width = MAX_HEIGHT_IMAGES_PREIEW / ratio;
       sizeImage.height = MAX_HEIGHT_IMAGES_PREIEW ;
     }
+    console.log('sizeeeeee', sizeImage)
     return sizeImage; // h.toString();
   }
   

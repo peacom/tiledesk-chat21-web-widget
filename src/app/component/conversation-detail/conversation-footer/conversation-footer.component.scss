@@ -2,13 +2,14 @@
 
 .visible-text-area {
     pointer-events: auto;
-    border-radius: $chat-footer-border-radius;
-    background-color: #f6f7fb;
     &.disabled {
         background-color: rgb(232, 233, 237);
     }
 }
 
+.chat21-textarea-button {
+    pointer-events: auto;
+}
 .chat21-textarea-button {
     fill: $blue;
     pointer-events: auto;
@@ -77,7 +78,7 @@ textarea:active{
 #chat21-buttonToBottom {
     display: flex;
     position: relative;
-    margin-right: -25px;
+    margin-right: 10px;
     margin-top: -40px;
     float: right;
     width: 30px;
@@ -131,32 +132,17 @@ textarea:active{
     max-height: 110px;
     min-height: auto;
     height: 20px;
-    padding: 0px 12px; //0px 40px 0px 70px; //NEW FOR EMOJII BUTTON
+    padding: 0px 40px 0px 70px; //NEW FOR EMOJII BUTTON
     margin: 10px 0px 10px;
     border: none;
-
-    &::-webkit-scrollbar {
-        width: 6px;
-        background-color: #00000000!important;
-    } 
-
-    &:hover {
-        &::-webkit-scrollbar-track {
-            background-color: #f9f9f9 !important;
-        }
-        
-        &::-webkit-scrollbar-thumb {
-            background: #777777; 
-        }
-
-    }
 }
 
 .chat21-textarea-button {
     position: absolute;
     display: block;
-    height: $chat-footer-height;
     bottom: 22px;
+    width: 20px;
+    height: 20px;
     opacity: 0.3;
     cursor: initial;
     &.active {
@@ -165,7 +151,7 @@ textarea:active{
     }
 }
 
-.chat21-textarea-button span svg:hover {
+.chat21-textarea-button:hover {
     background: rgba(240,240,240,0.4)!important;
     opacity: 1!important;
     transition: all .45s ease-in-out 0s!important;
@@ -178,20 +164,21 @@ textarea:active{
 
 #chat21-button-send {
     right: 8px;
-    bottom: 0;
+    bottom: 10px;
 }
 #chat21-file{
     left: 8px;
-    bottom: 0;
+    bottom: 10px;
 }
+
 #chat21-emoticon-picker{
     left: 36px;
-    bottom: 0;
+    top: 10px;
 }
 #chat21-start-upload-doc,
 #chat21-start-mic {
     left: 8px;
-    bottom: 0;
+    top: 10px;
 }
 
 #floating-container{
@@ -216,7 +203,7 @@ textarea:active{
 
     .c21-button-primary {
         height: 36px;
-        margin: 5px 0px;
+        margin: 5px 5px;
     }
 
     .c21-waiting-time {

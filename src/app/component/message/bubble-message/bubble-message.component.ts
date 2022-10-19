@@ -3,8 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MessageModel } from 'src/chat21-core/models/message';
 import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
 import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
-import { MESSAGE_TYPE_MINE, MESSAGE_TYPE_OTHERS } from 'src/chat21-core/utils/constants';
-import { isFile, isFrame, isImage, messageType } from 'src/chat21-core/utils/utils-message';
+import { isFile, isFrame, isImage } from 'src/chat21-core/utils/utils-message';
 import { MAX_WIDTH_IMAGES, MIN_WIDTH_IMAGES} from '../../../utils/constants';
 
 @Component({
@@ -15,7 +14,6 @@ import { MAX_WIDTH_IMAGES, MIN_WIDTH_IMAGES} from '../../../utils/constants';
 export class BubbleMessageComponent implements OnInit {
 
   @Input() message: MessageModel;
-  @Input() isSameSender: boolean;
   @Input() fontColor: string;
   @Input() fontSize: string;
   @Input() fontFamily: string;
@@ -27,13 +25,6 @@ export class BubbleMessageComponent implements OnInit {
   isFile = isFile;
   isFrame = isFrame;
 
- // ========== begin:: check message type functions ======= //
-  messageType = messageType;
-
-  MESSAGE_TYPE_MINE = MESSAGE_TYPE_MINE;
-  MESSAGE_TYPE_OTHERS = MESSAGE_TYPE_OTHERS;
- // ========== end:: check message type functions ======= //
-  
   tooltipOptions = {
     'show-delay': 500,
     'tooltip-class': 'chat-tooltip',

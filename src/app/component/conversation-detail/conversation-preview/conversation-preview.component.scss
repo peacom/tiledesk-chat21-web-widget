@@ -22,7 +22,6 @@
     --modal-width: 80%;
 
     --content-height: 160px;
-    --border-radius: #{$chat-footer-border-radius};
 
     background-color: rgba(0,0,0,0.4);
     height: 100%;
@@ -37,11 +36,11 @@
         min-height: var( --modal-height);
         min-width: 100px;
         max-width: 80%;
-        border-radius: var(--border-radius);
+        border-radius: 3px;
         font-size: 1.2em;
         line-height: normal;
         overflow: hidden;
-        // border: 1px solid #d7d7d7;  
+        border: 1px solid #d7d7d7;  
         background-color: #ffffff; 
         z-index: 25;
         margin: auto;
@@ -163,15 +162,9 @@
         position: fixed;
         top: calc( var(--margin-top) + var(--header-height) + var(--content-height));
         width: var(--modal-width);
-        border-radius: var(--border-radius);
+        box-shadow: 0 -1px 0px 0px $trasp-light-gray;
         background: white;
         
-        display: flex;
-        gap: 5px;
-        padding: 5px;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-
         textarea,
         textarea:visited,
         textarea:focus,
@@ -196,33 +189,17 @@
             max-height: 110px;
             min-height: auto;
             height: 20px;
-            padding: 0px 12px; //0px 40px 0px 70px; //NEW FOR EMOJII BUTTON
+            padding: 0px 30px 0px 10px;
             margin: 10px 0px 10px;
             border: none;
-
-            &::-webkit-scrollbar {
-                width: 6px;
-                background-color: #00000000!important;
-            } 
-        
-            &:hover {
-                &::-webkit-scrollbar-track {
-                    background-color: #f9f9f9 !important;
-                }
-                
-                &::-webkit-scrollbar-thumb {
-                    background: #777777; 
-                }
-        
-            }
         }
 
         .chat21-textarea-button {
             position: absolute;
             display: block;
             bottom: 22px;
-            // width: 20px;
-            height: $chat-footer-height;
+            width: 20px;
+            height: 20px;
             opacity: 0.3;
             cursor: initial;
             &.active {
@@ -233,15 +210,11 @@
 
         #chat21-button-send {
             right: 8px;
-            bottom: 0px;
+            bottom: 10px;
         }
 
         .visible-text-area {
             pointer-events: auto;
-            border-radius: 10px;
-            background-color: #f6f7fb;
-            -webkit-box-flex: 1;
-            width: 85%;
         }
         
         .chat21-textarea-button {

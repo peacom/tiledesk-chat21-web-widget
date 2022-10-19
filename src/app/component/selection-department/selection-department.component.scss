@@ -1,18 +1,15 @@
 @import 'src/app/sass/variables';
 // @import '../../../sass/normalize.css';
 
-
 #chat21-selection-department {
-
-    --backgroundColor: #{$light-white};
-    --textColor: #{$blue};
-    --hoverBackgroundColor: #{$blue};
-    --hoverTextColor: #{$light-white};
-
     background-color: #ffffff;
     width: 100%;
     height: 100%;
 
+    .c21-button-department{
+        width: 100%;
+        text-align: left;
+    }
     .c21-header {
         overflow: hidden;
         width: 100%;
@@ -52,15 +49,8 @@
         }
     }
     .c21-body {
-        .c21-body-container{
-            display: flex;
-            -webkit-box-orient: vertical;
-            -webkit-box-direction: normal;
-            flex-direction: column;
-            padding-left: 16px;
-            padding-right: 16px;
-            gap: 10px;
-        }
+        padding: 0px;
+        // margin: 0px auto;
         .c21-body-header{
             position: relative;
             top: 0;
@@ -81,7 +71,6 @@
         .c21-body-content  {
             padding: 0px 0px 40px 0px;
             position: relative;
-            width: 100%;
             
         }
     }
@@ -94,45 +83,22 @@
     padding: 0;
     height: auto;
     overflow-y: auto;
-
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    flex-direction: column;
-    gap: 12px;
     /* width: 15em; */
 }
 .chat21-content-modal-select > li {
     cursor: pointer;
     position: relative;
-    margin: 0px;//7px 14px;
-    padding: 20px 16px; //7px 4px; 
+    margin: 7px 14px;//15px 0;
+    padding: 7px 4px; //4px 20px;
     font-size: 1.4em;
     text-align: left;
-    color: var(--textColor);
-    border: 1px solid var(--textColor);
+    color: $black;
     line-height: normal;
     display: block;
-    border-radius: 10px;
-
-    .c21-button-department{
-        width: 100%;
-        text-align: left;
-        display: flex;
-        gap: 12px
-    }
 }
 .chat21-content-modal-select > li:hover {
-    background-color: var(--hoverBackgroundColor);
+    background-color: $trasp-light-gray;
     border-radius: 10px;
-    .chat21-name-list{
-        color: var(--hoverTextColor);
-    }
-
-    .chat21-badge{
-        color: var(--hoverBackgroundColor);
-        background-color: var(--hoverTextColor);
-    }
 }
 .chat21-content-modal-select li.selected:hover {
     /* background-color: #BBD8DC !important;
@@ -145,11 +111,7 @@
 .chat21-content-modal-select .chat21-badge {
     -webkit-box-sizing: initial;
     box-sizing: initial;
-    display: flex;
-    -webkit-box-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    align-items: center;
+    display: inline-block;
     font-size: 12px;
     padding: 0px;
     line-height: 24px;
@@ -159,16 +121,11 @@
     margin: 0 10px 0 0;
     text-align: center;
     font-weight: 500;
-
-    color: var(--backgroundColor);
-    background-color: var(--textColor);
-
 }
 .chat21-content-modal-select .chat21-name-list {
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 300;
     line-height: 24px;
-    color: #7d87a4
 }
 
 .chat21-content-modal-select .chat21-title{

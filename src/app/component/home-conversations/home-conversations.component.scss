@@ -13,25 +13,23 @@
         color: $dark-gray;
         height: auto;
         position: relative;
-        min-height: 40px; //50px;
+        min-height: 50px;
         display: block;
         font-weight: 300;
-        border-bottom: 1px solid rgb(241,241,241);
-        border-radius: 0px;
 
         .c21-title{
             font-size: 1.4em;
             max-width: 230px;
             line-height: normal;
-            padding: 14px 0px 10px 24px;
+            padding: 16px 0px 10px 24px;
             float:left;
         }
         .c21-button{
-            font-size: 1.4em;
+            font-size: 1.2em;
             margin: 0px;
             line-height: normal;
             // padding: 17px 24px 11px 5px;
-            padding: 0px 5px;
+            padding: 5px;
             float: right;
             fill: $blue;
             button {
@@ -43,7 +41,11 @@
             }
         }
     }
-    
+    .c21-waiting-time {
+        font-size: 1.3em;
+        font-weight: 200;
+        padding: 0px 24px 5px 24px;
+    }
     .c21-body {
         position: relative;
         display: inline-block;
@@ -55,14 +57,6 @@
         box-shadow: none;
         overflow: hidden;
         margin: 0px 0px 0 0px;
-
-        .flex-container{
-            display: flex;
-            justify-content: center;
-            align-content: center;
-            margin: 20px;
-
-        }
 
         .c21-item-conversation {
             width: 100%;
@@ -136,7 +130,7 @@
                 }
 
                 .c21-right-conv {
-                    width: calc( 100% - 65px);
+                    width: calc( 100% - 70px);
                     margin-left: 15px;
                     height: auto;
                     float: left;
@@ -182,16 +176,12 @@
 
         .c21-pallozzo{
             display: inline;
-
-            &.flex-inline-agent{
-                margin: auto 15px;
-            }
         }
 
         
         .c21-ball {
             position: relative;
-            // border: 2px solid #ffffff;
+            border: 2px solid #ffffff;
             width: 52px;
             height: 52px;
             border-radius: 50%;
@@ -222,51 +212,25 @@
         }
         
     }
-    .c21-new-conversation {
+    .c21-footer {
         width: auto;
-        // margin: 0 20px;
+        margin: 0 20px;
         height: auto;
         position: relative;
-        // padding: 10px 0 10px 0;
+        padding: 0 0 10px 0;
         border-top: 0px solid $light-gray;
-        display: flex; //inline-block;
+        display: inline-block;
         align-items: center;
-        justify-content: center;
         -webkit-box-shadow: none;
         box-shadow: none;
         vertical-align: top;
-
-        // button.c21-button-primary{
-        //     margin: 5px 0px;
-        // }
-    }
-
-    .c21-footer{
-        width: auto;
-        // margin: 0 20px;
-        height: auto;
-        position: relative;
-        // padding: 0 0 10px 0;
-        // border-top: 0px solid $light-gray;
-        display: flex; //inline-block;
-        align-items: center;
-        // justify-content: center;
-        // -webkit-box-shadow: none;
-        // box-shadow: none;
-        // vertical-align: top;
-
-        .c21-waiting-time {
-            font-size: 1.3em;
-            font-weight: 200;
-            padding: 0px 24px 10px 24px;
-        }
     }
 
     .c21-divBudge {
         position: absolute;
         top: 40px;
         left: inherit;
-        right: 10px; //0px;
+        right: 0px;
         width: 10px;
         height: 10px;
         min-width: 10px;

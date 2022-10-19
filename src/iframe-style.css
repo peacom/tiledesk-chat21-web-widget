@@ -15,7 +15,7 @@
     max-height: 640px; */
     width: 376px;
     height: calc(100% - 40px);
-    max-width: 696px;  /*376px;*/
+    max-width: 376px;
     min-width: 376px;
     max-height: 620px;
     right: 0px;
@@ -25,32 +25,6 @@
     
 }
 
-#tiledeskdiv.decreaseSize {
-    /* transition: width 1s, height 1s; */
-    transition: all 1s ease-out;
-    width: 376px;
-    max-height: 620px;
-    /* animation: right-animate 1s ease infinite alternate; */
-
-}
-
-#tiledeskdiv.increaseSize {
-    /* transition: width 1s, height 1s; */
-    transition: all 1s ease-in;
-    width: 696px;
-    max-height: 712px;
-    /* animation: right-animate 1s ease infinite alternate; */
-
-}
-
-@keyframes right-animate {
-    0% {
-        transform: translateX(140px);
-    }
-    100% {
-        transform: translateX(20px);
-    }
-}
 
 #tiledesk-container.closed #tiledeskdiv {
     width: 100px; /* 100X100 */
@@ -94,7 +68,8 @@
     /* border-radius: 16px; */
     /* box-shadow: rgba(0, 18, 46, 0.16) 0px 8px 36px 0px; */
     /* margin: 10px; */
-}
+
+} 
 #tiledesk-container.open #tiledeskdiv.shadow {
     transition: box-shadow 0.8s ease-in;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 8px 36px 0px; /*NEW GAB*/

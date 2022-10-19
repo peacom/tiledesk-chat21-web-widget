@@ -30,8 +30,10 @@ export class SelectionDepartmentComponent implements OnInit, AfterViewInit {
     // projectid: string;
     // ========= end:: component variables ======= //
 
+    colorBck:string;
+
     constructor(
-        private elementRef: ElementRef,
+        private el: ElementRef,
         public g: Globals,
         public appStorageService: AppStorageService,
     ) {
@@ -39,11 +41,7 @@ export class SelectionDepartmentComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
         this.logger.debug('[SELECT-DEP] ngOnInit');
-        this.elementRef.nativeElement.querySelector('#chat21-selection-department').style.setProperty('--backgroundColor', this.g.themeForegroundColor);
-        this.elementRef.nativeElement.querySelector('#chat21-selection-department').style.setProperty('--textColor', this.g.themeColor);
-        this.elementRef.nativeElement.querySelector('#chat21-selection-department').style.setProperty('--hoverBackgroundColor', this.g.themeColor);
-        this.elementRef.nativeElement.querySelector('#chat21-selection-department').style.setProperty('--hoverTextColor', this.g.themeForegroundColor);
-        
+        this.colorBck = '#000000';
         if ( this.g.departments && this.g.departments.length > 0 ) {
             if (this.g.windowContext && this.g.windowContext.tiledesk && this.g.windowContext.tiledesk['beforeDepartmentsFormRender'] ) {
                 this.departments = this.g.departments;
