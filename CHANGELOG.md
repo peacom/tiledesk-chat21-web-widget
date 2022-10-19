@@ -1,5 +1,15 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.39-rc.7
+- bug-fixed: if singleConversation mode is active and widget is closed, do not start new conversation flows
+- changed: conversation-footer UI
+- changed: conversation-preview component UI
+- changed: selection-department UI
+- changed: border-radius text-area
+- changed: moved sender-fullname info from conversation-content to bubble-message
+- changed: dynamically decide if show enbedJs element
+- added: enbedJs and enbedJsBaseUrl property in envs file
+
 ### 5.0.39-rc.6
 - added: ivy paraemter to angular build
 - added: implemetation to es5 and es2017 files during prod-pre-dev envs
