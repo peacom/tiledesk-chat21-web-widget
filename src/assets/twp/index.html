@@ -270,7 +270,15 @@
         });
         
         window.Tiledesk('onBeforeInit', function(event_data) {
-        	console.log("onBeforeInit Tiledesk FN", event_data);
+            console.log("onBeforeInit Tiledesk FN", event_data);
+            
+            setTimeout(() => {
+                var enbedJs = event_data && event_data.detail && event_data.detail.appConfigs && event_data.detail.appConfigs.enbedJs? event_data.detail.appConfigs.enbedJs : false;
+                var enbedJsBaseUrl = event_data && event_data.detail && event_data.detail.appConfigs && event_data.detail.appConfigs.enbedJs && event_data.detail.appConfigs.enbedJsBaseUrl? event_data.detail.appConfigs.enbedJsBaseUrl : null;
+                document.getElementById("enbed").style.display = enbedJs? "inline-block": "none";
+                document.getElementById("base_url").innerHTML = enbedJs && enbedJsBaseUrl ? enbedJsBaseUrl + '/launch.js': null;
+            }, 1000);
+            
         });
         
         window.Tiledesk('onInit', function(event_data) {
@@ -376,6 +384,7 @@
             document.getElementById("project_id").innerHTML = '"' + tiledesk_projectid + '"';
             document.getElementById("project_name").innerHTML = project_name;
             
+
             document.getElementById("base_url").innerHTML = baseUrl + '/launch.js'
             if(role !== 'agent'){
                 document.getElementById("testPageButton").style.display = 'block'
@@ -454,7 +463,7 @@
                     <h1 id="project_name" style="min-height: 39px;"></h1>
                     <h2></h2>
                     <div class="b_integrations_agent_links">
-                        <a href="" data-toggle="modal" data-target="#embedModal"><em class="fa-code fa"></em>Embed</a>
+                        <a href="" data-toggle="modal" data-target="#embedModal" id="enbed" style="display: none;"><em class="fa-code fa"></em>Embed</a>
                         <a href="" data-toggle="modal" data-target="#shareModal"><em class="fa-reply fa"></em>Share</a>
                     </div>
                 </div>
