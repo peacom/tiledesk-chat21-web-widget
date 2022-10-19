@@ -1,6 +1,6 @@
 @import 'src/app/sass/variables';
 
-:root {
+:host {
     --backgroundColor: #{$blue};
     --textColor: #{$bck-msg-sent};
     --hoverBackgroundColor: #{$bck-msg-sent};
