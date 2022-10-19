@@ -2,7 +2,7 @@
 
 .visible-text-area {
     pointer-events: auto;
-    border-radius: 10px;
+    border-radius: $chat-footer-border-radius;
     background-color: #f6f7fb;
     &.disabled {
         background-color: rgb(232, 233, 237);

@@ -22,7 +22,7 @@
     --modal-width: 80%;
 
     --content-height: 160px;
-    --border-radius: 10px;
+    --border-radius: #{$chat-footer-border-radius};
 
     background-color: rgba(0,0,0,0.4);
     height: 100%;
