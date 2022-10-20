@@ -1,5 +1,8 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.38.3
+- added: themeColorOpacity tiledesk property
+
 ### 5.0.38.2
 - bug-fixed: if singleConversation mode is active and widget is closed, do not start new conversation flows
 
