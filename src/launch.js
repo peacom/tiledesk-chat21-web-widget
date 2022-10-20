@@ -40,6 +40,7 @@ function loadIframe(tiledeskScriptBaseLocation) {
     srcTileDesk += '<title>Tilechat Widget</title>';
     srcTileDesk += '<base href="./">';
     srcTileDesk += '<link rel="icon" type="image/x-icon" href="favicon.ico">';
+    srcTileDesk += '<link rel="stylesheet" type="text/css" href="' + tiledeskScriptBaseLocation +'/assets/styles/tiledesk_v1.scss">';
     srcTileDesk += '</head>';
     srcTileDesk += '<body>';
     srcTileDesk += '<chat-root></chat-root>';
