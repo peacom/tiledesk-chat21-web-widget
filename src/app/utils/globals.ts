@@ -147,10 +147,9 @@ export class Globals {
    fullscreenMode: boolean;
    hideHeaderCloseButton: boolean;
    themeColor: string;
+   themeColorOpacity: number;
    themeForegroundColor: string;
-   themeColor50: string;
    colorGradient: string;
-   colorBck: string
    colorGradient180: string;
    allowTranscriptDownload: boolean;
    poweredBy: string;
@@ -302,12 +301,11 @@ export class Globals {
     (color of the header, color of the launcher button,
     other minor elements). Permitted values: Hex color
     codes, e.g. #87BC65 and RGB color codes, e.g. rgb(135,188,101) */
+    this.themeColorOpacity = 50
+    /**allows you to change opacity in background headers component 
+     * Permitted values: [0..1] */
     this.themeForegroundColor = convertColorToRGBA('#ffffff', 100);
     /** allows you to change text and icons' color.
-    Permitted values: Hex color codes, e.g. #425635 and RGB color
-    codes, e.g. rgb(66,86,53) */
-    this.colorBck = convertColorToRGBA('#000000', 100)
-    /** allows you to change background color.
     Permitted values: Hex color codes, e.g. #425635 and RGB color
     codes, e.g. rgb(66,86,53) */
     this.allowTranscriptDownload = false;
@@ -505,7 +503,7 @@ export class Globals {
       'lang': this.lang, 'calloutTimer': this.calloutTimer, 'calloutStaus': this.calloutStaus,
       'align': this.align,'welcomeMsg': this.welcomeMsg, 'calloutTitle': this.calloutTitle,
       'calloutMsg': this.calloutMsg, 'fullscreenMode': this.fullscreenMode, 'hideHeaderCloseButton': this.hideHeaderCloseButton,
-      'themeColor': this.themeColor, 'themeForegroundColor': this.themeForegroundColor,
+      'themeColor': this.themeColor, 'themeColorOpacity': this.themeColorOpacity, 'themeForegroundColor': this.themeForegroundColor,
       'allowTranscriptDownload': this.allowTranscriptDownload, //'userToken': this.userToken,
       'autoStart': this.autoStart, 'startHidden': this.startHidden, 'isShown': this.isShown,
       'startFromHome': this.startFromHome, 'logoChat': this.logoChat,
@@ -530,9 +528,8 @@ export class Globals {
 
 
   setColorWithGradient() {
-    this.themeColor50 = convertColorToRGBA(this.themeColor, 50); // this.g.themeColor + 'CC';
-    this.colorGradient = 'linear-gradient(' + this.themeColor + ', ' + this.themeColor50 + ')';
-    this.colorGradient180 = 'linear-gradient( 180grad, ' + this.themeColor + ', ' + this.themeColor50 + ')';
+    this.colorGradient = 'linear-gradient(' + this.themeColor + ', ' + convertColorToRGBA(this.themeColor, this.themeColorOpacity) + ')';
+    this.colorGradient180 = 'linear-gradient( 180grad, ' + this.themeColor + ', ' + convertColorToRGBA(this.themeColor, this.themeColorOpacity) + ')';
     this.bubbleSentBackground = 'linear-gradient( 135grad, ' + this.bubbleSentBackground + ', ' + convertColorToRGBA(this.bubbleSentBackground, 80) + ')';
   }
 
