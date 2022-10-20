@@ -21,9 +21,7 @@ export class MenuOptionsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const themeColor = this.g.themeColor;
-    this.themeColor50 = convertColorToRGBA(themeColor, 50);
-    // this.themeColor50 = this.g.themeColor + '7F';
+    this.themeColor50 = convertColorToRGBA(this.g.themeColor, 50);
   }
 
   f21_toggle_options() {

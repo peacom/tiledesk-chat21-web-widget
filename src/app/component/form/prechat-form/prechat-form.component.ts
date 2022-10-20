@@ -28,7 +28,6 @@ export class PrechatFormComponent implements OnInit, AfterViewInit {
   userEmail: string;
   // ========= end:: component variables ======= //
 
-  colorBck: string;
   browserLang: string;
   private logger: LoggerService = LoggerInstance.getInstance();
 
@@ -36,16 +35,13 @@ export class PrechatFormComponent implements OnInit, AfterViewInit {
     public g: Globals,
     public formBuilder: FormBuilder,
     public appStorageService: AppStorageService
-  ) {
-
-  }
+  ) { }
 
   ngOnInit() {
     this.initialize();
   }
 
   initialize() {
-    this.colorBck = '#000000';
     // this.preChatFormGroup = this.createForm(this.formBuilder);
     // if (this.preChatFormGroup) {
     //   this.subcribeToFormChanges();

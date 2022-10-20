@@ -38,7 +38,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
   widgetTitle;
   welcomeMsg;
   welcomeTitle;
-  colorBck;
   hover: boolean = false;
   translationMapHeader: Map<string, string>;
   translationMapFooter: Map<string, string>;
@@ -55,13 +54,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    // get global variables
     this.logger.debug('[HOME-COMP] ngOnInit');
-    // https://stackoverflow.com/questions/7015302/css-hexadecimal-rgba
-    // this.themeColor50 = convertColorToRGBA(this.themeColor, 30); // this.g.themeColor + 'CC';
-    // this.colorGradient = 'linear-gradient(' + this.themeColor + ', ' + this.themeColor50 + ')';
-    this.colorBck ="#000000"
-
   }
 
   ngAfterViewInit(){

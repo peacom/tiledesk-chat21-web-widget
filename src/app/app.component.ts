@@ -2017,7 +2017,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     // ========= END:: TRIGGER FUNCTIONS ============//
 
     private setStyleMap() {
-        this.styleMapConversation.set('backgroundColor', this.g.colorBck)
         this.styleMapConversation.set('foregroundColor', this.g.themeForegroundColor)
         this.styleMapConversation.set('themeColor', this.g.themeColor)
         this.styleMapConversation.set('colorGradient', this.g.colorGradient180)
