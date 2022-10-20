@@ -824,6 +824,19 @@
             document.getElementById('themeColor').value = color
         }
 
+        function onClickThemeColorOpacity(){
+            let text = document.getElementById('themeColorOpacity').value
+            text === ""? text= 50 : text //set default value if user not write a value
+            window.tiledeskSettings['themeColorOpacity'] = +text 
+            console.log('onClickThemeColorOpacity:', window.tiledeskSettings)
+            window.Tiledesk('restart')
+        }
+
+        function onChangeThemeColorOpacity(){
+            let value = document.getElementById('themeColorOpacity').value
+            document.getElementById('themeColorOpacityText').innerText = value + ' %'
+        }
+
         function onChangeThemeForegroundColor(){
             let color = document.getElementById('themeForegroundColor').value
             document.getElementById('themeForegroundColorText').value = color
@@ -1688,6 +1701,15 @@
                             </div>
                             <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickThemeColor()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 formElement"><span><em><strong>themeColorOpacity</strong></em></span></div>
+                            <div class="col-md-5 formElement">
+                                <input class="form-range" type="range" id="themeColorOpacity" name="themeColorOpacity" min="0" max="100" value="50" style="width: 80%;" oninput="onChangeThemeColorOpacity()"><label class="col-form-label" id="themeColorOpacityText">50 %</label>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-light" onclick="onClickThemeColorOpacity()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
