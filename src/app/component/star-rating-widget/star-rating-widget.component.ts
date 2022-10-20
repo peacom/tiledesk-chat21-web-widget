@@ -20,23 +20,7 @@ export class StarRatingWidgetComponent implements OnInit {
   // @Input() recipientId: string; // uid utente ex: JHFFkYk2RBUn87LCWP2WZ546M7d2
   // ========= end:: Input/Output values ===========//
 
-  // ========= begin:: Input/Output values ===========/
-  // @Output() eventNewConv = new EventEmitter<string>();
-  // @Output() eventSelctedConv = new EventEmitter<string>();
-  // @Output() eventClose = new EventEmitter();
-  // @Output() eventSignOut = new EventEmitter();
-
-  // ========= end:: Input/Output values ===========/
-
-
-  // ========= begin:: component variables ======= //
-  themeColor;
-  themeForegroundColor;
   isConversationClosed: boolean;
-  themeColor50: string;
-  colorGradient: string;
-  colorBck: string;
-  // ========= end:: component variables ======= //
 
   private rate: number;
   private logger: LoggerService = LoggerInstance.getInstance();
@@ -58,12 +42,10 @@ export class StarRatingWidgetComponent implements OnInit {
   constructor(
     public starRatingWidgetService: StarRatingWidgetService,
     public g: Globals
-  ) {
-   }
+  ) { }
 
   ngOnInit() {
     this.step = 0;
-    this.colorBck = '#000000';
   }
 
   dowloadTranscript() {

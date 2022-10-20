@@ -3,7 +3,6 @@
 <div #homeComponent id='chat21-home-component' tabindex="2002" onFocus="document.querySelector('[aflistconv]').focus()">
 
     <!-- HEADER -->
-    <!-- 'background-color': colorBck,  -->
     <div class="c21-header" (click)="hideMenuOptions()" [ngStyle]="{'color': g.themeForegroundColor, 'background-image': g.colorGradient }" >
 
         <div class="c21-header-container">
@@ -56,7 +55,7 @@
         <!-- <div class="c21-body-container"> -->
             <div class="c21-body-content" [class.nologo]="g.project.logoChat === 'nologo'">
                 <div class="c21-cards">
-                    <div class="c21-card fade-in-top" [ngStyle]="{ 'border-top': '2.4px solid', 'border-top-color': g.themeColor50 }">
+                    <div class="c21-card fade-in-top" [ngStyle]="{ 'border-top': '2.4px solid', 'border-top-color': g.themeColor }">
                         <chat-home-conversations 
                             [listConversations]="listConversations"
                             [archivedConversations]="archivedConversations"

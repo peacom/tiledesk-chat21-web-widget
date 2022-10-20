@@ -11,7 +11,6 @@ svg.star:hover{
 </style>
 <div id="chat21-star-rating-widget">
     <!-- HEADER -->
-    <!-- 'background-color': colorBck, -->
     <div class="c21-header" [ngStyle]="{ 'color': g.themeForegroundColor, 'background-image': g.colorGradient180 }">
         <div class="c21-header-container">
             <!-- ICON CLOSE CHAT -->
@@ -60,7 +59,7 @@ svg.star:hover{
                 <div *ngIf="step==0" class="step-rate">
                     <div *ngIf="g.allowTranscriptDownload" class="c21-modal-content" style="text-align: right; margin: 0px 20px 30px 10px;">
                         <div class="c21-link" (click)="dowloadTranscript()" >
-                            <span [ngStyle]="{'color': g.themeColor}">{{ g.DOWNLOAD_TRANSCRIPT }}</span>
+                            <span [ngStyle]="{'color': stylesMap?.get('themeColor')}">{{ g.DOWNLOAD_TRANSCRIPT }}</span>
                         </div>
                     </div>
                     <div class="clear"></div>
@@ -189,7 +188,7 @@ svg.star:hover{
                 <div *ngIf="step==2" class="step-rate">
                     <div *ngIf="g.allowTranscriptDownload" class="c21-modal-content" style="text-align: right; margin: 0px 20px 30px 10px;">
                         <div class="c21-link" (click)="dowloadTranscript()" >
-                            <span [ngStyle]="{'color': g.themeColor}">{{ g.DOWNLOAD_TRANSCRIPT }}</span>
+                            <span [ngStyle]="{'color': stylesMap?.get('themeColor')}">{{ g.DOWNLOAD_TRANSCRIPT }}</span>
                         </div>
                     </div>
                     <div class="clear"></div>

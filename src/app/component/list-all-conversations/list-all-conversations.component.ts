@@ -40,10 +40,6 @@ export class ListAllConversationsComponent implements OnInit, OnDestroy, AfterVi
   // ========= begin:: variabili del componente ======= //
   allConversations: Array<ConversationModel>;
 
-
-  themeColor = '';
-  colorBck = '';
-  themeForegroundColor = '';
   LABEL_START_NW_CONV: string;
   translationMapConversation: Map<string, string>;
   iterableDifferListConv: any;
@@ -90,9 +86,6 @@ export class ListAllConversationsComponent implements OnInit, OnDestroy, AfterVi
     this.LABEL_START_NW_CONV = this.g.LABEL_START_NW_CONV; // is used ?? LABEL_START_NW_CONV there isn't in the template
     // this.subscriptions = [];
     this.allConversations = [];
-
-    this.colorBck = '#000000';
-
 
     //this.conversationsService.initialize(this.senderId, this.tenant);
     // this.conversations = this.conversationsService.allConversations;
