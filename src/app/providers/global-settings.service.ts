@@ -477,6 +477,11 @@ export class GlobalSettingsService {
                         // globals['buttonHoverTextColor'] = invertColor(variables['themeColor'], true);
                         globals['buttonHoverBackgroundColor'] = variables['themeColor'];
                     }
+                    if (variables.hasOwnProperty('themeColorOpacity')) {
+                        // globals[key] = stringToBoolean(variables[key]); -> fare test perchè se param è !== string allora ritorna string e non boolean
+                        globals['themeColorOpacity'] = variables['themeColorOpacity'];
+                        // globals['bubbleMsgSentTextColor'] = variables['themeForegroundColor'];
+                    }
                     if (variables.hasOwnProperty('themeForegroundColor')) {
                         // globals[key] = stringToBoolean(variables[key]); -> fare test perchè se param è !== string allora ritorna string e non boolean
                         globals['themeForegroundColor'] = variables['themeForegroundColor'];
@@ -729,6 +734,11 @@ export class GlobalSettingsService {
             globals.buttonTextColor = convertColorToRGBA(TEMP, 100);
             globals.buttonHoverBackgroundColor = convertColorToRGBA(TEMP, 100);
             // globals.buttonHoverTextColor = invertColor(TEMP, true);
+        }
+        TEMP = tiledeskSettings['themeColorOpacity'];
+        // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > themeColorOpacity:: ', TEMP);
+        if (TEMP !== undefined) {
+            globals.themeColorOpacity = +TEMP;
         }
         TEMP = tiledeskSettings['themeForegroundColor'];
         // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > themeForegroundColor:: ', TEMP);
@@ -1366,6 +1376,11 @@ export class GlobalSettingsService {
             globals.buttonTextColor = convertColorToRGBA(themecolor, 100);
             globals.buttonHoverBackgroundColor = convertColorToRGBA(themecolor, 100);
             // globals.buttonHoverTextColor = invertColor(themecolor, true);
+        }
+
+        TEMP = getParameterByName(windowContext, 'tiledesk_themeColorOpacity');
+        if (TEMP) {
+            globals.themeColorOpacity = +TEMP
         }
 
         TEMP = getParameterByName(windowContext, 'tiledesk_themeForegroundColor');
