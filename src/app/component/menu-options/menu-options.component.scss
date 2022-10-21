@@ -41,7 +41,8 @@
         right: 0px;
     }
     .button-menu-options svg {
-        display: none
+        fill: $icon-fill-color;
+        display: none;
     }
 
     .button-menu-options:hover{
@@ -124,7 +125,7 @@
     margin: 0 10px 0px 10px;
 }
 .icon-menu {
-    fill: $blue;
+    fill: $icon-fill-color;
 }
 
 #c21-options-menu .label-menu-item {

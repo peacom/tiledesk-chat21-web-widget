@@ -12,7 +12,7 @@ export class UserTypingComponent implements OnInit, OnDestroy {
   // @Input() isDirect: boolean;
   @Input() typingLocation: string = 'content'
   @Input() translationMap: Map<string, string>;
-  @Input() themeColor: string;
+  @Input() color: string;
   @Input() idUserTypingNow: string;
   @Input() nameUserTypingNow: string;
   // @Input() membersConversation: [string];
@@ -21,7 +21,7 @@ export class UserTypingComponent implements OnInit, OnDestroy {
 
   /** */
   ngOnInit() {
-    this.elementRef.nativeElement.style.setProperty('--themeColor', this.themeColor);
+    this.elementRef.nativeElement.style.setProperty('--bubbleReceivedBackgroundColor', this.color);
   }
 
   /** */

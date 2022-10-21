@@ -37,6 +37,9 @@
             button {
                 width: 40px;
                 height: 40px;
+                svg {
+                    fill: $icon-fill-color;
+                }
             }
             button:hover {
                 background: rgba(220, 220, 220, 0.4) !important;

@@ -7,7 +7,7 @@
       <!-- CONTENT !isNewConversation && [class.active]="isShowSpinner"  -->
       <span *ngIf="messages && this.messages.length === 0">
         <user-typing class="loading"
-          [themeColor]="stylesMap?.get('themeColor')"
+          [color]="stylesMap?.get('bubbleReceivedBackground')"
           [translationMap]="translationMap"
           [idUserTypingNow]="idUserTypingNow"
           [nameUserTypingNow]="nameUserTypingNow">
@@ -171,9 +171,9 @@
                       <div *ngIf="showUploadProgress" class="msg_container base_sent" >
                         <!-- class="slide-in-right" -->
                         <div class="chat21-spinner active" id="chat21-spinner" style="margin: 0px 6px 0px;">
-                          <div class="chat21-bounce1" [ngStyle]="{'background-color': stylesMap.get('themeColor')}"></div>
-                          <div class="chat21-bounce2" [ngStyle]="{'background-color': stylesMap.get('themeColor'), 'opacity': 0.4}"></div>
-                          <div class="chat21-bounce3" [ngStyle]="{'background-color': stylesMap.get('themeColor'), 'opacity': 0.6}"></div>
+                          <div class="chat21-bounce1" [ngStyle]="{'background-color': stylesMap.get('bubbleSentBackground')}"></div>
+                          <div class="chat21-bounce2" [ngStyle]="{'background-color': stylesMap.get('bubbleSentBackground'), 'opacity': 0.4}"></div>
+                          <div class="chat21-bounce3" [ngStyle]="{'background-color': stylesMap.get('bubbleSentBackground'), 'opacity': 0.6}"></div>
                           <!-- <span [ngStyle]="{'color': stylesMap.get('themeColor')}">{{translationMap.get('LABEL_LOADING')}}</span> -->
                         </div>
 
@@ -191,7 +191,7 @@
 
                         <user-typing
                           [ngClass]="{'userTypingNowExist': !idUserTypingNow}"
-                          [themeColor]="stylesMap?.get('themeColor')"
+                          [color]="stylesMap?.get('bubbleReceivedBackground')"
                           [translationMap]="translationMap"
                           [idUserTypingNow]="idUserTypingNow"
                           [nameUserTypingNow]="nameUserTypingNow">
