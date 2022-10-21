@@ -1,5 +1,7 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.39 in PROD
+
 ### 5.0.38.3
 - added: themeColorOpacity tiledesk property
 
