@@ -6,7 +6,8 @@
     <div>
 
       <div *ngIf="messageType(MESSAGE_TYPE_OTHERS, message) && !isSameSender" 
-        [ngStyle]="{'margin': (isImage(message) || isFrame(message))? '6px 18px': '6px 10px'}" class="message_sender_fullname">
+        [style.color]="fontColor"
+        [ngStyle]="{'margin': (isImage(message) || isFrame(message))? '6px 16px': '6px 8px'}" class="message_sender_fullname">
         {{message?.sender_fullname}}
       </div>
       <!-- message type:: image -->
