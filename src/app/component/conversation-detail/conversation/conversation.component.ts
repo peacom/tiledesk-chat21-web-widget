@@ -730,7 +730,6 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
 
     subscribtionKey = 'messageAdded';
     subscribtion = this.subscriptions.find(item => item.key === subscribtionKey);
-    console.log('subscriptionnn', subscribtion, this.subscriptions.find(item => item.key === subscribtionKey))
     if (!subscribtion) {
       this.logger.debug('[CONV-COMP] ***** add messageAdded *****',  this.conversationHandlerService);
       subscribtion = this.conversationHandlerService.messageAdded.pipe(takeUntil(this.unsubscribe$)).subscribe((msg: MessageModel) => {
