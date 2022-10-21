@@ -1,5 +1,9 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.39-rc.8
+- change: color of sender_fullname -> same as bubbleReceivedTextColor
+- changed: colors of footer, conversation-preview-footer, menu icons and typing's bounce(no dynamic color)
+
 ### 5.0.39-rc.7
 - bug-fixed: if singleConversation mode is active and widget is closed, do not start new conversation flows
 - changed: conversation-footer UI

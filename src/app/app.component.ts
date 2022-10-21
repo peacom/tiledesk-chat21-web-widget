@@ -919,7 +919,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
      * conversation from REST API call and then startUI() and showWidget()
      */
     manageWidgetSingleConversation(){
-        console.log('recipientttt', this.g.recipientId)
         if(this.g.recipientId){
             this.appStorageService.setItem('recipientId', this.g.recipientId)
             new Promise((resolve, reject)=>{
