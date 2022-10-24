@@ -2031,6 +2031,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.styleMapConversation.set('buttonHoverBackgroundColor',this.g.buttonHoverBackgroundColor)
         this.styleMapConversation.set('buttonHoverTextColor', this.g.buttonHoverTextColor)
 
+        this.styleMapConversation.set('iconColor', '#5f6368')
+
         this.el.nativeElement.style.setProperty('--button-in-msg-background-color', this.g.bubbleSentBackground)
         this.el.nativeElement.style.setProperty('--button-in-msg-font-size', this.g.buttonFontSize)
     }
