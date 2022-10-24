@@ -1,5 +1,8 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.40-rc.2
+- bug-fixed: if singleConversation is active, recipientId exist and widget is close, if open it not show preChatForm component
+
 ### 5.0.40-rc.1
 - added: update userFullname and userEmail of user in customAttributes
 
