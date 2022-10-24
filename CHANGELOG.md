@@ -1,5 +1,8 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.40-rc.1
+- added: update userFullname and userEmail of user in customAttributes
+
 ### 5.0.39 in PROD
 
 ### 5.0.38.3
