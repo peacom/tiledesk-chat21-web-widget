@@ -755,14 +755,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         let attributes: any = {};
         try {
             attributes = JSON.parse(this.appStorageService.getItem('attributes'));
-            if (attributes.preChatForm) {
-                const preChatForm = attributes.preChatForm;
-                if(preChatForm.userEmail) this.g.userEmail = preChatForm.userEmail;
-                if(preChatForm.userFullname) this.g.userFullname = preChatForm.userFullname 
-            }
-            // this.g.wdLog(['> attributes: ', attributes]);
         } catch (error) {
-            this.logger.debug('[APP-COMP] > Error :' + error);
+            this.logger.debug('[APP-COMP] > Error  setAttributesFromStorageService:' + error);
         }
 
         const CLIENT_BROWSER = navigator.userAgent;
@@ -810,6 +804,14 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             }
         } catch (error) {
             this.logger.debug('[APP-COMP] > Error is handled payload: ', error);
+        }
+
+        try{
+            const preChatForm = attributes['preChatForm']
+            if(preChatForm && preChatForm.userEmail) this.g.userEmail = preChatForm.userEmail;
+            if(preChatForm && preChatForm.userFullname) this.g.userFullname = preChatForm.userFullname 
+        } catch(error){
+            this.logger.debug('[APP-COMP] > Error is handled preChatForm: ', error);
         }
 
         this.appStorageService.setItem('attributes', JSON.stringify(attributes));
@@ -1557,11 +1559,12 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.g.setParameter('displayEyeCatcherCard', 'none');
         // const conversationActive: ConversationModel = JSON.parse(this.appStorageService.getItem('activeConversation'));
         const recipientId : string = this.appStorageService.getItem('recipientId')
+        this.g.setParameter('recipientId', recipientId);
         this.logger.debug('[APP-COMP] openCloseWidget', recipientId, this.g.isOpen, this.g.startFromHome);
         if (this.g.isOpen === true) {
             if (!recipientId) {
                 if(this.g.singleConversation){
-                    this.onNewConversation()
+                    this.manageWidgetSingleConversation()
                 } else if (this.g.startFromHome) {
                     this.isOpenHome = true;
                     this.isOpenConversation = false;
@@ -1574,6 +1577,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             } else { //conversation is present in localstorage
                 this.isOpenHome = false;
                 this.isOpenConversation = true;
+                this.startUI()
+                // this.isOpenSelectionDepartment = false;
             }
             // if (!conversationActive && !this.g.startFromHome) {
             //     this.isOpenHome = false;
@@ -2030,6 +2035,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.styleMapConversation.set('buttonTextColor', this.g.buttonTextColor)
         this.styleMapConversation.set('buttonHoverBackgroundColor',this.g.buttonHoverBackgroundColor)
         this.styleMapConversation.set('buttonHoverTextColor', this.g.buttonHoverTextColor)
+
+        this.styleMapConversation.set('iconColor', '#5f6368')
 
         this.el.nativeElement.style.setProperty('--button-in-msg-background-color', this.g.bubbleSentBackground)
         this.el.nativeElement.style.setProperty('--button-in-msg-font-size', this.g.buttonFontSize)
