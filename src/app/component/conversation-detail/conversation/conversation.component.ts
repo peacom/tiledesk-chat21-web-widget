@@ -381,8 +381,8 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
     }) //check if conv is archived or not
     // this.checkListMessages();
 
-    if (this.g.customAttributes && this.g.customAttributes.recipient_fullname) {
-      this.g.recipientFullname = this.g.customAttributes.recipient_fullname;
+    if(this.g.customAttributes){
+      this.updateUserInfo(this.g.customAttributes)
     }
 
     this.logger.debug('[CONV-COMP] ------ 7: initializeTyping()', this.conversationId)
@@ -901,6 +901,22 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
+  updateUserInfo(customAttributes){
+    if (customAttributes && customAttributes['userFullname']) {
+      const userFullname = customAttributes['userFullname'];
+      this.logger.debug('[CONV-COMP] updateUserInfo --> userFullname', userFullname)
+      this.g.setAttributeParameter('userFullname', userFullname);
+      this.g.setParameter('userFullname', userFullname);
+    }
+    if (customAttributes && customAttributes['userEmail']) {
+      const userEmail = customAttributes['userEmail'];
+      this.logger.debug('[CONV-COMP] updateUserInfo --> userEmail', userEmail)
+      this.g.setAttributeParameter('userEmail', userEmail);
+      this.g.setParameter('userEmail', userEmail);
+    }
+    this.appStorageService.setItem('attributes', JSON.stringify(this.g.attributes));
+  }
+
  scrollToBottom() {
   this.conversationContent.scrollToBottom();
   // const that = this;
@@ -1185,7 +1201,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
     try{
       const tiledeskDiv = this.g.windowContext.window.document.getElementById('tiledeskdiv') 
       tiledeskDiv.classList.remove('increaseSize')
-      tiledeskDiv.classList.add('decreaseSize')
+      tiledeskDiv.classList.remove('decreaseSize')
       // tiledeskDiv.style.width = '376px'
       // tiledeskDiv.style.maxHeight = '620px'
     }catch(e){
