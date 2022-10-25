@@ -1,5 +1,7 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.40 in PROD
+
 ### 5.0.40-rc.3
 - changed: sender_fullname position and color
 - merged: newUI branch into master
