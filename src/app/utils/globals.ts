@@ -11,8 +11,9 @@ import { UserAgent } from 'src/models/userAgent';
 import { DepartmentModel } from 'src/models/department';
 
 /** UTILS FUNCTIONS */
-import { avatarPlaceholder, convertColorToRGBA, detectIfIsMobile, getParameterByName, setColorFromString } from 'src/app/utils/utils';
+import { avatarPlaceholder, detectIfIsMobile, getParameterByName, setColorFromString } from 'src/app/utils/utils';
 import { ConversationModel } from 'src/chat21-core/models/conversation';
+import { convertColorToRGBA } from 'src/chat21-core/utils/utils';
 
 @Injectable({
     providedIn: 'root'
