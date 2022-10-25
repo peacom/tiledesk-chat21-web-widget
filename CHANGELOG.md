@@ -1,5 +1,17 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.40-rc.3
+- changed: sender_fullname position and color
+- merged: newUI branch into master
+
+### 5.0.40-rc.2
+- bug-fixed: if singleConversation is active, recipientId exist and widget is close, if open it not show preChatForm component
+
+### 5.0.40-rc.1
+- added: update userFullname and userEmail of user in customAttributes
+
+### 5.0.39 in PROD
+
 ### 5.0.39-rc.8
 - change: color of sender_fullname -> same as bubbleReceivedTextColor
 - changed: colors of footer, conversation-preview-footer, menu icons and typing's bounce(no dynamic color)
