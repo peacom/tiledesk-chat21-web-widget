@@ -1,6 +1,6 @@
 @import 'src/app/sass/variables';
 :root {
-    --themeColor: $blue;
+    --bubbleReceivedBackgroundColor: $blue;
     --foregroundColor: $bck-msg-sent;
 }
 
@@ -89,7 +89,6 @@
 .spinner > div {
     width: 9px;
     height: 9px;
-    background-color: #333;
 
     border-radius: 100%;
     display: inline-block;
@@ -100,18 +99,18 @@
 .spinner .bounce1 {
     -webkit-animation-delay: -0.32s;
     animation-delay: -0.32s;
-    background-color: var(--themeColor)
+    background-color: var(--bubbleReceivedBackgroundColor)
 }
 
 .spinner .bounce2 {
     -webkit-animation-delay: -0.16s;
     animation-delay: -0.16s;
-    background-color: var(--themeColor);
+    background-color: var(--bubbleReceivedBackgroundColor);
     opacity: 0.4
 }
 
 .spinner .bounce3 {
-    background-color: var(--themeColor);
+    background-color: var(--bubbleReceivedBackgroundColor);
     opacity: 0.6
 }
 

@@ -414,6 +414,7 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
 
   onSendPressed(event) {
     this.logger.debug('[CONV-FOOTER] onSendPressed:event', event);
+    event.preventDefault();
     this.logger.debug('[CONV-FOOTER] AppComponent::onSendPressed::isFilePendingToUpload:', this.isFilePendingToUpload);
     if (this.isFilePendingToUpload) {
       this.logger.debug('[CONV-FOOTER] AppComponent::onSendPressed', 'is a file');

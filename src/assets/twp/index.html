@@ -121,7 +121,9 @@
 
         .b_integrations_agent_links {
             margin-top: 50px;
+
         }
+
         .b_integrations_agent_links a {
             color: black;
             margin-right: 30px;
@@ -132,6 +134,10 @@
             width: 15px;
             height: 15px;
             display: inline-block;
+        }
+
+        .b_integrations_agent_links em{
+            margin-right: 10px;
         }
 
         #shareModal .modal-body {
@@ -264,7 +270,15 @@
         });
         
         window.Tiledesk('onBeforeInit', function(event_data) {
-        	console.log("onBeforeInit Tiledesk FN", event_data);
+            console.log("onBeforeInit Tiledesk FN", event_data);
+            
+            setTimeout(() => {
+                var enbedJs = event_data && event_data.detail && event_data.detail.appConfigs && event_data.detail.appConfigs.enbedJs? event_data.detail.appConfigs.enbedJs : false;
+                var enbedJsBaseUrl = event_data && event_data.detail && event_data.detail.appConfigs && event_data.detail.appConfigs.enbedJs && event_data.detail.appConfigs.enbedJsBaseUrl? event_data.detail.appConfigs.enbedJsBaseUrl : null;
+                document.getElementById("enbed").style.display = enbedJs? "inline-block": "none";
+                document.getElementById("base_url").innerHTML = enbedJs && enbedJsBaseUrl ? enbedJsBaseUrl + '/launch.js': null;
+            }, 1000);
+            
         });
         
         window.Tiledesk('onInit', function(event_data) {
@@ -296,6 +310,7 @@
 
 
         var currentUrl = window.location.href
+        var baseUrl = window.location.origin
         function shareOnFacebook() {
             var fbShareUrl = "https://www.facebook.com/sharer.php?u=" + encodeURIComponent(currentUrl);
             window.open(
@@ -312,7 +327,7 @@
             );
          }
 
-         function shareOnLinkedin() {
+        function shareOnLinkedin() {
             var LinkedinShareUrl = "https://www.linkedin.com/shareArticle?mini=true&url=" + encodeURIComponent(currentUrl);
             window.open(
                 LinkedinShareUrl,
@@ -320,7 +335,7 @@
             );
          }
 
-         function shareOnTelegram() {                                    
+        function shareOnTelegram() {                                    
             var TelegramShareUrl = "tg://msg_url?url=" + encodeURIComponent(currentUrl) ;
             // console.log('TelegramShareUrl ', TelegramShareUrl ) 
             window.open(
@@ -329,7 +344,7 @@
             );
          }
 
-         function shareOnWhatsapp() {            
+        function shareOnWhatsapp() {            
             var WhatsappShareUrl = "whatsapp://send?text=" + currentUrl;
             window.open(
                 WhatsappShareUrl,
@@ -368,7 +383,9 @@
         window.onload = function() {
             document.getElementById("project_id").innerHTML = '"' + tiledesk_projectid + '"';
             document.getElementById("project_name").innerHTML = project_name;
+            
 
+            document.getElementById("base_url").innerHTML = baseUrl + '/launch.js'
             if(role !== 'agent'){
                 document.getElementById("testPageButton").style.display = 'block'
             }
@@ -387,16 +404,6 @@
                 
         //     });
         // };
-        
-        var isOpen = getQueryVariable("isOpen");
-        //var tiledesk_projectid = url.searchParams.get("tiledesk_projectid");
-
-        // console.log('isOpen >: ', isOpen);
-        if(isOpen == 'true') {
-            // console.log('QUI ENTRO isOpen >: ', isOpen);
-            localStorage.setItem("tiledesk_widget_sv1_"+ tiledesk_projectid +"_isOpen", true);
-        } 
-
 
         function getQueryVariable(variable)     {
             var query = window.location.search.substring(1);
@@ -456,7 +463,7 @@
                     <h1 id="project_name" style="min-height: 39px;"></h1>
                     <h2></h2>
                     <div class="b_integrations_agent_links">
-                        <a href="" data-toggle="modal" data-target="#embedModal"><em class="fa-code fa"></em>Embed</a>
+                        <a href="" data-toggle="modal" data-target="#embedModal" id="enbed" style="display: none;"><em class="fa-code fa"></em>Embed</a>
                         <a href="" data-toggle="modal" data-target="#shareModal"><em class="fa-reply fa"></em>Share</a>
                     </div>
                 </div>
@@ -487,7 +494,7 @@
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var js, fjs=d.getElementsByTagName(s)[0];<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (d.getElementById(id)) return;<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;js=d.createElement(s); js.id=id; js.async=true;<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;js.src="https://widget.tiledesk.com/v5/launch.js";<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;js.src="<span id="base_url"> </span>";<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fjs.parentNode.insertBefore(js, fjs);<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}(document, &#39;script&#39;, &#39;tiledesk-jssdk&#39;));<br>
                                 &lt;/script&gt;

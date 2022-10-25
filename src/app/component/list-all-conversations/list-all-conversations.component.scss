@@ -138,7 +138,7 @@
     
     .c21-ball {
         position: relative;
-        border: 2px solid #ffffff;
+        // border: 2px solid #ffffff;
         width: 52px;
         height: 52px;
         border-radius: 50%;
@@ -251,7 +251,7 @@
                 }
 
                 .c21-right-conv {
-                    width: calc( 100% - 70px);
+                    width: calc( 100% - 65px);
                     margin-left: 15px;
                     height: auto;
                     float: left;
@@ -296,26 +296,13 @@
         }
         
     }
-    .c21-footer {
-        // width: calc(100% - 48px);
-        width: auto;
-        margin: 0 24px;
-        height: auto;
-        position: relative;
-        // margin: auto;
-        padding: 0px;
-        border-top: 1px solid #eee;
-        display: flex;
-        align-items: center;
-        -webkit-box-shadow: none;
-        box-shadow: none;
-    }
+
 
     .c21-divBudge {
         position: absolute;
         top: 40px;
         left: inherit;
-        right: 0px;
+        right: 10px ;//0px;
         width: 10px;
         height: 10px;
         min-width: 10px;

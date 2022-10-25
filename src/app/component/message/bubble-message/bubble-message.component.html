@@ -4,6 +4,12 @@
   
     
     <div>
+
+      <div *ngIf="messageType(MESSAGE_TYPE_OTHERS, message) && !isSameSender" 
+        [style.color]="convertColorToRGBA(fontColor, 65)"
+        [ngStyle]="{'margin': (isImage(message) || isFrame(message))? '10px 16px 0px 16px': '10px 8px 0px 8px'}" class="message_sender_fullname">
+        {{message?.sender_fullname}}
+      </div>
       <!-- message type:: image -->
       <!-- <div *ngIf="message.type == 'image' && message.metadata"  [ngStyle] = "{ 'max-width': getSizeImg(message).width, 'max-height': getSizeImg(message).height }">
           <img class="message-contentX message-content-imageX" [src]="message.metadata.src" />
@@ -43,6 +49,7 @@
         <ng-template #timeTooltipLeft>
           <span>{{message.timestamp | amTimeAgo}} ({{message.timestamp | amLocal | amDateFormat: 'L HH:mm:ss'}})</span>
         </ng-template> 
+
 
           <!-- [htmlEnabled]="(message?.type==='html')? true : false" -->
           <chat-text *ngIf="message?.type !=='html'"

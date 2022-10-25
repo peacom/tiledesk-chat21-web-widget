@@ -15,7 +15,6 @@ export class MenuOptionsComponent implements OnInit {
   @Output() onSignOut = new EventEmitter();
   
   themeColor50: string;
-  hover: boolean;
 
   constructor(
     public g: Globals
@@ -23,7 +22,6 @@ export class MenuOptionsComponent implements OnInit {
 
   ngOnInit() {
     this.themeColor50 = convertColorToRGBA(this.g.themeColor, 50);
-
   }
 
   f21_toggle_options() {

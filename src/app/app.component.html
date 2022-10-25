@@ -40,7 +40,7 @@
     </div>
 
     <div *ngIf="isOpenConversation && g.senderId" class="modal-page active" >
-      <!-- [class.active]="true" isOpenConversation &&  [class.modal-slide-in-right]="isOpenConversation && !g?.singleConversation"-->
+      <!-- [class.active]="true" isOpenConversation &&  [class.modal-slide-in-right]="isOpenConversation && !g?.singleConversation &&  [class.modal-slide-out-right]="!isOpenConversation"-->
       <!-- [conversation]="conversationSelected" -->
       <chat-conversation 
         [senderId]="g.senderId"

@@ -38,6 +38,15 @@ export class PrechatFormComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit() {
+    this.initialize();
+  }
+
+  initialize() {
+    // this.preChatFormGroup = this.createForm(this.formBuilder);
+    // if (this.preChatFormGroup) {
+    //   this.subcribeToFormChanges();
+    // }
+  
   }
 
   ngAfterViewInit() {

@@ -8,7 +8,6 @@
     onFocus="document.querySelector('[start-focus-chat21-selection-department]').focus()">
 
     <!-- HEADER -->
-    <!-- 'background-color': colorBck,  -->
     <div class="c21-header" [ngStyle]="{'color': g.themeForegroundColor, 'background-image': g.colorGradient180 }" >
         <div class="c21-header-container">
 
@@ -16,7 +15,7 @@
             <div class="c21-header-button">
                 <div class="c21-close-button c21-small" role="button">
                     <button tabindex="1210" aria-label=" chiudi pannello" class="c21-close-button-body" (click)="closePage()">
-                        <svg role="img" aria-labelledby="altIconTitle" [ngStyle]="{'fill': g.themeForegroundColor }" xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24">
+                        <svg role="img" aria-labelledby="altIconTitle" xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24">
                             <path fill="none" d="M0 0h24v24H0V0z"/>
                             <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
                             <!-- <title id="altIconTitle">{{BUTTON_CLOSE_CHAT}}</title> -->
@@ -48,7 +47,7 @@
                 <ul class="chat21-content-modal-select">
                     <li *ngFor="let department of departments; let i = index">
                         <button tabindex="1202" class="c21-button-department c21-button-clean" (click)="onSelectDepartment(department)">
-                            <span [ngStyle]="{'background-color': g.themeColor, 'color': g.themeForegroundColor }" class="chat21-badge">{{i+1}}</span>
+                            <span  class="chat21-badge">{{i+1}}</span>
                             <span class="chat21-name-list" >{{department?.name}}</span>
                         </button>
                     </li>

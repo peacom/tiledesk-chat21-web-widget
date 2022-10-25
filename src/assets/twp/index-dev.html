@@ -238,9 +238,10 @@
         input[type=color] > .form-group
 
         button:hover,button:focus {
-            color: #999;
+            /* color: #999;
             background-color: darkgrey;
-            border: 1px solid black;
+            border: 1px solid black; */
+            outline: none !important;
         }
 
         button {
@@ -422,10 +423,20 @@
 
             document.getElementById("project_id").innerHTML = '"' + tiledesk_projectid + '"';
             document.getElementById("project_name").innerHTML = project_name;
+
+            document.getElementById("base_url").innerHTML = baseUrl + '/launch.js'
         });
 
         window.Tiledesk('onBeforeInit', function(event_data) {
             console.log("onBeforeInit Tiledesk FN", event_data); 
+
+            setTimeout(() => {
+                var enbedJs = event_data && event_data.detail && event_data.detail.appConfigs && event_data.detail.appConfigs.enbedJs? event_data.detail.appConfigs.enbedJs : false;
+                var enbedJsBaseUrl = event_data && event_data.detail && event_data.detail.appConfigs && event_data.detail.appConfigs.enbedJs && event_data.detail.appConfigs.enbedJsBaseUrl? event_data.detail.appConfigs.enbedJsBaseUrl : null;
+                document.getElementById("enbed").style.display = enbedJs? "inline-block": "none";
+                document.getElementById("base_url").innerHTML = enbedJs && enbedJsBaseUrl ? enbedJsBaseUrl + '/launch.js': null;
+            }, 1000);
+
             if(document.getElementById('events')){
                 document.getElementById('events').value +=  'onBeforeInit --> FIRED!' + '\n' 
                 document.getElementById('events').scrollTop = document.getElementById('events').scrollHeight
@@ -550,6 +561,7 @@
         }
   
         var currentUrl = window.location.href
+        var baseUrl = window.location.origin
         function shareOnFacebook() {
             var fbShareUrl = "https://www.facebook.com/sharer.php?u=" + encodeURIComponent(currentUrl);
             window.open(
@@ -807,6 +819,11 @@
             document.getElementById('themeColorText').value = color
         }
 
+        function onChangeThemeColorText(){
+            let color = document.getElementById('themeColorText').value
+            document.getElementById('themeColor').value = color
+        }
+
         function onClickThemeColorOpacity(){
             let text = document.getElementById('themeColorOpacity').value
             text === ""? text= 50 : text //set default value if user not write a value
@@ -818,11 +835,6 @@
         function onChangeThemeColorOpacity(){
             let value = document.getElementById('themeColorOpacity').value
             document.getElementById('themeColorOpacityText').innerText = value + ' %'
-        }
-
-        function onChangeThemeColorText(){
-            let color = document.getElementById('themeColorText').value
-            document.getElementById('themeColor').value = color
         }
 
         function onChangeThemeForegroundColor(){
@@ -1237,28 +1249,33 @@
 
         function initLang(){
             var languages = [
+                { code: 'ar', name: 'Arabic', type: '--- Pre-translated ---' },
+                { code: 'az', name: 'Azerbaijani', type: '--- Pre-translated ---' },
                 { code: 'en', name: 'English', type: '--- Pre-translated ---' },
                 { code: 'fr', name: 'French', type: '--- Pre-translated ---' },
                 { code: 'de', name: 'German', type: '--- Pre-translated ---' },
                 { code: 'it', name: 'Italian', type: '--- Pre-translated ---' },
+                { code: 'kk', name: 'Kazakh', type: '--- Pre-translated ---' },
                 { code: 'pt', name: 'Portuguese', type: '--- Pre-translated ---' },
                 { code: 'ru', name: 'Russian', type: '--- Pre-translated ---' },
                 { code: 'es', name: 'Spanish, Castilian', type: '--- Pre-translated ---' },
+                { code: 'sr', name: 'Serbian', type: '--- Pre-translated ---' },
+                { code: 'sv', name: 'Swedish', type: '--- Pre-translated ---' },
                 { code: 'tr', name: 'Turkish', type: '--- Pre-translated ---' },
+                { code: 'uk', name: 'Ukrainian', type: '--- Pre-translated ---' },
+                { code: 'uz', name: 'Uzbek', type: '--- Pre-translated ---' },
                 { code: 'ab', name: 'Abkhazian', type: '--- Needs own translation ---' },
                 { code: 'aa', name: 'Afar', type: '--- Needs own translation ---' },
                 { code: 'af', name: 'Afrikaans', type: '--- Needs own translation ---' },
                 { code: 'ak', name: 'Akan', type: '--- Needs own translation ---' },
                 { code: 'sq', name: 'Albanian', type: '--- Needs own translation ---' },
                 { code: 'am', name: 'Amharic', type: '--- Needs own translation ---' },
-                { code: 'ar', name: 'Arabic', type: '--- Needs own translation ---' },
                 { code: 'an', name: 'Aragonese', type: '--- Needs own translation ---' },
                 { code: 'hy', name: 'Armenian', type: '--- Needs own translation ---' },
                 { code: 'as', name: 'Assamese', type: '--- Needs own translation ---' },
                 { code: 'av', name: 'Avaric', type: '--- Needs own translation ---' },
                 { code: 'ae', name: 'Avestan', type: '--- Needs own translation ---' },
                 { code: 'ay', name: 'Aymara', type: '--- Needs own translation ---' },
-                { code: 'az', name: 'Azerbaijani', type: '--- Needs own translation ---' },
                 { code: 'bm', name: 'Bambara', type: '--- Needs own translation ---' },
                 { code: 'ba', name: 'Bashkir', type: '--- Needs own translation ---' },
                 { code: 'eu', name: 'Basque', type: '--- Needs own translation ---' },
@@ -1324,7 +1341,6 @@
                 { code: 'kn', name: 'Kannada', type: '--- Needs own translation ---' },
                 { code: 'kr', name: 'Kanuri', type: '--- Needs own translation ---' },
                 { code: 'ks', name: 'Kashmiri', type: '--- Needs own translation ---' },
-                { code: 'kk', name: 'Kazakh', type: '--- Needs own translation ---' },
                 { code: 'rw', name: 'Kinyarwanda', type: '--- Needs own translation ---' },
                 { code: 'kv', name: 'Komi', type: '--- Needs own translation ---' },
                 { code: 'kg', name: 'Kongo', type: '--- Needs own translation ---' },
@@ -1378,7 +1394,6 @@
                 { code: 'sg', name: 'Sango', type: '--- Needs own translation ---' },
                 { code: 'sa', name: 'Sanskrit', type: '--- Needs own translation ---' },
                 { code: 'sc', name: 'Sardinian', type: '--- Needs own translation ---' },
-                { code: 'sr', name: 'Serbian', type: '--- Needs own translation ---' },
                 { code: 'sn', name: 'Shona', type: '--- Needs own translation ---' },
                 { code: 'sd', name: 'Sindhi', type: '--- Needs own translation ---' },
                 { code: 'si', name: 'Sinhala, Sinhalese', type: '--- Needs own translation ---' },
@@ -1390,7 +1405,6 @@
                 { code: 'su', name: 'Sundanese', type: '--- Needs own translation ---' },
                 { code: 'sw', name: 'Swahili', type: '--- Needs own translation ---' },
                 { code: 'ss', name: 'Swati', type: '--- Needs own translation ---' },
-                { code: 'sv', name: 'Swedish', type: '--- Needs own translation ---' },
                 { code: 'tl', name: 'Tagalog', type: '--- Needs own translation ---' },
                 { code: 'ty', name: 'Tahitian', type: '--- Needs own translation ---' },
                 { code: 'tg', name: 'Tajik', type: '--- Needs own translation ---' },
@@ -1406,9 +1420,7 @@
                 { code: 'tk', name: 'Turkmen', type: '--- Needs own translation ---' },
                 { code: 'tw', name: 'Twi', type: '--- Needs own translation ---' },
                 { code: 'ug', name: 'Uighur, Uyghur', type: '--- Needs own translation ---' },
-                { code: 'uk', name: 'Ukrainian', type: '--- Needs own translation ---' },
                 { code: 'ur', name: 'Urdu', type: '--- Needs own translation ---' },
-                { code: 'uz', name: 'Uzbek', type: '--- Needs own translation ---' },
                 { code: 've', name: 'Venda', type: '--- Needs own translation ---' },
                 { code: 'vi', name: 'Vietnamese', type: '--- Needs own translation ---' },
                 { code: 'vo', name: 'Volap_k', type: '--- Needs own translation ---' },
@@ -2172,7 +2184,7 @@
                     <h1 id="project_name" style="min-height: 39px;"></h1>
                     <h2></h2>
                     <div class="b_integrations_agent_links">
-                        <a href="" data-toggle="modal" data-target="#embedModal"><i class="fa-code fa"></i>Embed</a>
+                        <a href="" data-toggle="modal" data-target="#embedModal" id="enbed" style="display: none;"><i class="fa-code fa"></i>Embed</a>
                         <!-- <a href="mailto:?subject=Tiledesk%20widget%20test%20page"><i class="fa-envelope-o fa" target="_blank"></i>Email</a> -->
                         <a href="" data-toggle="modal" data-target="#shareModal"><i class="fa-reply fa"></i>Share</a>
                     </div>
@@ -2204,7 +2216,7 @@
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var js, fjs=d.getElementsByTagName(s)[0];<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (d.getElementById(id)) return;<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;js=d.createElement(s); js.id=id; js.async=true;<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;js.src="https://widget.tiledesk.com/v5/launch.js";<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;js.src="<span id="base_url"></span>";<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fjs.parentNode.insertBefore(js, fjs);<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}(document, &#39;script&#39;, &#39;tiledesk-jssdk&#39;));<br>
                                 &lt;/script&gt;

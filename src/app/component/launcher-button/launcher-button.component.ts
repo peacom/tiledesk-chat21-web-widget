@@ -53,9 +53,10 @@ export class LauncherButtonComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     setTimeout(() => {
-      if (!this.g.isOpen && this.aflauncherbutton) {
-        this.aflauncherbutton.nativeElement.style['box-shadow'] = '0px 4px 20px ' + convertColorToRGBA(this.g.themeColor, 50);
-      }
+        if (!this.g.isOpen && this.aflauncherbutton) {
+          // this.aflauncherbutton.nativeElement.focus();
+          this.aflauncherbutton.nativeElement.style['box-shadow'] = '0px 4px 20px ' + convertColorToRGBA(this.g.themeColor, 50);;
+        }
     }, 0);
   }
 

@@ -34,6 +34,10 @@
         background-position: center;
         background-size: cover;
         border-radius: 50%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .c21-avatar-image img{
         max-width: 100%;
@@ -52,7 +56,7 @@
 
 .c21-ball {
     position: relative;
-    border: 2px solid #ffffff;
+    // border: 2px solid #ffffff;
     width: 52px;
     height: 52px;
     border-radius: 50%;

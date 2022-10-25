@@ -66,7 +66,7 @@
                 top: 0;
                 right: 0;
                 left: 0;
-                bottom: 43px;
+                bottom: $chat-footer-height; //43px;
                 overflow: hidden;
                 .time{
                     margin-bottom: 20px;
@@ -109,15 +109,25 @@
                     position: absolute;
                     top: 0;
                     right: 0;
+
+                    &::-webkit-scrollbar {
+                        width: 6px;
+                        background-color: #00000000!important;
+                    } 
                 }
                 #scroll-me:hover {
+                    &::-webkit-scrollbar-track {
+                        background-color: #f9f9f9 !important;
+                    }
+
                     &::-webkit-scrollbar-thumb {
-                        background: #777777; 
+                        background: #d3d6dc; 
                     }
                 }
                 .msg_container {
                     overflow: hidden;
                     display: flex;
+                    width: 100%;
                     //opacity: 0px;
                 }
                 .msg_info_container{
@@ -185,7 +195,7 @@
                 .base_sent {
                     align-items: flex-end;
                     justify-content: flex-end;
-                    padding: 2px 0px 4px 40px;
+                    padding: 2px 0px 4px 0px; //2px 0px 4px 40px;
     
                     .msg_sent {
                         background-color: $bck-msg-sent;
@@ -247,7 +257,7 @@
     
                 /** recive message **/
                 .base_receive {
-                    // padding: 0px 0px 6px 0px; //activate 
+                    padding: 2px 0px 4px 0px; //activate 
                     /* avatar */ 
                     .content-avatar {
                         position: relative;
@@ -281,7 +291,7 @@
                         // max-width: 260px;
                         max-width: calc(100% - 70px);
                         min-width: 14px;
-                        margin: 0 20px 4px 10px;
+                        margin: auto 20px auto 10px; //0 20px 4px 10px;
                         height: fit-content;
                         width: auto;
 

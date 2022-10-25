@@ -16,9 +16,9 @@ export class AvatarComponent implements OnInit {
   ngOnInit() {
     if(this.senderID){
       if(this.senderID.indexOf('bot_') !== -1 || this.senderFullname === 'Bot'){
-        this.url =  this.baseLocation +'/assets/images/avatar_bot_tiledesk.svg'
+        this.url =  this.baseLocation +'/assets/images/tommy_bot_tiledesk.svg'
       }else if( this.senderID.indexOf('bot_') == -1){
-        this.url =  this.baseLocation +'/assets/images/light_avatar_placeholder.svg'
+        this.url =  this.baseLocation +'/assets/images/chat_human_avatar.svg'
       }
       let url = this.imageRepoService.getImagePhotoUrl(this.senderID)
       // this.imageRepoService.checkImageExists(url,  (existImage)=> {
@@ -33,10 +33,10 @@ export class AvatarComponent implements OnInit {
   }
 
   onBotImgError(event){
-    event.target.src = this.baseLocation +'/assets/images/avatar_bot_tiledesk.svg'
+    event.target.src = this.baseLocation +'/assets/images/tommy_bot_tiledesk.svg'
   }
   onHumanImgError(event) {
-    event.target.src = this.baseLocation + "/assets/images/light_avatar_placeholder.svg"
+    event.target.src = this.baseLocation + "/assets/images/chat_human_avatar.svg"
   }
 
   onLoadedBot(event){
