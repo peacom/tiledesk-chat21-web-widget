@@ -1,5 +1,12 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.41-rc.1
+- bug-fixed: if bot has name 'Bot' and no 'bot_' prefix exist double avatar was shown
+- added: remove bubble-message background if is image or iframe and no text is in message
+- added: enbedJs variable to env and relative configurations file
+- changed: frame and image loader background color
+- changed: info-message UI
+
 ### 5.0.40 in PROD
 
 ### 5.0.40-rc.3
