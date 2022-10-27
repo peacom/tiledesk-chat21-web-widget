@@ -35,9 +35,7 @@ export const environment = {
   storage_prefix : 'widget_sv5',
   authPersistence: 'LOCAL',
   supportMode: true,
-  enbedJs: true,
-  enbedJsBaseUrl:"https://widget-pre.tiledesk.com/v5/"
-  
+  enbedJs: true  
 };
 
 

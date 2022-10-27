@@ -35,6 +35,5 @@ export const environment = {
   storage_prefix : 'widget_sv5',
   authPersistence: 'LOCAL',
   supportMode: true,
-  enbedJs: true,
-  enbedJsBaseUrl:'http://localhost:4200/'
+  enbedJs: true
 };
