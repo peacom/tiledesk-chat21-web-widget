@@ -22,6 +22,7 @@
     },
     "apiUrl": "${API_URL}",
     "baseImageUrl": "${API_BASEIMAGE_URL}",
-    "authPersistence": "${AUTH_PERSISTENCE}"
+    "authPersistence": "${AUTH_PERSISTENCE}",
+    "enbedJs": "${ENBED_JS}"
     
 }
