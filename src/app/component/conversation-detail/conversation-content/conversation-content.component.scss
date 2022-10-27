@@ -208,6 +208,9 @@
                     .message_innerhtml {
                         padding: 8px;
                     }
+                    .no-background{
+                        background: transparent!important;
+                    }
                     .emoticon {
                         background: transparent!important;
                         font-size: 4em;
@@ -301,6 +304,11 @@
                     .message_innerhtml {
                         padding: 14px;
                     }
+
+                    .no-background{
+                        background: transparent!important;
+                    }
+
                     .emoticon {
                         background-color: transparent!important;
                         font-size: 4em;

@@ -1,13 +1,14 @@
 <!-- [ngClass]="{'button-in-msg' : message.metadata && message.metadata.button}" -->
 <!-- ngStyle]="{'padding': (isImage(message) || isFrame(message))?'1px':'0 8px'}" -->
-<div [ngStyle]="{'padding': (isImage(message) || isFrame(message))?'0px':'0 8px', 'width': (isImage(message) || isFrame(message))? sizeImage?.width + 'px': null }" class="messages primary-color">
+<!-- 'width': (isImage(message) || isFrame(message))? sizeImage?.width + 'px': null  -->
+<div [ngStyle]="{'padding': (isImage(message) || isFrame(message))?'0 0px':'0 8px'}" class="messages primary-color">
   
     
     <div>
 
       <div *ngIf="messageType(MESSAGE_TYPE_OTHERS, message) && !isSameSender" 
         [style.color]="convertColorToRGBA(fontColor, 65)"
-        [ngStyle]="{'margin': (isImage(message) || isFrame(message))? '10px 16px 0px 16px': '10px 8px 0px 8px'}" class="message_sender_fullname">
+        [ngStyle]="{'margin': (isImage(message) || isFrame(message))? '10px 16px 8px 16px': '10px 8px 0px 8px'}" class="message_sender_fullname">
         {{message?.sender_fullname}}
       </div>
       <!-- message type:: image -->

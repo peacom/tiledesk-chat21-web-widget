@@ -24,7 +24,7 @@ describe('ImageComponent', () => {
       uid: "ksg7sxnt",
       width: 650
     }
-    component.width = '650px'
+    component.width = 650
     component.height = 650
     fixture.detectChanges();
   });
