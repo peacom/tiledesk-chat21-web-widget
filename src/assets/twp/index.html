@@ -274,9 +274,8 @@
             
             setTimeout(() => {
                 var enbedJs = event_data && event_data.detail && event_data.detail.appConfigs && event_data.detail.appConfigs.enbedJs? event_data.detail.appConfigs.enbedJs : false;
-                var enbedJsBaseUrl = event_data && event_data.detail && event_data.detail.appConfigs && event_data.detail.appConfigs.enbedJs && event_data.detail.appConfigs.enbedJsBaseUrl? event_data.detail.appConfigs.enbedJsBaseUrl : null;
                 document.getElementById("enbed").style.display = enbedJs? "inline-block": "none";
-                document.getElementById("base_url").innerHTML = enbedJs && enbedJsBaseUrl ? enbedJsBaseUrl + '/launch.js': null;
+                document.getElementById("base_url").innerHTML = enbedJs && enbedJsBaseUrl ? enbedJsBaseUrl + '/launch.js': baseUrl + '/launch.js';
             }, 1000);
             
         });
@@ -384,8 +383,6 @@
             document.getElementById("project_id").innerHTML = '"' + tiledesk_projectid + '"';
             document.getElementById("project_name").innerHTML = project_name;
             
-
-            document.getElementById("base_url").innerHTML = baseUrl + '/launch.js'
             if(role !== 'agent'){
                 document.getElementById("testPageButton").style.display = 'block'
             }
