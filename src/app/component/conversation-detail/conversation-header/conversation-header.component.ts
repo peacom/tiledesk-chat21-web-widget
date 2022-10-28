@@ -22,6 +22,7 @@ export class ConversationHeaderComponent implements OnInit, OnChanges {
   @Input() typingLocation: string;
   @Input() isTrascriptDownloadEnabled: boolean;
   @Input() hideCloseConversationOptionMenu: boolean;
+  @Input() hideRestartConversationOptionsMenu: boolean;
   @Input() hideHeaderCloseButton: boolean;
   @Input() hideHeaderBackButton: boolean;
   @Input() hideHeaderConversationOptionsMenu: boolean;
@@ -34,6 +35,7 @@ export class ConversationHeaderComponent implements OnInit, OnChanges {
   @Output() onCloseWidget = new EventEmitter();
   @Output() onSoundChange = new EventEmitter();
   @Output() onCloseChat =  new EventEmitter();
+  @Output() onRestartChat =  new EventEmitter();
   @Output() onWidgetHeightChange = new EventEmitter<string>();
   @Output() onSignOut = new EventEmitter();
   @Output() onMenuOptionShow = new EventEmitter();
@@ -162,7 +164,12 @@ export class ConversationHeaderComponent implements OnInit, OnChanges {
   }
 
   closeChat(){
-    this.onCloseChat.emit()
+    this.onCloseChat.emit();
+  }
+
+  restartChat(){
+    this.onRestartChat.emit();
+    this.onMenuOptionShow.emit(false)
   }
 
   closeWidget() {

@@ -857,6 +857,11 @@ export class GlobalSettingsService {
         if (TEMP !== undefined) {
             globals.hideCloseConversationOptionMenu = (TEMP === true) ? true : false;;
         }
+        TEMP = tiledeskSettings['hideRestartConversationOptionsMenu'];
+        // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > hideHeaderConversationOptionsMenu:: ', TEMP]);
+        if (TEMP !== undefined) {
+            globals.hideRestartConversationOptionsMenu = (TEMP === true) ? true : false;;
+        }
         TEMP = tiledeskSettings['hideHeaderConversationOptionsMenu'];
         // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > hideHeaderConversationOptionsMenu:: ', TEMP]);
         if (TEMP !== undefined) {
@@ -1161,6 +1166,10 @@ export class GlobalSettingsService {
         TEMP = el.nativeElement.getAttribute('hideCloseConversationOptionMenu');
         if (TEMP !== null) {
             this.globals.hideCloseConversationOptionMenu = TEMP;
+        }
+        TEMP = el.nativeElement.getAttribute('hideRestartConversationOptionsMenu');
+        if (TEMP !== null) {
+            this.globals.hideRestartConversationOptionsMenu = TEMP;
         }
         TEMP = el.nativeElement.getAttribute('hideSettings');
         if (TEMP !== null) {
@@ -1529,6 +1538,11 @@ export class GlobalSettingsService {
         TEMP = getParameterByName(windowContext, 'tiledesk_hideCloseConversationOptionMenu');
         if (TEMP) {
             globals.hideCloseConversationOptionMenu = stringToBoolean(TEMP); 
+        }
+
+        TEMP = getParameterByName(windowContext, 'tiledesk_hideRestartConversationOptionsMenu');
+        if (TEMP) {
+            globals.hideRestartConversationOptionsMenu = stringToBoolean(TEMP); 
         }
 
         TEMP = getParameterByName(windowContext, 'tiledesk_hideSettings');

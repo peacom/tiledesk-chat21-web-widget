@@ -91,9 +91,10 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
   isButtonsDisabled = true;
   // isConversationArchived = false;
   hideFooterTextReply: boolean = false;
+  hideTextAreaContent: boolean = false;
   footerMessagePlaceholder: string = '';
+  textInputTextArea: String;
   isTrascriptDownloadEnabled = false;
-  audio: any;
   showContinueConversationButton: boolean = false
   // ========= begin:: gestione scroll view messaggi ======= //
   //startScroll = true; // indica lo stato dello scroll: true/false -> è in movimento/ è fermo
@@ -113,26 +114,18 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
   isOpenAttachmentPreview: Boolean = false;
   attachments: Array<{ file: Array<any>, metadata: {}}>
 
-  // userEmail: string;
-  // userFullname: string;
-  preChatForm = false;
-  textInputTextArea: String;
-  HEIGHT_DEFAULT = '20px';
+  
   
   isPopupUrl = isPopupUrl;
   popupUrl = popupUrl;
-  IMG_PROFILE_SUPPORT = 'https://user-images.githubusercontent.com/32448495/39111365-214552a0-46d5-11e8-9878-e5c804adfe6a.png';
-  
+
   // availableAgentsStatus = false; // indica quando è impostato lo stato degli agenti nel subscribe
   messages: Array<MessageModel> = [];
-  // recipient_fullname: string;
-  // attributes: any;
-  // GUEST_LABEL = '';
+
 
   CLIENT_BROWSER: string = navigator.userAgent;
 
   // devo inserirle nel globals
-  obsTyping: Subscription;
   subscriptions: Array<any> = [];
   private unsubscribe$: Subject<any> = new Subject<any>();
   showMessageWelcome: boolean;
@@ -143,19 +136,8 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
   // ========= end::agent availability
 
 
-  // ========== begin:: set icon status message
-  MSG_STATUS_SENT = MSG_STATUS_SENT;
-  MSG_STATUS_SENT_SERVER = MSG_STATUS_SENT_SERVER;
-  MSG_STATUS_RETURN_RECEIPT = MSG_STATUS_RETURN_RECEIPT;
-  // ========== end:: icon status message
-
-  lastMsg = false;
-  // _LABEL_PLACEHOLDER: string;
-
   isIE = /msie\s|trident\//i.test(window.navigator.userAgent);
   firstScroll = true;
-
-  public showSpinner = true;
 
   tooltipOptions = {
     'show-delay': 1500,
@@ -253,6 +235,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
       'MAXIMIZE',
       'MINIMIZE',
       'CLOSE_CHAT',
+      'RESTART',
       'LOGOUT'
     ];
 
@@ -974,6 +957,10 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
     })
   }
   /** CALLED BY: conv-header component */
+  onRestartChat(event){
+    this.hideTextAreaContent = true
+  }
+  /** CALLED BY: conv-header component */
   onWidgetHeightChange(mode){
     var tiledeskDiv = this.g.windowContext.window.document.getElementById('tiledeskdiv') 
     if(mode==='max'){
@@ -1110,6 +1097,10 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
   onNewConversationButtonClickedFN(event){
     this.logger.debug('[CONV-COMP] floating onNewConversationButtonClicked')
     this.onNewConversationButtonClicked.emit()
+  }
+  /** CALLED BY: conv-footer floating-button component */
+  onBackButton(event: boolean){
+    this.hideTextAreaContent = event;
   }
   // =========== END: event emitter function ====== //
 

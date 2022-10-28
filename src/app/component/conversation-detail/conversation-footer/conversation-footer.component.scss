@@ -176,6 +176,25 @@ textarea:active{
     border-radius: 50%;
 }
 
+.chat21-back-button{
+    position: absolute;
+    display: block;
+    height: $chat-footer-height;
+    cursor: pointer;
+}
+
+.chat21-back-button span svg:hover {
+    background: rgba(240,240,240,0.4)!important;
+    opacity: 1!important;
+    transition: all .45s ease-in-out 0s!important;
+    -moz-transition: all .45s ease-in-out 0s!important;
+    -webkit-transition: all .45s ease-in-out 0s!important;
+    padding: 0px;
+    margin: 0px;
+    border-radius: 50%;
+}
+
+
 #chat21-button-send {
     right: 8px;
     bottom: 0;
@@ -190,6 +209,10 @@ textarea:active{
 }
 #chat21-start-upload-doc,
 #chat21-start-mic {
+    left: 8px;
+    bottom: 0;
+}
+#chat21-back-button{
     left: 8px;
     bottom: 0;
 }

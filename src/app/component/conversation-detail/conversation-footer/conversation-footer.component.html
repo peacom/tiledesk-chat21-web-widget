@@ -1,4 +1,11 @@
-<div id="floating-container" *ngIf="isConversationArchived" class="fade-in-bottom" start-focus-chat21-conversation-component> 
+<div id="floating-container" *ngIf="hideTextAreaContent" class="fade-in-bottom" start-focus-chat21-conversation-component> 
+    <label tabindex="1504" aria-label="emojii" for="chat21-back-button" class="chat21-back-button" id="chat21-back-button" (click)="onBackButtonFN()">
+        <span class="v-align-center">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
+                <path d="M4.7,9c-0.6,0.6-0.6,1.5,0,2l8.6,8.6c0.6,0.6,1.5,0.6,2,0c0.6-0.6,0.6-1.5,0-2L7.7,10l7.6-7.6c0.6-0.6,0.6-1.5,0-2  s-1.5-0.6-2,0L4.7,9L4.7,9z"/>
+            </svg>
+        </span>
+    </label>
     <button tabindex="1040" aflistconv #aflistconv  class="c21-button-primary" (click)="openNewConversation()" [ngStyle]="{'background-color': stylesMap.get('themeColor'), 'border-color': stylesMap.get('themeColor'), 'color': stylesMap?.get('foregroundColor')}">
         <span class="v-align-center">
           <svg [ngStyle]="{'fill': 'yellow' }" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
@@ -23,7 +30,7 @@
     </button>
 </div>
 
-<div class="visible-text-area"  *ngIf="!isConversationArchived" [class.disabled] = "( isConversationArchived || hideTextReply)? true : null">
+<div class="visible-text-area"  *ngIf="!hideTextAreaContent" [class.disabled] = "( isConversationArchived || hideTextReply)? true : null">
     <!-- isFilePendingToUpload || -->
   <textarea 
     [attr.disabled] = "(isConversationArchived || hideTextReply)? true : null"
@@ -44,13 +51,9 @@
     <!-- placeholder="{{ translationMap?.get('LABEL_PLACEHOLDER') }}"> -->
   </textarea>
 
-  <!-- <chat-message-text-area
-    [text]="textInputTextArea"
-    (onChangeTextArea)="returnText($event)"
-  ></chat-message-text-area> -->
 </div>
 <!--   -->
-<div #div_attached  *ngIf="!isConversationArchived">
+<div #div_attached  *ngIf="!hideTextAreaContent">
     <!-- ICON ATTACHMENT -->
     <label *ngIf="showAttachmentButton == true" tabindex="1502" aria-label="allegati" for="chat21-file" class="chat21-textarea-button" [class.active]="!isFilePendingToUpload && !isConversationArchived && !hideTextReply" id="chat21-start-upload-doc">
         <span class="v-align-center">

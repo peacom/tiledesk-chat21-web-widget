@@ -174,6 +174,7 @@ export class Globals {
    openExternalLinkButton: boolean;
    hideHeaderConversationOptionsMenu: boolean;
    hideCloseConversationOptionMenu: boolean;
+   hideRestartConversationOptionsMenu: boolean;
    hideSettings: boolean;
    filterByRequester: boolean;
    persistence;
@@ -340,6 +341,8 @@ export class Globals {
     this.hideHeaderConversationOptionsMenu = false;
     /** enable to close a conversation from upper-right header menu  */
     this.hideCloseConversationOptionMenu = false;
+    /** enable to hide/show options menu in conversation detail header */
+    this.hideRestartConversationOptionsMenu = false;
     /** enable to hide/show options menu in conversation detail header */
     this.hideSettings = false;
     /** enable to hide/show options menu in home component */
@@ -512,8 +515,8 @@ export class Globals {
       'marginY': this.marginY, 'lancherWidth': this.launcherWidth, 'lancherHeight': this.launcherHeight,
       'baloonImage': this.baloonImage, 'baloonShape': this.baloonShape, 'isLogEnabled': this.isLogEnabled,
       'openExternalLinkButton': this.openExternalLinkButton, 'hideHeaderConversationOptionsMenu': this.hideHeaderConversationOptionsMenu,
-      'hideCloseConversationOptionMenu': this.hideCloseConversationOptionMenu, 'showInfoMessage': this.showInfoMessage,
-      'typingLocation': this.typingLocation, 'allowReopen': this.allowReopen,
+      'hideCloseConversationOptionMenu': this.hideCloseConversationOptionMenu, 'hideRestartConversationOptionsMenu': this.hideRestartConversationOptionsMenu,
+      'showInfoMessage': this.showInfoMessage, 'typingLocation': this.typingLocation, 'allowReopen': this.allowReopen,
       'hideSettings': this.hideSettings,'filterByRequester': this.filterByRequester, 
       'persistence': this.persistence,'showWaitTime': this.showWaitTime, 'showAvailableAgents': this.showAvailableAgents,
       'showLogoutOption': this.showLogoutOption, 'showAttachmentButton': this.showAttachmentButton,
