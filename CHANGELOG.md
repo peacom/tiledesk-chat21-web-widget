@@ -1,5 +1,9 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.41-rc.2
+- added: hideRestartConversationOptionsMenu property added to restar a new conversation ONLY IF singleConversation mode is active
+- removed: fullscreenMode from message-attachment
+
 ### 5.0.41-rc.1
 - bug-fixed: if bot has name 'Bot' and no 'bot_' prefix exist double avatar was shown
 - added: remove bubble-message background if is image or iframe and no text is in message
