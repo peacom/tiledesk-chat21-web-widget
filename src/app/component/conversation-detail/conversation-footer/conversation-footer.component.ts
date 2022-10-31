@@ -460,7 +460,8 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
   }
 
   onContinueConversation(){
-    this.isConversationArchived = false;
+    this.hideTextAreaContent = false;
+    this.onBackButton.emit(false)
     this.restoreTextArea()
   }
 

@@ -1101,6 +1101,15 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
   /** CALLED BY: conv-footer floating-button component */
   onBackButton(event: boolean){
     this.hideTextAreaContent = event;
+    try{
+      const tiledeskDiv = document.getElementById('chat21-footer')
+      tiledeskDiv.classList.remove('maximize-width')
+      // tiledeskDiv.style.width = '376px'
+      // tiledeskDiv.style.maxHeight = '620px'
+    }catch(e){
+      this.logger.error('[CONV-COMP] onBackButton > Error :' + e);
+    }
+
   }
   // =========== END: event emitter function ====== //
 
