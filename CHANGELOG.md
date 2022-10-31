@@ -1,5 +1,9 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.41-rc.3
+- addd: defaulf new label 
+- changed: target from es2017 to es5
+
 ### 5.0.41-rc.2
 - added: hideRestartConversationOptionsMenu property added to restar a new conversation ONLY IF singleConversation mode is active
 - removed: fullscreenMode from message-attachment
