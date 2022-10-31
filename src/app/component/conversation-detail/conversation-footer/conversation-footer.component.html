@@ -1,11 +1,4 @@
 <div id="floating-container" *ngIf="hideTextAreaContent" class="fade-in-bottom" start-focus-chat21-conversation-component> 
-    <label tabindex="1504" aria-label="emojii" for="chat21-back-button" class="chat21-back-button" id="chat21-back-button" (click)="onBackButtonFN()">
-        <span class="v-align-center">
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
-                <path d="M4.7,9c-0.6,0.6-0.6,1.5,0,2l8.6,8.6c0.6,0.6,1.5,0.6,2,0c0.6-0.6,0.6-1.5,0-2L7.7,10l7.6-7.6c0.6-0.6,0.6-1.5,0-2  s-1.5-0.6-2,0L4.7,9L4.7,9z"/>
-            </svg>
-        </span>
-    </label>
     <button tabindex="1040" aflistconv #aflistconv  class="c21-button-primary" (click)="openNewConversation()" [ngStyle]="{'background-color': stylesMap.get('themeColor'), 'border-color': stylesMap.get('themeColor'), 'color': stylesMap?.get('foregroundColor')}">
         <span class="v-align-center">
           <svg [ngStyle]="{'fill': 'yellow' }" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
@@ -18,11 +11,6 @@
         <div class="clear"></div>
     </button>
     <button *ngIf="showContinueConversationButton" tabindex="1040"  class="c21-button-primary" (click)="onContinueConversation()" [ngStyle]="{'background-color': stylesMap.get('themeColor'), 'border-color': stylesMap.get('themeColor'), 'color': stylesMap?.get('foregroundColor')}">
-        <!-- <span class="v-align-center">
-          <svg [ngStyle]="{'fill': 'yellow' }" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"  [ngStyle]="{'fill': stylesMap?.get('foregroundColor')}"/>
-          </svg>
-        </span> -->
         <span class="v-align-center c21-label-button">
           {{translationMap?.get('CONTINUE')}}
         </span>  
@@ -33,7 +21,7 @@
 <div class="visible-text-area"  *ngIf="!hideTextAreaContent" [class.disabled] = "( isConversationArchived || hideTextReply)? true : null">
     <!-- isFilePendingToUpload || -->
   <textarea 
-    [attr.disabled] = "(isConversationArchived || hideTextReply)? true : null"
+    [attr.disabled] = "(hideTextReply)? true : null"
     [attr.placeholder] ="(footerMessagePlaceholder)? footerMessagePlaceholder : translationMap?.get('LABEL_PLACEHOLDER')"
     start-focus-chat21-conversation-component
     inputTextArea
@@ -55,7 +43,7 @@
 <!--   -->
 <div #div_attached  *ngIf="!hideTextAreaContent">
     <!-- ICON ATTACHMENT -->
-    <label *ngIf="showAttachmentButton == true" tabindex="1502" aria-label="allegati" for="chat21-file" class="chat21-textarea-button" [class.active]="!isFilePendingToUpload && !isConversationArchived && !hideTextReply" id="chat21-start-upload-doc">
+    <label *ngIf="showAttachmentButton == true" tabindex="1502" aria-label="allegati" for="chat21-file" class="chat21-textarea-button" [class.active]="!isFilePendingToUpload && !hideTextReply" id="chat21-start-upload-doc">
         <span class="v-align-center">
             <svg xmlns="http://www.w3.org/2000/svg"  width="24" height="24" viewBox="0 0 28 28" transform="rotate(45)">
                 <!-- <path [ngStyle]="{'fill': stylesMap?.get('themeColor') }" d="M0 0h24v24H0V0z"/> -->
@@ -78,7 +66,7 @@
     </label>
     <!-- ICON SEND -->
     <!-- <div [class.active]="isFileSelected && !isFilePendingToUpload &&" class="chat21-textarea-button" id="chat21-button-reset" (click)="resetLoadImage()"></div> -->
-    <div tabindex="-1" class="chat21-textarea-button" [class.active]="!isConversationArchived && textInputTextArea && !hideTextReply" id="chat21-button-send" (click)="onSendPressed($event)">
+    <div tabindex="-1" class="chat21-textarea-button" [class.active]="textInputTextArea && !hideTextReply" id="chat21-button-send" (click)="onSendPressed($event)">
         <!-- <span class="v-align-center">
             <svg xmlns="http://www.w3.org/2000/svg" [ngStyle]="{'fill': stylesMap?.get('themeColor') }" width="24" height="24" viewBox="0 0 28 28">
                 <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
@@ -91,7 +79,7 @@
         </span>
     </div>
     <!-- ICON EMOJII -->
-    <label tabindex="1504" aria-label="emojii" for="chat21-emojii" class="chat21-textarea-button" [class.active]="!isFilePendingToUpload && !isConversationArchived && !hideTextReply" id="chat21-emoticon-picker" (click)="onEmojiiPickerClicked()">
+    <label tabindex="1504" aria-label="emojii" for="chat21-emojii" class="chat21-textarea-button" [class.active]="!isFilePendingToUpload && !hideTextReply" id="chat21-emoticon-picker" (click)="onEmojiiPickerClicked()">
         <span class="v-align-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 28 28" >
                 <path d="M0 0h24v24H0V0z" fill="none"/>
