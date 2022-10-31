@@ -1130,6 +1130,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
     this.logger.debug('[CONV-COMP] ngOnDestroy ------------------> this.subscriptions', this.subscriptions);
     //this.storageService.removeItem('activeConversation');
     this.isConversationArchived = false;
+    this.hideTextAreaContent = false;
     this.conversationFooter.textInputTextArea='';
     this.hideFooterTextReply = false;
     this.footerMessagePlaceholder = '';
