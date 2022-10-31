@@ -44,25 +44,11 @@ function loadIframe(tiledeskScriptBaseLocation) {
     srcTileDesk += '</head>';
     srcTileDesk += '<body>';
     srcTileDesk += '<chat-root></chat-root>';
-
-    if(dev){
-      srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/runtime.js"></script>';
-      srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/polyfills.js"></script>';
-      srcTileDesk += '<script type="text/css" src="'+tiledeskScriptBaseLocation+'/styles.css"></script>';
-      srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/vendor.js"></script>';
-      srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/main.js"></script>';
-    }else{
-      srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/runtime-es5.js" nomodule defer></script>';
-      srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/runtime-es2017.js" type="module"></script>';
-      srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/polyfills-es5.js" nomodule defer></script>';
-      srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/polyfills-es2017.js" type="module"></script>';
-      srcTileDesk += '<script type="text/css" src="'+tiledeskScriptBaseLocation+'/styles-es5.js" nomodule defer></script>';
-      srcTileDesk += '<script type="text/css" src="'+tiledeskScriptBaseLocation+'/styles-es2017.js" type="module"></script>';
-      srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/vendor-es5.js" nomodule defer></script>';
-      srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/vendor-es2017.js" type="module"></script>';
-      srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/main-es5.js" nomodule defer></script>';
-      srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/main-es2017.js" type="module"></script>';
-    }  
+    srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/runtime.js"></script>';
+    srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/polyfills.js"></script>';
+    srcTileDesk += '<script type="text/css" src="'+tiledeskScriptBaseLocation+'/styles.css"></script>';
+    srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/vendor.js"></script>';
+    srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/main.js"></script>';
     srcTileDesk += '</body>';
     srcTileDesk += '</html>';
     
