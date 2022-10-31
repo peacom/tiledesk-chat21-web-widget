@@ -146,7 +146,7 @@
     
     
                           <!-- message type:: button &&  -->
-                          <div *ngIf="message?.attributes && message?.attributes?.attachment " [ngClass]="{'slide-in-left': false}" > 
+                          <div *ngIf="message?.attributes && message?.attributes?.attachment " [ngClass]="{'slide-in-left': false}" class="attachment_container"> 
                               <chat-message-attachment 
                                   style="height: 100%; display: block;"
                                   [message]="message"

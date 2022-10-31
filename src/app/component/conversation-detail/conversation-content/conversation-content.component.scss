@@ -130,6 +130,11 @@
                     width: 100%;
                     //opacity: 0px;
                 }
+                .attachment_container {
+                    display: flex;
+                    align-content: center;
+                    justify-content: flex-end;
+                }
                 .msg_info_container{
                     text-align: center;
                     padding: 0px 0px 6px 0px
