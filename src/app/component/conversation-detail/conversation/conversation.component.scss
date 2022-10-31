@@ -427,6 +427,9 @@
     background: white;
     min-height: 40px;
 
+    &.maximize-width{
+        padding: 8px 0px;
+    }
 
     /* button scroll to bottom page */
     #chat21-buttonToBottom {

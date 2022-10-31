@@ -218,14 +218,15 @@ textarea:active{
 }
 
 #floating-container{
-    width: 98%; //not 100% due to vertical scroll bar
+    width: 100%; //not 100% due to vertical scroll bar
     // margin: 0px auto;
     // height: 46px;
     // position: absolute;
     // bottom: 0px;
     border-top: 0px solid $light-gray;
-    display: inline-block;
+    display: inline-flex;
     align-items: center;
+    justify-content: center;
     -webkit-box-shadow: none;
     box-shadow: none;
     vertical-align: top;
@@ -239,7 +240,7 @@ textarea:active{
 
     .c21-button-primary {
         height: 36px;
-        margin: 5px 0px;
+        margin: 5px 3px;
     }
 
     .c21-waiting-time {
