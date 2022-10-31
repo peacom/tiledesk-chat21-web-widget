@@ -1,5 +1,7 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.41 in PROD
+
 ### 5.0.41-rc.3
 - bug-fixed: if singleConversation is active and allowReopen active, footer text-area is disabled
 
