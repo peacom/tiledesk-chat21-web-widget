@@ -1565,9 +1565,11 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         const recipientId : string = this.appStorageService.getItem('recipientId')
         this.g.setParameter('recipientId', recipientId);
         this.logger.debug('[APP-COMP] openCloseWidget', recipientId, this.g.isOpen, this.g.startFromHome);
-        if (this.g.isOpen === true) {
+        if (this.g.isOpen === false) {
             if (!recipientId) {
                 if(this.g.singleConversation){
+                    this.isOpenHome = false;
+                    this.g.setParameter('isOpenPrechatForm', false)
                     this.manageWidgetSingleConversation()
                 } else if (this.g.startFromHome) {
                     this.isOpenHome = true;
@@ -1597,8 +1599,9 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         } else {
             this.triggerOnCloseEvent();
         }
-        // this.g.setParentBodyStyleMobile(this.g.isOpen, this.g.isMobile)
-        // this.g.setShadow(this.g.isOpen)
+        //change status to the widget
+        this.g.setIsOpen(!this.g.isOpen);
+        this.appStorageService.setItem('isOpen', this.g.isOpen);
     }
 
     /**
