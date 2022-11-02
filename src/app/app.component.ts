@@ -1666,11 +1666,16 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
      */
     onCloseModalPrechatForm() {
         this.logger.debug('[APP-COMP] onCloseModalPrechatForm');
-        this.isOpenHome = true;
-        this.isOpenSelectionDepartment = false;
-        this.isOpenConversation = false;
-        this.g.setParameter('isOpenPrechatForm', false);
-        this.g.newConversationStart = false;
+        if(!this.g.singleConversation){
+            this.isOpenHome = true;
+            this.isOpenSelectionDepartment = false;
+            this.isOpenConversation = false;
+            this.g.setParameter('isOpenPrechatForm', false);
+            this.g.newConversationStart = false;
+        }else{
+            this.onCloseWidget()
+        }
+        
         // this.settingsSaverService.setVariable('isOpenPrechatForm', false);
     }
 
@@ -1813,7 +1818,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         if(this.g.singleConversation){
             //manage single conversation
         }else{
-            this.onBackConversation
+            this.onBackConversation()
         }
     }
 
