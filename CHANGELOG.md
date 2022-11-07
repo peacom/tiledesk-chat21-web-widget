@@ -1,5 +1,7 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.42 in PROD
+
 ### 5.0.42-rc.1
 - bug-fixed: if singleConversation is active, preChatForm is active and departmentID is still selected prechatForm component was shows for a fews
 - bug-fixed: if singleConversation is active and close prechat icon is clicked, close widget, otherwize go to home
