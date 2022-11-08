@@ -39,10 +39,6 @@ export class FormTextComponent implements OnInit {
     }
     if(this.stylesMap && this.stylesMap.get('themeColor')) this.elementRef.nativeElement.style.setProperty('--themeColor', this.stylesMap.get('themeColor'));
     if(this.stylesMap && this.stylesMap.get('foregroundColor')) this.elementRef.nativeElement.style.setProperty('--foregroundColor', this.stylesMap.get('foregroundColor'));
-    // if(this.hasSubmitted){
-    //   this.input.nativeElement.classList.add('is-focused')
-    //   this.setFormStyle()
-    // }
   }
 
   onFocusOut(){
