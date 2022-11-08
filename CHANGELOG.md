@@ -1,6 +1,10 @@
 # chat21-web-widget ver 5.0
 
-### 5.0.42 in PROD
+### 5.0.43-rc.1
+- bug-fixed: form elements not set correctly themeColor variable
+- added: dashboardBaseUrl to env to manage 'Go to Console' test-page button
+
+# 5.0.42 in PROD
 
 ### 5.0.42-rc.1
 - bug-fixed: if singleConversation is active, preChatForm is active and departmentID is still selected prechatForm component was shows for a fews
