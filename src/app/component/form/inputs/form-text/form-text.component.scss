@@ -1,5 +1,10 @@
 @import 'src/app/sass/variables';
 
+:host {
+	--foregroundColor: #0000;
+  --themeColor: #2a6ac1;
+}
+
 .c21-input-container {
   border-bottom: 1px solid rgba(211, 212, 213, .4);
   -webkit-border-radius: 3px;
