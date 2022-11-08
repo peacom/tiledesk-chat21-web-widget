@@ -1,5 +1,8 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.43-rc.2
+- bug-fixed: stylesMap is not defined yet
+
 ### 5.0.43-rc.1
 - bug-fixed: form elements not set correctly themeColor variable
 - added: dashboardBaseUrl to env to manage 'Go to Console' test-page button
