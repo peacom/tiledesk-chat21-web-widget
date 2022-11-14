@@ -66,12 +66,11 @@ export class MQTTAuthService extends MessagingAuthService {
     this.logger.log("[MQTTAuthService] logout: closing mqtt connection...");
     return new Promise((resolve, reject) => {
       this.chat21Service.chatClient.close(() => {
-        console.log("[MQTTAuthService] logout: mqtt connection closed. OK");
         // remove
         // this.appStorage.removeItem('tiledeskToken');
         // this.appStorage.removeItem('currentUser');
         this.currentUser = null;
-        console.log("[MQTTAuthService] logout: user removed");
+        this.logger.debug("[MQTTAuthService] logout: mqtt connection closed. user removed. OK");
         this.BSSignOut.next(true);
         this.BSAuthStateChanged.next('offline');
         resolve(true)
@@ -93,20 +92,20 @@ z
 
   /** */
   getToken(): string {
-    console.log('[MQTTAuthService]::getToken');
+    this.logger.debug('[MQTTAuthService]::getToken');
     return this.token;
   }
 
   /**
    */
   onAuthStateChanged() {
-    console.log('UserService::onAuthStateChanged');
+    this.logger.debug('UserService::onAuthStateChanged');
     // if (this.appStorage.getItem('tiledeskToken') == null) {
     //   this.currentUser = null;
       this.BSAuthStateChanged.next('offline');
     // }
     // const that = this;
-    console.log("STORAGE CHANGED: added listner")
+    this.logger.debug("STORAGE CHANGED: added listner")
     // window.addEventListener('storage', (e) => {
     //   console.log('STORAGE CHANGED:', e.key);
     //   if (this.appStorage.getItem('tiledeskToken') == null && this.appStorage.getItem('currentUser') == null) {
@@ -254,19 +253,19 @@ z
     // const that = this;
     this.http.post(this.URL_TILEDESK_CREATE_CUSTOM_TOKEN, postData, { headers, responseType})
     .subscribe(data =>  {
-      console.log("[MQTTAuthService] connectWithCustomToken: **** data", data)
+      this.logger.debug("[MQTTAuthService] connectWithCustomToken: **** data", data)
       const result = JSON.parse(data);
       this.connectMQTT(result);
     }, error => {
-      console.log(error);
+      this.logger.error(error);
     });
   }
 
   connectMQTT(credentials: any): any {
-    console.log('[MQTTAuthService] connectMQTT: **** credentials:', credentials);
+    this.logger.debug('[MQTTAuthService] connectMQTT: **** credentials:', credentials);
     const userid = credentials.userid;
     this.chat21Service.chatClient.connect(userid, credentials.token, () => {
-      console.log('[MQTTAuthService] connectMQTT: Chat connected.');
+      this.logger.debug('[MQTTAuthService] connectMQTT: Chat connected.');
       this.BSAuthStateChanged.next('online');
     });
   }
