@@ -1,5 +1,9 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.44-rc.1
+- added: singleConversation and themeColorOpacity property on /widget api call
+- bug-fixed: default image for file attachment non rendered
+
 # 5.0.43 in PROD
 
 ### 5.0.43-rc.2
