@@ -241,6 +241,7 @@
         window.tiledeskSettings = {
             marginX: "100px",
             marginY: "50px",
+            calloutTimer: 1
             // autostart: false
 
         };
@@ -290,6 +291,12 @@
             setTimeout(() => {
                 document.getElementById("preloader").style.display = "none";
             }, 1000);
+            //open widget after 3s if is closed
+            setTimeout(() => {
+                if(event_data && event_data.detail && event_data.detail.global && !event_data.detail.global.isOpen){
+                    window.Tiledesk('open')
+                }
+            }, 3000);
         });
 
         window.Tiledesk('onAuthStateChanged', function(event_data) {
