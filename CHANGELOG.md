@@ -1,5 +1,8 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.44 in PROD
+- bug-fixed: axios is undefined with MQTT engine
+
 ### 5.0.44-rc.1
 - added: singleConversation and themeColorOpacity property on /widget api call
 - bug-fixed: default image for file attachment non rendered
