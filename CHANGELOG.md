@@ -1,5 +1,8 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.45 in PROD
+- changed: chat21client.js file to 1.12.3
+
 ### 5.0.44 in PROD
 - bug-fixed: axios is undefined with MQTT engine
 
