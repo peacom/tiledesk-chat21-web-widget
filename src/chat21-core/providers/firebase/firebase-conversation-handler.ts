@@ -220,40 +220,6 @@ export class FirebaseConversationHandler extends ConversationHandlerService {
         // this.ref.off();
     }
 
-
-    // ---------------------------------------------------------- //
-    // BEGIN PRIVATE FUNCTIONS
-    // ---------------------------------------------------------- //
-    /** */
-    // private setAttributes(): any {
-    //     const attributes: any = {
-    //         client: this.CLIENT_BROWSER,
-    //         sourcePage: location.href,
-            
-    //     };
-
-    //     if(this.loggedUser && this.loggedUser.email ){
-    //         attributes.userEmail = this.loggedUser.email
-    //     }
-    //     if(this.loggedUser && this.loggedUser.fullname) {
-    //         attributes.userFullname = this.loggedUser.fullname
-    //     }
-        
-
-    //     // let attributes: any = JSON.parse(sessionStorage.getItem('attributes'));
-    //     // if (!attributes || attributes === 'undefined') {
-    //     //     attributes = {
-    //     //         client: this.CLIENT_BROWSER,
-    //     //         sourcePage: location.href,
-    //     //         userEmail: this.loggedUser.email,
-    //     //         userFullname: this.loggedUser.fullname
-    //     //     };
-    //     //     this.logger.printLog('>>>>>>>>>>>>>> setAttributes: ', JSON.stringify(attributes));
-    //     //     sessionStorage.setItem('attributes', JSON.stringify(attributes));
-    //     // }
-    //     return attributes;
-    // }
-
     /** */
     private added(childSnapshot: any) {
         const msg = this.messageGenerate(childSnapshot);
@@ -350,11 +316,6 @@ export class FirebaseConversationHandler extends ConversationHandlerService {
         if (messageType(MESSAGE_TYPE_INFO, msg)) {
             this.translateInfoSupportMessages(msg);
         }
-        /// commented because NOW ATTRIBUTES COMES FROM OUTSIDE 
-        // if (msg.attributes && msg.attributes.projectId) {
-        //     this.attributes.projectId = msg.attributes.projectId;
-        //     // sessionStorage.setItem('attributes', JSON.stringify(attributes));
-        // }
         return msg;
     }
 
@@ -380,11 +341,7 @@ export class FirebaseConversationHandler extends ConversationHandlerService {
         if (messageType(MESSAGE_TYPE_INFO, msg)) {
             this.translateInfoSupportMessages(msg);
         }
-        /// commented because NOW ATTRIBUTES COMES FROM OUTSIDE 
-        // if (msg.attributes && msg.attributes.projectId) {
-        //     this.attributes.projectId = msg.attributes.projectId;
-        //     // sessionStorage.setItem('attributes', JSON.stringify(attributes));
-        // }
+
         return msg;
     }
 
