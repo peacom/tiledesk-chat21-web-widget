@@ -1,5 +1,8 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.46-rc.1
+- bug-fixed: localstorage save [object, object] for attributes key
+
 ### 5.0.45 in PROD
 - changed: chat21client.js file to 1.12.3
 
