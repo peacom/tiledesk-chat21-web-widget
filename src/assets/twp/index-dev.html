@@ -393,7 +393,7 @@
         window.tiledeskSettings = {
             marginX: "100px",
             marginY: "50px",
-            calloutTimer: 5,
+            calloutTimer: 1,
         };
 
         (function(d, s, id) {
@@ -429,9 +429,15 @@
             console.log("onBeforeInit Tiledesk FN", event_data); 
 
             setTimeout(() => {
-                var enbedJs = event_data && event_data.detail && event_data.detail.appConfigs && event_data.detail.appConfigs.enbedJs? event_data.detail.appConfigs.enbedJs : false;
-                document.getElementById("enbed").style.display = enbedJs? "inline-block": "none";
-                document.getElementById("base_url").innerHTML = enbedJs ? baseUrl + '/launch.js': null;
+                if(event_data && event_data.detail && event_data.detail.appConfigs){
+                    
+                    var enbedJs = event_data.detail.appConfigs.enbedJs? event_data.detail.appConfigs.enbedJs : false;
+                    document.getElementById("enbed").style.display = enbedJs? "inline-block": "none";
+                    document.getElementById("base_url").innerHTML = enbedJs ? baseUrl + '/launch.js': null;
+                    
+                    baseUrlConsole = event_data.detail.appConfigs.dashboardUrl? event_data.detail.appConfigs.dashboardUrl : baseUrlConsole;
+                }
+
             }, 1000);
 
             if(document.getElementById('events')){
@@ -449,6 +455,12 @@
                 document.getElementById('events').value += 'onInit --> FIRED!' + '\n' 
                 document.getElementById('events').scrollTop = document.getElementById('events').scrollHeight
             }, 1000);
+            //open widget after 3s if is closed
+            setTimeout(() => {
+                if(event_data && event_data.detail && event_data.detail.global && !event_data.detail.global.isOpen){
+                    window.Tiledesk('open')
+                }
+            }, 3000);
         });
         
         window.Tiledesk('onAuthStateChanged', function(event_data) {

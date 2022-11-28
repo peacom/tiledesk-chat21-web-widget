@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormGroup, FormGroupDirective } from '@angular/forms';
 import { FormArray } from '../../../../../chat21-core/models/formArray';
 
@@ -23,14 +23,17 @@ export class FormTextareaComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.rootFormGroup.control as FormGroup;
-    this.elementRef.nativeElement.style.setProperty('--themeColor', this.stylesMap.get('themeColor'));
-    this.elementRef.nativeElement.style.setProperty('--foregroundColor', this.stylesMap.get('foregroundColor'));
     if(this.form.controls && this.form.controls[this.controlName]){
       this.form.controls[this.controlName].valueChanges.subscribe((value) => {
         this.hasSubmitted= false;
         this.setFormStyle();
       })
     }
+  }
+
+  ngOnChanges(changes: SimpleChanges){
+    if(this.stylesMap && this.stylesMap.get('themeColor')) this.elementRef.nativeElement.style.setProperty('--themeColor', this.stylesMap.get('themeColor'));
+    if(this.stylesMap && this.stylesMap.get('foregroundColor')) this.elementRef.nativeElement.style.setProperty('--foregroundColor', this.stylesMap.get('foregroundColor'));
   }
 
   // ngOnChanges(changes: SimpleChange){

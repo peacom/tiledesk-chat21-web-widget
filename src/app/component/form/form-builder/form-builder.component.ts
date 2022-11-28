@@ -107,7 +107,7 @@ export class FormBuilderComponent implements OnInit {
         //check if a key in label object contains browser language
         const language = this.getAcceptLanguage(element.label)
         this.logger.debug('[FORM-BUILDER] setTranslations acceptedLanguage for element.label:', element, language)
-        element.label= element.label[language]
+        element.text= element.label[language]
         // let translation = ''
         // Object.keys(element.label).forEach((lang)=> {
         //   if(this.browserLang.includes(lang.substring(0,2))){
@@ -117,7 +117,7 @@ export class FormBuilderComponent implements OnInit {
         // translation === ''?  translation= element.label[0] : null 
         // element.label = translation
       } else if (typeof element.label === 'string'){
-        element.label = this.customTranslateService.translateLanguage([element.label]).get(element.label)
+        element.text = this.customTranslateService.translateLanguage([element.label]).get(element.label)
       }
 
       /** 'erroLabel' property */

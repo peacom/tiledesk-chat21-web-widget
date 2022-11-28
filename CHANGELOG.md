@@ -1,5 +1,35 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.46-rc.1
+- bug-fixed: localstorage save [object, object] for attributes key
+
+### 5.0.45 in PROD
+- changed: chat21client.js file to 1.12.3
+
+### 5.0.44 in PROD
+- bug-fixed: axios is undefined with MQTT engine
+
+### 5.0.44-rc.1
+- added: singleConversation and themeColorOpacity property on /widget api call
+- bug-fixed: default image for file attachment non rendered
+
+# 5.0.43 in PROD
+
+### 5.0.43-rc.2
+- bug-fixed: stylesMap is not defined yet
+
+### 5.0.43-rc.1
+- bug-fixed: form elements not set correctly themeColor variable
+- added: dashboardBaseUrl to env to manage 'Go to Console' test-page button
+
+# 5.0.42 in PROD
+
+### 5.0.42-rc.1
+- bug-fixed: if singleConversation is active, preChatForm is active and departmentID is still selected prechatForm component was shows for a fews
+- bug-fixed: if singleConversation is active and close prechat icon is clicked, close widget, otherwize go to home
+- changed: dynamically add shadow to chat21-conversation element
+- changed: update widget status (open/closed) in app.component and not in launcher-button component
+
 ### 5.0.41 in PROD
 
 ### 5.0.41-rc.3

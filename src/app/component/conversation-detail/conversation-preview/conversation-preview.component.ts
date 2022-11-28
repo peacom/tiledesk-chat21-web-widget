@@ -158,7 +158,7 @@ export class ConversationPreviewComponent implements OnInit {
         that.logger.debug('[LOADER-PREVIEW-PAGE] OK: ', metadata);
         that.arrayFiles.push({metadata});
         if (!that.fileSelected) {
-          that.fileSelected = {metadata};
+          that.fileSelected = Object.assign({}, metadata)
         }
       };
     }

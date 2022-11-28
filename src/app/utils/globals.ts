@@ -559,14 +559,17 @@ export class Globals {
     const divTiledeskWidget = this.windowContext.document.getElementById('tiledeskdiv');
     const chat21conversationsEL = document.getElementById('chat21-conversations')
 
-    //customize shadow for 'tiledeskdiv'
+    //customize shadow for 'tiledeskdiv' and 'chat21-conversations'
     if(isOpen && divTiledeskWidget){
       setTimeout(() => {
         divTiledeskWidget.classList.add('shadow')
+        chat21conversationsEL.classList.add('shadow')
       }, 1000);
     } else if(!isOpen && divTiledeskWidget){
       divTiledeskWidget.classList.remove('shadow')
+      chat21conversationsEL.classList.remove('shadow')
     }
+
 
     //customize border-radius for 'chat21-conversations'
     if(isOpen && this.isMobile && chat21conversationsEL){

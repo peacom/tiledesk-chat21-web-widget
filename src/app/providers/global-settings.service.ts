@@ -502,6 +502,12 @@ export class GlobalSettingsService {
                             globals.showInfoMessage.push('CHAT_CLOSED')
                         }
                     }
+                    if (variables.hasOwnProperty('singleConversation')) {
+                        globals['singleConversation'] = variables['singleConversation'];
+                    }
+                    if (variables.hasOwnProperty('themeColorOpacity')) {
+                        globals['themeColorOpacity'] = variables['themeColorOpacity'];
+                    }
                     
                 }
             }

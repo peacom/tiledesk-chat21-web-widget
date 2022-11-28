@@ -212,26 +212,6 @@ export class MQTTConversationHandler extends ConversationHandlerService {
         // this.ref.off();
     }
 
-
-    // ---------------------------------------------------------- //
-    // BEGIN PRIVATE FUNCTIONS
-    // ---------------------------------------------------------- //
-    /** */
-    // private setAttributes(): any {
-    //     let attributes: any = JSON.parse(sessionStorage.getItem('attributes'));
-    //     if (!attributes || attributes === 'undefined') {
-    //         attributes = {
-    //             client: this.CLIENT_BROWSER,
-    //             sourcePage: location.href,
-    //             userEmail: this.loggedUser.email,
-    //             userFullname: this.loggedUser.fullname
-    //         };
-    //         this.logger.log('>>>>>>>>>>>>>> setAttributes: ', JSON.stringify(attributes));
-    //         sessionStorage.setItem('attributes', JSON.stringify(attributes));
-    //     }
-    //     return attributes;
-    // }
-
     /** */
     private addedMessage(messageSnapshot: any) {
         const msg = this.messageGenerate(messageSnapshot);

@@ -91,6 +91,7 @@ export const environment = {
   },
   apiUrl: 'https://<YOUR-TILEDESK-API-URL>/',
   baseImageUrl: 'https://<YOUR-BASE-IMAGE-URL>/',
+  dashboardUrl: "https://<YOUR-TILEDESK-DASHBOARD-URL>/",
   defaultLang : 'en',
   storage_prefix : 'widget_sv5',
   authPersistence: 'LOCAL',

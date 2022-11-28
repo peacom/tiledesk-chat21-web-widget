@@ -22,6 +22,7 @@
     },
     "apiUrl": "http://localhost:3000/",
     "baseImageUrl": "http://localhost:3000/",
+    "dashboardUrl": "http://localhost:4500/",
     "authPersistence": "LOCAL",
     "enbedJs": true
     

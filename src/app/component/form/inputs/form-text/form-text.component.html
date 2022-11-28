@@ -3,7 +3,7 @@
       [ngClass]="{'is-empty': !form?.controls[element.name].value}"
       id="div_input" #div_input>
     <label class="control-label">
-      {{element?.label}}
+      {{element?.text}}
     </label>
     <input 
       [formControlName]="element?.name" 

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ElementRef, EventEmitter, Output } from '@angular/core';
+import { Component, Input, OnInit, ElementRef, EventEmitter, Output, SimpleChanges } from '@angular/core';
 import { FormGroupDirective } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { FormArray } from '../../../../../chat21-core/models/formArray';
@@ -23,9 +23,11 @@ export class FormCheckboxComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.rootFormGroup.control;
-    this.elementRef.nativeElement.style.setProperty('--themeColor', this.stylesMap.get('themeColor'));
-    this.elementRef.nativeElement.style.setProperty('--foregroundColor', this.stylesMap.get('foregroundColor'));
-    
+  }
+
+  ngOnChanges(changes: SimpleChanges){
+    if(this.stylesMap && this.stylesMap.get('themeColor')) this.elementRef.nativeElement.style.setProperty('--themeColor', this.stylesMap.get('themeColor'));
+    if(this.stylesMap && this.stylesMap.get('foregroundColor')) this.elementRef.nativeElement.style.setProperty('--foregroundColor', this.stylesMap.get('foregroundColor'));
   }
 
   /**

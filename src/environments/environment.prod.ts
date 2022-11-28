@@ -31,6 +31,7 @@ export const environment = {
   },
   apiUrl: 'http://localhost:3000/',
   baseImageUrl: 'https://firebasestorage.googleapis.com/v0/b/',
+  dashboardUrl: 'https://console.tiledesk.com/v2/dashboard/',
   defaultLang : 'en',
   storage_prefix : 'widget_sv5',
   authPersistence: 'LOCAL',

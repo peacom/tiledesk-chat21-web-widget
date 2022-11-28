@@ -1,5 +1,5 @@
 
-:root {
+:host {
 	--foregroundColor: #0000;
   --themeColor: #2a6ac1;
   --backgroundUnchecked: #ffff;
@@ -34,6 +34,7 @@ input[type="checkbox"] {
     -webkit-border-radius:3px;
     -webkit-appearance: none;
     -webkit-transition: box-shadow 200ms;
+    transition: box-shadow 200ms;
   
 }
 

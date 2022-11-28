@@ -525,7 +525,7 @@ chat-root {
             // border: 1px solid #cccccc; //NEW GAB
             margin: 0px;
             padding: 0px;
-            box-shadow:rgba(0, 0, 0, 0.16) 0px 8px 36px 0px; //NEW GAB
+            // box-shadow:rgba(0, 0, 0, 0.16) 0px 8px 36px 0px; //NEW GAB
 
             &.full-screen-mode {
                 width: 100%;
@@ -539,6 +539,10 @@ chat-root {
             }
             &.isMobile{
                 border-radius: 0px;
+            }
+            &.shadow{
+                transition: box-shadow 0.8s ease-in;
+                box-shadow: rgba(0, 0, 0, 0.16) 0px 8px 36px 0px; /*NEW GAB*/
             }
         }
 

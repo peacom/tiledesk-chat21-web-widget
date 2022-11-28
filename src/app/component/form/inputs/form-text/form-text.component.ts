@@ -25,8 +25,6 @@ export class FormTextComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.rootFormGroup.control as FormGroup;
-    this.elementRef.nativeElement.style.setProperty('--themeColor', this.stylesMap.get('themeColor'));
-    this.elementRef.nativeElement.style.setProperty('--foregroundColor', this.stylesMap.get('foregroundColor'));
     if(this.form && this.form.controls && this.form.controls[this.controlName]){
       this.form.controls[this.controlName].valueChanges.subscribe((value) => {
         this.hasSubmitted= false;
@@ -39,10 +37,8 @@ export class FormTextComponent implements OnInit {
     if(this.controlName && (this.controlName.toLowerCase().includes('email') || this.controlName.toLowerCase().includes('e-mail')) ){
       this.inputType = 'email';
     }
-    // if(this.hasSubmitted){
-    //   this.input.nativeElement.classList.add('is-focused')
-    //   this.setFormStyle()
-    // }
+    if(this.stylesMap && this.stylesMap.get('themeColor')) this.elementRef.nativeElement.style.setProperty('--themeColor', this.stylesMap.get('themeColor'));
+    if(this.stylesMap && this.stylesMap.get('foregroundColor')) this.elementRef.nativeElement.style.setProperty('--foregroundColor', this.stylesMap.get('foregroundColor'));
   }
 
   onFocusOut(){

@@ -82,7 +82,7 @@
     **************** STEP 2 *******************
     [class.active]="g.isOpenPrechatForm === true"
     -->
-    <div *ngIf="g.isOpenPrechatForm" class="modal-page prechat-form active">
+    <div *ngIf="g.isOpenPrechatForm && g.senderId" class="modal-page prechat-form active">
       <chat-prechat-form
         [stylesMap]="styleMapConversation"
         (onClosePage)="onCloseModalPrechatForm()" 
