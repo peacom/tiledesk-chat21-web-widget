@@ -179,4 +179,11 @@
 
     }
 
-
+.tiledesk-popup{
+    opacity: 1;
+    position: absolute;
+    inset: 0px;
+    outline-offset: -5px;
+    background-color: rgba(0, 0, 0, 0.35);
+    will-change: opacity;
+}
