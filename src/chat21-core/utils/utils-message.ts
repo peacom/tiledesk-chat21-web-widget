@@ -64,7 +64,7 @@ export function isUserBanned(message: any){
 
 /** */
 export function isMine(message: any) {
-    if (message.isSender) {
+    if (message && message.isSender) {
       return true;
     }
     return false;
