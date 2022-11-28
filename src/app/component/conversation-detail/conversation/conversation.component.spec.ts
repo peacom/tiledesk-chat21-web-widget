@@ -30,10 +30,15 @@ import { TypingService } from '../../../../chat21-core/providers/abstract/typing
 import { ImageRepoService } from '../../../../chat21-core/providers/abstract/image-repo.service';
 import { UploadService } from '../../../../chat21-core/providers/abstract/upload.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { NGXLogger } from 'ngx-logger';
+import { CustomLogger } from 'src/chat21-core/providers/logger/customLogger';
+import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
 
 describe('ConversationComponent', () => {
   let component: ConversationComponent;
   let fixture: ComponentFixture<ConversationComponent>;
+  let ngxlogger: NGXLogger;
+  let customLogger = new CustomLogger(ngxlogger)
   class MockElementRef {}
 
   beforeEach(waitForAsync(() => {
@@ -66,7 +71,8 @@ describe('ConversationComponent', () => {
         ImageRepoService,
         UploadService,
         StarRatingWidgetService,
-        TiledeskRequestsService
+        TiledeskRequestsService,
+        NGXLogger
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })
@@ -76,6 +82,9 @@ describe('ConversationComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ConversationComponent);
     component = fixture.componentInstance;
+    LoggerInstance.setInstance(customLogger)
+    let logger = LoggerInstance.getInstance()
+    component['logger']= logger
     fixture.detectChanges();
   });
 

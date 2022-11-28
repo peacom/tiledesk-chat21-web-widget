@@ -117,9 +117,9 @@ describe('ConversationContentComponent', () => {
     component.baseLocation = 'http://tiledesk-widget-pre.s3-eu-west-1.amazonaws.com'
     component.translationMap = new Map();
     component.stylesMap = new Map();
-    fixture.detectChanges()
     const nativeEl: HTMLElement = fixture.nativeElement;
     const baseReceiveEl = nativeEl.querySelector('.message_sender_fullname');
+    fixture.detectChanges()
     expect(baseReceiveEl.textContent).toBe('BOT2');
   });
 
@@ -164,11 +164,12 @@ describe('ConversationContentComponent', () => {
     component.baseLocation = 'http://tiledesk-widget-pre.s3-eu-west-1.amazonaws.com'
     component.translationMap = new Map();
     component.stylesMap = new Map();
-    fixture.detectChanges()
+    
     const nativeEl: HTMLElement = fixture.nativeElement;
     const baseReceiveEl = nativeEl.querySelectorAll('.base_receive')
     const chatImageComponentChild = baseReceiveEl[0].querySelector('chat-avatar-image')
     const bubbleMessageComponentChild = baseReceiveEl[0].querySelector('chat-bubble-message.msg_receive')
+    fixture.detectChanges()
     expect(chatImageComponentChild).toBeTruthy();
     expect(bubbleMessageComponentChild).toBeTruthy();
   });

@@ -13,11 +13,16 @@ import { ImageRepoService } from '../../../chat21-core/providers/abstract/image-
 import { ConversationsHandlerService } from '../../../chat21-core/providers/abstract/conversations-handler.service';
 import { ArchivedConversationsHandlerService } from '../../../chat21-core/providers/abstract/archivedconversations-handler.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { NGXLogger } from 'ngx-logger';
+import { CustomLogger } from 'src/chat21-core/providers/logger/customLogger';
+import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
 
 describe('HomeConversationsComponent', () => {
   let component: HomeConversationsComponent;
   let fixture: ComponentFixture<HomeConversationsComponent>;
-
+  let ngxlogger: NGXLogger;
+  let customLogger = new CustomLogger(ngxlogger)
+  
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ HomeConversationsComponent ],
@@ -44,6 +49,9 @@ describe('HomeConversationsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(HomeConversationsComponent);
     component = fixture.componentInstance;
+    LoggerInstance.setInstance(customLogger)
+    let logger = LoggerInstance.getInstance()
+    component['logger']= logger
     fixture.detectChanges();
   });
 

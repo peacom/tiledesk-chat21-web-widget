@@ -3,15 +3,18 @@ import { TestBed } from '@angular/core/testing';
 import { AppStorageService } from '../abstract/app-storage.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TiledeskAuthService } from './tiledesk-auth.service';
+import { NGXLogger } from 'ngx-logger';
+import { CustomLogger } from '../logger/customLogger';
 
 describe('TiledeskAuthService', () => {
   // let httpClientMock;
   let httpMock: HttpTestingController;
   let service : TiledeskAuthService;
   let appStorage: AppStorageService;
+  let ngxlogger: NGXLogger;
+  let customLogger = new CustomLogger(ngxlogger)
 
   beforeEach(() => {
-    
     TestBed.configureTestingModule({
       providers: [
         TiledeskAuthService,
@@ -22,9 +25,9 @@ describe('TiledeskAuthService', () => {
     })
 
     // httpClientMock = jasmine.createSpyObj(['getAllObjects']);
-    httpMock = TestBed.get(HttpTestingController);
-    service = TestBed.get(TiledeskAuthService);
-    appStorage = TestBed.get(AppStorageService)
+    httpMock = TestBed.inject(HttpTestingController);
+    service = TestBed.inject(TiledeskAuthService);
+    appStorage = TestBed.inject(AppStorageService)
   });
 
   afterEach(() => {

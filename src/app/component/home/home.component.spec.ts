@@ -1,5 +1,8 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { NGXLogger } from 'ngx-logger';
+import { CustomLogger } from 'src/chat21-core/providers/logger/customLogger';
+import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
 import { Globals } from '../../utils/globals';
 
 import { HomeComponent } from './home.component';
@@ -7,12 +10,15 @@ import { HomeComponent } from './home.component';
 describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
+  let ngxlogger: NGXLogger;
+  let customLogger = new CustomLogger(ngxlogger)
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ HomeComponent ],
       providers: [
-        Globals
+        Globals,
+        NGXLogger
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })
@@ -22,6 +28,9 @@ describe('HomeComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
+    let loggerInstance = LoggerInstance.setInstance(customLogger)
+    let logger = LoggerInstance.getInstance()
+    component['logger']= logger
     fixture.detectChanges();
   });
 

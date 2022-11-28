@@ -1,4 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import { FrameComponent } from './frame.component';
 
@@ -6,9 +7,18 @@ describe('FrameComponent', () => {
   let component: FrameComponent;
   let fixture: ComponentFixture<FrameComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ FrameComponent ]
+      declarations: [ FrameComponent ],
+      providers: [
+        {
+          provide: DomSanitizer,
+          useValue: {
+            sanitize: () => 'safeString',
+            bypassSecurityTrustResourceUrl: () => 'safeString'
+          }
+        }
+      ,]
     })
     .compileComponents();
   }));
@@ -20,6 +30,9 @@ describe('FrameComponent', () => {
   });
 
   it('should create', () => {
+    component.url = component['sanitizer'].bypassSecurityTrustResourceUrl('http://www.tiledesk.com');
+    console.log('cccccc', component)
+    fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 });

@@ -1,4 +1,4 @@
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
@@ -13,7 +13,7 @@ export class FrameComponent implements OnInit {
   @Input() height: number;
   @Output() onElementRendered = new EventEmitter<{element: string, status: boolean}>();
   
-  url: any;
+  url: SafeResourceUrl = null
   loading: boolean = true
   constructor(private sanitizer: DomSanitizer) { }
 

@@ -1,7 +1,7 @@
 import { style } from '@angular/animations';
 import { ChatManager } from './../../../../chat21-core/providers/chat-manager';
 import { Globals } from './../../../utils/globals';
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 
 import { ConversationFooterComponent } from './conversation-footer.component';
@@ -10,12 +10,17 @@ import { TypingService } from '../../../../chat21-core/providers/abstract/typing
 import { ConversationsHandlerService } from '../../../../chat21-core/providers/abstract/conversations-handler.service';
 import { ArchivedConversationsHandlerService } from '../../../../chat21-core/providers/abstract/archivedconversations-handler.service';
 import { By } from '@angular/platform-browser';
+import { NGXLogger } from 'ngx-logger';
+import { CustomLogger } from 'src/chat21-core/providers/logger/customLogger';
+import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
 
 describe('ConversationFooterComponent', () => {
   let component: ConversationFooterComponent;
   let fixture: ComponentFixture<ConversationFooterComponent>;
-
-  beforeEach(async(() => {
+  let ngxlogger: NGXLogger;
+  let customLogger = new CustomLogger(ngxlogger)
+  
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ 
         ConversationFooterComponent,
@@ -36,6 +41,9 @@ describe('ConversationFooterComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ConversationFooterComponent);
     component = fixture.componentInstance;
+    LoggerInstance.setInstance(customLogger)
+    let logger = LoggerInstance.getInstance()
+    component['logger']= logger
     fixture.detectChanges();
   });
 

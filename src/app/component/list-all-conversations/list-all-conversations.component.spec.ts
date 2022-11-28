@@ -5,21 +5,16 @@ import { Globals } from '../../utils/globals';
 
 import { ListAllConversationsComponent } from './list-all-conversations.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { NGXLogger } from 'ngx-logger';
+import { CustomLogger } from 'src/chat21-core/providers/logger/customLogger';
+import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
 
 describe('ListAllConversationsComponent', () => {
   let component: ListAllConversationsComponent;
   let fixture: ComponentFixture<ListAllConversationsComponent>;
+  let ngxlogger: NGXLogger;
+  let customLogger = new CustomLogger(ngxlogger)
   
-  class MockIterableDiffers implements IterableDiffers {
-    factories: IterableDifferFactory[];
-    find(iterable: any): IterableDifferFactory {
-      return 
-    }
-    create(factories: IterableDifferFactory[], parent?: IterableDiffers): IterableDiffers {
-      return 
-    }
-}
-
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ListAllConversationsComponent ],
@@ -28,7 +23,7 @@ describe('ListAllConversationsComponent', () => {
       ],
       providers: [
         Globals,
-        { provide: IterableDiffers, useClass: MockIterableDiffers },
+        IterableDiffers,
         CustomTranslateService,
         TranslateService
       ],
@@ -40,6 +35,9 @@ describe('ListAllConversationsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ListAllConversationsComponent);
     component = fixture.componentInstance;
+    LoggerInstance.setInstance(customLogger)
+    let logger = LoggerInstance.getInstance()
+    component['logger']= logger
     fixture.detectChanges();
   });
 
