@@ -38,6 +38,7 @@
     &:hover {
         color: var(--hoverTextColor);
         background:  var(--hoverBackgroundColor);
+        transform: scale(1.05);
         .icon-button-action {
             svg {
                 fill: var(--hoverTextColor);
