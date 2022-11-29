@@ -989,6 +989,11 @@ export class GlobalSettingsService {
         // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > continueConversationBeforeTime:: ', TEMP]);
         if (TEMP !== undefined) {
             globals.continueConversationBeforeTime = +TEMP;
+        }
+        TEMP = tiledeskSettings['participants'];
+        // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > participants:: ', TEMP]);
+        if (TEMP !== undefined) {
+            globals.participants = TEMP.split(',').map(key => { return key.trim()});;
         }      
     }
 
@@ -1243,6 +1248,10 @@ export class GlobalSettingsService {
         TEMP = el.nativeElement.getAttribute('continueConversationBeforeTime');
         if (TEMP !== null) {
             this.globals.continueConversationBeforeTime = +TEMP;
+        }
+        TEMP = el.nativeElement.getAttribute('participants');
+        if (TEMP !== null) {
+            this.globals.participants = TEMP.split(',').map(key => { return key.trim()});
         }
         
     }
@@ -1670,6 +1679,11 @@ export class GlobalSettingsService {
         TEMP = getParameterByName(windowContext, 'tiledesk_continueConversationBeforeTime');
         if (TEMP) {
             globals.continueConversationBeforeTime = +TEMP;
+        }
+
+        TEMP = getParameterByName(windowContext, 'tiledesk_participants');
+        if (TEMP) {
+            globals.participants = TEMP.split(',').map(key => { return key.trim()});
         }
     }
 

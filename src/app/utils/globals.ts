@@ -215,6 +215,7 @@ export class Globals {
    typingLocation: string; // *******  new ********
    allowReopen: boolean; // *******  new ********
    continueConversationBeforeTime: number; // *******  new ********
+   participants: Array<string>; // *******  new ********
   constructor(
   ) {
     // console.log(' ---------------- 1: initDefafultParameters ---------------- ');
@@ -386,6 +387,8 @@ export class Globals {
     /** enable the user to reopen a closed conversation */
     this.continueConversationBeforeTime = 48;
     /** enable user to continue archived confersation before the value time from last timeout message */
+    this.participants = [];
+     /** enable user to talk with specific chat-bots/humans */
 
     this.showWaitTime = true;
 
