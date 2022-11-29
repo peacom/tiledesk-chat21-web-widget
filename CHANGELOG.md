@@ -1,5 +1,10 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.46-rc.2
+- added: scale on hover in message buttons
+- changed: set themeColorOpacity to 100 as default value
+- bug-fixed: 'Lead Updated' not fired if showInfoMessage property not contains 'LEAD_UPDATED' key
+
 ### 5.0.46-rc.1
 - bug-fixed: localstorage save [object, object] for attributes key
 
