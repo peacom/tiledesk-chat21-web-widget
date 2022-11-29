@@ -303,7 +303,7 @@ export class Globals {
     (color of the header, color of the launcher button,
     other minor elements). Permitted values: Hex color
     codes, e.g. #87BC65 and RGB color codes, e.g. rgb(135,188,101) */
-    this.themeColorOpacity = 50
+    this.themeColorOpacity = 100
     /**allows you to change opacity in background headers component 
      * Permitted values: [0..1] */
     this.themeForegroundColor = convertColorToRGBA('#ffffff', 100);
