@@ -1,6 +1,6 @@
 import { MomentModule } from 'ngx-moment';
 import { TooltipModule } from 'ng2-tooltip-directive';
-import { async, ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, waitForAsync, inject } from '@angular/core/testing';
 
 import { ConversationContentComponent } from './conversation-content.component';
 import { MarkedPipe } from '../../../directives/marked.pipe';
@@ -8,7 +8,7 @@ import { HtmlEntitiesEncodePipe } from '../../../directives/html-entities-encode
 import { UploadService } from '../../../../chat21-core/providers/abstract/upload.service';
 import { CustomLogger } from '../../../../chat21-core/providers/logger/customLogger';
 import { LoggerInstance } from '../../../../chat21-core/providers/logger/loggerInstance';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { NO_ERRORS_SCHEMA, Injectable } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ImageRepoService } from '../../../../chat21-core/providers/abstract/image-repo.service';
 
@@ -51,6 +51,8 @@ describe('ConversationContentComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ConversationContentComponent);
     component = fixture.componentInstance;
+    let upload = fixture.debugElement.injector.get(UploadService) as UploadService
+    upload.BSStateUpload.next({ upload: 100, type: 'image' })
     fixture.detectChanges();
   });
 

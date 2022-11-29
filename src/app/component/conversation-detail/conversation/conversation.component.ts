@@ -198,8 +198,6 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
     // this.initAll();
     this.logger.debug('[CONV-COMP] ngOnInit: ', this.senderId);
     this.showMessageWelcome = false;
-    this.elementRef.nativeElement.style.setProperty('--themeColor', this.stylesMap.get('themeColor'))
-    this.elementRef.nativeElement.style.setProperty('--foregroundColor', this.stylesMap.get('foregroundColor'))
     // const subscriptionEndRenderMessage = this.appComponent.obsEndRenderMessage.subscribe(() => {
     //   this.ngZone.run(() => {
     //     // that.scrollToBottom();
@@ -307,6 +305,10 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     this.logger.debug('[CONV-COMP] onChagnges', changes)
+    if(this.stylesMap){
+      this.elementRef.nativeElement.style.setProperty('--themeColor', this.stylesMap.get('themeColor'))
+      this.elementRef.nativeElement.style.setProperty('--foregroundColor', this.stylesMap.get('foregroundColor'))
+    }
     if (this.isOpen === true) {
       //this.updateConversationBadge();
       // this.scrollToBottom();

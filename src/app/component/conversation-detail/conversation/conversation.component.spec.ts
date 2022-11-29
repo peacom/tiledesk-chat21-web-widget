@@ -85,6 +85,8 @@ describe('ConversationComponent', () => {
     LoggerInstance.setInstance(customLogger)
     let logger = LoggerInstance.getInstance()
     component['logger']= logger
+    let globals  = fixture.debugElement.injector.get(Globals) as Globals;
+    globals.initDefafultParameters()
     fixture.detectChanges();
   });
 

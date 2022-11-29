@@ -13,12 +13,12 @@
     </small> - ->
   </div> -->
   <div class="form-group label-floating" id="div_input" #div_input
-      [ngClass]="{'is-empty': !form.controls[element.name]?.value}">
+      [ngClass]="{'is-empty': !form?.controls[element.name]?.value}">
     <label class="control-label">
-      {{element.text}}
+      {{element?.text}}
     </label>
     <textarea 
-      [formControlName]="element.name" 
+      [formControlName]="element?.name" 
       [rows]="rows"
       [tabIndex]="element?.tabIndex"
       type="text"
@@ -29,10 +29,10 @@
       (focusout)="onFocusOut()">
     </textarea>
   </div>
-  <div *ngIf="hasSubmitted && form.controls[element.name].errors && form.controls[element.name].hasError('required')" class="text-danger">
+  <div *ngIf="hasSubmitted && form?.controls[element.name].errors && form?.controls[element.name].hasError('required')" class="text-danger">
     {{translationErrorLabelMap.get('LABEL_ERROR_FIELD_REQUIRED')}}
   </div>
-  <div *ngIf="hasSubmitted && form.controls[element.name].errors && form.controls[element.name].hasError('pattern') && element.errorLabel" class="text-danger">
+  <div *ngIf="hasSubmitted && form?.controls[element.name].errors && form?.controls[element.name].hasError('pattern') && element?.errorLabel" class="text-danger">
     {{element.errorLabel}}
   </div>
 </form>

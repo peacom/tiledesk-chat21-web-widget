@@ -23,7 +23,7 @@ export class FormTextareaComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.rootFormGroup.control as FormGroup;
-    if(this.form.controls && this.form.controls[this.controlName]){
+    if(this.form && this.form.controls && this.form.controls[this.controlName]){
       this.form.controls[this.controlName].valueChanges.subscribe((value) => {
         this.hasSubmitted= false;
         this.setFormStyle();

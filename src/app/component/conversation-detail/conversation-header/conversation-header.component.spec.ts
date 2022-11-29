@@ -38,7 +38,6 @@ describe('ConversationHeaderComponent', () => {
     LoggerInstance.setInstance(customLogger)
     let logger = LoggerInstance.getInstance()
     component['logger']= logger
-    fixture.detectChanges();
   });
 
   it('should create', () => {
