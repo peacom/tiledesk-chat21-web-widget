@@ -236,6 +236,10 @@ export class FirebaseConversationHandler extends ConversationHandlerService {
         if(this.isValidMessage(msg)){
             // msg.attributes && msg.attributes['subtype'] === 'info'
             let isInfoMessage = messageType(MESSAGE_TYPE_INFO, msg)
+            if(isInfoMessage){
+                this.messageInfo.next(msg)
+            }
+
             if(isInfoMessage && hideInfoMessage(msg, this.showInfoMessage)){
                 //if showBubbleInfoMessage array keys not includes msg.attributes.messagelabel['key'] exclude CURRENT INFO MESSAGE
                 return;
@@ -247,9 +251,7 @@ export class FirebaseConversationHandler extends ConversationHandlerService {
                 }
             }
 
-            if(isInfoMessage){
-                this.messageInfo.next(msg)
-            }
+            
 
             this.addRepalceMessageInArray(msg.uid, msg);
             this.messageAdded.next(msg);

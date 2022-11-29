@@ -217,6 +217,10 @@ export class MQTTConversationHandler extends ConversationHandlerService {
         const msg = this.messageGenerate(messageSnapshot);
         msg.uid = msg.message_id;
         let isInfoMessage = messageType(MESSAGE_TYPE_INFO, msg)
+        if(isInfoMessage){
+            this.messageInfo.next(msg)
+        }
+        
         if(isInfoMessage && hideInfoMessage(msg, this.showInfoMessage)){
             //if showBubbleInfoMessage array keys not includes msg.attributes.messagelabel['key'] exclude CURRENT INFO MESSAGE
             return;
@@ -228,9 +232,7 @@ export class MQTTConversationHandler extends ConversationHandlerService {
             }
         }
 
-        if(isInfoMessage){
-            this.messageInfo.next(msg)
-        }
+       
         
         // imposto il giorno del messaggio per visualizzare o nascondere l'header data
         msg.headerDate = null;
