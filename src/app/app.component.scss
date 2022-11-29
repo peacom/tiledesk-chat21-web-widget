@@ -650,10 +650,11 @@ chat-root {
                     justify-content: center;
                     text-align: center;
                     // margin: 0 10px 0 10px;
-                    width: 40px;
-                    height: 40px;
-                    margin: 6px;
+                    width: 35px;//40px;
+                    height: 35px;//40px;
+                    margin: 9px; //6px;
                     padding: 0px;
+                    border-radius: 8px;
 
                     cursor: pointer;
                     &.c21-right{
