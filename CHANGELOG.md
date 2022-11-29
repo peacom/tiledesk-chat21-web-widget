@@ -1,5 +1,8 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.46-rc.3
+- added: participants tiledesk property to set specific chatbot/humans to talk with
+
 ### 5.0.46-rc.2
 - added: scale on hover in message buttons
 - changed: set themeColorOpacity to 100 as default value
