@@ -55,12 +55,12 @@
         position: fixed;
         top: var(--margin-top);
 
-        -webkit-box-shadow: 0 3px 5px -3px rgba(0, 0, 0, 0.4);
-        -moz-box-shadow: 0 3px 5px -3pxrgba(0, 0, 0, 0.4);
-        box-shadow: 0 3px 5px -3px rgba(0, 0, 0, 0.4);
+        // -webkit-box-shadow: 0 3px 5px -3px rgba(0, 0, 0, 0.4);
+        // -moz-box-shadow: 0 3px 5px -3pxrgba(0, 0, 0, 0.4);
+        // box-shadow: 0 3px 5px -3px rgba(0, 0, 0, 0.4);
         .c21-header-container{
             // height: var(--header-height);
-            
+            height: calc( var(--header-height));
             // margin: inherit;
             
             .c21-header-content {
@@ -88,6 +88,7 @@
                 }
 
                 .c21-header-button{
+                    margin: 6px;
                     width: 30px;
                     height: 30px;
                 }
@@ -104,6 +105,9 @@
         width: var(--modal-width);
         height: var(--content-height);
 
+        display: flex;
+        justify-content: center;
+        align-items: center;
         // img {
         //     border-radius: 8px;
         //     //padding: 3px;
@@ -134,6 +138,7 @@
             position: absolute;
             top: 0;
             right: 0;
+
         }
         #scroll-me-preview:hover {
             &::-webkit-scrollbar-thumb {
@@ -151,10 +156,10 @@
 
         #img-preview-file-extension {
             text-align: center;
-            position: relative;
+            position: absolute;//relative;
             text-transform: uppercase;
             color: #fff;
-            top: -25px;
+            bottom: 30px; //-25px;
             font-weight: 500;
         }
     }
@@ -171,7 +176,7 @@
         
         display: flex;
         gap: 5px;
-        padding: var(--paddingTopBottom) 5px;
+        padding: var(--paddingTopBottom) 10px;
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
 
@@ -244,7 +249,7 @@
             border-radius: 10px;
             background-color: $chat-footer-background-color;
             -webkit-box-flex: 1;
-            width: 85%;
+            width: 88%;
         }
         
         .chat21-textarea-button {
