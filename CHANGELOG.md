@@ -1,5 +1,9 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.46-rc.4
+- added: participants property to index-dev list
+- changed: converation-preview UI
+
 ### 5.0.46-rc.3
 - added: participants tiledesk property to set specific chatbot/humans to talk with
 
