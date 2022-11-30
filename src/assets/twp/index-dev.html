@@ -1142,6 +1142,13 @@
             window.Tiledesk('restart')
         }
 
+        function onClickParticipants(){
+            let text = document.getElementById('participants').value
+            window.tiledeskSettings['participants'] = text
+            console.log('onClickParticipants:', window.tiledeskSettings)
+            window.Tiledesk('restart')
+        }
+
         function onClickShowAttachmentButton(){
             let status = document.querySelector('input[name="showAttachmentButton"]:checked').value
             window.tiledeskSettings['showAttachmentButton'] = stringToBoolean(status)
@@ -2065,6 +2072,15 @@
                             </div>
                             <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickShowInfoMessage()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 formElement"><span><em><strong>participants</strong></em></span></div>
+                            <div class="col-md-5">
+                                <textarea class="form-control" id="participants" placeholder="Set a comma separated string..." rows="6" cols="30"></textarea>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-light" onclick="onClickParticipants()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
