@@ -550,7 +550,6 @@ export class Globals {
       'userEmail': this.userEmail, 'userFullname': this.userFullname, 
       'widgetTitle': this.widgetTitle,
       'welcomeMsg': this.welcomeMsg, 'welcomeTitle': this.welcomeTitle, 
-
     };
   }
 

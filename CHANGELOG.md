@@ -1,5 +1,7 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.46 in PROD
+
 ### 5.0.46-rc.4
 - added: participants property to index-dev list
 - changed: converation-preview UI
