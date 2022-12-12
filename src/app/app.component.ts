@@ -781,6 +781,9 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         if (location.href) {
             attributes['sourcePage'] = location.href;
         }
+        if(document.title){
+            attributes['sourceTitle'] = document.title;
+        }
         if (projectid) {
             attributes['projectId'] = projectid;
         }
