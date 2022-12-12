@@ -16,7 +16,8 @@
           position: absolute;
           left: 50px;
           right: 100px;
-          display: inline-block;
+          display: flex;
+          align-items: center;
           width: auto;
           height: 42px;
           padding: 0px;

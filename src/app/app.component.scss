@@ -679,7 +679,9 @@ chat-root {
                 .c21-title {
                     position: absolute;
                     left: 0;
-                    display: inline-block;
+                    // display: inline-block;
+                    display: flex;
+                    align-items: center;
                     width: calc(100% - 200px);
                     height: 1.6em;
                     line-height: 1.6em;
