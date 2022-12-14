@@ -602,7 +602,10 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.logger.debug('[APP-COMP]  ============ idConversation ===============', recipientId, this.g.recipientId);
         // this.g.recipientId = null;
         this.logger.debug('[APP-COMP] singleConversation conv da ...', this.g.recipientId)
-        if(this.g.recipientId && this.g.singleConversation){
+        if(this.g.restartConversation && this.g.singleConversation){
+            this.logger.debug('[APP-COMP] RESTART-CONVERSARION::: start a new conversations...', this.g.restartConversation)
+            this.onNewConversation();
+        }else if(this.g.recipientId && this.g.singleConversation){
             //start widget from current recipientId conversation
             this.logger.debug('[APP-COMP] singleConversation conv da API', this.g.recipientId)
             this.isOpenHome = false;

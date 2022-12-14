@@ -962,6 +962,11 @@ export class GlobalSettingsService {
         if (TEMP !== undefined) {
             globals.singleConversation = (TEMP === true) ? true : false;
         }
+        TEMP = tiledeskSettings['restartConversation'];
+        // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > continueConversationBeforeTime:: ', TEMP]);
+        if (TEMP !== undefined) {
+            globals.restartConversation = (TEMP === true) ? true : false;
+        }
         TEMP = tiledeskSettings['nativeRating'];
         // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > nativeRating:: ', TEMP]);
         if (TEMP !== undefined) {
@@ -1225,6 +1230,10 @@ export class GlobalSettingsService {
         TEMP = el.nativeElement.getAttribute('singleConversation');
         if (TEMP !== null) {
             this.globals.singleConversation = (TEMP === true) ? true : false;
+        }
+        TEMP = el.nativeElement.getAttribute('restartConversation');
+        if (TEMP !== null) {
+            this.globals.restartConversation = (TEMP === true) ? true : false;;
         }
         TEMP = el.nativeElement.getAttribute('nativeRating');
         if (TEMP !== null) {
@@ -1651,6 +1660,11 @@ export class GlobalSettingsService {
         TEMP = getParameterByName(windowContext, 'tiledesk_singleConversation');
         if (TEMP) {
             globals.singleConversation = stringToBoolean(TEMP);;
+        }
+
+        TEMP = getParameterByName(windowContext, 'tiledesk_restartConversation');
+        if (TEMP) {
+            globals.restartConversation = TEMP;
         }
 
         TEMP = getParameterByName(windowContext, 'tiledesk_nativeRating');

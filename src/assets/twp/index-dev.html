@@ -801,6 +801,13 @@
             window.Tiledesk('restart')
         }
 
+        function onClickRestartConversation(){
+            let status = document.querySelector('input[name="restart"]:checked').value
+            window.tiledeskSettings['restart'] = stringToBoolean(status)
+            console.log('onClickRestartConversation: status-->',window.tiledeskSettings);
+            window.Tiledesk('restart')
+        }
+
         function onClickHideSettings(){
             let status = document.querySelector('input[name="hideSettings"]:checked').value
             window.tiledeskSettings['hideSettings'] = stringToBoolean(status)
@@ -1694,6 +1701,17 @@
                                 <button class="btn btn-light" onclick="onClickSingleConversation()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-5 formElement"><span><em><strong>restartConversation</strong></em></span></div>
+                            <div class="col-md-5">
+                                <input class="form-check-input" type="radio" name="restartConversation" value="true"><label>True</label>
+                                <input class="form-check-input" type="radio" name="restartConversation" value="false" checked><label>False</label>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-light" onclick="onClickRestartConversation()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                        
                        
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>hideSettings</strong></em></span></div>
