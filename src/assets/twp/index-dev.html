@@ -802,7 +802,7 @@
         }
 
         function onClickRestartConversation(){
-            let status = document.querySelector('input[name="restart"]:checked').value
+            let status = document.querySelector('input[name="restartConversation"]:checked').value
             window.tiledeskSettings['restart'] = stringToBoolean(status)
             console.log('onClickRestartConversation: status-->',window.tiledeskSettings);
             window.Tiledesk('restart')

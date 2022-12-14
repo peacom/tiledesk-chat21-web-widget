@@ -1,5 +1,12 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.47-rc.1
+- added: sourceTitle info in attributes
+- added: restartConversation settings parameter to ALWAYS restart a conversation if singleConversation mode is active
+- bug-fixed: aligned title header component vertically
+- bug-fixed: chinese characters not displayed due to isEmojii function
+- bug-fixed: mqtt-conversations-handler service publish wrong changed conversation
+
 ### 5.0.46 in PROD
 
 ### 5.0.46-rc.4
