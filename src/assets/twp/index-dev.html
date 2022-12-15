@@ -1066,9 +1066,23 @@
         }
 
         function onClickWhatsappNumber(){
-            let status = document.getElementById('baloonImage').value
+            let status = document.getElementById('whatsappNumber').value
             window.tiledeskSettings['whatsappNumber'] = status
             console.log('onClickWhatsappNumber:', window.tiledeskSettings)
+            window.Tiledesk('restart')
+        }
+
+        function onClickMessangerPageTitle(){
+            let status = document.getElementById('messangerPageTitle').value
+            window.tiledeskSettings['messangerPageTitle'] = status
+            console.log('onClickMessangerPageTitle:', window.tiledeskSettings)
+            window.Tiledesk('restart')
+        }
+
+        function onClickTelegramUsername(){
+            let status = document.getElementById('telegramUsername').value
+            window.tiledeskSettings['telegramUsername'] = status
+            console.log('onClickTelegramUsername:', window.tiledeskSettings)
             window.Tiledesk('restart')
         }
         
@@ -1976,6 +1990,11 @@
                                 <button class="btn btn-light" onclick="onClickNativeRating()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <h4 class="col-md-10 formElement">Manage SOCIAL CHANNELS <span style="font-size:12px"> (parameter accepted only in window.tiledeskSettings object)</span>
+                            </h4>
+                        </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>whatsappNumber</strong></em></span></div>
                             <div class="col-md-5">
@@ -1983,6 +2002,24 @@
                             </div>
                             <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickWhatsappNumber()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 formElement"><span><em><strong>messangerPageTitle</strong></em></span></div>
+                            <div class="col-md-5">
+                                <input class="form-control" type="text" id="messangerPageTitle" name="messangerPageTitle">
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-light" onclick="onClickMessangerPageTitle()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 formElement"><span><em><strong>telegramUsername</strong></em></span></div>
+                            <div class="col-md-5">
+                                <input class="form-control" type="text" id="telegramUsername" name="telegramUsername">
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-light" onclick="onClickTelegramUsername()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         

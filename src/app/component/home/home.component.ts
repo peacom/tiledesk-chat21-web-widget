@@ -61,14 +61,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   initiTranslations(){
-    let keys=[
-      'LABEL_WHATSAPP'
-    ]
+
     let keysHeader = [
       'BUTTON_CLOSE_TO_ICON'
     ]
     this.translationMapHeader = this.customTranslateService.translateLanguage(keysHeader)
-    this.translationMapFooter = this.customTranslateService.translateLanguage(keys)
   }
 
   ngAfterViewInit(){
@@ -106,8 +103,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.onOpenAllConvesations.emit();
   }
 
-  openNewConversationOnWhatsapp(){
-    window.open('https://wa.me/'+this.g.whatsappNumber, '_blank')
+  openConversationOnPlatform(platform: "telegram" | "whatsapp" | "messanger" ){
+    if(platform === 'telegram'){
+      window.open('https://telegram.me'+this.g.telegramUsername, '_blank')
+    }else if(platform === 'whatsapp'){
+      window.open('https://wa.me/'+this.g.whatsappNumber, '_blank')
+    }else if(platform=== 'messanger'){
+      window.open('https://m.me/'+this.g.messangerPageTitle, '_blank')
+    }
+    
   }
 
   onConversationSelectedFN(conversation: ConversationModel) {

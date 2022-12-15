@@ -1001,10 +1001,20 @@ export class GlobalSettingsService {
             globals.participants = TEMP.split(',').map(key => { return key.trim()});;
         }
         TEMP = tiledeskSettings['whatsappNumber'];
-        // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > typingLocation:: ', TEMP]);
+        // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > whatsappNumber:: ', TEMP]);
         if (TEMP !== undefined) {
             globals.whatsappNumber = TEMP;
-        }      
+        }
+        TEMP = tiledeskSettings['messangerPageTitle'];
+        // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > messangerPageTitle:: ', TEMP]);
+        if (TEMP !== undefined) {
+            globals.messangerPageTitle = TEMP;
+        } 
+        TEMP = tiledeskSettings['telegramUsername'];
+        // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > telegramUsername:: ', TEMP]);
+        if (TEMP !== undefined) {
+            globals.telegramUsername = TEMP;
+        }       
     }
 
     /**

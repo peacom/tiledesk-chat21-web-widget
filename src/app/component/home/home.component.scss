@@ -207,15 +207,15 @@
         // right: 0px;
         display: flex;
         align-items: center;
-        flex-direction: row-reverse;
+        justify-content: center;
         background-color: white;
         // box-shadow: 0 0px 10px 0px $trasp-light-gray;
         z-index: 20;
         // border-top: 1px solid $trasp-light-gray;
-        #c21-whatsapp{
+        #c21-whatsapp, #c21-telegram, #c21-messanger{
             margin-right: 10px;
             .c21-button-primary{
-                background-color: rgb(0,209,73);
+                background-color: transparent;
                 color: white;
                 margin: 0;
                 padding: 5px;
@@ -224,29 +224,10 @@
                 display: flex;
                 justify-content: center;
             }
-            span.c21-label-button{
-                display: none;
+            &:hover svg{
+                transform: scale(1.2);
             }
-            .c21-button-primary:hover{
-                width: auto;
-                span.c21-label-button{
-                    display: flex;
-                    animation: 1s slide-in-right;
-                    margin-left: 10px;
-                    margin-right: 10px;
-                }
 
-                @keyframes slide-in-right {
-                    0% {
-                        opacity: 0;
-                        transform: translateX(100%);
-                    }
-                    100% {
-                        opacity: 1;
-                        transform: translateX(0);
-                    }
-                }
-            } 
         }
     }
 

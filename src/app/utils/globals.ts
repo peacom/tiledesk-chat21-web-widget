@@ -218,6 +218,8 @@ export class Globals {
    continueConversationBeforeTime: number; // *******  new ********
    participants: Array<string>; // *******  new ********
    whatsappNumber: string; // *******  new ********
+   messangerPageTitle: string; // *******  new ********
+   telegramUsername: string; // *******  new ********
   constructor(
   ) {
     // console.log(' ---------------- 1: initDefafultParameters ---------------- ');
@@ -392,9 +394,13 @@ export class Globals {
     this.continueConversationBeforeTime = 48;
     /** enable user to continue archived confersation before the value time from last timeout message */
     this.participants = [];
-     /** enable user to talk with specific chat-bots/humans */
-     this.whatsappNumber = '';
-     /**enable user to set a whatsapp business number to chat with */
+    /** enable user to talk with specific chat-bots/humans */
+    this.whatsappNumber = '';
+    /**enable user to set a whatsapp business number to chat with */
+    this.messangerPageTitle = ''
+    /**enable user to set a facebook messanger page to chat with */
+    this.telegramUsername = ''
+    /**enable user to set a telegram number to chat with */
 
     this.showWaitTime = true;
 

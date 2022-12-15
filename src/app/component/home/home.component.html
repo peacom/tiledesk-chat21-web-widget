@@ -68,20 +68,75 @@
     </div>
 
     <!-- FOOTER - CONTENT -->
-    <div class="c21-footer-content fade-in-bottom-footer" *ngIf="g?.whatsappNumber && g?.whatsappNumber.trim() !== ''">
-        <div id="c21-whatsapp">
-            <button tabindex="1040" aflistconv #aflistconv class="c21-button-primary" (click)="openNewConversationOnWhatsapp()">
-                <span class="v-align-center c21-label-button">
-                    <!-- {{LABEL_START_NW_CONV}} -->
-                    {{translationMapFooter?.get('LABEL_WHATSAPP')}}
-                </span>
+    <div class="c21-footer-content fade-in-bottom-footer" >
+        <div id="c21-whatsapp" *ngIf="g?.whatsappNumber && g?.whatsappNumber.trim() !== ''">
+            <button tabindex="1040" aflistconv #aflistconv class="c21-button-primary" (click)="openConversationOnPlatform('whatsapp')">
                 <span class="v-align-center">
                     <!-- <svg [ngStyle]="{'fill': 'yellow' }" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                       <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"  [ngStyle]="{'fill': g.themeForegroundColor}"/>
                     </svg> -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20">
-                        <path fill="white" d="M13.76,11.4s-1.24-.61-1.46-.69a.88.88,0,0,0-.28-.06.49.49,0,0,0-.41.24c-.12.18-.49.61-.6.74l0,0-.25-.1A6.5,6.5,0,0,1,8.28,9.41a.1.1,0,0,1,0-.05l.07-.08a2.4,2.4,0,0,0,.21-.23l.1-.12a2,2,0,0,0,.2-.31l0-.06a.57.57,0,0,0,0-.53c0-.06-.54-1.29-.6-1.42-.13-.32-.3-.46-.54-.46h-.1a3.07,3.07,0,0,0-1,.26,2.09,2.09,0,0,0-.79,1.8,3.89,3.89,0,0,0,.84,2.13l0,.05a7.86,7.86,0,0,0,3.38,2.94,5.47,5.47,0,0,0,2.05.52h0l.33,0h.06A2.16,2.16,0,0,0,14,12.77a1.68,1.68,0,0,0,.1-1.11A.78.78,0,0,0,13.76,11.4Z"/>
-                        <path fill="white" d="M10.15,1.68A8.15,8.15,0,0,0,2,9.79a8,8,0,0,0,1.12,4.1L1.69,18a.23.23,0,0,0,.06.22.21.21,0,0,0,.15.07H2l4.32-1.37a8.25,8.25,0,0,0,3.87,1,8.11,8.11,0,1,0,0-16.22Zm0,14.53a6.51,6.51,0,0,1-3.56-1.06.28.28,0,0,0-.12,0H6.4l-2.16.69.7-2.06a.24.24,0,0,0,0-.2A6.29,6.29,0,0,1,3.68,9.79a6.47,6.47,0,1,1,6.47,6.42Z"/>
+                    <svg aria-labelledby="altIconTitle" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 1219.547 1225.016">
+                        <path fill="#E0E0E0" d="M1041.858 178.02C927.206 63.289 774.753.07 612.325 0 277.617 0 5.232 272.298 5.098 606.991c-.039 106.986 27.915 211.42 81.048 303.476L0 1225.016l321.898-84.406c88.689 48.368 188.547 73.855 290.166 73.896h.258.003c334.654 0 607.08-272.346 607.222-607.023.056-162.208-63.052-314.724-177.689-429.463zm-429.533 933.963h-.197c-90.578-.048-179.402-24.366-256.878-70.339l-18.438-10.93-191.021 50.083 51-186.176-12.013-19.087c-50.525-80.336-77.198-173.175-77.16-268.504.111-278.186 226.507-504.503 504.898-504.503 134.812.056 261.519 52.604 356.814 147.965 95.289 95.36 147.728 222.128 147.688 356.948-.118 278.195-226.522 504.543-504.693 504.543z"/>
+                        <linearGradient id="a" gradientUnits="userSpaceOnUse" x1="609.77" y1="1190.114" x2="609.77" y2="21.084">
+                            <stop offset="0" stop-color="#20b038"/>
+                            <stop offset="1" stop-color="#60d66a"/>
+                        </linearGradient><path fill="url(#a)" d="M27.875 1190.114l82.211-300.18c-50.719-87.852-77.391-187.523-77.359-289.602.133-319.398 260.078-579.25 579.469-579.25 155.016.07 300.508 60.398 409.898 169.891 109.414 109.492 169.633 255.031 169.57 409.812-.133 319.406-260.094 579.281-579.445 579.281-.023 0 .016 0 0 0h-.258c-96.977-.031-192.266-24.375-276.898-70.5l-307.188 80.548z"/>
+                        <image overflow="visible" opacity=".08" width="20" height="20" xlink:href="FCC0802E2AF8A915.png" transform="translate(270.984 291.372)"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" fill="#FFF" d="M462.273 349.294c-11.234-24.977-23.062-25.477-33.75-25.914-8.742-.375-18.75-.352-28.742-.352-10 0-26.25 3.758-39.992 18.766-13.75 15.008-52.5 51.289-52.5 125.078 0 73.797 53.75 145.102 61.242 155.117 7.5 10 103.758 166.266 256.203 226.383 126.695 49.961 152.477 40.023 179.977 37.523s88.734-36.273 101.234-71.297c12.5-35.016 12.5-65.031 8.75-71.305-3.75-6.25-13.75-10-28.75-17.5s-88.734-43.789-102.484-48.789-23.75-7.5-33.75 7.516c-10 15-38.727 48.773-47.477 58.773-8.75 10.023-17.5 11.273-32.5 3.773-15-7.523-63.305-23.344-120.609-74.438-44.586-39.75-74.688-88.844-83.438-103.859-8.75-15-.938-23.125 6.586-30.602 6.734-6.719 15-17.508 22.5-26.266 7.484-8.758 9.984-15.008 14.984-25.008 5-10.016 2.5-18.773-1.25-26.273s-32.898-81.67-46.234-111.326z"/>
+                        <path fill="#FFF" d="M1036.898 176.091C923.562 62.677 772.859.185 612.297.114 281.43.114 12.172 269.286 12.039 600.137 12 705.896 39.633 809.13 92.156 900.13L7 1211.067l318.203-83.438c87.672 47.812 186.383 73.008 286.836 73.047h.255.003c330.812 0 600.109-269.219 600.25-600.055.055-160.343-62.328-311.108-175.649-424.53zm-424.601 923.242h-.195c-89.539-.047-177.344-24.086-253.93-69.531l-18.227-10.805-188.828 49.508 50.414-184.039-11.875-18.867c-49.945-79.414-76.312-171.188-76.273-265.422.109-274.992 223.906-498.711 499.102-498.711 133.266.055 258.516 52 352.719 146.266 94.195 94.266 146.031 219.578 145.992 352.852-.118 274.999-223.923 498.749-498.899 498.749z"/>
+                        <title id="altIconTitle">Whatsapp</title>
+                    </svg>
+                  </span>
+                <div class="clear"></div>
+            </button>
+        </div>
+        <div id="c21-telegram" *ngIf="g?.telegramUsername && g?.telegramUsername.trim() !== ''">
+            <button tabindex="1040" aflistconv #aflistconv class="c21-button-primary" (click)="openConversationOnPlatform('telegram')">
+                <span class="v-align-center">
+                    <!-- <svg [ngStyle]="{'fill': 'yellow' }" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                      <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"  [ngStyle]="{'fill': g.themeForegroundColor}"/>
+                    </svg> -->
+                    <svg aria-labelledby="altIconTitle" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 368 368" style="enable-background:new 0 0 368 368;" xml:space="preserve">
+                        <g id="XMLID_1_">
+                            <linearGradient id="XMLID_7_" gradientUnits="userSpaceOnUse" x1="-66.831" y1="-68.1757" x2="-65.3102" y2="-68.1757" gradientTransform="matrix(-60 139.992 -139.992 -60 -13316.416 5324.4634)">
+                                <stop offset="0" style="stop-color:#37AEE2"/>
+                                <stop offset="1" style="stop-color:#1E96C8"/>
+                            </linearGradient>
+                            <circle id="XMLID_3_" fill="url(#XMLID_7_)" cx="184" cy="184" r="182.5"/>
+                            <path id="XMLID_4_" fill="#C8DAEA" d="M150.5,267.6c-5.9,0-4.9-2.2-6.9-7.9l-17.4-57.2L260,123.2"/>
+                            <path id="XMLID_5_" fill="#A9C9DD" d="M150.5,267.6c4.6,0,6.6-2.1,9.1-4.6l24.3-23.7l-30.4-18.3"/>
+                            <linearGradient id="XMLID_8_" gradientUnits="userSpaceOnUse" x1="-61.9167" y1="-70.9915" x2="-60.3959" y2="-70.9915" gradientTransform="matrix(24.9894 40.0038 -47.6951 20.9596 -1641.849 4153.2417)">
+                                <stop offset="0" style="stop-color:#EFF7FC"/>
+                                <stop offset="1" style="stop-color:#FFFFFF"/>
+                            </linearGradient>
+                            <path id="XMLID_6_" fill="url(#XMLID_8_)" d="M153.6,221.1l73.5,54.3c8.4,4.6,14.4,2.2,16.5-7.8l29.9-141.1c3.1-12.3-4.7-17.9-12.7-14.2   L85.2,180.2c-12,4.8-11.9,11.5-2.2,14.5l45.1,14.1l104.4-65.9c4.9-3,9.5-1.4,5.7,1.9"/>
+                        </g>
+                        <title id="altIconTitle">Telegram</title>
+                    </svg>
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg"  width="20" height="20" viewBox="0 0 24 24">
+                        <path [ngStyle]="{'fill': g.themeForegroundColor}" d="M13.92,11.22s-1.22-.6-1.44-.68a.76.76,0,0,0-.27-.06.46.46,0,0,0-.4.24c-.12.17-.48.59-.59.72l-.05,0-.25-.1A6.22,6.22,0,0,1,8.54,9.26l0,0s.05-.06.07-.09l.2-.23.1-.11a1.36,1.36,0,0,0,.19-.31l0-.05a.54.54,0,0,0,0-.52c0-.06-.53-1.27-.58-1.4-.13-.31-.3-.45-.54-.45H7.88a3,3,0,0,0-1,.26,2.08,2.08,0,0,0-.77,1.76A3.78,3.78,0,0,0,7,10.17a.09.09,0,0,0,0,.05,7.81,7.81,0,0,0,3.33,2.89,5.37,5.37,0,0,0,2,.51h0l.32,0h.06a2.13,2.13,0,0,0,1.48-1,1.7,1.7,0,0,0,.09-1.08A.72.72,0,0,0,13.92,11.22Z" transform="translate(-1.83 -1.83)"/>
+                        <path [ngStyle]="{'fill': g.themeForegroundColor}" d="M10.14,1.83a8,8,0,0,0-8,8,7.86,7.86,0,0,0,1.1,4L1.85,17.89a.19.19,0,0,0,0,.21.21.21,0,0,0,.15.07h.06l4.24-1.35a8,8,0,0,0,11.82-7A8,8,0,0,0,10.14,1.83Zm0,14.27a6.37,6.37,0,0,1-3.49-1,.19.19,0,0,0-.12,0H6.47l-2.12.68.68-2a.22.22,0,0,0,0-.19A6.22,6.22,0,0,1,3.79,9.8a6.36,6.36,0,1,1,6.35,6.3Z" transform="translate(-1.83 -1.83)"/>
+                    </svg> -->
+                  </span>
+                <div class="clear"></div>
+            </button>
+        </div>
+        <div id="c21-messanger" *ngIf="g?.messangerPageTitle && g?.messangerPageTitle.trim() !== ''">
+            <button tabindex="1040" aflistconv #aflistconv class="c21-button-primary" (click)="openConversationOnPlatform('messanger')">
+                <span class="v-align-center">
+                    <!-- <svg [ngStyle]="{'fill': 'yellow' }" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                      <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"  [ngStyle]="{'fill': g.themeForegroundColor}"/>
+                    </svg> -->
+                    <svg aria-labelledby="altIconTitle" xmlns="http://www.w3.org/2000/svg" width="20" height="20" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 800 800">
+                        <radialGradient id="Gradient" cx="101.925" cy="809.0079" r="1.0896" gradientTransform="matrix(800 0 0 -799.9985 -81386 648000.75)" gradientUnits="userSpaceOnUse">
+                         <stop offset="0" style="stop-color:#0099FF"/>
+                         <stop offset="0.6098" style="stop-color:#A033FF"/>
+                         <stop offset="0.9348" style="stop-color:#FF5280"/>
+                         <stop offset="1" style="stop-color:#FF7061"/>
+                        </radialGradient>
+                        <path fill="url(#Gradient)" d="M400,0C174.7,0,0,165.1,0,388c0,116.6,47.8,217.4,125.6,287c6.5,5.8,10.5,14,10.7,22.8l2.2,71.2  c0.7,22.7,24.1,37.5,44.9,28.3l79.4-35c6.7-3,14.3-3.5,21.4-1.6c36.5,10,75.3,15.4,115.8,15.4c225.3,0,400-165.1,400-388  S625.3,0,400,0z"/>
+                        <path fill="#FFFFFF" d="M159.8,501.5l117.5-186.4c18.7-29.7,58.7-37,86.8-16l93.5,70.1c8.6,6.4,20.4,6.4,28.9-0.1    l126.2-95.8c16.8-12.8,38.8,7.4,27.6,25.3L522.7,484.9c-18.7,29.7-58.7,37-86.8,16l-93.5-70.1c-8.6-6.4-20.4-6.4-28.9,0.1    l-126.2,95.8C170.5,539.5,148.5,519.4,159.8,501.5z"/>
+                        <title id="altIconTitle">Facebook Messanger</title>
                     </svg>
                     <!-- <svg xmlns="http://www.w3.org/2000/svg"  width="20" height="20" viewBox="0 0 24 24">
                         <path [ngStyle]="{'fill': g.themeForegroundColor}" d="M13.92,11.22s-1.22-.6-1.44-.68a.76.76,0,0,0-.27-.06.46.46,0,0,0-.4.24c-.12.17-.48.59-.59.72l-.05,0-.25-.1A6.22,6.22,0,0,1,8.54,9.26l0,0s.05-.06.07-.09l.2-.23.1-.11a1.36,1.36,0,0,0,.19-.31l0-.05a.54.54,0,0,0,0-.52c0-.06-.53-1.27-.58-1.4-.13-.31-.3-.45-.54-.45H7.88a3,3,0,0,0-1,.26,2.08,2.08,0,0,0-.77,1.76A3.78,3.78,0,0,0,7,10.17a.09.09,0,0,0,0,.05,7.81,7.81,0,0,0,3.33,2.89,5.37,5.37,0,0,0,2,.51h0l.32,0h.06a2.13,2.13,0,0,0,1.48-1,1.7,1.7,0,0,0,.09-1.08A.72.72,0,0,0,13.92,11.22Z" transform="translate(-1.83 -1.83)"/>
