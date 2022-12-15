@@ -1,5 +1,11 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.47-rc.2
+- added: whatsapp number added to home
+- added: chatbot-panel page to host chatbot template
+- added: facebbok messanger channel link to home component
+- added: telegram channel link to home component
+
 ### 5.0.47-rc.1
 - added: sourceTitle info in attributes
 - added: restartConversation settings parameter to ALWAYS restart a conversation if singleConversation mode is active
