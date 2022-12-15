@@ -217,6 +217,7 @@ export class Globals {
    allowReopen: boolean; // *******  new ********
    continueConversationBeforeTime: number; // *******  new ********
    participants: Array<string>; // *******  new ********
+   whatsappNumber: string; // *******  new ********
   constructor(
   ) {
     // console.log(' ---------------- 1: initDefafultParameters ---------------- ');
@@ -392,6 +393,8 @@ export class Globals {
     /** enable user to continue archived confersation before the value time from last timeout message */
     this.participants = [];
      /** enable user to talk with specific chat-bots/humans */
+     this.whatsappNumber = '';
+     /**enable user to set a whatsapp business number to chat with */
 
     this.showWaitTime = true;
 

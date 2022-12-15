@@ -1,4 +1,5 @@
 import { ElementRef, ViewChild, Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation, SimpleChanges, AfterViewInit } from '@angular/core';
+import { CustomTranslateService } from 'src/chat21-core/providers/custom-translate.service';
 import { ConversationModel } from '../../../chat21-core/models/conversation';
 import { LoggerService } from '../../../chat21-core/providers/abstract/logger.service';
 import { LoggerInstance } from '../../../chat21-core/providers/logger/loggerInstance';
@@ -48,13 +49,26 @@ export class HomeComponent implements OnInit, AfterViewInit {
   private logger: LoggerService = LoggerInstance.getInstance();
   
   constructor(
-    public g: Globals
+    public g: Globals,
+    private customTranslateService: CustomTranslateService,
   ) {
 
   }
 
   ngOnInit() {
     this.logger.debug('[HOME-COMP] ngOnInit');
+    this.initiTranslations()
+  }
+
+  initiTranslations(){
+    let keys=[
+      'LABEL_WHATSAPP'
+    ]
+    let keysHeader = [
+      'BUTTON_CLOSE_TO_ICON'
+    ]
+    this.translationMapHeader = this.customTranslateService.translateLanguage(keysHeader)
+    this.translationMapFooter = this.customTranslateService.translateLanguage(keys)
   }
 
   ngAfterViewInit(){
@@ -90,6 +104,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
     // rimuovo classe animazione
     this.removeAnimation();
     this.onOpenAllConvesations.emit();
+  }
+
+  openNewConversationOnWhatsapp(){
+    window.open('https://wa.me/'+this.g.whatsappNumber, '_blank')
   }
 
   onConversationSelectedFN(conversation: ConversationModel) {

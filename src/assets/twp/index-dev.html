@@ -1064,6 +1064,13 @@
             console.log('onClickNativeRating:', window.tiledeskSettings)
             window.Tiledesk('restart')
         }
+
+        function onClickWhatsappNumber(){
+            let status = document.getElementById('baloonImage').value
+            window.tiledeskSettings['whatsappNumber'] = status
+            console.log('onClickWhatsappNumber:', window.tiledeskSettings)
+            window.Tiledesk('restart')
+        }
         
         function onClickHideHeaderCloseButton(){
             let status = document.querySelector('input[name="hideHeaderCloseButton"]:checked').value
@@ -1967,6 +1974,15 @@
                             </div>
                             <div class="col-md-2">
                                 <button class="btn btn-light" onclick="onClickNativeRating()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 formElement"><span><em><strong>whatsappNumber</strong></em></span></div>
+                            <div class="col-md-5">
+                                <input class="form-control" type="text" id="whatsappNumber" name="whatsappNumber">
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-light" onclick="onClickWhatsappNumber()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         
