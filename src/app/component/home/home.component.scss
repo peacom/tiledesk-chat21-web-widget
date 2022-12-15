@@ -211,18 +211,19 @@
         background-color: white;
         // box-shadow: 0 0px 10px 0px $trasp-light-gray;
         z-index: 20;
+        gap: 10px;
         // border-top: 1px solid $trasp-light-gray;
         #c21-whatsapp, #c21-telegram, #c21-messanger{
-            margin-right: 10px;
             .c21-button-primary{
                 background-color: transparent;
                 color: white;
                 margin: 0;
                 padding: 5px;
-                height: 25px;
-                width: 25px;
+                height: 35px;
+                width: 35px;
                 display: flex;
                 justify-content: center;
+                
             }
             &:hover svg{
                 transform: scale(1.2);
