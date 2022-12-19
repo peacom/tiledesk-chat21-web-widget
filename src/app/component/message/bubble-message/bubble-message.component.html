@@ -1,7 +1,7 @@
 <!-- [ngClass]="{'button-in-msg' : message.metadata && message.metadata.button}" -->
 <!-- ngStyle]="{'padding': (isImage(message) || isFrame(message))?'1px':'0 8px'}" -->
 <!-- 'width': (isImage(message) || isFrame(message))? sizeImage?.width + 'px': null  -->
-<div [ngStyle]="{'padding': (isImage(message) || isFrame(message))?'0 0px':'0 8px'}" class="messages primary-color">
+<div id="bubble-message" [ngStyle]="{'padding': (isImage(message) || isFrame(message))?'0 0px':'0 8px'}" class="messages primary-color">
   
     
     <div>
@@ -52,33 +52,33 @@
         </ng-template> 
 
 
-          <!-- [htmlEnabled]="(message?.type==='html')? true : false" -->
-          <chat-text *ngIf="message?.type !=='html'"
-            [text]="message?.text"
-            [color]="fontColor"
-            [fontSize]="fontSize"
-            [fontFamily]="fontFamily"
-            (onBeforeMessageRender)="onBeforeMessageRenderFN($event)"
-            (onAfterMessageRender)="onAfterMessageRenderFN($event)">
-          </chat-text>
+        <!-- [htmlEnabled]="(message?.type==='html')? true : false" -->
+        <chat-text *ngIf="message?.type !=='html'"
+          [text]="message?.text"
+          [color]="fontColor"
+          [fontSize]="fontSize"
+          [fontFamily]="fontFamily"
+          (onBeforeMessageRender)="onBeforeMessageRenderFN($event)"
+          (onAfterMessageRender)="onAfterMessageRenderFN($event)">
+        </chat-text>
 
-          <chat-html *ngIf="message?.type==='html'"
-            [htmlText]="message?.text"
-            [fontSize]="stylesMap.get('buttonFontSize')"
-            [themeColor]="stylesMap.get('themeColor')"
-            [foregroundColor]="stylesMap.get('foregroundColor')">
-          </chat-html>
-          <!-- <p #messageEl class="message_innerhtml marked" [innerHTML]="printMessage(message, messageEl, this) | marked"></p> -->
-          <!-- <div *ngIf="isPopupUrl(message.text); then contentPopup else contentNewTab">here
-              is ignored</div>
-          <ng-template #contentPopup>
-              <p style="text-decoration: underline; padding:8px; cursor: pointer;"
-                  (click)="popupUrl(g.windowContext, message.text,'windowName')">{{strip_tags(message.text)}}</p>
-          </ng-template>
-          <ng-template #contentNewTab>
-              <p #messageEl [innerHTML]="printMessage(message, messageEl, this) | linky"></p>
-          </ng-template> -->
-        </div>
+        <chat-html *ngIf="message?.type==='html'"
+          [htmlText]="message?.text"
+          [fontSize]="stylesMap.get('buttonFontSize')"
+          [themeColor]="stylesMap.get('themeColor')"
+          [foregroundColor]="stylesMap.get('foregroundColor')">
+        </chat-html>
+        <!-- <p #messageEl class="message_innerhtml marked" [innerHTML]="printMessage(message, messageEl, this) | marked"></p> -->
+        <!-- <div *ngIf="isPopupUrl(message.text); then contentPopup else contentNewTab">here
+            is ignored</div>
+        <ng-template #contentPopup>
+            <p style="text-decoration: underline; padding:8px; cursor: pointer;"
+                (click)="popupUrl(g.windowContext, message.text,'windowName')">{{strip_tags(message.text)}}</p>
+        </ng-template>
+        <ng-template #contentNewTab>
+            <p #messageEl [innerHTML]="printMessage(message, messageEl, this) | linky"></p>
+        </ng-template> -->
+      </div>
   
     </div>
   

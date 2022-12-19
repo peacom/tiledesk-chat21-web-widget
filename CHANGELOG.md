@@ -1,5 +1,7 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.47 in PROD
+
 ### 5.0.47-rc.2
 - added: whatsapp number added to home
 - added: chatbot-panel page to host chatbot template
