@@ -1789,20 +1789,22 @@ export class GlobalSettingsService {
                     // }
                     // console.log('this.globals.offline_msg ::::', department['offline_msg']);
                     // console.log('this.globals.online_msg ::::', department['online_msg']);
-                    departments.splice(i, 1);
+                    // departments.splice(i, 1);
+                    this.globals.setParameter('departmentDefault', departments[i]);
+                    this.setDepartment(departments[i]);
                     return;
                 }
                 i++;
             });
-            this.globals.setParameter('departmentDefault', departments[0]);
-            this.setDepartment(departments[0]);
+            // this.globals.setParameter('departmentDefault', departments[0]);
+            // this.setDepartment(departments[0]);
         } else {
             // DEPARTMENT DEFAULT NON RESTITUISCE RISULTATI !!!!
             this.logger.error('[GLOBAL-SET] initDepartments > DEPARTMENT DEFAULT NON RESTITUISCE RISULTATI ::::');
             // return;
         }
 
-        this.setDepartmentFromExternal(); // chiamata ridondante viene fatta nel setParameters come ultima operazione
+        // this.setDepartmentFromExternal(); // chiamata ridondante viene fatta nel setParameters come ultima operazione
     }
 
 
@@ -1828,6 +1830,8 @@ export class GlobalSettingsService {
             }
             this.logger.debug('[GLOBAL-SET] setDepartmentFromExternal > END departmentID ::::' + this.globals.departmentID + isValidID);
         }
+        //remove default department from list
+        this.globals.departments = this.globals.departments.filter(obj => obj['default'] !== true)
     }
 
     /**
