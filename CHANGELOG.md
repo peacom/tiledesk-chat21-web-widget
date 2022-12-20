@@ -1,5 +1,10 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.48-rc.1
+- bug-fixed: chatbot-panel page not render background-image
+- bug-fixed: if departmentID is the default department, widget do not setup its as departmentID to start convs with
+- bug-fixed: if uploadEngine is native, set baseImageUrl as BASE_URL to upload and download images
+
 ### 5.0.47.1 in PROD
 
 ### 5.0.47 in PROD
