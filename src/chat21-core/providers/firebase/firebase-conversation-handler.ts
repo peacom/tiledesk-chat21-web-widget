@@ -251,7 +251,7 @@ export class FirebaseConversationHandler extends ConversationHandlerService {
                 }
             }
 
-            
+    
 
             this.addRepalceMessageInArray(msg.uid, msg);
             this.messageAdded.next(msg);
@@ -411,7 +411,7 @@ export class FirebaseConversationHandler extends ConversationHandlerService {
                 message.text = INFO_A_NEW_SUPPORT_REQUEST_HAS_BEEN_ASSIGNED_TO_YOU + ': ' + textAfterColon;
             }
         } else if ((message.attributes.messagelabel && message.attributes.messagelabel.key === LEAD_UPDATED)) {
-             message.text = INFO_SUPPORT_LEAD_UPDATED;
+            message.text = INFO_SUPPORT_LEAD_UPDATED;
         } else if ((message.attributes.messagelabel && message.attributes.messagelabel.key === MEMBER_LEFT_GROUP)) {
             let subject: string;
             if (message.attributes.messagelabel.parameters.fullname) {
@@ -557,7 +557,7 @@ private generateMessageObject(message, command_message, callback) {
     command_message.attributes.parentUid = parentUid //added to manage message STATUS UPDATES
     this.addedNew(command_message)
     callback();
-  }
+}
 
 
     private isValidMessage(msgToCkeck:MessageModel): boolean{

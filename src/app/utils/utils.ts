@@ -23,6 +23,7 @@ import { environment } from '../../environments/environment';
  * oggi;
  * ieri;
  * giorno della settimana (lunedì, martedì, ecc)
+ * @deprecated
  */
 export function setHeaderDate(timestamp): string {
   const date = new Date(timestamp);
