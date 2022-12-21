@@ -100,6 +100,9 @@ export function contactsRef(tenant) {
 //   return labelDays;
 // }
 
+/**
+ * @deprecated
+ */
 export function setHeaderDate(translate, timestamp): string {
   // const LABEL_TODAY = translate.get('LABEL_TODAY');
   // const LABEL_TOMORROW = translate.get('LABEL_TOMORROW');
