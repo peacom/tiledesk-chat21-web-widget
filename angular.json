@@ -40,7 +40,8 @@
               "src/environments/real_data/widget-config-firebase.json",
               "src/environments/real_data/widget-config-mqtt.json",
               "src/environments/real_data/widget-config-docker.json",
-              "src/environments/real_data/widget-config-native-mqtt.json"
+              "src/environments/real_data/widget-config-native-mqtt.json",
+              "src/environments/real_data/widget-config-native-prod.json"
             ],
             "styles": [
               "src/app/sass/styles.scss",

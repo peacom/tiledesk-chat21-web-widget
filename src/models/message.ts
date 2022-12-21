@@ -15,7 +15,6 @@ export class MessageModel {
         public metadata: any,
         public text: any,
         public timestamp: any,
-        public headerDate: string,
         public type: string,
         public attributes: any,
         public channel_type: string,
@@ -34,7 +33,6 @@ export class MessageModel {
     //         metadata: this.metadata,
     //         text: this.text,
     //         timestamp: firebase.database.ServerValue.TIMESTAMP,
-    //         // headerDate: this.headerDate,
     //         type: this.type,
     //         attributes: this.attributes,
     //         channel_type: this.channel_type
