@@ -21,10 +21,10 @@ import {
   htmlEntities,
   compareValues,
   searchIndexInArrayForUid,
-  setHeaderDate,
   conversationMessagesRef
 } from '../../utils/utils';
-import { checkIfIsMemberJoinedGroup, hideInfoMessage, messageType } from '../../utils/utils-message';
+import { v4 as uuidv4 } from 'uuid';
+import { messageType, checkIfIsMemberJoinedGroup, hideInfoMessage, isJustRecived } from '../../utils/utils-message';
 
 
 // @Injectable({ providedIn: 'root' })
@@ -47,7 +47,6 @@ export class MQTTConversationHandler extends ConversationHandlerService {
     // private variables
     private translationMap: Map<string, string>; // LABEL_TODAY, LABEL_TOMORROW
     private showInfoMessage: string[];
-    // private urlNodeFirebase: string;
     private recipientId: string;
     private recipientFullname: string;
     private tenant: string;
@@ -55,8 +54,7 @@ export class MQTTConversationHandler extends ConversationHandlerService {
     private senderId: string;
     private listSubsriptions: any[];
     private CLIENT_BROWSER: string;
-    private lastDate = '';
-
+    private startTime: Date = new Date();
     private logger: LoggerService = LoggerInstance.getInstance()
 
     constructor(
@@ -71,7 +69,7 @@ export class MQTTConversationHandler extends ConversationHandlerService {
      */
     initialize(recipientId: string, recipientFullName: string,loggedUser: UserModel,
                 tenant: string,translationMap: Map<string, string>, showInfoMessage: string[]) {
-        this.logger.log('[MQTTConversationHandler] initWithRecipient:', tenant);
+        this.logger.log('[MQTTConversationHandlerSERVICE] initWithRecipient:', tenant);
         this.recipientId = recipientId;
         this.recipientFullname = recipientFullName;
         this.loggedUser = loggedUser;
@@ -96,35 +94,47 @@ export class MQTTConversationHandler extends ConversationHandlerService {
      * mi sottoscrivo a change, removed, added
      */
     connect() {
-        this.logger.log('[MQTTConversationHandler] connecting conversation handler...');
+        this.logger.log('[MQTTConversationHandlerSERVICE] connecting conversation handler...');
         if (this.conversationWith == null) {
-            this.logger.error('[MQTTConversationHandler] cant connect invalid this.conversationWith', this.conversationWith);
+            this.logger.error('[MQTTConversationHandlerSERVICE] cant connect invalid this.conversationWith', this.conversationWith);
             return;
         }
         this.chat21Service.chatClient.lastMessages(this.conversationWith, (err, messages) => {
             if (!err) {
-                messages.forEach(msg => {
-                    this.addedMessage(msg);
+                messages.forEach(message => {
+                    // this.addedMessage(msg);
+                    const msg: MessageModel = message;        
+                    msg.uid = message.message_id;
+                    if (msg.attributes && msg.attributes.commands) {
+                        // this.logger.debug('[MQTTConversationHandlerSERVICE] splitted message::::', msg)
+                        this.addCommandMessage(msg)
+                    } else {
+                        // this.logger.debug('[MQTTConversationHandlerSERVICE] NOT splitted message::::', msg)
+                        this.addedMessage(msg)
+                    }
                 });
             }
         });
         const handler_message_added = this.chat21Service.chatClient.onMessageAddedInConversation(
             this.conversationWith, (message, topic) => {
-                this.logger.log('[MQTTConversationHandler] message added:', message, 'on topic:', topic);
-                this.addedMessage(message);
+                this.logger.log('[MQTTConversationHandlerSERVICE] message added:', message, 'on topic:', topic);
+                // this.addedMessage(msg);
+                const msg: MessageModel = message;        
+                msg.uid = message.message_id;
+
+                if (msg.attributes && msg.attributes.commands) {
+                    this.logger.debug('[MQTTConversationHandlerSERVICE] splitted message::::', msg)
+                    this.addCommandMessage(msg)
+                } else {
+                    this.logger.debug('[MQTTConversationHandlerSERVICE] NOT splitted message::::', msg)
+                    this.addedMessage(msg)
+                }
         });
         const handler_message_updated = this.chat21Service.chatClient.onMessageUpdatedInConversation(
             this.conversationWith,  (message, topic) => {
-            this.logger.log('[MQTTConversationHandler] message updated:', message, 'on topic:', topic);
+            this.logger.log('[MQTTConversationHandlerSERVICE] message updated:', message, 'on topic:', topic);
             this.updatedMessageStatus(message);
         });
-    }
-
-    isGroup(groupId) {
-        if (groupId.indexOf('group-') >= 0) {
-            return true;
-        }
-        return false;
     }
 
     /**
@@ -163,7 +173,7 @@ export class MQTTConversationHandler extends ConversationHandlerService {
             channelType = TYPE_DIRECT;
         }
 
-        this.logger.log('[MQTTConversationHandler] Senderfullname', senderFullname);
+        this.logger.log('[MQTTConversationHandlerSERVICE] Senderfullname', senderFullname);
         const language = document.documentElement.lang;
         const recipientFullname = conversationWithFullname;
         const recipientId = conversationWith;
@@ -181,7 +191,7 @@ export class MQTTConversationHandler extends ConversationHandlerService {
             (err, message) => {
                 if (err) {
                     message.status = '-100';
-                    this.logger.log('[MQTTConversationHandler] ERROR', err);
+                    this.logger.log('[MQTTConversationHandlerSERVICE] ERROR', err);
                 } else {
                     message.status = '150';
                 }
@@ -213,9 +223,9 @@ export class MQTTConversationHandler extends ConversationHandlerService {
     }
 
     /** */
-    private addedMessage(messageSnapshot: any) {
+    private addedMessage(messageSnapshot: MessageModel) {
         const msg = this.messageGenerate(messageSnapshot);
-        msg.uid = msg.message_id;
+        
         let isInfoMessage = messageType(MESSAGE_TYPE_INFO, msg)
         if(isInfoMessage){
             this.messageInfo.next(msg)
@@ -232,16 +242,7 @@ export class MQTTConversationHandler extends ConversationHandlerService {
             }
         }
 
-       
-        
-        // imposto il giorno del messaggio per visualizzare o nascondere l'header data
-        msg.headerDate = null;
-        const headerDate = setHeaderDate(this.translationMap, msg.timestamp);
-        if (headerDate !== this.lastDate) {
-            this.lastDate = headerDate;
-            msg.headerDate = headerDate;
-        }
-        this.logger.log('[MQTTConversationHandler] adding message:' + JSON.stringify(msg));
+        this.logger.log('[MQTTConversationHandlerSERVICE] adding message:' + JSON.stringify(msg));
         // this.logger.log('childSnapshot.message_id:' + msg.message_id);
         // this.logger.log('childSnapshot.key:' + msg.key);
         // this.logger.log('childSnapshot.uid:' + msg.uid);
@@ -250,18 +251,19 @@ export class MQTTConversationHandler extends ConversationHandlerService {
         this.messageAdded.next(msg);
     }
 
+
     /** */
     private updatedMessageStatus(patch: any) {
         if(messageType(MESSAGE_TYPE_INFO, patch) ){
             return;
         }
-        this.logger.log('[MQTTConversationHandler] updating message with patch', patch);
+        this.logger.log('[MQTTConversationHandlerSERVICE] updating message with patch', patch);
         const index = searchIndexInArrayForUid(this.messages, patch.message_id);
         if (index > -1) {
             const message = this.messages[index];
             if (message) {
                 message.status = patch.status;
-                this.logger.log('[MQTTConversationHandler] message found and patched (replacing)', message);
+                this.logger.log('[MQTTConversationHandlerSERVICE] message found and patched (replacing)', message);
                 this.addReplaceMessageInArray(message.uid, message);
                 this.messageChanged.next(message);
             }
@@ -281,9 +283,9 @@ export class MQTTConversationHandler extends ConversationHandlerService {
     /** */
     private messageGenerate(childSnapshot: any) {
         // const msg: MessageModel = childSnapshot.val();
-        this.logger.log("[MQTTConversationHandler] childSnapshot >" + JSON.stringify(childSnapshot));
+        this.logger.log("[MQTTConversationHandlerSERVICE] childSnapshot >" + JSON.stringify(childSnapshot));
         const msg = childSnapshot;
-        msg.uid = childSnapshot.key;
+        // msg.uid = childSnapshot.key;
         msg.text = msg.text.trim() //remove black msg with only spaces
         // controllo fatto per i gruppi da rifattorizzare
         if (!msg.sender_fullname || msg.sender_fullname === 'undefined') {
@@ -294,7 +296,7 @@ export class MQTTConversationHandler extends ConversationHandlerService {
         //     msg.text = htmlEntities(msg.text);
         // }
         // verifico che il sender è il logged user
-        this.logger.log("[MQTTConversationHandler] ****>msg.sender:" + msg.sender);
+        this.logger.log("[MQTTConversationHandlerSERVICE] ****>msg.sender:" + msg.sender);
         msg.isSender = this.isSender(msg.sender, this.loggedUser.uid);
         // traduco messaggi se sono del server
         if (messageType(MESSAGE_TYPE_INFO, msg)) {
@@ -307,8 +309,6 @@ export class MQTTConversationHandler extends ConversationHandlerService {
     private addReplaceMessageInArray(uid: string, msg: MessageModel) {
         const index = searchIndexInArrayForUid(this.messages, uid);
         if (index > -1) {
-            // const headerDate = this.messages[index].headerDate;
-            // msg.headerDate = headerDate;
             this.messages.splice(index, 1, msg);
         } else {
             this.messages.splice(0, 0, msg);
@@ -387,11 +387,11 @@ export class MQTTConversationHandler extends ConversationHandlerService {
      * @param conversationWith
      */
     private updateMessageStatusReceived(msg) {
-        this.logger.log('[MQTTConversationHandler] updateMessageStatusReceived', msg);
+        this.logger.log('[MQTTConversationHandlerSERVICE] updateMessageStatusReceived', msg);
         if (msg['status'] < MSG_STATUS_RECEIVED) {
-            this.logger.log('[MQTTConversationHandler] status ', msg['status'], ' < (RECEIVED:200)', MSG_STATUS_RECEIVED);
+            this.logger.log('[MQTTConversationHandlerSERVICE] status ', msg['status'], ' < (RECEIVED:200)', MSG_STATUS_RECEIVED);
             if (msg.sender !== this.loggedUser.uid && msg.status < MSG_STATUS_RECEIVED) {
-                this.logger.log('[MQTTConversationHandler] updating message with status received');
+                this.logger.log('[MQTTConversationHandlerSERVICE] updating message with status received');
                 this.chat21Service.chatClient.updateMessageStatus(msg.message_id, this.conversationWith, MSG_STATUS_RECEIVED, null);
             }
         }
@@ -432,15 +432,89 @@ export class MQTTConversationHandler extends ConversationHandlerService {
     // }
 
 
-  unsubscribe(key: string) {
-    this.logger.log('[MQTTConversationHandler] unsubscribe: ', key);
-    this.listSubsriptions.forEach(sub => {
-      this.logger.log('[MQTTConversationHandler] unsubscribe: ', sub.uid, key);
-      if (sub.uid === key) {
-        sub.unsubscribe(key, null);
-        return;
-      }
-    });
-  }
+    unsubscribe(key: string) {
+        this.logger.log('[MQTTConversationHandlerSERVICE] unsubscribe: ', key);
+        this.listSubsriptions.forEach(sub => {
+        this.logger.log('[MQTTConversationHandlerSERVICE] unsubscribe: ', sub.uid, key);
+        if (sub.uid === key) {
+            sub.unsubscribe(key, null);
+            return;
+        }
+        });
+    }
+
+    private addCommandMessage(msg: MessageModel){
+        const that = this;
+        const commands = msg.attributes.commands;
+        let i=0;
+        function execute(command){
+            if(command.type === "message"){
+                that.logger.debug('[MQTTConversationHandlerSERVICE] addCommandMessage --> type="message"', command, i)
+                if (i >= 2) {
+                    
+                    //check if previus wait message type has time value, otherwize set to 1000ms
+                    !commands[i-1].time? commands[i-1].time= 1000 : commands[i-1].time
+                    command.message.timestamp = commands[i-2].message.timestamp + commands[i-1].time;
+                    
+                    /** CHECK IF MESSAGE IS JUST RECEIVED: IF false, set next message time (if object exist) to 0 -> this allow to show it immediately */
+                    if(!isJustRecived(that.startTime.getTime(), msg.timestamp)){
+                        let previewsTimeMsg = msg.timestamp;
+                        commands[i-2]? previewsTimeMsg = commands[i-2].message.timestamp : null;
+                        command.message.timestamp = previewsTimeMsg + 100
+                        commands[i+1]? commands[i+1].time = 0 : null
+                    }
+                } else { /**MANAGE FIRST MESSAGE */
+                    command.message.timestamp = msg.timestamp;
+                    if(!isJustRecived(that.startTime.getTime(), msg.timestamp)){
+                        commands[i+1]? commands[i+1].time = 0 : null
+                    }
+                }
+                that.generateMessageObject(msg, command.message, function () {
+                    i += 1
+                    if (i < commands.length) {
+                        execute(commands[i])
+                    }
+                    else {
+                        that.logger.debug('[MQTTConversationHandlerSERVICE] addCommandMessage --> last command executed (wait), exit') 
+                    }
+                })
+            }else if(command.type === "wait"){
+                that.logger.debug('[MQTTConversationHandlerSERVICE] addCommandMessage --> type="wait"', command, i, commands.length)
+                //publish waiting event to simulate user typing
+                if(isJustRecived(that.startTime.getTime(), msg.timestamp)){
+                    // console.log('message just received::', command, i, commands)
+                    that.messageWait.next({uid: that.conversationWith, uidUserTypingNow: msg.sender, nameUserTypingNow: msg.sender_fullname, waitTime: command.time, command: command})
+                }
+                setTimeout(function() {
+                    i += 1
+                    if (i < commands.length) {
+                        execute(commands[i])
+                    }
+                    else {
+                        that.logger.debug('[MQTTConversationHandlerSERVICE] addCommandMessage --> last command executed (send message), exit') 
+                    }
+                },command.time)
+            }
+        }
+        execute(commands[0]) //START render first message
+    }
+    
+    private generateMessageObject(message, command_message, callback) {
+        let parentUid = message.uid
+        command_message.uid = uuidv4();
+        if(command_message.text) command_message.text = command_message.text.trim()//remove black msg with only spaces
+        command_message.language = message.language;
+        command_message.recipient = message.recipient;
+        command_message.recipient_fullname = message.recipient_fullname;
+        command_message.sender = message.sender;
+        command_message.sender_fullname = message.sender_fullname;
+        command_message.channel_type = message.channel_type;
+        command_message.status = message.status;
+        command_message.isSender = message.isSender;
+        command_message.attributes? command_message.attributes.commands = true : command_message.attributes = {commands : true}
+        command_message.attributes.parentUid = parentUid //added to manage message STATUS UPDATES
+        this.addedMessage(command_message)
+        callback();
+    }
 
 }
