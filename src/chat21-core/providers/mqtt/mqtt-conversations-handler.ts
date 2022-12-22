@@ -156,7 +156,7 @@ export class MQTTConversationsHandler extends ConversationsHandlerService {
                 this.changed(conversation);
             }
             else {
-                this.logger.log('[MQTTConversationsHandler]Added conv -> Added!')
+                this.logger.log('[MQTTConversationsHandler] Added conv -> Added!')
                 this.added(conversation);
             }
         });
@@ -269,10 +269,12 @@ export class MQTTConversationsHandler extends ConversationsHandlerService {
             conversation.conversation_with = conversation.conversWith // conversWith comes from remote
         }
         const index = searchIndexInArrayForUid(this.conversations, conversation.conversation_with);
+        const oldConversation = this.conversations[index]
         if (index > -1) {
             this.updateConversationWithSnapshot(this.conversations[index], conversation);
             this.logger.debug('[MQTTConversationsHandler] conversationchanged.isnew', JSON.stringify(conversation))
             this.conversationChanged.next(this.conversations[index]);
+            this.conversationChangedDetailed.next({value: this.conversations[index], previousValue: oldConversation})
             this.conversations.splice(index, 1, this.conversations[index])
             this.conversations.sort(compareValues('timestamp', 'desc'));
         }
