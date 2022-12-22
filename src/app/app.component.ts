@@ -1423,6 +1423,13 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             };
 
             /** set state reinit */
+            windowContext['tiledesk'].startConversation = function () {
+                ngZone.run(() => {
+                    windowContext['tiledesk']['angularcomponent'].component.onNewConversation();
+                });
+            };
+
+            /** set state reinit */
             windowContext['tiledesk'].reInit = function () {
                 ngZone.run(() => {
                     windowContext['tiledesk']['angularcomponent'].component.reInit();
