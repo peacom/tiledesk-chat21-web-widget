@@ -1,5 +1,10 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.48-rc.3
+- added: startConversation method to start a new conversation from javascript method
+- added: implementation of conversationChangedDetailed in MQTTConversationsHandler service
+- bug-fixed: MQTTConversationsHandler service trigger onConversationsChanged every time conversation is loaded (is_new)
+
 ### 5.0.48-rc.2
 - added: splitMessage in MQTTConversationHandler service
 - removed: MESSAGE_TYPE_DATE
