@@ -286,6 +286,7 @@
             console.log("onBeforeInit Tiledesk FN", event_data);
             
             setTimeout(() => {
+                document.getElementById("preloader").style.display = "none";
                 if(event_data && event_data.detail && event_data.detail.appConfigs){
                     
                     var enbedJs = event_data.detail.appConfigs.enbedJs? event_data.detail.appConfigs.enbedJs : false;
@@ -295,14 +296,20 @@
                     baseUrlConsole = event_data.detail.appConfigs.dashboardUrl? event_data.detail.appConfigs.dashboardUrl : baseUrlConsole;
                 }
             }, 1000);
+
+            setTimeout(() => {
+                if(event_data && event_data.detail && event_data.detail.global && !event_data.detail.global.isOpen){
+                    window.Tiledesk('open')
+                }
+            }, 3000);
             
         });
         
         window.Tiledesk('onInit', function(event_data) {
             console.log("onInit Tiledesk FN", event_data); 
-            setTimeout(() => {
-                document.getElementById("preloader").style.display = "none";
-            }, 1000);
+            // setTimeout(() => {
+            //     document.getElementById("preloader").style.display = "none";
+            // }, 1000);
             //open widget after 3s if is closed
             setTimeout(() => {
                 if(event_data && event_data.detail && event_data.detail.global && !event_data.detail.global.isOpen){
