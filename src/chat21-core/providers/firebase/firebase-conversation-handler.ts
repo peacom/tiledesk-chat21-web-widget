@@ -1,4 +1,4 @@
-import { MEMBER_LEFT_GROUP, TOUCHING_OPERATOR } from './../../utils/constants';
+import { LIVE_PAGE, MEMBER_LEFT_GROUP, TOUCHING_OPERATOR } from './../../utils/constants';
 import { CustomLogger } from './../logger/customLogger';
 
 import { Inject, Injectable, Optional } from '@angular/core';
@@ -372,6 +372,7 @@ export class FirebaseConversationHandler extends ConversationHandlerService {
         const INFO_SUPPORT_LEAD_UPDATED = this.translationMap.get('INFO_SUPPORT_LEAD_UPDATED');
         const INFO_SUPPORT_MEMBER_LEFT_GROUP = this.translationMap.get('INFO_SUPPORT_MEMBER_LEFT_GROUP');
         const INFO_A_NEW_SUPPORT_REQUEST_HAS_BEEN_ASSIGNED_TO_YOU = this.translationMap.get('INFO_A_NEW_SUPPORT_REQUEST_HAS_BEEN_ASSIGNED_TO_YOU');
+        const INFO_SUPPORT_LIVE_PAGE = this.translationMap.get('INFO_SUPPORT_LIVE_PAGE');
 
         if (message.attributes.messagelabel
             && message.attributes.messagelabel.parameters
@@ -413,13 +414,19 @@ export class FirebaseConversationHandler extends ConversationHandlerService {
         } else if ((message.attributes.messagelabel && message.attributes.messagelabel.key === LEAD_UPDATED)) {
             message.text = INFO_SUPPORT_LEAD_UPDATED;
         } else if ((message.attributes.messagelabel && message.attributes.messagelabel.key === MEMBER_LEFT_GROUP)) {
-            let subject: string;
+            let subject: string = '';
             if (message.attributes.messagelabel.parameters.fullname) {
                 subject = message.attributes.messagelabel.parameters.fullname;
             }else{
                 subject = message.attributes.messagelabel.parameters.member_id;
             }
             message.text = subject + ' ' +  INFO_SUPPORT_MEMBER_LEFT_GROUP ;
+        }else if(message.attributes.messagelabel && message.attributes.messagelabel.key === LIVE_PAGE){
+            let sourceUrl: string = '';
+            if(message.attributes && message.attributes.sourcePage){
+                sourceUrl = message.attributes.sourcePage
+            }
+            message.text= INFO_SUPPORT_LIVE_PAGE + ' ' + sourceUrl
         }
     }
 

@@ -65,6 +65,7 @@ export const MEMBER_JOINED_GROUP = 'MEMBER_JOINED_GROUP';
 export const MEMBER_LEFT_GROUP = "MEMBER_LEFT_GROUP"
 export const LEAD_UPDATED = "LEAD_UPDATED";
 export const TOUCHING_OPERATOR = "TOUCHING_OPERATOR";
+export const LIVE_PAGE = "LIVE_PAGE"
 
 // URLS
 // export const URL_SOUND = 'assets/sounds/pling.mp3';

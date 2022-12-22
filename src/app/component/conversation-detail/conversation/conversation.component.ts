@@ -8,7 +8,6 @@ import { Subscription } from 'rxjs';
 
 import {
   CHANNEL_TYPE_DIRECT, CHANNEL_TYPE_GROUP, TYPE_MSG_TEXT,
-  MSG_STATUS_SENT, MSG_STATUS_RETURN_RECEIPT, MSG_STATUS_SENT_SERVER,
   UID_SUPPORT_GROUP_MESSAGES
 } from 'src/app/utils/constants';
 
@@ -46,6 +45,7 @@ import { StarRatingWidgetService } from 'src/app/providers/star-rating-widget.se
 import { TiledeskRequestsService } from 'src/chat21-core/providers/tiledesk/tiledesk-requests.service';
 import moment from 'moment';
 import { isUserBanned } from 'src/chat21-core/utils/utils-message';
+import { LIVE_PAGE } from 'src/chat21-core/utils/constants';
 // import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -254,6 +254,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
       'INFO_A_NEW_SUPPORT_REQUEST_HAS_BEEN_ASSIGNED_TO_YOU',
       'INFO_SUPPORT_LEAD_UPDATED',
       'INFO_SUPPORT_MEMBER_LEFT_GROUP',
+      'INFO_SUPPORT_LIVE_PAGE',
       'LABEL_TODAY',
       'LABEL_TOMORROW',
       'LABEL_LOADING',
@@ -577,7 +578,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
       
       /* SEND FIRST MESSAGE if preChatForm has 'firstMessage' key */ 
       this.sendFirstMessagePreChatForm()
-      
+
       this.logger.debug('[CONV-COMP] DETTAGLIO CONV - messages **************', this.messages);
       this.chatManager.addConversationHandler(this.conversationHandlerService);
 
@@ -624,6 +625,23 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
         }
       }
     }, 1000);
+  }
+
+  /**
+   * allow widget to send Live info about the current page where the user is located (sourcePage and sourceTitle)
+   *  NOT IN USE
+   */
+  sendLivePage(){
+    setTimeout(() => {
+      const message= 'Moved to: ' + this.g.attributes.sourcePage
+      const attributes={
+        subtype: 'info/support',
+        messagelabel: {key: LIVE_PAGE}
+      }
+      this.logger.debug('[CONV-COMP] sendLivePage --> attributes+message', attributes, message)
+      this.conversationFooter.sendMessage(message, TYPE_MSG_TEXT, null, attributes);
+    }, 1000);
+    
   }
 
 
@@ -901,6 +919,8 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
     }
     this.appStorageService.setItem('attributes', JSON.stringify(this.g.attributes));
   }
+
+  
 
  scrollToBottom() {
   this.conversationContent.scrollToBottom();
