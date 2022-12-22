@@ -147,7 +147,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                     return;
                 }
 
-                if(conversation.sender !== this.g.senderId && !isInfo(conversation)){
+                if(conversation.is_new && conversation.sender !== this.g.senderId && !isInfo(conversation)){
                     that.manageTabNotification();
                 }
 
