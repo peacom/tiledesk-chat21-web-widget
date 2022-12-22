@@ -102,9 +102,9 @@
         .mockup{
             background-repeat: no-repeat;
             background-image: url(../images/website_mockup.jpg);      
-            background-size: calc(100% - 122px);
-            background-position-x: 50px;
-            background-position-y: 100px;
+            background-size: calc(100% - 40px);
+            /* background-position-x: 50px; */
+            /* background-position-y: 100px; */
         }
 
         .row {
@@ -159,7 +159,7 @@
             text-align: center;
 
             position: relative;
-            margin-top: -81px; /* negative value of footer height */
+            margin-top: -100px; /* negative value of footer height */
             height: 80px;
             clear:both;
         }
@@ -445,37 +445,6 @@
     </div>
 
     <div id="wrapper">
-        <header id="header">
-            <nav class="navbar navbar-inverse" role="navigation">
-                <div class="container">
-                    <div class="navbar-header">
-
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="https://console.tiledesk.com/"></a>
-                    </div>
-
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                            <li><a href="https://developer.tiledesk.com/widget/web-sdk" target="_blank">WEB SDK &amp; Docs<span></span></a></li>
-                            <li><a href="https://www.tiledesk.com/pricing-cloud/" target="_blank">Pricing<span></span></a></li>
-                            <li><a href="https://www.tiledesk.com/blog/" target="_blank">Blog<span></span></a></li>
-                        </ul>
-
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="sign-up"><a onclick="goToConsole()" href="#">GO TO CONSOLE</a></li>
-                        </ul>
-
-                        <ul class="nav navbar-nav navbar-right" id="testPageButton"  style="display: none;">
-                            <li class="sign-up"><a onclick="goToTestPage()" href="#">GO TO TEST PAGE</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
         </header>
 
         <div id="main" class="container">
