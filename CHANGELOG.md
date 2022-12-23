@@ -1,5 +1,8 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.50 in PROD
+- bug-fixed: if only one department exist (not the default) widget starts conversation with default one
+
 ### 5.0.49 in PROD
 
 ### 5.0.49-rc.1
