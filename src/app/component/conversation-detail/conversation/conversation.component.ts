@@ -578,6 +578,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
       
       /* SEND FIRST MESSAGE if preChatForm has 'firstMessage' key */ 
       this.sendFirstMessagePreChatForm()
+      // this.sendLivePage()
 
       this.logger.debug('[CONV-COMP] DETTAGLIO CONV - messages **************', this.messages);
       this.chatManager.addConversationHandler(this.conversationHandlerService);
