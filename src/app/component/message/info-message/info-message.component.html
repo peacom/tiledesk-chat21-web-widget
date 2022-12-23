@@ -5,7 +5,7 @@
         <div class="bounce1"></div>
     </div>
       
-    <div>
+    <div style="max-width: 70%;">
         <span class="base_info" [innerHTML]="message?.text | marked" [options]="tooltipOptions" [tooltip]="timeTooltipLeft"  placement="left" contentType="template"></span>
         <ng-template #timeTooltipLeft>
             <span>{{message.timestamp | amTimeAgo}} ({{message.timestamp | amLocal | amDateFormat: 'L HH:mm:ss'}})</span>
