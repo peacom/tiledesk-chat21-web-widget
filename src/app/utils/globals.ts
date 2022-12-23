@@ -381,7 +381,7 @@ export class Globals {
     /** set the text size of attachment-buttons */
     this.singleConversation = false;
     /** set the single conversation mode for the widget */
-    this.restartConversation = true;
+    this.restartConversation = false;
     /** allow you to always restart a new converazioe */
     this.nativeRating = true;
     /** set if native rating componet has to be shown */
