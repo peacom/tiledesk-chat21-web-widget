@@ -1,5 +1,10 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.49-rc.1
+- bug-fixed: restartConversation default parameter was set to true
+- bug-fixed: icon for html file moved to local resource
+- changed info-message UI
+
 ### 5.0.48 in PROD
 
 ### 5.0.48-rc.3
