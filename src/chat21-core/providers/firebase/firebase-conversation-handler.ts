@@ -421,12 +421,15 @@ export class FirebaseConversationHandler extends ConversationHandlerService {
                 subject = message.attributes.messagelabel.parameters.member_id;
             }
             message.text = subject + ' ' +  INFO_SUPPORT_MEMBER_LEFT_GROUP ;
-        }else if(message.attributes.messagelabel && message.attributes.messagelabel.key === LIVE_PAGE){
+        } else if(message.attributes.messagelabel && message.attributes.messagelabel.key === LIVE_PAGE){
             let sourceUrl: string = '';
             if(message.attributes && message.attributes.sourcePage){
-                sourceUrl = message.attributes.sourcePage
+                sourceUrl = message.attributes.sourcePage 
             }
-            message.text= INFO_SUPPORT_LIVE_PAGE + ' ' + sourceUrl
+            if(message.attributes && message.attributes.sourceTitle){
+                sourceUrl = '['+message.attributes.sourceTitle+']('+sourceUrl+')'
+            }
+            message.text= INFO_SUPPORT_LIVE_PAGE + ': ' + sourceUrl
         }
     }
 
