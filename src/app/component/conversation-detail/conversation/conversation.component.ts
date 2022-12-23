@@ -633,7 +633,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
    */
   sendLivePage(){
     setTimeout(() => {
-      const message= 'Moved to: ' + this.g.attributes.sourcePage
+      const message= 'Moved to: [' + this.g.attributes.sourceTitle + '](' +  this.g.attributes.sourcePage + ')'
       const attributes={
         subtype: 'info/support',
         messagelabel: {key: LIVE_PAGE}
