@@ -1832,6 +1832,9 @@ export class GlobalSettingsService {
         }
         //remove default department from list
         this.globals.departments = this.globals.departments.filter(obj => obj['default'] !== true)
+        if(this.globals.departments && this.globals.departments.length === 1){
+            this.setDepartment(this.globals.departments[0])
+        }
     }
 
     /**
