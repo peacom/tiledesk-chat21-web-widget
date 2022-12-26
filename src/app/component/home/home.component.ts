@@ -107,7 +107,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     if(platform === 'telegram'){
       window.open('https://telegram.me/'+this.g.telegramUsername, '_blank')
     }else if(platform === 'whatsapp'){
-      window.open('https://wa.me/'+this.g.whatsappNumber, '_blank')
+      window.open('https://wa.me/'+this.g.whatsappNumber+'?text=/start', '_blank')
     }else if(platform=== 'messanger'){
       window.open('https://m.me/'+this.g.messangerPageTitle, '_blank')
     }
