@@ -1270,13 +1270,13 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             /** close window chat */
             windowContext['tiledesk'].close = function () {
                 ngZone.run(() => {
-                    windowContext['tiledesk']['angularcomponent'].component.f21_close();
+                    windowContext['tiledesk']['angularcomponent'].component.onCloseWidget();
                 });
             };
             /** open window chat */
             windowContext['tiledesk'].open = function () {
                 ngZone.run(() => {
-                    windowContext['tiledesk']['angularcomponent'].component.f21_open();
+                    windowContext['tiledesk']['angularcomponent'].component.onOpenCloseWidget();
                 });
             };
             /** set state PreChatForm close/open */
