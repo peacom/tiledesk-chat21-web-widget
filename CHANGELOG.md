@@ -1,5 +1,9 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.51-rc.1
+- bug-fixed: open method show prechat form if singleConversation mode is active
+- added: first message text to whatsapp social channel link
+
 ### 5.0.50 in PROD
 - bug-fixed: if only one department exist (not the default) widget starts conversation with default one
 
