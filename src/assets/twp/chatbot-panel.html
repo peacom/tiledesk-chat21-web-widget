@@ -105,6 +105,9 @@
             background-size: calc(100% - 40px);
             /* background-position-x: 50px; */
             /* background-position-y: 100px; */
+            background-position: inherit;
+            background-attachment: fixed;
+            background-size: cover;
         }
 
         .row {
@@ -447,102 +450,12 @@
     
 </head>
 
-<body class="website white mockup" >
+<body class="website white" >
     <div id="preloader">
         <div class="logo"></div>
     </div>
 
-    <div id="wrapper">
-        </header>
-
-        <div id="main" class="container">
-            <!-- <div class="row">
-                <div class="col-md-6">
-                    <h1 id="project_name" style="min-height: 39px;"></h1>
-                    <h2></h2>
-                    <div class="b_integrations_agent_links">
-                        <a href="" data-toggle="modal" data-target="#embedModal" id="enbed" style="display: none;"><em class="fa-code fa"></em>Embed</a>
-                        <a href="" data-toggle="modal" data-target="#shareModal"><em class="fa-reply fa"></em>Share</a>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                </div>
-            </div> -->
-            <div class="mockup"></div>
-
-            <div class="modal fade" tabindex="-1" id="embedModal" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                            <h4 class="modal-title">Use following code to integrate the widget into your site:</h4>
-                        </div>
-                        <div class="modal-body" style="font-family: monospace;font-size: 12px;">
-                            <span style="margin-bottom: 0px; border:none !important">
-                                &lt;script type=&quot;application/javascript&quot;&gt; <br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;window.tiledeskSettings = <br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;projectid: </span> 
-                                <span id="project_id"> </span> 
-                                <span style="border:none !important">
-                                <br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}; <br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(function(d, s, id) { <br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var w=window; var d=document; var i=function() { i.c(arguments); };<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i.q=[]; i.c=function(args){ i.q.push(args); }; w.Tiledesk=i;<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var js, fjs=d.getElementsByTagName(s)[0];<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (d.getElementById(id)) return;<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;js=d.createElement(s); js.id=id; js.async=true;<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;js.src="<span id="base_url"> </span>";<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fjs.parentNode.insertBefore(js, fjs);<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}(document, &#39;script&#39;, &#39;tiledesk-jssdk&#39;));<br>
-                                &lt;/script&gt;
-                            </span>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal fade" tabindex="-1" id="shareModal" role="dialog" style="display: none;">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                            <h4 class="modal-title">Share this page via social networks:</h4>
-                        </div>
-                        <div class="modal-body">
-
-                            <a onclick="shareOnFacebook()" style="cursor: pointer;text-decoration: none;">    
-                                
-                                <img src="./tiledesk_widget_files/facebook.png" alt="Facebook">
-                            </a>
-
-                            <!-- Twitter -->
-                            <a onclick="shareOnTwitter()" style="cursor: pointer;text-decoration: none;">     
-                                <img src="./tiledesk_widget_files/twitter.png" alt="Twitter">
-                            </a>
-
-                            <!-- LinkedIn -->
-                            <a onclick="shareOnLinkedin()" style="cursor: pointer;text-decoration: none;">
-                                <img src="./tiledesk_widget_files/linkedin.png" alt="LinkedIn">
-                            </a>
-
-                            <!-- telegram -->
-                            <a onclick="shareOnTelegram()" style="cursor: pointer;text-decoration: none;">
-                                <img src="./tiledesk_widget_files/telegram.png" alt="Telegram">
-                            </a>
-
-                            <!-- whatsapp -->
-                            <!-- <a onclick="shareOnWhatsapp()" style="cursor: pointer">
-                                <img src="./tiledesk_widget_files/whatsapp.png" alt="Whatsapp">
-                            </a> -->
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div id="wrapper" class="mockup">
     </div>
 
     <footer id="footer">
