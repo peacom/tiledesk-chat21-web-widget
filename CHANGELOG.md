@@ -1,5 +1,10 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.51-rc.2
+- added: label to social channels
+- changed: footer position index / index-dev / chatbot-panel
+- bug-fixed: background size on mobile
+
 ### 5.0.51-rc.1
 - bug-fixed: open method show prechat form if singleConversation mode is active
 - added: first message text to whatsapp social channel link
