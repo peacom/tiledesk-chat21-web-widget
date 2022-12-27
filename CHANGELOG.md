@@ -1,5 +1,7 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.51 in PROD
+
 ### 5.0.51-rc.2
 - added: label to social channels
 - changed: footer position index / index-dev / chatbot-panel
