@@ -212,6 +212,14 @@
         // box-shadow: 0 0px 10px 0px $trasp-light-gray;
         z-index: 20;
         gap: 10px;
+
+        .label-item{
+            line-height: 20px;
+            position: relative;
+            margin: 0 10px 0px 10px;
+            color: #777777;
+            font-size: 1.2em;
+        }
         // border-top: 1px solid $trasp-light-gray;
         #c21-whatsapp, #c21-telegram, #c21-messanger{
             .c21-button-primary{

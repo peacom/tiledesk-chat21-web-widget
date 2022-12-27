@@ -68,7 +68,8 @@
     </div>
 
     <!-- FOOTER - CONTENT -->
-    <div class="c21-footer-content fade-in-bottom-footer" >
+    <div class="c21-footer-content fade-in-bottom-footer" *ngIf="g?.whatsappNumber || g?.telegramUsername || g?.messangerPageTitle">
+        <div class="label-item">{{translationMapFooter?.get('SWITCH_TO')}}</div>
         <div id="c21-whatsapp" *ngIf="g?.whatsappNumber && g?.whatsappNumber.trim() !== ''">
             <button tabindex="1040" aflistconv #aflistconv class="c21-button-primary" (click)="openConversationOnPlatform('whatsapp')">
                 <span class="v-align-center">

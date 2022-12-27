@@ -65,6 +65,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
     let keysHeader = [
       'BUTTON_CLOSE_TO_ICON'
     ]
+    let keysFooter = [
+      'SWITCH_TO'
+    ]
+    this.translationMapFooter = this.customTranslateService.translateLanguage(keysFooter)
     this.translationMapHeader = this.customTranslateService.translateLanguage(keysHeader)
   }
 

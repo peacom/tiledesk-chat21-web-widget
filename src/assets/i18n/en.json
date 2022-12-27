@@ -88,6 +88,7 @@
     "SENT_AN_ATTACHMENT": "sent an attachment",
     "SENT_AN_IMAGE":"sent an image",
 
-    "LABEL_PREVIEW": "Preview"
+    "LABEL_PREVIEW": "Preview",
+    "SWITCH_TO":"Or switch to:"
 
 }
