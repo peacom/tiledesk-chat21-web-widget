@@ -21,7 +21,8 @@ import {
   htmlEntities,
   compareValues,
   searchIndexInArrayForUid,
-  conversationMessagesRef
+  conversationMessagesRef,
+  searchIndexInArrayForGenericKey
 } from '../../utils/utils';
 import { v4 as uuidv4 } from 'uuid';
 import { messageType, checkIfIsMemberJoinedGroup, hideInfoMessage, isJustRecived } from '../../utils/utils-message';
@@ -101,12 +102,13 @@ export class MQTTConversationHandler extends ConversationHandlerService {
         }
         this.chat21Service.chatClient.lastMessages(this.conversationWith, (err, messages) => {
             if (!err) {
+                this.logger.log('[MQTTConversationHandlerSERVICE] message lastMessages:', messages);
                 messages.forEach(message => {
                     // this.addedMessage(msg);
                     const msg: MessageModel = message;        
                     msg.uid = message.message_id;
-                    if (msg.attributes && msg.attributes.commands) {
-                        // this.logger.debug('[MQTTConversationHandlerSERVICE] splitted message::::', msg)
+                    if (msg.attributes && msg.attributes.commands ) {
+                        this.logger.debug('[MQTTConversationHandlerSERVICE] splitted message::::', this.messages)
                         this.addCommandMessage(msg)
                     } else {
                         // this.logger.debug('[MQTTConversationHandlerSERVICE] NOT splitted message::::', msg)
@@ -117,11 +119,16 @@ export class MQTTConversationHandler extends ConversationHandlerService {
         });
         const handler_message_added = this.chat21Service.chatClient.onMessageAddedInConversation(
             this.conversationWith, (message, topic) => {
-                this.logger.log('[MQTTConversationHandlerSERVICE] message added:', message, 'on topic:', topic);
+                this.logger.log('[MQTTConversationHandlerSERVICE] message added:', message, 'on topic:', topic, this.messages);
                 // this.addedMessage(msg);
                 const msg: MessageModel = message;        
                 msg.uid = message.message_id;
 
+                //escape command message is already is in list checking by parendUid 
+                if(this.messages.filter(message=> message.attributes['parentUid'] === msg.uid).length > 0){
+                    return;
+                }
+                
                 if (msg.attributes && msg.attributes.commands) {
                     this.logger.debug('[MQTTConversationHandlerSERVICE] splitted message::::', msg)
                     this.addCommandMessage(msg)
@@ -133,7 +140,7 @@ export class MQTTConversationHandler extends ConversationHandlerService {
         const handler_message_updated = this.chat21Service.chatClient.onMessageUpdatedInConversation(
             this.conversationWith,  (message, topic) => {
             this.logger.log('[MQTTConversationHandlerSERVICE] message updated:', message, 'on topic:', topic);
-            this.updatedMessageStatus(message);
+            this.changed(message);
         });
     }
 
@@ -225,7 +232,7 @@ export class MQTTConversationHandler extends ConversationHandlerService {
     /** */
     private addedMessage(messageSnapshot: MessageModel) {
         const msg = this.messageGenerate(messageSnapshot);
-        
+        console.log('messageeee', msg)
         let isInfoMessage = messageType(MESSAGE_TYPE_INFO, msg)
         if(isInfoMessage){
             this.messageInfo.next(msg)
@@ -253,7 +260,7 @@ export class MQTTConversationHandler extends ConversationHandlerService {
 
 
     /** */
-    private updatedMessageStatus(patch: any) {
+    private changed(patch: any) {
         if(messageType(MESSAGE_TYPE_INFO, patch) ){
             return;
         }
@@ -400,18 +407,13 @@ export class MQTTConversationHandler extends ConversationHandlerService {
         this.logger.log('[MQTTConversationHandlerSERVICE] updateMessageStatusReceived', msg);
         if (msg['status'] < MSG_STATUS_RECEIVED) {
             this.logger.log('[MQTTConversationHandlerSERVICE] status ', msg['status'], ' < (RECEIVED:200)', MSG_STATUS_RECEIVED);
+            let uid = msg.uid
+            msg.attributes.commands? uid = msg.attributes.parentUid: null 
             if (msg.sender !== this.loggedUser.uid && msg.status < MSG_STATUS_RECEIVED) {
                 this.logger.log('[MQTTConversationHandlerSERVICE] updating message with status received');
-                this.chat21Service.chatClient.updateMessageStatus(msg.message_id, this.conversationWith, MSG_STATUS_RECEIVED, null);
+                this.chat21Service.chatClient.updateMessageStatus(uid, this.conversationWith, MSG_STATUS_RECEIVED, null);
             }
         }
-        // if (msg.status < MSG_STATUS_RECEIVED) {
-        //     if (msg.sender !== this.loggedUser.uid && msg.status < MSG_STATUS_RECEIVED) {
-        //     const urlNodeMessagesUpdate  = this.urlNodeFirebase + '/' + msg.uid;
-        //     this.logger.log('AGGIORNO STATO MESSAGGIO', urlNodeMessagesUpdate);
-        //     firebase.database().ref(urlNodeMessagesUpdate).update({ status: MSG_STATUS_RECEIVED });
-        //     }
-        // }
     }
 
     /**
