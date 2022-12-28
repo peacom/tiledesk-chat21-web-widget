@@ -231,7 +231,6 @@ export class MQTTConversationHandler extends ConversationHandlerService {
     /** */
     private addedMessage(messageSnapshot: MessageModel) {
         const msg = this.messageGenerate(messageSnapshot);
-        console.log('messageeee', msg)
         let isInfoMessage = messageType(MESSAGE_TYPE_INFO, msg)
         if(isInfoMessage){
             this.messageInfo.next(msg)
