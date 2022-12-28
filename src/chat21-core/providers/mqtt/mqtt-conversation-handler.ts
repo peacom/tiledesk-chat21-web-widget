@@ -21,8 +21,7 @@ import {
   htmlEntities,
   compareValues,
   searchIndexInArrayForUid,
-  conversationMessagesRef,
-  searchIndexInArrayForGenericKey
+  conversationMessagesRef
 } from '../../utils/utils';
 import { v4 as uuidv4 } from 'uuid';
 import { messageType, checkIfIsMemberJoinedGroup, hideInfoMessage, isJustRecived } from '../../utils/utils-message';
