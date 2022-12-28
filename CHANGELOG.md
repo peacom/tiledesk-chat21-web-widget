@@ -1,5 +1,9 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.52-rc.1
+- changed: background opacity in chatbot-panel html page
+- bug-fixed: splitted messages is shown twice
+
 ### 5.0.51 in PROD
 
 ### 5.0.51-rc.2
