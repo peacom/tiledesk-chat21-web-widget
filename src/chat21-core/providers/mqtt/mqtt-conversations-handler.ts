@@ -192,7 +192,7 @@ export class MQTTConversationsHandler extends ConversationsHandlerService {
 
     getLastConversation(callback: (conv: ConversationModel, error: string) => void): void {
         this.chat21Service.chatClient.lastConversations( false, (err, conversations) => {
-            console.log('Last conversations', conversations, 'err', err);
+            this.logger.debug('[MQTTConversationsHandler] getLastConversation ', conversations, 'err', err);
             if (!err) {
                 if(conversations && conversations.length > 0){
                     callback(conversations[0], null)
@@ -224,7 +224,6 @@ export class MQTTConversationsHandler extends ConversationsHandlerService {
             this.setClosingConversation(conversation.conversation_with, false);
             this.logger.debug('[MQTTConversationsHandler] conversations:', conversation.uid, this.conversations);
             const index = this.searchIndexInArrayForConversationWith(this.conversations, conversation.conversation_with);
-            console.log("NUOVA CONVER;.uid2" + conversation.uid)
             if (index > -1) {
                 this.logger.debug('[MQTTConversationsHandler] TROVATO')
                 this.conversations.splice(index, 1, conversation);
