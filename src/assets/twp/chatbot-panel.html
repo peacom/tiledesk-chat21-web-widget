@@ -262,6 +262,7 @@
             calloutTimer: 1,
             singleConversation: true,
             restartConversation: true,
+            isLogEnabled: true,
             hideCloseConversationOptionMenu: true
             // autostart: false
 
@@ -418,29 +419,6 @@
         var urlConsole = baseUrlConsole + "#/projects/"+tiledesk_projectid+"/home";
         // console.log('tiledesk_projectid: ', tiledesk_projectid);
         // console.log('project_name: ', project_name);
-
-        window.onload = function() {
-            document.getElementById("project_id").innerHTML = '"' + tiledesk_projectid + '"';
-            // document.getElementById("project_name").innerHTML = project_name;
-            
-            if(role !== 'agent'){
-                document.getElementById("testPageButton").style.display = 'block'
-            }
-        }
-
-        // window.tileDeskAsyncInit = function() {
-        //     window.tiledesk.on('onLoadParams', function(event_data) {
-        //         // console.log('onLoadParams: ')
-        //         window.tiledesk.open();
-        //     });
-
-        //     window.tiledesk.on('onInit', function(event_data) {
-        //         setTimeout(() => {
-        //             document.getElementById("preloader").style.display = "none";
-        //         }, 1000);
-                
-        //     });
-        // };
 
         function getQueryVariable(variable)     {
             var query = window.location.search.substring(1);
