@@ -1,5 +1,10 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.52-rc.3
+- added: build info in menu conversation-header component if singleConversation is enabled
+- bug-fixed: splitted messages is shown twice
+- removed: open automatically the widget after 3s in index-dev.html page
+
 ### 5.0.52-rc.1
 - changed: background opacity in chatbot-panel html page
 - bug-fixed: splitted messages is shown twice
