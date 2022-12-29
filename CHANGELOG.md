@@ -1,5 +1,8 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.52-rc.4
+- bug-fixed: getLastConversation for MQTTConversationsHandler service not return uid into conv object
+
 ### 5.0.52-rc.3
 - added: build info in menu conversation-header component if singleConversation is enabled
 - bug-fixed: splitted messages is shown twice
