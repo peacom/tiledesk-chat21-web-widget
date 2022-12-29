@@ -186,7 +186,6 @@ export class MQTTArchivedConversationsHandler extends ArchivedConversationsHandl
             this.setClosingConversation(conversation.conversation_with, false);
             this.logger.debug('[MQTTArchivedConversationsHandler] conversations:', conversation.uid, this.archivedConversations);
             const index = this.searchIndexInArrayForConversationWith(this.archivedConversations, conversation.conversation_with);
-            console.log("NUOVA CONVER;.uid2" + conversation.uid)
             if (index > -1) {
                 this.logger.debug('[MQTTArchivedConversationsHandler] TROVATO')
                 this.archivedConversations.splice(index, 1, conversation);
