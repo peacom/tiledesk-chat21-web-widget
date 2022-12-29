@@ -460,11 +460,11 @@
                 document.getElementById('events').scrollTop = document.getElementById('events').scrollHeight
             }, 1000);
             //open widget after 3s if is closed
-            setTimeout(() => {
-                if(event_data && event_data.detail && event_data.detail.global && !event_data.detail.global.isOpen){
-                    window.Tiledesk('open')
-                }
-            }, 3000);
+            // setTimeout(() => {
+            //     if(event_data && event_data.detail && event_data.detail.global && !event_data.detail.global.isOpen){
+            //         window.Tiledesk('open')
+            //     }
+            // }, 3000);
         });
         
         window.Tiledesk('onAuthStateChanged', function(event_data) {
