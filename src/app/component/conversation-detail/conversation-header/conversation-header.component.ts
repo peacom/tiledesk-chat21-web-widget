@@ -31,6 +31,7 @@ export class ConversationHeaderComponent implements OnInit, OnChanges {
   @Input() stylesMap: Map<string, string>
   @Input() translationMap: Map< string, string>;
   @Input() widgetTitle: string;
+  @Input() build_version: string;
   @Output() onBack = new EventEmitter();
   @Output() onCloseWidget = new EventEmitter();
   @Output() onSoundChange = new EventEmitter();

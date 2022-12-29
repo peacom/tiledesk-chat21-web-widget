@@ -130,5 +130,16 @@
         stroke: $icon-fill-color;
     }
 
+    .build_version_menu {
+        color: $gray;
+        justify-content: center;
+        font-size: 0.8em;
+    }
+    
+    .build_version_menu:hover {
+        cursor: default;
+        background-color: unset;
+    }
+
     
 }
