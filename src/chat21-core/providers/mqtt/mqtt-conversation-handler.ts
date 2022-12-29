@@ -106,6 +106,12 @@ export class MQTTConversationHandler extends ConversationHandlerService {
                     // this.addedMessage(msg);
                     const msg: MessageModel = message;        
                     msg.uid = message.message_id;
+
+                    //escape command message is already is in list checking by parendUid 
+                    if(this.messages.filter(message => message.attributes['parentUid'] === msg.uid).length > 0){
+                        return;
+                    }
+
                     if (msg.attributes && msg.attributes.commands ) {
                         this.logger.debug('[MQTTConversationHandlerSERVICE] splitted message::::', this.messages)
                         this.addCommandMessage(msg)
@@ -124,7 +130,7 @@ export class MQTTConversationHandler extends ConversationHandlerService {
                 msg.uid = message.message_id;
 
                 //escape command message is already is in list checking by parendUid 
-                if(this.messages.filter(message=> message.attributes['parentUid'] === msg.uid).length > 0){
+                if(this.messages.filter(message => message.attributes['parentUid'] === msg.uid).length > 0){
                     return;
                 }
                 
