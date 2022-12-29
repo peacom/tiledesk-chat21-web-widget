@@ -195,7 +195,8 @@ export class MQTTConversationsHandler extends ConversationsHandlerService {
             this.logger.debug('[MQTTConversationsHandler] getLastConversation ', conversations, 'err', err);
             if (!err) {
                 if(conversations && conversations.length > 0){
-                    callback(conversations[0], null)
+                    let conversation = this.completeConversation(conversations[0]);
+                    callback(conversation, null)
                 }else {
                     callback(null, null)
 
