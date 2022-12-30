@@ -1673,12 +1673,12 @@ export class GlobalSettingsService {
 
         TEMP = getParameterByName(windowContext, 'tiledesk_singleConversation');
         if (TEMP) {
-            globals.singleConversation = stringToBoolean(TEMP);;
+            globals.singleConversation = stringToBoolean(TEMP);
         }
 
         TEMP = getParameterByName(windowContext, 'tiledesk_restartConversation');
         if (TEMP) {
-            globals.restartConversation = TEMP;
+            globals.restartConversation = stringToBoolean(TEMP);
         }
 
         TEMP = getParameterByName(windowContext, 'tiledesk_nativeRating');
