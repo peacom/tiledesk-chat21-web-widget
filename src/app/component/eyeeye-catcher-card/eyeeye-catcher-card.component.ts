@@ -77,7 +77,7 @@ export class EyeeyeCatcherCardComponent implements OnInit {
       this.checkIsEmoji();
       const isOpen = this.g.isOpen;
       this.logger.debug('[EYEEYE-CATCHER-CARD] openEyeCatcher: calloutStaus ---------> ', this.g.calloutStaus);
-      // console.log('this.g.isMobile', this.g.isMobile);
+      
       if (isOpen === false && this.g.calloutStaus) { // && this.g.isMobile === false
           this.onCloseEyeCatcherCard.emit(true);
           // this.g.displayEyeCatcherCard = 'block';
@@ -104,7 +104,6 @@ export class EyeeyeCatcherCardComponent implements OnInit {
     while (match = regex.exec(title)) {
       const emoji = match[0];
       this.logger.debug('[EYEEYE-CATCHER-CARD]--> match', match)
-      // console.log(`Matched sequence ${ emoji } — code points: ${ [...emoji].length }`);
       if (title.indexOf(emoji) === 0) {
         this.title = title.replace(emoji, '');
         this.emoticon = emoji;

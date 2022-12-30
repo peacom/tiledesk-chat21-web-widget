@@ -929,7 +929,6 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
   //  try {
   //   that.isScrolling = true;
   //   const objDiv = document.getElementById(that.idDivScroll) as HTMLElement;
-  //   console.log('divto scrool', objDiv);
   //   // const element = objDiv[0] as HTMLElement;
   //   setTimeout(function () {
 
@@ -1180,34 +1179,6 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
   }
   // ========= end:: DESTROY ALL SUBSCRIPTIONS ============//
 
-
-
-  /**
-   * regola sound message:
-   * se lo invio io -> NO SOUND
-   * se non sono nella conversazione -> SOUND
-   * se sono nella conversazione in fondo alla pagina -> NO SOUND
-   * altrimenti -> SOUND
-   */
-  // soundMessage(timestamp?) {
-  //   if (!isJustRecived(this.g.startedAt.getTime(), timestamp)) {
-  //     return;
-  //   }
-  //   const soundEnabled = this.g.soundEnabled;
-  //   const baseLocation = this.g.baseLocation;
-  //   if ( soundEnabled ) {
-  //     const that = this;
-  //     this.audio = new Audio();
-  //     this.audio.src = baseLocation + '/assets/sounds/justsaying.mp3';
-  //     this.audio.load();
-  //     // console.log('conversation play');
-  //     clearTimeout(this.setTimeoutSound);
-  //     this.setTimeoutSound = setTimeout(function () {
-  //       that.audio.play();
-  //       that.logger.debug('[CONV-COMP] ****** soundMessage 1 *****', that.audio.src);
-  //     }, 1000);
-  //   }
-  // }
   private onIncreaseWith(){
     try{
       const tiledeskDiv = this.g.windowContext.window.document.getElementById('tiledeskdiv') 
@@ -1253,7 +1224,6 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
 
   /** */
   private actionButton(event: any) {
-    // console.log(event);
     const action = event.action ? event.action : '';
     const message = event.value ? event.value : '';
     const subtype = event.show_echo ?  '' : 'info';

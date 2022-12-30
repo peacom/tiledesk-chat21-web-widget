@@ -86,7 +86,6 @@ export class HomeConversationsComponent implements OnInit, OnDestroy {
     public translatorService: TranslatorService,
     private customTranslateService: CustomTranslateService,
   ) {
-    // console.log(this.langService);
     // https://www.npmjs.com/package/humanize-duration-ts
     // https://github.com/Nightapes/HumanizeDuration.ts/blob/master/src/humanize-duration.ts
     this.humanizer = new HumanizeDuration(this.langService);
@@ -165,89 +164,30 @@ export class HomeConversationsComponent implements OnInit, OnDestroy {
 
           that.waitingTime = wt;
           that.logger.debug('[HOMECONVERSATIONS] that.waitingTime',  that.waitingTime);
-          // console.log('that.waitingTime', that.waitingTime);
 
           const lang = that.translatorService.getLanguage();
           that.humanWaitingTime = this.humanizer.humanize(wt, {language: lang});
-          // console.log('LIST CONVERSATION humanWaitingTime ', that.humanWaitingTime);
-          // console.log('LIST CONVERSATION g.WAITING_TIME_FOUND ',  this.g.WAITING_TIME_FOUND)
-          // console.log('LIST CONVERSATION g.WAITING_TIME_FOUND contains $reply_time',  this.g.WAITING_TIME_FOUND.includes("$reply_time") )
-        
+
           // REPLACE
           if (this.g.WAITING_TIME_FOUND.includes("$reply_time")) {
             // REPLACE if exist
             this.WAITING_TIME_FOUND_WITH_REPLYTIME_PLACEHOLDER = this.g.WAITING_TIME_FOUND.replace("$reply_time", that.humanWaitingTime);
           }
-          // console.log('LIST CONVERSATION WAITING_TIME_FOUND_WITH_REPLYTIME_PLACEHOLDER',  this.WAITING_TIME_FOUND_WITH_REPLYTIME_PLACEHOLDER)
-          // console.log('LIST CONVERSATION g.dynamicWaitTimeReply ',  this.g.dynamicWaitTimeReply )
-          // console.log('LIST CONVERSATION typeof g.dynamicWaitTimeReply ', typeof this.g.dynamicWaitTimeReply )
-
-          // console.log('xxx', this.humanizer.humanize(wt));
-          // 'The team typically replies in ' + moment.duration(response[0].waiting_time_avg).format();
         }
-        //  else {
-        //   that.waitingTimeMessage = 'waiting_time_not_found';
-        //   // that.waitingTimeMessage = 'Will reply as soon as they can';
-        //  }
+
       });
     }
     
-}
-
-checkShowAllConversation() {
-  if (this.archivedConversations && this.archivedConversations.length > 0) {
-    return true;
-  } else if (this.listConversations && this.listConversations.length > 0) {
-    return true;
   }
-  return false;
-}
-// msToTime(duration) {
-//   let milliseconds = parseInt((duration % 1000) / 100),
-//     seconds = parseInt((duration / 1000) % 60),
-//     minutes = parseInt((duration / (1000 * 60)) % 60),
-//     hours = parseInt((duration / (1000 * 60 * 60)) % 24);
 
-//   hours = (hours < 10) ? "0" + hours : hours;
-//   minutes = (minutes < 10) ? "0" + minutes : minutes;
-//   seconds = (seconds < 10) ? "0" + seconds : seconds;
-
-//   return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
-// }
-
-
-//  dhm(t) {
-//   let cd = 24 * 60 * 60 * 1000,
-//       ch = 60 * 60 * 1000,
-//       d = Math.floor(t / cd),
-//       h = Math.floor( (t - d * cd) / ch),
-//       m = Math.round( (t - d * cd - h * ch) / 60000),
-//       pad = function(n){ return n < 10 ? '0' + n : n; };
-// if ( m === 60 ) {
-//   h++;
-//   m = 0;
-// }
-// if ( h === 24 ) {
-//   d++;
-//   h = 0;
-// }
-// return [d, pad(h), pad(m)].join(':');
-// }
-
-
-  // setImageProfile(agent) {
-  //   //console.log(agent);
-  //   this.contactService.setImageProfile(agent)
-  //   .then(function (snapshot) {
-  //     if (snapshot.val().trim()) {
-  //       agent.image = snapshot.val();
-  //     }
-  //   })
-  //   .catch(function (err) {
-  //       console.log(err);
-  //   });
-  // }
-
+  checkShowAllConversation() {
+    if (this.archivedConversations && this.archivedConversations.length > 0) {
+      return true;
+    } else if (this.listConversations && this.listConversations.length > 0) {
+      return true;
+    }
+    return false;
+  }
 
 
   // ========= begin:: ACTIONS ============//
@@ -284,8 +224,8 @@ checkShowAllConversation() {
     this.unsubscribe();
   }
 
- /** */
- unsubscribe() {
+  /** */
+  unsubscribe() {
     this.subscriptions.forEach(function (subscription) {
         subscription.unsubscribe();
     });

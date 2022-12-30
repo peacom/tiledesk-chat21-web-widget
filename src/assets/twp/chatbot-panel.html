@@ -346,71 +346,10 @@
         if(urlToConsole){
             baseUrlConsole = urlToConsole;
         }
-        
-
 
         var currentUrl = window.location.href
         var baseUrl = window.location.origin
-        function shareOnFacebook() {
-            var fbShareUrl = "https://www.facebook.com/sharer.php?u=" + encodeURIComponent(currentUrl);
-            window.open(
-                fbShareUrl,
-                '_blank' 
-            );
-        }
 
-        function shareOnTwitter() {
-            var TwShareUrl = "https://twitter.com/share?url=" + encodeURIComponent(currentUrl);
-            window.open(
-                TwShareUrl,
-                '_blank' 
-            );
-         }
-
-        function shareOnLinkedin() {
-            var LinkedinShareUrl = "https://www.linkedin.com/shareArticle?mini=true&url=" + encodeURIComponent(currentUrl);
-            window.open(
-                LinkedinShareUrl,
-                '_blank' 
-            );
-         }
-
-        function shareOnTelegram() {                                    
-            var TelegramShareUrl = "tg://msg_url?url=" + encodeURIComponent(currentUrl) ;
-            // console.log('TelegramShareUrl ', TelegramShareUrl ) 
-            window.open(
-                TelegramShareUrl,
-                '_blank' 
-            );
-         }
-
-        function shareOnWhatsapp() {            
-            var WhatsappShareUrl = "whatsapp://send?text=" + currentUrl;
-            window.open(
-                WhatsappShareUrl,
-                '_blank' 
-            );
-        }
-
-        function goToConsole(){
-            var url = new URL(currentUrl);
-            var tiledesk_projectid = url.searchParams.get("tiledesk_projectid");
-            var project_name = url.searchParams.get("project_name");
-            var urlConsole = baseUrlConsole + "#/project/"+tiledesk_projectid+"/home";
-            //var urlConsole = "dashboard/#/project/"+tiledesk_projectid+"/home";
-            window.open(
-                urlConsole,
-                '_blank' 
-            );
-        }
-
-        function goToTestPage(){
-            var urlTestPage = currentUrl.replace('index.html', 'index-dev.html')
-            window.open(
-                urlTestPage,
-                '_blank' 
-            );
-        }
                         
         var url = new URL(currentUrl);
         var tiledesk_projectid = url.searchParams.get("tiledesk_projectid");

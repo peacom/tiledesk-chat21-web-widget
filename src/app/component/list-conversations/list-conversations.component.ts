@@ -45,22 +45,10 @@ export class ListConversationsComponent implements OnInit {
 
   ngOnInit() {
     this.logger.debug('[LISTCONVERSATIONS] ngOnInit', this.listConversations);
-    // console.log('empDifferMap::' + JSON.stringify(this.listConversations))
-    // this.listConversations.forEach(emp => {
-    //   this.empDifferMap[emp.uid] = this.kvDiffers.find(emp).create();
-    //   this.empMap[emp.uid] = emp;
-    //   console.log('empDifferMap::', this.empDifferMap, this.empMap)
-    // })
   }
 
   ngOnChanges(changes: SimpleChanges){
-    // console.log('empDifferMap:: 1111' + JSON.stringify(this.listConversations[1]))
-    // console.log('empDifferMap:: 1111', this.listConversations)
-    // this.listConversations.forEach(emp => {
-    //   this.empDifferMap[emp.uid] = this.kvDiffers.find(emp).create();
-    //   this.empMap[emp.uid] = emp;
-    //   console.log('empDifferMap::', this.empDifferMap, this.empMap)
-    // })
+
   }
 
   public openConversationByID(conversation) {
@@ -79,51 +67,7 @@ export class ListConversationsComponent implements OnInit {
 
   ngDoCheck() {
     let changesListConversation = this.iterableDifferListConv.diff(this.listConversations);
-    if(changesListConversation){
-      // changesListConversation.forEachAddedItem(element => {
-      //   let conv = element.item
-      //   this.onImageLoaded.emit(conv)
-      //   this.onConversationLoaded.emit(conv)
-      // });
-      // changesListConversation.forEachRemovedItem(element => {
-      // });
-      // changesListConversation.forEachOperation((element: IterableChangeRecord<ConversationModel>, adjustedPreviousIndex: number, currentIndex: number) => {
-      //     // if (item.previousIndex == null) {
-      //     //   console.log('itemmmm 1111', item, adjustedPreviousIndex)
-      //     // } else if (currentIndex == null) {
-      //     //   console.log('itemmmm 2222', item, adjustedPreviousIndex)
-      //     // } else {
-      //     //   console.log('itemmmm 3333', item, adjustedPreviousIndex)
-      //     // }
-      //     if(element.currentIndex == null || element.previousIndex == null){
-      //       console.log('itemmmm 44444', element, adjustedPreviousIndex, currentIndex)
-      //       let conv = element.item
-      //       this.onImageLoaded.emit(conv)
-      //       this.onConversationLoaded.emit(conv)
-      //     }
-      // });
-      // changesListConversation.forEachItem((item: IterableChangeRecord<ConversationModel>)=> {
-      //   console.log('itemmmm forEachItem', item)
-      // });
 
-    }
-
-
-    //Detect changes in object inside array
-    // for (let [key, empDiffer] of this.objDiffers) {
-    //   let empChanges = empDiffer.diff(this.differ.get(key));
-    //   if (empChanges) {
-    //     empChanges.forEachChangedItem(record => {
-    //       console.log('--- Employee with id ' + key + ' updated ---');
-    //       // this.changeLogs.push('--- Employee with id ' + key + ' updated ---');
-    //       console.log('Previous value: ' + record.previousValue);
-    //       // this.changeLogs.push('Previous value: ' + record.previousValue);
-    //       console.log('Current value: ' + record.currentValue);
-    //       // this.changeLogs.push('Current value: ' + record.currentValue);
-    //     });
-    //   }
-    // }
-    
   }
 
 

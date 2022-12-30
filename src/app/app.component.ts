@@ -945,23 +945,13 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             if(error){
                 this.logger.error("[APP-COMP] getConverationRESTApi: ERORR while retriving data", error)
             }
+
             if(conv){
                 //start widget from this conversation
                 const recipientId : string = conv.uid
                 this.g.setParameter('recipientId', recipientId);
                 this.appStorageService.setItem('recipientId', recipientId)
-                // this.startUI();
-                // if (this.g.isOpen === true) {
-                //     console.log('conversation from rest API go to conversationdetail -->', recipientId)
-                //     this.isOpenHome = false;
-                //     this.isOpenConversation = true;
-                //     this.isOpenSelectionDepartment = false;
-                //     this.isConversationArchived = false;
-                //     this.triggerOnOpenEvent();
-                // } else {
-                //     this.triggerOnCloseEvent();
-                // }
-            }else {
+            } else {
                 //start widget with NEW CONVERSATION
                 this.logger.debug("[APP-COMP] getConverationRESTApi: NO active conversations")
                 // this.isOpenHome = false;

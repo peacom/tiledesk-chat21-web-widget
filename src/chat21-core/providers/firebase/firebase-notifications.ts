@@ -48,13 +48,7 @@ export class FirebaseNotifications extends NotificationsService {
                     });
                 } else {
                     this.logger.log("[FIREBASE-NOTIFICATIONS] initialize - Service Worker is supported on this browser - !not registered",)
-                    // navigator.serviceWorker.register('http://localhost:8101/firebase-messaging-sw.js')
-                    //     .then(function (registration) {
-                    //         console.log('Service worker successfully registered.');
-                    //         return registration;
-                    //     }).catch(function (err) {
-                    //         console.error('Unable to register service worker.', err);
-                    //     });
+
                 }
             });
         }
@@ -98,61 +92,6 @@ export class FirebaseNotifications extends NotificationsService {
         }
     }
 
-    // getNotificationPermissionAndSaveToken(currentUserUid) {
-    //     // this.tenant = this.getTenant();
-    //     this.logger.log('[FIREBASE-NOTIFICATIONS] calling requestPermission - tenant ', this.tenant)
-    //     this.logger.log('[FIREBASE-NOTIFICATIONS] calling requestPermission - currentUserUid ', currentUserUid)
-    //     this.userId = currentUserUid;
-    //     const messaging = firebase.messaging();
-    //     if (firebase.messaging.isSupported()) {
-    //         // messaging.requestPermission()
-    //         Notification.requestPermission().then((permission) => {
-    //             if (permission === 'granted') {
-    //                 this.logger.log('[FIREBASE-NOTIFICATIONS] >>>> requestPermission Notification permission granted.');
-    //                 messaging.getToken({ vapidKey: 'BOsgS2ADwspKdWAmiFDZXEYqY1HSYADVfJT3j67wsySh3NxaViJqoabPJH8WM02wb5r8cQIm5TgM0UK047Z1D1c'}).then((currentToken) => {
-    //                     if (currentToken) {
-    //                         this.sendTokenToServer(currentToken);
-    //     // updateUIForPushEnabled(currentToken);
-
-    //                     } else {
-    //                       // Show permission request UI
-    //                       console.log('No registration token available. Request permission to generate one.');
-    //                       // ...
-    //                     }
-    //                   }).catch((err) => {
-    //                     console.log('An error occurred while retrieving token. ', err);
-    //                     // ...
-    //                   });
-
-    //                 resetUI()
-
-    //             } else {
-    //                 this.logger.error('Unable to get permission to notify.');
-    //             }
-    //         })
-
-    //     }
-    // }
-
-    //  sendTokenToServer(currentToken) {
-    //     if (!this.isTokenSentToServer()) {
-    //       console.log('Sending token to server...');
-    //       // TODO(developer): Send the current token to your server.
-    //       this.setTokenSentToServer(true);
-    //     } else {
-    //       console.log('Token already sent to server so won\'t send it again ' +
-    //           'unless it changes');
-    //     }
-    //   }
-
-    //   isTokenSentToServer() {
-    //     return window.localStorage.getItem('sentToServer') === '1';
-    //   }
-
-    //   setTokenSentToServer(sent) {
-    //     window.localStorage.setItem('sentToServer', sent ? '1' : '0');
-    //   }
-
     removeNotificationsInstance(callback: (string) => void) {
         var self = this;
         firebase.auth().onAuthStateChanged(function (user) {
@@ -189,19 +128,6 @@ export class FirebaseNotifications extends NotificationsService {
                 })
         }
     }
-
-    // removeNotificationsInstance() {
-    //     let promise = new Promise((resolve, reject) => {
-    //         this.appStoreService.getInstallation(this.projectId).then((res) => {
-    //             console.log("Get Installation Response: ", res);
-    //             resolve(res);
-    //         }).catch((err) => {
-    //             console.error("Error getting installation: ", err);
-    //             reject(err);
-    //         })
-    //     })
-    //     return promise;
-    // }
 
 
     // ********** PRIVATE METHOD - START ****************//

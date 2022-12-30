@@ -79,7 +79,6 @@ export class GlobalSettingsService {
         // const projectid = globals.projectid;
         this.getProjectParametersById(projectid).subscribe( response => {
             const project = response['project'];
-            // console.log('1 - setParameters ', project);
             if (project) {
                 that.globals.project.initialize(
                     project['id'],

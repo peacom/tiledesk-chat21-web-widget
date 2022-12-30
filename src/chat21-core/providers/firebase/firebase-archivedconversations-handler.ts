@@ -214,20 +214,6 @@ export class FirebaseArchivedConversationsHandler extends ArchivedConversationsH
     // ---------------------------------------------------------- //
     // BEGIN PRIVATE FUNCTIONS
     // ---------------------------------------------------------- //
-    /**
-     *
-     */
-    // private getConversationsFromStorage() {
-    //     const that = this;
-    //     this.databaseProvider.getConversations()
-    //     .then((conversations: [ConversationModel]) => {
-    //         that.loadedConversationsStorage.next(conversations);
-    //     })
-    //     .catch((e) => {
-    //         console.log('error: ', e);
-    //     });
-    // }
-
 
     // /**  DEPRECATED
     //  *
@@ -251,33 +237,6 @@ export class FirebaseArchivedConversationsHandler extends ArchivedConversationsH
             return false;
         }
     }
-
-     /**
-     * @param childSnapshot
-     */
-    // private conversationGenerate(childSnapshot: any): ConversationModel {
-    //     console.log('conversationGenerate: ', childSnapshot.val());
-    //     const childData: ConversationModel = childSnapshot.val();
-    //     childData.uid = childSnapshot.key;
-    //     const conversation = this.completeConversation(childData);
-    //     if (this.isValidConversation(conversation)) {
-    //         this.setClosingConversation(childSnapshot.key, false);
-    //         const index = searchIndexInArrayForUid(this.conversations, conversation.uid);
-    //         if (index > -1) {
-    //             this.conversations.splice(index, 1, conversation);
-    //         } else {
-    //             this.conversations.splice(0, 0, conversation);
-    //         }
-    //         //this.databaseProvider.setConversation(conversation);
-    //         this.conversations.sort(compareValues('timestamp', 'desc'));
-    //         if (conversation.is_new) {
-    //             this.soundMessage();
-    //         }
-    //         return conversation;
-    //     } else {
-    //         return null;
-    //     }
-    // }
 
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
     /**

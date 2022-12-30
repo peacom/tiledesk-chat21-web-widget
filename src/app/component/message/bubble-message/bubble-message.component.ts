@@ -54,10 +54,8 @@ export class BubbleMessageComponent implements OnInit {
   }
 
   ngOnChanges() {
-    // console.log('BUBBLE-MSG Hello !!!! this.message ',  this.message)
     if (this.message && this.message.metadata && typeof this.message.metadata === 'object' ) {
       this.sizeImage = this.getMetadataSize(this.message.metadata)
-      // console.log('BUBBLE-MSG ngOnChanges message > metadata', this.message.metadata)
     }
 
   }

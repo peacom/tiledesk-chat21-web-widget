@@ -221,30 +221,24 @@ export class Globals {
    messangerPageTitle: string; // *******  new ********
    telegramUsername: string; // *******  new ********
   constructor(
-  ) {
-    // console.log(' ---------------- 1: initDefafultParameters ---------------- ');
-  }
+  ) { }
 
 
   /**
    * 1: initParameters
    */
   initDefafultParameters() {
-    // console.log('initDefafultParameters, ', window, window.frameElement);
     this.globalsParameters = {};
     this.filterSystemMsg = true;
 
     let wContext: any = window;
-    // console.log('windowContext 0', wContext);
     if (window.frameElement && window.frameElement.getAttribute('tiledesk_context') === 'parent') {
       wContext = window.parent;
     }
-    // console.log('windowContext 1', wContext);
     const windowcontextFromWindow = getParameterByName(window, 'windowcontext');
     if (windowcontextFromWindow !== null && windowcontextFromWindow === 'window.parent') {
       wContext = window.parent;
     }
-    // console.log('windowContext 2', wContext);
     // this.parameters['windowContext'] = windowContext;
     this.windowContext = wContext;
 

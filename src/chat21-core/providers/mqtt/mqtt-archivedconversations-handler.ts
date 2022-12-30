@@ -63,7 +63,6 @@ export class MQTTArchivedConversationsHandler extends ArchivedConversationsHandl
         const conversation = this.archivedConversations.find(conv => conv.conversation_with === conversationWith);
         this.logger.log('[MQTTArchivedConversationsHandler] getConversationDetail found locally? *****: ', conversation);
         if (conversation) {
-            console.log('found!');
             callback(conversation);
         } else {
             this.logger.log('[MQTTArchivedConversationsHandler] getConversationDetail Not found locally, remote.getConversationDetail *****: ', conversation);

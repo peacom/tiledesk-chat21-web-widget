@@ -69,10 +69,8 @@ export class TranslatorService {
           if (browserLang === 'it') {
               this._translate.use('it');
               this.http.get(this.baseLocation + `/assets/i18n/${browserLang}.json`).subscribe(data=> {
-                console.log('ress lang', JSON.parse(data['_body']))
                 this._translate.setTranslation('it', JSON.parse(data['_body']));
                 this._translate.get('LABEL_PREVIEW').subscribe(res => {
-                  console.log('default translate --> ', res)
                 });
               })
               // this._translate.setTranslation('it', './assets/i18n/en.json')

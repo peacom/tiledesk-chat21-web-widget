@@ -43,19 +43,6 @@ export class MQTTPresenceService extends PresenceService {
   }
 
   userIsOnline(userid: string): Observable<any> {
-    // console.log('userIsOnline', userid);
-    // const that = this;
-    // const urlNodeConnections = this.urlNodePresence + userid + '/connections';
-    // console.log('userIsOnline: ', urlNodeConnections);
-    // const connectionsRef = firebase.database().ref().child(urlNodeConnections);
-    // connectionsRef.on('value', (child) => {
-    //   console.log('is-online-' + userid);
-    //   if (child.val()) {
-    //     that.events.publish('is-online-' + userid, userid, true);
-    //   } else {
-    //     that.events.publish('is-online-' + userid, userid, false);
-    //   }
-    // });
     return this.BSIsOnline
   }
 

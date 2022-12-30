@@ -266,7 +266,6 @@ export class ConversationPreviewComponent implements OnInit {
         this.restoreTextArea();
       }
     } else if (keyCode === 9) {
-      // console.log('TAB pressedddd')
       event.preventDefault();
     }
   }

@@ -44,7 +44,6 @@ export class ImageComponent implements OnInit {
     console.log('Image COMP - IMAGE FILENAME ', fileName) 
     fileName? null: fileName = decodeURIComponent(decodeURIComponent(url).split('/').pop())
     // const a: any = document.createElement('a');
-    // console.log('ellll', this.el)
     // a.href = this.sanitizer.bypassSecurityTrustUrl(url);
     // a.download = fileName;
     // document.body.appendChild(a);

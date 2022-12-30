@@ -92,10 +92,8 @@ export class PrechatFormComponent implements OnInit, AfterViewInit {
     if (this.g.attributes) {
       const attributes = this.g.attributes;
       if ( this.privacyInputField && this.privacyInputField.nativeElement.checked === false) {
-        // console.log(this.privacyInputField.nativeElement.checked);
         this.g.privacyApproved = false;
         const spanCheck = window.document.getElementById('span-checkmark');
-        // console.log('-----------> ', spanCheck);
         if (spanCheck) {
           spanCheck.classList.add('unchecked');
         }
@@ -117,16 +115,6 @@ export class PrechatFormComponent implements OnInit, AfterViewInit {
       // mostro messaggio di errore
     }
   }
-
-
-  /**  */
-  // checkInput() {
-  //   const spanCheck = window.document.getElementById('span-checkmark');
-  //   // console.log('-----------> ', spanCheck);
-  //   if (spanCheck) {
-  //     spanCheck.classList.remove('unchecked');
-  //   }
-  // }
 
   returnClosePage() {
     this.onClosePage.emit();

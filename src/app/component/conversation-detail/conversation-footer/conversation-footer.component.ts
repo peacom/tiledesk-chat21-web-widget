@@ -355,7 +355,6 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
           const target = document.getElementById('chat21-main-message-context') as HTMLInputElement;
           target.value = '';
           target.style.height = this.HEIGHT_DEFAULT;
-          // console.log('target.style.height: ', target.style.height);
         } catch (e) {
           this.logger.error('[CONV-FOOTER] > Error :' + e);
         }
@@ -511,7 +510,6 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
    */
   onkeypress(event) {
     const keyCode = event.which || event.keyCode;
-    // console.log('keycode', keyCode)
     this.textInputTextArea = ((document.getElementById('chat21-main-message-context') as HTMLInputElement).value);
     if (keyCode === 13) { // ENTER pressed
       if (this.textInputTextArea && this.textInputTextArea.trim() !== '') {

@@ -405,9 +405,7 @@ export class FirebaseConversationHandler extends ConversationHandlerService {
         } else if ((message.attributes.messagelabel && message.attributes.messagelabel.key === CHAT_CLOSED)) {
             message.text = INFO_SUPPORT_CHAT_CLOSED;
         } else if ((message.attributes && message.attributes.messagelabel && message.attributes.messagelabel.key === TOUCHING_OPERATOR) && message.sender === "system") {
-            // console.log('FIREBASEConversationHandlerSERVICE message text', message.text)
             const textAfterColon = message.text.split(":")[1]
-            // console.log('FIREBASEConversationHandlerSERVICE message text - textAfterColon', textAfterColon)
             if (textAfterColon !== undefined) {
                 message.text = INFO_A_NEW_SUPPORT_REQUEST_HAS_BEEN_ASSIGNED_TO_YOU + ': ' + textAfterColon;
             }
@@ -534,7 +532,6 @@ private addCommandMessage(msg: MessageModel){
             that.logger.debug('[FIREBASEConversationHandlerSERVICE] addCommandMessage --> type="wait"', command, i, commands.length)
             //publish waiting event to simulate user typing
             if(isJustRecived(that.startTime.getTime(), msg.timestamp)){
-                // console.log('message just received::', command, i, commands)
                 that.messageWait.next({uid: that.conversationWith, uidUserTypingNow: msg.sender, nameUserTypingNow: msg.sender_fullname, waitTime: command.time, command: command})
             }
             setTimeout(function() {
@@ -571,7 +568,6 @@ private generateMessageObject(message, command_message, callback) {
 
 
     private isValidMessage(msgToCkeck:MessageModel): boolean{
-        // console.log('message to check-->', msgToCkeck)
         // if(!this.isValidField(msgToCkeck.uid)){
         //     return false;
         // }
