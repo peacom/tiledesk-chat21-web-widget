@@ -1,5 +1,7 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.52 in PROD
+
 ### 5.0.52-rc.4
 - bug-fixed: getLastConversation for MQTTConversationsHandler service not return uid into conv object
 
