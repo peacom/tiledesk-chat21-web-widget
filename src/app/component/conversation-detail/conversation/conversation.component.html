@@ -37,6 +37,12 @@
         (onMenuOptionShow)="onMenuOption($event)">
     </chat-conversation-header>
 
+    <div id="dropZone_container" *ngIf="isHovering">
+        <div class="drop">
+            drop zone
+        </div>
+    </div>
+    
     <!-- CONTENT -->
     <chat-conversation-content
         [messages]="messages"
@@ -55,8 +61,13 @@
         (onAttachmentButtonClicked)="onAttachmentButtonClicked($event)"
         (onScrollContent)="onScrollContent($event)"
         (onMenuOptionShow)="onMenuOption($event)"
-        (onEmojiiPickerShow)="onEmojiiPickerShow($event)">
+        (onEmojiiPickerShow)="onEmojiiPickerShow($event)"
+        (drop)="drop($event)"
+        (dragover)="allowDrop($event)" 
+        (dragleave)="drag($event)" >
     </chat-conversation-content>
+
+    
 
     <!-- INTERNAL FRAME FOR SELF ACTION LINK BUTTONS-->
     <chat-internal-frame *ngIf="isButtonUrl"
@@ -105,6 +116,7 @@
             [isEmojiiPickerShow]="isEmojiiPickerShow"
             [footerMessagePlaceholder]="footerMessagePlaceholder"
             [fileUploadAccept]="appConfigService?.getConfig().fileUploadAccept"
+            [dropEvent]="dropEvent"
             [stylesMap]="stylesMap"
             [translationMap]="translationMapFooter"
             (onEmojiiPickerShow)="onEmojiiPickerShow($event)"

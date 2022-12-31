@@ -37,6 +37,7 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
   @Input() fileUploadAccept: string;
   @Input() stylesMap: Map<string, string>
   @Input() translationMap: Map< string, string>;
+  @Input() dropEvent: Event;
   @Output() onEmojiiPickerShow = new EventEmitter<boolean>();
   @Output() onBeforeMessageSent = new EventEmitter();
   @Output() onAfterSendMessage = new EventEmitter<MessageModel>();
@@ -86,6 +87,11 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
     if(changes['hideTextReply'] && changes['hideTextReply'].currentValue !== undefined){
       this.restoreTextArea();
     }
+
+    if(changes['dropEvent'] && changes['dropEvent'].currentValue !== undefined){
+      this.onDrop(this.dropEvent)
+    }
+
   }
   
   ngAfterViewInit() {
@@ -570,6 +576,22 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
         this.logger.debug('[CONV-FOOTER] onPaste file ', file);
         this.detectFiles(data)
       }
+    }
+  }
+
+  onDrop(event){
+    const items = event.dataTransfer.files;
+    let file = null;
+    this.logger.debug('[CONV-FOOTER] onDrop items ', items);
+    for (const item of items) {
+      this.logger.debug('[CONV-FOOTER] onDrop item ', item);
+      this.logger.debug('[CONV-FOOTER] onDrop item.type ', item.type);
+
+      const data = {target: {files: new DataTransfer()}}
+      data.target.files = items
+      this.logger.debug('[CONV-FOOTER] onDrop data', data);
+      this.logger.debug('[CONV-FOOTER] onDrop file ', file);
+      this.detectFiles(data)
     }
   }
 

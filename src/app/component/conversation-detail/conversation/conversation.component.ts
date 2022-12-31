@@ -139,6 +139,11 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
   isIE = /msie\s|trident\//i.test(window.navigator.userAgent);
   firstScroll = true;
 
+  // ========== begin:: DRAG & DROP =======  
+  isHovering: boolean = false
+  dropEvent: Event
+  // ========== end:: DRAG & DROP =======
+
   tooltipOptions = {
     'show-delay': 1500,
     'tooltip-class': 'chat-tooltip',
@@ -1249,5 +1254,51 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
     this.onNewConversationInit.emit({ global: this.g, default_settings: default_settings, newConvId: newConvId, appConfigs: appConfigs })
   }
   // ========= END:: TRIGGER FUNCTIONS ============//
+
+
+  drop(event){
+    event.preventDefault()
+    event.stopPropagation()
+
+    this.logger.log('[CONV-COMP] ----> FILE - DROP ev ', event)
+    const fileList = event.dataTransfer.files
+    this.logger.log('[CONV-COMP] ----> FILE - DROP ev.dataTransfer.files ',fileList)
+    this.isHovering = false
+    if (fileList.length > 0) {
+      const file: File = fileList[0]
+      this.logger.log('[CONV-COMP] ----> FILE - DROP file ', file)
+
+      var mimeType = fileList[0].type
+      this.logger.log('[CONV-COMP] ----> FILE - DROP mimeType files ', mimeType)
+
+      // if (mimeType.startsWith("image") || mimeType.startsWith("application")) {
+      // this.logger.log('[CONV-COMP] ----> FILE - DROP mimeType files: ', this.appConfigProvider.getConfig().fileUploadAccept);
+      // this.checkAcceptedFile(mimeType);
+      // const isAccepted = this.checkAcceptedFile(mimeType)
+      // this.logger.log('[CONV-COMP] > checkAcceptedFile - fileUploadAccept isAcceptFile FILE - DROP',isAccepted)
+      // if (isAccepted === true) {
+      this.dropEvent = event
+      // } else {
+      //   this.logger.log( '[CONV-COMP] ----> FILE - DROP mimeType files ', mimeType,'NOT SUPPORTED FILE TYPE')
+      //   this.presentToast(this.translationsMap.get('FAILED_TO_UPLOAD_THE_FORMAT_IS_NOT_SUPPORTED'), 'danger','toast-custom-class', 5000 )
+      //   // this.presentToastOnlyImageFilesAreAllowedToDrag()
+      // }
+      
+    }
+  }
+
+  allowDrop(event: any) {
+    event.preventDefault()
+    event.stopPropagation()
+    this.logger.log('[CONV-COMP] ----> FILE - (dragover) allowDrop ev ', event)
+    this.isHovering = true
+  }
+
+  drag(event){
+    event.preventDefault()
+    event.stopPropagation()
+    console.log('dragleave-->', event)
+    this.isHovering = false
+  }
 
 }
