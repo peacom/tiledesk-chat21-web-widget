@@ -43,6 +43,7 @@ import { supports_html5_storage } from 'src/chat21-core/utils/utils';
 import { AUTH_STATE_OFFLINE, AUTH_STATE_ONLINE, TYPE_MSG_FILE, TYPE_MSG_IMAGE, URL_SOUND_LIST_CONVERSATION } from 'src/chat21-core/utils/constants';
 import { isInfo, isUserBanned } from 'src/chat21-core/utils/utils-message';
 import { MessageModel } from 'src/chat21-core/models/message';
+import { Rules } from './utils/rules';
 
 interface MessageObj {
   tenant?: string;
@@ -107,6 +108,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     private el: ElementRef,
     private ngZone: NgZone,
     public g: Globals,
+    private rules: Rules,
     public triggerHandler: Triggerhandler,
     public globalSettingsService: GlobalSettingsService,
     private settingsSaverService: SettingsSaverService,

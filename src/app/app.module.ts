@@ -127,6 +127,7 @@ import { Triggerhandler } from 'src/chat21-core/utils/triggerHandler';
 import { WaitingService } from './providers/waiting.service';
 import { StarRatingWidgetService } from './providers/star-rating-widget.service';
 import { LikeUnlikeComponent } from './component/message/like-unlike/like-unlike.component';
+import { Rules } from './utils/rules';
 
 
 const appInitializerFn = (appConfig: AppConfigService, logger: NGXLogger) => {
@@ -315,6 +316,7 @@ export function uploadFactory(http: HttpClient, appConfig: AppConfigService, app
     AppConfigService,
     Chat21Service,
     Globals,
+    Rules,
     GlobalSettingsService,
     SettingsSaverService,
     StarRatingWidgetService,
