@@ -14,7 +14,7 @@ export class FormLabelComponent implements OnInit {
   @Input() controlName: string;
   @Input() hasSubmitted: boolean; 
 
-  form: FormGroup;
+  form: FormGroup<any>;
   constructor(private rootFormGroup: FormGroupDirective) { }
 
   ngOnInit() {

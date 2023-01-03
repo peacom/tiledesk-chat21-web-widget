@@ -52,7 +52,7 @@ export class FormBuilderComponent implements OnInit {
     }
   }
 
-  buildFormGroup(inputJson: Array<FormArray>): FormGroup {
+  buildFormGroup(inputJson: Array<FormArray>): FormGroup<any> {
     let objectFormBuilder: { [key: string]: FormControl } = {}
     let restoreDefault = false;
     let initIndex:number = 1411;

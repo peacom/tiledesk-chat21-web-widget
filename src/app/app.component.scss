@@ -5,7 +5,7 @@
 @import 'src/app/sass/variables';
 @import url('./sass/animations.scss');
 @import url("./sass/hover.css");
-@import '~@ctrl/ngx-emoji-mart/picker';
+@import '@ctrl/ngx-emoji-mart/picker';
 // @import "~bootstrap/dist/css/bootstrap.css";
 /** custom scroll bar **/
 input, select:focus, textarea {

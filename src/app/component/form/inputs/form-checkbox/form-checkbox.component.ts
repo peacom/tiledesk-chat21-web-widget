@@ -17,7 +17,7 @@ export class FormCheckboxComponent implements OnInit {
   @Input() hasSubmitted: boolean;
   @Output() onKeyEnterPressed = new EventEmitter<any>();
   
-  form: FormGroup;
+  form: FormGroup<any>;
   constructor(private rootFormGroup: FormGroupDirective,
               private elementRef: ElementRef) { }
 

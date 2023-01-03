@@ -1,7 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "defaultProject": "widget",
   "newProjectRoot": "projects",
   "projects": {
     "widget": {
@@ -43,14 +42,13 @@
             ],
             "styles": [
               "src/app/sass/styles.scss",
-              "node_modules/@ctrl/ngx-emoji-mart/picker.css",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "node_modules/popper.js/dist/umd/popper.min.js"
+              "node_modules/@ctrl/ngx-emoji-mart/picker.css"
             ],
             "scripts": [
               "src/assets/js/mqtt/4.2.6/mqtt.min.js",
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/popper.js/dist/umd/popper.min.js"
             ],
             "vendorChunk": true,
             "extractLicenses": false,

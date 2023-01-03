@@ -23,7 +23,7 @@ export class PrechatFormComponent implements OnInit, AfterViewInit {
 
 
   // ========= begin:: component variables ======= //
-  preChatFormGroup: FormGroup;
+  preChatFormGroup: FormGroup<any>;
   userFullname: string;
   userEmail: string;
   // ========= end:: component variables ======= //

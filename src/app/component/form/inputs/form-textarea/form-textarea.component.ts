@@ -17,12 +17,12 @@ export class FormTextareaComponent implements OnInit {
   @Input() hasSubmitted: boolean; 
   @Output() onKeyEnterPressed = new EventEmitter<any>();
   @ViewChild('div_input') input: ElementRef;
-  form: FormGroup;
+  form: FormGroup<any>;
   constructor(private rootFormGroup: FormGroupDirective,
               private elementRef: ElementRef) { }
 
   ngOnInit() {
-    this.form = this.rootFormGroup.control as FormGroup;
+    this.form = this.rootFormGroup.control as FormGroup<any>;
     if(this.form && this.form.controls && this.form.controls[this.controlName]){
       this.form.controls[this.controlName].valueChanges.subscribe((value) => {
         this.hasSubmitted= false;
