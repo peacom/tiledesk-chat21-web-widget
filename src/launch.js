@@ -163,69 +163,12 @@ function loadIframe(tiledeskScriptBaseLocation) {
 
     iDiv.appendChild(ifrm);
 
-    // buildIframeDOM(ifrm)
     // ifrm.contentWindow.document.open();
-    // ifrm.document.srcdoc = srcTileDesk;
-    // ifrm.srcdoc = srcTileDesk
-    ifrm.contentWindow.document.open();
-    ifrm.contentWindow.document.write(srcTileDesk);
-    ifrm.contentWindow.document.close();
+    ifrm.src = tiledeskScriptBaseLocation + '/base_script.html'
+    // ifrm.contentWindow.document.open();
+    // ifrm.contentWindow.document.write(srcTileDesk);
+    // ifrm.contentWindow.document.close();
 
-}
-
-function buildIframeDOM(iframe){
-
-  var meta = document.createElement('meta');
-  meta.setAttribute('charset', 'utf-8')
-  var meta_2 = document.createElement('meta')
-  meta_2.setAttribute('name', 'viewport')
-  meta_2.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0')
-  var title = document.createElement('title')
-  title.title = 'Tilechat Widget'
-  var base = document.createElement('base')
-  base.setAttribute('href', './')
-  var link_1 = document.createElement('link')
-  link_1.setAttribute('rel', 'icon')
-  link_1.setAttribute('type', 'image/x-icon')
-  link_1.setAttribute('href', 'favicon.ico')
-  var link_2 = document.createElement('link')
-  link_2.setAttribute('rel', 'stylesheet')
-  link_2.setAttribute('type', 'text/css')
-  link_2.setAttribute('href', tiledeskScriptBaseLocation + '/assets/styles/tiledesk_v1.scss')
-  link_2.setAttribute('media','all')
-
-  
-  let head = iframe.contentWindow.document.getElementsByTagName('head')[0]
-  head.appendChild(meta)
-  head.appendChild(meta_2)
-  head.appendChild(title)
-  head.appendChild(base)
-  head.appendChild(link_1)
-  head.appendChild(link_2)
-
-  var script_1 = document.createElement('script')
-  script_1.setAttribute('type','text/javascript')
-  script_1.setAttribute('src',tiledeskScriptBaseLocation + '/runtime.js')
-  var script_2 = document.createElement('script')
-  script_2.setAttribute('type','text/javascript')
-  script_2.setAttribute('src',tiledeskScriptBaseLocation + '/polyfills.js')
-  var script_3 = document.createElement('script')
-  script_3.setAttribute('type','text/javascript')
-  script_3.setAttribute('src',tiledeskScriptBaseLocation + '/styles.css')
-  var script_4 = document.createElement('script')
-  script_4.setAttribute('type','text/javascript')
-  script_4.setAttribute('src',tiledeskScriptBaseLocation + '/vendor.js')
-  var script_5 = document.createElement('script')
-  script_5.setAttribute('type','text/javascript')
-  script_5.setAttribute('src',tiledeskScriptBaseLocation + '/main.js')
-
-  let body= iframe.contentWindow.document.getElementsByTagName('body')[0]
-  body.appendChild(document.createElement('chat-root'))
-  body.appendChild(script_1)
-  body.appendChild(script_2)
-  body.appendChild(script_3)
-  body.appendChild(script_4)
-  body.appendChild(script_5)
 }
 
 
