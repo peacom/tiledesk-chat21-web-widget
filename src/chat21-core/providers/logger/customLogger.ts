@@ -23,6 +23,10 @@ export class CustomLogger extends LoggerService{
         }
     }
 
+    getLoggerConfig(): {isLogEnabled: boolean, logLevel: number}{
+        return {isLogEnabled: this.isLogEnabled, logLevel: this.logLevel}
+    }
+
     error(message: any, ...optionalParams: any[]) {
         if (this.isLogEnabled && this.logLevel >= LogLevel.ERROR) {
             this.logger.error(message, ...optionalParams)
