@@ -1,5 +1,13 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.53-rc.1
+- added: Rules class (work in progress)
+- added: base_script.html to load element inside tiledesk-iframe
+- added: getLoggerConfig to logger service
+- removed: document.write() injection
+- removed: unused html test file
+
+
 ### 5.0.52 in PROD
 
 ### 5.0.52-rc.4
