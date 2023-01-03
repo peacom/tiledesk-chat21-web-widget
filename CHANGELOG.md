@@ -7,7 +7,6 @@
 - removed: document.write() injection
 - removed: unused html test file
 
-
 ### 5.0.52 in PROD
 
 ### 5.0.52-rc.4
