@@ -3,7 +3,7 @@ version=`node -e 'console.log(require("./package.json").version)'`
 echo "version $version"
 
 # --build-optimizer=false if localstorage is disabled (webview) appears https://github.com/firebase/angularfire/issues/970
-ng build --configuration="prod" --aot=true --base-href --output-hashing none --buildOptimizer=true --vendor-chunk=true
+ng build --configuration="prod" --aot=true --base-href --output-hashing none --build-optimizer=true --vendor-chunk=true
 
 cd dist
 # aws s3 sync . s3://tiledesk-widget/v5/latest/
