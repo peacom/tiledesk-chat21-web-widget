@@ -1,5 +1,4 @@
 import { MomentModule } from 'ngx-moment';
-import { TooltipModule } from 'ng2-tooltip-directive';
 import { async, ComponentFixture, TestBed, waitForAsync, inject } from '@angular/core/testing';
 
 import { ConversationContentComponent } from './conversation-content.component';
@@ -36,7 +35,6 @@ describe('ConversationContentComponent', () => {
         HtmlEntitiesEncodePipe,
       ],
       imports: [
-        TooltipModule,
         MomentModule
       ],
       providers: [ 

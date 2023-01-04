@@ -67,16 +67,6 @@ export class ConversationContentComponent implements OnInit {
   MESSAGE_TYPE_OTHERS = MESSAGE_TYPE_OTHERS;
   // ========== end:: check message type functions ======= //
 
-  tooltipOptions = {
-    'show-delay': 1500,
-    'tooltip-class': 'chat-tooltip',
-    'theme': 'light',
-    'shadow': false,
-    'hide-delay-mobile': 0,
-    'hideDelayAfterClick': 3000,
-    'hide-delay': 200
-  };
-
   urlBOTImage = 'https://s3.eu-west-1.amazonaws.com/tiledesk-widget/dev/2.0.4-beta.7/assets/images/avatar_bot_tiledesk.svg'
   uploadProgress: number;
   showUploadProgress: boolean = false;

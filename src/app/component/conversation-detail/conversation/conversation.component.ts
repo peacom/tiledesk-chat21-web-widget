@@ -144,16 +144,6 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
   dropEvent: Event
   // ========== end:: DRAG & DROP =======
 
-  tooltipOptions = {
-    'show-delay': 1500,
-    'tooltip-class': 'chat-tooltip',
-    'theme': 'light',
-    'shadow': false,
-    'hide-delay-mobile': 0,
-    'hideDelayAfterClick': 3000,
-    'hide-delay': 200
-  };
-
   translationMapHeader: Map<string, string>;
   translationMapFooter: Map<string, string>;
   translationMapContent: Map<string, string>;

@@ -17,15 +17,7 @@ export class ImageComponent implements OnInit {
 
   loading: boolean = true
   tooltipMessage: string;
-  tooltipOptions = {
-    'show-delay': 0,
-    'tooltip-class': 'chat-tooltip',
-    'theme': 'light',
-    'shadow': false,
-    'hide-delay-mobile': 0,
-    'hideDelayAfterClick': 3000,
-    'hide-delay': 200
-  };
+  
 
   popupUrl = popupUrl;
   

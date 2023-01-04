@@ -41,8 +41,6 @@
     "jquery": "^3.6.0",
     "marked": "^4.0.16",
     "moment": "^2.29.3",
-    "ng2-tooltip-directive": "^2.10.3",
-    "ng2-tooltip-directive-ng13fix": "^2.10.2",
     "ngx-logger": "^5.0.11",
     "ngx-moment": "^6.0.2",
     "popper.js": "^1.16.1",

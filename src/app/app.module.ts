@@ -57,7 +57,6 @@ import { environment } from 'src/environments/environment';
 //THIRD-PART MODULES
 import { TranslateModule } from '@ngx-translate/core';
 import { MomentModule } from 'ngx-moment';
-import { TooltipModule, TooltipOptions } from 'ng2-tooltip-directive';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { INGXLoggerMetadata, LoggerModule, NGXLogger, NgxLoggerLevel, NGXLoggerServerService, TOKEN_LOGGER_SERVER_SERVICE } from "ngx-logger";
 
@@ -115,7 +114,7 @@ import { NativeImageRepoService } from 'src/chat21-core/providers/native/native-
 import { NativeUploadService } from 'src/chat21-core/providers/native/native-upload-service';
 
 //CONSTANTS
-import { CHAT_ENGINE_MQTT, CustomTooltipOptions, UPLOAD_ENGINE_NATIVE } from 'src/chat21-core/utils/constants';
+import { CHAT_ENGINE_MQTT, UPLOAD_ENGINE_NATIVE } from 'src/chat21-core/utils/constants';
 
 //STORAGE
 import { LocalSessionStorage } from 'src/chat21-core/providers/localSessionStorage';
@@ -128,6 +127,7 @@ import { WaitingService } from './providers/waiting.service';
 import { StarRatingWidgetService } from './providers/star-rating-widget.service';
 import { LikeUnlikeComponent } from './component/message/like-unlike/like-unlike.component';
 import { Rules } from './utils/rules';
+import { TooltipDirective } from 'src/app/directives/tooltip.directive';
 
 
 const appInitializerFn = (appConfig: AppConfigService, logger: NGXLogger) => {
@@ -283,7 +283,8 @@ export function uploadFactory(http: HttpClient, appConfig: AppConfigService, app
     HtmlEntitiesEncodePipe,
     MarkedPipe,
     SafeHtmlPipe,
-    LikeUnlikeComponent
+    LikeUnlikeComponent,
+    TooltipDirective
   ],
   imports: [
     BrowserModule,
@@ -293,7 +294,6 @@ export function uploadFactory(http: HttpClient, appConfig: AppConfigService, app
     FormsModule,
     ReactiveFormsModule,
     MomentModule,
-    TooltipModule.forRoot(CustomTooltipOptions),
     PickerModule,
     TranslateModule.forRoot(//),
     {

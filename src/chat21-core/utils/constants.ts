@@ -1,7 +1,5 @@
 // TIMES
 
-import { TooltipOptions } from 'ng2-tooltip-directive';
-
 // export const SERVICE_WORKER_DEV = '/chat/';
 // export const SERVICE_WORKER_PROD = './chat/';
 
@@ -109,13 +107,3 @@ export const LogLevel = {
     'INFO' : 2,
     'DEBUG' : 3
 }
-
-export const CustomTooltipOptions:  TooltipOptions = {
-    'show-delay': 500,
-    'tooltip-class': 'chat-tooltip',
-    'theme': 'light',
-    'shadow': false,
-    'hide-delay-mobile': 0,
-    'hideDelayAfterClick': 3000,
-    'hide-delay': 200
-  } 
