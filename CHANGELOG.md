@@ -1,5 +1,13 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.53-rc.2
+- added: angular 15 engine
+- added: custom tooltip directive
+- changed: buildOptimization ng build parameter to build-optimization
+- removed: ng2-tooltip-directive and ng2-tooltip-directive-ng13fix
+- removed: initializatoin of abstract variables in chat21-core abstract providers
+- removed: enableIvy parameter from tsconfig.json
+
 ### 5.0.53-rc.1
 - added: Rules class (work in progress)
 - added: base_script.html to load element inside tiledesk-iframe
