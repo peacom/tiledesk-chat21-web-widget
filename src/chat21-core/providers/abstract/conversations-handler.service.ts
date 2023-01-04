@@ -14,15 +14,15 @@ import { ConversationModel } from './../../models/conversation';
 export abstract class ConversationsHandlerService {
 
   // BehaviorSubject
-  abstract BSConversationDetail: BehaviorSubject<ConversationModel> = new BehaviorSubject<ConversationModel>(null);
-  abstract conversationAdded: BehaviorSubject<ConversationModel> = new BehaviorSubject<ConversationModel>(null);
-  abstract conversationChanged: BehaviorSubject<ConversationModel> = new BehaviorSubject<ConversationModel>(null);
-  abstract conversationChangedDetailed: BehaviorSubject<{value: ConversationModel, previousValue: ConversationModel}> = new BehaviorSubject<{value: ConversationModel, previousValue: ConversationModel}>(null);
-  abstract conversationRemoved: BehaviorSubject<ConversationModel> = new BehaviorSubject<ConversationModel>(null);
+  abstract BSConversationDetail: BehaviorSubject<ConversationModel>;
+  abstract conversationAdded: BehaviorSubject<ConversationModel>;
+  abstract conversationChanged: BehaviorSubject<ConversationModel>;
+  abstract conversationChangedDetailed: BehaviorSubject<{value: ConversationModel, previousValue: ConversationModel}>;
+  abstract conversationRemoved: BehaviorSubject<ConversationModel>;
   // abstract readAllMessages: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
   // params
-  abstract conversations: Array<ConversationModel> = [];
+  abstract conversations: Array<ConversationModel>;
   abstract uidConvSelected: string;
 
   // functions

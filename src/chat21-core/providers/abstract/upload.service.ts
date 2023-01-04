@@ -24,7 +24,7 @@ export abstract class UploadService {
   }
 
   //BehaviorSubject
-  abstract BSStateUpload: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  abstract BSStateUpload: BehaviorSubject<any>;
 
   // functions
   abstract initialize(): void;

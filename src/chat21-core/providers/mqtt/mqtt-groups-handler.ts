@@ -14,7 +14,7 @@ export class MQTTGroupsHandler extends GroupsHandlerService {
     
     // BehaviorSubject
     BSgroupDetail: BehaviorSubject<GroupModel> = new BehaviorSubject<GroupModel>(null); 
-    SgroupDetail: Subject<GroupModel> = new BehaviorSubject<GroupModel>(null);
+    SgroupDetail: Subject<GroupModel> = new Subject<GroupModel>();
     groupAdded: BehaviorSubject<GroupModel> = new BehaviorSubject<GroupModel>(null);
     groupChanged: BehaviorSubject<GroupModel> = new BehaviorSubject<GroupModel>(null);
     groupRemoved: BehaviorSubject<GroupModel> = new BehaviorSubject<GroupModel>(null);

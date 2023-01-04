@@ -20,7 +20,7 @@ import { LoggerInstance } from '../logger/loggerInstance';
 export class MQTTArchivedConversationsHandler extends ArchivedConversationsHandlerService {
  
     // BehaviorSubject
-    BSConversationDetail: BehaviorSubject<ConversationModel>;
+    BSConversationDetail: BehaviorSubject<ConversationModel> = new BehaviorSubject<ConversationModel>(null);
     archivedConversationAdded: BehaviorSubject<ConversationModel> = new BehaviorSubject<ConversationModel>(null);
     archivedConversationChanged: BehaviorSubject<ConversationModel> = new BehaviorSubject<ConversationModel>(null);
     archivedConversationRemoved: BehaviorSubject<ConversationModel> = new BehaviorSubject<ConversationModel>(null);

@@ -6,7 +6,7 @@ import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance'
 import { MESSAGE_TYPE_MINE, MESSAGE_TYPE_OTHERS } from 'src/chat21-core/utils/constants';
 import { convertColorToRGBA } from 'src/chat21-core/utils/utils';
 import { isFile, isFrame, isImage, messageType } from 'src/chat21-core/utils/utils-message';
-import { MAX_WIDTH_IMAGES, MIN_WIDTH_IMAGES} from '../../../utils/constants';
+import { MAX_WIDTH_IMAGES, MIN_WIDTH_IMAGES, CustomTooltipOptions} from 'src/chat21-core/utils/constants';
 
 @Component({
   selector: 'chat-bubble-message',
@@ -35,16 +35,6 @@ export class BubbleMessageComponent implements OnInit {
   MESSAGE_TYPE_MINE = MESSAGE_TYPE_MINE;
   MESSAGE_TYPE_OTHERS = MESSAGE_TYPE_OTHERS;
  // ========== end:: check message type functions ======= //
-  
-  tooltipOptions = {
-    'show-delay': 500,
-    'tooltip-class': 'chat-tooltip',
-    'theme': 'light',
-    'shadow': false,
-    'hide-delay-mobile': 0,
-    'hideDelayAfterClick': 3000,
-    'hide-delay': 200
-  };
   sizeImage : { width: number, height: number}
 
   private logger: LoggerService = LoggerInstance.getInstance()
@@ -124,7 +114,7 @@ export class BubbleMessageComponent implements OnInit {
   */
  handleTooltipEvents(event) {
   const that = this;
-  const showDelay = this.tooltipOptions['showDelay'];
+  const showDelay = CustomTooltipOptions['showDelay'];
   setTimeout(function () {
     try {
       const domRepresentation = document.getElementsByClassName('chat-tooltip');
@@ -137,7 +127,7 @@ export class BubbleMessageComponent implements OnInit {
           if (item.classList.contains('tooltip-show')) {
             item.classList.remove('tooltip-show');
           }
-        }, that.tooltipOptions['hideDelayAfterClick']);
+        }, CustomTooltipOptions['hideDelayAfterClick']);
       }
     } catch (err) {
         that.logger.error('[BUBBLE-MESSAGE] handleTooltipEvents >>>> Error :' + err);

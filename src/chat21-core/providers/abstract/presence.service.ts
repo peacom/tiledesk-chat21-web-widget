@@ -8,8 +8,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export abstract class PresenceService {
 
   // BehaviorSubject
-  abstract BSIsOnline: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-  abstract BSLastOnline: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  abstract BSIsOnline: BehaviorSubject<any>;
+  abstract BSLastOnline: BehaviorSubject<any>;
 
   // params
   // private DEFAULT_TENANT: string = environment.firebaseConfig.tenant;

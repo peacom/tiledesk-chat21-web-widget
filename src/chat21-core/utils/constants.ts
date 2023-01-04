@@ -1,5 +1,7 @@
 // TIMES
 
+import { TooltipOptions } from 'ng2-tooltip-directive';
+
 // export const SERVICE_WORKER_DEV = '/chat/';
 // export const SERVICE_WORKER_PROD = './chat/';
 
@@ -45,7 +47,8 @@ export const TYPE_MSG_IMAGE = 'image';
 export const TYPE_MSG_FILE = 'file';
 export const TYPE_MSG_BUTTON = 'button';
 
-export const MAX_WIDTH_IMAGES = 300;
+export const MAX_WIDTH_IMAGES = 230;
+export const MIN_WIDTH_IMAGES = 130;
 export const TIME_TYPING_MESSAGE = 2000;
 export const TYPE_DIRECT = 'direct';
 export const TYPE_GROUP = 'group';
@@ -106,3 +109,13 @@ export const LogLevel = {
     'INFO' : 2,
     'DEBUG' : 3
 }
+
+export const CustomTooltipOptions:  TooltipOptions = {
+    'show-delay': 500,
+    'tooltip-class': 'chat-tooltip',
+    'theme': 'light',
+    'shadow': false,
+    'hide-delay-mobile': 0,
+    'hideDelayAfterClick': 3000,
+    'hide-delay': 200
+  } 
