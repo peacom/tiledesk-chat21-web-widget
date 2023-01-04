@@ -10,8 +10,11 @@
     "module": "es2020",
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2020",
-    "types": [ "node" , "jasmine"],
+    "target": "ES2022",
+    "types": [
+      "node",
+      "jasmine"
+    ],
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -24,7 +27,6 @@
   },
   "skipLibCheck": true,
   "angularCompilerOptions": {
-    "enableIvy": true,
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
   }
