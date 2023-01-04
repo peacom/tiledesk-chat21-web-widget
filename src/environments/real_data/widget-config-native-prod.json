@@ -1,0 +1,27 @@
+{
+    "chatEngine": "mqtt",
+    "uploadEngine": "native",
+    "pushEngine":"mqtt",
+    "fileUploadAccept":"*/*",
+    "logLevel": "debug",
+    "remoteTranslationsUrl": "https://api.tiledesk.com/v3/",
+    "firebaseConfig": {
+        "apiKey": "AIzaSyDKfdKrlD7AYcbQ-U-xxgV-b3FUQ4xt7NM",
+        "authDomain": "tiledesk-prod-v2.firebaseapp.com",
+        "databaseURL": "https://tiledesk-prod-v2.firebaseio.com",
+        "projectId": "tiledesk-prod-v2",
+        "storageBucket": "tiledesk-prod-v2.appspot.com",
+        "messagingSenderId": "92907897826",
+        "appId": "1:92907897826:web:f255664014a7cc14ee2fbb",
+        "tenant": "tilechat"
+    },
+    "chat21Config": {
+        "appId": "tilechat",
+        "MQTTendpoint": "wss://eu.rtmv3.tiledesk.com/mqws/ws",
+        "APIendpoint": "https://eu.rtmv3.tiledesk.com/chatapi/api",
+        "log": true
+    },
+    "apiUrl": "https://api.tiledesk.com/v3/",
+    "baseImageUrl": "https://eu.rtmv3.tiledesk.com/api/",
+    "authPersistence": "LOCAL"
+}
