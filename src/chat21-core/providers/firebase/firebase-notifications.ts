@@ -14,7 +14,7 @@ import { LoggerService } from '../abstract/logger.service';
 @Injectable()
 export class FirebaseNotifications extends NotificationsService {
     
-    public BUILD_VERSION: string;
+    // public BUILD_VERSION: string;
     private FCMcurrentToken: string;
     private userId: string;
     private tenant: string;

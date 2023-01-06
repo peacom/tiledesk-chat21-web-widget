@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export abstract class NotificationsService {
   
   private _tenant: string;
-  abstract BUILD_VERSION = environment.version
+  public BUILD_VERSION = environment.version
 
   public setTenant(tenant): void {
     this._tenant = tenant;
