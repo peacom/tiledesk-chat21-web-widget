@@ -1,8 +1,8 @@
 {
   "name": "@chat21/chat21-web-widget",
   "author": "Tiledesk SRL",
-  "version": "5.0.53-rc.2",
-  "license": "MIT License",
+  "version": "5.0.53-rc.3",
+  "license": "MIT",
   "homepage": "https://www.tiledesk.com",
   "repository": {
     "type": "git",
@@ -28,7 +28,7 @@
     "@angular/platform-browser": "^15.0.4",
     "@angular/platform-browser-dynamic": "^15.0.4",
     "@angular/router": "^15.0.4",
-    "@ctrl/ngx-emoji-mart": "^5.1.2",
+    "@ctrl/ngx-emoji-mart": "^7.1.0",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^4.0.0",
     "@popperjs/core": "^2.11.5",
@@ -38,7 +38,6 @@
     "file-saver": "^2.0.5",
     "firebase": "^8.6.7",
     "humanize-duration-ts": "^2.1.1",
-    "jquery": "^3.6.0",
     "marked": "^4.0.16",
     "moment": "^2.29.3",
     "ngx-logger": "^5.0.11",
@@ -62,12 +61,13 @@
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~6.3.20",
     "karma-chrome-launcher": "~3.1.0",
+    "karma-coverage": "^2.2.0",
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
     "protractor": "~7.0.0",
     "ts-node": "~7.0.0",
     "tslint": "~6.1.0",
-    "typescript": "4.8.4"
+    "typescript": "^4.8.4"
   }
 }

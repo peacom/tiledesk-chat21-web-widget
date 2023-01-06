@@ -1,5 +1,14 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.53-rc.3
+- added: html descriptions to index.html and index-dev.html
+- changed: script tag for style.css to link tag with rel="stylesheet"
+- changed: binding to tiledesk iframe from scr to srcdoc 
+- removed: base_script.html 
+- removed: jquery plugin
+- removed: relativeLinkResolution from forRoot in RooterModule
+
+
 ### 5.0.53-rc.2
 - added: angular 15 engine
 - added: custom tooltip directive
