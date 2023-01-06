@@ -32,6 +32,7 @@ function loadIframe(tiledeskScriptBaseLocation) {
     var ifrm = document.createElement("iframe");
     ifrm.setAttribute("frameborder", "0");
     ifrm.setAttribute("border", "0");
+    ifrm.setAttribute("title", "Tiledesk Widget")
        
     var srcTileDesk = '<html lang="en">';
     srcTileDesk += '<head>';
@@ -46,7 +47,7 @@ function loadIframe(tiledeskScriptBaseLocation) {
     srcTileDesk += '<chat-root></chat-root>';
     srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/runtime.js"></script>';
     srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/polyfills.js"></script>';
-    srcTileDesk += '<script type="text/css" src="'+tiledeskScriptBaseLocation+'/styles.css"></script>';
+    srcTileDesk += '<link type="text/css" rel="stylesheet" href="'+tiledeskScriptBaseLocation+'/styles.css" media="all"></link>';
     srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/vendor.js"></script>';
     srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/main.js"></script>';
     srcTileDesk += '</body>';
@@ -163,11 +164,14 @@ function loadIframe(tiledeskScriptBaseLocation) {
 
     iDiv.appendChild(ifrm);
 
-    // ifrm.contentWindow.document.open();
-    ifrm.src = tiledeskScriptBaseLocation + '/base_script.html'
-    // ifrm.contentWindow.document.open();
-    // ifrm.contentWindow.document.write(srcTileDesk);
-    // ifrm.contentWindow.document.close();
+    if(tiledeskScriptBaseLocation.includes('localhost')){
+      ifrm.contentWindow.document.open();
+      ifrm.contentWindow.document.write(srcTileDesk);
+      ifrm.contentWindow.document.close();
+    }else {
+      ifrm.srcdoc = srcTileDesk
+    }
+   
 
 }
 
