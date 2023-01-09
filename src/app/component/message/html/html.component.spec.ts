@@ -1,4 +1,4 @@
-import { SafeHtmlPipe } from './../../../directives/safe-html.pipe';
+import { SafeHtmlPipe } from './../../../pipe/safe-html.pipe';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HtmlComponent } from './html.component';

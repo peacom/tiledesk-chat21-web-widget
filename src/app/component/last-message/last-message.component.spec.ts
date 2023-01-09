@@ -1,11 +1,11 @@
-import { MarkedPipe } from './../../directives/marked.pipe';
+import { MarkedPipe } from './../../pipe/marked.pipe';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ImageRepoService } from '../../../chat21-core/providers/abstract/image-repo.service';
 import { Globals } from '../../utils/globals';
 
 import { LastMessageComponent } from './last-message.component';
-import { HtmlEntitiesEncodePipe } from '../../directives/html-entities-encode.pipe';
+import { HtmlEntitiesEncodePipe } from '../../pipe/html-entities-encode.pipe';
 
 describe('LastMessageComponent', () => {
   let component: LastMessageComponent;

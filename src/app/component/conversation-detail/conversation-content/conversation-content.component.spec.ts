@@ -2,8 +2,8 @@ import { MomentModule } from 'ngx-moment';
 import { async, ComponentFixture, TestBed, waitForAsync, inject } from '@angular/core/testing';
 
 import { ConversationContentComponent } from './conversation-content.component';
-import { MarkedPipe } from '../../../directives/marked.pipe';
-import { HtmlEntitiesEncodePipe } from '../../../directives/html-entities-encode.pipe';
+import { MarkedPipe } from '../../../pipe/marked.pipe';
+import { HtmlEntitiesEncodePipe } from '../../../pipe/html-entities-encode.pipe';
 import { UploadService } from '../../../../chat21-core/providers/abstract/upload.service';
 import { CustomLogger } from '../../../../chat21-core/providers/logger/customLogger';
 import { LoggerInstance } from '../../../../chat21-core/providers/logger/loggerInstance';

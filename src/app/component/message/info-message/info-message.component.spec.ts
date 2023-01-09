@@ -2,7 +2,7 @@ import { CustomLogger } from './../../../../chat21-core/providers/logger/customL
 import { LoggerInstance } from './../../../../chat21-core/providers/logger/loggerInstance';
 import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MarkedPipe } from '../../../directives/marked.pipe';
+import { MarkedPipe } from '../../../pipe/marked.pipe';
 
 import { InfoMessageComponent } from './info-message.component';
 import { NGXLogger } from 'ngx-logger';

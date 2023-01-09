@@ -1,5 +1,5 @@
-import { HtmlEntitiesEncodePipe } from './../../../directives/html-entities-encode.pipe';
-import { MarkedPipe } from './../../../directives/marked.pipe';
+import { HtmlEntitiesEncodePipe } from './../../../pipe/html-entities-encode.pipe';
+import { MarkedPipe } from './../../../pipe/marked.pipe';
 import { async, ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TextComponent } from './text.component';
