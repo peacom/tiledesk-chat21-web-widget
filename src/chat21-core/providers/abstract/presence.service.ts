@@ -31,5 +31,6 @@ export abstract class PresenceService {
   abstract userIsOnline(userid: string): Observable<any>
   abstract lastOnlineForUser(userid: string): void;
   abstract setPresence(userid: string): void;
+  abstract imHere():void;
   abstract removePresence(): void;
 }

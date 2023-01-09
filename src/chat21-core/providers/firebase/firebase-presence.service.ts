@@ -180,4 +180,8 @@ export class FirebasePresenceService extends PresenceService {
     return connectionsRef;
   }
 
+  public imHere(){
+    //NOT IMPLEMENTED FOR FIREBASE ENGINE
+  }
+
 }

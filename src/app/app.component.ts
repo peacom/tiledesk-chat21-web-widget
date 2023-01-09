@@ -783,11 +783,11 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         if (CLIENT_BROWSER) {
             attributes['client'] = CLIENT_BROWSER;
         }
-        if (location.href) {
-            attributes['sourcePage'] = location.href;
+        if (this.g.windowContext.window.location) {
+            attributes['sourcePage'] = this.g.windowContext.window.location.href;
         }
-        if(document.title){
-            attributes['sourceTitle'] = document.title;
+        if(this.g.windowContext.window.document){
+            attributes['sourceTitle'] = this.g.windowContext.window.document.title;
         }
         if (projectid) {
             attributes['projectId'] = projectid;
@@ -1493,6 +1493,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             // this.g.windowContext.window.document.title = this.tabTitle
         } else {
             // TAB IS ACTIVE --> restore title and DO NOT SOUND
+            this.presenceService.imHere()
             clearInterval(this.setIntervalTime)
             this.setIntervalTime = null;
             this.isTabVisible = true;

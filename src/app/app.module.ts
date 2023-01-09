@@ -61,9 +61,9 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { INGXLoggerMetadata, LoggerModule, NGXLogger, NgxLoggerLevel, NGXLoggerServerService, TOKEN_LOGGER_SERVER_SERVICE } from "ngx-logger";
 
 //DIRECTIVES
-import { HtmlEntitiesEncodePipe } from './directives/html-entities-encode.pipe';
-import { MarkedPipe } from './directives/marked.pipe';
-import { SafeHtmlPipe } from './directives/safe-html.pipe';
+import { HtmlEntitiesEncodePipe } from './pipe/html-entities-encode.pipe';
+import { MarkedPipe } from './pipe/marked.pipe';
+import { SafeHtmlPipe } from './pipe/safe-html.pipe';
 
 //LOGGER SERVICES
 import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
@@ -193,7 +193,7 @@ export function conversationHandlerFactory(chat21Service: Chat21Service, appConf
   }
 }
 
-export function typingFactory(appConfig: AppConfigService) {
+export function typingFactory(chat21Service: Chat21Service, appConfig: AppConfigService) {
   const config = appConfig.getConfig()
   if (config.chatEngine === CHAT_ENGINE_MQTT) {
     return new MQTTTypingService();
@@ -202,10 +202,10 @@ export function typingFactory(appConfig: AppConfigService) {
   }
 }
 
-export function presenceFactory(appConfig: AppConfigService) {
+export function presenceFactory(chat21Service: Chat21Service, appConfig: AppConfigService) {
   const config = appConfig.getConfig()
   if (config.chatEngine === CHAT_ENGINE_MQTT) {
-    return new MQTTPresenceService();
+    return new MQTTPresenceService(chat21Service);
   } else {
     return new FirebasePresenceService();
   }
@@ -363,12 +363,12 @@ export function uploadFactory(http: HttpClient, appConfig: AppConfigService, app
     {
       provide: PresenceService,
       useFactory: presenceFactory,
-      deps: [AppConfigService]
+      deps: [Chat21Service, AppConfigService]
     },
     {
       provide: TypingService,
       useFactory: typingFactory,
-      deps: [AppConfigService]
+      deps: [Chat21Service, AppConfigService]
     },
     {
       provide: UploadService,
