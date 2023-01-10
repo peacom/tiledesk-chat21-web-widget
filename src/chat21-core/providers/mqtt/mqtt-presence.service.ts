@@ -66,7 +66,9 @@ export class MQTTPresenceService extends PresenceService {
 
   public imHere(): void {
     this.logger.debug('[MQTT-PRESENCE] imHere', this.tenant);
-    this.chat21Service.chatClient.ImHere()
+    setTimeout(() => {
+      this.chat21Service.chatClient.ImHere()
+    }, 2000);
   }
 
 }
