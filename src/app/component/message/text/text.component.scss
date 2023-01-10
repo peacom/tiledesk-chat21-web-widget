@@ -26,3 +26,7 @@ p {
     font-weight: 300;
     overflow: hidden;
 }
+
+p ::ng-deep a {
+    word-break: break-all
+}

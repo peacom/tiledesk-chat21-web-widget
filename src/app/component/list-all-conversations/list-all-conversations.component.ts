@@ -149,7 +149,7 @@ export class ListAllConversationsComponent implements OnInit, OnDestroy, AfterVi
   }
 
   onConversationLoadedFN(conversation: ConversationModel){
-    this.logger.debug('[LISTALLCONVERSATIONS] onImageLoadedFN', conversation)
+    this.logger.debug('[LISTALLCONVERSATIONS] onConversationLoadedFN', conversation)
   }
 
   // private openConversationByID(conversation) {
