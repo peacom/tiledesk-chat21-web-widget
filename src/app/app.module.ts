@@ -1,3 +1,4 @@
+import { EventsService } from './providers/events.service';
 
 // ************** COMPONENTS ************** //
 import { AppComponent } from './app.component';
@@ -319,6 +320,7 @@ export function uploadFactory(http: HttpClient, appConfig: AppConfigService, app
     Rules,
     GlobalSettingsService,
     SettingsSaverService,
+    EventsService,
     StarRatingWidgetService,
     {
       provide: APP_INITIALIZER,
