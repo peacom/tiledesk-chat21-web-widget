@@ -1,3 +1,4 @@
+import { EventsService } from './../../../providers/events.service';
 import { ChatManager } from 'src/chat21-core/providers/chat-manager';
 
 import { ConversationFooterComponent } from './../conversation-footer/conversation-footer.component';
@@ -182,7 +183,8 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
     public typingService: TypingService,
     private tiledeskRequestService: TiledeskRequestsService,
     private changeDetectorRef: ChangeDetectorRef,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private events: EventsService
   ) { }
 
   onResize(event){
@@ -827,6 +829,18 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
       const subscribe = {key: subscribtionKey, value: subscribtion };
       this.subscriptions.push(subscribe);
     }
+
+    subscribtionKey = 'lastMessage:attachmentButtonClicked';
+    this.events.subscribe('lastMessage:attachmentButtonClicked', (event: any) => {
+        this.logger.debug('[CONV-COMP] ***** lastMessage:attachmentButtonClicked *****', event);
+        if (event) {
+          const conversationUid = event.message.conversation_with; //support-group-...
+          if(this.conversationId === conversationUid){
+            this.onAttachmentButtonClicked(event)
+          }
+        }
+    });
+
 
   }
 

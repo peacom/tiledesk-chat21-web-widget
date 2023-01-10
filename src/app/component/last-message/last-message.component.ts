@@ -1,3 +1,4 @@
+import { EventsService } from './../../providers/events.service';
 import { Component, OnInit, Output, OnDestroy, AfterViewInit, EventEmitter, Input, SimpleChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
 // services
@@ -39,6 +40,7 @@ export class LastMessageComponent implements OnInit, AfterViewInit, OnDestroy {
   
   constructor(
     private imageRepoService: ImageRepoService,
+    private events: EventsService,
     public g: Globals,
     // public conversationsService: ConversationsService
   ) { }
@@ -90,6 +92,8 @@ export class LastMessageComponent implements OnInit, AfterViewInit, OnDestroy {
   onAttachmentButtonClicked(event: any){
     // this.onAttachmentButtonClicked.emit(event)
     this.logger.debug('[LASTMESSAGE] onAttachmentButtonClicked', event)
+    this.events.publish('lastMessage:attachmentButtonClicked', event)
+    this.openConversationByID(this.conversation);
   }
   /** */
   openConversationByID(conversation) {
