@@ -30,15 +30,15 @@
         [height]="getSizeImg(conversation).height" /> -->
       
     
-    <div class="previewNewMessagge" (click)="openConversationByID(conversation)">
+    <div class="previewNewMessagge msg_container" (click)="openConversationByID(conversation)">
 
-      <!-- <div *ngIf="isImage(conversation)" class="c21-img">
-      <chat-image *ngIf="isImage(conversation)"
-        [metadata]="conversation?.metadata"
-        [width]="getMetadataSize(conversation?.metadata).width"
-        [height]="getMetadataSize(conversation?.metadata).height">
-      </chat-image>
-    </div> -->
+      <!-- <div *ngIf="isImage(conversation)">
+        <chat-image 
+          [metadata]="fileSelected"
+          [width]="fileSelected?.width"
+          [height]="fileSelected?.height">
+        </chat-image>
+      </div>
 
       <div *ngIf="conversation.type == 'text'" class="c21-box-text">
         <chat-text
@@ -46,25 +46,34 @@
           [fontSize]="stylesMap?.get('fontSize')"
           [fontFamily]="stylesMap?.get('fontFamily')">
         </chat-text>
-      </div>
+      </div> -->
+
+      <chat-bubble-message class="messages no-background"
+        [class.emoticon]="isEmojii(message?.text)"
+        [ngClass]="{'button-in-msg' : message?.metadata && message?.metadata?.button}"
+        [message]="message"
+        [fontColor]="stylesMap.get('bubbleReceivedTextColor')"
+        [fontSize]="stylesMap.get('fontSize')"
+        [fontFamily]="stylesMap.get('fontFamily')"
+        [stylesMap]="stylesMap">
+      </chat-bubble-message>
 
       <div class="c21-icon-avatar">
         <div class="c21-avatar-image profile_image">
           <chat-avatar-image class="slide-in-left"  
-            [senderID]="conversation.sender"
-            [senderFullname]="conversation.sender_fullname"
+            [senderID]="message?.sender"
+            [senderFullname]="message?.sender_fullname"
             [baseLocation]="baseLocation">
-           </chat-avatar-image>
-          <!-- <img src="{{conversation.image}}" onError="this.src = 'https://s3.eu-west-1.amazonaws.com/tiledesk-widget/dev/2.0.4-beta.7/assets/images/avatar_bot_tiledesk.svg'" /> -->
+          </chat-avatar-image>
         </div> 
       </div>
 
     </div>
 
-    <div *ngIf="conversation.attributes && conversation.attributes.attachment " class="conversations-buttons">
+    <div *ngIf="message.attributes && message.attributes.attachment " class="conversations-buttons">
       <chat-message-attachment 
         style="height: 100%; display: block;"
-        [message]="conversation"
+        [message]="message"
         [isLastMessage] = "true"
         [limit]="3"
         [stylesMap]="stylesMap"

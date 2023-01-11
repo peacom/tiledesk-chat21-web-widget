@@ -148,7 +148,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                     that.disposeWidget();
                     return;
                 }
-
+ 
                 if(conversation.is_new && conversation.sender !== this.g.senderId && !isInfo(conversation)){
                     that.manageTabNotification();
                 }
@@ -167,9 +167,12 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                 } else {
                     // if(conversation.is_new && isJustRecived(this.g.startedAt.getTime(), conversation.timestamp)){
                     //widget closed
-                    that.lastConversation = conversation;
-                    that.g.isOpenNewMessage = true;
-                    that.logger.debug('[APP-COMP] lastconversationnn', that.lastConversation)
+                    if(conversation.is_new && conversation.sender !== this.g.senderId && !isInfo(conversation)){
+                        that.lastConversation = conversation;
+                        that.g.isOpenNewMessage = true;
+                        that.logger.debug('[APP-COMP] lastconversationnn', that.lastConversation)
+                    }
+                    
 
                     let badgeNewConverstionNumber = that.conversationsHandlerService.countIsNew()
                     that.g.setParameter('conversationsBadge', badgeNewConverstionNumber);
@@ -397,6 +400,10 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                 if (autoStart && !that.g.singleConversation) { 
                     that.showWidget();
                 }
+
+                const rules = new Rules(that.tiledeskRequestsService)
+                rules.initRules(that.g.windowContext, that.g.tiledeskToken, user, that.generateNewUidConversation())
+
 
             } else if (state && state === AUTH_STATE_OFFLINE) {
                 /** non sono loggato */

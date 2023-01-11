@@ -1,3 +1,5 @@
+import { MessageModel } from './../../../chat21-core/models/message';
+import { UserModel } from './../../../chat21-core/models/user';
 import { EventsService } from './../../providers/events.service';
 import { Component, OnInit, Output, OnDestroy, AfterViewInit, EventEmitter, Input, SimpleChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -7,9 +9,9 @@ import { Globals } from 'src/app/utils/globals';
 // utils
 import { popupUrl, isPopupUrl, strip_tags } from '../../utils/utils';
 
-import { MAX_WIDTH_IMAGES} from 'src/app/utils/constants';
+import { MIN_WIDTH_IMAGES } from 'src/app/utils/constants';
 import { ConversationModel } from 'src/chat21-core/models/conversation';
-import { isImage } from 'src/chat21-core/utils/utils-message';
+import { conversationToMessage, isEmojii, isImage } from 'src/chat21-core/utils/utils-message';
 import { ImageRepoService } from 'src/chat21-core/providers/abstract/image-repo.service';
 import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
 import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
@@ -31,15 +33,13 @@ export class LastMessageComponent implements OnInit, AfterViewInit, OnDestroy {
   subscriptions: Subscription[] = []; /** */
   // ========= end:: sottoscrizioni ======= //
 
-  isPopupUrl = isPopupUrl;
-  popupUrl = popupUrl;
-  strip_tags = strip_tags;
-  isImage = isImage;
-
+  isEmojii = isEmojii;
+  
   private logger: LoggerService = LoggerInstance.getInstance();
+  public fileSelected: any;
+  public message: MessageModel;
   
   constructor(
-    private imageRepoService: ImageRepoService,
     private events: EventsService,
     public g: Globals,
     // public conversationsService: ConversationsService
@@ -56,32 +56,52 @@ export class LastMessageComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnChanges(changes: SimpleChanges) {
     this.logger.debug('[LASTMESSAGE] onChanges', changes)
     if(this.conversation){
-      this.conversation.image = this.imageRepoService.getImagePhotoUrl(this.conversation.sender)
+      this.message = conversationToMessage(this.conversation, this.g.senderId)
+      console.log('messsageeeeeeeee', this.message)
+      // if(isImage(this.conversation)){
+      //   this.fileSelected = Object.assign({}, this.conversation.metadata)
+      //   this.fileSelected = Object.assign(this.fileSelected, this.getMetadataSize(this.fileSelected))
+      // }
     }
   }
 
-  /**
-   *
-   * @param message
-   */
-  getMetadataSize(metadata): any {
-    if(metadata.width === undefined){
-      metadata.width= MAX_WIDTH_IMAGES
-    }
-    if(metadata.height === undefined){
-      metadata.height = MAX_WIDTH_IMAGES
-    }
+  
+
+  getMetadataSize(metadata): {width, height} {
+    const MAX_WIDTH_IMAGES_PREVIEW = 230
+    const MAX_HEIGHT_IMAGES_PREIEW = 150
+    // if(metadata.width === undefined){
+    //   metadata.width= MAX_WIDTH_IMAGES_PREVIEW
+    // }
+    // if(metadata.height === undefined){
+    //   metadata.height = MAX_HEIGHT_IMAGES_PREIEW
+    // }
     // const MAX_WIDTH_IMAGES = 300;
+    
     const sizeImage = {
         width: metadata.width,
         height: metadata.height
     };
-    //   that.g.wdLog(['message::: ', metadata);
-    if (metadata.width && metadata.width > (MAX_WIDTH_IMAGES)) {
-        const rapporto = (metadata['width'] / metadata['height']);
-        sizeImage.width = MAX_WIDTH_IMAGES;
-        sizeImage.height = (MAX_WIDTH_IMAGES) / rapporto;
+
+    
+    // SCALE IN WIDTH --> for horizontal images
+    if (metadata.width && metadata.width > MAX_WIDTH_IMAGES_PREVIEW) {
+      const ratio = (metadata['width'] / metadata['height']);
+      sizeImage.width = metadata.width = MAX_WIDTH_IMAGES_PREVIEW;
+      sizeImage.height = metadata.height = MAX_WIDTH_IMAGES_PREVIEW / ratio;
+    } else if(metadata.width && metadata.width <= 55){
+      const ratio = (metadata['width'] / metadata['height']);
+      sizeImage.width = MIN_WIDTH_IMAGES;
+      sizeImage.height = MIN_WIDTH_IMAGES / ratio;
     }
+
+    // SCALE IN HEIGHT --> for vertical images
+    if(metadata.height && metadata.height > MAX_HEIGHT_IMAGES_PREIEW){
+      const ratio = (MAX_HEIGHT_IMAGES_PREIEW / metadata['width']);
+      sizeImage.width = MAX_HEIGHT_IMAGES_PREIEW / ratio;
+      sizeImage.height = MAX_HEIGHT_IMAGES_PREIEW ;
+    }
+
     return sizeImage; // h.toString();
   }
 
