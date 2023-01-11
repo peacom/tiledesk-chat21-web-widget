@@ -205,11 +205,11 @@ export function conversationToMessage(conversation: ConversationModel, currentUs
   message.recipient_fullname = conversation.recipient_fullname
   message.status = +conversation.status
   message.timestamp = conversation.timestamp
-  message.metadata = conversation.metadata
+  message.metadata = conversation['metadata']
   message.channel_type = conversation.channel_type
   message.type = conversation.type
   message.isSender = isSender(message.sender, currentUserId)
   message.attributes = conversation.attributes
-  
+
   return message as MessageModel
 }
