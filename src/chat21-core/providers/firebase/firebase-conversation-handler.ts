@@ -28,7 +28,7 @@ import {
   conversationMessagesRef  
 } from '../../utils/utils';
 import { v4 as uuidv4 } from 'uuid';
-import { messageType, checkIfIsMemberJoinedGroup, hideInfoMessage, isJustRecived } from '../../utils/utils-message';
+import { messageType, checkIfIsMemberJoinedGroup, hideInfoMessage, isJustRecived, isSender } from '../../utils/utils-message';
 
 // @Injectable({ providedIn: 'root' })
 @Injectable()
@@ -187,7 +187,6 @@ export class FirebaseConversationHandler extends ConversationHandlerService {
                 type: typeMsg,
                 attributes: attributes,
                 channel_type: channelType
-                // isSender: true
             });
 
         // const message = new MessageModel(
@@ -310,7 +309,7 @@ export class FirebaseConversationHandler extends ConversationHandlerService {
         // }
         
         // verifico che il sender è il logged user
-        msg.isSender = this.isSender(msg.sender, this.loggedUser.uid);
+        msg.isSender = isSender(msg.sender, this.loggedUser.uid);
         //check if message contains only an emojii
         // msg.emoticon = isEmojii(msg.text)
 
@@ -335,7 +334,7 @@ export class FirebaseConversationHandler extends ConversationHandlerService {
         // }
         
         // verifico che il sender è il logged user
-        msg.isSender = this.isSender(msg.sender, this.loggedUser.uid);
+        msg.isSender = isSender(msg.sender, this.loggedUser.uid);
         //check if message contains only an emojii
         // msg.emoticon = isEmojii(msg.text)
 
@@ -453,118 +452,91 @@ export class FirebaseConversationHandler extends ConversationHandlerService {
         }
     }
 
-    /**
-     * controllo se il messaggio è stato inviato da loggerUser
-     * richiamato dalla pagina elenco messaggi della conversazione
-     */
-    private isSender(sender: string, currentUserId: string) {
-        if (currentUserId) {
-            if (sender === currentUserId) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
 
-
-    /** */
-    // updateMetadataMessage(uid: string, metadata: any) {
-    //     metadata.status = true;
-    //     const message = {
-    //         metadata: metadata
-    //     };
-    //     const firebaseMessages = firebase.database().ref(this.urlNodeFirebase + uid);
-    //     firebaseMessages.set(message);
-    // }
-
-
-  unsubscribe(key: string) {
-    this.listSubsriptions.forEach(sub => {
-        this.logger.debug('[FIREBASEConversationHandlerSERVICE] unsubscribe: ', sub.uid, key);
-        if (sub.uid === key) {
+    unsubscribe(key: string) {
+        this.listSubsriptions.forEach(sub => {
             this.logger.debug('[FIREBASEConversationHandlerSERVICE] unsubscribe: ', sub.uid, key);
-            sub.unsubscribe(key, null);
-            return;
-        }
-    });
-  }
-
-
-private addCommandMessage(msg: MessageModel){
-    const that = this;
-    const commands = msg.attributes.commands;
-    let i=0;
-    function execute(command){
-        if(command.type === "message"){
-            that.logger.debug('[FIREBASEConversationHandlerSERVICE] addCommandMessage --> type="message"', command, i)
-            if (i >= 2) {
-                
-                //check if previus wait message type has time value, otherwize set to 1000ms
-                !commands[i-1].time? commands[i-1].time= 1000 : commands[i-1].time
-                command.message.timestamp = commands[i-2].message.timestamp + commands[i-1].time;
-                
-                /** CHECK IF MESSAGE IS JUST RECEIVED: IF false, set next message time (if object exist) to 0 -> this allow to show it immediately */
-                if(!isJustRecived(that.startTime.getTime(), msg.timestamp)){
-                    let previewsTimeMsg = msg.timestamp;
-                    commands[i-2]? previewsTimeMsg = commands[i-2].message.timestamp : null;
-                    command.message.timestamp = previewsTimeMsg + 100
-                    commands[i+1]? commands[i+1].time = 0 : null
-                }
-            } else { /**MANAGE FIRST MESSAGE */
-                command.message.timestamp = msg.timestamp;
-                if(!isJustRecived(that.startTime.getTime(), msg.timestamp)){
-                    commands[i+1]? commands[i+1].time = 0 : null
-                }
+            if (sub.uid === key) {
+                this.logger.debug('[FIREBASEConversationHandlerSERVICE] unsubscribe: ', sub.uid, key);
+                sub.unsubscribe(key, null);
+                return;
             }
-            that.generateMessageObject(msg, command.message, function () {
-                i += 1
-                if (i < commands.length) {
-                    execute(commands[i])
-                }
-                else {
-                    that.logger.debug('[FIREBASEConversationHandlerSERVICE] addCommandMessage --> last command executed (wait), exit') 
-                }
-            })
-        }else if(command.type === "wait"){
-            that.logger.debug('[FIREBASEConversationHandlerSERVICE] addCommandMessage --> type="wait"', command, i, commands.length)
-            //publish waiting event to simulate user typing
-            if(isJustRecived(that.startTime.getTime(), msg.timestamp)){
-                that.messageWait.next({uid: that.conversationWith, uidUserTypingNow: msg.sender, nameUserTypingNow: msg.sender_fullname, waitTime: command.time, command: command})
-            }
-            setTimeout(function() {
-                i += 1
-                if (i < commands.length) {
-                    execute(commands[i])
-                }
-                else {
-                    that.logger.debug('[FIREBASEConversationHandlerSERVICE] addCommandMessage --> last command executed (send message), exit') 
-                }
-            },command.time)
-        }
+        });
     }
-    execute(commands[0]) //START render first message
-}
 
-private generateMessageObject(message, command_message, callback) {
-    let parentUid = message.uid
-    command_message.uid = uuidv4();
-    if(command_message.text) command_message.text = command_message.text.trim()//remove black msg with only spaces
-    command_message.language = message.language;
-    command_message.recipient = message.recipient;
-    command_message.recipient_fullname = message.recipient_fullname;
-    command_message.sender = message.sender;
-    command_message.sender_fullname = message.sender_fullname;
-    command_message.channel_type = message.channel_type;
-    command_message.status = message.status;
-    command_message.isSender = message.isSender;
-    command_message.attributes? command_message.attributes.commands = true : command_message.attributes = {commands : true}
-    command_message.attributes.parentUid = parentUid //added to manage message STATUS UPDATES
-    this.addedNew(command_message)
-    callback();
-}
+
+    private addCommandMessage(msg: MessageModel){
+        const that = this;
+        const commands = msg.attributes.commands;
+        let i=0;
+        function execute(command){
+            if(command.type === "message"){
+                that.logger.debug('[FIREBASEConversationHandlerSERVICE] addCommandMessage --> type="message"', command, i)
+                if (i >= 2) {
+                    
+                    //check if previus wait message type has time value, otherwize set to 1000ms
+                    !commands[i-1].time? commands[i-1].time= 1000 : commands[i-1].time
+                    command.message.timestamp = commands[i-2].message.timestamp + commands[i-1].time;
+                    
+                    /** CHECK IF MESSAGE IS JUST RECEIVED: IF false, set next message time (if object exist) to 0 -> this allow to show it immediately */
+                    if(!isJustRecived(that.startTime.getTime(), msg.timestamp)){
+                        let previewsTimeMsg = msg.timestamp;
+                        commands[i-2]? previewsTimeMsg = commands[i-2].message.timestamp : null;
+                        command.message.timestamp = previewsTimeMsg + 100
+                        commands[i+1]? commands[i+1].time = 0 : null
+                    }
+                } else { /**MANAGE FIRST MESSAGE */
+                    command.message.timestamp = msg.timestamp;
+                    if(!isJustRecived(that.startTime.getTime(), msg.timestamp)){
+                        commands[i+1]? commands[i+1].time = 0 : null
+                    }
+                }
+                that.generateMessageObject(msg, command.message, function () {
+                    i += 1
+                    if (i < commands.length) {
+                        execute(commands[i])
+                    }
+                    else {
+                        that.logger.debug('[FIREBASEConversationHandlerSERVICE] addCommandMessage --> last command executed (wait), exit') 
+                    }
+                })
+            }else if(command.type === "wait"){
+                that.logger.debug('[FIREBASEConversationHandlerSERVICE] addCommandMessage --> type="wait"', command, i, commands.length)
+                //publish waiting event to simulate user typing
+                if(isJustRecived(that.startTime.getTime(), msg.timestamp)){
+                    that.messageWait.next({uid: that.conversationWith, uidUserTypingNow: msg.sender, nameUserTypingNow: msg.sender_fullname, waitTime: command.time, command: command})
+                }
+                setTimeout(function() {
+                    i += 1
+                    if (i < commands.length) {
+                        execute(commands[i])
+                    }
+                    else {
+                        that.logger.debug('[FIREBASEConversationHandlerSERVICE] addCommandMessage --> last command executed (send message), exit') 
+                    }
+                },command.time)
+            }
+        }
+        execute(commands[0]) //START render first message
+    }
+
+    private generateMessageObject(message, command_message, callback) {
+        let parentUid = message.uid
+        command_message.uid = uuidv4();
+        if(command_message.text) command_message.text = command_message.text.trim()//remove black msg with only spaces
+        command_message.language = message.language;
+        command_message.recipient = message.recipient;
+        command_message.recipient_fullname = message.recipient_fullname;
+        command_message.sender = message.sender;
+        command_message.sender_fullname = message.sender_fullname;
+        command_message.channel_type = message.channel_type;
+        command_message.status = message.status;
+        command_message.isSender = message.isSender;
+        command_message.attributes? command_message.attributes.commands = true : command_message.attributes = {commands : true}
+        command_message.attributes.parentUid = parentUid //added to manage message STATUS UPDATES
+        this.addedNew(command_message)
+        callback();
+    }
 
 
     private isValidMessage(msgToCkeck:MessageModel): boolean{

@@ -1,3 +1,7 @@
+import { convertMessage } from 'src/app/utils/utils';
+import { MessageModel } from './../models/message';
+import { ConversationModel } from './../models/conversation';
+import { v4 as uuidv4 } from 'uuid';
 import {
     MESSAGE_TYPE_INFO,
     MESSAGE_TYPE_MINE,
@@ -67,6 +71,18 @@ export function isMine(message: any) {
       return true;
     }
     return false;
+}
+
+export function isSender(sender: string, currentUserId: string) {
+  if (currentUserId) {
+      if (sender === currentUserId) {
+          return true;
+      } else {
+          return false;
+      }
+  } else {
+      return false;
+  }
 }
 
 /** */
@@ -176,4 +192,24 @@ export function hideInfoMessage(msg, infoMessageKeyEnabled): boolean{
       return false
   }
   return true
+}
+
+
+export function conversationToMessage(conversation: ConversationModel, currentUserId: string): MessageModel{
+  let message: any = {}
+  message.uid = conversation['message_id']? conversation['message_id'] : uuidv4()
+  message.text = conversation.text? conversation.text.trim(): conversation.last_message_text.trim()
+  message.sender = conversation.sender
+  message.sender_fullname = conversation.sender_fullname
+  message.recipient = conversation.recipient
+  message.recipient_fullname = conversation.recipient_fullname
+  message.status = +conversation.status
+  message.timestamp = conversation.timestamp
+  message.metadata = conversation.metadata
+  message.channel_type = conversation.channel_type
+  message.type = conversation.type
+  message.isSender = isSender(message.sender, currentUserId)
+  message.attributes = conversation.attributes
+  
+  return message as MessageModel
 }

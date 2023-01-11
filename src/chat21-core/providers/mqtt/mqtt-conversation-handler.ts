@@ -24,7 +24,7 @@ import {
   conversationMessagesRef
 } from '../../utils/utils';
 import { v4 as uuidv4 } from 'uuid';
-import { messageType, checkIfIsMemberJoinedGroup, hideInfoMessage, isJustRecived } from '../../utils/utils-message';
+import { messageType, checkIfIsMemberJoinedGroup, hideInfoMessage, isJustRecived, isSender } from '../../utils/utils-message';
 
 
 // @Injectable({ providedIn: 'root' })
@@ -308,7 +308,7 @@ export class MQTTConversationHandler extends ConversationHandlerService {
         // }
         // verifico che il sender è il logged user
         this.logger.log("[MQTTConversationHandlerSERVICE] ****>msg.sender:" + msg.sender);
-        msg.isSender = this.isSender(msg.sender, this.loggedUser.uid);
+        msg.isSender = isSender(msg.sender, this.loggedUser.uid);
         // traduco messaggi se sono del server
         if (messageType(MESSAGE_TYPE_INFO, msg)) {
             this.translateInfoSupportMessages(msg);
@@ -419,33 +419,6 @@ export class MQTTConversationHandler extends ConversationHandlerService {
             }
         }
     }
-
-    /**
-     * controllo se il messaggio è stato inviato da loggerUser
-     * richiamato dalla pagina elenco messaggi della conversazione
-     */
-    private isSender(sender: string, currentUserId: string) {
-        if (currentUserId) {
-            if (sender === currentUserId) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-
-
-    /** */
-    // updateMetadataMessage(uid: string, metadata: any) {
-    //     metadata.status = true;
-    //     const message = {
-    //         metadata: metadata
-    //     };
-    //     const firebaseMessages = firebase.database().ref(this.urlNodeFirebase + uid);
-    //     firebaseMessages.set(message);
-    // }
 
 
     unsubscribe(key: string) {
