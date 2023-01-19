@@ -401,8 +401,10 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                     that.showWidget();
                 }
 
-                const rules = new Rules(that.tiledeskRequestsService)
-                rules.initRules(that.g.windowContext, that.g.tiledeskToken, user, that.generateNewUidConversation())
+                if(this.g.botsRules){
+                    const rules = new Rules(that.tiledeskRequestsService, that.appStorageService,that.g)
+                    rules.initRules(that.g.windowContext, that.g.tiledeskToken, user, that.generateNewUidConversation(), that.g.botsRules)
+                }
 
 
             } else if (state && state === AUTH_STATE_OFFLINE) {

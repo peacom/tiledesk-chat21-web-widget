@@ -408,12 +408,17 @@ export class GlobalSettingsService {
             this.logger.error('[GLOBAL-SET] setVariablesFromService > Error is departments: ', error);
         }
 
-        // DEPARTMENTS
-        // if (response && response.departments !== null) {
-        //     this.logger.debug('[GLOBAL-SET] response DEP ::::', response.departments);
-        //     // globals.setParameter('departments', response.departments);
-        //     this.initDepartments(response.departments);
-        // }
+        // BOTS_RULES
+        try{
+            const botsRules = response.botsRules
+            if (typeof botsRules !== 'undefined') {
+                this.logger.debug('[GLOBAL-SET] setVariablesFromService > botsRules ::::', botsRules);
+                this.globals.botsRules = botsRules
+            }
+        }catch(error){
+            this.logger.error('[GLOBAL-SET] setVariablesFromService > Error is botsRules: ', error);
+        }
+        
 
         // AVAILABLE AGENTS
         try {
@@ -426,12 +431,6 @@ export class GlobalSettingsService {
             this.setAvailableAgentsStatus(null);
             this.logger.error('[GLOBAL-SET] setVariablesFromService > Error is departments: ', error);
         }
-
-        // AVAILABLE AGENTS
-        // if (response && response.user_available !== null) {
-        //     //this.logger.error('[GLOBAL-SET] setVariablesFromService > user_available ::::', response.user_available);
-        //     this.setAvailableAgentsStatus(response.user_available);
-        // }
 
         // WIDGET
         try {

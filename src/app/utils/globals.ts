@@ -14,6 +14,7 @@ import { DepartmentModel } from 'src/models/department';
 import { avatarPlaceholder, detectIfIsMobile, getParameterByName, setColorFromString } from 'src/app/utils/utils';
 import { ConversationModel } from 'src/chat21-core/models/conversation';
 import { convertColorToRGBA } from 'src/chat21-core/utils/utils';
+import { Rule } from 'src/models/rule';
 
 @Injectable({
     providedIn: 'root'
@@ -63,6 +64,8 @@ export class Globals {
   departmentDefault: any;
   isOpenMenuOptions: boolean;
   isOpenPrechatForm: boolean;
+
+  botsRules: Rule[];
 
   // areAgentsAvailable = false;
   areAgentsAvailableText: string;

@@ -1,3 +1,5 @@
+import { IRules } from './rule';
+
 export class ProjectModel {
     constructor(
         public id?: string,
@@ -22,6 +24,7 @@ export class ProjectModel {
         public color?: string,
         public welcomeTitle?: string,
         public welcomeMsg?: string,
+        public attributes?: IRules
     ) { }
 
     initialize (
@@ -40,7 +43,7 @@ export class ProjectModel {
         trialDaysLeft?: number,
         trialExpired?: boolean,
         updatedAt?: string,
-        versions?: string
+        versions?: string,
     ) {
         this.id = id;
         this.activeOperatingHours = activeOperatingHours;
