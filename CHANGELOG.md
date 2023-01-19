@@ -1,5 +1,20 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.53-rc.4
+- added: proactive rules from /widget/botsRules
+- added: imHere method for presence service
+- added: limit parameter to message-attachment component
+- added: send message on attachment button clicked on last-message component
+- added: events service
+- added: /requests/messages tiledesk api
+- added: convertConversationToMessage utils function in last-message component
+- changed: last-message UI
+- upgraded: chat21client.js to v0.1.12.4
+- changed: pipe files moved from /directives folder to /pipe folder
+- changed: moved isSender function from service to utils-message
+- bug-fixed: location.href and document.title is wrong (about:srcdoc)
+- bug-fixed: wait 2s before publish ImHere event to MQTT presence
+
 ### 5.0.53-rc.3
 - added: html descriptions to index.html and index-dev.html
 - changed: script tag for style.css to link tag with rel="stylesheet"
@@ -7,7 +22,6 @@
 - removed: base_script.html 
 - removed: jquery plugin
 - removed: relativeLinkResolution from forRoot in RooterModule
-
 
 ### 5.0.53-rc.2
 - added: angular 15 engine
@@ -23,7 +37,6 @@
 - added: getLoggerConfig to logger service
 - removed: document.write() injection
 - removed: unused html test file
-
 
 ### 5.0.52 in PROD
 
