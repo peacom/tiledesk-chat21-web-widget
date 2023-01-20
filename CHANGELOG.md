@@ -1,5 +1,7 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.53 in PROD
+
 ### 5.0.53-rc.3
 - added: html descriptions to index.html and index-dev.html
 - changed: script tag for style.css to link tag with rel="stylesheet"
