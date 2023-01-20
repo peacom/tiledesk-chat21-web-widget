@@ -15,6 +15,8 @@
 - bug-fixed: location.href and document.title is wrong (about:srcdoc)
 - bug-fixed: wait 2s before publish ImHere event to MQTT presence
 
+### 5.0.53 in PROD
+
 ### 5.0.53-rc.3
 - added: html descriptions to index.html and index-dev.html
 - changed: script tag for style.css to link tag with rel="stylesheet"
