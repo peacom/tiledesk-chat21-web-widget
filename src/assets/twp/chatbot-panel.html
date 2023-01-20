@@ -298,11 +298,6 @@
             setTimeout(() => {
                 document.getElementById("preloader").style.display = "none";
                 if(event_data && event_data.detail && event_data.detail.appConfigs){
-                    
-                    var enbedJs = event_data.detail.appConfigs.enbedJs? event_data.detail.appConfigs.enbedJs : false;
-                    document.getElementById("enbed").style.display = enbedJs? "inline-block": "none";
-                    document.getElementById("base_url").innerHTML = enbedJs ? baseUrl + '/launch.js': null;
-                    
                     baseUrlConsole = event_data.detail.appConfigs.dashboardUrl? event_data.detail.appConfigs.dashboardUrl : baseUrlConsole;
                 }
             }, 1000);
