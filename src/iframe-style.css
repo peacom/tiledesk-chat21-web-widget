@@ -70,7 +70,7 @@
 }
 #tiledesk-container.closed #tiledeskdiv.messagePreview {
     width: 375px; /*340px*/
-    height: 400px; /*300px*/
+    height: 440px; /*300px*/
     min-width: 340px;
 }
 
