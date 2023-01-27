@@ -13,7 +13,7 @@ export interface Rule {
         triggerEvery: number
     },
     do: [
-        {wait: number},
+        // {wait: number},
         {message: any}
     ]
 }

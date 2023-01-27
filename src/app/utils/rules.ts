@@ -53,7 +53,6 @@ export class Rules {
     private doAction(action: Rule['do']){
         this.logger.info('[RULES] doAction', this.currentUser, action)
         let message = action.filter(obj => Object.keys(obj).includes('message'))
-        let wait = action.filter(obj => Object.keys(obj).includes('wait'))
         if(message && message.length>0){
             message[0]['message'].attributes = { ...this.g.attributes, ...message[0]['message'].attributes}
             message[0]['message'].userAgent = this.g.attributes['client']
@@ -62,10 +61,7 @@ export class Rules {
             message[0]['message'].language = this.g.lang
             message[0]['message'].departmentid = this.g.attributes.departmentId
             console.log('message[0]', message[0]['message'])
-            setTimeout(() => {
-                this.tiledeskRequestsService.sendMessageToRequest(this.request_id, this.tiledeskToken, message[0]['message']) 
-                console.log('rulessss', this.appStorageService.getItem('_botsRules'))
-            }, wait[0]['wait']);
+            this.tiledeskRequestsService.sendMessageToRequest(this.request_id, this.tiledeskToken, message[0]['message'])
         }
     }
 
