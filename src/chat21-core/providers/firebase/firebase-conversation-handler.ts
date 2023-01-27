@@ -534,6 +534,7 @@ export class FirebaseConversationHandler extends ConversationHandlerService {
         command_message.isSender = message.isSender;
         command_message.attributes? command_message.attributes.commands = true : command_message.attributes = {commands : true}
         command_message.attributes.parentUid = parentUid //added to manage message STATUS UPDATES
+        command_message.attributes = {...message.attributes, ...command_message.attributes}
         this.addedNew(command_message)
         callback();
     }
