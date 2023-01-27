@@ -1,10 +1,15 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.53-rc.6
+- changed: removed wait object from Rule model
+- bug-fixed: splitted message lose original parent message attributes
+- bug-fixed: preChat form element UI padding
+
 ### 5.0.53-rc.5
 - changed: minor improvements for last-message component UI
 - changed: last-message UI for long text message and long attachment buttons
 - removed: automatic open widget after 3s on index.html
-- bug-fixed: on click over callout not opens widget correctly if singleConversation is active
+- bug-fixed: on click over callout not opens widget correctly if singleConversation is active                                                                     
 
 ### 5.0.53-rc.4
 - added: proactive rules from /widget/botsRules
