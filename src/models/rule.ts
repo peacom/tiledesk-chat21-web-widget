@@ -10,7 +10,8 @@ export interface Rule {
         regexOption: string,
         text: string, 
         urlMatches: string, 
-        triggerEvery: number},
+        triggerEvery: number
+    },
     do: [
         {wait: number},
         {message: any}

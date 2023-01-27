@@ -1,5 +1,11 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.53-rc.5
+- changed: minor improvements for last-message component UI
+- changed: last-message UI for long text message and long attachment buttons
+- removed: automatic open widget after 3s on index.html
+- bug-fixed: on click over callout not opens widget correctly if singleConversation is active
+
 ### 5.0.53-rc.4
 - added: proactive rules from /widget/botsRules
 - added: imHere method for presence service
