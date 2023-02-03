@@ -117,7 +117,12 @@ export class TiledeskAuthService {
           resolve(this.currentUser)
         }
       }, (error) => {
+        if(error.status === 401){
+          this.logOut()
+        }
         reject(error)
+        
+        
       });
     });
   }
