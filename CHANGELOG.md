@@ -1,5 +1,9 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.53-rc.7
+- bug-fixed: start message was shown twice
+- bug-fixed: is showAvailableAgents is false and no conversations exist, 'new conversation' button not displayed 
+
 ### 5.0.53-rc.6
 - changed: removed wait object from Rule model
 - bug-fixed: splitted message lose original parent message attributes
