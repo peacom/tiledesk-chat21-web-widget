@@ -1,5 +1,8 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.53-rc.8
+- bug-fixed: if tiledeskAuth get 401 error do logOut
+
 ### 5.0.53-rc.7
 - bug-fixed: start message was shown twice
 - bug-fixed: is showAvailableAgents is false and no conversations exist, 'new conversation' button not displayed 
