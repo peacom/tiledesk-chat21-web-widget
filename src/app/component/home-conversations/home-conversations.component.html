@@ -35,8 +35,8 @@
   <div class="c21-body">
     
     
-
-    <div *ngIf="(!listConversations || listConversations.length == 0) && g.showAvailableAgents === true && availableAgents && availableAgents.length > 1" style="margin: 20px 30px;"> 
+    <!--CASE: no conversations EXIST - >1 agents is available -->
+    <div *ngIf="(!listConversations || listConversations.length == 0) && availableAgents && availableAgents.length > 1 && g.showAvailableAgents === true" style="margin: 20px 30px;"> 
       <div *ngFor="let agent of availableAgents" class="c21-pallozzo">
           <div class="c21-ball" [ngStyle] = "{ 'background-color':setColorFromString(agent.firstname) }" >
             <span class="c21-ball-label">{{avatarPlaceholder(agent.firstname)}}</span>
@@ -45,6 +45,7 @@
       </div>
     </div>
 
+    <!--CASE: no conversations EXIST - 1 agents is available -->
     <div class="flex-container" *ngIf="(!listConversations || listConversations.length == 0) && availableAgents && availableAgents.length === 1 && g.showAvailableAgents === true">
       <div *ngFor="let agent of availableAgents" class="c21-pallozzo flex-inline-agent ">
         <div class="c21-ball" [ngStyle] = "{ 'background-color':setColorFromString(agent.firstname) }" >
@@ -65,7 +66,8 @@
       </button>
     </div>
 
-    <div *ngIf="(availableAgents && availableAgents.length > 1 ) || (listConversations && listConversations.length > 0  || (availableAgents && availableAgents.length === 0 ) )">
+    <!--CASE: conversations EXIST OR >1 agents is available OR showAvailableAgents=FALSE -->
+    <div *ngIf="(availableAgents && availableAgents.length > 1 ) || (listConversations && listConversations.length > 0  || (availableAgents && availableAgents.length === 0 ) || g.showAvailableAgents === false )">
       <chat-list-conversations *ngIf="(listConversations && listConversations.length > 0)"
         [listConversations]="listConversations"
         [limit]="3"
