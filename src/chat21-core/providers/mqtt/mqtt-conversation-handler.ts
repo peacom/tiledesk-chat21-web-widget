@@ -113,7 +113,7 @@ export class MQTTConversationHandler extends ConversationHandlerService {
                     }
 
                     if (msg.attributes && msg.attributes.commands ) {
-                        this.logger.debug('[MQTTConversationHandlerSERVICE] splitted message::::', this.messages)
+                        this.logger.debug('[MQTTConversationHandlerSERVICE] splitted message::::', this.messages, msg)
                         this.addCommandMessage(msg)
                     } else {
                         // this.logger.debug('[MQTTConversationHandlerSERVICE] NOT splitted message::::', msg)
@@ -458,7 +458,7 @@ export class MQTTConversationHandler extends ConversationHandlerService {
                         commands[i+1]? commands[i+1].time = 0 : null
                     }
                 }
-                that.generateMessageObject(msg, command.message, function () {
+                that.generateMessageObject(msg, command.message, i, function () {
                     i += 1
                     if (i < commands.length) {
                         execute(commands[i])
@@ -488,9 +488,10 @@ export class MQTTConversationHandler extends ConversationHandlerService {
         execute(commands[0]) //START render first message
     }
     
-    private generateMessageObject(message, command_message, callback) {
+    private generateMessageObject(message, command_message, index, callback) {
         let parentUid = message.uid
-        command_message.uid = uuidv4();
+        // command_message.uid = uuidv4();
+        command_message.uid = message.uid + '_' + index
         if(command_message.text) command_message.text = command_message.text.trim()//remove black msg with only spaces
         command_message.language = message.language;
         command_message.recipient = message.recipient;
