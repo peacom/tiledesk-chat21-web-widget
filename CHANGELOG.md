@@ -1,5 +1,7 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.54 in PROD
+
 ### 5.0.53-rc.8
 - bug-fixed: if tiledeskAuth get 401 error do logOut
 
