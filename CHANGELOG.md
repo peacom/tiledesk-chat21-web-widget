@@ -1,5 +1,8 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.55 in PROD
+- added: preflight property to /message API body
+
 ### 5.0.54 in PROD
 
 ### 5.0.53-rc.8
