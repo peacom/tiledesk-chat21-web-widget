@@ -60,7 +60,9 @@ export class TiledeskRequestsService {
         Authorization: token
       })
     };
-    const body = message;
+    let body = message;
+    body['preflight'] = true
+    
     return this.http.post(url, body, httpOptions).toPromise().then(res => {
       this.logger.log('[TILEDESK-SERVICE] - SEND MESSAGE TO A REQUEST res ', res);
       return res
