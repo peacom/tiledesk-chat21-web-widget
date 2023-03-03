@@ -7,6 +7,7 @@ import { MESSAGE_TYPE_MINE, MESSAGE_TYPE_OTHERS } from 'src/chat21-core/utils/co
 import { convertColorToRGBA } from 'src/chat21-core/utils/utils';
 import { isFile, isFrame, isImage, messageType } from 'src/chat21-core/utils/utils-message';
 import { MAX_WIDTH_IMAGES, MIN_WIDTH_IMAGES} from 'src/chat21-core/utils/constants';
+import { getColorBck } from 'src/chat21-core/utils/utils-user';
 
 @Component({
   selector: 'chat-bubble-message',
@@ -36,7 +37,7 @@ export class BubbleMessageComponent implements OnInit {
   MESSAGE_TYPE_OTHERS = MESSAGE_TYPE_OTHERS;
  // ========== end:: check message type functions ======= //
   sizeImage : { width: number, height: number}
-
+  fullnameColor: string;
   private logger: LoggerService = LoggerInstance.getInstance()
   constructor(public sanitizer: DomSanitizer) { }
 
@@ -46,6 +47,13 @@ export class BubbleMessageComponent implements OnInit {
   ngOnChanges() {
     if (this.message && this.message.metadata && typeof this.message.metadata === 'object' ) {
       this.sizeImage = this.getMetadataSize(this.message.metadata)
+    }
+
+    if(this.fontColor){
+      this.fullnameColor = convertColorToRGBA(this.fontColor, 65)
+    }
+    if(this.message && this.message.sender_fullname && this.message.sender_fullname.trim() !== ''){
+      this.fullnameColor = getColorBck(this.message.sender_fullname)
     }
 
   }
