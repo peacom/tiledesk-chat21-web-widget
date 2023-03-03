@@ -288,13 +288,14 @@
                 }
             }, 1000);
             
+            setTimeout(() => {
+                document.getElementById("preloader").style.display = "none";
+            }, 1000);
+
         });
         
         window.Tiledesk('onInit', function(event_data) {
             console.log("onInit Tiledesk FN", event_data); 
-            setTimeout(() => {
-                document.getElementById("preloader").style.display = "none";
-            }, 1000);
             //open widget after 3s if is closed
             // setTimeout(() => {
             //     if(event_data && event_data.detail && event_data.detail.global && !event_data.detail.global.isOpen){

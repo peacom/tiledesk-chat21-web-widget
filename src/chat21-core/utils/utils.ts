@@ -5,21 +5,8 @@ import 'moment/locale/it.js';
 import * as firebase from 'firebase/app';
 import 'firebase/storage';
 
-import { environment } from '../../environments/environment';
 // tslint:disable-next-line:max-line-length
-import {
-  MAX_WIDTH_IMAGES,
-  STORAGE_PREFIX,
-  TYPE_DIRECT,
-  TYPE_SUPPORT_GROUP
-} from './constants';
 
-import {
-  avatarPlaceholder,
-  getColorBck,
-  getImageUrlThumbFromFirebasestorage
- } from './utils-user';
-import { time } from 'console';
 import { ConversationModel } from '../models/conversation';
 /**
  * Shortest description  for phone and tablet
@@ -225,19 +212,6 @@ export function supports_html5_session() {
     return false;
   }
 }
-
-export function setStoragePrefix(): string{
-  let prefix = STORAGE_PREFIX;
-  try {
-      // const sv = 'sv' + environment.shemaVersion + '_';
-      // prefix = prefix + sv;
-      prefix = environment.storage_prefix + '_';
-  } catch (e) {
-      this.g.wdLog(['> Error :' + e]);
-  }
-  return prefix + this.g.projectid + '_';
-}
-
 
 export function convertMessage(messageText) {
   if (messageText) {
@@ -567,24 +541,6 @@ export function getDateDifference(startTimestampDate, endTimestampDate){
 
   return {days, hours, minutes}
 }
-
-
-// export function getUrlImgProfile(uid: string) {
-//   const baseLocation = this.g.baseLocation;
-//   if (!uid || uid === 'system' ) {
-//     return baseLocation + IMG_PROFILE_BOT;
-//   } else if ( uid === 'error') {
-//     return baseLocation + IMG_PROFILE_DEFAULT;
-//   } else {
-//       return getImageUrlThumb(uid);
-//   }
-// }
-
-export function getImageUrlThumb(FIREBASESTORAGE_BASE_URL_IMAGE: string, uid: string) {
-  let imageurl = FIREBASESTORAGE_BASE_URL_IMAGE + environment['firebaseConfig'].storageBucket + '/o/profiles%2F' + uid + '%2Fthumb_photo.jpg?alt=media';
-  return imageurl;
-}
-
 
 /**
  *
