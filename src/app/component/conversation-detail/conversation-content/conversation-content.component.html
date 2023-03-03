@@ -5,7 +5,7 @@
     <div class="c21-body-content" tabindex="1520" aria-label=" messaggi della conversazione: ">
   
       <!-- CONTENT !isNewConversation && [class.active]="isShowSpinner"  -->
-      <span *ngIf="messages && this.messages.length === 0">
+      <span *ngIf="messages && this.messages.length === 0 && !isTypings">
         <user-typing class="loading"
           [color]="stylesMap?.get('iconColor')"
           [translationMap]="translationMap"
@@ -34,7 +34,7 @@
                             <!--backgroundColor non viene ancora usato -->
                             <!-- class="messages msg_sent slide-in-right" -->
                             <chat-bubble-message class="messages msg_sent"
-                              [class.no-background]="(isImage(message) || isFrame(message)) && message?.text.trim() === '' "  
+                              [class.no-background]="(isImage(message) || isFrame(message)) && message?.text && message?.textmessage?.text.trim() === '' "  
                               [class.emoticon]="isEmojii(message?.text)"
                               [ngStyle]="{'background': stylesMap.get('bubbleSentBackground'), 'color': stylesMap.get('bubbleSentTextColor')}"
                               [ngClass]="{'button-in-msg' : message?.metadata && message?.metadata?.button}"
@@ -70,7 +70,7 @@
                             <!-- [ngClass]="{'slide-in-left': !isFirstMessage(message?.sender, i)}"  -->
                             <chat-bubble-message class="messages msg_receive"
                               [ngClass]="{'slide-in-left': false}"
-                              [class.no-background]="(isImage(message) || isFrame(message)) && message?.text.trim() === '' "  
+                              [class.no-background]="(isImage(message) || isFrame(message)) && message?.text && message?.text.trim() === '' "  
                               [class.emoticon]="isEmojii(message?.text)"
                               [style.margin-left]="isSameSender(message?.sender, i)? '50px': null"
                               [ngStyle]="{'background': stylesMap.get('bubbleReceivedBackground'), 'color': stylesMap.get('bubbleReceivedTextColor')}"
