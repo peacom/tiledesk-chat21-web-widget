@@ -1,5 +1,11 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.56-rc.1
+- added: custom colors to senderFullname to better distinguish the user
+- bug-fixed: cannot read text.trim() of undefined if no text is sent with an image
+- bug-fixed: markdown not split work correctly
+- bug-fixed: dispose loader bubbles if wait command message is received
+
 ### 5.0.55 in PROD
 - added: preflight property to /message API body
 
