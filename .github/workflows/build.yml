@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - master # The default branch
-      - features-*   # The other branches to be analyzed
+      - features.*   # The other branches to be analyzed
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
