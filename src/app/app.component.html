@@ -1,18 +1,11 @@
 
 <div id="tiledesk-container" [class.active]="g.isShown" tabindex="9999"> 
-  <!-- [class.active]="isLogged" onFocus="document.querySelector('.btn-new-conversation').focus()" -->
-  <!-- 
-  ****** WINDOW CHAT CONVERSATION ******
-  [class.active]="g.isOpen" -> su firefox nn funziona bene, aggiunto come style inline
-  'background-color':g.themeColor,
-  -->
 
   <div id="chat21-conversations"
     [ngClass]="{ 'swing-in-bottom-fwd' : g.isOpen === true, 'full-screen-mode' : g.fullscreenMode === true, 'c21-align-left' : g.align === 'left', 'c21-align-right' : g.align !== 'left'}"
     [ngStyle]="{ 'display': (g.isOpen == true)?'block':'none', 'bottom': g.marginY+'px', 'left':(g.align==='left')?g.marginX+'px':'', 'right':(g.align==='right')?g.marginX+'px':'' }">
       
     <div *ngIf="isOpenHome && g.senderId" class="modal-page active">
-      <!-- [class.active]="true" -->
       <chat-home 
         [listConversations]="listConversations"
         [archivedConversations]="archivedConversations"
@@ -29,7 +22,6 @@
     </div>
 
     <div *ngIf="isOpenAllConversation && g.senderId" class="modal-page active">
-      <!-- [class.active]="true" -->
       <chat-list-all-conversations
         [listConversations]="listConversations"
         [archivedConversations]="archivedConversations"
@@ -94,7 +86,6 @@
     ****************************************
     *********** MODALE RATE CHAT ***********
     ****************************************
-    [class.active]="g.isOpenStartRating === true"
     -->
     <div *ngIf="g.isOpenStartRating" class="modal-page star-rating-widget active">
       <chat-star-rating-widget
