@@ -1,11 +1,3 @@
-import * as moment from 'moment';
-import 'moment/locale/it.js';
-
-// firebase
-import 'firebase/storage';
-
-
-// tslint:disable-next-line:max-line-length
 import {
   IMG_PROFILE_BOT,
   IMG_PROFILE_DEFAULT,
@@ -25,26 +17,26 @@ import { environment } from '../../environments/environment';
  * giorno della settimana (lunedì, martedì, ecc)
  * @deprecated
  */
-export function setHeaderDate(timestamp): string {
-  const date = new Date(timestamp);
-  const now: Date = new Date();
-  let labelDays = '';
-  if (now.getFullYear() !== date.getFullYear()) {
-    labelDays = date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear();
-  } else if (now.getMonth() !== date.getMonth()) {
-    labelDays = date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear();
-  } else if (now.getDay() === date.getDay()) {
-    labelDays = LABEL_TODAY;
-  } else if (now.getDay() - date.getDay() === 1) {
-    labelDays = LABEL_TOMORROW;
-  } else {
-    labelDays = convertDayToString(date.getDay());
-  }
-  // se le date sono diverse o la data di riferimento non è impostata
-  // ritorna la data calcolata
-  // altrimenti torna null
-  return labelDays;
-}
+// export function setHeaderDate(timestamp): string {
+//   const date = new Date(timestamp);
+//   const now: Date = new Date();
+//   let labelDays = '';
+//   if (now.getFullYear() !== date.getFullYear()) {
+//     labelDays = date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear();
+//   } else if (now.getMonth() !== date.getMonth()) {
+//     labelDays = date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear();
+//   } else if (now.getDay() === date.getDay()) {
+//     labelDays = LABEL_TODAY;
+//   } else if (now.getDay() - date.getDay() === 1) {
+//     labelDays = LABEL_TOMORROW;
+//   } else {
+//     labelDays = convertDayToString(date.getDay());
+//   }
+//   // se le date sono diverse o la data di riferimento non è impostata
+//   // ritorna la data calcolata
+//   // altrimenti torna null
+//   return labelDays;
+// }
 
 export function supports_html5_storage() {
   try {
@@ -228,15 +220,6 @@ export function setColorFromString(str: string) {
   return arrayBckColor[num];
 }
 
-export function getFromNow(windowContext, timestamp) {
-  let browserLang = windowContext.navigator.language;
-  if (this.g.lang && this.g.lang !== '') {
-    browserLang = this.g.lang;
-  }
-  moment.locale(browserLang);
-  return moment.unix(timestamp).fromNow();
-}
-
 export function detectIfIsMobile(windowContext) {
   let isMobile = false;
   if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(windowContext.navigator.userAgent))
@@ -244,6 +227,33 @@ export function detectIfIsMobile(windowContext) {
   else
     isMobile = false
   return isMobile;
+}
+
+ /**
+* definitely not the best way to findout if there is a mobile browser
+* @returns {any}
+*/
+export function deviceOS() {
+   var useragent = navigator.userAgent;
+   if(useragent.match(/Android/i)) {
+       return 'android';
+   } else if(useragent.match(/webOS/i)) {
+       return 'webos';
+   } else if(useragent.match(/iPhone/i)) {
+       return 'iphone';
+   } else if(useragent.match(/iPod/i)) {
+       return 'ipod';
+   } else if(useragent.match(/iPad/i)) {
+       return 'ipad';
+   } else if(useragent.match(/Windows Phone/i)) {
+       return 'windows phone';
+   } else if(useragent.match(/SymbianOS/i)) {
+       return 'symbian';
+   } else if(useragent.match(/RIM/i) || useragent.match(/BB/i)) {
+       return 'blackberry';
+   } else {
+       return false;
+   }
 }
 
 export function convertColorToRGBA(color, opacity) {

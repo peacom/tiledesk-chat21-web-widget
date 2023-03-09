@@ -1,3 +1,4 @@
+import { DateAgoPipe } from './pipe/date-ago.pipe';
 import { EventsService } from './providers/events.service';
 
 // ************** COMPONENTS ************** //
@@ -57,9 +58,9 @@ import { environment } from 'src/environments/environment';
 
 //THIRD-PART MODULES
 import { TranslateModule } from '@ngx-translate/core';
-import { MomentModule } from 'ngx-moment';
+// import { MomentModule } from 'ngx-moment';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
-import { INGXLoggerMetadata, LoggerModule, NGXLogger, NgxLoggerLevel, NGXLoggerServerService, TOKEN_LOGGER_SERVER_SERVICE } from "ngx-logger";
+import { LoggerModule, NGXLogger, NgxLoggerLevel } from "ngx-logger";
 
 //DIRECTIVES
 import { HtmlEntitiesEncodePipe } from './pipe/html-entities-encode.pipe';
@@ -283,6 +284,7 @@ export function uploadFactory(http: HttpClient, appConfig: AppConfigService, app
     /**DIRECTIVES */
     HtmlEntitiesEncodePipe,
     MarkedPipe,
+    DateAgoPipe,
     SafeHtmlPipe,
     LikeUnlikeComponent,
     TooltipDirective
@@ -294,7 +296,6 @@ export function uploadFactory(http: HttpClient, appConfig: AppConfigService, app
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    MomentModule,
     PickerModule,
     TranslateModule.forRoot(//),
     {

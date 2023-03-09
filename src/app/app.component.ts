@@ -3,7 +3,6 @@ import { TYPE_DIRECT } from './../chat21-core/utils/constants';
 import { AfterViewInit, Component, ElementRef, HostListener, NgZone, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Subscription } from 'rxjs/internal/Subscription';
-import * as moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
 //COMPONENTS
 import { EyeeyeCatcherCardComponent } from './component/eyeeye-catcher-card/eyeeye-catcher-card.component';
@@ -44,6 +43,7 @@ import { AUTH_STATE_OFFLINE, AUTH_STATE_ONLINE, TYPE_MSG_FILE, TYPE_MSG_IMAGE, U
 import { isInfo, isUserBanned } from 'src/chat21-core/utils/utils-message';
 import { MessageModel } from 'src/chat21-core/models/message';
 import { Rules } from './utils/rules';
+import * as dayjs from 'dayjs'
 
 interface MessageObj {
   tenant?: string;
@@ -160,9 +160,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                     if (conversation.attributes && conversation.attributes['subtype'] === 'info') {
                         return;
                     }
-                    if (conversation.is_new && !this.isOpenConversation) {
-                        // this.soundMessage();
-                    }
 
                 } else {
                     // if(conversation.is_new && isJustRecived(this.g.startedAt.getTime(), conversation.timestamp)){
@@ -278,7 +275,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             this.translatorService.initI18n().then((result) => {
                 this.logger.debug('[APP-COMP] »»»» APP-COMPONENT.TS initI18n result', result);
                 const browserLang = this.translatorService.getLanguage();
-                moment.locale(browserLang)
+                // moment.locale(browserLang)
+                dayjs.locale(browserLang)
                 this.translatorService.translate(this.g);
             }).then(() => {
                 /** INIT  */
@@ -350,7 +348,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
     // ========= begin:: SUBSCRIPTIONS ============//
-    private setAuthSubscription(){
+    private async setAuthSubscription(){
         this.logger.debug('[APP-COMP] setLoginSubscription : ');
         const that = this;
         
@@ -392,9 +390,16 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                 that.g.singleConversation? null: that.startUI();
                 that.triggerOnAuthStateChanged(that.stateLoggedUser);
                 that.logger.debug('[APP-COMP]  1 - IMPOSTO STATO CONNESSO UTENTE ', autoStart);
-                that.typingService.initialize(this.g.tenant);
-                that.presenceService.initialize(this.g.tenant);
-                that.presenceService.setPresence(user.uid);
+                
+                
+
+                new Promise(async (resolve, reject)=> {
+                    that.typingService.initialize(this.g.tenant);
+                    await that.presenceService.initialize(this.g.tenant);
+                }).then(()=>{
+                    that.presenceService.setPresence(user.uid);
+                });
+                
                 // this.initConversationsHandler(this.g.tenant, that.g.senderId);
                 /* If singleConversation mode is active wait to showWidget: do it later in initConversationsHandler */
                 if (autoStart && !that.g.singleConversation) { 
@@ -836,7 +841,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
 
-    private initConversationsHandler(tenant: string, senderId: string) {
+    private async initConversationsHandler(tenant: string, senderId: string) {
         this.logger.debug('[APP-COMP] initialize: ListConversationsComponent');
         const keys = ['YOU'];
         const translationMap = this.translateService.translateLanguage(keys);
@@ -848,8 +853,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.logger.debug('[APP-COMP] tenant: ', tenant);
 
         // 1 - init chatConversationsHandler and  archviedConversationsHandler
-        this.conversationsHandlerService.initialize(tenant, senderId, translationMap)
-        this.archivedConversationsService.initialize(tenant, senderId, translationMap)
+        await this.conversationsHandlerService.initialize(tenant, senderId, translationMap)
+        await this.archivedConversationsService.initialize(tenant, senderId, translationMap)
         // 2 - get conversations from storage
         // this.chatConversationsHandler.getConversationsFromStorage();
         // 3 - get conversation from database with REST Api call if singleConversation mode is active and widget is Opened; otherwize show only widget and start conversation when launcher icon is clicked
