@@ -32,10 +32,9 @@ input[type="checkbox"] {
     border: 1px solid var(--themeColor);
     border-radius:3px;
     -webkit-border-radius:3px;
-    -webkit-appearance: none;
+    appearance: none;
     -webkit-transition: box-shadow 200ms;
     transition: box-shadow 200ms;
-  
 }
 
 

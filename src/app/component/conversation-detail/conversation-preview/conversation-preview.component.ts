@@ -47,7 +47,6 @@ export class ConversationPreviewComponent implements OnInit {
   ngOnInit() {
     this.logger.log('[LOADER-PREVIEW-PAGE] Hello!', this.textInputTextArea);
     this.setFocusOnId('chat21-main-message-context-preview')
-    // tslint:disable-next-line: prefer-for-of
     // this.selectedFiles = this.files;
     for (let i = 0; i < this.attachments.length; i++) {
       this.logger.log('[LOADER-PREVIEW-PAGE] ngOnInit', this.attachments[i])
@@ -171,15 +170,13 @@ export class ConversationPreviewComponent implements OnInit {
   onTextAreaChange(){
     this.resizeInputField();
     this.resizeModalHeight()
-    // this.setWritingMessages(this.textInputTextArea)
   }
 
   setFocusOnId(id) {
     setTimeout(function () {
         const textarea = document.getElementById(id);
         if (textarea) {
-            //   that.logger.debug('[CONV-FOOTER] 1--------> FOCUSSSSSS : ', textarea);
-            textarea.setAttribute('value', ' ');
+            textarea.setAttribute('value', '');
             textarea.focus();
         }
     }, 500);
@@ -188,7 +185,6 @@ export class ConversationPreviewComponent implements OnInit {
   resizeInputField() {
     try {
       const target = document.getElementById('chat21-main-message-context-preview') as HTMLInputElement;
-      //   that.logger.debug('[CONV-FOOTER] H:: this.textInputTextArea', (document.getElementById('chat21-main-message-context') as HTMLInputElement).value , target.style.height, target.scrollHeight, target.offsetHeight, target.clientHeight);
       target.style.height = '100%';
       if (target.value === '\n') {
         target.value = '';
@@ -198,18 +194,11 @@ export class ConversationPreviewComponent implements OnInit {
         target.style.minHeight = this.HEIGHT_DEFAULT;
 
       } else {
-        //   that.logger.debug('[CONV-FOOTER] PASSO 3');
         target.style.height = this.HEIGHT_DEFAULT;
-        // segno sto scrivendo
-        // target.offsetHeight - 15 + 'px';
       }
-      //this.setWritingMessages(target.value);
-      // this.onChangeTextArea.emit({textAreaEl: target, minHeightDefault: this.HEIGHT_DEFAULT})
     } catch (e) {
       this.logger.error('[LOADER-PREVIEW-PAGE] > Error :' + e);
     }
-    // tslint:disable-next-line:max-line-length
-    //   that.logger.debug('[CONV-FOOTER] H:: this.textInputTextArea', this.textInputTextArea, target.style.height, target.scrollHeight, target.offsetHeight, target.clientHeight);
   }
 
 
@@ -235,7 +224,6 @@ export class ConversationPreviewComponent implements OnInit {
   }
 
   private restoreTextArea() {
-    //   that.logger.debug('[CONV-FOOTER] AppComponent:restoreTextArea::restoreTextArea');
     this.resizeInputField();
     const textArea = (<HTMLInputElement>document.getElementById('chat21-main-message-context-preview'));
     this.textInputTextArea = ''; // clear the textarea
@@ -257,11 +245,6 @@ export class ConversationPreviewComponent implements OnInit {
     this.textInputTextArea = ((document.getElementById('chat21-main-message-context-preview') as HTMLInputElement).value);
     if (keyCode === 13) {
       if (this.textInputTextArea && this.textInputTextArea.trim() !== '') {
-        //   that.logger.debug('[CONV-FOOTER] sendMessage -> ', this.textInputTextArea);
-        // this.resizeInputField();
-        // this.messagingService.sendMessage(msg, TYPE_MSG_TEXT);
-        // this.setDepartment();
-        // this.textInputTextArea = replaceBr(this.textInputTextArea);
         this.onSendAttachment.emit(this.textInputTextArea);
         this.restoreTextArea();
       }

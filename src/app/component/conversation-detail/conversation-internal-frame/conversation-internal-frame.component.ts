@@ -20,32 +20,8 @@ import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance'
           style({transform: 'translateX(0)', opacity: 1}),
           animate('400ms', style({transform: 'translateX(100%)', opacity: 0}))
         ])
-        // state('in', style({
-        //   transform: 'translateX(100%)',
-        //   opacity: 0
-        // })),
-        // state('out',   style({
-        //   transform: 'translateX(0)',
-        //   opacity: 1
-        // })),
-        // transition('in => out', animate('400ms', style({transform: 'translateX(0)', opacity: 1}))),
-        // transition('out => in', animate('400ms', style({transform: 'translateX(100%)', opacity: 0})))
       ]
     )
-    // trigger('enterAnimation', [
-    //   state('open', style({
-    //     opacity: 1,
-    //   })),
-    //   state('closed', style({
-    //     opacity: 1,
-    //   })),
-    //   transition('closed => open', [
-    //     animate('1s', style({transform: 'translateX(0)', opacity: 1}))
-    //   ]),
-    //   transition('open => closed', [
-    //     animate('0.5s', style({transform: 'translateX(100%)', opacity: 0}))
-    //   ]),
-    // ]),
   ]
 })
 export class ConversationInternalFrameComponent implements OnInit {

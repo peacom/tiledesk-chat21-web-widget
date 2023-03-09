@@ -37,8 +37,6 @@
 
     <div id="c21-footer">
       <div class="visible-text-area">
-        <!-- isFilePendingToUpload || -->
-        <!-- [attr.disabled] = "isFilePendingToLoad" -->
         <textarea 
           start-focus-chat21-conversation-preview-component
           inputTextArea 
@@ -55,18 +53,10 @@
           (paste)="onPaste($event)"
           placeholder="{{ translationMap?.get('LABEL_PLACEHOLDER') }}">
         </textarea>
-      
-        <!-- <chat-message-text-area
-          [text]="textInputTextArea"
-          (onChangeTextArea)="returnText($event)"
-        ></chat-message-text-area> -->
-      
+
       </div>
       <div tabindex="-1" class="chat21-textarea-button" id="chat21-button-send" [class.active]="!isFilePendingToLoad " (click)="onSendPressed($event)">
         <span class="v-align-center">
-            <!-- <svg xmlns="http://www.w3.org/2000/svg" [ngStyle]="{'fill': stylesMap?.get('themeColor') }" width="24" height="24" viewBox="0 0 28 28">
-                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
-            </svg> -->
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
               <path d="M1.8,18.9V1.7L22,10.3L1.8,18.9z M3.9,15.6l12.6-5.4L3.9,4.9v3.7l6.4,1.6l-6.4,1.6V15.6z M3.9,15.6V4.9v7V15.6z"/>
             </svg>

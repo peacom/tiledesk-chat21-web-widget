@@ -36,13 +36,6 @@ export class FormTextareaComponent implements OnInit {
     if(this.stylesMap && this.stylesMap.get('foregroundColor')) this.elementRef.nativeElement.style.setProperty('--foregroundColor', this.stylesMap.get('foregroundColor'));
   }
 
-  // ngOnChanges(changes: SimpleChange){
-  //   if(this.hasSubmitted){
-  //     this.input.nativeElement.classList.add('is-focused')
-  //     this.setFormStyle()
-  //   }
-  // }
-
   onFocusOut(){
     this.input.nativeElement.classList.remove('is-focused')
   }
@@ -72,9 +65,6 @@ export class FormTextareaComponent implements OnInit {
       this.form.controls[this.controlName].patchValue(this.form.controls[this.controlName].value + '\r\n')
     }
   }
-
-
-
 
   setFormStyle(){
     if(this.form.controls[this.controlName].hasError('pattern') || 

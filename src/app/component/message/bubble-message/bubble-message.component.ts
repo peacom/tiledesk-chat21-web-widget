@@ -142,18 +142,6 @@ export class BubbleMessageComponent implements OnInit {
     this.onElementRendered.emit({element: event.element, status: event.status})
   }
 
-
-  // printMessage(message, messageEl, component) {
-  //   const messageOBJ = { message: message, sanitizer: this.sanitizer, messageEl: messageEl, component: component}
-  //   this.onBeforeMessageRender.emit(messageOBJ)
-  //   const messageText = message.text;
-  //   this.onAfterMessageRender.emit(messageOBJ)
-  //   // this.triggerBeforeMessageRender(message, messageEl, component);
-  //   // const messageText = message.text;
-  //   // this.triggerAfterMessageRender(message, messageEl, component);
-  //   return messageText;
-  // }
-
   // ========= END:: event emitter function ============//
 
 

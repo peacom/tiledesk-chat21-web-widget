@@ -5,7 +5,6 @@ import { ConversationFooterComponent } from './../conversation-footer/conversati
 
 // tslint:disable-next-line:max-line-length
 import { ElementRef, Component, OnInit, OnChanges, AfterViewInit, Input, Output, ViewChild, EventEmitter, SimpleChanges, ChangeDetectorRef } from '@angular/core';
-import { Subscription } from 'rxjs';
 
 import {
   CHANNEL_TYPE_DIRECT, CHANNEL_TYPE_GROUP, TYPE_MSG_TEXT,
@@ -29,7 +28,7 @@ import { AppComponent } from '../../../app.component';
 import { CustomTranslateService } from 'src/chat21-core/providers/custom-translate.service';
 import { ConversationHandlerService } from 'src/chat21-core/providers/abstract/conversation-handler.service';
 import { ConversationHandlerBuilderService } from 'src/chat21-core/providers/abstract/conversation-handler-builder.service';
-import { getDateDifference, getFromNow, popupUrl } from 'src/chat21-core/utils/utils';
+import { getDateDifference, popupUrl } from 'src/chat21-core/utils/utils';
 import { ConversationContentComponent } from '../conversation-content/conversation-content.component';
 import { ConversationsHandlerService } from 'src/chat21-core/providers/abstract/conversations-handler.service';
 import { ArchivedConversationsHandlerService } from 'src/chat21-core/providers/abstract/archivedconversations-handler.service';
@@ -44,7 +43,6 @@ import { Globals } from 'src/app/utils/globals';
 import { AppConfigService } from 'src/app/providers/app-config.service';
 import { StarRatingWidgetService } from 'src/app/providers/star-rating-widget.service';
 import { TiledeskRequestsService } from 'src/chat21-core/providers/tiledesk/tiledesk-requests.service';
-import moment from 'moment';
 import { isUserBanned } from 'src/chat21-core/utils/utils-message';
 import { LIVE_PAGE } from 'src/chat21-core/utils/constants';
 // import { TranslateService } from '@ngx-translate/core';
@@ -337,14 +335,14 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
   /**
    * do per scontato che this.userId esiste!!!
    */
-  initAll() {
+  async initAll() {
 
     this.logger.debug('[CONV-COMP] ------ 2: setConversation ------ ');
     this.setConversation();
 
     this.logger.debug('[CONV-COMP] ------ 3: connectConversation ------ ');
     // this.connectConversation();
-    this.initConversationHandler();
+    await this.initConversationHandler();
 
     this.logger.debug('[CONV-COMP] ------ 4: initializeChatManager ------ ');
     //this.initializeChatManager();
@@ -549,7 +547,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
    * carico messaggi
    * attendo x sec se nn arrivano messaggi visualizzo msg welcome
    */
-  initConversationHandler() {
+  async initConversationHandler() {
     const tenant = this.g.tenant;
     this.messages = [];
     //TODO-GAB: da sistemare loggedUser in firebase-conversation-handler.service
@@ -561,7 +559,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
     this.logger.debug('[CONV-COMP] DETTAGLIO CONV - handler **************', handler, this.conversationWith);
     if (!handler) {
       this.conversationHandlerService = this.conversationHandlerBuilderService.build();
-      this.conversationHandlerService.initialize(
+      await this.conversationHandlerService.initialize(
         this.conversationWith,
         conversationWithFullname,
         loggedUser,

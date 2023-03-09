@@ -6,7 +6,7 @@ import { setColorFromString, avatarPlaceholder, convertMessage} from '../../util
 import { ImageRepoService } from '../../../chat21-core/providers/abstract/image-repo.service';
 import { LoggerService } from '../../../chat21-core/providers/abstract/logger.service';
 import { LoggerInstance } from '../../../chat21-core/providers/logger/loggerInstance';
-import * as moment from 'moment';
+
 @Component({
   selector: 'chat-list-conversations',
   templateUrl: './list-conversations.component.html',

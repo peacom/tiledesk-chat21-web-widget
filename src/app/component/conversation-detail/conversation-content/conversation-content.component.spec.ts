@@ -1,4 +1,3 @@
-import { MomentModule } from 'ngx-moment';
 import { async, ComponentFixture, TestBed, waitForAsync, inject } from '@angular/core/testing';
 
 import { ConversationContentComponent } from './conversation-content.component';
@@ -35,7 +34,6 @@ describe('ConversationContentComponent', () => {
         HtmlEntitiesEncodePipe,
       ],
       imports: [
-        MomentModule
       ],
       providers: [ 
         UploadService,
@@ -48,7 +46,6 @@ describe('ConversationContentComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ConversationContentComponent);
-    component = fixture.componentInstance;
     let upload = fixture.debugElement.injector.get(UploadService) as UploadService
     upload.BSStateUpload.next({ upload: 100, type: 'image' })
     fixture.detectChanges();

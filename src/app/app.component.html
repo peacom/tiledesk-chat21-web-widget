@@ -59,7 +59,7 @@
     ****************************************
     ******* MODALE SELECT DEPARTMENT *******
     *************** STEP 1 *****************
-    [class.active]="isOpenSelectionDepartment" -->
+     -->
     <div *ngIf="isOpenSelectionDepartment" class="modal-page selection-department active">
       <chat-selection-department
         (onBeforeDepartmentsFormRender)="triggerHandler.triggerOnbeforeDepartmentsFormRender($event)" 
@@ -72,7 +72,6 @@
     *******************************************
     *********** MODALE PRECHAT FORM ***********
     **************** STEP 2 *******************
-    [class.active]="g.isOpenPrechatForm === true"
     -->
     <div *ngIf="g.isOpenPrechatForm && g.senderId" class="modal-page prechat-form active">
       <chat-prechat-form

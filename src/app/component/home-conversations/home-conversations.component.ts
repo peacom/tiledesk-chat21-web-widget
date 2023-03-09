@@ -10,8 +10,6 @@ import { setColorFromString, avatarPlaceholder, convertMessage } from '../../uti
 
 // models
 import { ConversationModel } from '../../../chat21-core/models/conversation';
-// import * as moment from 'moment/moment';
-// import 'moment-duration-format';
 import {HumanizeDurationLanguage, HumanizeDuration} from 'humanize-duration-ts';
 import { ImageRepoService } from 'src/chat21-core/providers/abstract/image-repo.service';
 import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
@@ -120,7 +118,6 @@ export class HomeConversationsComponent implements OnInit, OnDestroy {
     this.logger.debug('initialize: ListConversationsComponent');
     this.initTranslations();
 
-    //this.senderId = this.g.senderId;
     this.tenant = this.g.tenant;
     this.LABEL_START_NW_CONV = this.g.LABEL_START_NW_CONV; // IN THE TEMPLATE REPLACED LABEL_START_NW_CONV WITH g.LABEL_START_NW_CONV
     this.listConversations = [];
