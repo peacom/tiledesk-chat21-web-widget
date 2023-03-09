@@ -1,10 +1,6 @@
-import * as moment from 'moment';
-import 'moment/locale/it.js';
-
-// firebase
-import * as firebase from 'firebase/app';
-import 'firebase/storage';
-
+import * as dayjs from 'dayjs'
+import * as duration from 'dayjs/plugin/duration'
+dayjs.extend(duration)
 // tslint:disable-next-line:max-line-length
 
 import { ConversationModel } from '../models/conversation';
@@ -90,38 +86,38 @@ export function contactsRef(tenant) {
 /**
  * @deprecated
  */
-export function setHeaderDate(translate, timestamp): string {
-  // const LABEL_TODAY = translate.get('LABEL_TODAY');
-  // const LABEL_TOMORROW = translate.get('LABEL_TOMORROW');
+// export function setHeaderDate(translate, timestamp): string {
+//   // const LABEL_TODAY = translate.get('LABEL_TODAY');
+//   // const LABEL_TOMORROW = translate.get('LABEL_TOMORROW');
 
-  const date = new Date(timestamp);
-  const now: Date = new Date();
-  let labelDays = '';
-  if (now.getFullYear() !== date.getFullYear()) {
-    // quest'anno: data esatta
-    const month = date.getMonth() + 1;
-    labelDays = date.getDay() + '/' + month + '/' + date.getFullYear();
-  } else if (now.getMonth() !== date.getMonth()) {
-    // questo mese: data esatta
-    const month = date.getMonth() + 1;
-    labelDays = date.getDay() + '/' + month + '/' + date.getFullYear();
-  } else if (now.getDay() === date.getDay()) {
-    // oggi: oggi
-    labelDays = moment().calendar(timestamp).split(' ')[0].toLocaleLowerCase();
-    // labelDays = LABEL_TODAY;
-  } else if (now.getDay() - date.getDay() === 1) {
-    // ieri: ieri
-    labelDays = moment().calendar(timestamp).split(' ')[0].toLocaleLowerCase();
-    // labelDays = LABEL_TOMORROW;
-  } else {
-    // questa settimana: giorno
-    labelDays = convertDayToString(translate, date.getDay());
-  }
-  // se le date sono diverse o la data di riferimento non è impostata
-  // ritorna la data calcolata
-  // altrimenti torna null
-  return labelDays;
-}
+//   const date = new Date(timestamp);
+//   const now: Date = new Date();
+//   let labelDays = '';
+//   if (now.getFullYear() !== date.getFullYear()) {
+//     // quest'anno: data esatta
+//     const month = date.getMonth() + 1;
+//     labelDays = date.getDay() + '/' + month + '/' + date.getFullYear();
+//   } else if (now.getMonth() !== date.getMonth()) {
+//     // questo mese: data esatta
+//     const month = date.getMonth() + 1;
+//     labelDays = date.getDay() + '/' + month + '/' + date.getFullYear();
+//   } else if (now.getDay() === date.getDay()) {
+//     // oggi: oggi
+//     labelDays = moment().calendar(timestamp).split(' ')[0].toLocaleLowerCase();
+//     // labelDays = LABEL_TODAY;
+//   } else if (now.getDay() - date.getDay() === 1) {
+//     // ieri: ieri
+//     labelDays = moment().calendar(timestamp).split(' ')[0].toLocaleLowerCase();
+//     // labelDays = LABEL_TOMORROW;
+//   } else {
+//     // questa settimana: giorno
+//     labelDays = convertDayToString(translate, date.getDay());
+//   }
+//   // se le date sono diverse o la data di riferimento non è impostata
+//   // ritorna la data calcolata
+//   // altrimenti torna null
+//   return labelDays;
+// }
 
 
 
@@ -454,91 +450,23 @@ export function compareValues(key, order = 'asc') {
   };
 }
 
-/** */
-export function getNowTimestamp() {
-  //console.log("timestamp:", moment().valueOf());
-  return moment().valueOf();
-}
 
-export function getFormatData(timestamp): string {
-  var dateString = moment.unix(timestamp / 1000).format('L');
-  // const date = new Date(timestamp);
-  // const labelDays = date.getDay()+"/"+date.getMonth()+"/"+date.getFullYear();
-  return dateString;
-}
-
-export function getTimeLastMessage(timestamp: string) {
-  const timestampNumber = parseInt(timestamp, null) / 1000;
-  const time = getFromNow(timestampNumber);
-  return time;
-}
-
-// export function getFromNow(windowContext, timestamp) {
-//   let browserLang = windowContext.navigator.language;
-//   if (this.g.lang && this.g.lang !== '') {
-//     browserLang = this.g.lang;
-//   }
-//   moment.locale(browserLang);
-//   // console.log('getFromNow - browserLang: ', browserLang);
-//   const date_as_string = moment.unix(timestamp).fromNow();
-//   return date_as_string;
+// export function getFormatData(timestamp): string {
+//   var dateString = moment.unix(timestamp / 1000).format('L');
+//   // const date = new Date(timestamp);
+//   // const labelDays = date.getDay()+"/"+date.getMonth()+"/"+date.getFullYear();
+//   return dateString;
 // }
 
-export function getFromNow(timestamp): string {
-  // var fullDate = new Date(this.news.date.$date)
-  // console.log('FULL DATE: ', fullDate);
-  // var month = '' + (fullDate.getMonth() + 1)
-  // var day = '' + fullDate.getDate()
-  // var year = fullDate.getFullYear()
-  // var hour = '' + fullDate.getHours()
-  // var min = fullDate.getMinutes()
-  // var sec = fullDate.getSeconds()
-  // if (month.length < 2) month = '0' + month;
-  // if (day.length < 2) day = '0' + day;
-  // if (hour.length < 2) hour = '0' + hour;
-  // console.log('Giorno ', day)
-  // console.log('Mese ', month)
-  // console.log('Anno ', year)
-  // console.log('Ora ', hour)
-  // console.log('Min ', min)
-  // console.log('Sec', sec)
-
-  // this.dateFromNow = moment(year + month + day, "YYYYMMDD").fromNow()
-  // let date_as_string = moment(year + month + day, "YYYYMMDD").fromNow()
-
-  // let date_as_string = moment(year + "-" + month + "-" + day + " " + hour + ":" + min + ":" + sec).fromNow()
-  // let date_as_string = moment("2017-07-03 08:33:37").fromNow()
-  //var day = new Date(2017, 8, 16);
-  //let date_as_string = moment(day);
-
-  // var dateString = moment.unix(timestamp).format("MM/DD/YYYY");
-  // console.log(moment(dateString).fromNow(), dateString);
-  // var date = "Thu Aug 19 2017 19:58:03 GMT+0000 (GMT)";
-  // console.log(moment(date).fromNow()); // 1 hour ago
-  // console.log(moment.unix(1483228800).fromNow());
-  // console.log(moment.unix(1501545600).fromNow());
-  //console.log("timestamp: ",timestamp, " - 1483228800 - ", moment.unix(1483228800).fromNow());
-  // console.log();
-
-  //console.log("window.navigator.language: ", window.navigator.language);
-
-  moment.locale(window.navigator.language);
-  let date_as_string = moment.unix(timestamp).fromNow();
-  return date_as_string;
-}
-
-
 export function getDateDifference(startTimestampDate, endTimestampDate){
-  // var startTime = moment.unix(startTimestampDate);
-  // var endTime = moment.unix(endTimestampDate);
-
-  const startTime = moment(startTimestampDate);
-  const endTime = moment(endTimestampDate);
-  const duration = moment.duration(endTime.diff(startTime));
+  
+  const startTime = dayjs(startTimestampDate);
+  const endTime = dayjs(endTimestampDate);
+  const duration = dayjs.duration(endTime.diff(startTime, null, true));
   const days = duration.asDays()
   const hours = duration.asHours();
   const minutes = duration.asMinutes();
-
+  
   return {days, hours, minutes}
 }
 
