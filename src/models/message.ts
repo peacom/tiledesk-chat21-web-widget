@@ -1,7 +1,4 @@
 // firebase
-import * as firebase from 'firebase/app';
-import 'firebase/database';
-
 export class MessageModel {
     public sender_urlImage: string;
     constructor(
@@ -21,24 +18,4 @@ export class MessageModel {
         public projectid: string,
         public emoticon?: boolean
     ) { }
-
-    // asFirebaseMessage(): Object {
-    //     const message = {
-    //         language: this.language,
-    //         recipient: this.recipient,
-    //         recipient_fullname: this.recipient_fullname,
-    //         sender: this.sender,
-    //         sender_fullname: this.sender_fullname,
-    //         status: this.status,
-    //         metadata: this.metadata,
-    //         text: this.text,
-    //         timestamp: firebase.database.ServerValue.TIMESTAMP,
-    //         type: this.type,
-    //         attributes: this.attributes,
-    //         channel_type: this.channel_type
-    //         // projectid: this.projectid // removed by sponziello
-    //     };
-
-    //     return message;
-    //  }
  }

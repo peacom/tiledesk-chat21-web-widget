@@ -3,18 +3,14 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 
 // firebase
 // import * as firebase from 'firebase/app';
-import firebase from 'firebase/app';
-import 'firebase/messaging';
-import 'firebase/database';
-import 'firebase/auth';
-import 'firebase/storage';
+// import firebase from 'firebase/app';
 
 // models
 import { ConversationModel } from '../../models/conversation';
 
 // utils
 import { avatarPlaceholder, getColorBck } from '../../utils/utils-user';
-import { compareValues, getFromNow, searchIndexInArrayForUid, archivedConversationsPathForUserId, isGroup } from '../../utils/utils';
+import { compareValues, searchIndexInArrayForUid, archivedConversationsPathForUserId, isGroup } from '../../utils/utils';
 import { ArchivedConversationsHandlerService } from '../abstract/archivedconversations-handler.service';
 import { LoggerService } from '../abstract/logger.service';
 import { LoggerInstance } from '../logger/loggerInstance';
@@ -44,10 +40,12 @@ export class FirebaseArchivedConversationsHandler extends ArchivedConversationsH
     private translationMap: Map<string, string>;
     private isConversationClosingMap: Map<string, boolean>;
     private logger:LoggerService = LoggerInstance.getInstance()
-    private ref: firebase.database.Query;
+    // private ref: firebase.database.Query;
+    
 
     private subscribe: any;
-
+    private firebase: any;
+    private ref: any;
     constructor(
         //public databaseProvider: DatabaseProvider
     ) {
@@ -57,12 +55,17 @@ export class FirebaseArchivedConversationsHandler extends ArchivedConversationsH
     /**
      * inizializzo conversations handler
      */
-    initialize(tenant: string,userId: string,translationMap: Map<string, string>) {
+    async initialize(tenant: string,userId: string,translationMap: Map<string, string>) {
         this.tenant = tenant;
         this.loggedUserId = userId;
         this.translationMap = translationMap;
         this.archivedConversations = [];
         this.isConversationClosingMap = new Map();
+
+        const { default: firebase} = await import("firebase/app");
+        await Promise.all([import("firebase/database"), import("firebase/auth")]);
+        this.firebase = firebase
+        this.ref = this.firebase.database['Query'];
     }
 
     /**
@@ -94,7 +97,7 @@ export class FirebaseArchivedConversationsHandler extends ArchivedConversationsH
         const that = this;
         const urlNodeFirebase = archivedConversationsPathForUserId(this.tenant, this.loggedUserId);
         this.logger.debug('[FIREBASEArchivedConversationsHandlerSERVICE] SubscribeToConversations conversations::ARCHIVED urlNodeFirebase', urlNodeFirebase)
-        this.ref = firebase.database().ref(urlNodeFirebase).orderByChild('timestamp').limitToLast(200);
+        this.ref = this.firebase.database().ref(urlNodeFirebase).orderByChild('timestamp').limitToLast(200);
         this.ref.on('child_changed', (childSnapshot) => {
             that.changed(childSnapshot);
         });
@@ -134,7 +137,7 @@ export class FirebaseArchivedConversationsHandler extends ArchivedConversationsH
         const urlUpdate = archivedConversationsPathForUserId(this.tenant, this.loggedUserId) + '/' + conversationrecipient;
         const update = {};
         update['/is_new'] = false;
-        firebase.database().ref(urlUpdate).update(update);
+        this.firebase.database().ref(urlUpdate).update(update);
     }
 
 
@@ -173,7 +176,7 @@ export class FirebaseArchivedConversationsHandler extends ArchivedConversationsH
         } else {
             const urlNodeFirebase = archivedConversationsPathForUserId(this.tenant, this.loggedUserId) // + '/' + conversationId;
             this.logger.debug('[FIREBASEArchivedConversationsHandlerSERVICE] urlNodeFirebase conversationDetail *****', urlNodeFirebase, conversationId)
-            const firebaseMessages = firebase.database().ref(urlNodeFirebase);
+            const firebaseMessages = this.firebase.database().ref(urlNodeFirebase);
             // if(this.subscribe){
             //     this.logger.log('[FIREBASEArchivedConversationsHandlerSERVICE] getConversationDetail ALREADY SUBSCRIBED')
             //     return;
@@ -362,17 +365,6 @@ export class FirebaseArchivedConversationsHandler extends ArchivedConversationsH
         }
         return status;
     }
-
-    /**
-     * calcolo il tempo trascorso da ora al timestamp passato
-     * @param timestamp
-     */
-    private getTimeLastMessage(timestamp: string) {
-        const timestampNumber = parseInt(timestamp, 10) / 1000;
-        const time = getFromNow(timestampNumber);
-        return time;
-    }
-
 
     /**
      *  check if the conversations is valid or not

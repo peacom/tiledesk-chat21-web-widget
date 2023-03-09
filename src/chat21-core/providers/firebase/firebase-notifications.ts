@@ -4,9 +4,7 @@ import { Injectable } from '@angular/core';
 import { NotificationsService } from '../abstract/notifications.service';
 
 // firebase
-import firebase from 'firebase/app';
-import 'firebase/messaging';
-import 'firebase/auth';
+// import firebase from 'firebase/app';
 
 import { LoggerService } from '../abstract/logger.service';
 
@@ -19,16 +17,20 @@ export class FirebaseNotifications extends NotificationsService {
     private userId: string;
     private tenant: string;
     private vapidkey: string;
+    private firebase: any;
+
     private logger: LoggerService = LoggerInstance.getInstance();
     constructor() {
         super();
     }
 
-    initialize(tenant: string, vapId: string): void {
+    async initialize(tenant: string, vapId: string) {
         this.tenant = tenant
         this.vapidkey = vapId
         this.logger.debug('[FIREBASE-NOTIFICATIONS] initialize - tenant ', this.tenant)
 
+        const { default: firebase} = await import("firebase/app");
+        this.firebase = firebase
 
         if (!('serviceWorker' in navigator)) {
             // , disable or hide UI.
@@ -70,8 +72,8 @@ export class FirebaseNotifications extends NotificationsService {
 
 
       
-        if (firebase.messaging.isSupported()) {
-            const messaging = firebase.messaging(); 
+        if (this.firebase.messaging.isSupported()) {
+            const messaging = this.firebase.messaging(); 
             // messaging.requestPermission()
             Notification.requestPermission().then((permission) => {
                 if (permission === 'granted') {
@@ -94,7 +96,7 @@ export class FirebaseNotifications extends NotificationsService {
 
     removeNotificationsInstance(callback: (string) => void) {
         var self = this;
-        firebase.auth().onAuthStateChanged(function (user) {
+        this.firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 self.logger.debug('[FIREBASE-NOTIFICATIONS] - User is signed in. ', user)
 
@@ -112,7 +114,7 @@ export class FirebaseNotifications extends NotificationsService {
         let connectionsRefURL = '';
         if (connectionsRefinstancesId) {
             connectionsRefURL = connectionsRefinstancesId + this.FCMcurrentToken;
-            const connectionsRef = firebase.database().ref().child(connectionsRefURL);
+            const connectionsRef = this.firebase.database().ref().child(connectionsRefURL);
             this.logger.log('[FIREBASE-NOTIFICATIONS] >>>> connectionsRef ', connectionsRef);
             this.logger.log('[FIREBASE-NOTIFICATIONS] >>>> connectionsRef url ', connectionsRefURL);
             connectionsRef.off()
@@ -154,7 +156,7 @@ export class FirebaseNotifications extends NotificationsService {
         updates[connectionsRefinstancesId + connection] = device_model;
 
         this.logger.log('[FIREBASE-NOTIFICATIONS] >>>> getPermission > updateToken in DB', updates);
-        firebase.database().ref().update(updates)
+        this.firebase.database().ref().update(updates)
     }
     // ********** PRIVATE METHOD - END ****************//
 

@@ -4,10 +4,10 @@ import { BehaviorSubject } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 // firebase
-import * as firebase from 'firebase/app';
-import 'firebase/messaging';
-import 'firebase/database';
-import 'firebase/auth';
+// import * as firebase from 'firebase/app';
+// import 'firebase/messaging';
+// import 'firebase/database';
+// import 'firebase/auth';
 
 // services
 // import { EventsService } from '../events-service';

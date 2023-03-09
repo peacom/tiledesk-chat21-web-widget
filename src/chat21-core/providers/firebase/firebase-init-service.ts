@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 
 // firebase
-import firebase from 'firebase/app';
-import 'firebase/app';
+// import firebase from 'firebase/app';
 /*
   Generated class for the AuthService provider.
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
@@ -19,7 +18,8 @@ export class FirebaseInitService {
   constructor() {
   }
 
-  public static initFirebase(firebaseConfig: any) {
+  public static async initFirebase(firebaseConfig: any) {
+    const { default: firebase} = await import("firebase/app");
     if(!FirebaseInitService.firebaseInit){
       if (!firebaseConfig || firebaseConfig.apiKey === 'CHANGEIT') {
         throw new Error('Firebase config is not defined. Please create your widget-config.json. See the Chat21-Web_widget Installation Page');

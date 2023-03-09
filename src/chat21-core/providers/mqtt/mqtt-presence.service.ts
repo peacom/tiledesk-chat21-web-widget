@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 // firebase
-import * as firebase from 'firebase/app';
-import 'firebase/messaging';
-import 'firebase/database';
+// import * as firebase from 'firebase/app';
+// import 'firebase/messaging';
+// import 'firebase/database';
 
 // services
 // import { EventsService } from '../events-service';

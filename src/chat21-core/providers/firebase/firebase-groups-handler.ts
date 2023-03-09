@@ -3,11 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 // firebase
-import firebase from 'firebase/app';
-import 'firebase/messaging';
-import 'firebase/database';
-import 'firebase/auth';
-import 'firebase/storage';
+// import firebase from 'firebase/app';
 
 // models
 import { ConversationModel } from '../../models/conversation';
@@ -40,12 +36,15 @@ export class FirebaseGroupsHandler extends GroupsHandlerService {
     // private params
     private tenant: string;
     private loggedUserId: string;
-    private ref: firebase.database.Query;
+    // private ref: firebase.database.Query;
     private BASE_URL: string;
     private logger:LoggerService = LoggerInstance.getInstance()
 
     // private audio: any;
     // private setTimeoutSound: any;
+
+    private firebase: any;
+    private ref: any;
 
     constructor(
         public http: HttpClient,
@@ -57,11 +56,15 @@ export class FirebaseGroupsHandler extends GroupsHandlerService {
     /**
      * inizializzo groups handler
      */
-    initialize(tenant: string, loggedUserId: string) {
+    async initialize(tenant: string, loggedUserId: string) {
         this.tenant = tenant;
         this.loggedUserId = loggedUserId;
         this.BASE_URL = this.appConfig.getConfig().firebaseConfig.chat21ApiUrl;
         this.logger.debug('[FIREBASEGroupHandlerSERVICE] initialize', this.tenant, this.loggedUserId);
+    
+        const { default: firebase} = await import("firebase/app");
+        this.firebase = firebase
+        this.ref = this.firebase.database['Query'];
     }
 
     /**
@@ -74,7 +77,7 @@ export class FirebaseGroupsHandler extends GroupsHandlerService {
         const that = this;
         const urlNodeGroups = '/apps/' + this.tenant + '/users/' + this.loggedUserId + '/groups';
         this.logger.debug('[FIREBASEGroupHandlerSERVICE] connect -------> groups::', urlNodeGroups)
-        this.ref = firebase.database().ref(urlNodeGroups)
+        this.ref = this.firebase.database().ref(urlNodeGroups)
         this.ref.on('child_added', (childSnapshot) => {
             that.logger.debug('[FIREBASEGroupHandlerSERVICE]  child_added ------->', childSnapshot.val())
             // that.added(childSnapshot);
@@ -97,7 +100,7 @@ export class FirebaseGroupsHandler extends GroupsHandlerService {
     getDetail(groupId: string, callback?: (group: GroupModel)=>void): Promise<GroupModel>{
         const urlNodeGroupById = '/apps/' + this.tenant + '/users/' + this.loggedUserId + '/groups/' + groupId;
         this.logger.debug('[FIREBASEGroupHandlerSERVICE] getDetail -------> urlNodeGroupById::', urlNodeGroupById)
-        const ref = firebase.database().ref(urlNodeGroupById)
+        const ref = this.firebase.database().ref(urlNodeGroupById)
         return new Promise((resolve) => {
             ref.off()
             ref.on('value', (childSnapshot) => {
@@ -118,7 +121,7 @@ export class FirebaseGroupsHandler extends GroupsHandlerService {
         let SgroupDetail = new Subject<GroupModel>();
         const urlNodeGroupById = '/apps/' + this.tenant + '/users/' + this.loggedUserId + '/groups/' + groupId;
         this.logger.log('[FIREBASEGroupHandlerSERVICE] onGroupChange -------> urlNodeGroupById::', urlNodeGroupById)
-        const ref = firebase.database().ref(urlNodeGroupById)
+        const ref = this.firebase.database().ref(urlNodeGroupById)
         ref.off()
         ref.on('value', (childSnapshot) => {
             // this.groupValue(childSnapshot)
@@ -270,7 +273,7 @@ export class FirebaseGroupsHandler extends GroupsHandlerService {
 
     // // -------->>>> PRIVATE METHOD SECTION START <<<<---------------//
     private getFirebaseToken(callback) {
-        const firebase_currentUser = firebase.auth().currentUser;
+        const firebase_currentUser = this.firebase.auth().currentUser;
         this.logger.debug('[FIREBASEGroupHandlerSERVICE]  // firebase current user ', firebase_currentUser);
         if (firebase_currentUser) {
             const that = this;

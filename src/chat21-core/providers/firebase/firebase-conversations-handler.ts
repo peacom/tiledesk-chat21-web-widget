@@ -2,11 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 // firebase
-import firebase from 'firebase/app';
-import 'firebase/messaging';
-import 'firebase/database';
-import 'firebase/auth';
-import 'firebase/storage';
+// import firebase from 'firebase/app';
 
 // models
 import { ConversationModel } from '../../models/conversation';
@@ -20,8 +16,7 @@ import { LoggerInstance } from '../logger/loggerInstance';
 
 // utils
 import { avatarPlaceholder, getColorBck } from '../../utils/utils-user';
-import { compareValues, getFromNow, conversationsPathForUserId, searchIndexInArrayForUid, isGroup } from '../../utils/utils';
-
+import { compareValues, conversationsPathForUserId, searchIndexInArrayForUid, isGroup } from '../../utils/utils';
 
 
 
@@ -48,12 +43,15 @@ export class FirebaseConversationsHandler extends ConversationsHandlerService {
     private translationMap: Map<string, string>;
     private isConversationClosingMap: Map<string, boolean>;
     private logger:LoggerService = LoggerInstance.getInstance()
-    private ref: firebase.database.Query;
+    // private ref: firebase.database.Query;
     private BASE_URL: string;
     private BASE_URL_DATABASE: string;
     // private audio: any;
     // private setTimeoutSound: any;
     private subscribe: any
+
+    private firebase: any;
+    private ref: any;
 
     constructor(
         public http: HttpClient,
@@ -65,7 +63,7 @@ export class FirebaseConversationsHandler extends ConversationsHandlerService {
     /**
      * inizializzo conversations handler
      */
-    initialize(tenant: string,userId: string,translationMap: Map<string, string>) {
+    async initialize(tenant: string,userId: string,translationMap: Map<string, string>) {
         this.tenant = tenant;
         this.loggedUserId = userId;
         this.translationMap = translationMap;
@@ -75,6 +73,11 @@ export class FirebaseConversationsHandler extends ConversationsHandlerService {
         //this.getConversationsFromStorage();
         this.BASE_URL = this.appConfig.getConfig().firebaseConfig.chat21ApiUrl;
         this.BASE_URL_DATABASE = this.appConfig.getConfig().firebaseConfig.databaseURL;
+
+        const { default: firebase} = await import("firebase/app");
+        await Promise.all([import("firebase/database"), import("firebase/auth")]);
+        this.firebase = firebase
+        this.ref = this.firebase.database['Query'];
     }
 
     /**
@@ -115,7 +118,7 @@ export class FirebaseConversationsHandler extends ConversationsHandlerService {
         const that = this;
         const urlNodeFirebase = conversationsPathForUserId(this.tenant, this.loggedUserId);
         this.logger.debug('[FIREBASEConversationsHandlerSERVICE] SubscribeToConversations conversations::ACTIVE urlNodeFirebase', urlNodeFirebase)
-        this.ref = firebase.database().ref(urlNodeFirebase).orderByChild('timestamp').limitToLast(200);
+        this.ref = this.firebase.database().ref(urlNodeFirebase).orderByChild('timestamp').limitToLast(200);
         this.ref.on('child_changed', (childSnapshot) => {
             that.changed(childSnapshot);
         });
@@ -192,7 +195,7 @@ export class FirebaseConversationsHandler extends ConversationsHandlerService {
         const urlUpdate = conversationsPathForUserId(this.tenant, this.loggedUserId) + '/' + conversationrecipient;
         const update = {};
         update['/is_new'] = false;
-        firebase.database().ref(urlUpdate).update(update);
+        this.firebase.database().ref(urlUpdate).update(update);
     }
 
     /**
@@ -281,7 +284,7 @@ export class FirebaseConversationsHandler extends ConversationsHandlerService {
 
 
     getFirebaseToken(callback:(error: any, idToken: string)=>void) {
-        const firebase_currentUser = firebase.auth().currentUser;
+        const firebase_currentUser = this.firebase.auth().currentUser;
         this.logger.debug(' // firebase current user ', firebase_currentUser);
         if (firebase_currentUser) {
             firebase_currentUser.getIdToken(/* forceRefresh */ true)
@@ -310,7 +313,7 @@ export class FirebaseConversationsHandler extends ConversationsHandlerService {
             // const urlNodeFirebase = '/apps/' + this.tenant + '/users/' + this.loggedUserId + '/conversations/' + conversationId;
             const urlNodeFirebase = conversationsPathForUserId(this.tenant, this.loggedUserId) // + '/' + conversationId;
             this.logger.debug('[FIREBASEConversationsHandlerSERVICE] conversationDetail urlNodeFirebase *****', urlNodeFirebase)
-            const firebaseMessages = firebase.database().ref(urlNodeFirebase);
+            const firebaseMessages = this.firebase.database().ref(urlNodeFirebase);
             // if(this.subscribe){
             //     this.logger.log('[FIREBASEConversationsHandlerSERVICE] getConversationDetail ALREADY SUBSCRIBED')
             //     return;
@@ -563,16 +566,6 @@ export class FirebaseConversationsHandler extends ConversationsHandlerService {
             status = '1'; // non letto
         }
         return status;
-    }
-
-    /**
-     * calcolo il tempo trascorso da ora al timestamp passato
-     * @param timestamp
-     */
-    private getTimeLastMessage(timestamp: string) {
-        const timestampNumber = parseInt(timestamp, 10) / 1000;
-        const time = getFromNow(timestampNumber);
-        return time;
     }
 
     /**

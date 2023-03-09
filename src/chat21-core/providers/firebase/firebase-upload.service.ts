@@ -3,11 +3,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 // firebase
-import firebase from 'firebase/app';
-import 'firebase/messaging';
-import 'firebase/database';
-import 'firebase/firestore';
-import 'firebase/storage';
+// import firebase from 'firebase/app';
+// import 'firebase/storage';
 
 // services
 import { UploadService } from '../abstract/upload.service';
@@ -28,13 +25,19 @@ export class FirebaseUploadService extends UploadService {
 
   //private
   private logger:LoggerService = LoggerInstance.getInstance()
+  private firebase: any;
 
   constructor() {
     super();
   }
 
-  public initialize() {
+  public async initialize() {
     this.logger.debug('[FIREBASEUploadSERVICE] initialize');
+
+    const { default: firebase} = await import("firebase/app");
+    await Promise.all([import("firebase/storage")]);
+    this.firebase = firebase
+
   }
   
   public upload(userId: string, upload: UploadModel): Promise<any> {
@@ -44,7 +47,7 @@ export class FirebaseUploadService extends UploadService {
     this.logger.debug('[FIREBASEUploadSERVICE] pushUpload ', urlImagesNodeFirebase, upload.file);
 
     // Create a root reference
-    const storageRef = firebase.storage().ref();
+    const storageRef = this.firebase.storage().ref();
     this.logger.debug('[FIREBASEUploadSERVICE] storageRef', storageRef);
     
     // Create a reference to 'mountains.jpg'
@@ -70,11 +73,11 @@ export class FirebaseUploadService extends UploadService {
         that.BSStateUpload.next({ upload: progress, type: upload.file.type });
         
         switch (snapshot.state) {
-          case firebase.storage.TaskState.PAUSED: // or 'paused'
+          case that.firebase.storage.TaskState.PAUSED: // or 'paused'
             that.logger.debug('[FIREBASEUploadSERVICE] Upload is paused');
             
             break;
-          case firebase.storage.TaskState.RUNNING: // or 'running'
+          case that.firebase.storage.TaskState.RUNNING: // or 'running'
             that.logger.debug('[FIREBASEUploadSERVICE] Upload is running');
             
             break;

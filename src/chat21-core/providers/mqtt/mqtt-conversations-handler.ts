@@ -12,7 +12,7 @@ import { ConversationsHandlerService } from '../abstract/conversations-handler.s
 
 // utils
 import { avatarPlaceholder, getColorBck } from '../../utils/utils-user';
-import { compareValues, getFromNow, searchIndexInArrayForUid } from '../../utils/utils';
+import { compareValues, searchIndexInArrayForUid } from '../../utils/utils';
 import { LoggerService } from '../abstract/logger.service';
 import { LoggerInstance } from '../logger/loggerInstance';
 
@@ -424,16 +424,6 @@ export class MQTTConversationsHandler extends ConversationsHandlerService {
             status = '1'; // non letto
         }
         return status;
-    }
-
-    /**
-     * calcolo il tempo trascorso da ora al timestamp passato
-     * @param timestamp 
-     */
-    private getTimeLastMessage(timestamp: string) {
-        const timestampNumber = parseInt(timestamp) / 1000;
-        const time = getFromNow(timestampNumber);
-        return time;
     }
 
     /**

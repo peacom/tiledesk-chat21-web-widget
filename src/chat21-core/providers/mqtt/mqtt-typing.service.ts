@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 
 // firebase
-import * as firebase from 'firebase/app';
-import 'firebase/messaging';
-import 'firebase/database';
+// import * as firebase from 'firebase/app';
+// import 'firebase/messaging';
+// import 'firebase/database';
 
 // services
 // import { EventsService } from './abstract/events-service';

@@ -1,13 +1,10 @@
+import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 
 // firebase
-import firebase from 'firebase/app';
-import 'firebase/messaging';
-import 'firebase/database';
-import 'firebase/auth';
-import 'firebase/storage';
+// import firebase from 'firebase/app';
 
 // services
 import { MessagingAuthService } from '../abstract/messagingAuth.service';
@@ -35,6 +32,7 @@ export class FirebaseAuthService extends MessagingAuthService {
   // private imageRepo: ImageRepoService = new FirebaseImageRepoService();
 
   private firebaseToken: string;
+  private firebase: any;
   private logger:LoggerService = LoggerInstance.getInstance()
   constructor(
     public http: HttpClient
@@ -45,14 +43,16 @@ export class FirebaseAuthService extends MessagingAuthService {
   /**
    *
    */
-  initialize() {
+  async initialize() {
     this.SERVER_BASE_URL = this.getBaseUrl();
     this.URL_TILEDESK_CREATE_CUSTOM_TOKEN = this.SERVER_BASE_URL + 'chat21/firebase/auth/createCustomToken';
     this.logger.debug('[FIREBASEAuthSERVICE] - initialize URL_TILEDESK_CREATE_CUSTOM_TOKEN ', this.URL_TILEDESK_CREATE_CUSTOM_TOKEN)
-    // this.URL_TILEDESK_SIGNIN = this.SERVER_BASE_URL + 'auth/signin';
-    // this.URL_TILEDESK_SIGNIN_ANONYMOUSLY = this.SERVER_BASE_URL + 'auth/signinAnonymously'
-    // this.URL_TILEDESK_SIGNIN_WITH_CUSTOM_TOKEN = this.SERVER_BASE_URL + 'auth/signinWithCustomToken';
     // this.checkIsAuth();
+
+    const { default: firebase} = await import("firebase/app");
+    await Promise.all([import("firebase/auth")]);
+    this.firebase = firebase
+
     this.onAuthStateChanged();
   }
 
@@ -93,7 +93,8 @@ export class FirebaseAuthService extends MessagingAuthService {
    */
   onAuthStateChanged() {
     const that = this;
-    firebase.auth().onAuthStateChanged(user => {
+
+    this.firebase.auth().onAuthStateChanged(user => {
       this.logger.debug('[FIREBASEAuthSERVICE] onAuthStateChanged', user)
       if (!user) {
         this.logger.debug('[FIREBASEAuthSERVICE] 1 - PUBLISH OFFLINE to chat-manager')
@@ -114,24 +115,24 @@ export class FirebaseAuthService extends MessagingAuthService {
     let firebasePersistence;
     switch (this.getPersistence()) {
       case 'SESSION': {
-        firebasePersistence = firebase.auth.Auth.Persistence.SESSION;
+        firebasePersistence = this.firebase.auth.Auth.Persistence.SESSION;
         break;
       }
       case 'LOCAL': {
-        firebasePersistence = firebase.auth.Auth.Persistence.LOCAL;
+        firebasePersistence = this.firebase.auth.Auth.Persistence.LOCAL;
         break;
       }
       case 'NONE': {
-        firebasePersistence = firebase.auth.Auth.Persistence.NONE;
+        firebasePersistence = this.firebase.auth.Auth.Persistence.NONE;
         break;
       }
       default: {
-        firebasePersistence = firebase.auth.Auth.Persistence.NONE;
+        firebasePersistence = this.firebase.auth.Auth.Persistence.NONE;
         break;
       }
     }
-    return firebase.auth().setPersistence(firebasePersistence).then(async () => {
-      return firebase.auth().signInWithCustomToken(token).then(async () => {
+    return this.firebase.auth().setPersistence(firebasePersistence).then(async () => {
+      return this.firebase.auth().signInWithCustomToken(token).then(async () => {
         // that.firebaseSignInWithCustomToken.next(response);
       }).catch((error) => {
         that.logger.error('[FIREBASEAuthSERVICE] signInFirebaseWithCustomToken Error: ', error);
@@ -151,7 +152,7 @@ export class FirebaseAuthService extends MessagingAuthService {
    */
   createUserWithEmailAndPassword(email: string, password: string): any {
     const that = this;
-    return firebase.auth().createUserWithEmailAndPassword(email, password).then((response) => {
+    return this.firebase.auth().createUserWithEmailAndPassword(email, password).then((response) => {
       that.logger.debug('[FIREBASEAuthSERVICE] CRATE USER WITH EMAIL: ', email, ' & PSW: ', password);
       // that.firebaseCreateUserWithEmailAndPassword.next(response);
       return response;
@@ -167,7 +168,7 @@ export class FirebaseAuthService extends MessagingAuthService {
    */
   sendPasswordResetEmail(email: string): any {
     const that = this;
-    return firebase.auth().sendPasswordResetEmail(email).then(() => {
+    return this.firebase.auth().sendPasswordResetEmail(email).then(() => {
       that.logger.debug('[FIREBASEAuthSERVICE] firebase-send-password-reset-email');
       // that.firebaseSendPasswordResetEmail.next(email);
     }).catch((error) => {
@@ -180,7 +181,7 @@ export class FirebaseAuthService extends MessagingAuthService {
    */
   private signOut(): Promise<boolean> {
     const that = this;
-    return new Promise((resolve, reject)=> {firebase.auth().signOut().then(() => {
+    return new Promise((resolve, reject)=> {this.firebase.auth().signOut().then(() => {
       that.logger.debug('[FIREBASEAuthSERVICE] firebase-sign-out');
         // cancello token
         // this.appStorage.removeItem('tiledeskToken');
@@ -200,7 +201,7 @@ export class FirebaseAuthService extends MessagingAuthService {
    */
   delete() {
     const that = this;
-    firebase.auth().currentUser.delete().then(() => {
+    this.firebase.auth().currentUser.delete().then(() => {
       that.logger.debug('[FIREBASEAuthSERVICE] firebase-current-user-delete');
       // that.firebaseCurrentUserDelete.next();
     }).catch((error) => {

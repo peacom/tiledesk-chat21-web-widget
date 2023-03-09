@@ -4,10 +4,10 @@ import { Injectable } from '@angular/core';
 import { NotificationsService } from '../abstract/notifications.service';
 import { LoggerInstance } from '../logger/loggerInstance';
 import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
+
 // firebase
-import firebase from "firebase/app";
-import 'firebase/messaging';
-import 'firebase/auth';
+// import firebase from "firebase/app";
+
 // chat21
 import { Chat21Service } from './chat-service';
 
@@ -20,6 +20,8 @@ export class MQTTNotifications extends NotificationsService {
   private userId: string;
   private tenant: string;
   private vapidkey: string;
+  private firebase: any;
+
   private logger: LoggerService = LoggerInstance.getInstance();
 
   constructor(
@@ -28,16 +30,20 @@ export class MQTTNotifications extends NotificationsService {
     super();
   }
 
-  initialize(tenant: string, vapId: string): void {
+  async initialize(tenant: string, vapId: string) {
     this.tenant = tenant;
     this.vapidkey = vapId;
+
+    const { default: firebase} = await import("firebase/app");
+    this.firebase = firebase
+
     return;
   }
     
   getNotificationPermissionAndSaveToken(currentUserUid) {
     this.userId = currentUserUid;
-    if (firebase.messaging.isSupported()) {
-      const messaging = firebase.messaging();
+    if (this.firebase.messaging.isSupported()) {
+      const messaging = this.firebase.messaging();
       // messaging.requestPermission()
       Notification.requestPermission().then((permission) => {
         if (permission === 'granted') {
@@ -77,7 +83,7 @@ export class MQTTNotifications extends NotificationsService {
       let connectionsRefURL = '';
       if (connectionsRefinstancesId) {
         connectionsRefURL = connectionsRefinstancesId + self.FCMcurrentToken;
-        const connectionsRef = firebase.database().ref().child(connectionsRefURL);
+        const connectionsRef = this.firebase.database().ref().child(connectionsRefURL);
         self.logger.log('[MQTTNotificationService] >>>> connectionsRef ', connectionsRef);
         self.logger.log('[MQTTNotificationService] >>>> connectionsRef url ', connectionsRefURL);
         connectionsRef.off()
