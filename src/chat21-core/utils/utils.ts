@@ -133,9 +133,9 @@ export function setLastDate(translate, timestamp): string {
   const LABEL_TO = translate.get('LABEL_TO');
   const LABEL_LAST_ACCESS = translate.get('LABEL_LAST_ACCESS');
 
-  var date = new Date(timestamp);
+  let date = new Date(timestamp);
   let now: Date = new Date();
-  var labelDays = '';
+  let labelDays = '';
   if (now.getFullYear() !== date.getFullYear()) {
     const month = date.getMonth() + 1;
     labelDays = date.getDay() + '/' + month + '/' + date.getFullYear();
