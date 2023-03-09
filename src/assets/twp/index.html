@@ -180,43 +180,6 @@
 
     </style>
 
-    <!-- <script type="text/javascript">
-
-        // redirect to mobile version
-
-        /**
-         * definitely not the best way to findout if there is a mobile browser
-         * @returns {any}
-         */
-        function deviceOS() {
-            var useragent = navigator.userAgent;
-            if(useragent.match(/Android/i)) {
-                return 'android';
-            } else if(useragent.match(/webOS/i)) {
-                return 'webos';
-            } else if(useragent.match(/iPhone/i)) {
-                return 'iphone';
-            } else if(useragent.match(/iPod/i)) {
-                return 'ipod';
-            } else if(useragent.match(/iPad/i)) {
-                return 'ipad';
-            } else if(useragent.match(/Windows Phone/i)) {
-                return 'windows phone';
-            } else if(useragent.match(/SymbianOS/i)) {
-                return 'symbian';
-            } else if(useragent.match(/RIM/i) || useragent.match(/BB/i)) {
-                return 'blackberry';
-            } else {
-                return false;
-            }
-        }
-
-        if (deviceOS()) {
-            var frameEl = document.getElementById('frame');
-            location.href = "";
-        }
-    </script> -->
-
     <meta property="og:title" content="Try Tiledesk now!" />
     <meta property="og:description" content="Qualify your leads to increase your sales faster. It's really easy to do it with the Tiledesk conversational form builder" />
     <meta property="og:image" content="https://tiledesk.com/wp-content/uploads/2022/12/6029654-02-min.png" />
@@ -227,20 +190,7 @@
     <script defer="" src="./tiledesk_widget_files/jquery.min.js"></script>
     <script defer="" src="./tiledesk_widget_files/bootstrap.min.js"></script>
 
-    <!-- <script type="application/javascript">
-        window.tiledeskSettings = {
-            marginX: "100px",
-            marginY: "50px"
-        };
-        (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id; //js.async=!0;
-        js.src = "../../launch.js"; 
-        fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'tiledesk-jssdk'));
 
-    </script> -->
     <script type="application/javascript">
         window.tiledeskSettings = {
             marginX: "100px",
@@ -306,10 +256,6 @@
 
         window.Tiledesk('onAuthStateChanged', function(event_data) {
         	console.log("AUTHENTICATED!", event_data);
-       		// if(event_data.detail.isLogged){
-            // 	console.log("isLogged!!!!", event_data);
-            // 	window.Tiledesk('show')
-            // }
         });
     </script>
 
@@ -549,9 +495,9 @@
                             </a>
 
                             <!-- whatsapp -->
-                            <!-- <a onclick="shareOnWhatsapp()" style="cursor: pointer">
+                            <a onclick="shareOnWhatsapp()" style="cursor: pointer">
                                 <img src="./tiledesk_widget_files/whatsapp.png" alt="Whatsapp">
-                            </a> -->
+                            </a>
 
                         </div>
                     </div>
@@ -598,7 +544,6 @@
     <link href="./tiledesk_widget_files/bootstrap.min.css" rel="stylesheet" type="text/css">
     <!-- <link href="./tiledesk_widget_files/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
     <link href="./tiledesk_widget_files/website-poly.min.css" rel="stylesheet" type="text/css">
-    <!-- <link href="./tiledesk_widget_files/css" rel="stylesheet" type="text/css"> -->
 </div>
 </body>
 </html>

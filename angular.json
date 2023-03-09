@@ -30,7 +30,6 @@
               "src/test-custom-auth.html",
               "src/tiledesk.js",
               "src/launch.js",
-              "src/base_script.html",
               "src/iframe-style.css",
               "src/widget-config-template.json",
               "src/widget-config.json",
@@ -54,8 +53,9 @@
             "buildOptimizer": false,
             "allowedCommonJsDependencies": [
               "rxjs-compat",
-              "moment",
-              "idb"
+              "idb",
+              "accept-language-parser",
+              "file-saver"
             ],
             "sourceMap": true,
             "optimization": false,
