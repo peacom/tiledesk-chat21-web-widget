@@ -1,14 +1,14 @@
 import { TYPE_DIRECT } from './../chat21-core/utils/constants';
 /** ANGULAR MODULES */
 import { AfterViewInit, Component, ElementRef, HostListener, NgZone, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { environment } from 'src/environments/environment';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { v4 as uuidv4 } from 'uuid';
 //COMPONENTS
 import { EyeeyeCatcherCardComponent } from './component/eyeeye-catcher-card/eyeeye-catcher-card.component';
 //MODELS
-import { ConversationModel } from 'src/chat21-core/models/conversation';
 import { UserModel } from 'src/chat21-core/models/user';
+import { ConversationModel } from 'src/chat21-core/models/conversation';
 // SERVICES
 /** LOGGER SERVICES */
 import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';

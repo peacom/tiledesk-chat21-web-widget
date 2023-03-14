@@ -120,7 +120,6 @@ import { CHAT_ENGINE_MQTT, UPLOAD_ENGINE_NATIVE } from 'src/chat21-core/utils/co
 
 //STORAGE
 import { LocalSessionStorage } from 'src/chat21-core/providers/localSessionStorage';
-import { SettingsSaverService } from './providers/settings-saver.service';
 
 import { Globals } from './utils/globals';
 import { GlobalSettingsService } from './providers/global-settings.service';
@@ -320,7 +319,6 @@ export function uploadFactory(http: HttpClient, appConfig: AppConfigService, app
     Globals,
     Rules,
     GlobalSettingsService,
-    SettingsSaverService,
     EventsService,
     StarRatingWidgetService,
     {
