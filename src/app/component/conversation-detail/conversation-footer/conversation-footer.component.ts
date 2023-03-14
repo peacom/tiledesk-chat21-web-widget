@@ -1,15 +1,15 @@
-import { ConversationHandlerService } from 'src/chat21-core/providers/abstract/conversation-handler.service';
-import { TypingService } from 'src/chat21-core/providers/abstract/typing.service';
-import { TYPE_MSG_TEXT, TYPE_MSG_IMAGE, TYPE_MSG_FILE } from 'src/chat21-core/utils/constants';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Globals } from 'src/app/utils/globals';
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChanges, OnChanges, ViewChild } from '@angular/core';
-import { UploadModel } from 'src/chat21-core/models/upload';
-import { convertColorToRGBA } from 'src/chat21-core/utils/utils';
-import { UploadService } from 'src/chat21-core/providers/abstract/upload.service';
-import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
-import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
-import { ChatManager } from 'src/chat21-core/providers/chat-manager';
 import { MessageModel } from 'src/chat21-core/models/message';
+import { UploadModel } from 'src/chat21-core/models/upload';
+import { ConversationHandlerService } from 'src/chat21-core/providers/abstract/conversation-handler.service';
+import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
+import { TypingService } from 'src/chat21-core/providers/abstract/typing.service';
+import { UploadService } from 'src/chat21-core/providers/abstract/upload.service';
+import { ChatManager } from 'src/chat21-core/providers/chat-manager';
+import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
+import { TYPE_MSG_FILE, TYPE_MSG_IMAGE, TYPE_MSG_TEXT } from 'src/chat21-core/utils/constants';
+import { convertColorToRGBA } from 'src/chat21-core/utils/utils';
 
 @Component({
   selector: 'chat-conversation-footer',

@@ -106,13 +106,13 @@
     <emoji-mart id="emoji-mart"
         *ngIf="showEmojiPicker"
         class="emoji-mart"
-        [showPreview]="emojiiOptions.showPreview"
+        [showPreview]="emojiiOptions?.showPreview"
         [color]="stylesMap?.get('themeColor')" 
-        [perLine]="emojiiOptions.emojiPerLine"
-        [totalFrequentLines]="emojiiOptions.totalFrequentLines"
-        [enableSearch]="emojiiOptions.enableSearch"
-        [darkMode]="emojiiOptions.darkMode"
-        [include]="emojiiOptions.include"
+        [perLine]="emojiiOptions?.emojiPerLine"
+        [totalFrequentLines]="emojiiOptions?.totalFrequentLines"
+        [enableSearch]="emojiiOptions?.enableSearch"
+        [darkMode]="emojiiOptions?.darkMode"
+        [include]="emojiiOptions?.include"
         (emojiSelect)="addEmoji($event)">
     </emoji-mart>
 </div>
