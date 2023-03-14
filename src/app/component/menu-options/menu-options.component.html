@@ -14,9 +14,7 @@
   </div>
   <div *ngIf="g.isOpenMenuOptions" class="modal-menu-options">
     <div class="">
-    
-      <div *ngIf="g.signInWithCustomToken && g.userFullname" class="label-menu-welcome">{{g.userFullname}}</div>  
-
+  
       <div class="c21-button" (click)="toggleSound()">
         <svg *ngIf="!g.soundEnabled" aria-labelledby="altIconTitle" class="icon-menu" xmlns="http://www.w3.org/2000/svg"
             width="20" height="20" viewBox="0 0 24 24">
