@@ -2,8 +2,6 @@
     "LABEL_TU": "",
     "LABEL_PLACEHOLDER": "Écrivez votre question ...",
     "LABEL_START_NW_CONV": "Nouvelle conversation",
-    "LABEL_FIRST_MSG": "Décrivez brièvement votre problème, nous vous mettrons en relation avec un opérateur spécialisé.",
-    "LABEL_FIRST_MSG_NO_AGENTS": "🤔 Tous les opérateurs sont actuellement hors ligne. Vous pouvez toujours décrire votre problème. Il sera attribué à l'équipe d'assistance qui vous répondra dans les plus brefs délais.",
     "LABEL_SELECT_TOPIC": "Sélectionnez un sujet",
     "LABEL_COMPLETE_FORM": "Remplissez le formulaire pour démarrer une conversation avec le prochain agent disponible.",
     "LABEL_FIELD_NAME": "Prenom",
