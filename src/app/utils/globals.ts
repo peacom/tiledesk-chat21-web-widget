@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
 import { BehaviorSubject } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 /** CONSTANTS */
 import { CHANNEL_TYPE_GROUP } from 'src/chat21-core/utils/constants';
 
 /** MODELS */
+import { DepartmentModel } from 'src/models/department';
 import { ProjectModel } from 'src/models/project';
 import { UserAgent } from 'src/models/userAgent';
-import { DepartmentModel } from 'src/models/department';
 
 /** UTILS FUNCTIONS */
 import { avatarPlaceholder, detectIfIsMobile, getParameterByName, setColorFromString } from 'src/app/utils/utils';
@@ -21,17 +21,13 @@ import { Rule } from 'src/models/rule';
   })
 export class Globals {
 
-  obsObjChanged = new BehaviorSubject<any>(null);
-  obsIsOpen = new BehaviorSubject<boolean>(null);
-
   BASE_LOCATION = 'https://widget.tiledesk.com/v2';
   POWERED_BY ='<a tabindex="-1" target="_blank" href="http://www.tiledesk.com/?utm_source=widget"><img src="https://support-pre.tiledesk.com/dashboard/assets/img/logos/tiledesk-logo_new_gray.svg"/></a>'
   DEFAULT_LOGO_CHAT = '/assets/images/tiledesk_logo_white_small.svg';
-  WIDGET_TITLE = 'Tiledesk';
 
   // ============ BEGIN: SET FUNCTION BY UTILS ==============//
   // getParameterByName = getParameterByName;
-  convertColorToRGBA = convertColorToRGBA;
+  // convertColorToRGBA = convertColorToRGBA;
   // ============ BEGIN: SET INTERNAL PARAMETERS ==============//
 
   project = new ProjectModel();
@@ -43,11 +39,9 @@ export class Globals {
   isLogged: boolean;
   soundEnabled: boolean;
   BUILD_VERSION: String;
-  filterSystemMsg: boolean; /** se è true i messaggi inviati da system non vengono visualizzati */
   baseLocation: string;
   availableAgents: Array<UserAgent> = [];
-  isLogout = false; /** indica se ho appena fotto il logout */
-
+  
   attributes: any;
   preChatFormJson: any; // *******  new ********
   token: string;
@@ -70,20 +64,16 @@ export class Globals {
   // areAgentsAvailable = false;
   areAgentsAvailableText: string;
   availableAgentsStatus = false; // indica quando è impostato lo stato degli agenti nel subscribe
-  signInWithCustomToken: boolean;
   displayEyeCatcherCard: string;
 
   firstOpen = true;
   departmentID = null;
   privacyApproved = false;
-  startedAt = new Date();
 
   // ============ BEGIN: LABELS ==============//
   LABEL_TU: string;
   LABEL_PLACEHOLDER: string;
   LABEL_START_NW_CONV: string;
-  LABEL_FIRST_MSG: string;
-  LABEL_FIRST_MSG_NO_AGENTS: string;
   LABEL_SELECT_TOPIC: string;
   LABEL_COMPLETE_FORM: string;
   LABEL_FIELD_NAME: string;
@@ -188,9 +178,6 @@ export class Globals {
    showLogoutOption: boolean;
    supportMode: boolean;
 
-   online_msg: string;
-   offline_msg: string;
-
    customAttributes: any;
    showAttachmentButton: boolean;
    showAllConversations: boolean;
@@ -232,7 +219,6 @@ export class Globals {
    */
   initDefafultParameters() {
     this.globalsParameters = {};
-    this.filterSystemMsg = true;
 
     let wContext: any = window;
     if (window.frameElement && window.frameElement.getAttribute('tiledesk_context') === 'parent') {
@@ -406,9 +392,6 @@ export class Globals {
 
     this.showLogoutOption = false;
 
-    this.offline_msg = this.LABEL_FIRST_MSG_NO_AGENTS;
-    this.online_msg = this.LABEL_FIRST_MSG;
-
     this.isOpenNewMessage = false;
     this.showAttachmentButton = true;
     this.showAllConversations = true;
@@ -443,11 +426,6 @@ export class Globals {
     // this.parameters['BUILD_VERSION'] = 'v.' + environment.version;
     // this.parameters.push({'BUILD_VERSION': 'v.' + environment.version});
 
-    this.filterSystemMsg = true;
-    /** ???? scolpito in MessagingService. se è true i messaggi inviati da system non vengono visualizzati */
-    // this.parameters['filterSystemMsg'] = true;
-    // this.parameters.push({'filterSystemMsg': true});
-
     this.soundEnabled = true;
     // this.parameters['soundEnabled'] = true;
     // this.parameters.push({'soundEnabled': true});
@@ -459,10 +437,6 @@ export class Globals {
     this.isOpenMenuOptions = false;
     // this.parameters['isOpenMenuOptions'] = false;
     // this.parameters.push({'isOpenMenuOptions': false});
-                                                        /** open/close menu options  */
-    this.signInWithCustomToken = false;
-    // this.parameters['signInWithCustomToken'] = false;
-    // this.parameters.push({'signInWithCustomToken': false});
 
     this.displayEyeCatcherCard = 'none';
     // this.parameters['displayEyeCatcherCard'] = 'none';
@@ -622,7 +596,6 @@ export class Globals {
     this.isOpen = val;
     this.setParentBodyStyleMobile(val, this.isMobile)
     this.setElementStyle(val)
-    this.obsIsOpen.next(val);
   }
 
   /**
@@ -634,9 +607,6 @@ export class Globals {
     // storage = true;
     this[key] = val;
     const obj = {'key': key, 'val': val};
-    if (storage === true) {
-      this.obsObjChanged.next(obj);
-    }
   }
 
   /**
