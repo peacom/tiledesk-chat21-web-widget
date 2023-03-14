@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { GlobalSettingsService } from './providers/global-settings.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AppStorageService } from 'src/chat21-core/providers/abstract/app-storage.service';
-import { SettingsSaverService } from './providers/settings-saver.service';
 import { TranslatorService } from './providers/translator.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { CustomTranslateService } from '../chat21-core/providers/custom-translate.service';
@@ -43,7 +42,6 @@ describe('AppComponent', () => {
         GlobalSettingsService,
         AppStorageService,
         AppConfigService,
-        SettingsSaverService,
         TranslatorService,
         CustomTranslateService,
         ChatManager,
