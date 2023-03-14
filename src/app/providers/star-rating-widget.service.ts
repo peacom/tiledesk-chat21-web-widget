@@ -1,13 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 // services
-import { Globals } from 'src/app/utils/globals';
-import { AppConfigService } from 'src/app/providers/app-config.service';
-import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
-import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
 import { map } from 'rxjs/operators';
+import { AppConfigService } from 'src/app/providers/app-config.service';
+import { Globals } from 'src/app/utils/globals';
+import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
+import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
 
 
 @Injectable()

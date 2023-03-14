@@ -1,5 +1,4 @@
-import { ConversationFooterComponent } from './../conversation-detail/conversation-footer/conversation-footer.component';
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Globals } from '../../utils/globals';
 
 @Component({

@@ -1,9 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Globals } from '../utils/globals';
-import { AppConfigService } from '../providers/app-config.service';
 import { map } from 'rxjs/operators';
+import { AppConfigService } from '../providers/app-config.service';
+import { Globals } from '../utils/globals';
 
 @Injectable()
 export class WaitingService {

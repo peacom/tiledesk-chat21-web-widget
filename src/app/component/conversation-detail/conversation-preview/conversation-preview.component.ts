@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MIN_WIDTH_IMAGES } from 'src/app/utils/constants';
 import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';

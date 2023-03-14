@@ -1,7 +1,6 @@
-import { Globals } from 'src/app/utils/globals';
-import { Component, Input, OnInit, SimpleChanges, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { saveAs } from 'file-saver';
 import { popupUrl } from 'src/chat21-core/utils/utils';
-import { saveAs} from 'file-saver';
 
 @Component({
   selector: 'chat-image',

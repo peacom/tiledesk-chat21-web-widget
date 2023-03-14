@@ -1,9 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Globals } from '../../utils/globals';
-import { isEmoji } from '../../utils/utils';
 
 
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { trigger } from '@angular/animations';
 import { LoggerService } from '../../../chat21-core/providers/abstract/logger.service';
 import { LoggerInstance } from '../../../chat21-core/providers/logger/loggerInstance';
 

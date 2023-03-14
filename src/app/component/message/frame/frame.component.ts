@@ -1,5 +1,5 @@
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'chat-frame',

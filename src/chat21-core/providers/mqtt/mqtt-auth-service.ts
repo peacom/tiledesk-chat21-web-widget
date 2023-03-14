@@ -14,8 +14,6 @@ import { environment } from '../../../environments/environment';
 import { MessagingAuthService } from '../abstract/messagingAuth.service';
 import { Chat21Service } from './chat-service';
 // models
-import { UserModel } from '../../models/user';
-import { avatarPlaceholder, getColorBck } from '../../utils/utils-user';
 import { AppStorageService } from '../abstract/app-storage.service';
 import { LoggerService } from '../abstract/logger.service';
 import { LoggerInstance } from '../logger/loggerInstance';

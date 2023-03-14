@@ -1,8 +1,8 @@
-import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { StarRatingWidgetService } from 'src/app/providers/star-rating-widget.service';
 import { Globals } from 'src/app/utils/globals';
 import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
+import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
 
 
 @Component({

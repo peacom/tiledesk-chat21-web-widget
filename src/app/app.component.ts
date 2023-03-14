@@ -1,14 +1,14 @@
 import { TYPE_DIRECT } from './../chat21-core/utils/constants';
 /** ANGULAR MODULES */
 import { AfterViewInit, Component, ElementRef, HostListener, NgZone, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { environment } from 'src/environments/environment';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { environment } from 'src/environments/environment';
 import { v4 as uuidv4 } from 'uuid';
 //COMPONENTS
 import { EyeeyeCatcherCardComponent } from './component/eyeeye-catcher-card/eyeeye-catcher-card.component';
 //MODELS
-import { UserModel } from 'src/chat21-core/models/user';
 import { ConversationModel } from 'src/chat21-core/models/conversation';
+import { UserModel } from 'src/chat21-core/models/user';
 // SERVICES
 /** LOGGER SERVICES */
 import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
@@ -17,33 +17,32 @@ import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance'
 import { TiledeskAuthService } from 'src/chat21-core/providers/tiledesk/tiledesk-auth.service';
 import { TiledeskRequestsService } from 'src/chat21-core/providers/tiledesk/tiledesk-requests.service';
 /** CONVERSATIONS - MESSAGE SERVICES */
-import { MessagingAuthService } from 'src/chat21-core/providers/abstract/messagingAuth.service';
-import { ChatManager } from 'src/chat21-core/providers/chat-manager';
-import { UploadService } from 'src/chat21-core/providers/abstract/upload.service';
-import { Triggerhandler } from 'src/chat21-core/utils/triggerHandler';
 import { AppStorageService } from 'src/chat21-core/providers/abstract/app-storage.service';
-import { ConversationHandlerBuilderService } from 'src/chat21-core/providers/abstract/conversation-handler-builder.service';
 import { ArchivedConversationsHandlerService } from 'src/chat21-core/providers/abstract/archivedconversations-handler.service';
-import { ConversationsHandlerService } from 'src/chat21-core/providers/abstract/conversations-handler.service';
+import { ConversationHandlerBuilderService } from 'src/chat21-core/providers/abstract/conversation-handler-builder.service';
 import { ConversationHandlerService } from 'src/chat21-core/providers/abstract/conversation-handler.service';
+import { ConversationsHandlerService } from 'src/chat21-core/providers/abstract/conversations-handler.service';
 import { ImageRepoService } from 'src/chat21-core/providers/abstract/image-repo.service';
-import { TypingService } from 'src/chat21-core/providers/abstract/typing.service';
+import { MessagingAuthService } from 'src/chat21-core/providers/abstract/messagingAuth.service';
 import { PresenceService } from 'src/chat21-core/providers/abstract/presence.service';
+import { TypingService } from 'src/chat21-core/providers/abstract/typing.service';
+import { UploadService } from 'src/chat21-core/providers/abstract/upload.service';
+import { ChatManager } from 'src/chat21-core/providers/chat-manager';
 import { CustomTranslateService } from 'src/chat21-core/providers/custom-translate.service';
+import { Triggerhandler } from 'src/chat21-core/utils/triggerHandler';
 /** OTHERS */
 import { AppConfigService } from './providers/app-config.service';
 import { GlobalSettingsService } from './providers/global-settings.service';
 import { TranslatorService } from './providers/translator.service';
-import { SettingsSaverService } from './providers/settings-saver.service';
 // UTILS
-import { Globals } from './utils/globals';
-import { UID_SUPPORT_GROUP_MESSAGES } from './utils/constants';
-import { supports_html5_storage } from 'src/chat21-core/utils/utils';
-import { AUTH_STATE_OFFLINE, AUTH_STATE_ONLINE, TYPE_MSG_FILE, TYPE_MSG_IMAGE, URL_SOUND_LIST_CONVERSATION } from 'src/chat21-core/utils/constants';
-import { isInfo, isUserBanned } from 'src/chat21-core/utils/utils-message';
+import * as dayjs from 'dayjs';
 import { MessageModel } from 'src/chat21-core/models/message';
+import { AUTH_STATE_OFFLINE, AUTH_STATE_ONLINE, TYPE_MSG_FILE, TYPE_MSG_IMAGE, URL_SOUND_LIST_CONVERSATION } from 'src/chat21-core/utils/constants';
+import { supports_html5_storage } from 'src/chat21-core/utils/utils';
+import { UID_SUPPORT_GROUP_MESSAGES } from './utils/constants';
+import { Globals } from './utils/globals';
 import { Rules } from './utils/rules';
-import * as dayjs from 'dayjs'
+import { isInfo, isUserBanned } from 'src/chat21-core/utils/utils-message';
 
 interface MessageObj {
   tenant?: string;
@@ -108,10 +107,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     private el: ElementRef,
     private ngZone: NgZone,
     public g: Globals,
-    private rules: Rules,
     public triggerHandler: Triggerhandler,
     public globalSettingsService: GlobalSettingsService,
-    private settingsSaverService: SettingsSaverService,
     public appConfigService: AppConfigService,
     private appStorageService: AppStorageService,
     private translatorService: TranslatorService,
@@ -319,12 +316,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.setStyleMap()
 
-    /**
-     * SUBSCRIPTION :
-     * Subscription to runtime changes in globals
-     * and save changes in localstorage
-    */
-    this.settingsSaverService.initialize();
     // ------------------------------- //
 
     // ------------------------------- //
@@ -399,7 +390,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                 }).then(()=>{
                     that.presenceService.setPresence(user.uid);
                 });
-                
+
                 // this.initConversationsHandler(this.g.tenant, that.g.senderId);
                 /* If singleConversation mode is active wait to showWidget: do it later in initConversationsHandler */
                 if (autoStart && !that.g.singleConversation) { 
@@ -448,7 +439,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                 this.g.setParameter('recipientId', null, false)
                 that.hideWidget();
                 // that.g.setParameter('isShown', false, true);
-                that.g.isLogout = true;
                 that.triggerOnAuthStateChanged('offline');
                 // that.triggerOnLoggedOut()
             }
@@ -1121,7 +1111,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             this.hideWidget();
             // that.g.setParameter('isShown', false, true);
             this.appStorageService.removeItem('tiledeskToken');
-            this.g.isLogout = true;
             if (this.g.autoStart !== false) {
                 this.authenticate();
                 this.initAll();

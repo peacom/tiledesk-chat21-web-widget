@@ -1,13 +1,12 @@
+import { Injectable } from '@angular/core';
 import { AppStorageService } from 'src/chat21-core/providers/abstract/app-storage.service';
-import { Globals } from './globals';
-import { UserModel } from './../../chat21-core/models/user';
-import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
 import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
-import { TiledeskAuthService } from 'src/chat21-core/providers/tiledesk/tiledesk-auth.service';
+import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
 import { TiledeskRequestsService } from 'src/chat21-core/providers/tiledesk/tiledesk-requests.service';
-import { Inject, Injectable } from '@angular/core';
-import { IRules, Rule } from 'src/models/rule';
 import { getDateDifference } from 'src/chat21-core/utils/utils';
+import { Rule } from 'src/models/rule';
+import { UserModel } from './../../chat21-core/models/user';
+import { Globals } from './globals';
 
 
 @Injectable({
@@ -60,7 +59,6 @@ export class Rules {
             message[0]['message'].sourcePage = this.g.attributes['sourcePage']
             message[0]['message'].language = this.g.lang
             message[0]['message'].departmentid = this.g.attributes.departmentId
-            console.log('message[0]', message[0]['message'])
             this.tiledeskRequestsService.sendMessageToRequest(this.request_id, this.tiledeskToken, message[0]['message'])
         }
     }

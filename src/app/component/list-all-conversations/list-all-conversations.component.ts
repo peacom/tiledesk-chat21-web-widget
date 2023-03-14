@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, IterableDiffers } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, IterableDiffers, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 // services
-import { Globals } from 'src/app/utils/globals';
-import { convertMessage, compareValues } from 'src/app/utils/utils';
-import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
 import { LoggerInstance } from 'src//chat21-core/providers/logger/loggerInstance';
+import { Globals } from 'src/app/utils/globals';
+import { compareValues, convertMessage } from 'src/app/utils/utils';
+import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
 import { CustomTranslateService } from 'src/chat21-core/providers/custom-translate.service';
 
 // models

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, Sanitizer } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'chat-text',

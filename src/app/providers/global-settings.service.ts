@@ -1,20 +1,17 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { LogLevel } from './../../chat21-core/utils/constants';
 import { ElementRef, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 // services
 import { Globals } from '../utils/globals';
-import { getImageUrlThumb, stringToBoolean, convertColorToRGBA, getParameterByName, stringToNumber, detectIfIsMobile } from '../utils/utils';
+import { convertColorToRGBA, detectIfIsMobile, getImageUrlThumb, getParameterByName, stringToBoolean } from '../utils/utils';
 
 import { TemplateBindingParseResult } from '@angular/compiler';
-import { AppConfigService } from './app-config.service';
-import { __core_private_testing_placeholder__ } from '@angular/core/testing';
-import { ProjectModel } from '../../models/project';
 import { AppStorageService } from '../../chat21-core/providers/abstract/app-storage.service';
 import { LoggerService } from '../../chat21-core/providers/abstract/logger.service';
 import { LoggerInstance } from '../../chat21-core/providers/logger/loggerInstance';
-import { invertColor, isJsonArray, isJsonString } from '../../chat21-core/utils/utils';
+import { invertColor, isJsonArray } from '../../chat21-core/utils/utils';
+import { AppConfigService } from './app-config.service';
 
 
 @Injectable()
@@ -1749,21 +1746,8 @@ export class GlobalSettingsService {
         this.globals.departments = departments;
         if (departments.length === 1) {
             // UN SOLO DEPARTMENT
-            const department = departments[0];
             this.logger.debug('[GLOBAL-SET] initDepartments DEPARTMENT FIRST ::::', departments[0]);
             this.globals.setParameter('departmentDefault', departments[0]);
-            if (department && department.online_msg && department.online_msg !== '') {
-                this.globals.online_msg = department.online_msg;
-            }
-            if (department && department.offline_msg && department.offline_msg !== '') {
-                this.globals.offline_msg = department.offline_msg;
-            }
-            // if (department['offline_msg']) {
-            //     this.globals.offline_msg = department['offline_msg'];
-            // }
-            // if (department['online_msg']) {
-            //     this.globals.online_msg = department['online_msg'];
-            // }
             this.setDepartment(departments[0]);
             // return false;
         } else if (departments.length > 1) {
@@ -1773,18 +1757,6 @@ export class GlobalSettingsService {
             departments.forEach(department => {
                 if (department['default'] === true) {
                     // this.globals.departmentDefault = department;
-                    if (department && department.online_msg && department.online_msg !== '') {
-                        this.globals.online_msg = department.online_msg;
-                    }
-                    if (department && department.offline_msg && department.offline_msg !== '') {
-                        this.globals.offline_msg = department.offline_msg;
-                    }
-                    // if (department['offline_msg']) {
-                    //     this.globals.offline_msg = department['offline_msg'];
-                    // }
-                    // if (department['online_msg']) {
-                    //     this.globals.online_msg = department['online_msg'];
-                    // }
                     // console.log('this.globals.offline_msg ::::', department['offline_msg']);
                     // console.log('this.globals.online_msg ::::', department['online_msg']);
                     // departments.splice(i, 1);

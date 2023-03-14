@@ -1,9 +1,9 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { convertColorToRGBA } from 'src/chat21-core/utils/utils';
-import { trigger, style, animate, transition } from '@angular/animations';
 import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
 import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
+import { convertColorToRGBA } from 'src/chat21-core/utils/utils';
 
 @Component({
   selector: 'chat-internal-frame',

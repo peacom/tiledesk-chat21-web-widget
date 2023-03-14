@@ -1,10 +1,10 @@
-import { EventsService } from './../../../providers/events.service';
 import { ChatManager } from 'src/chat21-core/providers/chat-manager';
+import { EventsService } from './../../../providers/events.service';
 
 import { ConversationFooterComponent } from './../conversation-footer/conversation-footer.component';
 
 // tslint:disable-next-line:max-line-length
-import { ElementRef, Component, OnInit, OnChanges, AfterViewInit, Input, Output, ViewChild, EventEmitter, SimpleChanges, ChangeDetectorRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 
 import {
   CHANNEL_TYPE_DIRECT, CHANNEL_TYPE_GROUP, TYPE_MSG_TEXT,
@@ -16,35 +16,35 @@ import {
 import { MessageModel } from 'src/chat21-core/models/message';
 
 // utils
-import { isJustRecived, isPopupUrl} from 'src/app/utils/utils';
+import { isPopupUrl } from 'src/app/utils/utils';
 import { v4 as uuidv4 } from 'uuid';
 
 
 // Import the resized event model
 
-import {DomSanitizer} from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 
-import { AppComponent } from '../../../app.component';
-import { CustomTranslateService } from 'src/chat21-core/providers/custom-translate.service';
-import { ConversationHandlerService } from 'src/chat21-core/providers/abstract/conversation-handler.service';
-import { ConversationHandlerBuilderService } from 'src/chat21-core/providers/abstract/conversation-handler-builder.service';
-import { getDateDifference, popupUrl } from 'src/chat21-core/utils/utils';
-import { ConversationContentComponent } from '../conversation-content/conversation-content.component';
-import { ConversationsHandlerService } from 'src/chat21-core/providers/abstract/conversations-handler.service';
-import { ArchivedConversationsHandlerService } from 'src/chat21-core/providers/abstract/archivedconversations-handler.service';
-import { ConversationModel } from 'src/chat21-core/models/conversation';
-import { AppStorageService } from 'src/chat21-core/providers/abstract/app-storage.service';
-import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
-import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
-import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { TypingService } from 'src/chat21-core/providers/abstract/typing.service';
-import { Globals } from 'src/app/utils/globals';
+import { takeUntil } from 'rxjs/operators';
 import { AppConfigService } from 'src/app/providers/app-config.service';
 import { StarRatingWidgetService } from 'src/app/providers/star-rating-widget.service';
+import { Globals } from 'src/app/utils/globals';
+import { ConversationModel } from 'src/chat21-core/models/conversation';
+import { AppStorageService } from 'src/chat21-core/providers/abstract/app-storage.service';
+import { ArchivedConversationsHandlerService } from 'src/chat21-core/providers/abstract/archivedconversations-handler.service';
+import { ConversationHandlerBuilderService } from 'src/chat21-core/providers/abstract/conversation-handler-builder.service';
+import { ConversationHandlerService } from 'src/chat21-core/providers/abstract/conversation-handler.service';
+import { ConversationsHandlerService } from 'src/chat21-core/providers/abstract/conversations-handler.service';
+import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
+import { TypingService } from 'src/chat21-core/providers/abstract/typing.service';
+import { CustomTranslateService } from 'src/chat21-core/providers/custom-translate.service';
+import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
 import { TiledeskRequestsService } from 'src/chat21-core/providers/tiledesk/tiledesk-requests.service';
-import { isUserBanned } from 'src/chat21-core/utils/utils-message';
 import { LIVE_PAGE } from 'src/chat21-core/utils/constants';
+import { getDateDifference, popupUrl } from 'src/chat21-core/utils/utils';
+import { isUserBanned } from 'src/chat21-core/utils/utils-message';
+import { AppComponent } from '../../../app.component';
+import { ConversationContentComponent } from '../conversation-content/conversation-content.component';
 // import { TranslateService } from '@ngx-translate/core';
 
 @Component({

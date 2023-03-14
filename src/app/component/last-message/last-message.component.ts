@@ -1,20 +1,17 @@
-import { MessageModel } from './../../../chat21-core/models/message';
-import { UserModel } from './../../../chat21-core/models/user';
-import { EventsService } from './../../providers/events.service';
-import { Component, OnInit, Output, OnDestroy, AfterViewInit, EventEmitter, Input, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { MessageModel } from './../../../chat21-core/models/message';
+import { EventsService } from './../../providers/events.service';
 // services
 import { Globals } from 'src/app/utils/globals';
 
 // utils
-import { popupUrl, isPopupUrl, strip_tags } from '../../utils/utils';
 
 import { MIN_WIDTH_IMAGES } from 'src/app/utils/constants';
 import { ConversationModel } from 'src/chat21-core/models/conversation';
-import { conversationToMessage, isEmojii, isImage } from 'src/chat21-core/utils/utils-message';
-import { ImageRepoService } from 'src/chat21-core/providers/abstract/image-repo.service';
-import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
 import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
+import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
+import { conversationToMessage, isEmojii } from 'src/chat21-core/utils/utils-message';
 
 
 @Component({

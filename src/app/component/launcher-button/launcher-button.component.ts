@@ -1,9 +1,9 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Globals } from '../../utils/globals';
 
-import { trigger, state, style, animate, transition } from '@angular/animations';
-import { AppStorageService } from '../../../chat21-core/providers/abstract/app-storage.service';
+import { animate, style, transition, trigger } from '@angular/animations';
 import { convertColorToRGBA } from 'src/chat21-core/utils/utils';
+import { AppStorageService } from '../../../chat21-core/providers/abstract/app-storage.service';
 // vedi: https://angular.io/guide/animations
 
 @Component({

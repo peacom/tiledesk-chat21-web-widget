@@ -1,10 +1,10 @@
+import { AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
-import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Globals } from '../../utils/globals';
 
-import { DepartmentModel } from 'src/models/department';
 import { AppStorageService } from 'src/chat21-core/providers/abstract/app-storage.service';
 import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
+import { DepartmentModel } from 'src/models/department';
 
 @Component({
     selector: 'chat-selection-department',

@@ -1,18 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-// import * as translations from '../utils/translations';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from '../../environments/environment';
 
-import { throwError as observableThrowError, Observable } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { throwError as observableThrowError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 // import 'rxjs/add/observable/throw';
 // import 'rxjs/add/operator/catch';
 import { Globals } from '../utils/globals';
 
-import { AppConfigService } from './app-config.service';
 import { LoggerService } from '../../chat21-core/providers/abstract/logger.service';
 import { LoggerInstance } from '../../chat21-core/providers/logger/loggerInstance';
+import { AppConfigService } from './app-config.service';
 
 @Injectable()
 export class TranslatorService {
@@ -20,7 +19,6 @@ export class TranslatorService {
   private defaultLanguage = 'en'; // default language
   private language: string; // user language
   private logger: LoggerService = LoggerInstance.getInstance()
-  // private translations: Object;
 
   translated_string: any;
   baseLocation: string;
@@ -215,8 +213,6 @@ export class TranslatorService {
       'LABEL_TU',
       'LABEL_PLACEHOLDER',
       'LABEL_START_NW_CONV',
-      'LABEL_FIRST_MSG',
-      'LABEL_FIRST_MSG_NO_AGENTS',
       'LABEL_SELECT_TOPIC',
       'LABEL_COMPLETE_FORM',
       'LABEL_FIELD_NAME',
@@ -271,8 +267,6 @@ export class TranslatorService {
       globals.LABEL_TU = res['LABEL_TU']
       globals.LABEL_PLACEHOLDER = res['LABEL_PLACEHOLDER']
       globals.LABEL_START_NW_CONV = res['LABEL_START_NW_CONV'];
-      globals.LABEL_FIRST_MSG = res['LABEL_FIRST_MSG'];
-      globals.LABEL_FIRST_MSG_NO_AGENTS = res['LABEL_FIRST_MSG_NO_AGENTS'];
       globals.LABEL_SELECT_TOPIC = res['LABEL_SELECT_TOPIC'];
       globals.LABEL_COMPLETE_FORM = res['LABEL_COMPLETE_FORM'];
       globals.LABEL_FIELD_NAME = res['LABEL_FIELD_NAME'];
@@ -342,8 +336,6 @@ export class TranslatorService {
     // console.log('»»»»» globals', globals)
     // globals.LABEL_PLACEHOLDER = this.translateForKey('LABEL_PLACEHOLDER') // done
     // globals.LABEL_START_NW_CONV = this.translateForKey('LABEL_START_NW_CONV'); // done
-    // globals.LABEL_FIRST_MSG = this.translateForKey('LABEL_FIRST_MSG'); // done
-    // globals.LABEL_FIRST_MSG_NO_AGENTS = this.translateForKey('LABEL_FIRST_MSG_NO_AGENTS'); // done
     // globals.LABEL_SELECT_TOPIC = this.translateForKey('LABEL_SELECT_TOPIC'); // done
     // globals.LABEL_COMPLETE_FORM = this.translateForKey('LABEL_COMPLETE_FORM'); // done
     // globals.LABEL_FIELD_NAME = this.translateForKey('LABEL_FIELD_NAME'); // done

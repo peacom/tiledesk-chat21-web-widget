@@ -1,12 +1,11 @@
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChange } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import * as parser from 'accept-language-parser';
 import { FormArray } from 'src/chat21-core/models/formArray';
-import { Component, OnInit, SimpleChange, EventEmitter, Output, Input, ChangeDetectorRef } from '@angular/core';
-import { isString } from 'util';
 import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
+import { CustomTranslateService } from 'src/chat21-core/providers/custom-translate.service';
 import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
 import { validateRegex } from 'src/chat21-core/utils/utils';
-import * as parser from 'accept-language-parser'
-import { CustomTranslateService } from 'src/chat21-core/providers/custom-translate.service';
 
 @Component({
   selector: 'chat-form-builder',

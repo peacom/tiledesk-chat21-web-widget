@@ -1,12 +1,12 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { MAX_WIDTH_IMAGES, MSG_STATUS_RETURN_RECEIPT, MSG_STATUS_SENT, MSG_STATUS_SENT_SERVER } from 'src/app/utils/constants';
 import { MessageModel } from 'src/chat21-core/models/message';
-import { isPopupUrl, popupUrl } from 'src/chat21-core/utils/utils';
-import { MSG_STATUS_SENT, MSG_STATUS_RETURN_RECEIPT, MSG_STATUS_SENT_SERVER, MAX_WIDTH_IMAGES} from 'src/app/utils/constants';
-import { isInfo, isMine, messageType, isEmojii, isImage, isFrame } from 'src/chat21-core/utils/utils-message';
-import { MESSAGE_TYPE_INFO, MESSAGE_TYPE_MINE, MESSAGE_TYPE_OTHERS } from 'src/chat21-core/utils/constants';
+import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
 import { UploadService } from 'src/chat21-core/providers/abstract/upload.service';
 import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
-import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
+import { MESSAGE_TYPE_INFO, MESSAGE_TYPE_MINE, MESSAGE_TYPE_OTHERS } from 'src/chat21-core/utils/constants';
+import { isPopupUrl, popupUrl } from 'src/chat21-core/utils/utils';
+import { isEmojii, isFrame, isImage, isInfo, isMine, messageType } from 'src/chat21-core/utils/utils-message';
 
 @Component({
   selector: 'chat-conversation-content',

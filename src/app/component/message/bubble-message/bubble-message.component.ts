@@ -3,10 +3,9 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MessageModel } from 'src/chat21-core/models/message';
 import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
 import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
-import { MESSAGE_TYPE_MINE, MESSAGE_TYPE_OTHERS } from 'src/chat21-core/utils/constants';
+import { MAX_WIDTH_IMAGES, MESSAGE_TYPE_MINE, MESSAGE_TYPE_OTHERS, MIN_WIDTH_IMAGES } from 'src/chat21-core/utils/constants';
 import { convertColorToRGBA } from 'src/chat21-core/utils/utils';
 import { isFile, isFrame, isImage, messageType } from 'src/chat21-core/utils/utils-message';
-import { MAX_WIDTH_IMAGES, MIN_WIDTH_IMAGES} from 'src/chat21-core/utils/constants';
 import { getColorBck } from 'src/chat21-core/utils/utils-user';
 
 @Component({

@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, OnChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Globals } from 'src/app//utils/globals';
 import { AppConfigService } from 'src/app/providers/app-config.service';
-import { convertColorToRGBA } from 'src/chat21-core/utils/utils';
 import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
 import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
+import { convertColorToRGBA } from 'src/chat21-core/utils/utils';
 
 @Component({
   selector: 'chat-conversation-header',

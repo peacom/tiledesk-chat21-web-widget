@@ -1,6 +1,6 @@
-import { LoggerInstance } from './../../../../chat21-core/providers/logger/loggerInstance';
-import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
 import { Component, OnInit } from '@angular/core';
+import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
+import { LoggerInstance } from './../../../../chat21-core/providers/logger/loggerInstance';
 
 @Component({
   selector: 'chat-like-unlike',

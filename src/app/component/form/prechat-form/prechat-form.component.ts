@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, ElementRef, AfterViewInit, ViewChild, Input } from '@angular/core';
-import { FormBuilder, Validators, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Globals } from 'src/app/utils/globals';
 import { AppStorageService } from 'src/chat21-core/providers/abstract/app-storage.service';
 

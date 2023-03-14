@@ -1,13 +1,10 @@
-import { ElementRef, ViewChild, Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation, SimpleChanges, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CustomTranslateService } from 'src/chat21-core/providers/custom-translate.service';
 import { ConversationModel } from '../../../chat21-core/models/conversation';
 import { LoggerService } from '../../../chat21-core/providers/abstract/logger.service';
 import { LoggerInstance } from '../../../chat21-core/providers/logger/loggerInstance';
 import { convertColorToRGBA } from '../../../chat21-core/utils/utils';
 import { Globals } from '../../utils/globals';
-
-
-
 
 @Component({
   selector: 'chat-home',

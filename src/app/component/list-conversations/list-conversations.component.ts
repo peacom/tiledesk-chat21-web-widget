@@ -1,11 +1,8 @@
-import { TranslatorService } from './../../providers/translator.service';
-import { TranslateService } from '@ngx-translate/core';
-import { Component, EventEmitter, Input, IterableChangeRecord, IterableChanges, IterableDiffers, KeyValueDiffers, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, IterableDiffers, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ConversationModel } from '../../../chat21-core/models/conversation';
-import { setColorFromString, avatarPlaceholder, convertMessage} from '../../utils/utils';
-import { ImageRepoService } from '../../../chat21-core/providers/abstract/image-repo.service';
 import { LoggerService } from '../../../chat21-core/providers/abstract/logger.service';
 import { LoggerInstance } from '../../../chat21-core/providers/logger/loggerInstance';
+import { avatarPlaceholder, convertMessage, setColorFromString } from '../../utils/utils';
 
 @Component({
   selector: 'chat-list-conversations',

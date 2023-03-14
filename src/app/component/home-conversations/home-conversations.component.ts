@@ -1,24 +1,24 @@
 
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy} from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 
-import { Subscription } from 'rxjs'
+import { Subscription } from 'rxjs';
 
 
 import { Globals } from '../../utils/globals';
-import { setColorFromString, avatarPlaceholder, convertMessage } from '../../utils/utils';
+import { avatarPlaceholder, convertMessage, setColorFromString } from '../../utils/utils';
 
 
 // models
-import { ConversationModel } from '../../../chat21-core/models/conversation';
-import {HumanizeDurationLanguage, HumanizeDuration} from 'humanize-duration-ts';
+import { HumanizeDuration, HumanizeDurationLanguage } from 'humanize-duration-ts';
+import { TranslatorService } from 'src/app/providers/translator.service';
+import { WaitingService } from 'src/app/providers/waiting.service';
 import { ImageRepoService } from 'src/chat21-core/providers/abstract/image-repo.service';
 import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
-import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
-import { TranslatorService } from 'src/app/providers/translator.service';
-import { CustomTranslateService } from 'src/chat21-core/providers/custom-translate.service';
 import { ChatManager } from 'src/chat21-core/providers/chat-manager';
+import { CustomTranslateService } from 'src/chat21-core/providers/custom-translate.service';
+import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
 import { UserAgent } from 'src/models/userAgent';
-import { WaitingService } from 'src/app/providers/waiting.service';
+import { ConversationModel } from '../../../chat21-core/models/conversation';
 
 
 @Component({

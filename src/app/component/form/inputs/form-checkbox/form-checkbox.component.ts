@@ -1,6 +1,5 @@
-import { Component, Input, OnInit, ElementRef, EventEmitter, Output, SimpleChanges } from '@angular/core';
-import { FormGroupDirective } from '@angular/forms';
-import { FormGroup } from '@angular/forms';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { FormGroup, FormGroupDirective } from '@angular/forms';
 import { FormArray } from '../../../../../chat21-core/models/formArray';
 
 @Component({

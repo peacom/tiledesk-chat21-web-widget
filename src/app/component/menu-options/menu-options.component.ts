@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Globals } from 'src/app/utils/globals';
 import { convertColorToRGBA } from 'src/chat21-core/utils/utils';
 
