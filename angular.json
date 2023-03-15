@@ -23,7 +23,6 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
               "src/assets",
               "src/test.html",
               "src/test-new.html",
@@ -40,8 +39,7 @@
               "src/environments/real_data/widget-config-native-prod.json"
             ],
             "styles": [
-              "src/app/sass/styles.scss",
-              "node_modules/@ctrl/ngx-emoji-mart/picker.css"
+              "src/app/sass/styles.scss"
             ],
             "scripts": [
               "src/assets/js/mqtt/4.2.6/mqtt.min.js",
@@ -55,7 +53,8 @@
               "rxjs-compat",
               "idb",
               "accept-language-parser",
-              "file-saver"
+              "file-saver",
+              "dayjs"
             ],
             "sourceMap": true,
             "optimization": false,
@@ -146,7 +145,6 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": [
-              "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
