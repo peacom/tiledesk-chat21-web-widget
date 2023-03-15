@@ -1,5 +1,14 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.56-rc.2
+- added: firebase laxy loading
+- added: get and set method for chatClient mqtt lib
+- changed: fire initWidget to 'complete' event of document
+- changed: replace moment with dayjs
+- removed: @import for sass/variables constants file
+- removed: unsed directives and imports
+- removed: ngx-moment and moment in favour of dayjs
+
 ### 5.0.56-rc.1
 - added: custom colors to senderFullname to better distinguish the user
 - bug-fixed: cannot read text.trim() of undefined if no text is sent with an image

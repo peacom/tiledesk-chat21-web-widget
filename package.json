@@ -1,7 +1,7 @@
 {
   "name": "@chat21/chat21-web-widget",
   "author": "Tiledesk SRL",
-  "version": "5.0.56-rc.1",
+  "version": "5.0.56-rc.2",
   "license": "MIT",
   "homepage": "https://www.tiledesk.com",
   "repository": {
@@ -14,7 +14,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "source-map-explorer": "source-map-explorer dist/*.js"
   },
   "private": false,
   "dependencies": {
@@ -35,15 +36,15 @@
     "@types/marked": "^4.0.3",
     "accept-language-parser": "^1.5.0",
     "bootstrap": "^5.1.3",
+    "dayjs": "^1.11.7",
     "file-saver": "^2.0.5",
     "firebase": "^8.6.7",
     "humanize-duration-ts": "^2.1.1",
     "marked": "^4.0.16",
-    "moment": "^2.29.3",
     "ngx-logger": "^5.0.11",
-    "ngx-moment": "^6.0.2",
     "popper.js": "^1.16.1",
     "rxjs": "~6.5.1",
+    "source-map-explorer": "^2.5.3",
     "tslib": "^2.0.0",
     "uuid": "^8.3.2",
     "zone.js": "~0.11.4"
