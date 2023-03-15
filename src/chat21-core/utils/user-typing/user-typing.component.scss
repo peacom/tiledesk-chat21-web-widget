@@ -1,7 +1,7 @@
-@import 'src/app/sass/variables';
+// @import 'src/app/sass/variables';
 :root {
-    --bubbleReceivedBackgroundColor: $blue;
-    --foregroundColor: $bck-msg-sent;
+    --bubbleReceivedBackgroundColor: var(--blue);
+    --foregroundColor: var(--bck-msg-sent);
 }
 
 

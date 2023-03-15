@@ -1,4 +1,4 @@
-@import 'src/app/sass/variables';
+// @import 'src/app/sass/variables';
 
 :host {
 	--foregroundColor: #0000;
@@ -92,11 +92,11 @@ input {
   background-size: 0 2px,100% 1px;
   background-repeat: no-repeat;
   background-position: center bottom,center calc(100% - 1px);
-  background-color:$chat-footer-background-color;
+  background-color: var(--chat-footer-background-color);
   transition: background 0s ease-out;
   float: none;
   box-shadow: none;
-  border-radius: $chat-footer-border-radius;
+  border-radius: var(--chat-footer-border-radius);
   font-weight: 400;
   height: 48px;
   padding: 0px 16px;

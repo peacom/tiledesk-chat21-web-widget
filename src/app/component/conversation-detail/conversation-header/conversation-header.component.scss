@@ -1,4 +1,4 @@
-@import 'src/app/sass/variables';
+// @import 'src/app/sass/variables';
 
  /* SET SCROLLBAR */
 // ============= CSS c21-header ================= // 
@@ -101,7 +101,7 @@
     line-height: normal;
     overflow: hidden;
     // border: 1px solid #d7d7d7;
-    color: $blue;
+    color: var(--blue);
     box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0  rgba(0, 0, 0, 0.2);
     background-color: #ffffff;
     // padding: 10px 0px 10px 0px;
@@ -124,14 +124,14 @@
         margin: 0 10px 0px 10px;
     }
     .icon-menu {
-        fill: $icon-fill-color;
+        fill: var(--icon-fill-color);
     }
     .icon-menu#archive{
-        stroke: $icon-fill-color;
+        stroke: var(--icon-fill-color);
     }
 
     .build_version_menu {
-        color: $gray;
+        color: var(--gray);
         justify-content: center;
         font-size: 0.8em;
     }

@@ -2,7 +2,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;0,700;1,300;1,400');
 @import 'src/app/sass/normalize.scss';
-@import 'src/app/sass/variables';
 @import url('./sass/animations.scss');
 @import url("./sass/hover.css");
 @import '@ctrl/ngx-emoji-mart/picker';
@@ -42,8 +41,8 @@ input, select:focus, textarea {
 //     background: #777; 
 // }
 
-:root {
-    --button-in-msg-background-color:  #{$blue};
+:host {
+    --button-in-msg-background-color:  --black;
     --button-in-msg-font-size: 15px;
 }
 
@@ -172,7 +171,7 @@ body {
 
 
 textarea::placeholder {
-    color: $gray;  
+    color: var(--gray);  
     font-weight: 300;
   }
 
@@ -269,7 +268,7 @@ chat-root {
         line-height: 20px!important;
         outline: none!important;
         box-shadow:none!important;
-        border: 0px solid $trasp-light-black!important;
+        border: 0px solid var(--trasp-light-black)!important;
     }
 
     // ========= BEGIN: CSS APP.COMPONENT ========= //
@@ -364,7 +363,7 @@ chat-root {
         .time {
             display: none;
             font-size: 1em;
-            color: $gray;
+            color: var(--gray);
             text-align: left;
             margin: 0px;
             padding: 0px 40px;
@@ -380,11 +379,11 @@ chat-root {
         // === CSS LINKS === //
         /* .messages.msg_receive a */
         .msg_receive a { 
-            color: $bck-msg-sent;
+            color: var(--bck-msg-sent);
         }
 
         img {
-            max-width: $max-width-images;
+            max-width: var(--max-width-images);
         }
 
         // === CSS BUTTON === //
@@ -398,7 +397,7 @@ chat-root {
             text-align: center;
             font-size: 1em;
             border-radius: 40px;
-            background-color: $blue;
+            background-color: var(--blue);
             color: #ffffff;
             border: 0px;
 
@@ -419,7 +418,7 @@ chat-root {
         button.c21-button-link {
             font-weight: 400;
             font-size: 14px;
-            color: $blue;
+            color: var(--blue);
             text-decoration: none;
             background-color: transparent;
             border: 1px solid transparent;
@@ -441,7 +440,7 @@ chat-root {
             font-size: 1em;
             line-height: 1.2em;
             border-radius: 50%;
-            background-color: $red;
+            background-color: red;
             color: white;
             text-align: center;
             margin-top: -10px;
@@ -500,7 +499,7 @@ chat-root {
         #chat21-spinner > div {
             width: 12px;
             height: 12px;
-            background-color: $blue;
+            background-color: var(--blue);
             border-radius: 100%;
             display: inline-block;
             -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
@@ -517,7 +516,7 @@ chat-root {
         #chat21-spinner span {
             display: block;
             margin: 0.5em 0 0 0;
-            color: $black;
+            color: var(--black);
             /* text-transform: uppercase; */
             font-family: 'Roboto', sans-serif;
             -webkit-animation: pulse 2000ms linear infinite;

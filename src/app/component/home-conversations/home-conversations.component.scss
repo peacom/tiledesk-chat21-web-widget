@@ -1,4 +1,4 @@
-@import 'src/app/sass/variables';
+// @import 'src/app/sass/variables';
 // @import '../../../sass/normalize.css';
 
 #c21-app-list-conversations{
@@ -10,7 +10,7 @@
 
 
     .c21-header{
-        color: $dark-gray;
+        color: var(--dark-gray);
         height: auto;
         position: relative;
         min-height: 40px; //50px;
@@ -33,12 +33,12 @@
             // padding: 17px 24px 11px 5px;
             padding: 0px 5px;
             float: right;
-            fill: $blue;
+            fill: var(--blue);
             button {
                 width: 40px;
                 height: 40px;
                 svg {
-                    fill: $icon-fill-color;
+                    fill: var(--icon-fill-color);
                 }
             }
             button:hover {
@@ -147,7 +147,7 @@
                     text-align: left;
                     .c21-last-time {
                         font-size: 0.8em;
-                        color: $gray;
+                        color: var(--gray);
                         float: right;
                         display: block;
                         padding: 0;
@@ -231,7 +231,7 @@
         height: auto;
         position: relative;
         // padding: 10px 0 10px 0;
-        border-top: 0px solid $light-gray;
+        border-top: 0px solid var(--light-gray);
         display: flex; //inline-block;
         align-items: center;
         justify-content: center;
@@ -276,7 +276,7 @@
         font-size: 1.2em;
         line-height: 10px;
         border-radius: 50%;
-        background-color: $blue;
+        background-color: var(--blue);
         color: white;
         font-weight: bold;
         padding: 0px;

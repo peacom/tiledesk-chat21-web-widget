@@ -1,16 +1,16 @@
-@import 'src/app/sass/variables';
+// @import 'src/app/sass/variables';
 
 .visible-text-area {
     pointer-events: auto;
-    border-radius: $chat-footer-border-radius;
-    background-color: $chat-footer-background-color;
+    border-radius: var(--chat-footer-border-radius);
+    background-color: var(--chat-footer-background-color);
     &.disabled {
         background-color: rgb(232, 233, 237);
     }
 }
 
 .chat21-textarea-button {
-    fill: $icon-fill-color;
+    fill: var(--icon-fill-color);
     pointer-events: auto;
 }
 
@@ -86,17 +86,17 @@ textarea:active{
     z-index: 1;
     cursor: pointer;
     background-color: #ffffff;
-    border: 1px solid $trasp-light-gray;
+    border: 1px solid var(--trasp-light-gray);
     // -webkit-box-shadow: 0 3px 2px $trasp-light-black;
     // box-shadow: 0 3px 2px $trasp-light-black;
     text-align: center;
     svg {
         margin: auto;
-        fill: $gray;
+        fill: var(--gray);
     }
 }
 #chat21-buttonToBottom:hover {
-    background-color: $blue;
+    background-color: var(--blue);
     opacity: 1!important;
     transition: all .45s ease-in-out!important;
     -moz-transition: all .45s ease-in-out!important;
@@ -121,7 +121,7 @@ textarea:active{
     resize: horizontal;
     overflow-y: auto;
     box-sizing: border-box;
-    color: $black;
+    color: var(--black);
     min-width: 100%;
     outline: 0;
     resize: none;
@@ -155,7 +155,7 @@ textarea:active{
 .chat21-textarea-button {
     position: absolute;
     display: block;
-    height: $chat-footer-height;
+    height: var(--chat-footer-height);
     bottom: 22px;
     opacity: 0.3;
     cursor: initial;
@@ -179,7 +179,7 @@ textarea:active{
 .chat21-back-button{
     position: absolute;
     display: block;
-    height: $chat-footer-height;
+    height: var(--chat-footer-height);
     cursor: pointer;
 }
 
@@ -223,7 +223,7 @@ textarea:active{
     // height: 46px;
     // position: absolute;
     // bottom: 0px;
-    border-top: 0px solid $light-gray;
+    border-top: 0px solid var(--light-gray);
     display: inline-flex;
     align-items: center;
     justify-content: center;

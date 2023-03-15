@@ -1,4 +1,4 @@
-@import 'src/app/sass/variables';
+// @import 'src/app/sass/variables';
 
 
 :host .c21-content ::ng-deep > chat-image  {
@@ -22,7 +22,7 @@
     --modal-width: 80%;
 
     --content-height: 160px;
-    --border-radius: #{$chat-footer-border-radius};
+    --border-radius: #{var(--chat-footer-border-radius)};
 
     background-color: rgba(0,0,0,0.4);
     height: 100%;
@@ -194,7 +194,7 @@
             resize: horizontal;
             overflow-y: auto;
             box-sizing: border-box;
-            color: $black;
+            color: var(--black);
             min-width: 100%;
             outline: 0;
             resize: none;
@@ -247,7 +247,7 @@
         .visible-text-area {
             pointer-events: auto;
             border-radius: 10px;
-            background-color: $chat-footer-background-color;
+            background-color: var(--chat-footer-background-color);
             -webkit-box-flex: 1;
             width: 88%;
         }
@@ -256,7 +256,7 @@
             pointer-events: auto;
         }
         .chat21-textarea-button {
-            fill: $icon-fill-color;
+            fill: var(--icon-fill-color);
             pointer-events: auto;
         }
 

@@ -1,4 +1,4 @@
-@import 'src/app/sass/variables';
+// @import 'src/app/sass/variables';
 
 
 #scroll-me {
@@ -9,8 +9,8 @@
 }
 
 :host {
-    --textColorSent: #{$col-msg-sent};
-    --textColorReceive: #{$black};
+    --textColorSent: #{var(--col-msg-sent)};
+    --textColorReceive: #{var(--black)};
 }
 
 :host .base_receive .msg_receive ::ng-deep > div > div > div > chat-text a {
@@ -66,7 +66,7 @@
                 top: 0;
                 right: 0;
                 left: 0;
-                bottom: $chat-footer-height; //43px;
+                bottom: var(--chat-footer-height); //43px;
                 overflow: hidden;
                 .time{
                     margin-bottom: 20px;
@@ -141,7 +141,7 @@
                 }
                 /* ====== SET MESSAGES ====== */
                 .messages {
-                    border-radius: $border-radius-bubble-message;
+                    border-radius: var(--border-radius-bubble-message);
                     padding: 0;
                     word-wrap: break-word;
                     // padding: 14px;
@@ -203,8 +203,8 @@
                     padding: 2px 0px 4px 0px; //2px 0px 4px 40px;
     
                     .msg_sent {
-                        background-color: $bck-msg-sent;
-                        color: $col-msg-sent;
+                        background-color: var(--bck-msg-sent);
+                        color: var(--col-msg-sent);
                         margin-right: 0;
                         margin-left: 4px;
                         max-width: calc(100% - 30px);
@@ -272,8 +272,8 @@
                     }
                     /* message */
                     .msg_receive {
-                        background-color: $light-white;
-                        color: $black;
+                        background-color: var(--light-white);
+                        color: var(--black);
                         // max-width: 260px;
                         max-width: calc(100% - 70px);
                         min-width: 14px;
@@ -306,7 +306,7 @@
     
                 .message_sender_fullname{
                     font-size: 12px;
-                    color: $dark-gray;
+                    color: var(--dark-gray);
                     margin: 0 auto 4px auto;
                 }
                 

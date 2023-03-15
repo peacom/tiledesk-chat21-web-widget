@@ -1,4 +1,4 @@
-@import 'src/app/sass/variables';
+// @import 'src/app/sass/variables';
 // @import '../../../sass/normalize.css';
 
 #c21-app-list-all-conversations {
@@ -190,7 +190,7 @@
             cursor: pointer;
             -webkit-appearance: initial;
             border: none;
-            border-bottom: 1px solid $light-gray;
+            border-bottom: 1px solid var(--light-gray);
             background-color: #ffffff;
             text-align: left;
             

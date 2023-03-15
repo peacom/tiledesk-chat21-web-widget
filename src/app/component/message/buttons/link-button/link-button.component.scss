@@ -1,12 +1,12 @@
-@import 'src/app/sass/variables';
+// @import 'src/app/sass/variables';
 
 :host {
-    --backgroundColor: #{$blue};
-    --textColor: #{$bck-msg-sent};
-    --hoverBackgroundColor: #{$bck-msg-sent};
-    --hoverTextColor: #{$blue};
-    --buttonFontSize: #{$button-in-msg-font-size};
-    --max-width: #{$button-in-msg-max-width};
+    --backgroundColor: #{var(--blue)};
+    --textColor: #{var(--bck-msg-sent)};
+    --hoverBackgroundColor: #{var(--bck-msg-sent)};
+    --hoverTextColor: #{var(--blue)};
+    --buttonFontSize: #{var(--button-in-msg-font-size)};
+    --max-width: #{var(--button-in-msg-max-width)};
 }
 
 .button-in-msg {

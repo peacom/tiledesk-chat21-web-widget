@@ -1,4 +1,4 @@
-@import 'src/app/sass/variables';
+// @import 'src/app/sass/variables';
 
 .info-container{
     display: flex;
@@ -14,9 +14,9 @@
     padding-right: 4px;
     padding: 6px 10px;
     display: inline-block;
-    background: $bkg-color-info-message;
+    background: var(--bkg-color-info-message);
     font-size: 10px;
-    color: $base-gray;
+    color: var(--base-gray);
     margin-left: 5px; //32px;
     margin-right: 5px; //32px;
 }
@@ -50,15 +50,15 @@
 }
 
 .spinner .bounce1 {
-    background-color: $bkg-color-info-message;
+    background-color: var(--bkg-color-info-message);
 }
 
 .spinner .bounce2 {
-    background-color:$bkg-color-info-message;
+    background-color:var(--bkg-color-info-message);
     opacity: 0.6
 }
 
 .spinner .bounce3 {
-    background-color:$bkg-color-info-message;
+    background-color:var(--bkg-color-info-message);
     opacity: 0.4
 }

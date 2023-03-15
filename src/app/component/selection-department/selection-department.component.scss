@@ -1,13 +1,13 @@
-@import 'src/app/sass/variables';
+// @import 'src/app/sass/variables';
 // @import '../../../sass/normalize.css';
 
 
 #chat21-selection-department {
 
-    --backgroundColor: #{$light-white};
-    --textColor: #{$blue};
-    --hoverBackgroundColor: #{$blue};
-    --hoverTextColor: #{$light-white};
+    --backgroundColor: #{var(--light-white)};
+    --textColor: #{var(--blue)};
+    --hoverBackgroundColor: #{var(--blue)};
+    --hoverTextColor: #{var(--light-white)};
 
     background-color: #ffffff;
     width: 100%;
@@ -72,7 +72,7 @@
                 padding: 0;
                 margin: 0;
                 line-height: 1.2em;
-                color: $gray;
+                color: var(--gray);
                 font-size: 1.6em;
                 text-align: center;
                 word-wrap: break-word;

@@ -1,4 +1,4 @@
-@import 'src/app/sass/variables';
+// @import 'src/app/sass/variables';
 
 :host .c21-msg ::ng-deep > a > img {
     max-width: 24% !important;
@@ -92,7 +92,7 @@
                 text-align: left;
                 .c21-last-time {
                     font-size: 0.8em;
-                    color: $gray;
+                    color: var(--gray);
                     float: right;
                     display: block;
                     padding: 0;
@@ -176,7 +176,7 @@
         font-size: 1.2em;
         line-height: 10px;
         border-radius: 50%;
-        background-color: $blue;
+        background-color: var(--blue);
         color: white;
         font-weight: bold;
         padding: 0px;

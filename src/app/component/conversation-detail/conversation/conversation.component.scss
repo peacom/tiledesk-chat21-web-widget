@@ -1,12 +1,12 @@
 // $f21ico-schedule: image-url('f21ico-schedule.svg', false, false);
 // $f21ico-done: image-url('../assets/images/f21ico-done.svg', false, false);
 // $f21ico-done_all: image-url('../assets/images/f21ico-done_all.svg', false, false);
-@import 'src/app/sass/variables';
+// @import 'src/app/sass/variables';
 // @import '../../../sass/normalize.css';
 
 :host {
-    --themeColor: $bck-msg-sent;
-    --foregroundColor: $col-msg-sent;
+    --themeColor: var(--bck-msg-sent);
+    --foregroundColor: var(--col-msg-sent);
 }
 
 // ============= CSS #chat21-conversation-component ================= //
@@ -60,13 +60,13 @@
         z-index: 1;
         cursor: pointer;
         background-color: #ffffff;
-        border: 1px solid $trasp-light-gray;
+        border: 1px solid var(--trasp-light-gray);
         // -webkit-box-shadow: 0 3px 2px $trasp-light-black;
         // box-shadow: 0 3px 2px $trasp-light-black;
         text-align: center;
         svg {
             margin: auto;
-            fill: $gray;
+            fill: var(--gray);
         }
     }
     #chat21-buttonToBottom:hover {

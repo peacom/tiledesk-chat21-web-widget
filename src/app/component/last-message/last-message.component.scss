@@ -1,4 +1,4 @@
-@import 'src/app/sass/variables';
+// @import 'src/app/sass/variables';
 
 :host  .c21-avatar-image ::ng-deep > chat-avatar-image {
 
@@ -61,7 +61,7 @@
 
 
 .messages {
-    border-radius: $border-radius-bubble-message;
+    border-radius: var(--border-radius-bubble-message);
     padding: 0;
     word-wrap: break-word;
 
@@ -284,7 +284,7 @@
 }
 
 /* ==================== MOBILE VERSION ==================== */ 
-@media (max-width: 451px) {
+// @media (max-width: 451px) {
     // #messagePreview {
     //     .boxButtons {
     //         display: block;
@@ -298,4 +298,4 @@
     //         animation: none;
     //     }
     // }
-}
+// }

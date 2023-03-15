@@ -1,4 +1,4 @@
-@import '../../../sass/variables';
+// @import '../../../sass/variables';
 // @import '../../../sass/normalize.css';
 
 #chat21-prechat-form {
@@ -82,7 +82,7 @@
                         margin: 10px 10px 0px 10px;
                     }
                     .text-danger {
-                        color: $danger;
+                        color: var(--danger);
                         font-size: 1em;
                         min-height: 20px;
                         background-color: #ffffff;

@@ -1,6 +1,6 @@
 // @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 // @import url(https://use.fontawesome.com/releases/v5.5.0/css/all.css);
-@import 'src/app/sass/variables';
+// @import 'src/app/sass/variables';
 
 #chat21-star-rating-widget {
   background-color: #ffffff;
@@ -85,13 +85,13 @@
       .default-title {
         font-size: 2em;
         font-family:'Roboto';
-        color:$black;
+        color:var(--black);
       }
       .default-text {
         font-size: 1.4em;
         font-family:'Roboto';
         // line-height: 1.2em;
-        color:$black;
+        color:var(--black);
         margin: 0 0 4px 0;
       }
       .step-rate{
@@ -233,12 +233,12 @@
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
       padding: 10px;
-      color: $black;
+      color: var(--black);
       width: calc(100% - 40px);
       height: 110px;
       resize: none;
       font-size: 13px;
-      border-radius: $chat-footer-border-radius;
+      border-radius: var(--chat-footer-border-radius);
       background-color: #fafafa;
       text-align: left;
       font-weight: 300;

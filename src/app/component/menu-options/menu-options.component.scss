@@ -1,4 +1,4 @@
-@import 'src/app/sass/variables';
+// @import 'src/app/sass/variables';
 
 #c21-menu-options{
     
@@ -41,7 +41,7 @@
         right: 0px;
     }
     .button-menu-options svg {
-        fill: $icon-fill-color;
+        fill: var(--icon-fill-color);
         display: none;
     }
 
@@ -75,7 +75,7 @@
 }
 
 .build_version_menu {
-    color: $gray;
+    color: var(--gray);
     justify-content: center;
     font-size: 1em;
 }
@@ -125,7 +125,7 @@
     margin: 0 10px 0px 10px;
 }
 .icon-menu {
-    fill: $icon-fill-color;
+    fill: var(--icon-fill-color);
 }
 
 #c21-options-menu .label-menu-item {

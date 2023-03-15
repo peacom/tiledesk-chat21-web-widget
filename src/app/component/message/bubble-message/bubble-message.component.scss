@@ -1,8 +1,8 @@
-@import 'src/app/sass/variables';
+// @import 'src/app/sass/variables';
 /* ====== SET MESSAGES ====== */
 
 .messages {
-    border-radius: $border-radius-bubble-message;
+    border-radius: var(--border-radius-bubble-message);
     padding: 0;
     word-wrap: break-word;
     // padding: 14px;
@@ -29,7 +29,7 @@
     }
     
     img {
-        border-radius: $border-radius-bubble-message;
+        border-radius: var(--border-radius-bubble-message);
         padding: 3px;
         margin-bottom: 0px;
         max-width: calc(100% - 6px);

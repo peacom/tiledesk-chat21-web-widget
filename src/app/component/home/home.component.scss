@@ -1,4 +1,4 @@
-@import 'src/app/sass/variables';
+// @import 'src/app/sass/variables';
 // @import '../../../sass/normalize.css';
 
 
@@ -184,10 +184,10 @@
                         border-radius: 16px; //3px;
                         font-size: 1.4em;
                         line-height: 1.4;
-                        color: $black;
+                        color: var(--black);
                         overflow: hidden;
-                        -webkit-box-shadow: 0 4px 15px 0 $trasp-light-black, 0 1px 2px 0 $trasp-light-black;
-                        // box-shadow: 0 4px 15px 0 $trasp-light-black, 0 1px 2px 0 $trasp-light-black;
+                        -webkit-box-shadow: 0 4px 15px 0 var(--trasp-light-black), 0 1px 2px 0 var(--trasp-light-black);
+                        box-shadow: 0 4px 15px 0 var(--trasp-light-black), 0 1px 2px 0 var(--trasp-light-black);
                         z-index: 20;
                         text-align: left;
 
@@ -262,7 +262,7 @@
             padding: 0;
             // margin: 5px 0;
             position: absolute;
-            color: $gray;
+            color: var(--gray);
             top: 0;
             left: 20px; //60px;
             // right: 60px;
@@ -273,7 +273,7 @@
                 text-decoration: none;
                 cursor: pointer;
                 display: inline-block;
-                color: $gray;
+                color: var(--gray);
                 font-size: 1.1em;
                 font-weight: 500;
                 line-height: 22px;
@@ -304,7 +304,7 @@
         .build_version {
             display: none;
             font-size: 1em;
-            color: $gray;
+            color: var(--gray);
             position: absolute;
             bottom: 0px;
             right: 40px; //10px;

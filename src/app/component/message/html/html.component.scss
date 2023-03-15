@@ -1,9 +1,9 @@
-@import 'src/app/sass/variables';
+// @import 'src/app/sass/variables';
 
 :root {
-    --themeColor: #{$blue};
-    --foregroundColor: #{$col-msg-sent};
-    --buttonFontSize: #{$button-in-msg-font-size};
+    --themeColor: #{var(--blue)};
+    --foregroundColor: #{var(--col-msg-sent)};
+    --buttonFontSize: #{var(--button-in-msg-font-size)};
 }
 
 
