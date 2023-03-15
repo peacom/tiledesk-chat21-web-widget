@@ -1,6 +1,6 @@
 /** */
 ready(function() {
-    // console.log('DOM is ready, call initWidget');
+    console.log('DOM is ready, call initWidget');
     if(!window.tileDeskAsyncInit){
       initAysncEvents();
     }
@@ -9,10 +9,37 @@ ready(function() {
 
 /** */
 function ready(callbackFunction){
-    if(document.readyState != 'loading')
-      callbackFunction()
-    else
-      document.addEventListener("DOMContentLoaded", callbackFunction)
+    // if(document.readyState != 'loading'){
+    //   console.log('in ifffffff', document.readyState)
+    //   callbackFunction()
+    // }
+    // else{
+    //   document.addEventListener("DOMContentLoaded", callbackFunction)
+    // }
+    document.addEventListener('scroll', start);
+    document.addEventListener('mousedown', start);
+    document.addEventListener('mousemove', start);
+    document.addEventListener('touchstart', start);
+    document.addEventListener('keydown', start);
+
+    function start(){
+      if(document.readyState==='complete'){
+        callbackFunction()
+      }else if(window.attachEvent){
+        window.attachEvent('onload',callbackFunction);
+      }else{
+        window.addEventListener('load',callbackFunction,false);
+      }
+      
+      document.removeEventListener('scroll', start);
+      document.removeEventListener('mousedown', start);
+      document.removeEventListener('mousemove', start);
+      document.removeEventListener('touchstart', start);
+      document.removeEventListener('scroll', start);
+      document.removeEventListener('keydown', start);
+    }
+
+    
 }
        
 
@@ -45,11 +72,11 @@ function loadIframe(tiledeskScriptBaseLocation) {
     srcTileDesk += '</head>';
     srcTileDesk += '<body>';
     srcTileDesk += '<chat-root></chat-root>';
-    srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/runtime.js"></script>';
-    srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/polyfills.js"></script>';
+    srcTileDesk += '<script async type="text/javascript" src="'+tiledeskScriptBaseLocation+'/runtime.js"></script>';
+    srcTileDesk += '<script async type="text/javascript" src="'+tiledeskScriptBaseLocation+'/polyfills.js"></script>';
+    srcTileDesk += '<script async type="text/javascript" src="'+tiledeskScriptBaseLocation+'/vendor.js"></script>';
+    srcTileDesk += '<script async type="text/javascript" src="'+tiledeskScriptBaseLocation+'/main.js"></script>';
     srcTileDesk += '<link type="text/css" rel="stylesheet" href="'+tiledeskScriptBaseLocation+'/styles.css" media="all"></link>';
-    srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/vendor.js"></script>';
-    srcTileDesk += '<script type="text/javascript" src="'+tiledeskScriptBaseLocation+'/main.js"></script>';
     srcTileDesk += '</body>';
     srcTileDesk += '</html>';
     
@@ -171,7 +198,7 @@ function loadIframe(tiledeskScriptBaseLocation) {
     }else {
       ifrm.srcdoc = srcTileDesk
     }
-   
+
 
 }
 
@@ -321,7 +348,10 @@ function initCSSWidget(tiledeskScriptBaseLocation) {
         link.rel  = 'stylesheet';
         link.type = 'text/css';
         link.href = tiledeskScriptBaseLocation+'/iframe-style.css';
-        link.media = 'all';
+        link.media = 'print';
+        link.onload = function(){
+          link.media = 'all'
+        }
         head.appendChild(link);
     // }
 }
