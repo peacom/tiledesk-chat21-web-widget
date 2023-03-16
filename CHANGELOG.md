@@ -1,5 +1,8 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.56-rc.3
+- added: widget loading in chatbot-panel.html page
+
 ### 5.0.56-rc.2
 - added: firebase laxy loading
 - added: dynamic base herf to load chunk files
