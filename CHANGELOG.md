@@ -9,7 +9,6 @@
 - removed: @import for sass/variables constants file
 - removed: unsed directives and imports
 - removed: ngx-moment and moment in favour of dayjs
-- 
 
 ### 5.0.56-rc.1
 - added: custom colors to senderFullname to better distinguish the user
