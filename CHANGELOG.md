@@ -2,12 +2,14 @@
 
 ### 5.0.56-rc.2
 - added: firebase laxy loading
+- added: dynamic base herf to load chunk files
 - added: get and set method for chatClient mqtt lib
 - changed: fire initWidget to 'complete' event of document
 - changed: replace moment with dayjs
 - removed: @import for sass/variables constants file
 - removed: unsed directives and imports
 - removed: ngx-moment and moment in favour of dayjs
+- 
 
 ### 5.0.56-rc.1
 - added: custom colors to senderFullname to better distinguish the user
