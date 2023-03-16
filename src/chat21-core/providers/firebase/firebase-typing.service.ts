@@ -51,6 +51,7 @@ export class FirebaseTypingService extends TypingService {
     this.urlNodeTypings = '/apps/' + this.tenant + '/typings/';
 
     const { default: firebase} = await import("firebase/app");
+    await Promise.all([import("firebase/database")]);
     this.firebase = firebase
     this.ref = this.firebase.database['Query'];
 

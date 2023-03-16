@@ -63,6 +63,7 @@ export class FirebaseGroupsHandler extends GroupsHandlerService {
         this.logger.debug('[FIREBASEGroupHandlerSERVICE] initialize', this.tenant, this.loggedUserId);
     
         const { default: firebase} = await import("firebase/app");
+        await Promise.all([import("firebase/database")]);
         this.firebase = firebase
         this.ref = this.firebase.database['Query'];
     }

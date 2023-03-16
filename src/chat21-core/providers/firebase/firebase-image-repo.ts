@@ -38,7 +38,6 @@ export class FirebaseImageRepoService extends ImageRepoService {
         const firebase_photo = '/o/profiles%2F'+ sender_id + '%2Fphoto.jpg?alt=media'
         const firebase_thumbnail = '/o/profiles%2F'+ sender_id + '%2Fthumb_photo.jpg?alt=media'
         const imageurl = this.baseImageURL + this.firebase.storage().ref().bucket + firebase_thumbnail
-        console.log('imageeeeeee', imageurl)
         return imageurl;
     }
 
