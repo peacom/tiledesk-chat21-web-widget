@@ -47,6 +47,10 @@
         padding: 8px 0px;
     }
 
+    &.hideFooterReply{
+        padding: 0px;
+    }
+
     /* button scroll to bottom page */
     #chat21-buttonToBottom {
         display: flex;
