@@ -6,7 +6,7 @@ import { UploadService } from 'src/chat21-core/providers/abstract/upload.service
 import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
 import { MESSAGE_TYPE_INFO, MESSAGE_TYPE_MINE, MESSAGE_TYPE_OTHERS } from 'src/chat21-core/utils/constants';
 import { isPopupUrl, popupUrl } from 'src/chat21-core/utils/utils';
-import { isEmojii, isFrame, isImage, isInfo, isMine, messageType } from 'src/chat21-core/utils/utils-message';
+import { isEmojii, isFirstMessage, isFrame, isImage, isInfo, isLastMessage, isMine, isSameSender, messageType } from 'src/chat21-core/utils/utils-message';
 
 @Component({
   selector: 'chat-conversation-content',
@@ -198,26 +198,30 @@ export class ConversationContentComponent implements OnInit {
 
   // ========= END:: functions scroll position ======= //
   isLastMessage(idMessage: string):boolean {
-    if (idMessage === this.messages[this.messages.length - 1].uid) {
-      return true;
-    }
-    return false;
+    return isLastMessage(this.messages, idMessage)
+    // if (idMessage === this.messages[this.messages.length - 1].uid) {
+    //   return true;
+    // }
+    // return false;
   }
 
   isSameSender(senderId, index):boolean{
-    if(senderId && this.messages[index - 1] && (senderId === this.messages[index - 1].sender)){
-      return true;
-    }
-    return false;
+    return isSameSender(this.messages, senderId, index)
+    // if(senderId && this.messages[index - 1] && (senderId === this.messages[index - 1].sender)){
+    //   return true;
+    // }
+    // return false;
   }
 
 
   isFirstMessage(senderId, index):boolean{
-    if(senderId && index == 0 && this.messages[index] && (this.messages[index] !== senderId)){
-      return true;
-    }
-    return false;
+    return isFirstMessage(this.messages, senderId, index)
+    // if(senderId && index == 0 && this.messages[index] && (this.messages[index] !== senderId)){
+    //   return true;
+    // }
+    // return false;
   }
+
 
   hideOutsideElements(){
     this.onMenuOptionShow.emit(false)

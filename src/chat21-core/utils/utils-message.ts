@@ -1,4 +1,3 @@
-import { convertMessage } from 'src/app/utils/utils';
 import { MessageModel } from './../models/message';
 import { ConversationModel } from './../models/conversation';
 import { v4 as uuidv4 } from 'uuid';
@@ -11,28 +10,12 @@ import {
     TYPE_SUPPORT_GROUP
 } from '../../chat21-core/utils/constants';
 
-/**  */
-export function isFirstMessage(i: number) {
-    if ( i > 0 ) {
-      try {
-        const message = this.messages[i];
-        const prevMessage = this.messages[ i - 1 ];
-        if (prevMessage.sender !== message.sender || message.headerDate || (prevMessage && this.isInfo(prevMessage))) {
-          return true;
-        }
-        return false;
-      } catch (err) {
-        console.log('error: ', err);
-      }
-    }
-}
-
 /** */
 export function isImage(message: any) {
-    if (message && message.type && message.metadata && message.metadata.src && message.type === 'image') {
-      return true;
-    }
-    return false;
+  if (message && message.type && message.metadata && message.metadata.src && message.type === 'image') {
+    return true;
+  }
+  return false;
 }
 
 export function isFrame(message: any) {
@@ -84,6 +67,28 @@ export function isSender(sender: string, currentUserId: string) {
       return false;
   }
 }
+
+export function isSameSender(messages, senderId, index):boolean{
+  if(senderId && messages[index - 1] && (senderId === messages[index - 1].sender)){
+    return true;
+  }
+  return false;
+}
+
+export function isLastMessage(messages, idMessage):boolean {
+  if (idMessage === messages[this.messages.length - 1].uid) {
+    return true;
+  }
+  return false;
+}
+
+export function isFirstMessage(messages, senderId, index):boolean{
+  if(senderId && index == 0 && messages[index] && (messages[index] !== senderId)){
+    return true;
+  }
+  return false;
+}
+
 
 /** */
 export function messageType(msgType: string, message: any) {
@@ -194,6 +199,18 @@ export function hideInfoMessage(msg, infoMessageKeyEnabled): boolean{
   return true
 }
 
+export function getProjectIdSelectedConversation(conversationWith: string): string{
+  const conversationWith_segments = conversationWith.split('-')
+  // Removes the last element of the array if is = to the separator
+  if (conversationWith_segments[conversationWith_segments.length - 1] === '') {
+    conversationWith_segments.pop()
+  }
+  let projectId = ''
+  if (conversationWith_segments.length >= 4) {
+    projectId = conversationWith_segments[2]
+  }
+  return projectId
+}
 
 export function conversationToMessage(conversation: ConversationModel, currentUserId: string): MessageModel{
   let message: any = {}
@@ -210,6 +227,25 @@ export function conversationToMessage(conversation: ConversationModel, currentUs
   message.type = conversation.type
   message.isSender = isSender(message.sender, currentUserId)
   message.attributes = conversation.attributes
+
+  return message as MessageModel
+}
+
+export function commandToMessage(msg: MessageModel, conversation: ConversationModel, currentUserId: string): MessageModel{
+  let message: any = {}
+  message.uid = conversation['message_id']? conversation['message_id'] : uuidv4()
+  message.text = msg.text? msg.text.trim(): '';
+  message.sender = conversation.sender
+  message.sender_fullname = conversation.sender_fullname
+  message.recipient = conversation.recipient
+  message.recipient_fullname = conversation.recipient_fullname
+  message.status = +conversation.status
+  message.timestamp = conversation.timestamp
+  message.metadata = msg['metadata']
+  message.channel_type = conversation.channel_type
+  message.type = msg.type
+  message.isSender = isSender(message.sender, currentUserId)
+  message.attributes = { ...conversation.attributes, ...msg.attributes}
 
   return message as MessageModel
 }
