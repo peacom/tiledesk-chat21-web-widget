@@ -1,5 +1,12 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.56-rc.4
+- added: function to manage messagePreview height programatically
+- added: implementation of commands messages inside callout component
+- added: isFirstMessage, isSameSender, isLastMessage, isFirstMessage function to utils-message
+- removed:  margin-block of inner p html tag in chat-text base message component
+- bug-fixed: cannot read trim() of undefined with image text message
+
 ### 5.0.56-rc.3
 - added: widget loading in chatbot-panel.html page
 
