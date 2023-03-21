@@ -152,7 +152,19 @@ function loadIframe(tiledeskScriptBaseLocation) {
           var httpRequest = createCORSRequest('POST', event_data.detail.appConfigs.apiUrl+event_data.detail.default_settings.projectid+'/events',true); //set async to false because loadParams must return when the get is complete
           httpRequest.setRequestHeader('Content-type', 'application/json');
           httpRequest.setRequestHeader('Authorization',tiledeskToken);
-          httpRequest.send(JSON.stringify({"name":"new_conversation","attributes": {"request_id":event_data.detail.newConvId, "department": event_data.detail.global.departmentSelected.id, "participants": event_data.detail.global.participants, "language": event_data.detail.global.lang, "subtype":"info", "fullname":event_data.detail.global.attributes.userFullname, "email":event_data.detail.global.attributes.userEmail, "attributes":event_data.detail.global.attributes}}));
+          httpRequest.send(JSON.stringify({ "name":"new_conversation",
+                                            "attributes": {
+                                              "request_id":event_data.detail.newConvId, 
+                                              "department": event_data.detail.global.departmentSelected.id, 
+                                              "participants": event_data.detail.global.participants, 
+                                              "language": event_data.detail.global.lang, 
+                                              "subtype":"info", 
+                                              "fullname":event_data.detail.global.attributes.userFullname, 
+                                              "email":event_data.detail.global.attributes.userEmail, 
+                                              "attributes":event_data.detail.global.attributes
+                                            }
+                                          }
+          ));
         }
     });
 
