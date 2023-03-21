@@ -916,6 +916,22 @@
             window.Tiledesk('restart')
         }
 
+        function onClickMobileMarginX(){
+            let text = document.getElementById('mobileMarginX').value
+            text === ""? text= '100px': text
+            window.tiledeskSettings['mobileMarginX'] = text
+            console.log('onClickMobileMarginX:',window.tiledeskSettings);
+            window.Tiledesk('restart')
+        }
+
+        function onClickMobileMarginY(){
+            let text = document.getElementById('mobileMarginY').value
+            text === ""? text= '50px' : text //set default value if user not write a value
+            window.tiledeskSettings['mobileMarginY'] = text
+            console.log('onClickMobileMarginY:',window.tiledeskSettings);
+            window.Tiledesk('restart')
+        }
+
         function onClickAutoStart(){
             let status = document.querySelector('input[name="autoStart"]:checked').value
             window.tiledeskSettings['autoStart'] = stringToBoolean(status)
@@ -1814,6 +1830,24 @@
                             </div>
                             <div class="col-md-2 ">
                                 <button class="btn btn-light" onclick="onClickMarginY()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 formElement"><span><em><strong>mobileMarginX</strong></em></span></div>
+                            <div class="col-md-5 formElement">
+                                <input class="form-control col-sm-2" type="text" id="mobileMarginX" name="mobileMarginX" placeholder="Ex. 100px, 1em">
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-light" onclick="onClickMobileMarginX()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 formElement"><span><em><strong>mobileMarginY</strong></em></span></div>
+                            <div class="col-md-5 formElement">
+                                <input class="form-control col-sm-2" type="text" id="mobileMarginY" name="mobileMarginY" placeholder="Ex. 100px, 1em">
+                            </div>
+                            <div class="col-md-2 ">
+                                <button class="btn btn-light" onclick="onClickMobileMarginY()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row">
