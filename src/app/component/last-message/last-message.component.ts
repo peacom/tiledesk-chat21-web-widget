@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { style } from '@angular/animations';
+import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, SimpleChanges, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MessageModel } from './../../../chat21-core/models/message';
 import { EventsService } from './../../providers/events.service';
@@ -11,7 +12,7 @@ import { MIN_WIDTH_IMAGES } from 'src/app/utils/constants';
 import { ConversationModel } from 'src/chat21-core/models/conversation';
 import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
 import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
-import { conversationToMessage, isEmojii } from 'src/chat21-core/utils/utils-message';
+import { commandToMessage, conversationToMessage, isEmojii, isFrame, isImage, isSameSender } from 'src/chat21-core/utils/utils-message';
 
 
 @Component({
@@ -20,6 +21,8 @@ import { conversationToMessage, isEmojii } from 'src/chat21-core/utils/utils-mes
   styleUrls: ['./last-message.component.scss']
 })
 export class LastMessageComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  @ViewChildren("message_wrp") messageListWRP: QueryList<ElementRef>;
 
   @Input() conversation: ConversationModel
   @Input() baseLocation: string;
@@ -31,14 +34,17 @@ export class LastMessageComponent implements OnInit, AfterViewInit, OnDestroy {
   // ========= end:: sottoscrizioni ======= //
 
   isEmojii = isEmojii;
-  
+  isImage = isImage;
+  isFrame = isFrame;
+
   private logger: LoggerService = LoggerInstance.getInstance();
   public fileSelected: any;
-  public message: MessageModel;
+  public messages: MessageModel[] = [];
   
   constructor(
     private events: EventsService,
     public g: Globals,
+    private el: ElementRef
     // public conversationsService: ConversationsService
   ) { }
 
@@ -53,8 +59,14 @@ export class LastMessageComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnChanges(changes: SimpleChanges) {
     this.logger.debug('[LASTMESSAGE] onChanges', changes)
     if(this.conversation){
-      this.message = conversationToMessage(this.conversation, this.g.senderId)
-      console.log('messsageeeeeeeee', this.message)
+
+      if(this.conversation.attributes && this.conversation.attributes.commands){
+        this.addCommandMessage(this.conversation)
+      }else{
+        this.messages.push(conversationToMessage(this.conversation, this.g.senderId))
+        this.manageIframeHeight();
+      }
+      console.log('messsageeeeeeeee', this.messages)
       // if(isImage(this.conversation)){
       //   this.fileSelected = Object.assign({}, this.conversation.metadata)
       //   this.fileSelected = Object.assign(this.fileSelected, this.getMetadataSize(this.fileSelected))
@@ -103,6 +115,51 @@ export class LastMessageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
 
+  addCommandMessage(conversation: ConversationModel){
+    const that = this;
+    const commands = conversation.attributes.commands;
+    let i=0;
+    function execute(command){
+      if(command.type === "message"){
+        that.messages.push(commandToMessage(command.message,that.conversation, that.g.senderId))
+        that.manageIframeHeight()
+        i += 1
+        if (i < commands.length) {
+            execute(commands[i])
+        }
+        else {
+            that.logger.debug('[FIREBASEConversationHandlerSERVICE] addCommandMessage --> last command executed (wait), exit') 
+        }
+      }else if(command.type === "wait"){
+        setTimeout(function() {
+          i += 1
+          if (i < commands.length) {
+              execute(commands[i])
+          }
+          else {
+              that.logger.debug('[FIREBASEConversationHandlerSERVICE] addCommandMessage --> last command executed (send message), exit') 
+          }
+        },command.time)
+      }
+    }
+    execute(commands[0])
+
+  }
+
+  private manageIframeHeight(){
+    setTimeout(() => {
+      if(this.messageListWRP.get(this.messages.length-1)){
+        let height = getComputedStyle(this.messageListWRP.get(this.messages.length-1).nativeElement).height
+        this.g.setWidgetPreviewContainerSize(0, +height.substring(0, height.length-2))
+      }
+    }, 50);
+  }
+  isSameSender(senderId: string, index: number){
+    return isSameSender(this.messages, senderId, index)
+  }
+
+
+
 
 // ========= begin:: event emitter function ============//
 
@@ -136,6 +193,7 @@ export class LastMessageComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy() {
     this.conversation = null;
     this.g.isOpenNewMessage = false;
+    this.messages = []
     // this.logger.debug('4 isOpenNewMessage: ' + this.g.isOpenNewMessage);
     //this.unsubscribe();
   }
