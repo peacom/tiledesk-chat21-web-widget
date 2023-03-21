@@ -1,5 +1,12 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.56-rc.5
+- added: if hideFooterTextReply is set to true, hide footer input area and display logo
+- added: mobileMarginX and mobileMarginY property to dev page
+- added: root css variable to manage dynamic iframe height
+- changed: minor UI changes in last-messsage and bubble-message components to display trasnsparent background if image/iframe/gif is received/sent
+- bug-fixed: dynamic height in .messagePreview container div modify the height of the entire iframe also when it is open
+
 ### 5.0.56-rc.4
 - added: function to manage messagePreview height programatically
 - added: implementation of commands messages inside callout component
