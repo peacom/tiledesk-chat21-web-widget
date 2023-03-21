@@ -589,11 +589,12 @@ export class Globals {
 
   setWidgetPreviewContainerSize(width: number, height: number){
     const divTiledeskWidget = this.windowContext.document.querySelector('.messagePreview');
-
+    
     let headerPadding = 10
     let style = getComputedStyle(divTiledeskWidget)
-    let currentHeight = +style.height.substring(0, style.height.length -2)
-    divTiledeskWidget.style.height = currentHeight + height + headerPadding + 'px'    
+    // console.log('computedddd', style.getPropertyValue('--messagePreviewHeight'))
+    let currentHeight = +style.getPropertyValue('--messagePreviewHeight').substring(0, style.getPropertyValue('--messagePreviewHeight').length -2)
+    this.windowContext.document.documentElement.style.setProperty('--messagePreviewHeight', currentHeight + height + headerPadding + 'px');
   }
 
 
