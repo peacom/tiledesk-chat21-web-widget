@@ -76,7 +76,7 @@ export function isSameSender(messages, senderId, index):boolean{
 }
 
 export function isLastMessage(messages, idMessage):boolean {
-  if (idMessage === messages[this.messages.length - 1].uid) {
+  if (idMessage === messages[messages.length - 1].uid) {
     return true;
   }
   return false;
