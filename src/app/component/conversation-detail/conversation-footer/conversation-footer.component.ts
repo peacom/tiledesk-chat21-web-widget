@@ -35,9 +35,10 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
   @Input() isEmojiiPickerShow: boolean;
   @Input() footerMessagePlaceholder: string;
   @Input() fileUploadAccept: string;
+  @Input() dropEvent: Event;
+  @Input() poweredBy: string;
   @Input() stylesMap: Map<string, string>
   @Input() translationMap: Map< string, string>;
-  @Input() dropEvent: Event;
   @Output() onEmojiiPickerShow = new EventEmitter<boolean>();
   @Output() onBeforeMessageSent = new EventEmitter();
   @Output() onAfterSendMessage = new EventEmitter<MessageModel>();

@@ -18,7 +18,11 @@
     </button>
 </div>
 
-<div class="visible-text-area"  *ngIf="!hideTextAreaContent" [class.disabled] = "( isConversationArchived || hideTextReply)? true : null">
+<div id="hiddenFooter" *ngIf="hideTextReply && !hideTextAreaContent" class="fade-in-bottom">
+    <div tabindex="-1" class="c21-powered-by" [innerHTML]="poweredBy"></div>
+</div>
+
+<div class="visible-text-area"  *ngIf="!hideTextAreaContent && !hideTextReply" [class.disabled] = "( isConversationArchived || hideTextReply)? true : null">
     <!-- isFilePendingToUpload || -->
   <textarea 
     [attr.disabled] = "(hideTextReply)? true : null"
@@ -40,7 +44,7 @@
 
 </div>
 <!--   -->
-<div #div_attached  *ngIf="!hideTextAreaContent">
+<div #div_attached  *ngIf="!hideTextAreaContent && !hideTextReply">
     <!-- ICON ATTACHMENT -->
     <label *ngIf="showAttachmentButton == true" tabindex="1502" aria-label="allegati" for="chat21-file" class="chat21-textarea-button" [class.active]="!isFilePendingToUpload && !hideTextReply" id="chat21-start-upload-doc">
         <span class="v-align-center">
