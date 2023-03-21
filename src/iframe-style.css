@@ -1,3 +1,7 @@
+:root{
+    --messagePreviewHeight: 100px;
+}
+
 #tiledesk-container {
     position: fixed; 
     right: 0px;
@@ -70,7 +74,7 @@
 }
 #tiledesk-container.closed #tiledeskdiv.messagePreview {
     width: 340px; /*340px*/
-    height: 100px; /*300px*/
+    height: var(--messagePreviewHeight); /*300px*/
     min-width: 340px;
 }
 
