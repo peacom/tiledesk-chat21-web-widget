@@ -1,3 +1,4 @@
+import { style } from '@angular/animations';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -584,6 +585,15 @@ export class Globals {
     } else if(!isOpen && chat21conversationsEL){
       chat21conversationsEL.classList.remove('isMobile')
     }
+  }
+
+  setWidgetPreviewContainerSize(width: number, height: number){
+    const divTiledeskWidget = this.windowContext.document.querySelector('.messagePreview');
+
+    let headerPadding = 10
+    let style = getComputedStyle(divTiledeskWidget)
+    let currentHeight = +style.height.substring(0, style.height.length -2)
+    divTiledeskWidget.style.height = currentHeight + height + headerPadding + 'px'    
   }
 
 
