@@ -47,7 +47,9 @@ export class FirebasePresenceService extends PresenceService {
     this.urlNodePresence = '/apps/' + this.tenant + '/presence/';
 
     const { default: firebase} = await import("firebase/app");
+    await Promise.all([import("firebase/database")]);
     this.firebase = firebase
+    return;
   }
 
   /**
@@ -168,6 +170,7 @@ export class FirebasePresenceService extends PresenceService {
    */
   private referenceLastOnlineForUser(userid: string): any {
     const urlNodeLastOnLine = this.urlNodePresence + userid + '/lastOnline';
+    this.logger.log('referenceLastOnlineForUser', urlNodeLastOnLine)
     const lastOnlineRef = this.firebase.database().ref().child(urlNodeLastOnLine);
     return lastOnlineRef;
   }
