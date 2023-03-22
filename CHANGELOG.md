@@ -1,5 +1,9 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.56-rc.6
+- bug-fixed: setPresence not fired due to undefined reading Query in database
+- bug-fixed: multiple rules was done--> do only the first that match the regex
+
 ### 5.0.56-rc.5
 - added: if hideFooterTextReply is set to true, hide footer input area and display logo
 - added: mobileMarginX and mobileMarginY property to dev page
