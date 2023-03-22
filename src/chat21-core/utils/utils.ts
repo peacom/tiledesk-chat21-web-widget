@@ -84,7 +84,7 @@ export function contactsRef(tenant) {
 // }
 
 /**
- * @deprecated
+ * 
  */
 // export function setHeaderDate(translate, timestamp): string {
 //   // const LABEL_TODAY = translate.get('LABEL_TODAY');

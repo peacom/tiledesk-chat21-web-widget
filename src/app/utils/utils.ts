@@ -387,10 +387,3 @@ export function getUnique(arr, comp) {
     // eliminate the dead keys & store unique objects
     .filter(e => arr[e]).map(e => arr[e]);
 }
-
-export function isJustRecived(startedAt, time) {
-  if (time > startedAt) {
-    return true;
-  }
-  return false;
-}

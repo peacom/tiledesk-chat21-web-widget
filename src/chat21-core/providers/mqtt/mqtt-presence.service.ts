@@ -53,7 +53,7 @@ export class MQTTPresenceService extends PresenceService {
   }
 
   public setPresence(userid: string): void  {
-
+    
   }
 
   /**
