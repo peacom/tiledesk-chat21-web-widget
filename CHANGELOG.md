@@ -1,5 +1,7 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.56 in PROD
+
 ### 5.0.56-rc.6
 - bug-fixed: setPresence not fired due to undefined reading Query in database
 - bug-fixed: multiple rules was done--> do only the first that match the regex
