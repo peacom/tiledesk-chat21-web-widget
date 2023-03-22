@@ -387,8 +387,9 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                 new Promise(async (resolve, reject)=> {
                     that.typingService.initialize(this.g.tenant);
                     await that.presenceService.initialize(this.g.tenant);
+                    resolve(null)
                 }).then(()=>{
-                    that.presenceService.setPresence(user.uid);
+                    that.presenceService.setPresence(user.uid);    
                 });
 
                 // this.initConversationsHandler(this.g.tenant, that.g.senderId);

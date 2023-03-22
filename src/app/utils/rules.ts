@@ -38,10 +38,12 @@ export class Rules {
     }
 
     checkRules(){
+        let exit = false;
         this.rules.forEach((rule, index)=>{
-            if(rule.when && new RegExp(rule.when.urlMatches).test(this.windowContext.location.href)){
+            if(!exit && rule.when && new RegExp(rule.when.urlMatches).test(this.windowContext.location.href)){
                 if(this.checkIfAlreadyDone(rule)){
                     this.doAction(rule.do)
+                    exit = true
                     return;
                 }
                 
@@ -50,7 +52,7 @@ export class Rules {
     }
 
     private doAction(action: Rule['do']){
-        this.logger.info('[RULES] doAction', this.currentUser, action)
+        this.logger.info('[RULES] doAction', this.request_id, this.currentUser, action)
         let message = action.filter(obj => Object.keys(obj).includes('message'))
         if(message && message.length>0){
             message[0]['message'].attributes = { ...this.g.attributes, ...message[0]['message'].attributes}
