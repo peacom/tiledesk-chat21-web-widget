@@ -2,7 +2,6 @@
     "chatEngine": "${CHAT21_ENGINE}",
     "uploadEngine": "${UPLOAD_ENGINE}",
     "pushEngine": "${PUSH_ENGINE}",
-    "fileUploadAccept":"${FILE_UPLOAD_ACCEPT}",
     "logLevel": "${LOG_LEVEL}"    ,
     "remoteTranslationsUrl": "${TRANSLATIONS_URL}",
     "firebaseConfig": {

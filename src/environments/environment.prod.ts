@@ -12,7 +12,6 @@ export const environment = {
   remoteTranslationsUrl: 'http://localhost:3000/',
   chatEngine: 'CHANGEIT',
   uploadEngine: 'CHANGEIT',
-  fileUploadAccept:"*/*",
   logLevel: 'INFO',
   firebaseConfig: {
     apiKey: 'CHANGEIT',

@@ -13,7 +13,6 @@ export const environment = {
   chatEngine: 'mqtt',
   uploadEngine: 'native',
   tenant: 'tilechat',
-  fileUploadAccept:"*/*",
   logLevel: 'INFO',
   firebaseConfig: {
     apiKey: 'CHANGEIT',

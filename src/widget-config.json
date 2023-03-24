@@ -2,7 +2,6 @@
     "chatEngine": "mqtt",
     "uploadEngine": "native",
     "pushEngine":"none",
-    "fileUploadAccept":"*/*",
     "logLevel":"INFO",
     "remoteTranslationsUrl": "http://localhost:3000/",
     "firebaseConfig": {

@@ -72,7 +72,6 @@ export const environment = {
   remoteTranslationsUrl: 'https://<YOUR_REMOTE_TRANSLATIONS_URL>/',
   chatEngine: "mqtt", // OR YOUR CUSTOM CHAT ENGINE
   updloaEngine: "native", // OR YOUR CUSTOM UPLOAD ENGINE
-  fileUploadAccept:"*/*",
   logLevel: '<YOUR-PREFERRED-LOG-LEVEL-NUMBER>',
   firebaseConfig: {
     apiKey: '123ABC..',
@@ -102,8 +101,6 @@ export const environment = {
 
 * `logLevel`: The Tiledesk web-widget supports 4 log levels. The order is as follows:
   `Error < Warn < Info < Debug`
-
-* `fileUploadAccept`: The Tiledesk web-widget allows you to manage the type of files that can be uploaded. By default, all file types are accepted.
 
 ### RUN in dev
 

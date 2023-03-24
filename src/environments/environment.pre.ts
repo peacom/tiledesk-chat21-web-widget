@@ -12,7 +12,6 @@ export const environment = {
   loadRemoteTranslations: true,
   chatEngine: 'mqtt',
   uploadEngine: 'native',
-  fileUploadAccept:"*/*",
   logLevel: 'INFO',
   firebaseConfig: {
     apiKey: 'CHANGEIT',
