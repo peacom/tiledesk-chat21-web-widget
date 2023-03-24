@@ -1,5 +1,12 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.57-rc.1
+- added: fileUploadAccept as a tiledesk property
+- added: tiledesk logo during conversation
+- added: presence manger on mqtt service
+- changed: new conversation-footer UI
+- removed: fileUploadAccept from envs and template
+
 ### 5.0.56 in PROD
 
 ### 5.0.56-rc.6
