@@ -148,6 +148,10 @@ export class FirebasePresenceService extends PresenceService {
     });
   }
 
+  public imHere(){
+    //NOT IMPLEMENTED FOR FIREBASE ENGINE
+  }
+
   /**
    * removePresence
    * richiamato prima del logout
@@ -184,10 +188,6 @@ export class FirebasePresenceService extends PresenceService {
     const urlNodeConnections = this.urlNodePresence + userid + '/connections';
     const connectionsRef = this.firebase.database().ref().child(urlNodeConnections);
     return connectionsRef;
-  }
-
-  public imHere(){
-    //NOT IMPLEMENTED FOR FIREBASE ENGINE
   }
 
 }

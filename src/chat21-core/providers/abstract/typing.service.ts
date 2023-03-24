@@ -9,8 +9,8 @@ import { BehaviorSubject } from 'rxjs';
 export abstract class TypingService {
 
   // BehaviorSubject
-  BSIsTyping: BehaviorSubject<any>;
-  BSSetTyping: BehaviorSubject<any>;
+  abstract BSIsTyping: BehaviorSubject<any>;
+  abstract BSSetTyping: BehaviorSubject<any>;
 
   // params
   // private DEFAULT_TENANT: string = environment.firebaseConfig.tenant;

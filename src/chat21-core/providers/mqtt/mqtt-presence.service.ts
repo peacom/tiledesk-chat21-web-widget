@@ -1,5 +1,5 @@
 import { Chat21Service } from 'src/chat21-core/providers/mqtt/chat-service';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, Optional } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 // firebase
@@ -32,7 +32,8 @@ export class MQTTPresenceService extends PresenceService {
   private logger: LoggerService = LoggerInstance.getInstance();
 
   constructor(
-    public chat21Service: Chat21Service
+    public chat21Service: Chat21Service,
+    @Optional() @Inject('webSocketService') public webSocketService?: any,
   ) {
     super();
   }
@@ -45,7 +46,20 @@ export class MQTTPresenceService extends PresenceService {
   }
 
   userIsOnline(userid: string): Observable<any> {
-    return this.BSIsOnline
+    const that = this;
+    let local_BSIsOnline = new BehaviorSubject<any>(null);
+    this.webSocketService.wsRequesterStatus$.subscribe((data: any) => {
+    this.logger.log('[NATIVEPresenceSERVICE] $subs to wsService - data ', data, userid);
+    if (data && data.presence && data.presence.status === 'online' ) {
+        that.BSIsOnline.next({ uid: data.uuid_user, isOnline: true });
+        local_BSIsOnline.next({ uid: data.uuid_user, isOnline: true });
+    } else {
+        that.BSIsOnline.next({ uid: data.uuid_user, isOnline: false });
+        local_BSIsOnline.next({ uid: data.uuid_user, isOnline: false });
+    }
+    });
+
+    return local_BSIsOnline
   }
 
   lastOnlineForUser(userid: string) {
@@ -53,14 +67,6 @@ export class MQTTPresenceService extends PresenceService {
   }
 
   public setPresence(userid: string): void  {
-    
-  }
-
-  /**
-   * removePresence
-   * richiamato prima del logout
-   */
-  public removePresence(): void {
 
   }
 
@@ -69,6 +75,14 @@ export class MQTTPresenceService extends PresenceService {
     setTimeout(() => {
       this.chat21Service.chatClient.ImHere()
     }, 2000);
+  }
+
+  /**
+   * removePresence
+   * richiamato prima del logout
+   */
+  public removePresence(): void {
+
   }
 
 }
