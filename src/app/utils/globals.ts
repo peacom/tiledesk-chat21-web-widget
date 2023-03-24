@@ -211,6 +211,7 @@ export class Globals {
    whatsappNumber: string; // *******  new ********
    messangerPageTitle: string; // *******  new ********
    telegramUsername: string; // *******  new ********
+   fileUploadAccept: string; // *******  new ********
   constructor(
   ) { }
 
@@ -385,6 +386,7 @@ export class Globals {
     /**enable user to set a facebook messanger page to chat with */
     this.telegramUsername = ''
     /**enable user to set a telegram number to chat with */
+    this.fileUploadAccept = "image/*,.pdf,.txt"
 
     this.showWaitTime = true;
 

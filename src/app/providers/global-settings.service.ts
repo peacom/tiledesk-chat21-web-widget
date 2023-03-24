@@ -503,6 +503,9 @@ export class GlobalSettingsService {
                     if (variables.hasOwnProperty('themeColorOpacity')) {
                         globals['themeColorOpacity'] = variables['themeColorOpacity'];
                     }
+                    if (variables.hasOwnProperty('fileUploadAccept')) {
+                        globals['fileUploadAccept'] = variables['fileUploadAccept'];
+                    }
                     
                 }
             }
@@ -1009,7 +1012,12 @@ export class GlobalSettingsService {
         // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > telegramUsername:: ', TEMP]);
         if (TEMP !== undefined) {
             globals.telegramUsername = TEMP;
-        }       
+        }
+        TEMP = tiledeskSettings['fileUploadAccept'];
+        // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > telegramUsername:: ', TEMP]);
+        if (TEMP !== undefined) {
+            globals.fileUploadAccept = TEMP;
+        }      
     }
 
     /**
@@ -1271,6 +1279,10 @@ export class GlobalSettingsService {
         TEMP = el.nativeElement.getAttribute('participants');
         if (TEMP !== null) {
             this.globals.participants = TEMP.split(',').map(key => { return key.trim()});
+        }
+        TEMP = el.nativeElement.getAttribute('fileUploadAccept');
+        if (TEMP !== null) {
+            this.globals.fileUploadAccept = TEMP;
         }
         
     }
@@ -1708,6 +1720,11 @@ export class GlobalSettingsService {
         TEMP = getParameterByName(windowContext, 'tiledesk_participants');
         if (TEMP) {
             globals.participants = TEMP.split(',').map(key => { return key.trim()});
+        }
+
+        TEMP = getParameterByName(windowContext, 'tiledesk_fileUploadAccept');
+        if (TEMP) {
+            globals.fileUploadAccept = TEMP;
         }
     }
 
