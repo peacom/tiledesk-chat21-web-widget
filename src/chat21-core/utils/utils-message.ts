@@ -243,9 +243,9 @@ export function commandToMessage(msg: MessageModel, conversation: ConversationMo
   message.timestamp = conversation.timestamp
   message.metadata = msg['metadata']
   message.channel_type = conversation.channel_type
-  message.type = msg.type
+  message.type = msg['type']
   message.isSender = isSender(message.sender, currentUserId)
-  message.attributes = { ...conversation.attributes, ...msg.attributes}
+  message.attributes = { ...conversation.attributes, ...msg['attributes']}
 
   return message as MessageModel
 }

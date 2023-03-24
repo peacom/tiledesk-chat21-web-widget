@@ -150,10 +150,12 @@ export class LastMessageComponent implements OnInit, AfterViewInit, OnDestroy {
     setTimeout(() => {
       if(this.messageListWRP.get(this.messages.length-1)){
         let height = getComputedStyle(this.messageListWRP.get(this.messages.length-1).nativeElement).height
+        // console.log('heightttttt--<', height, this.messages[this.messages.length-1])
         this.g.setWidgetPreviewContainerSize(0, +height.substring(0, height.length-2))
       }
     }, 50);
   }
+
   isSameSender(senderId: string, index: number){
     return isSameSender(this.messages, senderId, index)
   }
