@@ -11,7 +11,7 @@
 
 :host chat-conversation-content.hideTextReply ::ng-deep .chat21-sheet-content{
 
-    bottom: calc(var(--chat-footer-logo-height) + var(--chat-footer-height)) !important
+    bottom: var(--chat-footer-height) !important
 }
 
 // ============= CSS #chat21-conversation-component ================= //

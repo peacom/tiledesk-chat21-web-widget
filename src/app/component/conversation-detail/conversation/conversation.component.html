@@ -45,7 +45,7 @@
     
     <!-- CONTENT -->
     <chat-conversation-content
-        [class.hideTextReply]="!hideFooterTextReply"
+        [class.hideTextReply]="hideFooterTextReply"
         [messages]="messages"
         [senderId]="senderId"
         [baseLocation]="g?.windowContext['tiledesk']?.getBaseLocation()"
