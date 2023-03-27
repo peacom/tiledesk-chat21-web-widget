@@ -45,6 +45,7 @@
     
     <!-- CONTENT -->
     <chat-conversation-content
+        [class.hideTextReply]="!hideFooterTextReply"
         [messages]="messages"
         [senderId]="senderId"
         [baseLocation]="g?.windowContext['tiledesk']?.getBaseLocation()"
@@ -98,10 +99,6 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path opacity=".87" fill="none" d="M24 24H0V0h24v24z"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
             <div *ngIf="messagesBadgeCount!=0" id="chat21-divBudge" class="c21-divBudge">{{messagesBadgeCount}}</div>
         </div>
-
-        <!-- <div id="hiddenFooter" *ngIf="!hideTextAreaContent" class="fade-in-bottom">
-            <div tabindex="-1" class="c21-powered-by" [innerHTML]="g.poweredBy"></div>
-        </div> -->
 
         <chat-conversation-footer
             [conversationWith]="conversationWith"

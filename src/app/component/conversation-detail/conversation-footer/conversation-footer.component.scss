@@ -248,10 +248,11 @@ textarea:active{
     // position: absolute;
     bottom: 100%;
     width: 100%;
+    height: 22px;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
+    // position: absolute;
     box-shadow: inset 0px -22px 16px -15px rgba(0,0,0,0.1);
     &.hideTextReply{
         height: var(--chat-footer-height);

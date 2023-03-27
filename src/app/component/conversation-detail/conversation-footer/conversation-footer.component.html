@@ -1,3 +1,10 @@
+<!-- LOGO-->
+<div id="hiddenFooter" *ngIf="!hideTextAreaContent" class="fade-in-bottom" 
+    [class.hideTextReply]="hideTextReply">
+    <div tabindex="-1" class="c21-powered-by" [innerHTML]="poweredBy"></div>
+</div>
+
+<!-- TEXTAREA + ICONS: conv active-->
 <div class="textarea-container" *ngIf="!hideTextAreaContent && !hideTextReply">
     
     <div class="icons-container">
@@ -69,12 +76,8 @@
     </div>
 </div>
 
-<div id="hiddenFooter" *ngIf="!hideTextAreaContent" class="fade-in-bottom" 
-    [class.hideTextReply]="hideTextReply">
-    <div tabindex="-1" class="c21-powered-by" [innerHTML]="poweredBy"></div>
-</div>
 
-
+<!-- EMOJII PICKER-->
 <div [style.visibility]="isEmojiiPickerShow?'visible':'hidden'"  class="emoji-container">
     <emoji-mart id="emoji-mart"
         *ngIf="showEmojiPicker"
@@ -90,6 +93,7 @@
     </emoji-mart>
 </div>
 
+<!-- NEW CONV & CONTINE buttons: conv archived-->
 <div id="floating-container" *ngIf="hideTextAreaContent" class="fade-in-bottom" start-focus-chat21-conversation-component> 
     <button tabindex="1040" aflistconv #aflistconv  class="c21-button-primary" (click)="openNewConversation()" [ngStyle]="{'background-color': stylesMap.get('themeColor'), 'border-color': stylesMap.get('themeColor'), 'color': stylesMap?.get('foregroundColor')}">
         <span class="v-align-center">
