@@ -188,6 +188,20 @@ export class LastMessageComponent implements OnInit, AfterViewInit, OnDestroy {
     // this.logger.debug('3 isOpenNewMessage: ' + this.g.isOpenNewMessage);
     this.onCloseMessagePreview.emit();
   }
+
+  onElementRenderedFN(event){
+    console.log('eventttttttt-->', event, this.messageListWRP)
+    this.messageListWRP.forEach((item, index)=> {
+      setTimeout(() => {
+        if(this.messageListWRP.get(index)){
+          let height = getComputedStyle(this.messageListWRP.get(index).nativeElement).height
+          console.log('heightttttt--<', height, this.messages[this.messages.length-1])
+          this.g.setWidgetPreviewContainerSize(0, +height.substring(0, height.length-2))
+        }
+      }, 50);
+    })
+
+  }
   // ========= begin:: event emitter function ============//
 
 

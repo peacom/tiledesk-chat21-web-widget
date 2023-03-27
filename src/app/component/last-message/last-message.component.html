@@ -38,7 +38,8 @@
           [fontColor]="stylesMap.get('bubbleReceivedTextColor')"
           [fontSize]="stylesMap.get('fontSize')"
           [fontFamily]="stylesMap.get('fontFamily')"
-          [stylesMap]="stylesMap">
+          [stylesMap]="stylesMap"
+          (onElementRendered)="onElementRenderedFN($event)">
         </chat-bubble-message>
   
         <div class="c21-icon-avatar" *ngIf="isFirst">
