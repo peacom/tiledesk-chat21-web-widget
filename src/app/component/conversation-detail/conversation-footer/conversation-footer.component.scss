@@ -253,15 +253,11 @@ textarea:active{
     align-items: center;
     justify-content: center;
     // position: absolute;
-    box-shadow: inset 0px -22px 16px -15px rgba(0,0,0,0.1);
+    // box-shadow: inset 0px -22px 16px -15px rgba(0,0,0,0.1);
     &.hideTextReply{
         height: var(--chat-footer-height);
         position: unset;
         box-shadow: none;
-        .c21-powered-by{
-            background-color: var(--chat-footer-background-color);
-            
-        }
     }
     .c21-powered-by {
         // height: 40px;
