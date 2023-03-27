@@ -1,5 +1,10 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.57-rc.3
+- changed: tiledesk logo during conversation
+- changed: show entire text of buttons
+- bug-fixed: window.location is undefined in chat21client.js
+
 ### 5.0.57-rc.2
 - changed: tiledesk logo during conversation
 - removed: image loader wrapper
