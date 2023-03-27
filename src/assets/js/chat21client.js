@@ -31,7 +31,6 @@ class Chat21Client {
                     console.log("MQTTendpoint relative url");
                 }
                 var loc = window.parent.location, new_uri;
-                console.log('optionnnnn', options, loc)
                 if (loc.protocol === "https:") {
                     // new_uri = "wss:";
                     new_uri = "mqtt:";
