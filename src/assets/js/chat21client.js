@@ -24,13 +24,14 @@ class Chat21Client {
         this.reconnections = 0 // just to check how many reconnections
         this.client_id = this.uuidv4();
         this.log = options.log ? true : false;
-        console.log('optionnnnn', options)
+       
         if (options && options.MQTTendpoint) {
             if (options.MQTTendpoint.startsWith('/')) {
                 if (this.log) {
                     console.log("MQTTendpoint relative url");
                 }
                 var loc = window.location, new_uri;
+                console.log('optionnnnn', options, loc)
                 if (loc.protocol === "https:") {
                     // new_uri = "wss:";
                     new_uri = "mqtt:";
@@ -42,6 +43,7 @@ class Chat21Client {
                 new_uri += "//" + loc.host;
                 // new_uri += loc.pathname + "/to/ws";
                 new_uri += options.MQTTendpoint;
+                console.log('new_uriiiiiii', new_uri, loc)
                 this.endpoint = new_uri
             } else {
                 this.endpoint = options.MQTTendpoint
@@ -988,6 +990,7 @@ class Chat21Client {
         }
         if (this.log) {console.log("starting mqtt connection with LWT on:", this.presence_topic, this.endpoint)}
         // client = mqtt.connect('mqtt://127.0.0.1:15675/ws',options)
+        console.log("starting mqtt connection with LWT on:", this.presence_topic, this.endpoint)
         this.client = mqtt.connect(this.endpoint,options)
         
         this.client.on('connect', // TODO if token is wrong it must reply with an error!
