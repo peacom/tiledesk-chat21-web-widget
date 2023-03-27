@@ -24,6 +24,7 @@ class Chat21Client {
         this.reconnections = 0 // just to check how many reconnections
         this.client_id = this.uuidv4();
         this.log = options.log ? true : false;
+        console.log('optionnnnn', options)
         if (options && options.MQTTendpoint) {
             if (options.MQTTendpoint.startsWith('/')) {
                 if (this.log) {
