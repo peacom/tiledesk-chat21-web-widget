@@ -43,7 +43,7 @@ class Chat21Client {
                 new_uri += "//" + loc.host;
                 // new_uri += loc.pathname + "/to/ws";
                 new_uri += options.MQTTendpoint;
-                console.log('new_uriiiiiii', new_uri, loc)
+                console.log('new_uriiiiiii', new_uri, loc, document, window)
                 this.endpoint = new_uri
             } else {
                 this.endpoint = options.MQTTendpoint
