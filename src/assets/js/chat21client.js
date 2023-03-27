@@ -30,7 +30,7 @@ class Chat21Client {
                 if (this.log) {
                     console.log("MQTTendpoint relative url");
                 }
-                var loc = document.location, new_uri;
+                var loc = window.parent.location, new_uri;
                 console.log('optionnnnn', options, loc)
                 if (loc.protocol === "https:") {
                     // new_uri = "wss:";
@@ -43,7 +43,7 @@ class Chat21Client {
                 new_uri += "//" + loc.host;
                 // new_uri += loc.pathname + "/to/ws";
                 new_uri += options.MQTTendpoint;
-                console.log('new_uriiiiiii', new_uri, loc, document.location, window)
+                console.log('new_uriiiiiii', new_uri, loc, document.location, window.parent)
                 this.endpoint = new_uri
             } else {
                 this.endpoint = options.MQTTendpoint
