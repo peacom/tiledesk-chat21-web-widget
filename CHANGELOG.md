@@ -1,5 +1,10 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.57-rc.2
+- changed: tiledesk logo during conversation
+- removed: image loader wrapper
+- bug-fixed: callout not render right height if heavy image is received
+
 ### 5.0.57-rc.1
 - added: fileUploadAccept as a tiledesk property
 - added: tiledesk logo during conversation
