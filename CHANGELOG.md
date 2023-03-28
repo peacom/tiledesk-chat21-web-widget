@@ -1,5 +1,8 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.57-rc.4
+- changed: set calloutStatus to false as default value
+
 ### 5.0.57-rc.3
 - changed: tiledesk logo during conversation
 - changed: show entire text of buttons
