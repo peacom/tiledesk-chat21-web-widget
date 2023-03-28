@@ -266,7 +266,7 @@ export class Globals {
     /** title box callout */
     this.calloutMsg = '';
     /** stato callout (shown only first time) */
-    this.calloutStaus = true;
+    this.calloutStaus = false;
     /** message box callout */
     this.userFullname = '';
     /** userFullname: Current user fullname. Set this parameter to specify
