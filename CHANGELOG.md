@@ -1,5 +1,9 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.57-rc.5
+- changed: chat21client.js to v0.1.12.5 (window scope fixed)
+- changed: tiledesk logo in conversation and home components
+
 ### 5.0.57-rc.4
 - changed: set calloutStatus to false as default value
 
