@@ -1,9 +1,10 @@
 /*
     Chat21Client
 
-    v0.1.12.4
+    v0.1.12.5
 
     @Author Andrea Sponziello
+    @Member Gabriele Panico
     (c) Tiledesk 2020
 */
 
@@ -24,13 +25,16 @@ class Chat21Client {
         this.reconnections = 0 // just to check how many reconnections
         this.client_id = this.uuidv4();
         this.log = options.log ? true : false;
-       
+    
         if (options && options.MQTTendpoint) {
             if (options.MQTTendpoint.startsWith('/')) {
                 if (this.log) {
                     console.log("MQTTendpoint relative url");
                 }
-                var loc = window.parent.location, new_uri;
+                var loc = window.location, new_uri;
+                if(window.frameElement && window.frameElement.getAttribute('tiledesk_context') === 'parent'){
+                    loc = window.parent.location
+                }
                 if (loc.protocol === "https:") {
                     // new_uri = "wss:";
                     new_uri = "mqtt:";
@@ -42,7 +46,6 @@ class Chat21Client {
                 new_uri += "//" + loc.host;
                 // new_uri += loc.pathname + "/to/ws";
                 new_uri += options.MQTTendpoint;
-                console.log('new_uriiiiiii', new_uri, loc, document.location, window.parent)
                 this.endpoint = new_uri
             } else {
                 this.endpoint = options.MQTTendpoint
