@@ -23,7 +23,7 @@ import { Rule } from 'src/models/rule';
 export class Globals {
 
   BASE_LOCATION = 'https://widget.tiledesk.com/v2';
-  POWERED_BY ='<a tabindex="-1" target="_blank" href="http://www.tiledesk.com/?utm_source=widget"><img src="https://support-pre.tiledesk.com/dashboard/assets/img/logos/tiledesk-logo_new_gray.svg"/></a>'
+  POWERED_BY ='<a tabindex="-1" target="_blank" href="http://www.tiledesk.com/?utm_source=widget"><img src="https://support-pre.tiledesk.com/dashboard/assets/img/logos/tiledesk-solo_logo_new_gray.svg"/><span>Powered by Tiledesk</span></a>'
   DEFAULT_LOGO_CHAT = '/assets/images/tiledesk_logo_white_small.svg';
 
   // ============ BEGIN: SET FUNCTION BY UTILS ==============//
