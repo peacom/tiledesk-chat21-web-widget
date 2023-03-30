@@ -1,7 +1,7 @@
 {
   "name": "@chat21/chat21-web-widget",
   "author": "Tiledesk SRL",
-  "version": "5.0.58",
+  "version": "5.0.59-rc.1",
   "license": "MIT",
   "homepage": "https://www.tiledesk.com",
   "repository": {
@@ -43,6 +43,7 @@
     "marked": "^4.0.16",
     "ngx-logger": "^5.0.11",
     "popper.js": "^1.16.1",
+    "replace": "^1.2.2",
     "rxjs": "~6.5.1",
     "source-map-explorer": "^2.5.3",
     "tslib": "^2.0.0",

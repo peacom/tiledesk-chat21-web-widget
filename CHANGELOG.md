@@ -1,5 +1,8 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.59-rc.1
+- added: hashing while building dist files
+
 ### 5.0.58 in PROD
 
 ### 5.0.57 in PROD
