@@ -1,5 +1,10 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.59-rc.2
+- added: handler for buttons in last-message component
+- changed: tooltip custom directive
+- changed: user-avatar size in last-message component
+
 ### 5.0.59-rc.1
 - added: hashing while building dist files
 

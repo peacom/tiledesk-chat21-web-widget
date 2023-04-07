@@ -220,6 +220,7 @@ export function conversationToMessage(conversation: ConversationModel, currentUs
   message.sender_fullname = conversation.sender_fullname
   message.recipient = conversation.recipient
   message.recipient_fullname = conversation.recipient_fullname
+  message.conversation_with = conversation.conversation_with
   message.status = +conversation.status
   message.timestamp = conversation.timestamp
   message.metadata = conversation['metadata']
