@@ -239,6 +239,7 @@ export function commandToMessage(msg: MessageModel, conversation: ConversationMo
   message.sender_fullname = conversation.sender_fullname
   message.recipient = conversation.recipient
   message.recipient_fullname = conversation.recipient_fullname
+  message.conversation_with = conversation.conversation_with
   message.status = +conversation.status
   message.timestamp = conversation.timestamp
   message.metadata = msg['metadata']
@@ -246,6 +247,7 @@ export function commandToMessage(msg: MessageModel, conversation: ConversationMo
   message.type = msg['type']
   message.isSender = isSender(message.sender, currentUserId)
   message.attributes = { ...conversation.attributes, ...msg['attributes']}
+  
 
   return message as MessageModel
 }

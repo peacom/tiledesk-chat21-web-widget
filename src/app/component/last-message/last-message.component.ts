@@ -167,8 +167,10 @@ export class LastMessageComponent implements OnInit, AfterViewInit, OnDestroy {
   onAttachmentButtonClicked(event: any){
     // this.onAttachmentButtonClicked.emit(event)
     this.logger.debug('[LASTMESSAGE] onAttachmentButtonClicked', event)
-    this.events.publish('lastMessage:attachmentButtonClicked', event)
     this.openConversationByID(this.conversation);
+    setTimeout(() => {
+      this.events.publish('lastMessage:attachmentButtonClicked', event)
+    }, 500);
   }
   /** */
   openConversationByID(conversation) {
