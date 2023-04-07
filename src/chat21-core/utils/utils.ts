@@ -19,6 +19,26 @@ export function windowsMatchMedia() {
   }
 }
 
+/** */
+export function isOniOSMobileDevice(): boolean {
+  let IS_ON_IOS_MOBILE_DEVICE = false;
+  if (/iPad|iPhone|iPod/i.test(window.navigator.userAgent)) {
+    IS_ON_IOS_MOBILE_DEVICE = true;
+
+  }
+  // console.log('[CONVS-DETAIL][HEADER] IS_ON_IOS_MOBILE_DEVICE ', this.IS_ON_IOS_MOBILE_DEVICE)
+  return IS_ON_IOS_MOBILE_DEVICE;
+}
+
+export function isOnMobileDevice() {
+  let IS_ON_MOBILE_DEVICE = false;
+  if (/Android|iPhone/i.test(window.navigator.userAgent)) {
+    IS_ON_MOBILE_DEVICE = true;
+  }
+  // this.logger.log('[APP-COMP] IS_ON_MOBILE_DEVICE', this.IS_ON_MOBILE_DEVICE)
+  return IS_ON_MOBILE_DEVICE;
+}
+
 /**
  * chiamata da ChatConversationsHandler
  * restituisce url '/conversations'
