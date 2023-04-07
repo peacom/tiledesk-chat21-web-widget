@@ -3,10 +3,10 @@
 :host  .c21-avatar-image ::ng-deep > chat-avatar-image {
 
     .c21-icon-avatar { 
-        height: 32px;
-        width: 32px;
-        min-width: 32px;
-        min-height: 32px;
+        height: 38px;
+        width: 38px;
+        min-width: 38px;
+        min-height: 38px;
     }  
 }
 :host .previewNewMessagge ::ng-deep > chat-bubble-message > #bubble-message > div > div > chat-text {
@@ -152,10 +152,10 @@
 
 .c21-icon-avatar {
     position: absolute;
-    width: 32px;
-    height: 32px;
+    width: 38px;
+    height: 38px;
     bottom: 0px;
-    left: -40px;
+    left: -46px;
     box-shadow: rgba(35, 47, 53, 0.09) 0px 2px 8px 0px;
     border-radius: 100%; //GAB
     border: 1px solid #eee;
@@ -163,8 +163,8 @@
 }
 
 .c21-avatar-image {
-    width: 32px;
-    height: 32px;
+    width: 38px;
+    height: 38px;
     display: block;
     position: absolute;
 }
