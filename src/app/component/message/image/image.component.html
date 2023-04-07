@@ -1,6 +1,5 @@
 <!-- [ngStyle] = "{ 'max-width': width +'px', 'max-height': height +'px' }" style="position: relative; text-align: center; margin: auto"-->
 <div class="c21-img-container" >
-  <!-- <div *ngIf="loading" class="loader" [ngStyle] = "{ 'width': width , 'height': height }"></div> -->
   <img 
     class="message-contentX message-content-imageX" 
     [alt]="metadata?.name"
@@ -9,7 +8,4 @@
     [src]="metadata.src" 
     (load)="onLoaded($event)"
     (click)="downloadImage(metadata.src, metadata.name)"/>
-  <ng-template #timeTooltipRight>
-    <span>{{ tooltipMessage }}</span>
-  </ng-template>
 </div>
