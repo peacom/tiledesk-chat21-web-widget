@@ -587,6 +587,18 @@ export class Globals {
     } else if(!isOpen && chat21conversationsEL){
       chat21conversationsEL.classList.remove('isMobile')
     }
+
+
+    //customize position for 'tiledeskdiv' for mobile
+    if(isOpen && this.isMobile && divTiledeskWidget){
+      divTiledeskWidget.style.right = '0px'
+      divTiledeskWidget.style.bottom = '0px'
+    } else if(!isOpen && this.isMobile && divTiledeskWidget){
+      divTiledeskWidget.style.bottom = this.marginY
+      this.align === 'left'?  divTiledeskWidget.style.left = this.mobileMarginX : divTiledeskWidget.style.right = this.mobileMarginX; 
+    }
+
+
   }
 
   setWidgetPreviewContainerSize(width: number, height: number){

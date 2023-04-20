@@ -369,6 +369,7 @@ export class GlobalSettingsService {
             this.globals.isMobile? marginX= this.globals.mobileMarginX: marginX = this.globals.marginX
             divTiledeskiframe.style.right =  marginX;
         }
+        
         if (this.globals.isMobile) {
             divTiledeskiframe.style.bottom =  this.globals.mobileMarginY
         } else {
