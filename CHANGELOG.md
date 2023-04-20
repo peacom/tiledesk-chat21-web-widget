@@ -1,5 +1,8 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.59-rc.3
+- bug-fixed: if mobileMarginX or MobileMarginY is set, widget do not fit on fullscreen once is opened
+
 ### 5.0.59-rc.2
 - added: handler for buttons in last-message component
 - changed: tooltip custom directive
