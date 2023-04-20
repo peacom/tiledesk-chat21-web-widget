@@ -596,4 +596,47 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
     }
   }
 
+
+
+  managePoweredBy(event: Event){
+    event.stopPropagation();
+    this.segmentLogoClick()
+    let target = (event.target as Element) || (event.srcElement as Element) || (event.currentTarget as Element)
+    if(target.parentElement.tagName === 'A' && target.parentElement.hasAttribute('href')){
+     window.open(target.parentElement.getAttribute('href'), '_blank')
+    }
+  }
+
+
+  private segmentLogoClick(){
+    let that = this
+    if(window['analytics']){
+      try {
+        window['analytics'].page("Widget Conversation Page, LogoClick", {});
+      } catch (err) {
+        this.logger.error('Event:Signed In [page] error', err);
+      }
+  
+      try {
+        window['analytics'].identify(that.senderId, {
+          name: that.userFullname,
+          email: that.userEmail,
+          logins: 5,
+        });
+      } catch (err) {
+        this.logger.error('Event:LogoClick [identify] error', err);
+      }
+      // Segments
+      try {
+        window['analytics'].track('LogoClick', {
+          "username": that.userFullname,
+          "userId": that.userEmail,
+          "attributes": that.attributes
+        });
+      } catch (err) {
+        this.logger.error('Event:LogoClick [track] error', err);
+      }
+    }
+  }
+
 }
