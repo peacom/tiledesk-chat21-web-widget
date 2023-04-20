@@ -1,3 +1,4 @@
+import { ScriptService } from './../chat21-core/providers/scripts/script.service';
 import { TYPE_DIRECT } from './../chat21-core/utils/constants';
 /** ANGULAR MODULES */
 import { AfterViewInit, Component, ElementRef, HostListener, NgZone, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
@@ -113,6 +114,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     private appStorageService: AppStorageService,
     private translatorService: TranslatorService,
     private translateService: CustomTranslateService,
+    private scriptService: ScriptService,
     public chatManager: ChatManager,
     private tiledeskRequestsService: TiledeskRequestsService,
     public tiledeskAuthService: TiledeskAuthService,
@@ -123,220 +125,222 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     public imageRepoService: ImageRepoService,
     public typingService: TypingService,
     public presenceService: PresenceService,
-    public uploadService: UploadService
+    public uploadService: UploadService 
   ){}
 
-  ngOnInit(): void {
-    this.logger.info('[APP-CONF]---------------- ngOnInit: APP.COMPONENT ---------------- ')
-    this.initWidgetParamiters();
-  }
+    ngOnInit(): void {
+        this.logger.info('[APP-CONF]---------------- ngOnInit: APP.COMPONENT ---------------- ')
+        this.initWidgetParamiters();
+    }
 
-  ngAfterViewInit(): void {
-    this.logger.info('[APP-CONF]---------------- ngAfterViewInit: APP.COMPONENT ---------------- ')
-    this.ngZone.run(() => {
-        const that = this;
-        const subChangedConversation = this.conversationsHandlerService.conversationChanged.subscribe((conversation) => {
-            // that.ngZone.run(() => {
-            if (conversation) {
-                this.onImageLoaded(conversation)
-                this.onConversationLoaded(conversation)
+    ngAfterViewInit(): void {
+        this.logger.info('[APP-CONF]---------------- ngAfterViewInit: APP.COMPONENT ---------------- ')
+        this.ngZone.run(() => {
+            const that = this;
+            const subChangedConversation = this.conversationsHandlerService.conversationChanged.subscribe((conversation) => {
+                // that.ngZone.run(() => {
+                if (conversation) {
+                    this.onImageLoaded(conversation)
+                    this.onConversationLoaded(conversation)
 
-                if(conversation.recipient === this.g.senderId && isUserBanned(conversation)){
-                    that.disposeWidget();
+                    if(conversation.recipient === this.g.senderId && isUserBanned(conversation)){
+                        that.disposeWidget();
+                        return;
+                    }
+    
+                    if(conversation.is_new && conversation.sender !== this.g.senderId && !isInfo(conversation)){
+                        that.manageTabNotification();
+                    }
+
+                    if (that.g.isOpen === true) {
+                        that.g.setParameter('displayEyeCatcherCard', 'none');
+
+                        this.logger.debug('[APP-COMP] obsChangeConversation ::: ', conversation);
+                        if (conversation.attributes && conversation.attributes['subtype'] === 'info') {
+                            return;
+                        }
+
+                    } else {
+                        // if(conversation.is_new && isJustRecived(this.g.startedAt.getTime(), conversation.timestamp)){
+                        //widget closed
+                        if(conversation.is_new && conversation.sender !== this.g.senderId && !isInfo(conversation)){
+                            that.lastConversation = conversation;
+                            that.g.isOpenNewMessage = true;
+                            that.logger.debug('[APP-COMP] lastconversationnn', that.lastConversation)
+                        }
+                        
+
+                        let badgeNewConverstionNumber = that.conversationsHandlerService.countIsNew()
+                        that.g.setParameter('conversationsBadge', badgeNewConverstionNumber);
+                        // }
+                    }
+
+                    that.triggerOnConversationUpdated(conversation);
+                } else {
+                    this.logger.debug('[APP-COMP] oBSconversationChanged null: errorrr')
                     return;
                 }
- 
-                if(conversation.is_new && conversation.sender !== this.g.senderId && !isInfo(conversation)){
-                    that.manageTabNotification();
-                }
+                
+                // });
+            });
+            this.subscriptions.push(subChangedConversation);
 
-                if (that.g.isOpen === true) {
+            const subAddedConversation = this.conversationsHandlerService.conversationAdded.subscribe((conversation) => {
+                // that.ngZone.run(() => {
+                if (that.g.isOpen === true && conversation) {
                     that.g.setParameter('displayEyeCatcherCard', 'none');
-
-                    this.logger.debug('[APP-COMP] obsChangeConversation ::: ', conversation);
+                    that.triggerOnConversationUpdated(conversation);
+                    that.logger.debug('[APP-COMP] obsAddedConversation ::: ', conversation);
                     if (conversation.attributes && conversation.attributes['subtype'] === 'info') {
                         return;
                     }
-
-                } else {
-                    // if(conversation.is_new && isJustRecived(this.g.startedAt.getTime(), conversation.timestamp)){
-                    //widget closed
-                    if(conversation.is_new && conversation.sender !== this.g.senderId && !isInfo(conversation)){
+                    if (conversation.is_new) {
+                        that.manageTabNotification()
+                        // this.soundMessage(); 
+                    }
+                    if(this.g.isOpen === false){
                         that.lastConversation = conversation;
                         that.g.isOpenNewMessage = true;
-                        that.logger.debug('[APP-COMP] lastconversationnn', that.lastConversation)
                     }
-                    
+                } else {
+                    //widget closed
 
                     let badgeNewConverstionNumber = that.conversationsHandlerService.countIsNew()
                     that.g.setParameter('conversationsBadge', badgeNewConverstionNumber);
-                    // }
                 }
-
-                that.triggerOnConversationUpdated(conversation);
-            } else {
-                this.logger.debug('[APP-COMP] oBSconversationChanged null: errorrr')
-                return;
-            }
-            
-            // });
-        });
-        this.subscriptions.push(subChangedConversation);
-
-        const subAddedConversation = this.conversationsHandlerService.conversationAdded.subscribe((conversation) => {
-            // that.ngZone.run(() => {
-            if (that.g.isOpen === true && conversation) {
-                that.g.setParameter('displayEyeCatcherCard', 'none');
-                that.triggerOnConversationUpdated(conversation);
-                that.logger.debug('[APP-COMP] obsAddedConversation ::: ', conversation);
-                if (conversation.attributes && conversation.attributes['subtype'] === 'info') {
-                    return;
+                // that.manageTabNotification()
+                // });
+                if(conversation){
+                    this.onImageLoaded(conversation)
+                    this.onConversationLoaded(conversation)
                 }
-                if (conversation.is_new) {
-                    that.manageTabNotification()
-                    // this.soundMessage(); 
+                
+            });
+            this.subscriptions.push(subAddedConversation);
+
+            const subAddedArchivedConversations = this.archivedConversationsService.archivedConversationAdded.subscribe((conversation) => {
+                // that.ngZone.run(() => {
+                if (conversation) {
+                    that.triggerOnConversationUpdated(conversation);
+                    this.onImageLoaded(conversation)
+                    this.onConversationLoaded(conversation)
                 }
-                if(this.g.isOpen === false){
-                    that.lastConversation = conversation;
-                    that.g.isOpenNewMessage = true;
+                // });
+            });
+            this.subscriptions.push(subAddedArchivedConversations);
+
+            const subRemovedArchivedConversations = this.archivedConversationsService.archivedConversationRemoved.subscribe((conversation) => {
+                // that.ngZone.run(() => {
+                if (conversation) {
+                    this.isConversationArchived = false;
+                    that.triggerOnConversationUpdated(conversation);
                 }
-            } else {
-                //widget closed
+                // });
+            });
+            this.subscriptions.push(subRemovedArchivedConversations);
 
-                let badgeNewConverstionNumber = that.conversationsHandlerService.countIsNew()
-                that.g.setParameter('conversationsBadge', badgeNewConverstionNumber);
-            }
-            // that.manageTabNotification()
-            // });
-            if(conversation){
-                this.onImageLoaded(conversation)
-                this.onConversationLoaded(conversation)
-            }
-            
         });
-        this.subscriptions.push(subAddedConversation);
-
-        const subAddedArchivedConversations = this.archivedConversationsService.archivedConversationAdded.subscribe((conversation) => {
-            // that.ngZone.run(() => {
-            if (conversation) {
-                that.triggerOnConversationUpdated(conversation);
-                this.onImageLoaded(conversation)
-                this.onConversationLoaded(conversation)
-            }
-            // });
-        });
-        this.subscriptions.push(subAddedArchivedConversations);
-
-        const subRemovedArchivedConversations = this.archivedConversationsService.archivedConversationRemoved.subscribe((conversation) => {
-            // that.ngZone.run(() => {
-            if (conversation) {
-                this.isConversationArchived = false;
-                that.triggerOnConversationUpdated(conversation);
-            }
-            // });
-        });
-        this.subscriptions.push(subRemovedArchivedConversations);
-
-    });
-    this.appStorageService.initialize(environment.storage_prefix, this.g.persistence, this.g.projectid)
-    this.tiledeskAuthService.initialize(this.appConfigService.getConfig().apiUrl)
-    this.tiledeskRequestsService.initialize(this.appConfigService.getConfig().apiUrl, this.g.projectid)
-    this.messagingAuthService.initialize();
-    this.chatManager.initialize();
-    this.uploadService.initialize();
-  }
-
-  private initWidgetParamiters(){
-    const that = this;
-    const obsSettingsService = this.globalSettingsService.obsSettingsService.subscribe((resp) => {
-        if(resp){
-
-            // /** INIT  */
-            this.logger.setLoggerConfig(this.g.isLogEnabled, this.g.logLevel)
-            this.tabTitle = this.g.windowContext.window.document.title
-            this.appStorageService.initialize(environment.storage_prefix, this.g.persistence, this.g.projectid)
-            this.logger.debug('[APP-COMP] check if token is passed throw url: ', this.g.jwt);
-            /**CHECK IF JWT IS IN URL PARAMETERS */
-            if (this.g.jwt) {
-                // logging in with custom token from url
-                // add JWY token to localstorage and authenticate with it           this.logger.debug('[APP-COMP] token from url. isShown:', this.g.isShown, 'autostart:', this.g.autoStart)
-                this.logger.debug('[APP-COMP]  ----------------  logging in with custom token from url ---------------- ');
-                //   this.g.autoStart = false;
-                const storedTiledeskToken = this.appStorageService.getItem('tiledeskToken')
-                storedTiledeskToken === this.g.jwt? null: this.appStorageService.setItem('tiledeskToken', this.g.jwt);
-                this.g.tiledeskToken = this.g.jwt;
-                // this.signInWithCustomToken(this.g.jwt) // moved to authenticate() in else(tiledeskToken)
-            }
-
-            /** INIT LABELS TRANSLATIONS */
-            this.translatorService.initI18n().then((result) => {
-                this.logger.debug('[APP-COMP] »»»» APP-COMPONENT.TS initI18n result', result);
-                const browserLang = this.translatorService.getLanguage();
-                // moment.locale(browserLang)
-                dayjs.locale(browserLang)
-                this.translatorService.translate(this.g);
-            }).then(() => {
-                /** INIT  */
-                that.initAll();
-                /** TRIGGER ONBEFORE INIT */
-                that.triggerOnBeforeInit();
-                /** AUTH */
-                that.setAuthSubscription();
-            })
-      
-        }
-    });
-    this.subscriptions.push(obsSettingsService);
-    this.globalSettingsService.initWidgetParamiters(this.g, this.el);
-
-    // SET AUDIO
-    this.audio = new Audio();
-    this.audio.src = this.g.baseLocation + URL_SOUND_LIST_CONVERSATION;
-    this.audio.load();
-  }
-
-  private initAll() {
-    this.addComponentToWindow(this.ngZone);
-
-    //INIT TRIGGER-HANDLER
-    this.triggerHandler.setElement(this.el)
-    this.triggerHandler.setWindowContext(this.g.windowContext)
-
-    // /** TRANSLATION LOADER: */
-    // //  this.translatorService.translate(this.g);
-    // this.translatorService.initI18n().then((result) => {
-    //     this.g.wdLog(['»»»» APP-COMPONENT.TS initI18n result', result]);
-    //     this.translatorService.translate(this.g);
-    // });
-
-    /** SET ATTRIBUTES */
-    const attributes = this.setAttributesFromStorageService();
-    if (attributes) {
-        this.g.attributes = attributes;
+        this.appStorageService.initialize(environment.storage_prefix, this.g.persistence, this.g.projectid)
+        this.tiledeskAuthService.initialize(this.appConfigService.getConfig().apiUrl)
+        this.tiledeskRequestsService.initialize(this.appConfigService.getConfig().apiUrl, this.g.projectid)
+        this.messagingAuthService.initialize();
+        this.chatManager.initialize();
+        this.uploadService.initialize();
     }
-    this.setStyleMap()
 
-    // ------------------------------- //
+    private initWidgetParamiters(){
+        const that = this;
+        const obsSettingsService = this.globalSettingsService.obsSettingsService.subscribe((resp) => {
+            if(resp){
 
-    // ------------------------------- //
-    /**
-     * INIZIALIZE GLOBALS :
-     * create settings object used in trigger
-     * set isMobile
-     * set attributes
-    */
-    this.g.initialize();
-    // ------------------------------- //
+                // /** INIT  */
+                this.logger.setLoggerConfig(this.g.isLogEnabled, this.g.logLevel)
+                this.tabTitle = this.g.windowContext.window.document.title
+                this.appStorageService.initialize(environment.storage_prefix, this.g.persistence, this.g.projectid)
+                this.logger.debug('[APP-COMP] check if token is passed throw url: ', this.g.jwt);
+                /**CHECK IF JWT IS IN URL PARAMETERS */
+                if (this.g.jwt) {
+                    // logging in with custom token from url
+                    // add JWY token to localstorage and authenticate with it           this.logger.debug('[APP-COMP] token from url. isShown:', this.g.isShown, 'autostart:', this.g.autoStart)
+                    this.logger.debug('[APP-COMP]  ----------------  logging in with custom token from url ---------------- ');
+                    //   this.g.autoStart = false;
+                    const storedTiledeskToken = this.appStorageService.getItem('tiledeskToken')
+                    storedTiledeskToken === this.g.jwt? null: this.appStorageService.setItem('tiledeskToken', this.g.jwt);
+                    this.g.tiledeskToken = this.g.jwt;
+                    // this.signInWithCustomToken(this.g.jwt) // moved to authenticate() in else(tiledeskToken)
+                }
 
-    this.removeFirebasewebsocketFromLocalStorage();
-    // this.triggerLoadParamsEvent();
-    // this.addComponentToWindow(this.ngZone); // forse dovrebbe stare prima di tutti i triggers
+                /** INIT LABELS TRANSLATIONS */
+                this.translatorService.initI18n().then((result) => {
+                    this.logger.debug('[APP-COMP] »»»» APP-COMPONENT.TS initI18n result', result);
+                    const browserLang = this.translatorService.getLanguage();
+                    // moment.locale(browserLang)
+                    dayjs.locale(browserLang)
+                    this.translatorService.translate(this.g);
+                }).then(() => {
+                    /** INIT  */
+                    that.initAll();
+                    /** TRIGGER ONBEFORE INIT */
+                    that.triggerOnBeforeInit();
+                    /** AUTH */
+                    that.setAuthSubscription();
+                    /** SCRIPT LOAD */
+                    that.loadCustomScript(this.appConfigService.getConfig())
+                })
+        
+            }
+        });
+        this.subscriptions.push(obsSettingsService);
+        this.globalSettingsService.initWidgetParamiters(this.g, this.el);
 
-    this.initLauncherButton();
-    this.triggerLoadParamsEvent(); // first trigger
-    //this.setAvailableAgentsStatus();
+        // SET AUDIO
+        this.audio = new Audio();
+        this.audio.src = this.g.baseLocation + URL_SOUND_LIST_CONVERSATION;
+        this.audio.load();
+    }
 
-  }
+    private initAll() {
+        this.addComponentToWindow(this.ngZone);
+
+        //INIT TRIGGER-HANDLER
+        this.triggerHandler.setElement(this.el)
+        this.triggerHandler.setWindowContext(this.g.windowContext)
+
+        // /** TRANSLATION LOADER: */
+        // //  this.translatorService.translate(this.g);
+        // this.translatorService.initI18n().then((result) => {
+        //     this.g.wdLog(['»»»» APP-COMPONENT.TS initI18n result', result]);
+        //     this.translatorService.translate(this.g);
+        // });
+
+        /** SET ATTRIBUTES */
+        const attributes = this.setAttributesFromStorageService();
+        if (attributes) {
+            this.g.attributes = attributes;
+        }
+        this.setStyleMap()
+
+        // ------------------------------- //
+
+        // ------------------------------- //
+        /**
+         * INIZIALIZE GLOBALS :
+         * create settings object used in trigger
+         * set isMobile
+         * set attributes
+        */
+        this.g.initialize();
+        // ------------------------------- //
+
+        this.removeFirebasewebsocketFromLocalStorage();
+        // this.triggerLoadParamsEvent();
+        // this.addComponentToWindow(this.ngZone); // forse dovrebbe stare prima di tutti i triggers
+
+        this.initLauncherButton();
+        this.triggerLoadParamsEvent(); // first trigger
+        //this.setAvailableAgentsStatus();
+
+    }
 
     // ========= begin:: SUBSCRIPTIONS ============//
     private async setAuthSubscription(){
@@ -2062,6 +2066,13 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this.el.nativeElement.style.setProperty('--button-in-msg-background-color', this.g.bubbleSentBackground)
         this.el.nativeElement.style.setProperty('--button-in-msg-font-size', this.g.buttonFontSize)
+    }
+
+
+    private loadCustomScript(config){
+        if(config.hasOwnProperty("globalRemoteJSSrc")){
+          this.scriptService.buildScriptArray(config['globalRemoteJSSrc'])
+        }
     }
 
     // ========= begin:: DESTROY ALL SUBSCRIPTIONS ============//

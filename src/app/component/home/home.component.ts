@@ -1,3 +1,4 @@
+import { TiledeskAuthService } from './../../../chat21-core/providers/tiledesk/tiledesk-auth.service';
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CustomTranslateService } from 'src/chat21-core/providers/custom-translate.service';
 import { ConversationModel } from '../../../chat21-core/models/conversation';
@@ -47,6 +48,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   
   constructor(
     public g: Globals,
+    private tiledeskAuthService : TiledeskAuthService,
     private customTranslateService: CustomTranslateService,
   ) {
 
@@ -82,6 +84,49 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.aflistconv.nativeElement.focus();
       }
     }, 1000);
+  }
+
+
+  managePoweredBy(event: Event){
+    event.stopPropagation();
+    this.segmentLogoClick()
+    let target = (event.target as Element) || (event.srcElement as Element) || (event.currentTarget as Element)
+    if(target.parentElement.tagName === 'A' && target.parentElement.hasAttribute('href')){
+     window.open(target.parentElement.getAttribute('href'), '_blank')
+    }
+  }
+
+
+  private segmentLogoClick(){
+    let that = this
+    let user = this.tiledeskAuthService.getCurrentUser()
+    if(window['analytics']){
+      try {
+        window['analytics'].page("Widget Home Page, LogoClick", {});
+      } catch (err) {
+        this.logger.error('Event:Signed In [page] error', err);
+      }
+  
+      try {
+        window['analytics'].identify(user.uid, {
+          name: user.firstname + ' ' + user.lastname,
+          email: user.email,
+          logins: 5,
+        });
+      } catch (err) {
+        this.logger.error('Event:LogoClick [identify] error', err);
+      }
+      // Segments
+      try {
+        window['analytics'].track('LogoClick', {
+          "username": user.firstname + ' ' + user.lastname,
+          "userId": user.uid,
+          "attributes": that.g.attributes
+        });
+      } catch (err) {
+        this.logger.error('Event:LogoClick [track] error', err);
+      }
+    }
   }
 
 

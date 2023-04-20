@@ -62,10 +62,11 @@ import { TranslateModule } from '@ngx-translate/core';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { LoggerModule, NGXLogger, NgxLoggerLevel } from "ngx-logger";
 
-//DIRECTIVES
+//DIRECTIVES-PIPES
 import { HtmlEntitiesEncodePipe } from './pipe/html-entities-encode.pipe';
 import { MarkedPipe } from './pipe/marked.pipe';
 import { SafeHtmlPipe } from './pipe/safe-html.pipe';
+import { TooltipDirective } from 'src/app/directives/tooltip.directive';
 
 //LOGGER SERVICES
 import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
@@ -128,7 +129,7 @@ import { WaitingService } from './providers/waiting.service';
 import { StarRatingWidgetService } from './providers/star-rating-widget.service';
 import { LikeUnlikeComponent } from './component/message/like-unlike/like-unlike.component';
 import { Rules } from './utils/rules';
-import { TooltipDirective } from 'src/app/directives/tooltip.directive';
+import { ScriptService } from 'src/chat21-core/providers/scripts/script.service';
 
 
 const appInitializerFn = (appConfig: AppConfigService, logger: NGXLogger) => {
@@ -381,7 +382,8 @@ export function uploadFactory(http: HttpClient, appConfig: AppConfigService, app
     TranslatorService,
     CustomTranslateService,
     Triggerhandler,
-    WaitingService
+    WaitingService,
+    ScriptService
   ],
   bootstrap: [AppComponent]
 })

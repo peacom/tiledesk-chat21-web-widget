@@ -144,7 +144,7 @@
     <!-- FOOTER -->
     <div class="c21-footer fade-in-bottom-footer">
         <div id="c21-powered-by" (mouseover)="hover=true" (mouseleave)="hover=false">
-            <div tabindex="-1" class="c21-powered-by" [innerHTML]="g.poweredBy"></div>
+            <div tabindex="-1" class="c21-powered-by" [innerHTML]="g.poweredBy" (click)="managePoweredBy($event)"></div>
             <!-- <div class="build_version">{{g.BUILD_VERSION}}</div> -->
         </div>
         <chat-menu-options *ngIf="!hideSettings"

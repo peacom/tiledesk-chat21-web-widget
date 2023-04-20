@@ -1,7 +1,7 @@
 <!-- LOGO-->
 <div id="hiddenFooter" *ngIf="!hideTextAreaContent && poweredBy" class="fade-in-bottom" 
     [class.hideTextReply]="hideTextReply">
-    <div tabindex="-1" class="c21-powered-by" [innerHTML]="poweredBy"></div>
+    <div tabindex="-1" class="c21-powered-by" [innerHTML]="poweredBy" (click)="managePoweredBy($event)"></div>
 </div>
 
 <!-- TEXTAREA + ICONS: conv active-->
