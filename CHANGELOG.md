@@ -1,5 +1,8 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.59-rc.4
+- bug-fixed: texarea remains disabled if messages array has the last (non ordered) timestamp message set with 'disabledTextArea' set to true
+
 ### 5.0.59-rc.3
 - bug-fixed: if mobileMarginX or MobileMarginY is set, widget do not fit on fullscreen once is opened
 
