@@ -38,12 +38,20 @@ export const BCK_COLOR_CONVERSATION_UNSELECTED = '#FFFFFF ';
 
 export const TYPE_SUPPORT_GROUP = 'support-group';
 export const CHANNEL_TYPE_GROUP = 'group';
+export const CHANNEL_TYPE_CHAT21 = 'chat21';
+export const CHANNEL_TYPE_EMAIL = 'email';
+export const CHANNEL_TYPE_FORM = 'form';
+export const CHANNEL_TYPE_MESSANGER = 'messanger';
+export const CHANNEL_TYPE_WHATSAPP = 'whatsapp';
+export const CHANNEL_TYPE_TELEGRAM = 'telegram';
 
 // TYPES MESSAGES
 export const TYPE_MSG_TEXT = 'text';
 export const TYPE_MSG_IMAGE = 'image';
 export const TYPE_MSG_FILE = 'file';
 export const TYPE_MSG_BUTTON = 'button';
+export const TYPE_MSG_EMAIL = 'email';
+export const TYPE_MSG_FORM = 'form';
 
 export const MAX_WIDTH_IMAGES = 230;
 export const MIN_WIDTH_IMAGES = 130;
