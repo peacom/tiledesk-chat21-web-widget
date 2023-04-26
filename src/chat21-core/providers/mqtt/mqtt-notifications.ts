@@ -1,49 +1,48 @@
-
 import { Injectable } from '@angular/core';
 // services
 import { NotificationsService } from '../abstract/notifications.service';
 import { LoggerInstance } from '../logger/loggerInstance';
 import { LoggerService } from 'src/chat21-core/providers/abstract/logger.service';
-
 // firebase
-// import firebase from "firebase/app";
-
+import firebase from "firebase/app";
+import 'firebase/messaging';
+import 'firebase/auth';
 // chat21
 import { Chat21Service } from './chat-service';
 
-// @Injectable({ providedIn: 'root' })
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+  })
 export class MQTTNotifications extends NotificationsService {
-  
+    
   // public BUILD_VERSION: string;
   private FCMcurrentToken: string;
   private userId: string;
   private tenant: string;
   private vapidkey: string;
-  private firebase: any;
-
+  private platform: string;
   private logger: LoggerService = LoggerInstance.getInstance();
 
   constructor(
-    public chat21Service: Chat21Service
+    public chat21Service: Chat21Service,
   ) {
     super();
   }
 
-  async initialize(tenant: string, vapId: string) {
+  initialize(tenant: string, vapId: string, platform: string): void {
     this.tenant = tenant;
     this.vapidkey = vapId;
-
-    const { default: firebase} = await import("firebase/app");
-    this.firebase = firebase
-
+    platform === 'desktop'? this.platform = 'ionic' : this.platform = platform
+    this.logger.log('[MQTTNotificationService] initialize - tenant ', this.tenant, this.platform)
     return;
   }
     
   getNotificationPermissionAndSaveToken(currentUserUid) {
+    console.log("[MQTTNotificationService] getNotificationPermissionAndSaveToken()",currentUserUid);
     this.userId = currentUserUid;
-    if (this.firebase.messaging.isSupported()) {
-      const messaging = this.firebase.messaging();
+    if (firebase.messaging.isSupported()) {
+      console.log("[MQTTNotificationService] firebase.messaging.isSupported -> YES");
+      const messaging = firebase.messaging();
       // messaging.requestPermission()
       Notification.requestPermission().then((permission) => {
         if (permission === 'granted') {
@@ -61,6 +60,28 @@ export class MQTTNotifications extends NotificationsService {
       });
     } else {
       this.logger.log('[MQTTNotificationService] >>>> FIREBASE MESSAGING IS NOT SUPPORTED')
+
+      // if(this.platform == 'android' || this.platform === 'ios'){
+      //   this.logger.log('[MQTTNotificationService] >>>> FIREBASE MESSAGING: use FCM plugin')
+      //   this.fcm.onTokenRefresh().subscribe(FCMtoken => {
+      //     // Register your new token in your back-end if you want
+      //     // backend.registerToken(token);
+      //     this.FCMcurrentToken = FCMtoken;
+      //     console.log("[MQTTNotificationService] FCM: onTokenRefresh --->", FCMtoken);
+      //     this.saveToken(FCMtoken, currentUserUid)
+      //   });
+      //   this.fcm.requestPushPermission().then((permission) => {
+      //     console.log("[MQTTNotificationService] FCM: requestPushPermission --->", permission);
+      //     if(permission === true){
+      //       this.fcm.getToken().then(FCMtoken => {
+      //         console.log("[MQTTNotificationService] FCM: getToken --->", FCMtoken);
+      //         this.FCMcurrentToken = FCMtoken;
+      //         this.saveToken(FCMtoken, currentUserUid)
+      //       });
+      //     }
+      //   });
+        
+      // }
     }
   }
 
@@ -83,7 +104,7 @@ export class MQTTNotifications extends NotificationsService {
       let connectionsRefURL = '';
       if (connectionsRefinstancesId) {
         connectionsRefURL = connectionsRefinstancesId + self.FCMcurrentToken;
-        const connectionsRef = this.firebase.database().ref().child(connectionsRefURL);
+        const connectionsRef = firebase.database().ref().child(connectionsRefURL);
         self.logger.log('[MQTTNotificationService] >>>> connectionsRef ', connectionsRef);
         self.logger.log('[MQTTNotificationService] >>>> connectionsRef url ', connectionsRefURL);
         connectionsRef.off()
@@ -107,7 +128,7 @@ export class MQTTNotifications extends NotificationsService {
     const device_model = {
       device_model: navigator.userAgent,
       language: navigator.language,
-      platform: 'ionic',
+      platform: this.platform,
       platform_version: this.BUILD_VERSION
     }
     this.chat21Service.chatClient.saveInstance(FCMcurrentToken,device_model,(err, response) => {
