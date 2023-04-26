@@ -184,7 +184,7 @@ export class ChatManager {
   getConversationHandlerByConversationId(conversationId): any {
     let handler = null;
     this.handlers.forEach(conv => {
-      // this.logger.('[CHAT MANAGER]forEach ***', conversationId, this.handlers, conv);
+      this.logger.log('[CHAT MANAGER]forEach ***', conversationId, this.handlers, conv);
       if (conv.conversationWith === conversationId) {
         handler = conv;
         return;
