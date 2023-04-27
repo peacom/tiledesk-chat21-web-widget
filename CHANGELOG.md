@@ -1,5 +1,8 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.60-rc.1
+- bug-fixed: index.html and index-dev.html pages don't load widet on mobile browsers
+
 ### 5.0.59 in PROD
 
 ### 5.0.59-rc.4
