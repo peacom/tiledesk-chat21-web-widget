@@ -195,7 +195,7 @@
         window.tiledeskSettings = {
             marginX: "100px",
             marginY: "50px",
-            calloutTimer: 1
+            // calloutTimer: 1
             // autostart: false
 
         };
@@ -220,7 +220,7 @@
         window.addEventListener('load', (event)=> {
             document.dispatchEvent(new Event('mousemove'))
         })
-        
+
         window.Tiledesk('onLoadParams', function(event_data) {
             console.log("onLoadParams Tiledesk FN", event_data);
             // window.Tiledesk('signInWithCustomToken', 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDliOGVmYTg3MzJlYjAwMTQxNzYzZDlfNWU0ZWNiOThiNzhlZTQwMDE3NDA2MTEwIiwiZmlyc3RuYW1lIjoiS2VsbHkiLCJsYXN0bmFtZSI6IkdyYWNlIiwiZW1haWwiOiJncmFjZUBlbWFpbG5hLmNvIiwic3ViIjoidXNlcmV4dGVybmFsIiwiYXVkIjoiaHR0cHM6Ly90aWxlZGVzay5jb20vcHJvamVjdHMvNjA5YjhlZmE4NzMyZWIwMDE0MTc2M2Q5IiwiaWF0IjoxNjQxODAzODk0fQ.p0reTwd25p93CsDTyQa8tkihgFxThAI4DXloNc6vbXw')
