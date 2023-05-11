@@ -1,5 +1,7 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.60 in PROD
+
 ### 5.0.60-rc.2
 - bug-fixed: callout not showed in index.html and index-dev.html pages
 

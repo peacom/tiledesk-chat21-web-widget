@@ -148,7 +148,7 @@ export class MQTTConversationsHandler extends ConversationsHandlerService {
         this.logger.debug('[MQTTConversationsHandler] connecting MQTT conversations handler');
         this.chat21Service.chatClient.onConversationAdded( (conv) => {
             let conversation = this.completeConversation(conv); // needed to get the "conversation_with", and find the conv in the conv-history
-            this.logger.log("onConversationAdded completed:",conversation);
+            this.logger.log("[MQTTConversationsHandler] onConversationAdded completed:",conversation);
             const index = this.searchIndexInArrayForConversationWith(this.conversations, conversation.conversation_with);
             if (index > -1) {
                 this.logger.log('[MQTTConversationsHandler] Added conv -> Changed!')

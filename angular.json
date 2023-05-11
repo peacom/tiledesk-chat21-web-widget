@@ -33,6 +33,7 @@
               "src/iframe-style.css",
               "src/widget-config-template.json",
               "src/widget-config.json",
+              "src/environments/real_data/segment_script-dev.js",
               "src/environments/real_data/widget-config-firebase.json",
               "src/environments/real_data/widget-config-mqtt.json",
               "src/environments/real_data/widget-config-docker.json",
