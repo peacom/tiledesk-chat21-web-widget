@@ -68,7 +68,7 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
     showPreview: false,
     darkMode: false,
     enableSearch: false,
-    include: [ 'recent', 'people', 'nature', 'activity']
+    include: [ 'recent', 'people', 'nature', 'activity', 'flags']
   }
 
   convertColorToRGBA = convertColorToRGBA;
