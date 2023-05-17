@@ -103,6 +103,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   styleMapConversation: Map<string, string> = new Map();
   marginBottom: number;
   
+  forceDisconnect: boolean = false;
   private logger: LoggerService = LoggerInstance.getInstance();
   constructor(
     private el: ElementRef,
@@ -407,8 +408,12 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                     rules.initRules(that.g.windowContext, that.g.tiledeskToken, user, that.generateNewUidConversation(), that.g.botsRules)
                 }
 
+                //if widget is closed subscribe to 'click' event and set a 60sec timer to disconnect if handler isn't fired
+                if(!this.g.isOpen){
+                    that.listenToWidgetClick()
+                }
 
-            } else if (state && state === AUTH_STATE_OFFLINE) {
+            } else if (state && state === AUTH_STATE_OFFLINE && !this.forceDisconnect) {
                 /** non sono loggato */
                 that.logger.info('[APP-COMP] OFFLINE - NO CURRENT USER AUTENTICATE: ');
                 that.g.setParameter('isLogged', false);
@@ -427,7 +432,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
         const subUserLogOut = this.messagingAuthService.BSSignOut.subscribe((state) => {
             // that.ngZone.run(() => {
-            if (state === true) { //state = true -> user has logged out
+            console.log('[FORCE] messagingAuthService BSSignOut', state, this.forceDisconnect)
+            if (state === true && !this.forceDisconnect) { //state = true -> user has logged out
                 /** ho effettuato il logout: nascondo il widget */
                 that.logger.debug('[APP-COMP] sono nel caso logout -1');
                 // that.g.wdLog(['obsLoggedUser', obsLoggedUser);
@@ -1580,6 +1586,11 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.g.setParameter('recipientId', recipientId);
         this.logger.debug('[APP-COMP] openCloseWidget', recipientId, this.g.isOpen, this.g.startFromHome);
         if (this.g.isOpen === false) {
+            if(this.forceDisconnect){
+                console.log('[FORCE] onOpenCloseWidget --> reconnect', this.forceDisconnect)
+                this.messagingAuthService.createCustomToken(this.g.tiledeskToken)
+            }
+
             if (!recipientId) {
                 if(this.g.singleConversation){
                     this.isOpenHome = false;
@@ -2073,6 +2084,20 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         if(config.hasOwnProperty("globalRemoteJSSrc")){
           this.scriptService.buildScriptArray(config['globalRemoteJSSrc'])
         }
+    }
+
+
+    private listenToWidgetClick(){
+        let clickTimeout = setTimeout(() => {
+            console.log('[FORCE] --> NO INTERACTION: disconnection... <--- ')
+            //disconnect 
+            this.forceDisconnect = true
+            this.messagingAuthService.logout()
+        }, 10*1000);
+        window.addEventListener("click", function(){
+            console.log('[FORCE] <<INTERACTION>> within 1 minute')
+            clearTimeout(clickTimeout)
+        })
     }
 
     // ========= begin:: DESTROY ALL SUBSCRIPTIONS ============//
