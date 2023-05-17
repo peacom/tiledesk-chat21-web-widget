@@ -158,6 +158,31 @@
             text-align: center;
         }
 
+        header#header{
+            z-index: 2;
+            position: absolute;
+            cursor: pointer;
+        }
+
+        .share-btn{
+            transition: color 0.15s ease 0s, opacity 0.15s ease 0s, box-shadow 0.15s ease 0s, background-color 0.15s ease 0s;
+            height: 41px;
+            box-sizing: border-box;
+            color: rgb(19, 33, 68);
+            font-weight: 600;
+            line-height: 22px;
+            background-size: 1px 41px;
+            padding: 10px 19px;
+            border-radius: 10px;
+            border: 1px solid rgb(255, 255, 255);
+            background-color: rgb(231, 240, 242);
+            box-shadow: rgb(204, 211, 228) 0px 0px 0px 1px;
+        }
+
+        .share-btn:hover{
+            opacity: 0.8;
+        }
+
         footer#footer {
             background-color: white;
             text-align: center;
@@ -190,7 +215,53 @@
             height: 24px;
             /* margin-left: 20px; */
         }
-        
+
+        /* The snackbar - position it at the bottom and in the middle of the screen */
+        #snackbar {
+            visibility: hidden; /* Hidden by default. Visible on click */
+            min-width: 250px; /* Set a default minimum width */
+            margin-left: -125px; /* Divide value of min-width by 2 */
+            background-color: #504a4a; /* Black background color */
+            color: #fff; /* White text color */
+            text-align: center; /* Centered text */
+            border-radius: 10px; /* Rounded borders */
+            padding: 16px; /* Padding */
+            position: fixed; /* Sit on top of the screen */
+            z-index: 1; /* Add a z-index if needed */
+            left: 50%; /* Center the snackbar */
+            bottom: 30px; /* 30px from the bottom */
+            font-size: medium;
+        }
+
+        /* Show the snackbar when clicking on a button (class added with JavaScript) */
+        #snackbar.show {
+            visibility: visible; /* Show the snackbar */
+            /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+            However, delay the fade out process for 2.5 seconds */
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        /* Animations to fade the snackbar in and out */
+        @-webkit-keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @-webkit-keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
+
+        @keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
 
     </style>
 
@@ -367,14 +438,27 @@
             }
             return(false);
         }
+
+        
+
     </script>
     
 </head>
 
 <body class="website white" >
+
+
     <div id="preloader">
         <div class="logo"></div>
     </div>
+
+    <header id="header">
+        <ul class="nav navbar-nav navbar-left">
+            <li class="sign-up"><button class="share-btn" onclick="copyLink()">SHARE THIS PROTOTYPE</button></li>
+        </ul>
+    </header>
+    <!-- The actual snackbar -->
+    <div id="snackbar">Copied to clipboard...</div>
 
     <div id="wrapper" class="mockup">
     </div>
@@ -389,24 +473,38 @@
     </footer>
 
 
-<!-- <script>
+<script>
     // non-blocking CSS delivery
-    var loadDeferredStyles = function() {
-        var addStylesNode = document.getElementById("deferred-styles");
-        console.log('addStylesNode ', addStylesNode)
-        var replacement = document.createElement("div");
-        replacement.innerHTML = addStylesNode.textContent;
-        document.body.appendChild(replacement);
-        addStylesNode.parentElement.removeChild(addStylesNode);
-    };
-    var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
-            window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
-    if (raf) {
-        raf(function() { window.setTimeout(loadDeferredStyles, 0); });
-    } else {
-        window.addEventListener('load', loadDeferredStyles);
+    // var loadDeferredStyles = function() {
+    //     var addStylesNode = document.getElementById("deferred-styles");
+    //     console.log('addStylesNode ', addStylesNode)
+    //     var replacement = document.createElement("div");
+    //     replacement.innerHTML = addStylesNode.textContent;
+    //     document.body.appendChild(replacement);
+    //     addStylesNode.parentElement.removeChild(addStylesNode);
+    // };
+    // var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+    //         window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+    // if (raf) {
+    //     raf(function() { window.setTimeout(loadDeferredStyles, 0); });
+    // } else {
+    //     window.addEventListener('load', loadDeferredStyles);
+    // }
+    function copyLink(){
+        let url = window.location.href
+        navigator.clipboard.writeText(url)
+
+        // Get the snackbar DIV
+        var toast = document.getElementById("snackbar");
+
+        // Add the "show" class to DIV
+        toast.className = "show";
+
+        // After 3 seconds, remove the show class from DIV
+        setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+
     }
-</script> -->
+</script>
 
 <!-- Google Analytics -->
 
