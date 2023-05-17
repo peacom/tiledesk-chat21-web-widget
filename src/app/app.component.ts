@@ -1589,6 +1589,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             if(this.forceDisconnect){
                 console.log('[FORCE] onOpenCloseWidget --> reconnect', this.forceDisconnect)
                 this.messagingAuthService.createCustomToken(this.g.tiledeskToken)
+                this.forceDisconnect = false;
             }
 
             if (!recipientId) {
