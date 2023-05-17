@@ -1,5 +1,10 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.61-rc.1
+- added: 'flags' emojii category in conversatio-footer component
+- added: 'share prototype' button inside 'chatbot-panel.html' page to copy link to clipboard
+- added: forceDisconnet var to disconnet messaging client if no interaction is handled within 60s
+
 ### 5.0.60 in PROD
 
 ### 5.0.60-rc.2
