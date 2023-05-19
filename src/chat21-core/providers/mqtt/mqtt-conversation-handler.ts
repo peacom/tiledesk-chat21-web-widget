@@ -127,13 +127,19 @@ export class MQTTConversationHandler extends ConversationHandlerService {
             this.conversationWith, (message, topic) => {
                 this.logger.log('[MQTTConversationHandlerSERVICE] message added:', message, 'on topic:', topic, this.messages);
                 // this.addedMessage(msg);
-                const msg: MessageModel = message;        
-                msg.uid = message.message_id;
+                const msg: MessageModel = message;
+
+                //allow to replace message in unknown status (pending status: '0')
+                if(message.attributes && message.attributes.tempUID){
+                    msg.uid = message.attributes.tempUID;
+                }else{
+                    msg.uid = message.message_id
+                }
 
                 //escape command message is already is in list checking by parendUid 
-                if(this.messages.filter(message => message.attributes['parentUid'] === msg.uid).length > 0){
-                    return;
-                }
+                // if(this.messages.filter(message => message.attributes['parentUid'] === msg.uid).length > 0){
+                //     return;
+                // }
                 
                 if (msg.attributes && msg.attributes.commands) {
                     this.logger.debug('[MQTTConversationHandlerSERVICE] splitted message::::', msg)
@@ -191,6 +197,7 @@ export class MQTTConversationHandler extends ConversationHandlerService {
         const recipientFullname = conversationWithFullname;
         const recipientId = conversationWith;
         attributes.lang = language;
+        attributes.tempUID = uuidv4(); //allow to show message in a pending status
         this.chat21Service.chatClient.sendMessage(
             msg,
             typeMsg,
@@ -210,6 +217,25 @@ export class MQTTConversationHandler extends ConversationHandlerService {
                 }
             }
         );
+        
+        const message = new MessageModel(
+            attributes.tempUID, //allow to show message in a pending status 
+            language,
+            conversationWith,
+            recipientFullname,
+            sender,
+            senderFullname,
+            0,
+            metadataMsg,
+            msg,
+            Date.now(),
+            typeMsg,
+            attributes,
+            channelType,
+            false
+        );
+        this.addedMessage(message) //allow to show message in a pending status: add pending message in array of messages
+
         return new MessageModel(
             '',
             language,
@@ -410,7 +436,7 @@ export class MQTTConversationHandler extends ConversationHandlerService {
      */
     private updateMessageStatusReceived(msg) {
         this.logger.log('[MQTTConversationHandlerSERVICE] updateMessageStatusReceived', msg);
-        if (msg['status'] < MSG_STATUS_RECEIVED) {
+        if (msg['status'] < MSG_STATUS_RECEIVED && msg['status'] > 0) {
             this.logger.log('[MQTTConversationHandlerSERVICE] status ', msg['status'], ' < (RECEIVED:200)', MSG_STATUS_RECEIVED);
             let uid = msg.uid
             msg.attributes.commands? uid = msg.attributes.parentUid: null 
