@@ -342,6 +342,7 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
           channelType: channelType
         })
         
+        this.conversationHandlerService = this.chatManager.getConversationHandlerByConversationId(this.conversationWith);
         const messageSent = this.conversationHandlerService.sendMessage(
           msg,
           type,
