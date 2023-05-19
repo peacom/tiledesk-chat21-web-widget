@@ -1,5 +1,10 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.62 in PROD
+- added: pending messages
+- added: disconnect from messaging handler if no interaction exist within 1 minute
+- bug-fixed: cannot able to send messages due to undefined in conversationHandlerService
+
 ### 5.0.61-rc.1
 - added: 'flags' emojii category in conversatio-footer component
 - added: 'share prototype' button inside 'chatbot-panel.html' page to copy link to clipboard
