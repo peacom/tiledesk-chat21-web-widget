@@ -15,6 +15,8 @@ import { avatarPlaceholder, getColorBck } from '../../utils/utils-user';
 import { compareValues, searchIndexInArrayForUid } from '../../utils/utils';
 import { LoggerService } from '../abstract/logger.service';
 import { LoggerInstance } from '../logger/loggerInstance';
+import { messageType } from 'src/chat21-core/utils/utils-message';
+import { MESSAGE_TYPE_INFO } from 'src/chat21-core/utils/constants';
 
 // @Injectable({ providedIn: 'root' })
 @Injectable()
@@ -267,6 +269,12 @@ export class MQTTConversationsHandler extends ConversationsHandlerService {
         if (!conversation.conversation_with) {
             conversation.conversation_with = conversation.conversWith // conversWith comes from remote
         }
+
+        //skip info message updates
+        if(messageType(MESSAGE_TYPE_INFO, conversation) ){
+            return;
+        }
+        
         const index = searchIndexInArrayForUid(this.conversations, conversation.conversation_with);
         const oldConversation = this.conversations[index]
         if (index > -1) {

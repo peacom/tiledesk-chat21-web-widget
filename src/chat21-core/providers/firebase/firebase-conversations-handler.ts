@@ -17,6 +17,8 @@ import { LoggerInstance } from '../logger/loggerInstance';
 // utils
 import { avatarPlaceholder, getColorBck } from '../../utils/utils-user';
 import { compareValues, conversationsPathForUserId, searchIndexInArrayForUid, isGroup } from '../../utils/utils';
+import { messageType } from 'src/chat21-core/utils/utils-message';
+import { MESSAGE_TYPE_INFO } from 'src/chat21-core/utils/constants';
 
 
 
@@ -475,6 +477,10 @@ export class FirebaseConversationsHandler extends ConversationsHandlerService {
     //TODO-GAB: ora emit singola conversation e non dell'intero array di conversations
     private changed(childSnapshot: any) {
         const oldConversation = this.conversations[searchIndexInArrayForUid(this.conversations, childSnapshot.key)]
+        //skip info message updates
+        if(messageType(MESSAGE_TYPE_INFO, oldConversation) ){
+            return;
+        }
         if (this.conversationGenerate(childSnapshot)) {
             const index = searchIndexInArrayForUid(this.conversations, childSnapshot.key);
             if (index > -1) {
