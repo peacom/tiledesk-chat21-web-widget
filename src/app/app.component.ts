@@ -1727,6 +1727,12 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     public onSelectedConversation($event: ConversationModel) {
         if ($event) {
             if (this.g.isOpen === false) {
+
+                if(this.forceDisconnect){
+                    console.log('[FORCE] onSelectedConversation --> reconnect', this.forceDisconnect)
+                    this.messagingAuthService.createCustomToken(this.g.tiledeskToken)
+                    this.forceDisconnect = false;
+                }
                 //this.f21_open();
                 this._f21_open()
             }
@@ -2094,7 +2100,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             //disconnect 
             this.forceDisconnect = true
             this.messagingAuthService.logout()
-        }, 10*1000);
+        }, 60*1000);
         window.addEventListener("click", function(){
             console.log('[FORCE] <<INTERACTION>> within 1 minute')
             clearTimeout(clickTimeout)
