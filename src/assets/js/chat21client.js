@@ -979,12 +979,12 @@ class Chat21Client {
             // clean: true,
             reconnectPeriod: 1000,
             // connectTimeout: 30 * 1000,
-            // will: {
-            //     topic: this.presence_topic,
-            //     payload: '{"disconnected":true}',
-            //     qos: 1,
-            //     retain: true
-            // },
+            will: {
+                topic: this.presence_topic,
+                payload: '{"disconnected":true}',
+                qos: 1,
+                retain: true
+            },
             clientId: this.client_id,
             username: 'JWT',
             password: jwt,
