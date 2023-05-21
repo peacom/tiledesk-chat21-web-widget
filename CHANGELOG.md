@@ -1,6 +1,12 @@
 # chat21-web-widget ver 5.0
 
 ### 5.0.62 in PROD
+- added: LWT e imHere() for presence management
+
+### 5.0.63-rc.1
+- added: skip info messages in conversations-list component
+
+### 5.0.62 in PROD
 - added: pending messages
 - added: disconnect from messaging handler if no interaction exist within 1 minute
 - bug-fixed: cannot able to send messages due to undefined in conversationHandlerService
