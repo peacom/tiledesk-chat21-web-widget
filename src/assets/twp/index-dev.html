@@ -708,6 +708,19 @@
             }
             return true;
         }
+
+        function onClickDisconnectTime(){
+            let status = document.querySelector('input[name="disconnetTime"]:checked');
+            let value;
+            status? value = status.value : '';
+            if(!value){
+                value = document.getElementById('disconnetTimeText').value;
+            }
+            !value? value = -1 : '';
+            window.tiledeskSettings['disconnetTime'] = +value
+            console.log('onClickDisconnectTime: status-->',window.tiledeskSettings);
+            window.Tiledesk('restart')
+        }
     
         function onClickStartFromHome(){
             let status = document.querySelector('input[name="startFromHome"]:checked').value
@@ -1627,6 +1640,19 @@
                     <div class="row section c21-parameters">
                         <div><h3 style="line-height: 0.3;">MANAGE <em><strong>widget settings</strong></em></h3></div>
                         <div>Select an option for Tiledesk settings parameter</div>
+                        <div class="row">
+                            <div class="col-md-5 formElement"><span><em><strong>disconnectTime</strong></em></span></div>
+                            <div class="col-md-5">
+                                <input class="form-check-input" type="radio" name="disconnectTime" value="-1"><label class="form-check-label" for="preChatForm">-1(disabled)</label>
+                                <div class="formElement" >
+                                    <div class="col-form-label" style="width: 90px">Time (s):</div>
+                                    <input class="form-control col-sm-2" type="text" id="disconnectTimeText" name="disconnectTime" placeholder="Ex. 10">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-light" onclick="onClickDisconnectTime()">Test this setting <i class="fa fa-magic" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-5 formElement"><span><em><strong>startFromHome</strong></em></span></div>
                             <div class="col-md-5">

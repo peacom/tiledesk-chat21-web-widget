@@ -212,6 +212,7 @@ export class Globals {
    messangerPageTitle: string; // *******  new ********
    telegramUsername: string; // *******  new ********
    fileUploadAccept: string; // *******  new ********
+   disconnetTime: number; // *******  new ********
   constructor(
   ) { }
 
@@ -387,6 +388,8 @@ export class Globals {
     this.telegramUsername = ''
     /**enable user to set a telegram number to chat with */
     this.fileUploadAccept = "image/*,.pdf,.txt"
+    /**enable auto disconnect from messaging after a defined amount of time (s)*/
+    this.disconnetTime = 10
 
     this.showWaitTime = true;
 

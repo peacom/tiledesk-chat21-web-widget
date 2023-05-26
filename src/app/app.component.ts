@@ -409,7 +409,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                 }
 
                 //if widget is closed subscribe to 'click' event and set a 60sec timer to disconnect if handler isn't fired
-                if(!this.g.isOpen){
+                if(!this.g.isOpen && this.g.disconnetTime > 0){
                     that.listenToWidgetClick()
                 }
 
@@ -2100,7 +2100,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             //disconnect 
             this.forceDisconnect = true
             this.messagingAuthService.logout()
-        }, 60*1000);
+        }, this.g.disconnetTime * 1000);
         window.addEventListener("click", function(){
             console.log('[FORCE] <<INTERACTION>> within 1 minute')
             clearTimeout(clickTimeout)

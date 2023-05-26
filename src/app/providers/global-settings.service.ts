@@ -1018,7 +1018,12 @@ export class GlobalSettingsService {
         // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > telegramUsername:: ', TEMP]);
         if (TEMP !== undefined) {
             globals.fileUploadAccept = TEMP;
-        }      
+        } 
+        TEMP = tiledeskSettings['disconnetTime'];
+        // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > disconnetTime:: ', TEMP]);
+        if (TEMP !== undefined) {
+            globals.disconnetTime = +TEMP;
+        }     
     }
 
     /**
@@ -1285,6 +1290,11 @@ export class GlobalSettingsService {
         if (TEMP !== null) {
             this.globals.fileUploadAccept = TEMP;
         }
+        TEMP = el.nativeElement.getAttribute('disconnetTime');
+        if (TEMP !== null) {
+            this.globals.disconnetTime = +TEMP;
+        }
+        
         
     }
 
@@ -1727,6 +1737,12 @@ export class GlobalSettingsService {
         if (TEMP) {
             globals.fileUploadAccept = TEMP;
         }
+
+        TEMP = getParameterByName(windowContext, 'tiledesk_disconnetTime');
+        if (TEMP) {
+            globals.disconnetTime = +TEMP;
+        }
+        
     }
 
     /**
