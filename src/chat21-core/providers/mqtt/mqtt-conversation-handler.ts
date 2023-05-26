@@ -103,12 +103,12 @@ export class MQTTConversationHandler extends ConversationHandlerService {
             if (!err) {
                 this.logger.log('[MQTTConversationHandlerSERVICE] message lastMessages:', messages);
                 messages.sort(compareValues('timestamp', 'asc'));
-                messages.forEach(message => {
+                messages.forEach((message) => {
                     // this.addedMessage(msg);
                     const msg: MessageModel = message;        
                     msg.uid = message.message_id;
 
-                    //escape command message is already is in list checking by parendUid 
+                    //escape command message is already in list checking by parendUid 
                     if(this.messages.filter(message => message.attributes['parentUid'] === msg.uid).length > 0){
                         return;
                     }
@@ -117,7 +117,7 @@ export class MQTTConversationHandler extends ConversationHandlerService {
                         this.logger.debug('[MQTTConversationHandlerSERVICE] splitted message::::', this.messages, msg)
                         this.addCommandMessage(msg)
                     } else {
-                        // this.logger.debug('[MQTTConversationHandlerSERVICE] NOT splitted message::::', msg)
+                        this.logger.debug('[MQTTConversationHandlerSERVICE] NOT splitted message::::', msg)
                         this.addedMessage(msg)
                     }
                 });

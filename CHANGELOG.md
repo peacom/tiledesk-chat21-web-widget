@@ -1,6 +1,10 @@
 # chat21-web-widget ver 5.0
 
-### 5.0.62 in PROD
+### 5.0.64 in PROD
+- removed: LWT e imHere() for presence management
+- removed: tooltip lib
+
+### 5.0.63 in PROD
 - added: LWT e imHere() for presence management
 
 ### 5.0.63-rc.1
