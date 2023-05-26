@@ -1,3 +1,4 @@
+import { async } from '@angular/core/testing';
 import { LIVE_PAGE, TOUCHING_OPERATOR } from './../../utils/constants';
 import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
@@ -85,6 +86,7 @@ export class MQTTConversationHandler extends ConversationHandlerService {
         this.messages = [];
         this.showInfoMessage = showInfoMessage;
         // this.attributes = this.setAttributes();
+        return;
     }
 
     /**
@@ -103,9 +105,9 @@ export class MQTTConversationHandler extends ConversationHandlerService {
             if (!err) {
                 this.logger.log('[MQTTConversationHandlerSERVICE] message lastMessages:', messages);
                 messages.sort(compareValues('timestamp', 'asc'));
-                messages.forEach((message) => {
+                messages.forEach(async (message) => {
                     // this.addedMessage(msg);
-                    const msg: MessageModel = message;        
+                    const msg: MessageModel = message;
                     msg.uid = message.message_id;
 
                     //escape command message is already in list checking by parendUid 
@@ -113,7 +115,7 @@ export class MQTTConversationHandler extends ConversationHandlerService {
                         return;
                     }
 
-                    if (msg.attributes && msg.attributes.commands ) {
+                    if (msg.attributes && msg.attributes.commands && msg.attributes.commands.lenght > 0 ) {
                         this.logger.debug('[MQTTConversationHandlerSERVICE] splitted message::::', this.messages, msg)
                         this.addCommandMessage(msg)
                     } else {
@@ -141,7 +143,7 @@ export class MQTTConversationHandler extends ConversationHandlerService {
                 //     return;
                 // }
                 
-                if (msg.attributes && msg.attributes.commands) {
+                if (msg.attributes && msg.attributes.commands && msg.attributes.commands.lenght > 0) {
                     this.logger.debug('[MQTTConversationHandlerSERVICE] splitted message::::', msg)
                     this.addCommandMessage(msg)
                 } else {
