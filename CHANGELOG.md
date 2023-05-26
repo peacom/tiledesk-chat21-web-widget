@@ -1,5 +1,10 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.65-rc.1
+- added: disconnectTime tiledesk property to manage the time before disconnecting from messaging system if no interaction is fired while the widget is in closed status
+- bug-fixed: numbered list reduce the font-size of the bubble-message
+- bug-fixed: init() method of conversationHandler.service is not called after a refresh page
+
 ### 5.0.64 in PROD
 - removed: LWT e imHere() for presence management
 - removed: tooltip lib
