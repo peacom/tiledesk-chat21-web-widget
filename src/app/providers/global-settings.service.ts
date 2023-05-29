@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 // services
 import { Globals } from '../utils/globals';
-import { convertColorToRGBA, detectIfIsMobile, getImageUrlThumb, getParameterByName, stringToBoolean } from '../utils/utils';
+import { convertColorToRGBA, detectIfIsMobile, getImageUrlThumb, getParameterByName, stringToBoolean, stringToNumber } from '../utils/utils';
 
 import { TemplateBindingParseResult } from '@angular/compiler';
 import { AppStorageService } from '../../chat21-core/providers/abstract/app-storage.service';
@@ -1740,7 +1740,7 @@ export class GlobalSettingsService {
 
         TEMP = getParameterByName(windowContext, 'tiledesk_disconnetTime');
         if (TEMP) {
-            globals.disconnetTime = +TEMP;
+            globals.disconnetTime = stringToNumber(TEMP);
         }
         
     }
