@@ -1,5 +1,8 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.66 in PROD
+- added: LWT e imHere() for presence management
+
 ### 5.0.65 in PROD
 
 ### 5.0.65-rc.1

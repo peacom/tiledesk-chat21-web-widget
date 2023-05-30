@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ComponentFactoryResolver, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild, ViewContainerRef } from '@angular/core';
 import { Globals } from 'src/app/utils/globals';
 import { MessageModel } from 'src/chat21-core/models/message';
 import { UploadModel } from 'src/chat21-core/models/upload';
@@ -48,7 +48,7 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
   @Output() onBackButton = new EventEmitter()
 
   @ViewChild('chat21_file') public chat21_file: ElementRef;
-
+  @ViewChild('emoji_mart_container', {read: ViewContainerRef}) public divEmojiiContainer: ViewContainerRef;
   // ========= begin:: send image ======= //
   selectedFiles: FileList;
   isFilePendingToUpload: Boolean = false;
@@ -62,6 +62,7 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
   conversationHandlerService: ConversationHandlerService
 
   showEmojiPicker: boolean = false; //To show/hide emoji picker
+  loadPickerModule: boolean = true;
   emojiiOptions = {
     emojiPerLine : 9,
     totalFrequentLines: 1,
@@ -450,7 +451,30 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
     }
   }
 
-  onEmojiiPickerClicked(){
+  async onEmojiiPickerClicked(){
+    // if(this.loadPickerModule){
+    //   this.loadPickerModule = false;
+    //   const { default: PickerModule} = await import("@ctrl/ngx-emoji-mart");
+    //   import('../conversation-emojii/conversation-emojii.component').then(({ConversationEmojiiComponent})=> {
+    //     this.divEmojiiContainer.clear();
+    //     const instance = this.divEmojiiContainer.createComponent(ConversationEmojiiComponent);
+    //     this.divEmojiiContainer.createEmbeddedView()
+    //     this.divEmojiiContainer.insert(instance.hostView);
+    //   });
+    //   // this.divEmojiiContainer.nativeElement.insertAdjacentHTML('afterbegin', '<emoji-mart id="emoji-mart"' +
+    //   // //  '*ngIf="showEmojiPicker"'+
+    //   //  'class="emoji-mart"'+
+    //   // '[showPreview]="emojiiOptions?.showPreview"'+
+    //   // // '[color]="stylesMap?.get("themeColor")"' +
+    //   // '[perLine]="emojiiOptions?.emojiPerLine"'+
+    //   // '[totalFrequentLines]="emojiiOptions?.totalFrequentLines"'+
+    //   // '[enableSearch]="emojiiOptions?.enableSearch"'+
+    //   // '[darkMode]="emojiiOptions?.darkMode"'+
+    //   // '[include]="emojiiOptions?.include"'+
+    //   // '(emojiSelect)="addEmoji($event)">'+
+    //   // '</emoji-mart>')
+
+    // }
     //OPEN EMOJII PICKER
     this.onEmojiiPickerShow.emit(!this.isEmojiiPickerShow)
   }

@@ -78,7 +78,7 @@
 
 
 <!-- EMOJII PICKER-->
-<div [style.visibility]="isEmojiiPickerShow?'visible':'hidden'"  class="emoji-container">
+<div [style.visibility]="isEmojiiPickerShow?'visible':'hidden'"  class="emoji-container"  id="emoji-mart-container" #emoji_mart_container>
     <emoji-mart id="emoji-mart"
         *ngIf="showEmojiPicker"
         class="emoji-mart"

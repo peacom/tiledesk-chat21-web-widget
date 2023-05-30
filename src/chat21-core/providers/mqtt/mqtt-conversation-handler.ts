@@ -115,7 +115,7 @@ export class MQTTConversationHandler extends ConversationHandlerService {
                         return;
                     }
 
-                    if (msg.attributes && msg.attributes.commands && msg.attributes.commands.lenght > 0 ) {
+                    if (msg.attributes && msg.attributes.commands) {
                         this.logger.debug('[MQTTConversationHandlerSERVICE] splitted message::::', this.messages, msg)
                         this.addCommandMessage(msg)
                     } else {
@@ -143,7 +143,7 @@ export class MQTTConversationHandler extends ConversationHandlerService {
                 //     return;
                 // }
                 
-                if (msg.attributes && msg.attributes.commands && msg.attributes.commands.lenght > 0) {
+                if (msg.attributes && msg.attributes.commands) {
                     this.logger.debug('[MQTTConversationHandlerSERVICE] splitted message::::', msg)
                     this.addCommandMessage(msg)
                 } else {
