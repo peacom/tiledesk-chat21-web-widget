@@ -432,7 +432,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
         const subUserLogOut = this.messagingAuthService.BSSignOut.subscribe((state) => {
             // that.ngZone.run(() => {
-            console.log('[FORCE] messagingAuthService BSSignOut', state, this.forceDisconnect)
+            this.logger.log('[FORCE] messagingAuthService BSSignOut', state, this.forceDisconnect)
             if (state === true && !this.forceDisconnect) { //state = true -> user has logged out
                 /** ho effettuato il logout: nascondo il widget */
                 that.logger.debug('[APP-COMP] sono nel caso logout -1');
@@ -1507,7 +1507,9 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             // this.g.windowContext.window.document.title = this.tabTitle
         } else {
             // TAB IS ACTIVE --> restore title and DO NOT SOUND
-            this.presenceService.imHere()
+            if(!this.forceDisconnect){
+                this.presenceService.imHere()
+            }
             clearInterval(this.setIntervalTime)
             this.setIntervalTime = null;
             this.isTabVisible = true;
@@ -1587,7 +1589,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.logger.debug('[APP-COMP] openCloseWidget', recipientId, this.g.isOpen, this.g.startFromHome);
         if (this.g.isOpen === false) {
             if(this.forceDisconnect){
-                console.log('[FORCE] onOpenCloseWidget --> reconnect', this.forceDisconnect)
+                this.logger.log('[FORCE] onOpenCloseWidget --> reconnect', this.forceDisconnect)
                 this.messagingAuthService.createCustomToken(this.g.tiledeskToken)
                 this.forceDisconnect = false;
             }
@@ -1729,7 +1731,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             if (this.g.isOpen === false) {
 
                 if(this.forceDisconnect){
-                    console.log('[FORCE] onSelectedConversation --> reconnect', this.forceDisconnect)
+                    this.logger.log('[FORCE] onSelectedConversation --> reconnect', this.forceDisconnect)
                     this.messagingAuthService.createCustomToken(this.g.tiledeskToken)
                     this.forceDisconnect = false;
                 }
@@ -2095,14 +2097,15 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
     private listenToWidgetClick(){
+        const that = this
         let clickTimeout = setTimeout(() => {
-            console.log('[FORCE] --> NO INTERACTION: disconnection... <--- ')
+            that.logger.log('[FORCE] --> NO INTERACTION: disconnection... <--- ')
             //disconnect 
-            this.forceDisconnect = true
-            this.messagingAuthService.logout()
-        }, this.g.disconnetTime * 1000);
+            that.forceDisconnect = true
+            that.messagingAuthService.logout()
+        }, that.g.disconnetTime * 1000);
         window.addEventListener("click", function(){
-            console.log('[FORCE] <<INTERACTION>> within 1 minute')
+            that.logger.log('[FORCE] <<INTERACTION>> within 1 minute')
             clearTimeout(clickTimeout)
         })
     }
