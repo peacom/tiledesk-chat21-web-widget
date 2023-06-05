@@ -23,6 +23,7 @@ import { ImageComponent } from './component/message/image/image.component';
 import { InfoMessageComponent } from './component/message/info-message/info-message.component';
 import { HtmlComponent } from './component/message/html/html.component';
 import { FrameComponent } from './component/message/frame/frame.component';
+import { AudioComponent } from './component/message/audio/audio.component';
 import { UserTypingComponent } from './../chat21-core/utils/user-typing/user-typing.component';
 /** MESSAGE ATTACHMENTS COMPONENTS */
 import { MessageAttachmentComponent } from './component/message-attachment/message-attachment.component';
@@ -130,6 +131,7 @@ import { StarRatingWidgetService } from './providers/star-rating-widget.service'
 import { LikeUnlikeComponent } from './component/message/like-unlike/like-unlike.component';
 import { Rules } from './utils/rules';
 import { ScriptService } from 'src/chat21-core/providers/scripts/script.service';
+
 
 
 const appInitializerFn = (appConfig: AppConfigService, logger: NGXLogger) => {
@@ -287,7 +289,8 @@ export function uploadFactory(http: HttpClient, appConfig: AppConfigService, app
     DateAgoPipe,
     SafeHtmlPipe,
     LikeUnlikeComponent,
-    TooltipDirective
+    TooltipDirective,
+    AudioComponent
   ],
   imports: [
     BrowserModule,
