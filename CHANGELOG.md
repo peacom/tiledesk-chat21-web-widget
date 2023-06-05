@@ -1,5 +1,9 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.67 in PROD
+- bug-fixed: when refresh the page and an already open conversation is selected, footer is blocked 
+- bug-fix: pdf preview image is not containend into its container 
+
 ### 5.0.66 in PROD
 - added: LWT e imHere() for presence management
 
