@@ -148,8 +148,8 @@ export class ConversationPreviewComponent implements OnInit {
         const metadata = {
           'name': imageXLoad.title,
           'src': that.sanitizer.bypassSecurityTrustUrl(imageXLoad.src),
-          'width': 80,
-          'height': 106,
+          'width': '80px',
+          'height': '106px',
           'type': attachment.metadata.type,
           'uid': attachment.metadata.uid
         };
@@ -158,6 +158,7 @@ export class ConversationPreviewComponent implements OnInit {
         that.arrayFiles.push({metadata});
         if (!that.fileSelected) {
           that.fileSelected = Object.assign({}, metadata)
+          that.fileSelected = Object.assign(that.fileSelected, that.getMetadataSize(that.fileSelected))
         }
       };
     }
