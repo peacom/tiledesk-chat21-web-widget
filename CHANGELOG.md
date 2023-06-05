@@ -2,7 +2,7 @@
 
 ### 5.0.67 in PROD
 - bug-fixed: when refresh the page and an already open conversation is selected, footer is blocked 
-- bug-fix: pdf preview image is not containend into its container 
+- bug-fix: pdf preview image is not contained into its container 
 - bug-fixed: cannot push isHere() for presence management if user is disconnected and a notification is received
 
 ### 5.0.66 in PROD

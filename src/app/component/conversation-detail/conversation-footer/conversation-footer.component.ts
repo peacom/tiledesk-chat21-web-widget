@@ -48,6 +48,7 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
   @Output() onBackButton = new EventEmitter()
 
   @ViewChild('chat21_file') public chat21_file: ElementRef;
+  // @ViewChild('emojii_container', {read: ViewContainerRef}) selector;
   @ViewChild('emoji_mart_container', {read: ViewContainerRef}) public divEmojiiContainer: ViewContainerRef;
   // ========= begin:: send image ======= //
   selectedFiles: FileList;
@@ -454,12 +455,18 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
   async onEmojiiPickerClicked(){
     // if(this.loadPickerModule){
     //   this.loadPickerModule = false;
-    //   const { default: PickerModule} = await import("@ctrl/ngx-emoji-mart");
+    //   // this.divEmojiiContainer.clear();
+    //   this.vcref.clear();
+    //   const { PickerModule } = await import("@ctrl/ngx-emoji-mart");
     //   import('../conversation-emojii/conversation-emojii.component').then(({ConversationEmojiiComponent})=> {
-    //     this.divEmojiiContainer.clear();
-    //     const instance = this.divEmojiiContainer.createComponent(ConversationEmojiiComponent);
-    //     this.divEmojiiContainer.createEmbeddedView()
-    //     this.divEmojiiContainer.insert(instance.hostView);
+    //     // const instance = this.divEmojiiContainer.createComponent(ConversationEmojiiComponent);
+    //     // // this.divEmojiiContainer.createEmbeddedView(instance.hostView)
+    //     // this.divEmojiiContainer.insert(instance.hostView);
+    //     // this.divEmojiiContainer = this.selector.createComponent(ConversationEmojiiComponent);
+    //     let greetcomp = this.vcref.createComponent(
+    //       this.cfr.resolveComponentFactory(ConversationEmojiiComponent)
+    //     );
+    //     greetcomp.instance.var = 'ssssss'
     //   });
     //   // this.divEmojiiContainer.nativeElement.insertAdjacentHTML('afterbegin', '<emoji-mart id="emoji-mart"' +
     //   // //  '*ngIf="showEmojiPicker"'+
