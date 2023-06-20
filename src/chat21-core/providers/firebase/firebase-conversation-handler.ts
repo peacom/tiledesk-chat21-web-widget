@@ -105,14 +105,14 @@ export class FirebaseConversationHandler extends ConversationHandlerService {
         this.logger.debug('[FIREBASEConversationHandlerSERVICE] urlNodeFirebase *****', this.urlNodeFirebase);
         const firebaseMessages = this.firebase.database().ref(this.urlNodeFirebase);
         this.ref = firebaseMessages.orderByChild('timestamp').limitToLast(100);
-        this.ref.on('child_added', (childSnapshot) => {
+        this.ref.on('child_added', async (childSnapshot) => {
             that.logger.debug('[FIREBASEConversationHandlerSERVICE] >>>>>>>>>>>>>> child_added: ', childSnapshot.val())
             const msg: MessageModel = childSnapshot.val();        
             msg.uid = childSnapshot.key;
 
             if (msg.attributes && msg.attributes.commands) {
                 this.logger.debug('[FIREBASEConversationHandlerSERVICE] splitted message::::', msg)
-                that.addCommandMessage(msg)
+                await that.addCommandMessage(msg)
             } else {
                 this.logger.debug('[FIREBASEConversationHandlerSERVICE] NOT splitted message::::', msg)
                 that.addedNew(msg)
@@ -255,6 +255,7 @@ export class FirebaseConversationHandler extends ConversationHandlerService {
 
     
 
+            
             this.addRepalceMessageInArray(msg.uid, msg);
             this.messageAdded.next(msg);
         } else {
@@ -468,59 +469,63 @@ export class FirebaseConversationHandler extends ConversationHandlerService {
     }
 
 
-    private addCommandMessage(msg: MessageModel){
+    private async addCommandMessage(msg: MessageModel): Promise<boolean> {
         const that = this;
         const commands = msg.attributes.commands;
         let i=0;
-        function execute(command){
-            if(command.type === "message"){
-                that.logger.debug('[FIREBASEConversationHandlerSERVICE] addCommandMessage --> type="message"', command, i)
-                if (i >= 2) {
-                    
-                    //check if previus wait message type has time value, otherwize set to 1000ms
-                    !commands[i-1].time? commands[i-1].time= 1000 : commands[i-1].time
-                    command.message.timestamp = commands[i-2].message.timestamp + commands[i-1].time;
-                    
-                    /** CHECK IF MESSAGE IS JUST RECEIVED: IF false, set next message time (if object exist) to 0 -> this allow to show it immediately */
-                    if(!isJustRecived(that.startTime.getTime(), msg.timestamp)){
-                        let previewsTimeMsg = msg.timestamp;
-                        commands[i-2]? previewsTimeMsg = commands[i-2].message.timestamp : null;
-                        command.message.timestamp = previewsTimeMsg + 100
-                        commands[i+1]? commands[i+1].time = 0 : null
+        return new Promise((resolve, reject)=>{
+            function execute(command){
+                if(command.type === "message"){
+                    that.logger.debug('[FIREBASEConversationHandlerSERVICE] addCommandMessage --> type="message"', command, i)
+                    if (i >= 2) {
+                        
+                        //check if previus wait message type has time value, otherwize set to 1000ms
+                        !commands[i-1].time? commands[i-1].time= 1000 : commands[i-1].time
+                        command.message.timestamp = commands[i-2].message.timestamp + commands[i-1].time;
+                        
+                        /** CHECK IF MESSAGE IS JUST RECEIVED: IF false, set next message time (if object exist) to 0 -> this allow to show it immediately */
+                        if(!isJustRecived(that.startTime.getTime(), msg.timestamp)){
+                            let previewsTimeMsg = msg.timestamp;
+                            commands[i-2]? previewsTimeMsg = commands[i-2].message.timestamp : null;
+                            command.message.timestamp = previewsTimeMsg + 100
+                            commands[i+1]? commands[i+1].time = 0 : null
+                        }
+                    } else { /**MANAGE FIRST MESSAGE */
+                        command.message.timestamp = msg.timestamp;
+                        if(!isJustRecived(that.startTime.getTime(), msg.timestamp)){
+                            commands[i+1]? commands[i+1].time = 0 : null
+                        }
                     }
-                } else { /**MANAGE FIRST MESSAGE */
-                    command.message.timestamp = msg.timestamp;
-                    if(!isJustRecived(that.startTime.getTime(), msg.timestamp)){
-                        commands[i+1]? commands[i+1].time = 0 : null
+                    that.generateMessageObject(msg, command.message, function () {
+                        i += 1
+                        if (i < commands.length) {
+                            execute(commands[i])
+                        }
+                        else {
+                            that.logger.debug('[FIREBASEConversationHandlerSERVICE] addCommandMessage --> last command executed (wait), exit')
+                            resolve(true)
+                        }
+                    })
+                }else if(command.type === "wait"){
+                    that.logger.debug('[FIREBASEConversationHandlerSERVICE] addCommandMessage --> type="wait"', command, i, commands.length)
+                    //publish waiting event to simulate user typing
+                    if(isJustRecived(that.startTime.getTime(), msg.timestamp)){
+                        that.messageWait.next({uid: that.conversationWith, uidUserTypingNow: msg.sender, nameUserTypingNow: msg.sender_fullname, waitTime: command.time, command: command})
                     }
+                    setTimeout(function() {
+                        i += 1
+                        if (i < commands.length) {
+                            execute(commands[i])
+                        }
+                        else {
+                            that.logger.debug('[FIREBASEConversationHandlerSERVICE] addCommandMessage --> last command executed (send message), exit')
+                            resolve(true)
+                        }
+                    },command.time)
                 }
-                that.generateMessageObject(msg, command.message, function () {
-                    i += 1
-                    if (i < commands.length) {
-                        execute(commands[i])
-                    }
-                    else {
-                        that.logger.debug('[FIREBASEConversationHandlerSERVICE] addCommandMessage --> last command executed (wait), exit') 
-                    }
-                })
-            }else if(command.type === "wait"){
-                that.logger.debug('[FIREBASEConversationHandlerSERVICE] addCommandMessage --> type="wait"', command, i, commands.length)
-                //publish waiting event to simulate user typing
-                if(isJustRecived(that.startTime.getTime(), msg.timestamp)){
-                    that.messageWait.next({uid: that.conversationWith, uidUserTypingNow: msg.sender, nameUserTypingNow: msg.sender_fullname, waitTime: command.time, command: command})
-                }
-                setTimeout(function() {
-                    i += 1
-                    if (i < commands.length) {
-                        execute(commands[i])
-                    }
-                    else {
-                        that.logger.debug('[FIREBASEConversationHandlerSERVICE] addCommandMessage --> last command executed (send message), exit') 
-                    }
-                },command.time)
             }
-        }
-        execute(commands[0]) //START render first message
+            execute(commands[0]) //START render first message
+        })
     }
 
     private generateMessageObject(message, command_message, callback) {

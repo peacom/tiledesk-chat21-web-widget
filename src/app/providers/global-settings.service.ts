@@ -997,7 +997,7 @@ export class GlobalSettingsService {
         TEMP = tiledeskSettings['participants'];
         // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > participants:: ', TEMP]);
         if (TEMP !== undefined) {
-            globals.participants = TEMP.split(',').map(key => { return key.trim()});;
+            globals.participants = TEMP.split(',').map(key => { return key.trim()});
         }
         TEMP = tiledeskSettings['whatsappNumber'];
         // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > whatsappNumber:: ', TEMP]);
