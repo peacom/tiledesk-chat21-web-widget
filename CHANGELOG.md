@@ -1,5 +1,8 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.68 in PROD
+- bug-fixed: metadata.includes is not a function at isAudio function
+
 ### 5.0.67 in PROD
 - bug-fixed: when refresh the page and an already open conversation is selected, footer is blocked 
 - bug-fix: pdf preview image is not contained into its container
