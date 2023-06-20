@@ -1,0 +1,29 @@
+<div class="wrapper">
+    <div id="left" class="arrow" (click)="goTo('previous')" >
+        <!-- *ngIf="activeElement > 1" -->
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
+            <path d="M0 0h24v24H0V0z" fill="none"/><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12l4.58-4.59z"/>
+        </svg>
+    </div>
+    <div class="carousel">
+        <div class="card" *ngFor="let card of gallery">
+            <div class="card-image">
+                <img [src]="card?.preview?.src" alt="img" draggable="false">
+            </div>
+            <div class="card-content">
+                <div class="card-title">{{card?.title}}</div>
+                <div class="card-description">{{card?.description}}</div>
+            </div>
+            <div class="buttons" *ngIf="card?.buttons && card?.buttons.length > 0">
+                <div class="single-button action" *ngFor="let button of card?.buttons">
+                    <div>{{button.value}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="right" class="arrow" (click)="goTo('next')" *ngIf="activeElement !== gallery.length">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
+            <path d="M0 0h24v24H0V0z" fill="none"/><path d="M10.02 6L8.61 7.41 13.19 12l-4.58 4.59L10.02 18l6-6-6-6z"/>
+        </svg>
+    </div>
+</div>

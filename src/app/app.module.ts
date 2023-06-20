@@ -131,6 +131,7 @@ import { StarRatingWidgetService } from './providers/star-rating-widget.service'
 import { LikeUnlikeComponent } from './component/message/like-unlike/like-unlike.component';
 import { Rules } from './utils/rules';
 import { ScriptService } from 'src/chat21-core/providers/scripts/script.service';
+import { CarouselComponent } from './component/message/carousel/carousel.component';
 
 
 
@@ -290,7 +291,8 @@ export function uploadFactory(http: HttpClient, appConfig: AppConfigService, app
     SafeHtmlPipe,
     LikeUnlikeComponent,
     TooltipDirective,
-    AudioComponent
+    AudioComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,
