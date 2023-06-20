@@ -8,7 +8,7 @@ import {
     MAX_WIDTH_IMAGES,
     CHANNEL_TYPE_GROUP,
     TYPE_SUPPORT_GROUP
-} from '../../chat21-core/utils/constants';
+} from './constants';
 
 /** */
 export function isImage(message: any) {
@@ -27,14 +27,14 @@ export function isFrame(message: any) {
 
 /** */
 export function isFile(message: any) {
-  if (message && message.type && message.type === 'file' && message.metadata && message.metadata.src && !message.metadata.includes('audio')) {
+  if (message && message.type && message.type === 'file' && message.metadata && message.metadata.src && !message.metadata.type.includes('audio')) {
     return true;
   }
   return false;
 }
 
 export function isAudio(message: any) {
-  if (message && message.type && message.type === 'file' && message.metadata && message.metadata.src && message.metadata.includes('audio') ) {
+  if (message && message.type && message.type === 'file' && message.metadata && message.metadata.src && message.metadata.type.includes('audio') ) {
     return true;
   }
   return false;
