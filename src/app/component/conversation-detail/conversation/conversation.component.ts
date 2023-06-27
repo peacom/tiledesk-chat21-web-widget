@@ -42,7 +42,7 @@ import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance'
 import { TiledeskRequestsService } from 'src/chat21-core/providers/tiledesk/tiledesk-requests.service';
 import { LIVE_PAGE } from 'src/chat21-core/utils/constants';
 import { getDateDifference, popupUrl } from 'src/chat21-core/utils/utils';
-import { isUserBanned } from 'src/chat21-core/utils/utils-message';
+import { isJustRecived, isUserBanned } from 'src/chat21-core/utils/utils-message';
 import { AppComponent } from '../../../app.component';
 import { ConversationContentComponent } from '../conversation-content/conversation-content.component';
 // import { TranslateService } from '@ngx-translate/core';
@@ -165,6 +165,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
 
   public isButtonUrl: boolean = false;
   public buttonClicked: any;
+  public startTime: Date = new Date(); 
   private logger: LoggerService = LoggerInstance.getInstance();
 
   constructor(
@@ -889,6 +890,12 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
         this.footerMessagePlaceholder = msg.attributes['inputMessagePlaceholder']
       }else {
         this.footerMessagePlaceholder = '';
+      }
+
+      //check if redirect message is present inside message object 
+      if(msg.type === 'redirect' && isJustRecived(this.startTime.getTime(), msg.timestamp)){
+        let button = { link: msg.metadata.src, target: msg.metadata.target}
+        this.openLink(button)
       }
     }
 
