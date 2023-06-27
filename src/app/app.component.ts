@@ -258,8 +258,26 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                 this.logger.setLoggerConfig(this.g.isLogEnabled, this.g.logLevel)
                 this.tabTitle = this.g.windowContext.window.document.title
                 this.appStorageService.initialize(environment.storage_prefix, this.g.persistence, this.g.projectid)
-                this.logger.debug('[APP-COMP] check if token is passed throw url: ', this.g.jwt);
+                
+                //set visibility
+                if((this.g.isMobile && !this.g.displayOnMobile) || (!this.g.isMobile && !this.g.displayOnDesktop)){
+                    this.disposeWidget()
+                    return;
+                }
+                //set status (open /close)
+                if(this.g.isMobile && this.g.onPageChangeVisibilityMobile !== 'last'){
+                    let isOpen = this.g.onPageChangeVisibilityMobile === 'open'? true: false
+                    this.g.setIsOpen(isOpen)
+                    this.appStorageService.setItem('isOpen', isOpen)
+                }
+                if(!this.g.isMobile && this.g.onPageChangeVisibilityDesktop !== 'last'){
+                    let isOpen = this.g.onPageChangeVisibilityDesktop === 'open'? true: false
+                    this.g.setIsOpen(isOpen)
+                    this.appStorageService.setItem('isOpen', isOpen)
+                }
+                
                 /**CHECK IF JWT IS IN URL PARAMETERS */
+                this.logger.debug('[APP-COMP] check if token is passed throw url: ', this.g.jwt);
                 if (this.g.jwt) {
                     // logging in with custom token from url
                     // add JWY token to localstorage and authenticate with it           this.logger.debug('[APP-COMP] token from url. isShown:', this.g.isShown, 'autostart:', this.g.autoStart)
@@ -488,40 +506,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             this.logger.debug('[APP-COMP]  ---------------- 13 ---------------- ');
             this.logger.debug('[APP-COMP]  ----------- sono già loggato ------- ');
             this.signInWithCustomToken(tiledeskToken)
-            // this.tiledeskAuthService.signInWithCustomToken(tiledeskToken).then(user => {
-            //     this.messagingAuthService.createCustomToken(tiledeskToken)
-            // }).catch(error => { console.error('SIGNINWITHCUSTOMTOKEN error::' + error) })
 
-
-            // const currentUser = this.authService2.getCurrentUser();
-            //     this.g.senderId = currentUser.uid;
-            //     this.g.setParameter('senderId', currentUser.uid);
-
-            // const fullName = currentUser.firstname + ' ' + currentUser.lastname;
-            // this.g.setParameter('userFullname', fullName);
-            // this.g.setAttributeParameter('userFullname', fullName);
-            // this.g.setParameter('userEmail', currentUser.email);
-            // this.g.setAttributeParameter('userEmail', currentUser.email);
-
-            //     // if(currentUser.firstname || currentUser.lastname){
-            //     //     this.g.wdLog([' ---------------- 13 fullname ---------------- ']);
-            //     //     const fullName = currentUser.firstname + ' ' + currentUser.lastname;
-            //     //     this.g.setParameter('userFullname', fullName);
-            //     //     this.g.setAttributeParameter('userFullname', fullName);
-            //     // }
-            //     // if(currentUser.email){
-            //     //     this.g.wdLog([' ---------------- 13 email ---------------- ']);
-            //     //     this.g.setParameter('userEmail', currentUser.email);
-            //     //     this.g.setAttributeParameter('userEmail', currentUser.email);
-            //     // }
-
-            //     // this.g.setParameter('isLogged', true);
-            //     // this.g.setParameter('attributes', this.setAttributesFromStorageService());
-            //     // this.startNwConversation();
-            //     //this.startUI();
-            //     // this.g.wdLog([' 13 - IMPOSTO STATO CONNESSO UTENTE ']);
-            //     // this.presenceService.setPresence(currentUser.uid);
-            // 
         } else {
             //  AUTENTICAZIONE ANONIMA
             this.logger.debug('[APP-COMP]  ---------------- 14 ---------------- ');
@@ -543,9 +528,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                     this.g.setAttributeParameter('userEmail', user.email);
                 }
             });
-            // this.authService.anonymousAuthentication();
-            // this.g.wdLog([' authenticateFirebaseAnonymously']);
-            // this.authService.authenticateFirebaseAnonymously();
         }
     }
 
@@ -599,8 +581,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             this.logger.error('[APP-COMP] signInAnonymous ERR', error);
             return Promise.reject(error);
         });
-        // this.authService.anonymousAuthentication();
-        // this.authService.authenticateFirebaseAnonymously();
     }
     // ========= end:: AUTHENTICATION ============//
 

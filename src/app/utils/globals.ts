@@ -213,6 +213,11 @@ export class Globals {
    telegramUsername: string; // *******  new ********
    fileUploadAccept: string; // *******  new ********
    disconnetTime: number; // *******  new ********
+
+   onPageChangeVisibilityMobile: 'open' | 'close' | 'last'; // *******  new ********
+   onPageChangeVisibilityDesktop: 'open' | 'close' | 'last'; // *******  new ********
+   displayOnMobile: boolean; // *******  new ********
+   displayOnDesktop: boolean; // *******  new ********
   constructor(
   ) { }
 
@@ -401,6 +406,14 @@ export class Globals {
     this.isOpenNewMessage = false;
     this.showAttachmentButton = true;
     this.showAllConversations = true;
+
+    //WIDGET VISIBILITY - desktop
+    this.displayOnDesktop = true
+    this.onPageChangeVisibilityDesktop ='last'
+    //WIDGET VISIBILITY - mobile
+    this.displayOnMobile = true
+    this.onPageChangeVisibilityMobile = 'close'
+
 
     // ============ END: SET EXTERNAL PARAMETERS ==============//
 

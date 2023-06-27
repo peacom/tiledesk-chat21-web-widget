@@ -507,6 +507,18 @@ export class GlobalSettingsService {
                     if (variables.hasOwnProperty('fileUploadAccept')) {
                         globals['fileUploadAccept'] = variables['fileUploadAccept'];
                     }
+                    if (variables.hasOwnProperty('d_display')) {
+                        globals['displayOnDesktop'] = variables['d_display'];
+                    }
+                    if (variables.hasOwnProperty('m_display')) {
+                        globals['displayOnMobile'] = variables['m_display'];
+                    }
+                    if (variables.hasOwnProperty('d_on_page_change')) {
+                        globals['onPageChangeVisibilityDesktop'] = variables['d_on_page_change'];
+                    }
+                    if (variables.hasOwnProperty('m_on_page_change')) {
+                        globals['onPageChangeVisibilityMobile'] = variables['m_on_page_change'];
+                    }
                     
                 }
             }
@@ -1023,6 +1035,26 @@ export class GlobalSettingsService {
         // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > disconnetTime:: ', TEMP]);
         if (TEMP !== undefined) {
             globals.disconnetTime = +TEMP;
+        }
+        TEMP = tiledeskSettings['displayOnDesktop'];
+        // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > displayOnDesktop:: ', TEMP]);
+        if (TEMP !== undefined) {
+            globals.displayOnDesktop = (TEMP === true) ? true : false;
+        }
+        TEMP = tiledeskSettings['displayOnMobile'];
+        // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > displayOnMobile:: ', TEMP]);
+        if (TEMP !== undefined) {
+            globals.displayOnMobile = (TEMP === true) ? true : false;
+        }
+        TEMP = tiledeskSettings['onPageChangeVisibilityDesktop'];
+        // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > onPageChangeVisibilityDesktop:: ', TEMP]);
+        if (TEMP !== undefined) {
+            globals.onPageChangeVisibilityDesktop = TEMP;
+        }
+        TEMP = tiledeskSettings['onPageChangeVisibilityMobile'];
+        // this.logger.debug('[GLOBAL-SET] setVariablesFromSettings > onPageChangeVisibilityMobile:: ', TEMP]);
+        if (TEMP !== undefined) {
+            globals.onPageChangeVisibilityMobile = TEMP;
         }     
     }
 
