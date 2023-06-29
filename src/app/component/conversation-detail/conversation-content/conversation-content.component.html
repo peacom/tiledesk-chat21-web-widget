@@ -109,14 +109,17 @@
                           </div>
 
                           <!-- carousel -->
-                          <!-- <div *ngIf="message?.attributes && message?.attributes?.attachment && message?.attributes?.attachment?.gallery" [ngClass]="{'slide-in-left': false}" class="carousel_container">
+                          <div *ngIf="message?.attributes && message?.attributes?.attachment 
+                                        && message?.attributes?.attachment?.gallery" [ngClass]="{'slide-in-left': false}" class="carousel_container">
                             <chat-carousel class="carousel_container"
                               [message]="message"
+                              [isConversationArchived]="isConversationArchived"
+                              [isLastMessage] = "isLastMessage(message?.uid)"
                               [stylesMap]="stylesMap"
                               (onElementRendered)="onElementRenderedFN($event)"
                               (onAttachmentButtonClicked)="onAttachmentButtonClickedFN($event)">
                             </chat-carousel>
-                          </div> -->
+                          </div>
     
                       </div>
 

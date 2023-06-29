@@ -10,6 +10,8 @@ export class CarouselComponent implements OnInit{
 
   // ========= begin:: Input/Output values ============//
   @Input() message: MessageModel;
+  @Input() isConversationArchived: boolean;
+  @Input() isLastMessage: boolean;
   @Input() stylesMap: Map<string, string>;
   @Output() onAttachmentButtonClicked = new EventEmitter<any>();
   @Output() onElementRendered = new EventEmitter<{element: string, status: boolean}>()
@@ -26,6 +28,8 @@ export class CarouselComponent implements OnInit{
   textColor: string;
   hoverBackgroundColor: string;
   hoverTextColor: string;
+  type: string;
+  button: any;
 
   constructor(private elementRef: ElementRef) { }
 
@@ -38,9 +42,8 @@ export class CarouselComponent implements OnInit{
 
     
     // this.firstCardWidth = (this.elementRef.nativeElement.querySelector(".card") as HTMLElement).offsetWidth
-    console.log('carrrrrrrrr', this.wrapper, this.elementRef.nativeElement.querySelector(".card"))
-    // Get the number of cards that can fit in the carousel at once
-    let cardPerView = Math.round(this.carousel.offsetWidth / this.firstCardWidth);
+    // // Get the number of cards that can fit in the carousel at once
+    // let cardPerView = Math.round(this.carousel.offsetWidth / this.firstCardWidth);
 
     // Insert copies of the last few cards to beginning of carousel for infinite scrolling
     // const carouselChildrens = [...this.carousel.children];
@@ -57,15 +60,11 @@ export class CarouselComponent implements OnInit{
     this.carousel.scrollLeft = this.carousel.offsetWidth;
     this.carousel.classList.remove("no-transition");
 
-    
-    console.log('[CAROUSEL-MESSAGE] cardPerView -->', cardPerView, this.carousel.querySelectorAll('.card') )
-
     let currentItem = 0
     // Store items as an array of objects
     const items = this.carousel.querySelectorAll('.card')
 
     this.carousel.addEventListener("scroll", function(el){
-      // console.log('elementttt', el)
       // Find item closest to the goal
       // currentItem = items.reduce((prev, curr) => {
       //   return (Math.abs(curr.offsetY - scrollY - goal) < Math.abs(prev.offsetY - scrollY - goal) ? curr : prev); // return the closest to the goal
@@ -78,34 +77,63 @@ export class CarouselComponent implements OnInit{
     if(this.message && this.message.attributes && this.message.attributes?.attachment && this.message.attributes?.attachment?.gallery){
       this.gallery = this.message.attributes.attachment.gallery
       console.log('carrrrrrrrr', this.wrapper, this.elementRef.nativeElement.querySelector(".card"))
-    
+      // this.firstCardWidth = (this.elementRef.nativeElement.querySelector(".card") as HTMLElement).offsetWidth
     }
 
-    if(this.stylesMap){
-      if(this.stylesMap.has('buttonFontSize')) this.elementRef.nativeElement.querySelector('.action').style.setProperty('--buttonFontSize', this.stylesMap.has('buttonFontSize'));
-      if(this.stylesMap.has('buttonBackgroundColor')) this.elementRef.nativeElement.querySelector('.action').style.setProperty('--backgroundColor', this.stylesMap.has('buttonBackgroundColor'));
-      if(this.stylesMap.has('buttonTextColor')) this.elementRef.nativeElement.querySelector('.action').style.setProperty('--textColor', this.stylesMap.has('buttonTextColor'));
-      if(this.stylesMap.has('buttonHoverBackgroundColor')) this.elementRef.nativeElement.querySelector('.action').style.setProperty('--hoverBackgroundColor', this.stylesMap.has('buttonHoverBackgroundColor'));
-      if(this.stylesMap.has('buttonHoverTextColor')) this.elementRef.nativeElement.querySelector('.action').style.setProperty('--hoverTextColor', this.stylesMap.has('buttonHoverTextColor'));
+    if(this.stylesMap ){
+      if(this.stylesMap.has('buttonFontSize')) this.elementRef.nativeElement.querySelector('.wrapper').style.setProperty('--buttonFontSize', this.stylesMap.get('buttonFontSize'));
+      if(this.stylesMap.has('buttonBackgroundColor')) this.elementRef.nativeElement.querySelector('.wrapper').style.setProperty('--backgroundColor', this.stylesMap.get('buttonBackgroundColor'));
+      if(this.stylesMap.has('buttonTextColor')) this.elementRef.nativeElement.querySelector('.wrapper').style.setProperty('--textColor', this.stylesMap.get('buttonTextColor'));
+      if(this.stylesMap.has('buttonHoverBackgroundColor')) this.elementRef.nativeElement.querySelector('.wrapper').style.setProperty('--hoverBackgroundColor', this.stylesMap.get('buttonHoverBackgroundColor'));
+      if(this.stylesMap.has('buttonHoverTextColor')) this.elementRef.nativeElement.querySelector('.wrapper').style.setProperty('--hoverTextColor', this.stylesMap.get('buttonHoverTextColor'));
     }
-
-    
+  
   }
 
   goTo(direction: 'next' | 'previous' ){
-    let width = (this.carousel.querySelector(".card") as HTMLElement).offsetWidth
-    let gap = Math.round( 16 / 2)
+    let width = (this.carousel.querySelectorAll(".card")[1] as HTMLElement).offsetWidth
+    let gap = 17
     let cardPerView = Math.round(this.carousel.offsetWidth / width);
 
-    console.log('go to -->', direction, width, cardPerView, this.carousel.offsetWidth)
+    console.log('go to -->', direction, width, this.firstCardWidth, cardPerView, this.carousel.offsetWidth)
 
-    this.carousel.scrollLeft += direction == "previous" ? -(width+gap) : width+gap;
-    // this.activeElement += direction == "previous" ? -1 : 1;
+    // this.carousel.scrollLeft += direction == "previous" ? -(width+gap) : width+gap;
+    this.carousel.scrollLeft += direction == "previous" ? -width : width;
+    this.activeElement += direction == "previous" ? -1 : 1;
 
     // this.carousel.classList.add("no-transition");
     // this.carousel.scrollLeft += width;
     // this.carousel.classList.remove("no-transition");
 
+  }
 
+  actionButtonClick(ev, button, index){
+    this.button = button
+    this.type = button.type
+    console.log('buttonnnnnnn', ev, button)
+    if ( button && ((button.action && button.action !== '') || (button.link && button.link !== '') || button.text !== '' )) {
+      
+      //set clicked button as the active one
+      this.gallery[index].buttons.find((element)=> { return element === button}).active = true
+      const spanCheck = this.elementRef.nativeElement.querySelector('.action');
+      if (spanCheck) {
+        // const item = domRepresentation[0] as HTMLInputElement;
+        // if (!spanCheck.classList.contains('active')) {
+        //   spanCheck.classList.add('active');
+        // }
+        // setTimeout(function() {
+        //   if (spanCheck.classList.contains('active')) {
+        //     spanCheck.classList.remove('active');
+        //   }
+        // }, 400);
+        ev.target.classList.add('active')
+        // event.target.classList
+      }
+      const event = { target: this, currentTarget: this}
+      if ( event && event.target ) {
+        const ev = {target: event.target, message: this.message, currentTarget: this }
+        this.onAttachmentButtonClicked.emit(ev);
+      }
+    }
   }
 }
