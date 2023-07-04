@@ -6,20 +6,22 @@
     </div>
     <div class="carousel">
         <!-- <div class="card" style="width: 17px;"></div> -->
-        <div class="card" *ngFor="let card of gallery; let i = index" [style.opacity]="i+1 === activeElement? 1: 0.5">
-            <div class="card-image">
-                <img [src]="card?.preview?.src" alt="img" draggable="false">
-            </div>
-            <div class="card-content">
-                <div class="card-title">{{card?.title}}</div>
-                <div class="card-description">{{card?.description}}</div>
-            </div>
-            <div class="buttons" *ngIf="card?.buttons && card?.buttons.length > 0">
-                <div *ngFor="let button of card?.buttons" 
-                    class="single-button action"
-                    [ngClass]="{'disabled': (isConversationArchived || !isLastMessage), 'active': button?.active}"
-                    (click)="actionButtonClick($event, button, i)" >
-                    {{button.value}}
+        <div class="card" *ngFor="let card of gallery; let i = index">
+            <div [style.opacity]="i+1 === activeElement? 1: 0.5">
+                <div class="card-image">
+                    <img [src]="card?.preview?.src" alt="img" draggable="false">
+                </div>
+                <div class="card-content">
+                    <div class="card-title">{{card?.title}}</div>
+                    <div class="card-description">{{card?.description}}</div>
+                </div>
+                <div class="buttons" *ngIf="card?.buttons && card?.buttons.length > 0">
+                    <div *ngFor="let button of card?.buttons" 
+                        class="single-button action"
+                        [ngClass]="{'disabled': (isConversationArchived || !isLastMessage), 'active': button?.active}"
+                        (click)="actionButtonClick($event, button, i)" >
+                        {{button.value}}
+                    </div>
                 </div>
             </div>
         </div>
