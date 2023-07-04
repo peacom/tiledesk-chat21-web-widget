@@ -507,17 +507,17 @@ export class GlobalSettingsService {
                     if (variables.hasOwnProperty('fileUploadAccept')) {
                         globals['fileUploadAccept'] = variables['fileUploadAccept'];
                     }
-                    if (variables.hasOwnProperty('d_display')) {
-                        globals['displayOnDesktop'] = variables['d_display'];
+                    if (variables.hasOwnProperty('displayOnDesktop')) {
+                        globals['displayOnDesktop'] = variables['displayOnDesktop'];
                     }
-                    if (variables.hasOwnProperty('m_display')) {
-                        globals['displayOnMobile'] = variables['m_display'];
+                    if (variables.hasOwnProperty('displayOnMobile')) {
+                        globals['displayOnMobile'] = variables['displayOnMobile'];
                     }
-                    if (variables.hasOwnProperty('d_on_page_change')) {
-                        globals['onPageChangeVisibilityDesktop'] = variables['d_on_page_change'];
+                    if (variables.hasOwnProperty('onPageChangeVisibilityDesktop')) {
+                        globals['onPageChangeVisibilityDesktop'] = variables['onPageChangeVisibilityDesktop'];
                     }
-                    if (variables.hasOwnProperty('m_on_page_change')) {
-                        globals['onPageChangeVisibilityMobile'] = variables['m_on_page_change'];
+                    if (variables.hasOwnProperty('onPageChangeVisibilityMobile')) {
+                        globals['onPageChangeVisibilityMobile'] = variables['onPageChangeVisibilityMobile'];
                     }
                     
                 }

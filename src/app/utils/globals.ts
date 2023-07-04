@@ -409,7 +409,7 @@ export class Globals {
 
     //WIDGET VISIBILITY - desktop
     this.displayOnDesktop = true
-    this.onPageChangeVisibilityDesktop ='last'
+    this.onPageChangeVisibilityDesktop ='close'
     //WIDGET VISIBILITY - mobile
     this.displayOnMobile = true
     this.onPageChangeVisibilityMobile = 'close'
