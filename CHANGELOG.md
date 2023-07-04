@@ -1,5 +1,10 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.69-rc.1
+- added: display/dispose widget on mobile/desktop behavior
+- added: open/close widget on page change behavior
+- added: 'redirect' action link on message type 'redirect'
+
 ### 5.0.68 in PROD
 - bug-fixed: metadata.includes is not a function at isAudio function
 
