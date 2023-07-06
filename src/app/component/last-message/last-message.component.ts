@@ -66,7 +66,6 @@ export class LastMessageComponent implements OnInit, AfterViewInit, OnDestroy {
         this.messages.push(conversationToMessage(this.conversation, this.g.senderId))
         this.manageIframeHeight();
       }
-      console.log('messsageeeeeeeee', this.messages)
       // if(isImage(this.conversation)){
       //   this.fileSelected = Object.assign({}, this.conversation.metadata)
       //   this.fileSelected = Object.assign(this.fileSelected, this.getMetadataSize(this.fileSelected))

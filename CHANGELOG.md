@@ -1,5 +1,11 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.70 in PROD
+
+### 5.0.70-rc.1
+- changed: chat21client.js version to v0.1.12.5
+- changed: set callback function on chat21client.connect without wait the subscription get back
+
 ### 5.0.69 in PROD
 
 ### 5.0.69-rc.2
