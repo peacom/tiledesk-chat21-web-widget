@@ -1,7 +1,7 @@
 /*
     Chat21Client
 
-    v0.1.12.5
+    v0.1.12.6
 
     @Author Andrea Sponziello
     @Member Gabriele Panico
@@ -101,7 +101,7 @@ class Chat21Client {
     }
 
     sendMessage(text, type, recipient_id, recipient_fullname, sender_fullname, attributes, metadata, channel_type, callback) {
-        // console.log("sendMessage:",text, recipient_id)
+        // console.log("sendMessage sattributes:", attributes);
         let dest_topic = `apps/${this.appid}/outgoing/users/${this.user_id}/messages/${recipient_id}/outgoing`
         // console.log("dest_topic:", dest_topic)
         let outgoing_message = {
@@ -551,6 +551,7 @@ class Chat21Client {
         }
         this.subscribeToMyConversations(() => {
             // no more than one "on_message" handler, thanks.
+            // console.log("Subscribed to MyConversations.");
             this.on_message_handler = this.client.on('message', (topic, message) => {
                 if (this.log) {
                     console.log("topic:" + topic + "\nmessage payload:" + message)
@@ -630,6 +631,7 @@ class Chat21Client {
                     if (topic.includes("/messages/") && topic.endsWith(_CLIENTADDED)) {
                         if (this.onMessageAddedCallbacks) {
                             this.onMessageAddedCallbacks.forEach((callback, handler, map) => {
+                                // console.log("DEBUG: MESSAGE:", message)
                                 callback(JSON.parse(message.toString()), _topic)
                             });
                         }
@@ -924,6 +926,7 @@ class Chat21Client {
                 })
               .then(function (response) {
                 if (log) {console.log("response.status:", response.status);}
+                // if (log) {console.log("response.data:", response.data);}
                 if (callback) {
                     callback(null, response.headers, response.data);
                 }
@@ -992,6 +995,7 @@ class Chat21Client {
         }
         if (this.log) {console.log("starting mqtt connection with LWT on:", this.presence_topic, this.endpoint)}
         // client = mqtt.connect('mqtt://127.0.0.1:15675/ws',options)
+        //console.log("starting mqtt connection with LWT on:", this.presence_topic, this.endpoint)
         this.client = mqtt.connect(this.endpoint,options)
         
         this.client.on('connect', // TODO if token is wrong it must reply with an error!
@@ -1000,8 +1004,9 @@ class Chat21Client {
                 if (!this.connected) {
                     if (this.log) {console.log("Chat client first connection for:" + user_id)}
                     this.connected = true
+                    callback();
                     this.start( () => {
-                        callback();
+                        // callback();
                     });
                 }
                 this.client.publish(
