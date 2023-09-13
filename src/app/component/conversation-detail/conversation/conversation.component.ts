@@ -504,7 +504,8 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
         '',
         '',
         false,
-        'text')
+        'text',
+        false)
     }
   }
 
