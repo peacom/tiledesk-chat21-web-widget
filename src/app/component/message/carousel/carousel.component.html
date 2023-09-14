@@ -8,8 +8,12 @@
         <!-- <div class="card" style="width: 17px;"></div> -->
         <div class="card" *ngFor="let card of gallery; let i = index">
             <div [style.opacity]="i+1 === activeElement? 1: 0.5">
-                <div class="card-image">
+                <div class="card-image" *ngIf="card?.preview?.src !== ''">
                     <img [src]="card?.preview?.src" alt="img" draggable="false">
+                </div>
+                <div class="card-image card-image-placeholder" *ngIf="card?.preview?.src == ''">
+                    <img src="assets/images/icons/no-image.svg" alt="img" draggable="false">
+                    <span>Image not available</span>
                 </div>
                 <div class="card-content">
                     <div class="card-title">{{card?.title}}</div>

@@ -76,7 +76,7 @@ export class CarouselComponent implements OnInit{
   ngOnChanges(changes: SimpleChanges){
     if(this.message && this.message.attributes && this.message.attributes?.attachment && this.message.attributes?.attachment?.gallery){
       this.gallery = this.message.attributes.attachment.gallery
-      console.log('carrrrrrrrr', this.wrapper, this.elementRef.nativeElement.querySelector(".card"))
+      // console.log('carrrrrrrrr', this.wrapper, this.elementRef.nativeElement.querySelector(".card"))
       // this.firstCardWidth = (this.elementRef.nativeElement.querySelector(".card") as HTMLElement).offsetWidth
     }
 

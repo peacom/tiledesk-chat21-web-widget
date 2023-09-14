@@ -100,6 +100,26 @@
 .carousel .card .card-image {
     height: 150px;
     width: var(--cardWidth);
+    border-radius: 8px 8px 0px 0px;
+}
+
+.carousel .card .card-image-placeholder{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    background: #c1b9b952;
+    align-items: center;
+
+    img{
+        width: 30px;
+        height: 30px;
+        filter: brightness(0) saturate(100%) invert(44%) sepia(8%) saturate(449%) hue-rotate(190deg) brightness(94%) contrast(93%);
+    }
+
+    span{
+        font-size: 0.8rem;
+    }
 }
 .card .card-image img {
     height: 100%;
@@ -110,6 +130,7 @@
     display: block;
     max-width: 100% !important;
     border-radius: 8px 8px 0px 0px;
+    
 }
 .carousel .card .card-content {
     // font-weight: 500;
