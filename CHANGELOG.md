@@ -1,5 +1,9 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.71-rc.1
+- added: ability to start conversation from an intent hiddenMessage name
+- changed: carousel UI if image is not available
+
 ### 5.0.70 in PROD
 
 ### 5.0.70-rc.1
