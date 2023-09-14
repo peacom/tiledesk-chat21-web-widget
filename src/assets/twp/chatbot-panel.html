@@ -377,11 +377,12 @@
                 }
             }, 1000);
 
+            //open widget after 3s if is closed
             setTimeout(() => {
                 if(event_data && event_data.detail && event_data.detail.global && !event_data.detail.global.isOpen){
                     window.Tiledesk('open')
                 }
-            }, 3000);
+            }, 1000);
             
         });
         
@@ -391,15 +392,24 @@
             //     document.getElementById("preloader").style.display = "none";
             // }, 1000);
             //open widget after 3s if is closed
-            setTimeout(() => {
-                if(event_data && event_data.detail && event_data.detail.global && !event_data.detail.global.isOpen){
-                    window.Tiledesk('open')
-                }
-            }, 3000);
+            // setTimeout(() => {
+            //     if(event_data && event_data.detail && event_data.detail.global && !event_data.detail.global.isOpen){
+            //         window.Tiledesk('open')
+            //     }
+            // }, 3000);
         });
 
         window.Tiledesk('onAuthStateChanged', function(event_data) {
         	console.log("AUTHENTICATED!", event_data);
+       		// if(event_data.detail.isLogged){
+            // 	console.log("isLogged!!!!", event_data);
+            // 	window.Tiledesk('show')
+            // }
+        });
+
+        window.Tiledesk('onMessageCreated', function(event_data) {
+        	console.log("onMessageCreated!", event_data);
+            window.parent.postMessage(event_data.detail, '*')
        		// if(event_data.detail.isLogged){
             // 	console.log("isLogged!!!!", event_data);
             // 	window.Tiledesk('show')
@@ -453,14 +463,14 @@
     </div>
 
     <header id="header">
-        <ul class="nav navbar-nav navbar-left">
+        <!-- <ul class="nav navbar-nav navbar-left">
             <li class="sign-up"><button class="share-btn" onclick="copyLink()">SHARE THIS PROTOTYPE</button></li>
-        </ul>
+        </ul> -->
     </header>
     <!-- The actual snackbar -->
     <div id="snackbar">Copied to clipboard...</div>
 
-    <div id="wrapper" class="mockup">
+    <!-- <div id="wrapper" class="mockup"> -->
     </div>
 
     <footer id="footer">
