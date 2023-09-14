@@ -2,6 +2,7 @@
 
 ### 5.0.71-rc.1
 - added: ability to start conversation from an intent hiddenMessage name
+- added: postMessage to notice parent the current message
 - changed: carousel UI if image is not available
 
 ### 5.0.70 in PROD
