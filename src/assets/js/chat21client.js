@@ -1,7 +1,7 @@
 /*
     Chat21Client
 
-    v0.1.12.6
+    v0.1.12.7
 
     @Author Andrea Sponziello
     @Member Gabriele Panico
@@ -1000,7 +1000,10 @@ class Chat21Client {
         
         this.client.on('connect', // TODO if token is wrong it must reply with an error!
             () => {
-                if (this.log) {console.log("Chat client connected. User:" + user_id)}
+                if (this.log) {
+                    console.log("Chat client connected. User:" + user_id)
+                    console.log("Chat client connected. this.connected:" + this.connected)
+                }
                 if (!this.connected) {
                     if (this.log) {console.log("Chat client first connection for:" + user_id)}
                     this.connected = true
@@ -1027,6 +1030,7 @@ class Chat21Client {
         );
         this.client.on('close',
             () => {
+                this.connected = false
                 if (this.log) {console.log("Chat client close event");}
             }
         );
