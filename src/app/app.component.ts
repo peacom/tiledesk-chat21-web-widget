@@ -748,6 +748,25 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.appStorageService.setItem('recipientId', newConvId)
         this.logger.debug('[APP-COMP]  recipientId: ', this.g.recipientId);
         this.isConversationArchived = false;
+        
+        if(window.location.search && window.location.search.substring(1).split('&').find((param => param.includes('tiledesk_hiddenMessage')))){
+            let hiddenMessage = window.location.search.substring(1).split('&').find((param => param.includes('tiledesk_hiddenMessage'))).split('=')[1]
+            let participant = window.location.search.substring(1).split('&').find((param => param.includes('tiledesk_participants'))).split('=')[1]
+            this.logger.debug('[APP-COMP] startNewConversation ', window.location.search.substring(1).split('&').find((param => param.includes('tiledesk_hiddenMessage'))))
+            let message: any = {}
+            message.attributes = { subtype: 'info', ...this.g.attributes}
+            message.userAgent = this.g.attributes['client']
+            message.request_id = newConvId
+            message.sourcePage = this.g.attributes['sourcePage']
+            message.language = this.g.lang
+            message.text = '/'+ hiddenMessage
+            message.participants = [ participant ]
+            message.departmentid = this.g.attributes.departmentId
+            // this.sendMessage(message)
+            this.tiledeskRequestsService.sendMessageToRequest(newConvId, this.g.tiledeskToken, message)
+            return;
+        }
+
         this.triggerNewConversationEvent(newConvId);
     }
 
@@ -781,9 +800,12 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         if (this.g.windowContext.window.location) {
             attributes['sourcePage'] = this.g.windowContext.window.location.href;
         }
-        if(this.g.windowContext.window.document){
+        if(this.g.windowContext.window.document) {
             attributes['sourceTitle'] = this.g.windowContext.window.document.title;
         }
+        // if(this.g.windowContext.window.document && this.g.windowContext.window.document.cookie) {
+        //     attributes['cookie'] = this.g.windowContext.window.document.cookie;
+        // }
         if (projectid) {
             attributes['projectId'] = projectid;
         }
