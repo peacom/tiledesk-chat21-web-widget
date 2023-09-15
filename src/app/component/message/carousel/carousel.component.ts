@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChange, SimpleChanges, ViewChildren } from '@angular/core';
 import { MessageModel } from 'src/chat21-core/models/message';
+import { isCarousel } from 'src/chat21-core/utils/utils-message';
 
 @Component({
   selector: 'chat-carousel',
@@ -34,7 +35,7 @@ export class CarouselComponent implements OnInit{
   constructor(private elementRef: ElementRef) { }
 
   ngOnInit() {
-    console.log('[CAROUSEL-MESSAGE] hello', this.message)
+    console.log('[CAROUSEL-MESSAGE] hello', this.message, isCarousel(this.message))
 
     
     this.wrapper = this.elementRef.nativeElement.querySelector('.wrapper')

@@ -11,6 +11,14 @@ import {
 } from './constants';
 
 /** */
+export function isCarousel(message: any) {
+  if (message && message.type && message.type === 'gallery' && message?.attributes && message?.attributes?.attachment && message?.attributes?.attachment?.gallery ) {
+    return true;
+  }
+  return false;
+}
+
+/** */
 export function isImage(message: any) {
   if (message && message.type && message.type === 'image' && message.metadata && message.metadata.src) {
     return true;

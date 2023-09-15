@@ -6,7 +6,7 @@ import { UploadService } from 'src/chat21-core/providers/abstract/upload.service
 import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
 import { MESSAGE_TYPE_INFO, MESSAGE_TYPE_MINE, MESSAGE_TYPE_OTHERS } from 'src/chat21-core/utils/constants';
 import { isPopupUrl, popupUrl } from 'src/chat21-core/utils/utils';
-import { isEmojii, isFirstMessage, isFrame, isImage, isInfo, isLastMessage, isMine, isSameSender, messageType } from 'src/chat21-core/utils/utils-message';
+import { isCarousel, isEmojii, isFirstMessage, isFrame, isImage, isInfo, isLastMessage, isMine, isSameSender, messageType } from 'src/chat21-core/utils/utils-message';
 
 @Component({
   selector: 'chat-conversation-content',
@@ -45,6 +45,7 @@ export class ConversationContentComponent implements OnInit {
   // ========= begin:: dichiarazione funzioni ======= //
   isPopupUrl = isPopupUrl;
   popupUrl = popupUrl;
+  isCarousel = isCarousel;
   // ========= end:: dichiarazione funzioni ======= //
 
   // ========== begin:: set icon status message ======= //
