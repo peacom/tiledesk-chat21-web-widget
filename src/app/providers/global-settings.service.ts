@@ -1774,6 +1774,11 @@ export class GlobalSettingsService {
         if (TEMP) {
             globals.disconnetTime = stringToNumber(TEMP);
         }
+
+        TEMP = getParameterByName(windowContext, 'tiledesk_hiddenMessage');
+        if (TEMP) {
+            globals.hiddenMessage = TEMP;
+        }
         
     }
 

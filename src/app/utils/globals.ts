@@ -218,6 +218,8 @@ export class Globals {
    onPageChangeVisibilityDesktop: 'open' | 'close' | 'last'; // *******  new ********
    displayOnMobile: boolean; // *******  new ********
    displayOnDesktop: boolean; // *******  new ********
+
+   hiddenMessage: string; // *******  new ********
   constructor(
   ) { }
 
@@ -414,6 +416,8 @@ export class Globals {
     this.displayOnMobile = true
     this.onPageChangeVisibilityMobile = 'close'
 
+    /**set an hidden message to show when conversation starts */
+    this.hiddenMessage = null
 
     // ============ END: SET EXTERNAL PARAMETERS ==============//
 
