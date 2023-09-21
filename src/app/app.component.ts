@@ -690,42 +690,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     // ========= end:: START UI ============//
 
-    // private openNewConversation() {
-    //     this.logger.debug('[APP-COMP] openNewConversation in APP COMPONENT');
-    //     this.g.newConversationStart = true;
-    //     // controllo i dipartimenti se sono 1 o 2 seleziono dipartimento e nascondo modale dipartimento
-    //     // altrimenti mostro modale dipartimenti
-    //     const preChatForm = this.g.preChatForm;
-    //     const attributes = this.g.attributes;
-    //     const departments = this.g.departments;
-    //     // that.g.wdLog(['departments: ', departments, departments.length);
-    //     if (preChatForm && (!attributes || !attributes.userFullname || !attributes.userEmail)) {
-    //         // if (preChatForm && (!attributes.userFullname || !attributes.userEmail)) {
-    //         this.isOpenConversation = false;
-    //         this.g.setParameter('isOpenPrechatForm', true);
-    //         // this.settingsSaverService.setVariable('isOpenPrechatForm', true);
-    //         this.isOpenSelectionDepartment = false;
-    //         if (departments && departments.length > 1 && this.g.departmentID == null) {
-    //             this.isOpenSelectionDepartment = true;
-    //         }
-    //     } else {
-    //         // this.g.isOpenPrechatForm = false;
-    //         this.g.setParameter('isOpenPrechatForm', false);
-    //         // this.settingsSaverService.setVariable('isOpenPrechatForm', false);
-    //         this.isOpenConversation = false;
-    //         this.isOpenSelectionDepartment = false;
-    //         if (departments && departments.length > 1 && this.g.departmentID == null) {
-    //             this.isOpenSelectionDepartment = true;
-    //         } else {
-    //             this.isOpenConversation = true;
-    //         }
-    //     }
-
-    //     this.logger.debug('[APP-COMP] isOpenPrechatForm', this.g.isOpenPrechatForm, ' isOpenSelectionDepartment:', this.isOpenSelectionDepartment);
-    //     if (this.g.isOpenPrechatForm === false && this.isOpenSelectionDepartment === false) {
-    //         this.startNewConversation();
-    //     }
-    // }
 
     /**
      * genero un nuovo conversationWith
@@ -749,21 +713,9 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.logger.debug('[APP-COMP]  recipientId: ', this.g.recipientId);
         this.isConversationArchived = false;
         
-        if(window.location.search && window.location.search.substring(1).split('&').find((param => param.includes('tiledesk_hiddenMessage')))){
-            let hiddenMessage = window.location.search.substring(1).split('&').find((param => param.includes('tiledesk_hiddenMessage'))).split('=')[1]
-            let participant = window.location.search.substring(1).split('&').find((param => param.includes('tiledesk_participants'))).split('=')[1]
-            this.logger.debug('[APP-COMP] startNewConversation ', window.location.search.substring(1).split('&').find((param => param.includes('tiledesk_hiddenMessage'))))
-            let message: any = {}
-            message.attributes = { subtype: 'info', ...this.g.attributes}
-            message.userAgent = this.g.attributes['client']
-            message.request_id = newConvId
-            message.sourcePage = this.g.attributes['sourcePage']
-            message.language = this.g.lang
-            message.text = '/'+ hiddenMessage
-            message.participants = [ participant ]
-            message.departmentid = this.g.attributes.departmentId
-            // this.sendMessage(message)
-            this.tiledeskRequestsService.sendMessageToRequest(newConvId, this.g.tiledeskToken, message)
+        /** allow to start conversation with an hidden message (without publishing 'new_conversation' event) */
+        if(this.g.hiddenMessage){
+            this.onNewConversationWithMessage(this.g.hiddenMessage)
             return;
         }
 
@@ -1431,9 +1383,9 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             };
 
             /** set state reinit */
-            windowContext['tiledesk'].startConversation = function () {
+            windowContext['tiledesk'].startConversation = function (text: string) {
                 ngZone.run(() => {
-                    windowContext['tiledesk']['angularcomponent'].component.onNewConversation();
+                    windowContext['tiledesk']['angularcomponent'].component.onNewConversation(text);
                 });
             };
 
@@ -1763,8 +1715,9 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
      * carico conversazione - stack 1
      * home - stack 0
      */
-    onNewConversation() {
+    onNewConversation(text?: string) {
         this.logger.debug('[APP-COMP] returnNewConversation in APP COMPONENT');
+        if(text) this.g.setParameter('hiddenMessage', text);
         this.g.newConversationStart = true;
         // controllo i dipartimenti se sono 1 o 2 seleziono dipartimento e nascondo modale dipartimento
         // altrimenti mostro modale dipartimenti
@@ -1799,6 +1752,28 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         if (this.g.isOpenPrechatForm === false && this.isOpenSelectionDepartment === false) {
             this.startNewConversation();
         }
+    }
+
+
+    onNewConversationWithMessage(text: string, subType: string = 'info'){
+        this.logger.log('[APP-COMP] onNewConversationWithMessage in APP COMPONENT', text);
+
+        const newConvId = this.generateNewUidConversation();
+        this.g.setParameter('recipientId', newConvId);
+        this.appStorageService.setItem('recipientId', newConvId)
+
+        let message: any = {}
+        message.attributes = { subtype: subType, ...this.g.attributes}
+        message.userAgent = this.g.attributes['client']
+        message.request_id = newConvId
+        message.sourcePage = this.g.attributes['sourcePage']
+        message.language = this.g.lang
+        message.text = '/'+ text
+        message.participants = this.g.participants
+        message.departmentid = this.g.attributes.departmentId
+        // this.sendMessage(message)
+        this.tiledeskRequestsService.sendMessageToRequest(newConvId, this.g.tiledeskToken, message)
+        return;
     }
 
     /**

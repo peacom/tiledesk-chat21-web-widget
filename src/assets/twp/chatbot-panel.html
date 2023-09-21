@@ -415,6 +415,13 @@
             // 	window.Tiledesk('show')
             // }
         });
+
+        window.addEventListener('message', (event_data)=> {
+            if(event_data && event_data.data && event_data.data.action === 'restart'){
+                window.Tiledesk('startConversation', event_data.data.intentName)
+            }
+        })
+
     </script>
 
     <script type="application/javascript">
