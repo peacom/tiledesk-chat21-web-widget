@@ -96,7 +96,7 @@ export class CarouselComponent implements OnInit{
     let gap = 17
     let cardPerView = Math.round(this.carousel.offsetWidth / width);
 
-    console.log('go to -->', direction, width, this.firstCardWidth, cardPerView, this.carousel.offsetWidth)
+    // console.log('go to -->', direction, width, this.firstCardWidth, cardPerView, this.carousel.offsetWidth)
 
     // this.carousel.scrollLeft += direction == "previous" ? -(width+gap) : width+gap;
     this.carousel.scrollLeft += direction == "previous" ? -width : width;
@@ -111,7 +111,6 @@ export class CarouselComponent implements OnInit{
   actionButtonClick(ev, button, index){
     this.button = button
     this.type = button.type
-    console.log('buttonnnnnnn', ev, button)
     if ( button && ((button.action && button.action !== '') || (button.link && button.link !== '') || button.text !== '' )) {
       
       //set clicked button as the active one
