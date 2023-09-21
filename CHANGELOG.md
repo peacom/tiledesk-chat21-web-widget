@@ -1,5 +1,10 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.71-rc.2
+- added: hiddenMessage tiledesk property to start a conversation with an hidden info message
+- added: ability to listen from parent message and start a new Conversation with an hidden intentName info message
+- changed: minor UI fix carousel component
+
 ### 5.0.71-rc.1
 - added: ability to start conversation from an intent hiddenMessage name
 - added: postMessage to notice parent the current message
