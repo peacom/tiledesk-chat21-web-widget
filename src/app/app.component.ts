@@ -140,7 +140,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             const that = this;
             const subChangedConversation = this.conversationsHandlerService.conversationChanged.subscribe((conversation) => {
                 // that.ngZone.run(() => {
-                if (conversation) {
+               if (conversation) {
                     this.onImageLoaded(conversation)
                     this.onConversationLoaded(conversation)
 
@@ -148,7 +148,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                         that.disposeWidget();
                         return;
                     }
-    
+
                     if(conversation.is_new && conversation.sender !== this.g.senderId && !isInfo(conversation)){
                         that.manageTabNotification();
                     }

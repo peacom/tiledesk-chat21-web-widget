@@ -478,7 +478,7 @@ export class FirebaseConversationsHandler extends ConversationsHandlerService {
     private changed(childSnapshot: any) {
         const oldConversation = this.conversations[searchIndexInArrayForUid(this.conversations, childSnapshot.key)]
         //skip info message updates
-        if(messageType(MESSAGE_TYPE_INFO, oldConversation) ){
+        if(messageType(MESSAGE_TYPE_INFO, childSnapshot.val()) ){
             return;
         }
         if (this.conversationGenerate(childSnapshot)) {
