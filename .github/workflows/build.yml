@@ -4,7 +4,7 @@ on:
     branches:
       - master # The default branch
       - (branch|release)-.*   # The other branches to be analyzed
-      - features/*
+      - features/.*
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
