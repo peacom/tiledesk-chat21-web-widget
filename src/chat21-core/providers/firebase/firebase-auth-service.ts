@@ -131,8 +131,8 @@ export class FirebaseAuthService extends MessagingAuthService {
         break;
       }
     }
-    return this.firebase.auth().setPersistence(firebasePersistence).then(async () => {
-      return this.firebase.auth().signInWithCustomToken(token).then(async () => {
+    return that.firebase.auth().setPersistence(firebasePersistence).then(async () => {
+      return that.firebase.auth().signInWithCustomToken(token).then(async () => {
         // that.firebaseSignInWithCustomToken.next(response);
       }).catch((error) => {
         that.logger.error('[FIREBASEAuthSERVICE] signInFirebaseWithCustomToken Error: ', error);
@@ -181,7 +181,7 @@ export class FirebaseAuthService extends MessagingAuthService {
    */
   private signOut(): Promise<boolean> {
     const that = this;
-    return new Promise((resolve, reject)=> {this.firebase.auth().signOut().then(() => {
+    return new Promise((resolve, reject)=> {that.firebase.auth().signOut().then(() => {
       that.logger.debug('[FIREBASEAuthSERVICE] firebase-sign-out');
         // cancello token
         // this.appStorage.removeItem('tiledeskToken');

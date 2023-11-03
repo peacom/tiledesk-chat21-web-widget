@@ -35,7 +35,6 @@ function ready(callbackFunction){
       document.removeEventListener('mousedown', start);
       document.removeEventListener('mousemove', start);
       document.removeEventListener('touchstart', start);
-      document.removeEventListener('scroll', start);
       document.removeEventListener('keydown', start);
     }
 
