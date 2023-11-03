@@ -910,7 +910,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             }).then((res)=> { this.showWidget() });
             return;
         }
-
         this.conversationsHandlerService.getLastConversation((conv, error)=> {
             this.logger.debug('[APP-COMP] getConverationRESTApi: conversation from rest API --> ', conv)
             if(error){
@@ -1552,7 +1551,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                 if(this.g.singleConversation){
                     this.isOpenHome = false;
                     this.g.setParameter('isOpenPrechatForm', false)
-                    this.manageWidgetSingleConversation()
+                    this.initConversationsHandler(this.g.tenant, this.g.senderId)
+                    // this.manageWidgetSingleConversation()
                 } else if (this.g.startFromHome) {
                     this.isOpenHome = true;
                     this.isOpenConversation = false;
