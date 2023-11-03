@@ -131,6 +131,7 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
         if (event.target.files && event.target.files[0]) {
             const nameFile = event.target.files[0].name;
             const typeFile = event.target.files[0].type;
+            const size = event.target.files[0].size
             const reader = new FileReader();
               that.logger.debug('[CONV-FOOTER] OK preload: ', nameFile, typeFile, reader);
               reader.addEventListener('load', function () {
@@ -146,7 +147,7 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
                     that.logger.debug('[CONV-FOOTER] onload image');
                     // that.arrayFilesLoad.push(imageXLoad);
                     const uid = (new Date().getTime()).toString(36); // imageXLoad.src.substring(imageXLoad.src.length - 16);
-                    that.arrayFilesLoad[0] = { uid: uid, file: imageXLoad, type: typeFile };
+                    that.arrayFilesLoad[0] = { uid: uid, file: imageXLoad, type: typeFile, size: size };
                     that.logger.debug('[CONV-FOOTER] OK: ', that.arrayFilesLoad[0]);
                     // SEND MESSAGE
                     that.loadFile();
@@ -159,7 +160,7 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
                   };
                   // that.arrayFilesLoad.push(imageXLoad);
                   const uid = (new Date().getTime()).toString(36); // imageXLoad.src.substring(imageXLoad.src.length - 16);
-                  that.arrayFilesLoad[0] = { uid: uid, file: fileXLoad, type: typeFile };
+                  that.arrayFilesLoad[0] = { uid: uid, file: fileXLoad, type: typeFile, size: size };
                   that.logger.debug('[CONV-FOOTER] OK: ', that.arrayFilesLoad[0]);
                   // SEND MESSAGE
                   that.loadFile();
@@ -182,6 +183,7 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
             const fileXLoad = this.arrayFilesLoad[0].file;
             const uid = this.arrayFilesLoad[0].uid;
             const type = this.arrayFilesLoad[0].type;
+            const size = this.arrayFilesLoad[0].size
             this.logger.debug('[CONV-FOOTER] that.fileXLoad: ', type);
             let metadata;
             if (type.startsWith('image') && !type.includes('svg')) {
@@ -191,14 +193,16 @@ export class ConversationFooterComponent implements OnInit, OnChanges {
                     'width': fileXLoad.width,
                     'height': fileXLoad.height,
                     'type': type,
-                    'uid': uid
+                    'uid': uid,
+                    'size': size
                 };
             } else {
                 metadata = {
                     'name': fileXLoad.title,
                     'src': fileXLoad.src,
                     'type': type,
-                    'uid': uid
+                    'uid': uid,
+                    'size': size
                 };
             }
             this.logger.debug('[CONV-FOOTER] metadata -------> ', metadata);
