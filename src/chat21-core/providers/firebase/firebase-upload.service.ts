@@ -39,6 +39,14 @@ export class FirebaseUploadService extends UploadService {
     this.firebase = firebase
 
   }
+
+  private createGuid() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      // tslint:disable-next-line:no-bitwise
+      const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  }
   
   public upload(userId: string, upload: UploadModel): Promise<any> {
     const that = this;
@@ -97,12 +105,43 @@ export class FirebaseUploadService extends UploadService {
 
   }
 
-  private createGuid() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-      // tslint:disable-next-line:no-bitwise
-      const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
-      return v.toString(16);
-    });
+  public async delete(userId: string, path: string): Promise<any>{
+    const that = this;
+    const file_name_photo = 'photo.jpg';
+    const file_name_thumb_photo = 'thumb_photo.jpg';
+
+    that.logger.debug('[FIREBASEUploadSERVICE] delete image for USER', userId, path);
+
+    let uid = path.split(userId)[1].split('%2F')[1]; // get the UID of the image
+    let imageName = path.split(uid + '%2F')[1].split('?')[0];
+
+    // Create a root reference
+    const storageRef = this.firebase.storage().ref();
+    const ref = storageRef.child('public/images/' + userId + '/'+ uid + '/')
+    let arrayPromise = []
+    await ref.listAll().then((dir => {
+      dir.items.forEach(fileRef => arrayPromise.push(this.deleteFile(ref.fullPath, fileRef.name)));
+    })).catch(error => {
+      that.logger.error('[FIREBASEUploadSERVICE] delete: listAll error', error)
+    })
+
+    //AWAIT to return ALL the promise delete()
+    return new Promise((resolve, reject)=> {
+      Promise.all(arrayPromise).then(()=>{
+        resolve(true)
+      }).catch((error)=>{
+        reject(error)
+      })
+    })
+  }
+
+  // // ------------------------------------
+  // // Delete the file photo
+  // // ------------------------------------
+  private deleteFile(pathToFile, fileName){
+    const ref = this.firebase.storage().ref(pathToFile);
+    const childRef = ref.child(fileName);
+    return childRef.delete()
   }
 
 }
