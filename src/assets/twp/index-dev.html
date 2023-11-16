@@ -610,7 +610,7 @@
                 TelegramShareUrl,
                 '_blank' 
             );
-         }
+        }
 
         function shareOnWhatsapp() {            
             var WhatsappShareUrl = "whatsapp://send?text=" + currentUrl;
@@ -640,6 +640,7 @@
             }else{
                 window.Tiledesk(event);
             }
+            window.Tiledesk('setParameter', {key: 'poweredBy', value: ''})
         }
 
         function onClickSignInAnonymous(){
