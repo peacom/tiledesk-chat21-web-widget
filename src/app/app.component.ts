@@ -714,6 +714,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.isConversationArchived = false;
         
         /** allow to start conversation with an hidden message (without publishing 'new_conversation' event) */
+        this.logger.debug('[APP-COMP] AppComponent::startNewConversation hiddenMessage',this.g.hiddenMessage );
         if(this.g.hiddenMessage){
             this.onNewConversationWithMessage(this.g.hiddenMessage)
             return;
@@ -1842,6 +1843,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
      */
     onNewConversationButtonClicked(event){
         this.logger.debug('[APP-COMP] onNewConversationButtonClicked');
+        this.g.setParameter('hiddenMessage', null)
         
         this.isOpenConversation = false;
         this.g.singleConversation? this.isOpenHome = false: null;
