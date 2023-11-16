@@ -368,8 +368,7 @@
         });
         
         window.Tiledesk('onBeforeInit', function(event_data) {
-            console.log("onBeforeInit Tiledesk FN", event_data);
-            
+            // console.log("onBeforeInit Tiledesk FN", event_data);
             setTimeout(() => {
                 document.getElementById("preloader").style.display = "none";
                 if(event_data && event_data.detail && event_data.detail.appConfigs){
@@ -387,7 +386,8 @@
         });
         
         window.Tiledesk('onInit', function(event_data) {
-            console.log("onInit Tiledesk FN", event_data); 
+            // console.log("onInit Tiledesk FN", event_data); 
+            window.Tiledesk('setParameter', {key: 'poweredBy', value: ''})
             // setTimeout(() => {
             //     document.getElementById("preloader").style.display = "none";
             // }, 1000);
@@ -400,7 +400,7 @@
         });
 
         window.Tiledesk('onAuthStateChanged', function(event_data) {
-        	console.log("AUTHENTICATED!", event_data);
+        	// console.log("AUTHENTICATED!", event_data);
        		// if(event_data.detail.isLogged){
             // 	console.log("isLogged!!!!", event_data);
             // 	window.Tiledesk('show')
@@ -408,7 +408,7 @@
         });
 
         window.Tiledesk('onMessageCreated', function(event_data) {
-        	console.log("onMessageCreated!", event_data);
+        	// console.log("onMessageCreated!", event_data);
             window.parent.postMessage(event_data.detail, '*')
        		// if(event_data.detail.isLogged){
             // 	console.log("isLogged!!!!", event_data);
