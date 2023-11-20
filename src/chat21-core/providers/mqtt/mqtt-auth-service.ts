@@ -263,7 +263,7 @@ z
     this.logger.debug('[MQTTAuthService] connectMQTT: **** credentials:', credentials);
     const userid = credentials.userid;
     this.chat21Service.chatClient.connect(userid, credentials.token, () => {
-      this.logger.debug('[MQTTAuthService] connectMQTT: Chat connected.');
+      this.logger.debug('[MQTTAuthService] connectMQTT: Chat connected');
       this.BSAuthStateChanged.next('online');
     });
   }

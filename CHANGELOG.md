@@ -1,5 +1,18 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.71-rc.4
+- added: uploadProfile method into upload.service files
+- bug-fixed: if hiddenMessage is present and user restart conversation from header menu, flow does not restart from beginning
+- bug-fixed: do not disable url buttons on carousel element
+- bug-fixed: do not sound if convAdded is fired and on reconnect event
+- bug-fixed: init Rules only if widget is closed
+- removed: 'Powereb By Tiledesk' on conversation and home components only for cahtbot-panel.html page
+
+### 5.0.71-rc.3
+- added: delete method for firebase-upload service
+- added: size attribute to metadata object while uploading file 
+- bug-fixed: cannot read property of undefined while reading auth() in onOpenCloseWidget method with singleConversation mode active
+
 ### 5.0.71-rc.2
 - added: hiddenMessage tiledesk property to start a conversation with an hidden info message
 - added: ability to listen from parent message and start a new Conversation with an hidden intentName info message

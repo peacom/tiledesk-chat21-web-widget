@@ -150,7 +150,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                     }
 
                     if(conversation.is_new && conversation.sender !== this.g.senderId && !isInfo(conversation)){
-                        that.manageTabNotification();
+                        that.manageTabNotification(conversation.sound);
                     }
 
                     if (that.g.isOpen === true) {
@@ -196,7 +196,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                         return;
                     }
                     if (conversation.is_new) {
-                        that.manageTabNotification()
+                        that.manageTabNotification(false)
                         // this.soundMessage(); 
                     }
                     if(this.g.isOpen === false){
@@ -421,7 +421,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                     that.showWidget();
                 }
 
-                if(this.g.botsRules){
+                if(this.g.botsRules && !this.g.isOpen){
                     const rules = new Rules(that.tiledeskRequestsService, that.appStorageService,that.g)
                     rules.initRules(that.g.windowContext, that.g.tiledeskToken, user, that.generateNewUidConversation(), that.g.botsRules)
                 }
@@ -1473,7 +1473,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         }
     }
 
-    private manageTabNotification() {
+    private manageTabNotification(canSound: boolean) {
         if (!this.isTabVisible) {
             // TAB IS HIDDEN --> manage title and SOUND 
             // this.g.windowContext.parent.title = "HIDDEN"
@@ -1493,7 +1493,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                 }
             }, 1000);
         }
-        this.soundMessage()
+        if(canSound)
+            this.soundMessage()
     }
 
 
