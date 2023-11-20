@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChange, SimpleChanges, ViewChildren } from '@angular/core';
 import { MessageModel } from 'src/chat21-core/models/message';
+import { TYPE_BUTTON } from 'src/chat21-core/utils/constants';
 import { isCarousel } from 'src/chat21-core/utils/utils-message';
 
 @Component({
@@ -31,7 +32,7 @@ export class CarouselComponent implements OnInit{
   hoverTextColor: string;
   type: string;
   button: any;
-
+  TYPE_BUTTON = TYPE_BUTTON;
   constructor(private elementRef: ElementRef) { }
 
   ngOnInit() {
