@@ -1,6 +1,5 @@
 import { DepartmentModel } from './../../models/department';
 import { Injectable, ElementRef } from '@angular/core';
-import { Globals } from '../../app/utils/globals';
 import { ConversationModel } from '../models/conversation';
 import { LoggerInstance } from '../providers/logger/loggerInstance';
 import { LoggerService } from '../providers/abstract/logger.service';

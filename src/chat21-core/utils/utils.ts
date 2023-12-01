@@ -284,41 +284,6 @@ function convertUrlToTag(url) {
   //// <a href="#" onclick="openPopup(' + url + ')">' + url + '</a>';
 }
 
-
-export function isPopupUrl(url) {
-  try {
-    const TEMP = url.split('popup=')[1];
-    // può essere seguito da & oppure "
-    if (TEMP) {
-      if (TEMP.startsWith('true')) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      return false;
-    }
-  } catch (e) {
-    return false;
-  }
-}
-
-export function popupUrl(windowContext, html, title) {
-  const url = stripTags(html);
-  const w = 600;
-  const h = 600; // screen.height - 40;
-  const left = (screen.width / 2) - (w / 2);
-  const top = (screen.height / 2) - (h / 2);
-
-  // tslint:disable-next-line:whitespace
-  // tslint:disable-next-line:max-line-length
-  const newWindow = windowContext.open(url, '_blank', 'fullscreen=1, titlebar=0, toolbar=no, location=0, status=0, menubar=0, scrollbars=0, resizable=0, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
-  if (windowContext.focus) {
-    newWindow.focus();
-  }
-}
-
-
 export function encodeHTML(str) {
   return convert(str);
   // return str.replace(/[\u00A0-\u9999<>&](?!#)/gim, function(i) {
@@ -341,10 +306,6 @@ function convert(str) {
   str = str.replace(/"/g, '&quot;');
   str = str.replace(/'/g, '&#039;');
   return str;
-}
-
-export function stripTags(html) {
-  return (html.replace(/<.*?>/g, '')).trim();
 }
 
 export function htmlEntities(str) {

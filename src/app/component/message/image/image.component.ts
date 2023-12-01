@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { saveAs } from 'file-saver';
-import { popupUrl } from 'src/chat21-core/utils/utils';
 
 @Component({
   selector: 'chat-image',
@@ -16,9 +15,7 @@ export class ImageComponent implements OnInit {
 
   loading: boolean = true
   tooltipMessage: string;
-  
 
-  popupUrl = popupUrl;
   
   constructor() { }
 

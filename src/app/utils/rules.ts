@@ -11,7 +11,7 @@ import { Globals } from './globals';
 
 @Injectable({
     providedIn: 'root'
-  })
+})
 export class Rules {
 
     private windowContext:Window = window

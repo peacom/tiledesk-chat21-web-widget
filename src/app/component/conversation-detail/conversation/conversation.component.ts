@@ -16,7 +16,6 @@ import {
 import { MessageModel } from 'src/chat21-core/models/message';
 
 // utils
-import { isPopupUrl } from 'src/app/utils/utils';
 import { v4 as uuidv4 } from 'uuid';
 
 
@@ -41,7 +40,7 @@ import { CustomTranslateService } from 'src/chat21-core/providers/custom-transla
 import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
 import { TiledeskRequestsService } from 'src/chat21-core/providers/tiledesk/tiledesk-requests.service';
 import { LIVE_PAGE } from 'src/chat21-core/utils/constants';
-import { getDateDifference, popupUrl } from 'src/chat21-core/utils/utils';
+import { getDateDifference } from 'src/chat21-core/utils/utils';
 import { isJustRecived, isUserBanned } from 'src/chat21-core/utils/utils-message';
 import { AppComponent } from '../../../app.component';
 import { ConversationContentComponent } from '../conversation-content/conversation-content.component';
@@ -112,11 +111,6 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
 
   isOpenAttachmentPreview: Boolean = false;
   attachments: Array<{ file: Array<any>, metadata: {}}>
-
-  
-  
-  isPopupUrl = isPopupUrl;
-  popupUrl = popupUrl;
 
   // availableAgentsStatus = false; // indica quando è impostato lo stato degli agenti nel subscribe
   messages: Array<MessageModel> = [];

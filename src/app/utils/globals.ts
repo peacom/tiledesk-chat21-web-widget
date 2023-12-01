@@ -123,7 +123,6 @@ export class Globals {
   LABEL_PREVIEW: string;
 
   // ============ BEGIN: EXTERNAL PARAMETERS ==============//
-   globalsParameters: any;
    autoStart: boolean;
    startHidden: boolean;
    isShown: boolean;
@@ -228,7 +227,6 @@ export class Globals {
    * 1: initParameters
    */
   initDefafultParameters() {
-    this.globalsParameters = {};
 
     let wContext: any = window;
     if (window.frameElement && window.frameElement.getAttribute('tiledesk_context') === 'parent') {
