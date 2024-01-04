@@ -1,5 +1,8 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.71-rc.5
+- bug-fixed: last-message box is visible also if text is empty
+
 ### 5.0.71-rc.4
 - added: uploadProfile method into upload.service files
 - bug-fixed: if hiddenMessage is present and user restart conversation from header menu, flow does not restart from beginning
