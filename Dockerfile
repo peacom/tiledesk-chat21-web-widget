@@ -1,7 +1,7 @@
 ### STAGE 1: Build ###
 
 # We label our stage as ‘builder’
-FROM node:14.21.2-alpine as builder
+FROM node:16.20.2-alpine3.18 as builder
 
 COPY package.json package-lock.json ./
 
@@ -15,7 +15,7 @@ COPY . .
 
 ## Build the angular app in production mode and store the artifacts in dist folder
 
-RUN npm run ng build --configuration="prod" --output-path=dist --base-href="./" --output-hashing=none --build-optimizer=false --vendor-chunk
+RUN npm run ng build -- --configuration="prod" --output-path=dist --base-href="./" --output-hashing=none --build-optimizer=false --vendor-chunk
 
 
 ### STAGE 2: Setup ###
