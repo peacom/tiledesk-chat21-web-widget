@@ -2,12 +2,7 @@
 version=`node -e 'console.log(require("./package.json").version)'`
 echo "version $version"
 
-ng build --configuration="pre" --aot=true --base-href --build-optimizer=true
-
-### SET HASHING : START ###
-cp ./src/launch_template.js ./dist/launch.js
-node ./src/build_launch.js
-### SET HASHING : END ###
+ng build --configuration="pre" --aot=true --base-href --output-hashing none --build-optimizer=true
 
 # ########## --->>>> NATIVE-MQTT folder START <<<<<------ ########## #
 
@@ -28,13 +23,11 @@ node ./src/build_launch.js
 
 # ########## --->>>> FIREBASE folder START <<<<<------ ########## #
 cd dist
-aws s3 sync . s3://tiledesk-widget-pre/v5/$version/ --cache-control max-age=300 --exclude='launch.js' #7days
-aws s3 sync . s3://tiledesk-widget-pre/v5/$version/ --cache-control "no-store,no-cache,private" --exclude='*' --include='launch.js'
-aws s3 sync . s3://tiledesk-widget-pre/v5/ --cache-control max-age=300 --exclude='launch.js' #7days
-aws s3 sync . s3://tiledesk-widget-pre/v5/ --cache-control "no-store,no-cache,private" --exclude='*' --include='launch.js'
+aws s3 sync . s3://tiledesk-widget-pre/v5/$version/ --cache-control max-age=300
+aws s3 sync . s3://tiledesk-widget-pre/v5/ --cache-control max-age=300
 cd ..
 
-aws  cloudfront create-invalidation --distribution-id E2V5O0YPR61V8P --paths "/*"
+#aws  cloudfront create-invalidation --distribution-id E3EJDWEHY08CZZ --paths "/*"
 # echo new version deployed $NEW_VER/$NEW_BUILD/ on s3://tiledesk-widget-pre/v2
 echo new version deployed $version/ on s3://tiledesk-widget-pre/v5 and s3://tiledesk-widget-pre/v5/$version/
 echo available on https://s3.eu-west-1.amazonaws.com/tiledesk-widget-pre/v5/index.html
