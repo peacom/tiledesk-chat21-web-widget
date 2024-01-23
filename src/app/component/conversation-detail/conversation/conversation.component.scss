@@ -9,7 +9,8 @@
     --foregroundColor: var(--col-msg-sent);
 }
 
-:host chat-conversation-content.hideTextReply ::ng-deep .chat21-sheet-content{
+:host chat-conversation-content.hideTextReply ::ng-deep .chat21-sheet-content,
+:host #dropZone_container.hideTextReply{
 
     bottom: var(--chat-footer-height) !important
 }
@@ -143,7 +144,7 @@
 #dropZone_container{
     position: absolute;
     top: 52px;
-    bottom: 56px;
+    bottom: calc(var(--chat-footer-logo-height) + var(--chat-footer-height));
     left: 0;
     right: 0;
     background-color: rgba(240,248,255,0.6);

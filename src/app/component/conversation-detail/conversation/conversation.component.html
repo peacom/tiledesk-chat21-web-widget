@@ -37,9 +37,11 @@
         (onMenuOptionShow)="onMenuOption($event)">
     </chat-conversation-header>
 
-    <div id="dropZone_container" *ngIf="isHovering">
+    <!-- *ngIf="isHovering" -->
+    <div id="dropZone_container"
+        [class.hideTextReply]="hideFooterTextReply && g?.poweredBy">
         <div class="drop">
-            drop zone
+            <!-- drop zone -->
         </div>
     </div>
     

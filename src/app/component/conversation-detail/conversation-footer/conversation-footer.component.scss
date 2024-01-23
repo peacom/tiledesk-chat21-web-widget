@@ -248,7 +248,7 @@ textarea:active{
     // position: absolute;
     bottom: 100%;
     width: 100%;
-    // height: 22px;
+    height: var(--chat-footer-logo-height);
     display: flex;
     align-items: center;
     justify-content: center;
