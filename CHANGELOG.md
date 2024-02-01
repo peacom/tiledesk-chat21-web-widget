@@ -1,7 +1,10 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.71-rc.9
+- added: brandSrc env property
+
 ### 5.0.71-rc.8
-- chaged: chatbot-panel.html page UI (added header as CDS)
+- chaged: chatbot-panel.html page UI (added header as style)
 - bug-fixed: drop-zone area wrong height if footer in not visible
 - bug-fixed: set archived conversations as read always 
 
