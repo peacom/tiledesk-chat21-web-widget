@@ -447,7 +447,7 @@ export class FirebaseConversationHandler extends ConversationHandlerService {
         if (msg.status < MSG_STATUS_RECEIVED ) { // && !msg.attributes.commands
             //get message uid from attributes.parentUid if msg is a splitted one, from msg.uid otherwize
             let uid = msg.uid
-            msg.attributes.commands? uid = msg.attributes.parentUid: null 
+            msg.attributes && msg.attributes.commands? uid = msg.attributes.parentUid: null 
             if (msg.sender !== this.loggedUser.uid && msg.status < MSG_STATUS_RECEIVED) {
                 const urlNodeMessagesUpdate  = this.urlNodeFirebase + '/' + uid;
                 this.logger.debug('[FIREBASEConversationHandlerSERVICE] update message status', urlNodeMessagesUpdate);

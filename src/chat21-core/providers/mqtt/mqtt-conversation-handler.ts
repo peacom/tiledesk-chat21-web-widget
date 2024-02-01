@@ -444,7 +444,7 @@ export class MQTTConversationHandler extends ConversationHandlerService {
         if (msg['status'] < MSG_STATUS_RECEIVED && msg['status'] > 0) {
             this.logger.log('[MQTTConversationHandlerSERVICE] status ', msg['status'], ' < (RECEIVED:200)', MSG_STATUS_RECEIVED);
             let uid = msg.uid
-            msg.attributes.commands? uid = msg.attributes.parentUid: null 
+            msg.attributes && msg.attributes.commands? uid = msg.attributes.parentUid: null 
             if (msg.sender !== this.loggedUser.uid && msg.status < MSG_STATUS_RECEIVED) {
                 this.logger.log('[MQTTConversationHandlerSERVICE] updating message with status received');
                 this.chat21Service.chatClient.updateMessageStatus(uid, this.conversationWith, MSG_STATUS_RECEIVED, null);
