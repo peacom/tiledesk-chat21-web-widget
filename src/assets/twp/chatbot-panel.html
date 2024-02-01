@@ -14,11 +14,15 @@
         @-ms-keyframes blink {0%{opacity:1;} 50%{opacity:0;} 100%{opacity:1;}} /* IE */
         @keyframes blink {0%{opacity:1;} 50%{opacity:0;} 100%{opacity:1;}} /* Opera and prob css3 final iteration */
 
+        :root {
+            
+        }
+
         body{
             --font-family-poppins: 'Poppins', 'Roboto', Arial, sans-serif;
             --blu: #506493;
             --gray-light-02: rgb(223, 227, 237);
-            --tiledesk-base-color: rgb(224,106,88);
+            --base-company-logo: rgb(224,106,88);
             --header-height: 60px;
 
         }
@@ -28,6 +32,8 @@
             position: fixed;
             top: 0;
             left: 0;
+            bottom: 0;
+            right: 0;
             height: 100%;
             width: 100%;
             z-index: 999999;
@@ -58,6 +64,52 @@
             -webkit-animation:blink normal 2s infinite ease-in-out; /* Webkit */
             -ms-animation:blink normal 2s infinite ease-in-out; /* IE */
             animation:blink normal 2s infinite ease-in-out; /* Opera and prob css3 final iteration */
+        }
+
+        .loader{
+            display: block;
+            z-index: 99;
+            position: absolute;
+            top: calc( 50% - 50px);
+            left: calc( 50% - 50px);
+            width: 100px;
+            height: 100px;
+            border: 3px solid rgb(224, 106, 88);
+            border-radius: 50%;
+
+            animation: spin 7s ease-in-out;
+            animation-iteration-count: infinite;
+            transition-duration: 0.1s;
+        }
+
+        .loader:hover {
+            scale: 0.95;
+            /*Loader on hover effect*/
+        }
+
+        .loader:active {
+            scale: 1.2;
+            /*Loader on click effect*/
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+                border-bottom: solid 3px transparent;
+                border-top: solid 3px transparent;
+            }
+            50% {
+                transform: rotate(1800deg);
+                border: 3px solid white;
+                border-left: solid 3px transparent;
+                border-right: solid 3px transparent;
+            }
+            100% {
+                /*Reversed spinning*/
+                transform: rotate(0deg);
+                border-bottom: solid 3px transparent;
+                border-top: solid 3px transparent;
+            }
         }
 
         #deferred-styles {
@@ -225,7 +277,7 @@
 
         .header-right .header-go-back .cds-text {
             font-weight: 700;
-            color: rgb(224,106,88);
+            color: var(--base-company-logo);
         }
 
         .header-right .header-title{
@@ -272,7 +324,9 @@
         }
 
         .b-agent-demo_powered_by a {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
             margin-top: 30px;
             margin-bottom: 30px;
             text-decoration: none;
@@ -286,8 +340,7 @@
         }
         .b-agent-demo_powered_by img {
             display: inline-block;
-            height: 24px;
-            /* margin-left: 20px; */
+            height: 40px;
         }
 
         /* The snackbar - position it at the bottom and in the middle of the screen */
@@ -449,6 +502,8 @@
         
         window.Tiledesk('onBeforeInit', function(event_data) {
             // console.log("onBeforeInit Tiledesk FN", event_data);
+            var brandSrc = event_data.detail.appConfigs.brandSrc? getBrandResources(event_data.detail.appConfigs.brandSrc) : null;
+
             setTimeout(() => {
                 document.getElementById("preloader").style.display = "none";
                 if(event_data && event_data.detail && event_data.detail.appConfigs){
@@ -541,6 +596,32 @@
             document.getElementById("tiledesk_widgetTitle").innerHTML = tiledesk_widgetTitle;
         }
 
+
+        function getBrandResources(url) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    var brandJson = JSON.parse(xhr.response)
+                    if(brandJson){
+                        /** TITLE AND FAVICON **/
+                        brandJson['WIDGET'].META_TITLE? document.body.title = brandJson['WIDGET'].META_TITLE : null;
+                        brandJson['WIDGET'].FAVICON_URL?  document.querySelector("link[rel~='icon']").setAttribute('href', brandJson['WIDGET'].FAVICON_URL) : null;
+                        /** FOOTER-LOGO **/
+                        brandJson['COMMON'].COMPANY_LOGO? document.getElementById('footer-logo').src = brandJson['COMMON'].COMPANY_LOGO : null;
+                        brandJson['COMMON'].COMPANY_SITE_NAME? document.getElementById('footer-logo').alt = brandJson['COMMON'].COMPANY_SITE_NAME : null;
+                        brandJson['COMMON'].COMPANY_SITE_URL? document.getElementById('footer-link').href = brandJson['COMMON'].COMPANY_SITE_URL : null;
+                        /** HEADER-LOGO **/  
+                        brandJson['COMMON'].BASE_LOGO_NO_TEXT? document.getElementById('header-logo').src = brandJson['COMMON'].BASE_LOGO_NO_TEXT: null;
+                        brandJson['COMMON'].BRAND_PRIMARY_COLOR? document.body.style.setProperty('--base-company-logo', brandJson['COMMON'].BRAND_PRIMARY_COLOR): null;
+                    }
+                }
+                    
+            }
+            xhr.open('GET', url, true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+            xhr.send();
+        }
+
         
 
     </script>
@@ -549,9 +630,12 @@
 
 <body class="website white" >
 
+    <!-- <div id="preloader">
+        <div class="logo"></div>
+    </div> -->
 
     <div id="preloader">
-        <div class="logo"></div>
+        <div class="loader"></div>
     </div>
 
     <header id="header">
@@ -560,7 +644,7 @@
         </ul> -->
         <div class="header-left">
             <div>
-                <img class="logo" src="./tiledesk_widget_files/logo-short.png">
+                <img id="header-logo" class="logo" src="./tiledesk_widget_files/logo-short.png">
             </div>
         </div>
         <div class="header-right">
@@ -585,9 +669,9 @@
 
     <footer id="footer">
         <div class="b-agent-demo_powered_by">
-            <a href="https://console.tiledesk.com/" target="_blank" style="cursor: pointer;text-decoration: none;">
+            <a href="https://console.tiledesk.com/" target="_blank" style="cursor: pointer;text-decoration: none;" id="footer-link">
                 <span style="position: relative; top: 2px;">Powered by</span>
-                <img src="./tiledesk_widget_files/logo@2x-black.png">
+                <img src="./tiledesk_widget_files/logo@2x-black.png" id="footer-logo">
             </a>
         </div>
     </footer>

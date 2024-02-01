@@ -86,6 +86,16 @@
             height: 100%;
         }
 
+        .container{
+            display: flex;
+            align-items: center;
+            width: 100% !important;
+            justify-content: space-around;
+        }
+        #header-logo{
+            height: 50px;
+        }
+
         #wrapper {
             /* display: block!important; */
             min-height: 100%;
@@ -112,6 +122,8 @@
             left: 0px;
             right: 0px;
             width: 100%;
+            justify-content: flex-start;
+            flex-direction: row;
         }
 
         .row {
@@ -180,7 +192,9 @@
         }
 
         .b-agent-demo_powered_by a {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
             margin-top: 30px;
             margin-bottom: 30px;
             text-decoration: none;
@@ -436,6 +450,8 @@
         window.Tiledesk('onBeforeInit', function(event_data) {
             console.log("onBeforeInit Tiledesk FN", event_data); 
 
+            var brandSrc = event_data.detail.appConfigs.brandSrc? getBrandResources(event_data.detail.appConfigs.brandSrc) : null;
+
             setTimeout(() => {
                 if(event_data && event_data.detail && event_data.detail.appConfigs){
                     
@@ -632,6 +648,32 @@
                 '_blank' 
             );
         }
+
+        function getBrandResources(url) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    var brandJson = JSON.parse(xhr.response)
+                    if(brandJson){
+                        /** TITLE AND FAVICON **/
+                        brandJson['WIDGET'].META_TITLE? document.body.title = brandJson['WIDGET'].META_TITLE : null;
+                        brandJson['WIDGET'].FAVICON_URL?  document.querySelector("link[rel~='icon']").setAttribute('href', brandJson['WIDGET'].FAVICON_URL) : null;
+                        /** FOOTER-LOGO **/    
+                        brandJson['COMMON'].COMPANY_LOGO? document.getElementById('footer-logo').src = brandJson['COMMON'].COMPANY_LOGO : null;
+                        brandJson['COMMON'].COMPANY_SITE_NAME? document.getElementById('footer-logo').alt = brandJson['COMMON'].COMPANY_SITE_NAME : null;
+                        brandJson['COMMON'].COMPANY_SITE_URL? document.getElementById('footer-link').href = brandJson['COMMON'].COMPANY_SITE_URL : null;
+                        /** HEADER-LOGO **/                 
+                        brandJson['COMMON'].BASE_LOGO_WHITE? document.getElementById('header-logo').src = brandJson['COMMON'].BASE_LOGO_WHITE : null;
+                        /** HEADER-DOCS RESOURCES **/    
+                        document.getElementsByClassName('docs')[0].style.display = 'none'
+                    }
+                }
+            }
+            xhr.open('GET', url, true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+            xhr.send();
+        }
+
 
         function onClickTestButton(event){
             console.log('onClickTestButton: event-->',event)
@@ -1566,7 +1608,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="https://console.tiledesk.com/"></a>
+                        <img src="tiledesk_widget_files/logo.png" id="header-logo">
                     </div>
 
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -1586,7 +1628,7 @@
 
         <div id="main" class="container">
             <div class="row">
-                <div class="col-md-7">
+                <div class="col-md-12">
                     <h1 style="min-height: 39px;">TEST ACTIONS</h1>
                     <h3 id="project_name" style="min-height: 39px;"></h3>
                     <div class="row method_container">
@@ -2375,20 +2417,16 @@
                     </div>
                 </div>
 
-                <div class="col-md-6"></div>
             </div>
             
-            <div class="row">
-                <div class="col-md-6">
-                    <h1 id="project_name" style="min-height: 39px;"></h1>
-                    <h2></h2>
-                    <div class="b_integrations_agent_links">
-                        <a href="" data-toggle="modal" data-target="#embedModal" id="enbed" style="display: none;"><i class="fa-code fa"></i>Embed</a>
-                        <!-- <a href="mailto:?subject=Tiledesk%20widget%20test%20page"><i class="fa-envelope-o fa" target="_blank"></i>Email</a> -->
-                        <a href="" data-toggle="modal" data-target="#shareModal"><i class="fa-reply fa"></i>Share</a>
-                    </div>
+            <div class="row" style="width: 100%;">
+                <h1 id="project_name" style="min-height: 39px;"></h1>
+                <h2></h2>
+                <div class="b_integrations_agent_links">
+                    <a href="" data-toggle="modal" data-target="#embedModal" id="enbed" style="display: none;"><i class="fa-code fa"></i>Embed</a>
+                    <!-- <a href="mailto:?subject=Tiledesk%20widget%20test%20page"><i class="fa-envelope-o fa" target="_blank"></i>Email</a> -->
+                    <a href="" data-toggle="modal" data-target="#shareModal"><i class="fa-reply fa"></i>Share</a>
                 </div>
-                <div class="col-md-6"></div>
             </div>
             
 
@@ -2469,9 +2507,9 @@
 
     <footer id="footer">
         <div class="b-agent-demo_powered_by">
-            <a href="https://console.tiledesk.com/" target="_blank" style="cursor: pointer;text-decoration: none;">
+            <a href="https://console.tiledesk.com/" target="_blank" style="cursor: pointer;text-decoration: none;" id="footer-link">
                 <span style="position: relative; top: 2px;">Powered by</span>
-                <img src="./tiledesk_widget_files/logo@2x-black.png">
+                <img src="./tiledesk_widget_files/logo@2x-black.png" id="footer-logo">
             </a>
         </div>
     </footer>

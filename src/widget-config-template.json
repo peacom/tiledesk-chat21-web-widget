@@ -23,6 +23,6 @@
     "baseImageUrl": "${API_BASEIMAGE_URL}",
     "dashboardUrl": "${DASHBOARD_URL}",
     "authPersistence": "${AUTH_PERSISTENCE}",
-    "enbedJs": "${ENBED_JS}"
-    
+    "enbedJs": "${ENBED_JS}",
+    "brandSrc": "${BRAND_SRC}"
 }

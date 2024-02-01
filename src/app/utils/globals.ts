@@ -470,7 +470,6 @@ export class Globals {
 
     this.newConversationStart = true;
 
-
   }
 
 
