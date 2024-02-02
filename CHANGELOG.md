@@ -1,5 +1,8 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.71-rc.10
+- bug-fixed: signInWithCustomToken override tiledesk_token key 
+
 ### 5.0.71-rc.9
 - added: brandSrc env property
 
