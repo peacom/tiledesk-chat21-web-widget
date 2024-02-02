@@ -130,7 +130,6 @@ export class TiledeskAuthService {
     this.logger.debug('[TILEDESK-AUTH] logOut()');
     this.appStorage.removeItem('tiledeskToken');
     this.appStorage.removeItem('currentUser');
-    localStorage.removeItem('tiledesk_token')
     this.setCurrentUser(null);
   }
 
@@ -179,8 +178,6 @@ export class TiledeskAuthService {
     } else if (storedTiledeskToken && storedTiledeskToken === tiledeskToken) {
       this.logger.log('[TILEDESK-AUTH] - checkAndSetInStorageTiledeskToken STORED-TOKEN EXIST AND IS = TO TOKEN ')
     }
-
-    localStorage.setItem('tiledesk_token', tiledeskToken)
   }
 
 
