@@ -14,6 +14,15 @@
         @-ms-keyframes blink {0%{opacity:1;} 50%{opacity:0;} 100%{opacity:1;}} /* IE */
         @keyframes blink {0%{opacity:1;} 50%{opacity:0;} 100%{opacity:1;}} /* Opera and prob css3 final iteration */
 
+        body{
+            --font-family-poppins: 'Poppins', 'Roboto', Arial, sans-serif;
+            --blu: #506493;
+            --gray-light-02: rgb(223, 227, 237);
+            --base-company-logo: rgb(224,106,88);
+            --header-height: 80px;
+            --footer-height: 80px;
+        }
+
         #preloader {
             background: #fff;
             position: fixed;
@@ -49,6 +58,52 @@
             -webkit-animation:blink normal 2s infinite ease-in-out; /* Webkit */
             -ms-animation:blink normal 2s infinite ease-in-out; /* IE */
             animation:blink normal 2s infinite ease-in-out; /* Opera and prob css3 final iteration */
+        }
+
+        .loader{
+            display: block;
+            z-index: 99;
+            position: absolute;
+            top: calc( 50% - 50px);
+            left: calc( 50% - 50px);
+            width: 100px;
+            height: 100px;
+            border: 3px solid var(--base-company-logo);
+            border-radius: 50%;
+
+            animation: spin 7s ease-in-out;
+            animation-iteration-count: infinite;
+            transition-duration: 0.1s;
+        }
+
+        .loader:hover {
+            scale: 0.95;
+            /*Loader on hover effect*/
+        }
+
+        .loader:active {
+            scale: 1.2;
+            /*Loader on click effect*/
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+                border-bottom: solid 3px transparent;
+                border-top: solid 3px transparent;
+            }
+            50% {
+                transform: rotate(1800deg);
+                border: 3px solid white;
+                border-left: solid 3px transparent;
+                border-right: solid 3px transparent;
+            }
+            100% {
+                /*Reversed spinning*/
+                transform: rotate(0deg);
+                border-bottom: solid 3px transparent;
+                border-top: solid 3px transparent;
+            }
         }
 
         #deferred-styles {
@@ -108,22 +163,21 @@
             left: 0px;
             right: 0px;
             overflow: hidden;
-            height: 80px;
+            height: var(--header-height);
+            font-family: var(--font-family-poppins);
         }
 
         #main {
+            padding: 20px;
             padding-bottom:100px;
-            margin: 20px;
+            margin: 20px auto 20px auto;
+            width: 970px !important;
+            justify-content: start;
 
             position: absolute;
-            overflow: auto;
-            top: 80px;
-            bottom: 100px;
-            left: 0px;
-            right: 0px;
-            width: 100%;
-            justify-content: flex-start;
-            flex-direction: row;
+            top: var(--header-height);
+            bottom: var(--footer-height);
+            overflow: scroll;
         }
 
         .row {
@@ -183,7 +237,7 @@
 
             /* position: relative;
             margin-top: -100px; negative value of footer height */
-            height: 80px;
+            height: var(--footer-height);
             clear:both;
 
             position: absolute;
@@ -294,7 +348,7 @@
         }
 
         div.section .btn:hover{
-            background: rgb(240,135,118);
+            background: var(--base-company-logo);
             color: #ffffff;
         }
 
@@ -352,7 +406,7 @@
         }
 
         div.method_container .btn:hover{
-            background: rgb(240,135,118);
+            background: var(--base-company-logo);
             color: #ffffff;
         }
 
@@ -1592,8 +1646,12 @@
 </head>
 
 <body class="website white" >
-    <div id="preloader">
+    <!-- <div id="preloader">
         <div class="logo"></div>
+    </div> -->
+
+    <div id="preloader">
+        <div class="loader"></div>
     </div>
 
     <div id="wrapper">
@@ -1626,9 +1684,8 @@
             </nav>
         </header>
 
-        <div id="main" class="container">
-            <div class="row">
-                <div class="col-md-12">
+        <div id="main">
+            <div class="row" style="width: 100%;">
                     <h1 style="min-height: 39px;">TEST ACTIONS</h1>
                     <h3 id="project_name" style="min-height: 39px;"></h3>
                     <div class="row method_container">
@@ -2415,19 +2472,20 @@
                             <button class="btn btn-light" onclick="onClickClearHistory()">Clear <i class="fa fa-trash" aria-hidden="true"></i></button>
                         </div>
                     </div>
-                </div>
+
+                    <div class="row" style="width: 100%;">
+                        <h1 id="project_name" style="min-height: 39px;"></h1>
+                        <h2></h2>
+                        <div class="b_integrations_agent_links">
+                            <a href="" data-toggle="modal" data-target="#embedModal" id="enbed" style="display: none;"><i class="fa-code fa"></i>Embed</a>
+                            <!-- <a href="mailto:?subject=Tiledesk%20widget%20test%20page"><i class="fa-envelope-o fa" target="_blank"></i>Email</a> -->
+                            <a href="" data-toggle="modal" data-target="#shareModal"><i class="fa-reply fa"></i>Share</a>
+                        </div>
+                    </div>
 
             </div>
             
-            <div class="row" style="width: 100%;">
-                <h1 id="project_name" style="min-height: 39px;"></h1>
-                <h2></h2>
-                <div class="b_integrations_agent_links">
-                    <a href="" data-toggle="modal" data-target="#embedModal" id="enbed" style="display: none;"><i class="fa-code fa"></i>Embed</a>
-                    <!-- <a href="mailto:?subject=Tiledesk%20widget%20test%20page"><i class="fa-envelope-o fa" target="_blank"></i>Email</a> -->
-                    <a href="" data-toggle="modal" data-target="#shareModal"><i class="fa-reply fa"></i>Share</a>
-                </div>
-            </div>
+            
             
 
             <div class="modal fade" tabindex="-1" id="embedModal" role="dialog">
