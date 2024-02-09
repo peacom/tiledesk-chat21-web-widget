@@ -52,7 +52,6 @@ export const BCK_COLOR_CONVERSATION_SELECTED = '#EEEEEE';
 export const BCK_COLOR_CONVERSATION_UNSELECTED = '#FFFFFF';
 
 // LABELS
-// export const LABEL_TU = 'you: ';
 // export const LABEL_MSG_PUSH_START_CHAT = 'Premi qui per chattare con qualcuno';
 // export const LABEL_MSG_START_CHAT = 'inizia a chattare';
 // export const LABEL_ACTIVE_NOW = 'attivo/a ora';

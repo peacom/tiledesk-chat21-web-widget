@@ -210,7 +210,6 @@ export class TranslatorService {
     // this.setLanguage(globals.windowContext, globals.lang);
 
     const labels: string[] = [
-      'LABEL_TU',
       'LABEL_PLACEHOLDER',
       'LABEL_START_NW_CONV',
       'LABEL_SELECT_TOPIC',
@@ -264,7 +263,6 @@ export class TranslatorService {
 
     this._translate.get(labels).subscribe(res => {
       // console.log('»»»» initI18n »»»»»» »»»»»» GET TRANSLATED LABELS RES ', res);
-      globals.LABEL_TU = res['LABEL_TU']
       globals.LABEL_PLACEHOLDER = res['LABEL_PLACEHOLDER']
       globals.LABEL_START_NW_CONV = res['LABEL_START_NW_CONV'];
       globals.LABEL_SELECT_TOPIC = res['LABEL_SELECT_TOPIC'];
@@ -288,8 +286,8 @@ export class TranslatorService {
       globals.BUTTON_EDIT_PROFILE = res['BUTTON_EDIT_PROFILE']; // is used ??
       globals.DOWNLOAD_TRANSCRIPT = res['DOWNLOAD_TRANSCRIPT'];
       globals.RATE_CHAT = res['RATE_CHAT']; // is used ??
-      globals.WELLCOME_TITLE = res['WELLCOME_TITLE'];
-      globals.WELLCOME_MSG = res['WELLCOME_MSG'];
+      globals.WELCOME_TITLE = res['WELCOME_TITLE'];
+      globals.WELCOME_MSG = res['WELCOME_MSG'];
       globals.OPTIONS = res['OPTIONS'];
       globals.SOUND_ON = res['SOUND_ON'];
       globals.SOUND_OFF = res['SOUND_OFF'];

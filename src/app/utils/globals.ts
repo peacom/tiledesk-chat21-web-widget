@@ -72,7 +72,6 @@ export class Globals {
   privacyApproved = false;
 
   // ============ BEGIN: LABELS ==============//
-  LABEL_TU: string;
   LABEL_PLACEHOLDER: string;
   LABEL_START_NW_CONV: string;
   LABEL_SELECT_TOPIC: string;

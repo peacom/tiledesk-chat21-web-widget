@@ -1,5 +1,4 @@
 {
-    "LABEL_TU": "",
     "LABEL_PLACEHOLDER": "type your message..",
     "LABEL_START_NW_CONV": "New conversation",
     "LABEL_WHATSAPP": "Message us",
@@ -17,7 +16,7 @@
     "GUEST_LABEL": "Guest",
     "ALL_AGENTS_OFFLINE_LABEL": "All operators are offline at the moment",
     "LABEL_LOADING": "Loading...",
-    "CALLOUT_TITLE_PLACEHOLDER": "Need Help?",
+    "CALLOUT_TITLE_PLACEHOLDER": "🖐 Need Help?",
     "CALLOUT_MSG_PLACEHOLDER": "Click here and start chatting with us!",
     "CUSTOMER_SATISFACTION": "Customer satisfaction",
     "YOUR_OPINION_ON_OUR_CUSTOMER_SERVICE": "your opinion on our customer service",
@@ -35,8 +34,9 @@
     "BUTTON_CLOSE_TO_ICON": "Minimize chat",
     "BUTTON_EDIT_PROFILE": "Update profile",
     "RATE_CHAT": "Rate chat",
-    "WELLCOME_TITLE": "Hi, welcome to Tiledesk 👋",
-    "WELLCOME_MSG": "How can we help?",
+    "WELCOME_TITLE": "Hi, welcome to Tiledesk 👋",
+    "WELCOME_MSG": "How can we help?",
+    "WELCOME": "Welcome",
     "OPTIONS": "options",
     "SOUND_OFF": "Sound off",
     "SOUND_ON": "Sound on",
@@ -87,6 +87,5 @@
     "SENT_AN_IMAGE":"sent an image",
 
     "LABEL_PREVIEW": "Preview",
-    "SWITCH_TO":"Or switch to:"
-
+    "SWITCH_TO": "Or switch to:"
 }
