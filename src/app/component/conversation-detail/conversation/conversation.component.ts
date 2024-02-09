@@ -39,10 +39,9 @@ import { TypingService } from 'src/chat21-core/providers/abstract/typing.service
 import { CustomTranslateService } from 'src/chat21-core/providers/custom-translate.service';
 import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
 import { TiledeskRequestsService } from 'src/chat21-core/providers/tiledesk/tiledesk-requests.service';
-import { LIVE_PAGE } from 'src/chat21-core/utils/constants';
+import { INFO_MESSAGE_TYPE } from 'src/chat21-core/utils/constants';
 import { getDateDifference } from 'src/chat21-core/utils/utils';
 import { isJustRecived, isUserBanned } from 'src/chat21-core/utils/utils-message';
-import { AppComponent } from '../../../app.component';
 import { ConversationContentComponent } from '../conversation-content/conversation-content.component';
 // import { TranslateService } from '@ngx-translate/core';
 
@@ -167,7 +166,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
     public g: Globals,
     public starRatingWidgetService: StarRatingWidgetService,
     public sanitizer: DomSanitizer,
-    public appComponent: AppComponent,
+    // public appComponent: AppComponent,
     public appStorageService: AppStorageService,
     public conversationHandlerBuilderService: ConversationHandlerBuilderService,
     public appConfigService: AppConfigService,
@@ -628,7 +627,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
       const message= 'Moved to: [' + this.g.attributes.sourceTitle + '](' +  this.g.attributes.sourcePage + ')'
       const attributes={
         subtype: 'info/support',
-        messagelabel: {key: LIVE_PAGE}
+        messagelabel: {key: INFO_MESSAGE_TYPE.LIVE_PAGE}
       }
       this.logger.debug('[CONV-COMP] sendLivePage --> attributes+message', attributes, message)
       this.conversationFooter.sendMessage(message, TYPE_MSG_TEXT, null, attributes);
