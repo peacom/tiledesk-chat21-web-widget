@@ -1,5 +1,10 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.71-rc.11
+- added: INFO_MESSAGE_TYPE enum added to manage info message keys into message.attributes object
+- changed: translations aligned for all lang
+- changed: index.js, index-dev.js and chatbot-panel.js UI improved
+
 ### 5.0.71-rc.10
 - bug-fixed: signInWithCustomToken override tiledesk_token key 
 
