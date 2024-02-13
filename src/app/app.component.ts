@@ -138,9 +138,42 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.logger.info('[APP-CONF]---------------- ngAfterViewInit: APP.COMPONENT ---------------- ')
         this.ngZone.run(() => {
             const that = this;
+            const subAddedConversation = this.conversationsHandlerService.conversationAdded.subscribe((conversation) => {
+                // that.ngZone.run(() => {
+                if (that.g.isOpen === true && conversation) {
+                    that.g.setParameter('displayEyeCatcherCard', 'none');
+                    that.triggerOnConversationUpdated(conversation);
+                    that.logger.debug('[APP-COMP] obsAddedConversation ::: ', conversation);
+                    if (conversation.attributes && conversation.attributes['subtype'] === 'info') {
+                        return;
+                    }
+                    if (conversation.is_new) {
+                        that.manageTabNotification(false, 'conv-added')
+                        // this.soundMessage(); 
+                    }
+                    if(this.g.isOpen === false){
+                        that.lastConversation = conversation;
+                        that.g.isOpenNewMessage = true;
+                    }
+                } else {
+                    //widget closed
+
+                    let badgeNewConverstionNumber = that.conversationsHandlerService.countIsNew()
+                    that.g.setParameter('conversationsBadge', badgeNewConverstionNumber);
+                }
+                // that.manageTabNotification()
+                // });
+                if(conversation){
+                    this.onImageLoaded(conversation)
+                    this.onConversationLoaded(conversation)
+                }
+                
+            });
+            this.subscriptions.push(subAddedConversation);
+
             const subChangedConversation = this.conversationsHandlerService.conversationChanged.subscribe((conversation) => {
                 // that.ngZone.run(() => {
-               if (conversation) {
+                if (conversation) {
                     this.onImageLoaded(conversation)
                     this.onConversationLoaded(conversation)
 
@@ -150,7 +183,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                     }
 
                     if(conversation.is_new && conversation.sender !== this.g.senderId && !isInfo(conversation)){
-                        that.manageTabNotification(conversation.sound);
+                        that.manageTabNotification(conversation.sound, 'conv-changed');
                     }
 
                     if (that.g.isOpen === true) {
@@ -185,39 +218,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                 // });
             });
             this.subscriptions.push(subChangedConversation);
-
-            const subAddedConversation = this.conversationsHandlerService.conversationAdded.subscribe((conversation) => {
-                // that.ngZone.run(() => {
-                if (that.g.isOpen === true && conversation) {
-                    that.g.setParameter('displayEyeCatcherCard', 'none');
-                    that.triggerOnConversationUpdated(conversation);
-                    that.logger.debug('[APP-COMP] obsAddedConversation ::: ', conversation);
-                    if (conversation.attributes && conversation.attributes['subtype'] === 'info') {
-                        return;
-                    }
-                    if (conversation.is_new) {
-                        that.manageTabNotification(false)
-                        // this.soundMessage(); 
-                    }
-                    if(this.g.isOpen === false){
-                        that.lastConversation = conversation;
-                        that.g.isOpenNewMessage = true;
-                    }
-                } else {
-                    //widget closed
-
-                    let badgeNewConverstionNumber = that.conversationsHandlerService.countIsNew()
-                    that.g.setParameter('conversationsBadge', badgeNewConverstionNumber);
-                }
-                // that.manageTabNotification()
-                // });
-                if(conversation){
-                    this.onImageLoaded(conversation)
-                    this.onConversationLoaded(conversation)
-                }
-                
-            });
-            this.subscriptions.push(subAddedConversation);
 
             const subAddedArchivedConversations = this.archivedConversationsService.archivedConversationAdded.subscribe((conversation) => {
                 // that.ngZone.run(() => {
@@ -1473,7 +1473,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         }
     }
 
-    private manageTabNotification(canSound: boolean) {
+    private manageTabNotification(canSound: boolean, calledby: string) {
         if (!this.isTabVisible) {
             // TAB IS HIDDEN --> manage title and SOUND 
             // this.g.windowContext.parent.title = "HIDDEN"
@@ -1493,6 +1493,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                 }
             }, 1000);
         }
+        this.logger.debug('[APP-COMP] manageTabNotification canSound:calledby---->', canSound, calledby)
         if(canSound)
             this.soundMessage()
     }
