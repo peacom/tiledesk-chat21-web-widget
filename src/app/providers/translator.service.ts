@@ -234,8 +234,8 @@ export class TranslatorService {
       'BUTTON_EDIT_PROFILE',
       'DOWNLOAD_TRANSCRIPT',
       'RATE_CHAT',
-      'WELLCOME_TITLE',
-      'WELLCOME_MSG',
+      'WELCOME_TITLE',
+      'WELCOME_MSG',
       'OPTIONS',
       'SOUND_ON',
       'SOUND_OFF',
@@ -313,10 +313,10 @@ export class TranslatorService {
       globals.LABEL_ERROR_FIELD_REQUIRED= res['LABEL_ERROR_FIELD_REQUIRED']
 
       if (!globals.welcomeTitle) {
-        globals.welcomeTitle = globals.WELLCOME_TITLE;   /** Set the widget welcome message. Value type : string */
+        globals.welcomeTitle = globals.WELCOME_TITLE;   /** Set the widget welcome message. Value type : string */
       }
       if (!globals.welcomeMsg) {
-        globals.welcomeMsg = globals.WELLCOME_MSG;       /** Set the widget welcome message. Value type : string */
+        globals.welcomeMsg = globals.WELCOME_MSG;       /** Set the widget welcome message. Value type : string */
       }
 
     }, (error) => {
