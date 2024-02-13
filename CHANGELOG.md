@@ -1,5 +1,8 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.71-rc.13
+- bug-fixed: wellcome message string
+
 ### 5.0.71-rc.12
 - changed: index.js, index-dev.js and chatbot-panel.js UI improved 
 
