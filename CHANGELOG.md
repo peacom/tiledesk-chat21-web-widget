@@ -1,5 +1,7 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.71 in PROD
+
 ### 5.0.71-rc.13
 - bug-fixed: wellcome message string
 
@@ -31,7 +33,7 @@
 - bug-fixed: do not disable url buttons on carousel element
 - bug-fixed: do not sound if convAdded is fired and on reconnect event
 - bug-fixed: init Rules only if widget is closed
-- removed: 'Powereb By Tiledesk' on conversation and home components only for cahtbot-panel.html page
+- removed: 'Powereb By Tiledesk' on conversation and home components only for chatbot-panel.html page
 
 ### 5.0.71-rc.3
 - added: delete method for firebase-upload service

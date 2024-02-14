@@ -36,7 +36,7 @@ export class CarouselComponent implements OnInit{
   constructor(private elementRef: ElementRef) { }
 
   ngOnInit() {
-    console.log('[CAROUSEL-MESSAGE] hello', this.message, isCarousel(this.message))
+    // console.log('[CAROUSEL-MESSAGE] hello', this.message, isCarousel(this.message))
 
     
     this.wrapper = this.elementRef.nativeElement.querySelector('.wrapper')

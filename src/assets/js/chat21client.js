@@ -1000,7 +1000,6 @@ class Chat21Client {
         
         this.client.on('connect', // TODO if token is wrong it must reply with an error!
             () => {
-                console.log("Chat client connected. User:" + user_id)
                 if (this.log) {
                     console.log("Chat client connected. this.connected:" + this.connected)
                 }
@@ -1025,20 +1024,17 @@ class Chat21Client {
         );
         this.client.on('reconnect',
             () => {
-                console.log("Chat client reconnect event")
                 if (this.log) {console.log("Chat client reconnect event");}
             }
         );
         this.client.on('close',
             () => {
-                console.log("Chat client reconnect event")
                 this.connected = false
                 if (this.log) {console.log("Chat client close event");}
             }
         );
         this.client.on('offline',
             () => {
-                console.log("Chat client reconnect event")
                 if (this.log) {console.log("Chat client offline event");}
             }
         );
