@@ -234,6 +234,10 @@ export class TranslatorService {
       'BUTTON_EDIT_PROFILE',
       'DOWNLOAD_TRANSCRIPT',
       'RATE_CHAT',
+      'WELLCOME',
+      'WELLCOME_TITLE',
+      'WELLCOME_MSG',
+      'WELCOME',
       'WELCOME_TITLE',
       'WELCOME_MSG',
       'OPTIONS',
@@ -286,8 +290,9 @@ export class TranslatorService {
       globals.BUTTON_EDIT_PROFILE = res['BUTTON_EDIT_PROFILE']; // is used ??
       globals.DOWNLOAD_TRANSCRIPT = res['DOWNLOAD_TRANSCRIPT'];
       globals.RATE_CHAT = res['RATE_CHAT']; // is used ??
-      globals.WELCOME_TITLE = res['WELCOME_TITLE'];
-      globals.WELCOME_MSG = res['WELCOME_MSG'];
+      globals.WELCOME = res['WELLCOME'];
+      globals.WELCOME_TITLE = res['WELLCOME_TITLE'];
+      globals.WELCOME_MSG = res['WELLCOME_MSG'];
       globals.OPTIONS = res['OPTIONS'];
       globals.SOUND_ON = res['SOUND_ON'];
       globals.SOUND_OFF = res['SOUND_OFF'];
