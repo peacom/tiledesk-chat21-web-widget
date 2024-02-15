@@ -1,5 +1,9 @@
 # chat21-web-widget ver 5.0
 
+
+### 5.0.71.1 in PROD
+- bug-fixed: WELCOME_TITLE and WELCOME_TITLE not showed if user change them on dashboard widget settings
+
 ### 5.0.71 in PROD
 
 ### 5.0.71-rc.13
