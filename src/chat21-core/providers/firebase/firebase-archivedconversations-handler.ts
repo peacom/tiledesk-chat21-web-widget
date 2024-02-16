@@ -336,7 +336,7 @@ export class FirebaseArchivedConversationsHandler extends ArchivedConversationsH
             conversation_with_fullname = conv.recipient_fullname;
             conv.sender_fullname = this.translationMap.get('YOU')
             // conv.last_message_text = YOU + conv.last_message_text;
-        // } else if (conv.channel_type === TYPE_GROUP) {
+        // } else if (conv.channel_type === CHANNEL_TYPE.GROUP) {
         } else if (isGroup(conv)) {
             // conversation_with_fullname = conv.sender_fullname;
             // conv.last_message_text = conv.last_message_text;

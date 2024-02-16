@@ -2,15 +2,13 @@ import { MessageModel } from './../models/message';
 import { ConversationModel } from './../models/conversation';
 import { v4 as uuidv4 } from 'uuid';
 import {
-    MESSAGE_TYPE_INFO,
-    MESSAGE_TYPE_MINE,
-    MESSAGE_TYPE_OTHERS,
-    MAX_WIDTH_IMAGES,
-    CHANNEL_TYPE_GROUP,
-    TYPE_SUPPORT_GROUP,
-    INFO_MESSAGE_TYPE
-} from './constants';
-
+  MESSAGE_TYPE_INFO,
+  MESSAGE_TYPE_MINE,
+  MESSAGE_TYPE_OTHERS,
+  MAX_WIDTH_IMAGES,
+  INFO_MESSAGE_TYPE,
+  CHANNEL_TYPE
+} from '../../chat21-core/utils/constants';
 /** */
 export function isCarousel(message: any) {
   if (message && message.type && message.type === 'gallery' && message?.attributes && message?.attributes?.attachment && message?.attributes?.attachment?.gallery ) {
@@ -169,9 +167,9 @@ export function getSizeImg(message: any, maxWidthImage?: number): any {
 
 /** */
 export function isChannelTypeGroup(channelType: string) {
-    if (channelType === CHANNEL_TYPE_GROUP || channelType === TYPE_SUPPORT_GROUP) {
-      return true;
-    }
+  if (channelType === CHANNEL_TYPE.GROUP || channelType === CHANNEL_TYPE.SUPPORT_GROUP) {
+    return true;
+  }
     return false;
 }
 

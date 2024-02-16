@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 // models
-import { MessageModel } from '../../../models/message';
+import { MessageModel } from 'src/chat21-core/models/message';
 
 @Component({
   selector: 'chat-message-attachment',
