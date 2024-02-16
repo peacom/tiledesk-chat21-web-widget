@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 /** CONSTANTS */
-import { CHANNEL_TYPE_GROUP } from 'src/chat21-core/utils/constants';
+import { CHANNEL_TYPE } from 'src/chat21-core/utils/constants';
 
 /** MODELS */
 import { DepartmentModel } from 'src/models/department';
@@ -427,9 +427,9 @@ export class Globals {
     /** Set the widget title label shown in the widget header. Value type : string.
     The default value is Tiledesk. */
                                                         /** name tenant ex: tilechat */
-    this.channelType = CHANNEL_TYPE_GROUP;
-    // this.parameters['channelType'] = CHANNEL_TYPE_GROUP;
-    // this.parameters.push({'channelType': CHANNEL_TYPE_GROUP});
+    this.channelType = CHANNEL_TYPE.GROUP;
+    // this.parameters['channelType'] = CHANNEL_TYPE.GROUP;
+    // this.parameters.push({'channelType': CHANNEL_TYPE.GROUP});
                                                         /** channelType: group/direct  */
     this.default_settings = {};
     // this.parameters.push({'default_settings': '' });

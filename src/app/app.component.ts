@@ -1,5 +1,4 @@
 import { ScriptService } from './../chat21-core/providers/scripts/script.service';
-import { TYPE_DIRECT } from './../chat21-core/utils/constants';
 /** ANGULAR MODULES */
 import { AfterViewInit, Component, ElementRef, HostListener, NgZone, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -38,7 +37,7 @@ import { TranslatorService } from './providers/translator.service';
 // UTILS
 import * as dayjs from 'dayjs';
 import { MessageModel } from 'src/chat21-core/models/message';
-import { AUTH_STATE_OFFLINE, AUTH_STATE_ONLINE, TYPE_MSG_FILE, TYPE_MSG_IMAGE, URL_SOUND_LIST_CONVERSATION } from 'src/chat21-core/utils/constants';
+import { AUTH_STATE_OFFLINE, AUTH_STATE_ONLINE, CHANNEL_TYPE, TYPE_MSG_FILE, TYPE_MSG_IMAGE, URL_SOUND_LIST_CONVERSATION } from 'src/chat21-core/utils/constants';
 import { supports_html5_storage } from 'src/chat21-core/utils/utils';
 import { UID_SUPPORT_GROUP_MESSAGES } from './utils/constants';
 import { Globals } from './utils/globals';
@@ -1696,7 +1695,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                 this._f21_open()
             }
             // this.conversationSelected = $event;
-            if($event.channel_type === TYPE_DIRECT){
+            if($event.channel_type === CHANNEL_TYPE.DIRECT){
                 this.g.setParameter('recipientId', $event.sender);
                 this.appStorageService.setItem('recipientId', $event.sender)
             }else {

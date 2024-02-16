@@ -29,10 +29,6 @@ export const TYPE_MSG_IMAGE = 'image';
 export const TYPE_MSG_FILE = 'file';
 export const TYPE_MSG_BUTTON = 'button';
 
-// CHANNEL TYPE
-export const CHANNEL_TYPE_GROUP = 'group';
-export const CHANNEL_TYPE_DIRECT = 'direct';
-
 // NODE MESSAGES
 export const UID_SUPPORT_GROUP_MESSAGES = 'support-group-';
 

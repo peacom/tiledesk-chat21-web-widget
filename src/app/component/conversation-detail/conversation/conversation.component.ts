@@ -6,18 +6,18 @@ import { ConversationFooterComponent } from './../conversation-footer/conversati
 // tslint:disable-next-line:max-line-length
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 
-import {
-  CHANNEL_TYPE_DIRECT, CHANNEL_TYPE_GROUP, TYPE_MSG_TEXT,
-  UID_SUPPORT_GROUP_MESSAGES
-} from 'src/app/utils/constants';
+
 
 // models
-
 import { MessageModel } from 'src/chat21-core/models/message';
+import { ConversationModel } from 'src/chat21-core/models/conversation';
 
 // utils
 import { v4 as uuidv4 } from 'uuid';
-
+import { UID_SUPPORT_GROUP_MESSAGES } from 'src/app/utils/constants';
+import { CHANNEL_TYPE, INFO_MESSAGE_TYPE, TYPE_MSG_TEXT } from 'src/chat21-core/utils/constants';
+import { getDateDifference } from 'src/chat21-core/utils/utils';
+import { isJustRecived, isUserBanned } from 'src/chat21-core/utils/utils-message';
 
 // Import the resized event model
 
@@ -28,7 +28,6 @@ import { takeUntil } from 'rxjs/operators';
 import { AppConfigService } from 'src/app/providers/app-config.service';
 import { StarRatingWidgetService } from 'src/app/providers/star-rating-widget.service';
 import { Globals } from 'src/app/utils/globals';
-import { ConversationModel } from 'src/chat21-core/models/conversation';
 import { AppStorageService } from 'src/chat21-core/providers/abstract/app-storage.service';
 import { ArchivedConversationsHandlerService } from 'src/chat21-core/providers/abstract/archivedconversations-handler.service';
 import { ConversationHandlerBuilderService } from 'src/chat21-core/providers/abstract/conversation-handler-builder.service';
@@ -39,9 +38,6 @@ import { TypingService } from 'src/chat21-core/providers/abstract/typing.service
 import { CustomTranslateService } from 'src/chat21-core/providers/custom-translate.service';
 import { LoggerInstance } from 'src/chat21-core/providers/logger/loggerInstance';
 import { TiledeskRequestsService } from 'src/chat21-core/providers/tiledesk/tiledesk-requests.service';
-import { INFO_MESSAGE_TYPE } from 'src/chat21-core/utils/constants';
-import { getDateDifference } from 'src/chat21-core/utils/utils';
-import { isJustRecived, isUserBanned } from 'src/chat21-core/utils/utils-message';
 import { ConversationContentComponent } from '../conversation-content/conversation-content.component';
 // import { TranslateService } from '@ngx-translate/core';
 
@@ -524,12 +520,12 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnChanges {
    *
    */
   private setChannelType() {
-    let channelTypeTEMP = CHANNEL_TYPE_GROUP;
+    let channelTypeTEMP = CHANNEL_TYPE.GROUP;
     const projectid = this.g.projectid;
     if (this.g.recipientId && this.g.recipientId.indexOf('group') !== -1) {
-      channelTypeTEMP = CHANNEL_TYPE_GROUP;
+      channelTypeTEMP = CHANNEL_TYPE.GROUP;
     } else if (!projectid) {
-      channelTypeTEMP = CHANNEL_TYPE_DIRECT;
+      channelTypeTEMP = CHANNEL_TYPE.DIRECT;
     }
     return channelTypeTEMP;
   }
