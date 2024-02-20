@@ -3,6 +3,9 @@
 ### 5.0.72-rc.1
 - changed: set retain option in mqtt connection as FALSE
 
+### 5.0.71.3 in PROD
+- bug-fixed: removed img filter from home footer section
+
 ### 5.0.71.2 in PROD
 - bug-fixing: widget do not restart conversation in chatbot-panel.html file
 
