@@ -1,5 +1,8 @@
 # chat21-web-widget ver 5.0
 
+### 5.0.72-rc.2
+- bug-fixed: update attributes after setAttributeParameter external function is called
+
 ### 5.0.72-rc.1
 - changed: set retain option in mqtt connection as FALSE
 
