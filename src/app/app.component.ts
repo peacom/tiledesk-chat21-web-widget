@@ -744,7 +744,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                 attributes = {};
             }
         }
-        // this.g.wdLog(['attributes: ', attributes, this.g.attributes]);
+        // console.log('attributes: ', attributes, this.g.attributes);
         // that.g.wdLog(['CLIENT_BROWSER: ', CLIENT_BROWSER);
         if (CLIENT_BROWSER) {
             attributes['client'] = CLIENT_BROWSER;
@@ -776,6 +776,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         try {
             // attributes['payload'] = this.g.customAttributes.payload;
             attributes['payload'] = []
+
             if (this.g.customAttributes) {
                 attributes['payload'] = this.g.customAttributes;
             }
@@ -1174,6 +1175,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
     private setAttributeParameter(parameterObj: {key: string, value: any}){
         this.g.setAttributeParameter(parameterObj.key, parameterObj.value)
+        this.appStorageService.setItem('attributes', JSON.stringify(this.g.attributes));
     }
 
     private removeFirebasewebsocketFromLocalStorage() {
