@@ -18,7 +18,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist",
-            "baseHref":"/",
+            "baseHref": "/",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -40,9 +40,7 @@
               "src/environments/real_data/widget-config-native-mqtt.json",
               "src/environments/real_data/widget-config-native-prod.json"
             ],
-            "styles": [
-              "src/app/sass/styles.scss"
-            ],
+            "styles": ["src/app/sass/styles.scss"],
             "scripts": [
               "src/assets/js/mqtt/4.2.6/mqtt.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
@@ -67,11 +65,12 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "with": "src/environments/environment.ts"
                 }
               ],
+              "baseHref": "/",
               "optimization": true,
-              "outputHashing": "all",
+              "outputHashing": "none",
               "sourceMap": false,
               "namedChunks": false,
               "aot": true,
@@ -119,8 +118,7 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-          },
+          "options": {},
           "configurations": {
             "prod": {
               "browserTarget": "widget:build:prod"
@@ -146,12 +144,8 @@
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "assets": ["src/assets"],
+            "styles": ["src/styles.scss"],
             "scripts": [],
             "codeCoverage": true
           }
@@ -175,5 +169,6 @@
           "defaultConfiguration": "development"
         }
       }
-    }}
+    }
+  }
 }
