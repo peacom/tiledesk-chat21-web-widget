@@ -65,7 +65,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.ts"
+                  "with": "src/environments/environment.prod.ts"
                 }
               ],
               "baseHref": "/",
@@ -118,7 +118,9 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {},
+          "options": {
+            "port": 5004
+          },
           "configurations": {
             "prod": {
               "browserTarget": "widget:build:prod"
